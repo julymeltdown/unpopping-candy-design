@@ -1,0 +1,129 @@
+<!doctype html>
+<html lang="en" data-cs-theme="light" data-cs-density="comfortable" data-cs-accent="blue">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Commonspace UI static preview</title>
+  <link rel="stylesheet" href="../../packages/tokens/src/styles.css" />
+  <link rel="stylesheet" href="../../packages/icons/src/styles.css" />
+  <link rel="stylesheet" href="../../packages/ui/src/styles.css" />
+  <link rel="stylesheet" href="../../packages/social/src/styles.css" />
+  <link rel="stylesheet" href="./preview.css" />
+</head>
+<body>
+  <div class="cs-preview-shell">
+    <aside class="cs-preview-sidebar">
+      <div class="cs-preview-brand"><span class="cs-preview-mark">CS</span> Commonspace UI</div>
+      <nav class="cs-preview-nav">
+        <a href="#" class="is-selected">Overview</a>
+        <a href="#">Foundations</a>
+        <a href="#">Components</a>
+        <a href="#">Social patterns</a>
+        <a href="#">Accessibility</a>
+        <a href="#">Releases</a>
+      </nav>
+      <div class="cs-preview-sidebar-note">Standalone package library<br/>React 18.3–19.x<br/>Static CSS variables<br/>API-agnostic patterns</div>
+    </aside>
+    <main class="cs-preview-main">
+      <header class="cs-preview-header">
+        <div>
+          <p class="cs-preview-kicker">Design system · 0.1.0</p>
+          <h1>Content-rich interfaces without application lock-in.</h1>
+          <p>Layered tokens, scoped themes, semantic Ant Design icon wrappers, accessible UI primitives, and social presentation patterns.</p>
+        </div>
+        <div class="cs-preview-actions">
+          <button class="cs-button cs-button--secondary cs-button--md">View packages</button>
+          <button class="cs-button cs-button--primary cs-button--md">Open Storybook</button>
+        </div>
+      </header>
+
+      <div class="cs-preview-grid">
+        <section class="cs-preview-panel">
+          <div class="cs-preview-panel-header"><h2>General UI and social composition</h2><span>@commonspace/ui · @commonspace/social</span></div>
+          <div class="cs-preview-component-body">
+            <div>
+              <p class="cs-preview-label">Actions</p>
+              <div class="cs-preview-row">
+                <button class="cs-button cs-button--primary cs-button--md">Primary action</button>
+                <button class="cs-button cs-button--secondary cs-button--md">Secondary</button>
+                <button class="cs-button cs-button--ghost cs-button--md">Quiet action</button>
+                <span class="cs-badge cs-badge--positive cs-badge--md">Published</span>
+              </div>
+            </div>
+            <div class="cs-preview-field">
+              <p class="cs-preview-label">Form control</p>
+              <label class="cs-field">
+                <span class="cs-field__label">Collection title</span>
+                <span class="cs-field__control"><input value="Civic typography archives" readonly /></span>
+                <span class="cs-field__description">Visible to people who can open this collection.</span>
+              </label>
+            </div>
+            <div class="cs-preview-alert">
+              <p class="cs-preview-label">Feedback</p>
+              <section class="cs-alert cs-alert--warning" role="alert">
+                <div class="cs-alert__icon" aria-hidden="true">△</div>
+                <div class="cs-alert__content">
+                  <div class="cs-alert__title">Two sources need review</div>
+                  <div class="cs-alert__description">Your draft is unchanged. Add provenance before publishing.</div>
+                </div>
+              </section>
+            </div>
+          </div>
+          <div class="cs-preview-post-wrap">
+            <article class="cs-post-card">
+              <span class="cs-avatar cs-avatar--lg"><img src="./assets/avatar-hanna.webp" alt="" /></span>
+              <div class="cs-post-card__content">
+                <header class="cs-post-header">
+                  <div class="cs-post-header__identity cs-post-header__identity--static"><strong>Hanna Lee</strong><span>@hanna · 18m</span></div>
+                  <span style="color:var(--cs-ink-muted)">•••</span>
+                </header>
+                <div class="cs-post-card__text">A collection becomes useful when the source, sequence, and reason for keeping an image survive the act of saving it.</div>
+                <div class="cs-post-media cs-post-media--2">
+                  <div class="cs-post-media__item cs-post-media__item--static"><img src="./assets/gate-b-sign.webp" alt="Gate B signage" /></div>
+                  <div class="cs-post-media__item cs-post-media__item--static"><img src="./assets/bauhaus-poster.webp" alt="Bauhaus poster" /></div>
+                </div>
+                <div class="cs-post-actions" aria-label="Post actions">
+                  <div class="cs-post-action"><button class="cs-icon-button cs-icon-button--md" aria-label="Reply">○</button><span>12</span></div>
+                  <div class="cs-post-action"><button class="cs-icon-button cs-icon-button--md" aria-label="Repost">↻</button><span>31</span></div>
+                  <div class="cs-post-action"><button class="cs-icon-button cs-icon-button--md cs-icon-button--accent is-selected" aria-label="Like">♥</button><span>248</span></div>
+                  <div class="cs-post-action"><button class="cs-icon-button cs-icon-button--md" aria-label="Bookmark">▯</button></div>
+                  <button class="cs-icon-button cs-icon-button--md" aria-label="Share">↗</button>
+                </div>
+              </div>
+            </article>
+          </div>
+        </section>
+
+        <aside class="cs-preview-panel">
+          <div class="cs-preview-panel-header"><h2>Foundations and theme scopes</h2><span>@commonspace/tokens · theme</span></div>
+          <div class="cs-preview-token-body">
+            <div>
+              <p class="cs-preview-label">Semantic roles</p>
+              <div class="cs-preview-swatches">
+                <div class="cs-preview-swatch cs-preview-swatch--canvas">canvas<br/>#f7f7f5</div>
+                <div class="cs-preview-swatch cs-preview-swatch--surface">surface<br/>#ffffff</div>
+                <div class="cs-preview-swatch cs-preview-swatch--muted">muted<br/>#f1f1ee</div>
+                <div class="cs-preview-swatch cs-preview-swatch--ink">ink<br/>#161616</div>
+              </div>
+            </div>
+            <div>
+              <p class="cs-preview-label">Content provides color</p>
+              <div class="cs-preview-media-strip">
+                <img src="./assets/visual-search-concrete.webp" alt="Concrete visual reference" />
+                <img src="./assets/bauhaus-poster.webp" alt="Poster visual reference" />
+              </div>
+            </div>
+            <div class="cs-preview-theme-card" data-cs-theme="dark" data-cs-accent="violet">
+              <h3>Scoped dark theme</h3>
+              <p>A subtree can switch theme and accent without changing application ownership.</p>
+              <div class="cs-preview-row" style="margin-top:12px"><span class="cs-badge cs-badge--accent">Violet accent</span><button class="cs-button cs-button--secondary cs-button--sm">Inspect</button></div>
+            </div>
+            <div class="cs-preview-code">import { PostCard } from '@commonspace/social/post';<br/><br/>&lt;PostCard<br/>  post={viewModel}<br/>  onLike={handleLike}<br/>/&gt;</div>
+          </div>
+        </aside>
+      </div>
+      <footer class="cs-preview-footer"><span>Static documentation preview · actual package CSS</span><span>light · comfortable · blue</span></footer>
+    </main>
+  </div>
+</body>
+</html>

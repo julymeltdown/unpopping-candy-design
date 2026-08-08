@@ -1,0 +1,17 @@
+{
+  "viewport": {
+    "width": 1440,
+    "height": 1000
+  },
+  "deviceScaleFactor": 1,
+  "capture": "docs/preview/captures/commonspace-ui-overview.png",
+  "brokenImages": 0,
+  "consoleOrPageErrors": [],
+  "horizontalOverflow": false,
+  "documentDimensions": {
+    "scrollWidth": 1440,
+    "scrollHeight": 1328,
+    "viewportWidth": 1440,
+    "viewportHeight": 1000
+  }
+}
