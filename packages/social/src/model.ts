@@ -1,0 +1,15 @@
+export type {
+  SocialConversationPreviewViewModel,
+  SocialMediaViewModel,
+  SocialNotificationViewModel,
+  SocialPostMetrics,
+  SocialPostReference,
+  SocialPostSummary,
+  SocialPostViewModel,
+  SocialPostViewerState,
+  SocialProfileViewModel,
+  SocialRecommendationReason,
+  SocialTimelineContext,
+  SocialTimelineDistribution,
+  SocialUserViewModel,
+} from './model/types.js';

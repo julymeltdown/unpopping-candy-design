@@ -1,0 +1,41 @@
+{
+  "name": "@commonspace/social",
+  "version": "0.1.0",
+  "description": "API-agnostic social presentation patterns for Commonspace UI.",
+  "license": "UNLICENSED",
+  "type": "module",
+  "files": ["dist", "README.md"],
+  "sideEffects": ["./dist/styles.css"],
+  "exports": {
+    ".": { "types": "./dist/index.d.ts", "import": "./dist/index.js" },
+    "./conversation": { "types": "./dist/conversation.d.ts", "import": "./dist/conversation.js" },
+    "./model": { "types": "./dist/model.d.ts", "import": "./dist/model.js" },
+    "./notification": { "types": "./dist/notification.d.ts", "import": "./dist/notification.js" },
+    "./post": { "types": "./dist/post.d.ts", "import": "./dist/post.js" },
+    "./profile": { "types": "./dist/profile.d.ts", "import": "./dist/profile.js" },
+    "./timeline": { "types": "./dist/timeline.d.ts", "import": "./dist/timeline.js" },
+    "./user": { "types": "./dist/user.d.ts", "import": "./dist/user.js" },
+    "./styles.css": "./dist/styles.css"
+  },
+  "publishConfig": { "access": "public" },
+  "peerDependencies": {
+    "react": ">=18.3 <20",
+    "react-dom": ">=18.3 <20"
+  },
+  "dependencies": {
+    "@commonspace/icons": "workspace:^",
+    "@commonspace/tokens": "workspace:^",
+    "@commonspace/ui": "workspace:^"
+  },
+  "devDependencies": {
+    "@types/react": "19.2.14",
+    "@types/react-dom": "19.2.3",
+    "@vitejs/plugin-react": "6.0.1",
+    "vite": "8.1.0"
+  },
+  "scripts": {
+    "build": "vite build && tsc -p tsconfig.build.json && node ../../scripts/copy-package-assets.mjs . src/styles.css dist/styles.css",
+    "test": "node --experimental-strip-types --test test/*.test.ts",
+    "typecheck": "tsc --noEmit -p tsconfig.json"
+  }
+}
