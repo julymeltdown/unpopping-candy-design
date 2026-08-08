@@ -14,6 +14,7 @@ d71eabb  initialize standalone monorepo
 6809cb7  API-agnostic social presentation package
 b66ddf8  Storybook catalog and Vite playground
 0064d03  release and consumer verification gates
+217982e  complete guides and static preview
 ```
 
 ## Executed verification
@@ -111,3 +112,21 @@ The project includes the corresponding configurations and CI steps. They remain 
 ## Release decision
 
 The repository is suitable as an implemented standalone design-system source project and internal workspace. It is not yet approved for public npm publication until the dependency-aware gates and licensing steps above are complete.
+
+## Final repository inventory
+
+```text
+publishable packages       5
+package source assets      73
+package/architecture tests 9 files
+Storybook story files      6
+tracked repository files   172
+Git commits                8
+README lines               853
+static preview             1440 × 1000
+static preview errors      0
+static preview broken imgs 0
+static preview h-overflow  false
+```
+
+The final verification commands were executed again after documentation and preview generation. `git diff --check`, `git status`, and `git fsck --full --strict` reported no repository-integrity problem.
