@@ -1,0 +1,8 @@
+* { box-sizing: border-box; }
+body { margin: 0; background: var(--cs-canvas); }
+button, input, textarea { font: inherit; }
+.playground-root { min-height: 100vh; background: var(--cs-canvas); color: var(--cs-ink); font-family: var(--cs-font-sans); }
+.playground-header { position: sticky; top: 0; z-index: 10; display: flex; align-items: center; justify-content: space-between; min-height: 64px; padding: 0 24px; border-bottom: 1px solid var(--cs-border); background: color-mix(in srgb, var(--cs-canvas) 90%, transparent); backdrop-filter: blur(12px); }
+.playground-main { padding-block: 56px 96px; }
+.playground-main h1 { max-width: 760px; margin: 0; font-size: clamp(32px, 5vw, 64px); line-height: 1.02; letter-spacing: -0.04em; }
+.playground-main > div > p { max-width: 620px; color: var(--cs-ink-muted); font-size: 17px; line-height: 1.55; }

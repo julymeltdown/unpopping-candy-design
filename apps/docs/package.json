@@ -1,0 +1,30 @@
+{
+  "name": "@commonspace/docs",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "build-storybook": "storybook build",
+    "dev": "storybook dev -p 6006",
+    "test": "vitest --project=storybook"
+  },
+  "dependencies": {
+    "@commonspace/icons": "workspace:*",
+    "@commonspace/social": "workspace:*",
+    "@commonspace/theme": "workspace:*",
+    "@commonspace/tokens": "workspace:*",
+    "@commonspace/ui": "workspace:*",
+    "react": "19.2.8",
+    "react-dom": "19.2.8"
+  },
+  "devDependencies": {
+    "@storybook/addon-a11y": "10.5.0",
+    "@storybook/addon-docs": "10.5.0",
+    "@storybook/addon-vitest": "10.5.0",
+    "@storybook/react-vite": "10.5.0",
+    "@types/react": "19.2.14",
+    "@types/react-dom": "19.2.3",
+    "storybook": "10.5.0",
+    "vitest": "4.1.10"
+  }
+}
