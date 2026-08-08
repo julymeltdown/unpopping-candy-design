@@ -1,0 +1,33 @@
+{
+  "name": "commonspace-ui-monorepo",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "packageManager": "pnpm@11.4.0",
+  "engines": {
+    "node": ">=22.13.0"
+  },
+  "scripts": {
+    "build": "pnpm --recursive --filter './packages/**' build && pnpm --filter @commonspace/playground build && pnpm --filter @commonspace/docs build-storybook",
+    "build:packages": "pnpm --recursive --filter './packages/**' build",
+    "changeset": "changeset",
+    "clean": "node scripts/clean.mjs",
+    "dev": "pnpm --parallel --filter @commonspace/playground --filter @commonspace/docs dev",
+    "format": "prettier --write .",
+    "format:check": "prettier --check .",
+    "lint": "eslint .",
+    "release": "pnpm build:packages && changeset publish",
+    "test": "pnpm test:pure && pnpm verify",
+    "test:pure": "node --experimental-strip-types --test packages/*/test/*.test.ts",
+    "typecheck": "pnpm --recursive typecheck",
+    "verify": "node scripts/verify-package-contracts.mjs && node scripts/verify-boundaries.mjs && node scripts/verify-exports.mjs && node scripts/verify-css-contract.mjs && tsc -p tsconfig.syntax.json",
+    "version-packages": "changeset version"
+  },
+  "devDependencies": {
+    "@changesets/cli": "2.29.7",
+    "@types/node": "24.3.0",
+    "eslint": "10.7.0",
+    "prettier": "3.6.2",
+    "typescript": "7.0.2"
+  }
+}
