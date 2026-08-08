@@ -50,6 +50,6 @@ export function themeDataAttributes(state: ThemeState): Record<string, string> {
 }
 
 export function createThemeBootstrapScript(storageKey = 'commonspace:theme:v1'): string {
-  const safeKey = JSON.stringify(storageKey);
+  const safeKey = JSON.stringify(storageKey).replace(/</g, '\\u003c').replace(/\u2028/g, '\\u2028').replace(/\u2029/g, '\\u2029');
   return `(function(){try{var key=${safeKey};var raw=localStorage.getItem(key);var value=raw?JSON.parse(raw):{};var root=document.documentElement;var themes=['light','dark','system','high-contrast'];var densities=['comfortable','compact'];var accents=['blue','violet','neutral'];root.dataset.csTheme=themes.includes(value.theme)?value.theme:'system';root.dataset.csDensity=densities.includes(value.density)?value.density:'comfortable';root.dataset.csAccent=accents.includes(value.accent)?value.accent:'blue';}catch(_){}})();`;
 }

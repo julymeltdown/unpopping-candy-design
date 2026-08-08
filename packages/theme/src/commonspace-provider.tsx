@@ -52,12 +52,8 @@ function useInitialState(
 ): ThemeState {
   return useMemo(() => {
     if (typeof window === 'undefined' || storageKey === false) return defaults;
-    const stored = parseStoredThemeState(window.localStorage.getItem(storageKey));
-    return {
-      theme: stored.theme ?? defaults.theme,
-      density: stored.density ?? defaults.density,
-      accent: stored.accent ?? defaults.accent,
-    };
+    const serialized = window.localStorage.getItem(storageKey);
+    return serialized ? parseStoredThemeState(serialized) : defaults;
   }, [defaults, storageKey]);
 }
 

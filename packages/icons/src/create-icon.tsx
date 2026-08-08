@@ -1,9 +1,10 @@
-import type { ComponentType, CSSProperties } from 'react';
-import type { AntdIconProps } from '@ant-design/icons/lib/components/AntdIcon';
+import type { ComponentProps, ComponentType, CSSProperties } from 'react';
+import { HomeOutlined } from '@ant-design/icons';
 
 export type CommonspaceIconSize = 'sm' | 'md' | 'lg' | number;
+type AntIconProps = ComponentProps<typeof HomeOutlined>;
 
-export interface CommonspaceIconProps extends Omit<AntdIconProps, 'aria-label'> {
+export interface CommonspaceIconProps extends Omit<AntIconProps, 'aria-label'> {
   size?: CommonspaceIconSize | undefined;
   label?: string | undefined;
 }
@@ -13,7 +14,7 @@ function sizeStyle(size: CommonspaceIconSize | undefined): CSSProperties | undef
 }
 
 export function createCommonspaceIcon(
-  AntIcon: ComponentType<AntdIconProps>,
+  AntIcon: ComponentType<AntIconProps>,
   semanticName: string,
 ) {
   function CommonspaceIcon({ className, label, size = 'md', style, ...props }: CommonspaceIconProps) {

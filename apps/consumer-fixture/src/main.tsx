@@ -1,0 +1,10 @@
+import { createRoot } from 'react-dom/client';
+import '@commonspace/tokens/styles.css';
+import '@commonspace/icons/styles.css';
+import '@commonspace/ui/styles.css';
+import '@commonspace/social/styles.css';
+import { CommonspaceProvider } from '@commonspace/theme';
+import { Button } from '@commonspace/ui/button';
+import { PostCard, type SocialPostViewModel } from '@commonspace/social/post';
+const post: SocialPostViewModel = { id: 'fixture', author: { id: 'user', handle: 'fixture', displayName: 'Consumer Fixture' }, text: 'This app resolves only package export maps and built dist files.', createdAt: new Date(0).toISOString(), media: [], metrics: { replies: 0, reposts: 0, likes: 0, bookmarks: 0 }, viewerState: { liked: false, reposted: false, bookmarked: false } };
+createRoot(document.getElementById('root')!).render(<CommonspaceProvider theme="light"><PostCard post={post} /><Button>Consumer action</Button></CommonspaceProvider>);

@@ -8,7 +8,7 @@
     "node": ">=22.13.0"
   },
   "scripts": {
-    "build": "pnpm --recursive --filter './packages/**' build && pnpm --filter @commonspace/playground build && pnpm --filter @commonspace/docs build-storybook",
+    "build": "pnpm --recursive --filter './packages/**' build && pnpm --filter @commonspace/playground build && pnpm --filter @commonspace/consumer-fixture build && pnpm --filter @commonspace/docs build-storybook",
     "build:packages": "pnpm --recursive --filter './packages/**' build",
     "changeset": "changeset",
     "clean": "node scripts/clean.mjs",
@@ -18,7 +18,7 @@
     "lint": "eslint .",
     "release": "pnpm build:packages && changeset publish",
     "test": "pnpm test:pure && pnpm verify",
-    "test:pure": "node --experimental-strip-types --test packages/*/test/*.test.ts",
+    "test:pure": "node --experimental-strip-types --test packages/*/test/*.test.ts && node --test tests/architecture/*.test.mjs",
     "typecheck": "pnpm --recursive typecheck",
     "verify": "node scripts/verify-package-contracts.mjs && node scripts/verify-boundaries.mjs && node scripts/verify-exports.mjs && node scripts/verify-css-contract.mjs && tsc -p tsconfig.syntax.json",
     "version-packages": "changeset version"
