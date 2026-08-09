@@ -1,0 +1,91 @@
+# Button
+
+> `ui.button` · `@commonspace/ui` · stable · version 0.1.0
+
+Triggers an immediate user action with explicit priority and pending behavior.
+
+## Import
+
+```tsx
+import { Button } from '@commonspace/ui';
+```
+
+```tsx
+import { Button } from '@commonspace/ui/button';
+```
+
+## Use when
+
+- The user can perform an immediate action.
+- A decision region needs one clearly prioritized primary action.
+
+## Avoid when
+
+- The target is navigation; use a link.
+- The control only contains an icon; use IconButton.
+
+## Variants
+
+- **primary:** Use the primary variant only when its semantic role matches the surrounding decision or content hierarchy.
+- **secondary:** Use the secondary variant only when its semantic role matches the surrounding decision or content hierarchy.
+- **ghost:** Use the ghost variant only when its semantic role matches the surrounding decision or content hierarchy.
+- **danger:** Use the danger variant only when its semantic role matches the surrounding decision or content hierarchy.
+
+## States
+
+- default
+- hover
+- focus-visible
+- disabled
+- pending
+
+## Accessibility
+
+- Use an action verb as the accessible name.
+- Pending state must preserve the accessible name and disable duplicate submission.
+- Use danger only for destructive actions with clear consequences.
+
+
+## Tokens
+
+- `--cs-button-height-md`
+- `--cs-accent`
+- `--cs-critical`
+- `--cs-focus`
+
+## Props
+
+Props follow the exported TypeScript interface. Use the CLI or package declaration for the exact installed-version type.
+
+## Preferred examples
+
+### Primary action
+
+One clear verb and stable pending state.
+
+```tsx
+<Button pending={isSaving}>Save changes</Button>
+```
+
+## Avoid examples
+
+### Navigation
+
+Navigation should preserve link semantics.
+
+```tsx
+<Button onClick={() => navigate('/settings')}>Settings</Button>
+```
+
+## Related
+
+- `ui.icon-button`
+- `pattern.form-actions`
+
+## Storybook
+
+- `catalog-ui--button`
+
+## Source
+
+- `packages/ui/src/button/button.tsx`

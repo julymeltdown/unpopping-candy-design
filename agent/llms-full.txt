@@ -1,0 +1,3251 @@
+# Commonspace UI
+
+> AI-operable React design system for content-rich and social products. Version 0.2.0.
+
+## Core context
+
+- [Design contract](../DESIGN.md)
+- [Components](./llms-components.txt)
+- [Patterns](./llms-patterns.txt)
+- [Tokens](./llms-tokens.txt)
+- [Migrations](./llms-migrations.txt)
+- [Full context](./llms-full.txt)
+- [Machine catalog](./manifests/catalog.json)
+
+## Agent sequence
+
+1. Detect the installed project version.
+2. Search the catalog.
+3. Compose from existing patterns and templates.
+4. Validate imports, props, tokens, states, and accessibility.
+
+
+---
+
+# Commonspace UI — compact agent context
+
+Version: 0.2.0
+
+- Public packages: @commonspace/tokens, @commonspace/theme, @commonspace/icons, @commonspace/ui, @commonspace/social.
+- Visual packages never fetch, route, authenticate, or own remote state.
+- Use semantic tokens and public entrypoints only.
+- Search before generating. Cover loading, empty, error, disabled, pending, mobile, dark, and high-contrast states.
+- Run commonspace validate and Storybook checks.
+
+Stable components: social.conversation-preview, social.notification-item, social.post-actions, social.post-card, social.post-card-skeleton, social.post-composer-view, social.post-header, social.post-media-grid, social.profile-header, social.timeline-view, social.user-cell, ui.alert, ui.avatar, ui.badge, ui.button, ui.container, ui.dialog, ui.empty-state, ui.feedback-provider, ui.icon-button, ui.inline, ui.separator, ui.skeleton, ui.spinner, ui.stack, ui.surface, ui.tabs, ui.text-area, ui.text-field, ui.toast, ui.toast-viewport, ui.visually-hidden
+
+Patterns: pattern.collection-states, pattern.conversation-list, pattern.feedback-recovery, pattern.form-actions, pattern.profile-surface, pattern.social-feed
+
+
+---
+
+# Commonspace UI components
+
+- [ConversationPreview](./components/social.conversation-preview.md): Presents a conversation summary with participants, latest message, time, and unread state.
+- [NotificationItem](./components/social.notification-item.md): Presents one social notification with actor context, event description, and optional target content.
+- [PostActions](./components/social.post-actions.md): Presents reply, repost, like, bookmark, and share actions as controlled social interactions.
+- [PostCard](./components/social.post-card.md): Presents a social post with author, content, distribution context, metrics, and injected actions.
+- [PostCardSkeleton](./components/social.post-card-skeleton.md): Reserves the expected geometry of a PostCard while timeline data loads.
+- [PostComposerView](./components/social.post-composer-view.md): Presents a controlled social composer while the application owns draft, validation, upload, and publishing state.
+- [PostHeader](./components/social.post-header.md): Presents post identity, timestamp, and distribution context without owning navigation.
+- [PostMediaGrid](./components/social.post-media-grid.md): Arranges one to four social media assets with stable aspect ratios and selection callbacks.
+- [ProfileHeader](./components/social.profile-header.md): Presents a curator or user profile summary with injected primary and secondary actions.
+- [TimelineView](./components/social.timeline-view.md): Composes timeline states and rendered post rows without owning pagination or virtualization.
+- [UserCell](./components/social.user-cell.md): Presents a compact person row with optional supporting text and injected action.
+- [Alert](./components/ui.alert.md): Presents contextual feedback beside the task or content that produced it.
+- [Avatar](./components/ui.avatar.md): Represents a person or organization with an image and deterministic fallback.
+- [Badge](./components/ui.badge.md): Displays a compact status or categorical label without becoming the primary action.
+- [Button](./components/ui.button.md): Triggers an immediate user action with explicit priority and pending behavior.
+- [Container](./components/ui.container.md): Constrains page content to a readable width and consistent horizontal gutter.
+- [Dialog](./components/ui.dialog.md): Interrupts the current context for a focused task that must be completed or dismissed.
+- [EmptyState](./components/ui.empty-state.md): Explains why a meaningful region has no content and offers the next valid action.
+- [FeedbackProvider](./components/ui.feedback-provider.md): Owns the application-level transient feedback queue and exposes a bounded controller.
+- [IconButton](./components/ui.icon-button.md): Triggers a frequent action where a well-known icon can replace visible text.
+- [Inline](./components/ui.inline.md): Arranges related items horizontally with tokenized gap, alignment, and wrapping.
+- [Separator](./components/ui.separator.md): Separates adjacent regions when spacing alone cannot communicate the boundary.
+- [Skeleton](./components/ui.skeleton.md): Reserves stable geometry while content is loading.
+- [Spinner](./components/ui.spinner.md): Indicates an indeterminate operation in a compact region.
+- [Stack](./components/ui.stack.md): Arranges a vertical reading or task sequence with tokenized spacing.
+- [Surface](./components/ui.surface.md): Creates a semantic background and boundary without prescribing product content.
+- [Tabs](./components/ui.tabs.md): Switches among peer views that share one context and URL or controlled state.
+- [TextArea](./components/ui.text-area.md): Collects multi-line text with label, description, validation, and native textarea semantics.
+- [TextField](./components/ui.text-field.md): Collects one short value with label, description, validation, and native input semantics.
+- [Toast](./components/ui.toast.md): Renders one transient or persistent item from the feedback queue.
+- [ToastViewport](./components/ui.toast-viewport.md): Positions and announces the bounded stack of global feedback items.
+- [VisuallyHidden](./components/ui.visually-hidden.md): Keeps essential text available to assistive technology without changing visual layout.
+
+
+---
+
+# Commonspace UI patterns
+
+- [Collection states](./patterns/pattern.collection-states.md): Provides complete loading, empty, populated, pagination, and error states for a collection.
+- [Conversation list](./patterns/pattern.conversation-list.md): Renders conversations with stable selection, unread semantics, and responsive detail navigation.
+- [Feedback and recovery](./patterns/pattern.feedback-recovery.md): Chooses inline, global, or route-level feedback while preserving successful data and unfinished work.
+- [Form actions](./patterns/pattern.form-actions.md): Orders validation, pending behavior, primary action, and cancellation for a form.
+- [Profile surface](./patterns/pattern.profile-surface.md): Combines profile identity, relationship action, tabs, and state-complete collections.
+- [Social feed](./patterns/pattern.social-feed.md): Composes a readable, state-complete social timeline without moving content unexpectedly.
+
+## Templates
+
+- **Strict FSD social shell** (`template.fsd-social-shell`): A React and Vite application shell that keeps Commonspace presentation packages below FSD application slices.
+- **Moderation workspace** (`template.moderation-workspace`): A three-region moderation decision workspace with queue, evidence, and controlled actions.
+- **Profile settings** (`template.profile-settings`): A profile settings form with validation, pending state, and preserved failure feedback.
+- **Social feed page** (`template.social-feed-page`): A state-complete social feed page using presentation models and externally owned remote state.
+- **Vite app shell** (`template.vite-app-shell`): A minimal React and Vite shell with Commonspace theme and feedback providers.
+
+
+---
+
+# Commonspace UI tokens
+
+Use semantic and component tokens instead of hardcoded visual values.
+
+```json
+{
+  "$schema": "https://design-tokens.github.io/community-group/format/",
+  "color": {
+    "reference": {
+      "amber700": {
+        "$type": "color",
+        "$value": "#9a6700"
+      },
+      "blue500": {
+        "$type": "color",
+        "$value": "#0f62fe"
+      },
+      "green600": {
+        "$type": "color",
+        "$value": "#198754"
+      },
+      "neutral0": {
+        "$type": "color",
+        "$value": "#ffffff"
+      },
+      "neutral100": {
+        "$type": "color",
+        "$value": "#f1f1ee"
+      },
+      "neutral200": {
+        "$type": "color",
+        "$value": "#dfdfda"
+      },
+      "neutral300": {
+        "$type": "color",
+        "$value": "#c8c8c1"
+      },
+      "neutral50": {
+        "$type": "color",
+        "$value": "#f7f7f5"
+      },
+      "neutral600": {
+        "$type": "color",
+        "$value": "#666661"
+      },
+      "neutral950": {
+        "$type": "color",
+        "$value": "#161616"
+      },
+      "red600": {
+        "$type": "color",
+        "$value": "#c9362b"
+      }
+    },
+    "semantic": {
+      "action": {
+        "$type": "color",
+        "$value": "{color.reference.blue500}"
+      },
+      "border": {
+        "$type": "color",
+        "$value": "{color.reference.neutral200}"
+      },
+      "canvas": {
+        "$type": "color",
+        "$value": "{color.reference.neutral50}"
+      },
+      "critical": {
+        "$type": "color",
+        "$value": "{color.reference.red600}"
+      },
+      "positive": {
+        "$type": "color",
+        "$value": "{color.reference.green600}"
+      },
+      "surface": {
+        "$type": "color",
+        "$value": "{color.reference.neutral0}"
+      },
+      "text": {
+        "$type": "color",
+        "$value": "{color.reference.neutral950}"
+      },
+      "textMuted": {
+        "$type": "color",
+        "$value": "{color.reference.neutral600}"
+      },
+      "warning": {
+        "$type": "color",
+        "$value": "{color.reference.amber700}"
+      }
+    }
+  },
+  "dimension": {
+    "button": {
+      "heightLarge": {
+        "$type": "dimension",
+        "$value": {
+          "unit": "px",
+          "value": 48
+        }
+      },
+      "heightMedium": {
+        "$type": "dimension",
+        "$value": {
+          "unit": "px",
+          "value": 40
+        }
+      },
+      "heightSmall": {
+        "$type": "dimension",
+        "$value": {
+          "unit": "px",
+          "value": 32
+        }
+      }
+    }
+  }
+}
+```
+
+
+---
+
+# Commonspace UI migrations
+
+## Commonspace UI 0.1 to 0.2
+
+Introduces the AI-native knowledge, CLI, MCP, Registry, and generated-document layer without changing existing visual package APIs.
+
+- **Manual:** `Hand-written DESIGN.md` → `Generated DESIGN.md`. Edit component and pattern metadata, then regenerate agent artifacts.
+- **Manual:** `Unstructured component discovery` → `commonspace search and MCP resources`. Run project detection before generating interfaces.
+- **Manual:** `Visual package source imports` → `Published package entrypoints`. Continue importing only documented @commonspace/* entrypoints.
+
+
+---
+
+# ConversationPreview
+
+> `social.conversation-preview` · `@commonspace/social` · stable · version 0.1.0
+
+Presents a conversation summary with participants, latest message, time, and unread state.
+
+## Import
+
+```tsx
+import { ConversationPreview } from '@commonspace/social';
+```
+
+```tsx
+import { ConversationPreview } from '@commonspace/social/conversation';
+```
+
+## Use when
+
+- A messaging inbox lists conversations.
+
+## Avoid when
+
+- A message bubble or full thread is required.
+
+## Variants
+
+- **direct:** Use the direct variant only when its semantic role matches the surrounding decision or content hierarchy.
+- **group:** Use the group variant only when its semantic role matches the surrounding decision or content hierarchy.
+
+## States
+
+- read
+- unread
+- selected
+- muted
+
+## Accessibility
+
+- Unread state needs text or a labelled indicator.
+- The preview needs a clear accessible name combining participant and latest message.
+
+
+## Tokens
+
+- `--cs-surface`
+- `--cs-border`
+- `--cs-ink-muted`
+- `--cs-accent`
+
+## Props
+
+Props follow the exported TypeScript interface. Use the CLI or package declaration for the exact installed-version type.
+
+## Preferred examples
+
+### Inbox row
+
+Injects navigation and keeps data ownership external.
+
+```tsx
+<ConversationPreview conversation={conversation} onSelect={openConversation} />
+```
+
+## Avoid examples
+
+- No avoid example documented.
+
+## Related
+
+- `social.user-cell`
+- `pattern.conversation-list`
+
+## Storybook
+
+- `catalog-social--conversation-preview`
+
+## Source
+
+- `packages/social/src/conversation/conversation-preview.tsx`
+
+
+---
+
+# NotificationItem
+
+> `social.notification-item` · `@commonspace/social` · stable · version 0.1.0
+
+Presents one social notification with actor context, event description, and optional target content.
+
+## Import
+
+```tsx
+import { NotificationItem } from '@commonspace/social';
+```
+
+```tsx
+import { NotificationItem } from '@commonspace/social/notification';
+```
+
+## Use when
+
+- A notification center renders typed social activity.
+
+## Avoid when
+
+- A global application Toast is needed.
+
+## Variants
+
+- **like:** Use the like variant only when its semantic role matches the surrounding decision or content hierarchy.
+- **reply:** Use the reply variant only when its semantic role matches the surrounding decision or content hierarchy.
+- **repost:** Use the repost variant only when its semantic role matches the surrounding decision or content hierarchy.
+- **follow:** Use the follow variant only when its semantic role matches the surrounding decision or content hierarchy.
+- **system:** Use the system variant only when its semantic role matches the surrounding decision or content hierarchy.
+
+## States
+
+- unread
+- read
+- selected
+
+## Accessibility
+
+- Unread state must be communicated beyond color.
+- Event text should make sense without relying on iconography.
+- The row needs one predictable activation target.
+
+
+## Tokens
+
+- `--cs-surface`
+- `--cs-border`
+- `--cs-ink-muted`
+
+## Props
+
+Props follow the exported TypeScript interface. Use the CLI or package declaration for the exact installed-version type.
+
+## Preferred examples
+
+### Notification list
+
+Keeps routing outside the package.
+
+```tsx
+<NotificationItem notification={item} onSelect={openTarget} />
+```
+
+## Avoid examples
+
+- No avoid example documented.
+
+## Related
+
+- `ui.toast`
+- `pattern.collection-states`
+
+## Storybook
+
+- `catalog-social--notification-item`
+
+## Source
+
+- `packages/social/src/notification/notification-item.tsx`
+
+
+---
+
+# PostActions
+
+> `social.post-actions` · `@commonspace/social` · stable · version 0.1.0
+
+Presents reply, repost, like, bookmark, and share actions as controlled social interactions.
+
+## Import
+
+```tsx
+import { PostActions } from '@commonspace/social';
+```
+
+```tsx
+import { PostActions } from '@commonspace/social/post';
+```
+
+## Use when
+
+- A post exposes standard engagement actions.
+
+## Avoid when
+
+- A product has different action semantics; compose explicit Buttons instead.
+
+## Variants
+
+- **default:** Use the default variant only when its semantic role matches the surrounding decision or content hierarchy.
+- **compact:** Use the compact variant only when its semantic role matches the surrounding decision or content hierarchy.
+
+## States
+
+- idle
+- liked
+- reposted
+- bookmarked
+- pending
+
+## Accessibility
+
+- Each icon action needs an accessible label and pressed state.
+- Pending state must prevent duplicate mutation without erasing current state.
+
+
+## Tokens
+
+- `--cs-ink-muted`
+- `--cs-accent`
+- `--cs-positive`
+- `--cs-critical`
+
+## Props
+
+Props follow the exported TypeScript interface. Use the CLI or package declaration for the exact installed-version type.
+
+## Preferred examples
+
+### Injected actions
+
+Keeps mutation ownership outside the component.
+
+```tsx
+<PostActions post={post} onLike={onLike} pendingAction={pending} />
+```
+
+## Avoid examples
+
+- No avoid example documented.
+
+## Related
+
+- `social.post-card`
+- `ui.icon-button`
+
+## Storybook
+
+- `catalog-social--post-actions`
+
+## Source
+
+- `packages/social/src/post-card/post-actions.tsx`
+
+
+---
+
+# PostCard
+
+> `social.post-card` · `@commonspace/social` · stable · version 0.1.0
+
+Presents a social post with author, content, distribution context, metrics, and injected actions.
+
+## Import
+
+```tsx
+import { PostCard } from '@commonspace/social';
+```
+
+```tsx
+import { PostCard } from '@commonspace/social/post';
+```
+
+## Use when
+
+- A timeline or thread needs a complete post presentation.
+
+## Avoid when
+
+- The application needs to fetch or mutate post data inside the component.
+- A compact reference is sufficient; use a post summary pattern.
+
+## Variants
+
+- **timeline:** Use the timeline variant only when its semantic role matches the surrounding decision or content hierarchy.
+- **detail:** Use the detail variant only when its semantic role matches the surrounding decision or content hierarchy.
+- **quoted:** Use the quoted variant only when its semantic role matches the surrounding decision or content hierarchy.
+
+## States
+
+- default
+- selected
+- pending-action
+- deleted
+
+## Accessibility
+
+- The outer interactive region must not swallow nested action focus.
+- Media requires alternative text.
+- Metrics must have accessible labels, not numbers alone.
+
+
+## Tokens
+
+- `--cs-surface`
+- `--cs-border`
+- `--cs-ink`
+- `--cs-accent`
+
+## Props
+
+Props follow the exported TypeScript interface. Use the CLI or package declaration for the exact installed-version type.
+
+## Preferred examples
+
+### Controlled post
+
+Keeps network and routing concerns in the consuming application.
+
+```tsx
+<PostCard post={post} onLike={() => onLike(post.id)} onOpenPost={() => open(post.id)} />
+```
+
+## Avoid examples
+
+### Fetching inside
+
+Couples presentation to one data layer and prevents isolated use.
+
+```tsx
+function PostCard({ id }) { const post = useQuery(...); }
+```
+
+## Related
+
+- `social.post-header`
+- `social.post-actions`
+- `social.post-media-grid`
+- `pattern.social-feed`
+
+## Storybook
+
+- `catalog-social--post-card`
+
+## Source
+
+- `packages/social/src/post-card/post-card.tsx`
+
+
+---
+
+# PostCardSkeleton
+
+> `social.post-card-skeleton` · `@commonspace/social` · stable · version 0.1.0
+
+Reserves the expected geometry of a PostCard while timeline data loads.
+
+## Import
+
+```tsx
+import { PostCardSkeleton } from '@commonspace/social';
+```
+
+```tsx
+import { PostCardSkeleton } from '@commonspace/social/post';
+```
+
+## Use when
+
+- A timeline is loading its first page.
+
+## Avoid when
+
+- Existing posts are available and only another page is loading.
+
+## Variants
+
+- **default:** Use the default variant only when its semantic role matches the surrounding decision or content hierarchy.
+
+## States
+
+- loading
+
+## Accessibility
+
+- Mark the containing timeline region busy.
+- Do not expose placeholder text as content.
+
+
+## Tokens
+
+- `--cs-surface-muted`
+
+## Props
+
+Props follow the exported TypeScript interface. Use the CLI or package declaration for the exact installed-version type.
+
+## Preferred examples
+
+### Initial timeline
+
+Matches the post layout without fake content.
+
+```tsx
+<PostCardSkeleton />
+```
+
+## Avoid examples
+
+- No avoid example documented.
+
+## Related
+
+- `social.post-card`
+- `ui.skeleton`
+
+## Storybook
+
+- `catalog-social--post-card-skeleton`
+
+## Source
+
+- `packages/social/src/post-card/post-card-skeleton.tsx`
+
+
+---
+
+# PostComposerView
+
+> `social.post-composer-view` · `@commonspace/social` · stable · version 0.1.0
+
+Presents a controlled social composer while the application owns draft, validation, upload, and publishing state.
+
+## Import
+
+```tsx
+import { PostComposerView } from '@commonspace/social';
+```
+
+```tsx
+import { PostComposerView } from '@commonspace/social/post';
+```
+
+## Use when
+
+- A social product needs a reusable text-post composition surface.
+
+## Avoid when
+
+- The component would need to own persistence, authentication, or uploads.
+
+## Variants
+
+- **inline:** Use the inline variant only when its semantic role matches the surrounding decision or content hierarchy.
+- **dialog:** Use the dialog variant only when its semantic role matches the surrounding decision or content hierarchy.
+
+## States
+
+- empty
+- draft
+- invalid
+- publishing
+- failed
+
+## Accessibility
+
+- The text field needs a clear label.
+- Character limits and errors must be announced.
+- Publishing must retain the draft until success.
+
+
+## Tokens
+
+- `--cs-surface`
+- `--cs-border`
+- `--cs-accent`
+- `--cs-field-height`
+
+## Props
+
+Props follow the exported TypeScript interface. Use the CLI or package declaration for the exact installed-version type.
+
+## Preferred examples
+
+### Controlled draft
+
+Leaves workflow state in the consuming app.
+
+```tsx
+<PostComposerView value={draft} onChange={setDraft} onSubmit={publish} pending={pending} />
+```
+
+## Avoid examples
+
+- No avoid example documented.
+
+## Related
+
+- `ui.text-area`
+- `ui.button`
+- `pattern.form-actions`
+
+## Storybook
+
+- `catalog-social--post-composer-view`
+
+## Source
+
+- `packages/social/src/post-composer/post-composer-view.tsx`
+
+
+---
+
+# PostHeader
+
+> `social.post-header` · `@commonspace/social` · stable · version 0.1.0
+
+Presents post identity, timestamp, and distribution context without owning navigation.
+
+## Import
+
+```tsx
+import { PostHeader } from '@commonspace/social';
+```
+
+```tsx
+import { PostHeader } from '@commonspace/social/post';
+```
+
+## Use when
+
+- A post or compact content item needs consistent identity metadata.
+
+## Avoid when
+
+- A generic person row is needed; use UserCell.
+
+## Variants
+
+- **default:** Use the default variant only when its semantic role matches the surrounding decision or content hierarchy.
+- **repost-context:** Use the repost-context variant only when its semantic role matches the surrounding decision or content hierarchy.
+
+## States
+
+- default
+- verified
+
+## Accessibility
+
+- Timestamp text should expose a meaningful date to assistive technology.
+- Author navigation is supplied as a callback or link wrapper by the application.
+
+
+## Tokens
+
+- `--cs-ink`
+- `--cs-ink-muted`
+
+## Props
+
+Props follow the exported TypeScript interface. Use the CLI or package declaration for the exact installed-version type.
+
+## Preferred examples
+
+### Post identity
+
+Injects navigation behavior.
+
+```tsx
+<PostHeader post={post} onOpenAuthor={openAuthor} />
+```
+
+## Avoid examples
+
+- No avoid example documented.
+
+## Related
+
+- `social.post-card`
+- `social.user-cell`
+
+## Storybook
+
+- `catalog-social--post-header`
+
+## Source
+
+- `packages/social/src/post-card/post-header.tsx`
+
+
+---
+
+# PostMediaGrid
+
+> `social.post-media-grid` · `@commonspace/social` · stable · version 0.1.0
+
+Arranges one to four social media assets with stable aspect ratios and selection callbacks.
+
+## Import
+
+```tsx
+import { PostMediaGrid } from '@commonspace/social';
+```
+
+```tsx
+import { PostMediaGrid } from '@commonspace/social/post';
+```
+
+## Use when
+
+- A post contains one to four media assets.
+
+## Avoid when
+
+- Media requires editing or upload management.
+- A general image gallery is being built.
+
+## Variants
+
+- **one:** Use the one variant only when its semantic role matches the surrounding decision or content hierarchy.
+- **two:** Use the two variant only when its semantic role matches the surrounding decision or content hierarchy.
+- **three:** Use the three variant only when its semantic role matches the surrounding decision or content hierarchy.
+- **four:** Use the four variant only when its semantic role matches the surrounding decision or content hierarchy.
+
+## States
+
+- loading
+- ready
+- error
+
+## Accessibility
+
+- Every image needs useful alt text or an explicit decorative alt.
+- Buttons opening media need labels that identify the selected item.
+
+
+## Tokens
+
+- `--cs-border`
+- `--cs-radius-md`
+
+## Props
+
+Props follow the exported TypeScript interface. Use the CLI or package declaration for the exact installed-version type.
+
+## Preferred examples
+
+### Post media
+
+Uses application-owned media behavior.
+
+```tsx
+<PostMediaGrid media={post.media} onOpenMedia={openMedia} />
+```
+
+## Avoid examples
+
+- No avoid example documented.
+
+## Related
+
+- `social.post-card`
+
+## Storybook
+
+- `catalog-social--post-media-grid`
+
+## Source
+
+- `packages/social/src/post-card/post-media-grid.tsx`
+
+
+---
+
+# ProfileHeader
+
+> `social.profile-header` · `@commonspace/social` · stable · version 0.1.0
+
+Presents a curator or user profile summary with injected primary and secondary actions.
+
+## Import
+
+```tsx
+import { ProfileHeader } from '@commonspace/social';
+```
+
+```tsx
+import { ProfileHeader } from '@commonspace/social/profile';
+```
+
+## Use when
+
+- A profile route needs consistent cover, identity, biography, and counts.
+
+## Avoid when
+
+- A compact list row is sufficient; use UserCell.
+
+## Variants
+
+- **self:** Use the self variant only when its semantic role matches the surrounding decision or content hierarchy.
+- **other:** Use the other variant only when its semantic role matches the surrounding decision or content hierarchy.
+- **private:** Use the private variant only when its semantic role matches the surrounding decision or content hierarchy.
+
+## States
+
+- default
+- following
+- pending
+- blocked
+
+## Accessibility
+
+- Heading levels must fit the page hierarchy.
+- Counts need complete accessible labels.
+- Cover imagery must not hide identity text.
+
+
+## Tokens
+
+- `--cs-surface`
+- `--cs-border`
+- `--cs-ink`
+- `--cs-ink-muted`
+
+## Props
+
+Props follow the exported TypeScript interface. Use the CLI or package declaration for the exact installed-version type.
+
+## Preferred examples
+
+### External relationship action
+
+Keeps relationship behavior in the application.
+
+```tsx
+<ProfileHeader profile={profile} action={<FollowButton />} />
+```
+
+## Avoid examples
+
+- No avoid example documented.
+
+## Related
+
+- `social.user-cell`
+- `pattern.profile-surface`
+
+## Storybook
+
+- `catalog-social--profile-header`
+
+## Source
+
+- `packages/social/src/profile/profile-header.tsx`
+
+
+---
+
+# TimelineView
+
+> `social.timeline-view` · `@commonspace/social` · stable · version 0.1.0
+
+Composes timeline states and rendered post rows without owning pagination or virtualization.
+
+## Import
+
+```tsx
+import { TimelineView } from '@commonspace/social';
+```
+
+```tsx
+import { TimelineView } from '@commonspace/social/timeline';
+```
+
+## Use when
+
+- An application needs a consistent loading, empty, error, and populated timeline surface.
+
+## Avoid when
+
+- The component would fetch pages itself.
+- A static arbitrary list has no social semantics.
+
+## Variants
+
+- **default:** Use the default variant only when its semantic role matches the surrounding decision or content hierarchy.
+
+## States
+
+- initial-loading
+- populated
+- empty
+- error
+- loading-more
+
+## Accessibility
+
+- Expose the list relationship with semantic list markup.
+- Keep existing items when additional loading fails.
+- Announce newly accepted items without moving focus.
+
+
+## Tokens
+
+- `--cs-border`
+- `--cs-surface`
+
+## Props
+
+Props follow the exported TypeScript interface. Use the CLI or package declaration for the exact installed-version type.
+
+## Preferred examples
+
+### External pagination
+
+Keeps remote state outside presentation.
+
+```tsx
+<TimelineView posts={posts} renderPost={renderPost} loadingMore={isFetchingNextPage} />
+```
+
+## Avoid examples
+
+- No avoid example documented.
+
+## Related
+
+- `social.post-card`
+- `social.post-card-skeleton`
+- `pattern.social-feed`
+
+## Storybook
+
+- `catalog-social--timeline-view`
+
+## Source
+
+- `packages/social/src/timeline/timeline-view.tsx`
+
+
+---
+
+# UserCell
+
+> `social.user-cell` · `@commonspace/social` · stable · version 0.1.0
+
+Presents a compact person row with optional supporting text and injected action.
+
+## Import
+
+```tsx
+import { UserCell } from '@commonspace/social';
+```
+
+```tsx
+import { UserCell } from '@commonspace/social/user';
+```
+
+## Use when
+
+- Search, followers, recommendations, or membership lists show people.
+
+## Avoid when
+
+- A full profile context is needed; use ProfileHeader.
+
+## Variants
+
+- **default:** Use the default variant only when its semantic role matches the surrounding decision or content hierarchy.
+- **compact:** Use the compact variant only when its semantic role matches the surrounding decision or content hierarchy.
+
+## States
+
+- default
+- selected
+- pending
+
+## Accessibility
+
+- If the entire row is interactive, preserve nested action behavior.
+- Identity text must not be conveyed by avatar alone.
+
+
+## Tokens
+
+- `--cs-ink`
+- `--cs-ink-muted`
+- `--cs-border`
+
+## Props
+
+Props follow the exported TypeScript interface. Use the CLI or package declaration for the exact installed-version type.
+
+## Preferred examples
+
+### Search result
+
+Separates row navigation and relationship action.
+
+```tsx
+<UserCell user={user} onSelect={openProfile} action={<FollowButton />} />
+```
+
+## Avoid examples
+
+- No avoid example documented.
+
+## Related
+
+- `ui.avatar`
+- `social.profile-header`
+
+## Storybook
+
+- `catalog-social--user-cell`
+
+## Source
+
+- `packages/social/src/user-cell/user-cell.tsx`
+
+
+---
+
+# Alert
+
+> `ui.alert` · `@commonspace/ui` · stable · version 0.1.0
+
+Presents contextual feedback beside the task or content that produced it.
+
+## Import
+
+```tsx
+import { Alert } from '@commonspace/ui';
+```
+
+```tsx
+import { Alert } from '@commonspace/ui/alert';
+```
+
+## Use when
+
+- A message must remain visible until the user resolves or dismisses its cause.
+- The message belongs to a specific form, panel, or data region.
+
+## Avoid when
+
+- A short global confirmation is sufficient; use FeedbackProvider and Toast.
+- The entire route is unusable; use a route-level error surface.
+
+## Variants
+
+- **neutral:** Use the neutral variant only when its semantic role matches the surrounding decision or content hierarchy.
+- **success:** Use the success variant only when its semantic role matches the surrounding decision or content hierarchy.
+- **warning:** Use the warning variant only when its semantic role matches the surrounding decision or content hierarchy.
+- **critical:** Use the critical variant only when its semantic role matches the surrounding decision or content hierarchy.
+
+## States
+
+- default
+- with-action
+- dismissible
+
+## Accessibility
+
+- Use role=status for neutral and success feedback.
+- Use role=alert for warning and critical feedback.
+- Keep the title specific and state what remains preserved.
+
+
+## Tokens
+
+- `--cs-surface`
+- `--cs-border`
+- `--cs-positive`
+- `--cs-warning`
+- `--cs-critical`
+
+## Props
+
+Props follow the exported TypeScript interface. Use the CLI or package declaration for the exact installed-version type.
+
+## Preferred examples
+
+### Recoverable failure
+
+Names the failure and preserved state.
+
+```tsx
+<Alert tone="warning" title="Could not refresh posts">Existing posts remain available.</Alert>
+```
+
+## Avoid examples
+
+### Raw server error
+
+May expose unsafe or irrelevant implementation details.
+
+```tsx
+<Alert title={error.message} />
+```
+
+## Related
+
+- `ui.toast`
+- `ui.empty-state`
+- `pattern.feedback-recovery`
+
+## Storybook
+
+- `catalog-ui--alert`
+
+## Source
+
+- `packages/ui/src/alert/alert.tsx`
+
+
+---
+
+# Avatar
+
+> `ui.avatar` · `@commonspace/ui` · stable · version 0.1.0
+
+Represents a person or organization with an image and deterministic fallback.
+
+## Import
+
+```tsx
+import { Avatar } from '@commonspace/ui';
+```
+
+```tsx
+import { Avatar } from '@commonspace/ui/avatar';
+```
+
+## Use when
+
+- An identity must remain recognizable at compact sizes.
+- A profile image may fail and needs a text fallback.
+
+## Avoid when
+
+- The visual is decorative and has no identity meaning.
+- A product or content thumbnail is being displayed.
+
+## Variants
+
+- **sm:** Use the sm variant only when its semantic role matches the surrounding decision or content hierarchy.
+- **md:** Use the md variant only when its semantic role matches the surrounding decision or content hierarchy.
+- **lg:** Use the lg variant only when its semantic role matches the surrounding decision or content hierarchy.
+
+## States
+
+- image
+- fallback
+- loading
+
+## Accessibility
+
+- Provide a useful accessible label through surrounding identity text.
+- Use an empty alt value when the adjacent text already names the person.
+
+
+## Tokens
+
+- `--cs-surface-muted`
+- `--cs-border`
+- `--cs-ink`
+
+## Props
+
+Props follow the exported TypeScript interface. Use the CLI or package declaration for the exact installed-version type.
+
+## Preferred examples
+
+### Identity row
+
+Provides both image and fallback data.
+
+```tsx
+<Avatar src={user.avatarUrl} name={user.displayName} />
+```
+
+## Avoid examples
+
+- No avoid example documented.
+
+## Related
+
+- `social.user-cell`
+
+## Storybook
+
+- `catalog-ui--avatar`
+
+## Source
+
+- `packages/ui/src/avatar/avatar.tsx`
+
+
+---
+
+# Badge
+
+> `ui.badge` · `@commonspace/ui` · stable · version 0.1.0
+
+Displays a compact status or categorical label without becoming the primary action.
+
+## Import
+
+```tsx
+import { Badge } from '@commonspace/ui';
+```
+
+```tsx
+import { Badge } from '@commonspace/ui/badge';
+```
+
+## Use when
+
+- A short status, category, or count needs compact emphasis.
+
+## Avoid when
+
+- The label is interactive; use Button, Tabs, or a link.
+- The text is ordinary metadata and does not need a container.
+
+## Variants
+
+- **neutral:** Use the neutral variant only when its semantic role matches the surrounding decision or content hierarchy.
+- **accent:** Use the accent variant only when its semantic role matches the surrounding decision or content hierarchy.
+- **positive:** Use the positive variant only when its semantic role matches the surrounding decision or content hierarchy.
+- **warning:** Use the warning variant only when its semantic role matches the surrounding decision or content hierarchy.
+- **critical:** Use the critical variant only when its semantic role matches the surrounding decision or content hierarchy.
+
+## States
+
+- default
+
+## Accessibility
+
+- Do not communicate state by color alone.
+- Keep labels concise enough to remain readable at 200% zoom.
+
+
+## Tokens
+
+- `--cs-surface-muted`
+- `--cs-border`
+- `--cs-ink-muted`
+
+## Props
+
+Props follow the exported TypeScript interface. Use the CLI or package declaration for the exact installed-version type.
+
+## Preferred examples
+
+### Status
+
+Pairs text with semantic color.
+
+```tsx
+<Badge tone="positive">Published</Badge>
+```
+
+## Avoid examples
+
+- No avoid example documented.
+
+## Related
+
+- `ui.alert`
+
+## Storybook
+
+- `catalog-ui--badge`
+
+## Source
+
+- `packages/ui/src/badge/badge.tsx`
+
+
+---
+
+# Button
+
+> `ui.button` · `@commonspace/ui` · stable · version 0.1.0
+
+Triggers an immediate user action with explicit priority and pending behavior.
+
+## Import
+
+```tsx
+import { Button } from '@commonspace/ui';
+```
+
+```tsx
+import { Button } from '@commonspace/ui/button';
+```
+
+## Use when
+
+- The user can perform an immediate action.
+- A decision region needs one clearly prioritized primary action.
+
+## Avoid when
+
+- The target is navigation; use a link.
+- The control only contains an icon; use IconButton.
+
+## Variants
+
+- **primary:** Use the primary variant only when its semantic role matches the surrounding decision or content hierarchy.
+- **secondary:** Use the secondary variant only when its semantic role matches the surrounding decision or content hierarchy.
+- **ghost:** Use the ghost variant only when its semantic role matches the surrounding decision or content hierarchy.
+- **danger:** Use the danger variant only when its semantic role matches the surrounding decision or content hierarchy.
+
+## States
+
+- default
+- hover
+- focus-visible
+- disabled
+- pending
+
+## Accessibility
+
+- Use an action verb as the accessible name.
+- Pending state must preserve the accessible name and disable duplicate submission.
+- Use danger only for destructive actions with clear consequences.
+
+
+## Tokens
+
+- `--cs-button-height-md`
+- `--cs-accent`
+- `--cs-critical`
+- `--cs-focus`
+
+## Props
+
+Props follow the exported TypeScript interface. Use the CLI or package declaration for the exact installed-version type.
+
+## Preferred examples
+
+### Primary action
+
+One clear verb and stable pending state.
+
+```tsx
+<Button pending={isSaving}>Save changes</Button>
+```
+
+## Avoid examples
+
+### Navigation
+
+Navigation should preserve link semantics.
+
+```tsx
+<Button onClick={() => navigate('/settings')}>Settings</Button>
+```
+
+## Related
+
+- `ui.icon-button`
+- `pattern.form-actions`
+
+## Storybook
+
+- `catalog-ui--button`
+
+## Source
+
+- `packages/ui/src/button/button.tsx`
+
+
+---
+
+# Container
+
+> `ui.container` · `@commonspace/ui` · stable · version 0.1.0
+
+Constrains page content to a readable width and consistent horizontal gutter.
+
+## Import
+
+```tsx
+import { Container } from '@commonspace/ui';
+```
+
+```tsx
+import { Container } from '@commonspace/ui/layout';
+```
+
+## Use when
+
+- A page or section needs the standard Commonspace reading width.
+
+## Avoid when
+
+- The element must be full bleed.
+- A local group only needs spacing; use Stack or Inline.
+
+## Variants
+
+- **sm:** Use the sm variant only when its semantic role matches the surrounding decision or content hierarchy.
+- **md:** Use the md variant only when its semantic role matches the surrounding decision or content hierarchy.
+- **lg:** Use the lg variant only when its semantic role matches the surrounding decision or content hierarchy.
+- **full:** Use the full variant only when its semantic role matches the surrounding decision or content hierarchy.
+
+## States
+
+- default
+
+## Accessibility
+
+- Container must not prevent 320px reflow.
+- Landmark semantics belong to the element passed through asChild or wrapping structure.
+
+
+## Tokens
+
+- `--cs-space-4`
+- `--cs-space-6`
+- `--cs-shell-max`
+
+## Props
+
+Props follow the exported TypeScript interface. Use the CLI or package declaration for the exact installed-version type.
+
+## Preferred examples
+
+### Page shell
+
+Uses standard gutters and width.
+
+```tsx
+<Container size="lg"><main>{children}</main></Container>
+```
+
+## Avoid examples
+
+- No avoid example documented.
+
+## Related
+
+- `ui.stack`
+- `ui.inline`
+
+## Storybook
+
+- `catalog-ui--container`
+
+## Source
+
+- `packages/ui/src/container/container.tsx`
+
+
+---
+
+# Dialog
+
+> `ui.dialog` · `@commonspace/ui` · stable · version 0.1.0
+
+Interrupts the current context for a focused task that must be completed or dismissed.
+
+## Import
+
+```tsx
+import { Dialog } from '@commonspace/ui';
+```
+
+```tsx
+import { Dialog } from '@commonspace/ui/dialog';
+```
+
+## Use when
+
+- A short focused task cannot fit safely inline.
+- A destructive action needs confirmation and consequence text.
+
+## Avoid when
+
+- The content is a full workflow or route.
+- A non-blocking message is sufficient.
+
+## Variants
+
+- **sm:** Use the sm variant only when its semantic role matches the surrounding decision or content hierarchy.
+- **md:** Use the md variant only when its semantic role matches the surrounding decision or content hierarchy.
+- **lg:** Use the lg variant only when its semantic role matches the surrounding decision or content hierarchy.
+
+## States
+
+- closed
+- opening
+- open
+- closing
+
+## Accessibility
+
+- Move focus into the dialog on open and restore it on close.
+- Provide a labelled title and optional description.
+- Escape closes unless an irreversible operation is in progress.
+
+
+## Tokens
+
+- `--cs-dialog-width-md`
+- `--cs-surface`
+- `--cs-shadow-dialog`
+- `--cs-focus`
+
+## Props
+
+Props follow the exported TypeScript interface. Use the CLI or package declaration for the exact installed-version type.
+
+## Preferred examples
+
+### Confirm action
+
+Labels the modal and keeps open state controlled.
+
+```tsx
+<Dialog open={open} onOpenChange={setOpen} title="Delete post?">...</Dialog>
+```
+
+## Avoid examples
+
+- No avoid example documented.
+
+## Related
+
+- `ui.button`
+- `ui.alert`
+
+## Storybook
+
+- `catalog-ui--dialog`
+
+## Source
+
+- `packages/ui/src/dialog/dialog.tsx`
+
+
+---
+
+# EmptyState
+
+> `ui.empty-state` · `@commonspace/ui` · stable · version 0.1.0
+
+Explains why a meaningful region has no content and offers the next valid action.
+
+## Import
+
+```tsx
+import { EmptyState } from '@commonspace/ui';
+```
+
+## Use when
+
+- A list, search, or workspace has no content.
+
+## Avoid when
+
+- Data is still loading; use Skeleton.
+- The region failed to load; use Alert.
+
+## Variants
+
+- **compact:** Use the compact variant only when its semantic role matches the surrounding decision or content hierarchy.
+- **default:** Use the default variant only when its semantic role matches the surrounding decision or content hierarchy.
+
+## States
+
+- first-use
+- no-results
+- cleared
+
+## Accessibility
+
+- Use a heading that identifies the empty condition.
+- Do not imply failure when the empty state is valid.
+
+
+## Tokens
+
+- `--cs-ink`
+- `--cs-ink-muted`
+- `--cs-space-8`
+
+## Props
+
+Props follow the exported TypeScript interface. Use the CLI or package declaration for the exact installed-version type.
+
+## Preferred examples
+
+### No results
+
+Explains the condition and recovery.
+
+```tsx
+<EmptyState title="No matching curators" description="Try a broader search." />
+```
+
+## Avoid examples
+
+- No avoid example documented.
+
+## Related
+
+- `ui.alert`
+- `ui.skeleton`
+
+## Storybook
+
+- `catalog-ui--empty-state`
+
+## Source
+
+- `packages/ui/src/empty-state/empty-state.tsx`
+
+
+---
+
+# FeedbackProvider
+
+> `ui.feedback-provider` · `@commonspace/ui` · stable · version 0.1.0
+
+Owns the application-level transient feedback queue and exposes a bounded controller.
+
+## Import
+
+```tsx
+import { FeedbackProvider } from '@commonspace/ui';
+```
+
+```tsx
+import { FeedbackProvider } from '@commonspace/ui/feedback';
+```
+
+## Use when
+
+- An application needs global confirmations and non-blocking errors.
+
+## Avoid when
+
+- Feedback belongs permanently beside a field or panel; use Alert.
+
+## Variants
+
+- **default:** Use the default variant only when its semantic role matches the surrounding decision or content hierarchy.
+
+## States
+
+- idle
+- queued
+- announcing
+
+## Accessibility
+
+- Mount one provider per feedback scope.
+- Critical items remain until explicitly dismissed.
+- Do not enqueue raw server messages.
+
+
+## Tokens
+
+- `--cs-dialog-width-sm`
+- `--cs-shadow-dialog`
+
+## Props
+
+Props follow the exported TypeScript interface. Use the CLI or package declaration for the exact installed-version type.
+
+## Preferred examples
+
+### Application provider
+
+Creates one deterministic queue.
+
+```tsx
+<FeedbackProvider><App /></FeedbackProvider>
+```
+
+## Avoid examples
+
+- No avoid example documented.
+
+## Related
+
+- `ui.toast`
+- `ui.toast-viewport`
+- `ui.alert`
+
+## Storybook
+
+- `catalog-ui--feedback-provider`
+
+## Source
+
+- `packages/ui/src/feedback/feedback-provider.tsx`
+
+
+---
+
+# IconButton
+
+> `ui.icon-button` · `@commonspace/ui` · stable · version 0.1.0
+
+Triggers a frequent action where a well-known icon can replace visible text.
+
+## Import
+
+```tsx
+import { IconButton } from '@commonspace/ui';
+```
+
+```tsx
+import { IconButton } from '@commonspace/ui/button';
+```
+
+## Use when
+
+- A compact toolbar or repeated row action has a familiar icon.
+
+## Avoid when
+
+- The action is unfamiliar or consequential; use a labeled Button.
+- The icon is decorative.
+
+## Variants
+
+- **ghost:** Use the ghost variant only when its semantic role matches the surrounding decision or content hierarchy.
+- **secondary:** Use the secondary variant only when its semantic role matches the surrounding decision or content hierarchy.
+- **danger:** Use the danger variant only when its semantic role matches the surrounding decision or content hierarchy.
+
+## States
+
+- default
+- hover
+- focus-visible
+- disabled
+- pressed
+
+## Accessibility
+
+- An aria-label is required.
+- Tooltip text should match the accessible name.
+- Pressed toggles must expose aria-pressed.
+
+
+## Tokens
+
+- `--cs-button-height-md`
+- `--cs-focus`
+- `--cs-ink-muted`
+
+## Props
+
+Props follow the exported TypeScript interface. Use the CLI or package declaration for the exact installed-version type.
+
+## Preferred examples
+
+### Toolbar action
+
+Provides a stable accessible name.
+
+```tsx
+<IconButton aria-label="Bookmark post"><BookmarkIcon /></IconButton>
+```
+
+## Avoid examples
+
+### Unnamed icon
+
+Screen-reader users cannot identify the action.
+
+```tsx
+<IconButton><BookmarkIcon /></IconButton>
+```
+
+## Related
+
+- `ui.button`
+
+## Storybook
+
+- `catalog-ui--icon-button`
+
+## Source
+
+- `packages/ui/src/icon-button/icon-button.tsx`
+
+
+---
+
+# Inline
+
+> `ui.inline` · `@commonspace/ui` · stable · version 0.1.0
+
+Arranges related items horizontally with tokenized gap, alignment, and wrapping.
+
+## Import
+
+```tsx
+import { Inline } from '@commonspace/ui';
+```
+
+```tsx
+import { Inline } from '@commonspace/ui/layout';
+```
+
+## Use when
+
+- Actions, metadata, or compact controls form one horizontal group.
+
+## Avoid when
+
+- Items represent a vertical reading sequence; use Stack.
+
+## Variants
+
+- **start:** Use the start variant only when its semantic role matches the surrounding decision or content hierarchy.
+- **center:** Use the center variant only when its semantic role matches the surrounding decision or content hierarchy.
+- **end:** Use the end variant only when its semantic role matches the surrounding decision or content hierarchy.
+- **space-between:** Use the space-between variant only when its semantic role matches the surrounding decision or content hierarchy.
+
+## States
+
+- nowrap
+- wrap
+
+## Accessibility
+
+- Allow wrapping when labels may grow or localize.
+- Preserve a logical DOM order.
+
+
+## Tokens
+
+- `--cs-space-1`
+- `--cs-space-2`
+- `--cs-space-3`
+- `--cs-space-4`
+
+## Props
+
+Props follow the exported TypeScript interface. Use the CLI or package declaration for the exact installed-version type.
+
+## Preferred examples
+
+### Action row
+
+Groups related actions without arbitrary margins.
+
+```tsx
+<Inline gap="sm"><Button>Save</Button><Button variant="secondary">Cancel</Button></Inline>
+```
+
+## Avoid examples
+
+- No avoid example documented.
+
+## Related
+
+- `ui.stack`
+- `ui.separator`
+
+## Storybook
+
+- `catalog-ui--inline`
+
+## Source
+
+- `packages/ui/src/inline/inline.tsx`
+
+
+---
+
+# Separator
+
+> `ui.separator` · `@commonspace/ui` · stable · version 0.1.0
+
+Separates adjacent regions when spacing alone cannot communicate the boundary.
+
+## Import
+
+```tsx
+import { Separator } from '@commonspace/ui';
+```
+
+```tsx
+import { Separator } from '@commonspace/ui/layout';
+```
+
+## Use when
+
+- Two peer regions need a visible boundary.
+
+## Avoid when
+
+- The rule is decorative only and adds visual noise.
+
+## Variants
+
+- **horizontal:** Use the horizontal variant only when its semantic role matches the surrounding decision or content hierarchy.
+- **vertical:** Use the vertical variant only when its semantic role matches the surrounding decision or content hierarchy.
+
+## States
+
+- default
+
+## Accessibility
+
+- Use semantic hr behavior for meaningful thematic breaks.
+- Hide purely decorative separators from assistive technology.
+
+
+## Tokens
+
+- `--cs-border`
+
+## Props
+
+Props follow the exported TypeScript interface. Use the CLI or package declaration for the exact installed-version type.
+
+## Preferred examples
+
+### Section boundary
+
+Uses the shared border token.
+
+```tsx
+<Separator />
+```
+
+## Avoid examples
+
+- No avoid example documented.
+
+## Related
+
+- `ui.stack`
+- `ui.surface`
+
+## Storybook
+
+- `catalog-ui--separator`
+
+## Source
+
+- `packages/ui/src/separator/separator.tsx`
+
+
+---
+
+# Skeleton
+
+> `ui.skeleton` · `@commonspace/ui` · stable · version 0.1.0
+
+Reserves stable geometry while content is loading.
+
+## Import
+
+```tsx
+import { Skeleton } from '@commonspace/ui';
+```
+
+```tsx
+import { Skeleton } from '@commonspace/ui/loading';
+```
+
+## Use when
+
+- The final content shape is predictable and load time is perceptible.
+
+## Avoid when
+
+- The operation is immediate or the layout is unknown; use Spinner or a simple pending label.
+
+## Variants
+
+- **text:** Use the text variant only when its semantic role matches the surrounding decision or content hierarchy.
+- **circle:** Use the circle variant only when its semantic role matches the surrounding decision or content hierarchy.
+- **block:** Use the block variant only when its semantic role matches the surrounding decision or content hierarchy.
+
+## States
+
+- loading
+
+## Accessibility
+
+- Mark the containing region busy.
+- Skeleton elements themselves should be hidden from assistive technology.
+- Respect reduced motion.
+
+
+## Tokens
+
+- `--cs-surface-muted`
+- `--cs-motion-slow`
+
+## Props
+
+Props follow the exported TypeScript interface. Use the CLI or package declaration for the exact installed-version type.
+
+## Preferred examples
+
+### Timeline row
+
+Reserves layout without announcing fake content.
+
+```tsx
+<Skeleton aria-hidden style={{ height: 160 }} />
+```
+
+## Avoid examples
+
+- No avoid example documented.
+
+## Related
+
+- `ui.spinner`
+- `ui.empty-state`
+
+## Storybook
+
+- `catalog-ui--skeleton`
+
+## Source
+
+- `packages/ui/src/skeleton/skeleton.tsx`
+
+
+---
+
+# Spinner
+
+> `ui.spinner` · `@commonspace/ui` · stable · version 0.1.0
+
+Indicates an indeterminate operation in a compact region.
+
+## Import
+
+```tsx
+import { Spinner } from '@commonspace/ui';
+```
+
+```tsx
+import { Spinner } from '@commonspace/ui/loading';
+```
+
+## Use when
+
+- A control or small region is waiting and final geometry is unknown.
+
+## Avoid when
+
+- A full content layout can be represented with Skeleton.
+- Progress is measurable; use a determinate progress indicator.
+
+## Variants
+
+- **sm:** Use the sm variant only when its semantic role matches the surrounding decision or content hierarchy.
+- **md:** Use the md variant only when its semantic role matches the surrounding decision or content hierarchy.
+- **lg:** Use the lg variant only when its semantic role matches the surrounding decision or content hierarchy.
+
+## States
+
+- active
+
+## Accessibility
+
+- Provide a visible or visually hidden loading label.
+- Respect reduced motion without removing the state indication.
+
+
+## Tokens
+
+- `--cs-accent`
+- `--cs-motion-fast`
+
+## Props
+
+Props follow the exported TypeScript interface. Use the CLI or package declaration for the exact installed-version type.
+
+## Preferred examples
+
+### Pending control
+
+Announces the current operation.
+
+```tsx
+<Spinner label="Saving changes" />
+```
+
+## Avoid examples
+
+- No avoid example documented.
+
+## Related
+
+- `ui.skeleton`
+- `ui.button`
+
+## Storybook
+
+- `catalog-ui--spinner`
+
+## Source
+
+- `packages/ui/src/spinner/spinner.tsx`
+
+
+---
+
+# Stack
+
+> `ui.stack` · `@commonspace/ui` · stable · version 0.1.0
+
+Arranges a vertical reading or task sequence with tokenized spacing.
+
+## Import
+
+```tsx
+import { Stack } from '@commonspace/ui';
+```
+
+```tsx
+import { Stack } from '@commonspace/ui/layout';
+```
+
+## Use when
+
+- Content forms a vertical hierarchy or workflow.
+
+## Avoid when
+
+- Items form a compact horizontal group; use Inline.
+
+## Variants
+
+- **xs:** Use the xs variant only when its semantic role matches the surrounding decision or content hierarchy.
+- **sm:** Use the sm variant only when its semantic role matches the surrounding decision or content hierarchy.
+- **md:** Use the md variant only when its semantic role matches the surrounding decision or content hierarchy.
+- **lg:** Use the lg variant only when its semantic role matches the surrounding decision or content hierarchy.
+- **xl:** Use the xl variant only when its semantic role matches the surrounding decision or content hierarchy.
+
+## States
+
+- default
+
+## Accessibility
+
+- Do not change semantic order for visual layout.
+- Use responsive gaps rather than arbitrary child margins.
+
+
+## Tokens
+
+- `--cs-space-1`
+- `--cs-space-2`
+- `--cs-space-3`
+- `--cs-space-4`
+- `--cs-space-6`
+
+## Props
+
+Props follow the exported TypeScript interface. Use the CLI or package declaration for the exact installed-version type.
+
+## Preferred examples
+
+### Form layout
+
+Creates consistent vertical rhythm.
+
+```tsx
+<Stack gap="md"><TextField /><TextArea /></Stack>
+```
+
+## Avoid examples
+
+- No avoid example documented.
+
+## Related
+
+- `ui.inline`
+- `ui.container`
+
+## Storybook
+
+- `catalog-ui--stack`
+
+## Source
+
+- `packages/ui/src/stack/stack.tsx`
+
+
+---
+
+# Surface
+
+> `ui.surface` · `@commonspace/ui` · stable · version 0.1.0
+
+Creates a semantic background and boundary without prescribing product content.
+
+## Import
+
+```tsx
+import { Surface } from '@commonspace/ui';
+```
+
+```tsx
+import { Surface } from '@commonspace/ui/layout';
+```
+
+## Use when
+
+- A local region needs contrast, padding, or elevation.
+
+## Avoid when
+
+- Every item in a feed would become a nested card.
+- Whitespace and a divider communicate the boundary better.
+
+## Variants
+
+- **plain:** Use the plain variant only when its semantic role matches the surrounding decision or content hierarchy.
+- **subtle:** Use the subtle variant only when its semantic role matches the surrounding decision or content hierarchy.
+- **raised:** Use the raised variant only when its semantic role matches the surrounding decision or content hierarchy.
+
+## States
+
+- default
+- interactive
+
+## Accessibility
+
+- Interactive surfaces must use a semantic interactive element.
+- Do not rely on elevation alone for grouping.
+
+
+## Tokens
+
+- `--cs-surface`
+- `--cs-surface-muted`
+- `--cs-border`
+- `--cs-shadow-dialog`
+
+## Props
+
+Props follow the exported TypeScript interface. Use the CLI or package declaration for the exact installed-version type.
+
+## Preferred examples
+
+### Settings section
+
+Adds bounded contrast to a local region.
+
+```tsx
+<Surface tone="subtle"><Stack>...</Stack></Surface>
+```
+
+## Avoid examples
+
+- No avoid example documented.
+
+## Related
+
+- `ui.container`
+- `ui.separator`
+
+## Storybook
+
+- `catalog-ui--surface`
+
+## Source
+
+- `packages/ui/src/surface/surface.tsx`
+
+
+---
+
+# Tabs
+
+> `ui.tabs` · `@commonspace/ui` · stable · version 0.1.0
+
+Switches among peer views that share one context and URL or controlled state.
+
+## Import
+
+```tsx
+import { Tabs } from '@commonspace/ui';
+```
+
+```tsx
+import { Tabs } from '@commonspace/ui/tabs';
+```
+
+## Use when
+
+- A region has a small set of mutually exclusive peer views.
+
+## Avoid when
+
+- The choices submit form data; use RadioGroup.
+- The targets are unrelated pages in global navigation.
+
+## Variants
+
+- **line:** Use the line variant only when its semantic role matches the surrounding decision or content hierarchy.
+- **compact:** Use the compact variant only when its semantic role matches the surrounding decision or content hierarchy.
+
+## States
+
+- default
+- selected
+- focus-visible
+- disabled
+
+## Accessibility
+
+- Use tablist, tab, and tabpanel semantics.
+- Support arrow-key movement and stable focus.
+- Reflect restorable view state in the URL when appropriate.
+
+
+## Tokens
+
+- `--cs-accent`
+- `--cs-border`
+- `--cs-focus`
+
+## Props
+
+Props follow the exported TypeScript interface. Use the CLI or package declaration for the exact installed-version type.
+
+## Preferred examples
+
+### Profile views
+
+Keeps selection controlled and explicit.
+
+```tsx
+<Tabs value={tab} onValueChange={setTab} items={items} />
+```
+
+## Avoid examples
+
+- No avoid example documented.
+
+## Related
+
+- `ui.button`
+
+## Storybook
+
+- `catalog-ui--tabs`
+
+## Source
+
+- `packages/ui/src/tabs/tabs.tsx`
+
+
+---
+
+# TextArea
+
+> `ui.text-area` · `@commonspace/ui` · stable · version 0.1.0
+
+Collects multi-line text with label, description, validation, and native textarea semantics.
+
+## Import
+
+```tsx
+import { TextArea } from '@commonspace/ui';
+```
+
+```tsx
+import { TextArea } from '@commonspace/ui/forms';
+```
+
+## Use when
+
+- The user writes more than one short line.
+
+## Avoid when
+
+- The value is a single concise field; use TextField.
+- Rich text structure is required.
+
+## Variants
+
+- **default:** Use the default variant only when its semantic role matches the surrounding decision or content hierarchy.
+
+## States
+
+- empty
+- filled
+- focus
+- disabled
+- invalid
+
+## Accessibility
+
+- Every field requires a visible label or an equivalent accessible name.
+- Connect descriptions and errors with aria-describedby.
+- Expose aria-invalid when validation fails.
+
+
+## Tokens
+
+- `--cs-field-height`
+- `--cs-border`
+- `--cs-focus`
+- `--cs-critical`
+
+## Props
+
+Props follow the exported TypeScript interface. Use the CLI or package declaration for the exact installed-version type.
+
+## Preferred examples
+
+### Biography
+
+Associates label and validation feedback.
+
+```tsx
+<TextArea label="Biography" error={errors.bio} />
+```
+
+## Avoid examples
+
+- No avoid example documented.
+
+## Related
+
+- `ui.text-field`
+- `pattern.form-actions`
+
+## Storybook
+
+- `catalog-ui--text-area`
+
+## Source
+
+- `packages/ui/src/text-area/text-area.tsx`
+
+
+---
+
+# TextField
+
+> `ui.text-field` · `@commonspace/ui` · stable · version 0.1.0
+
+Collects one short value with label, description, validation, and native input semantics.
+
+## Import
+
+```tsx
+import { TextField } from '@commonspace/ui';
+```
+
+```tsx
+import { TextField } from '@commonspace/ui/forms';
+```
+
+## Use when
+
+- The user enters a concise value such as a name, email, or query.
+
+## Avoid when
+
+- Multi-line input is expected; use TextArea.
+- A fixed choice set is known; use a selection control.
+
+## Variants
+
+- **text:** Use the text variant only when its semantic role matches the surrounding decision or content hierarchy.
+- **email:** Use the email variant only when its semantic role matches the surrounding decision or content hierarchy.
+- **password:** Use the password variant only when its semantic role matches the surrounding decision or content hierarchy.
+- **search:** Use the search variant only when its semantic role matches the surrounding decision or content hierarchy.
+
+## States
+
+- empty
+- filled
+- focus
+- disabled
+- invalid
+
+## Accessibility
+
+- Every field requires a visible label or equivalent accessible name.
+- Connect descriptions and errors with aria-describedby.
+- Use an appropriate autocomplete value for personal data.
+
+
+## Tokens
+
+- `--cs-field-height`
+- `--cs-border`
+- `--cs-focus`
+- `--cs-critical`
+
+## Props
+
+Props follow the exported TypeScript interface. Use the CLI or package declaration for the exact installed-version type.
+
+## Preferred examples
+
+### Email
+
+Uses native semantics and autofill metadata.
+
+```tsx
+<TextField label="Email" type="email" autoComplete="email" />
+```
+
+## Avoid examples
+
+- No avoid example documented.
+
+## Related
+
+- `ui.text-area`
+- `pattern.form-actions`
+
+## Storybook
+
+- `catalog-ui--text-field`
+
+## Source
+
+- `packages/ui/src/text-field/text-field.tsx`
+
+
+---
+
+# Toast
+
+> `ui.toast` · `@commonspace/ui` · stable · version 0.1.0
+
+Renders one transient or persistent item from the feedback queue.
+
+## Import
+
+```tsx
+import { Toast } from '@commonspace/ui';
+```
+
+```tsx
+import { Toast } from '@commonspace/ui/feedback';
+```
+
+## Use when
+
+- A result is global and does not require a fixed page position.
+
+## Avoid when
+
+- The message must remain beside its source; use Alert.
+
+## Variants
+
+- **neutral:** Use for non-semantic information.
+- **success:** Use after an operation has completed.
+- **warning:** Use for recoverable failure or degraded state.
+- **critical:** Use for security, session, or unrecoverable failure.
+
+## States
+
+- entering
+- visible
+- leaving
+- repeated
+
+## Accessibility
+
+- Neutral and success use polite live regions.
+- Warning and critical use assertive announcements.
+- Actions need clear labels and keyboard focus.
+
+
+## Tokens
+
+- `--cs-surface`
+- `--cs-shadow-dialog`
+- `--cs-positive`
+- `--cs-warning`
+- `--cs-critical`
+
+## Props
+
+Props follow the exported TypeScript interface. Use the CLI or package declaration for the exact installed-version type.
+
+## Preferred examples
+
+### Global confirmation
+
+Communicates a short global result.
+
+```tsx
+feedback.show({ tone: 'success', title: 'Link copied' })
+```
+
+## Avoid examples
+
+- No avoid example documented.
+
+## Related
+
+- `ui.feedback-provider`
+- `ui.toast-viewport`
+
+## Storybook
+
+- `catalog-ui--toast`
+
+## Source
+
+- `packages/ui/src/feedback/toast.tsx`
+
+
+---
+
+# ToastViewport
+
+> `ui.toast-viewport` · `@commonspace/ui` · stable · version 0.1.0
+
+Positions and announces the bounded stack of global feedback items.
+
+## Import
+
+```tsx
+import { ToastViewport } from '@commonspace/ui';
+```
+
+```tsx
+import { ToastViewport } from '@commonspace/ui/feedback';
+```
+
+## Use when
+
+- FeedbackProvider needs a visible output region.
+
+## Avoid when
+
+- A page needs a custom notification center.
+
+## Variants
+
+- **top-right:** Use the top-right variant only when its semantic role matches the surrounding decision or content hierarchy.
+- **bottom-right:** Use the bottom-right variant only when its semantic role matches the surrounding decision or content hierarchy.
+- **bottom-center:** Use the bottom-center variant only when its semantic role matches the surrounding decision or content hierarchy.
+
+## States
+
+- empty
+- populated
+
+## Accessibility
+
+- Avoid covering primary navigation and mobile safe areas.
+- Keep DOM order consistent with announcement order.
+
+
+## Tokens
+
+- `--cs-dialog-width-sm`
+- `--cs-space-4`
+
+## Props
+
+Props follow the exported TypeScript interface. Use the CLI or package declaration for the exact installed-version type.
+
+## Preferred examples
+
+### Default viewport
+
+Binds queue state to presentation.
+
+```tsx
+<ToastViewport items={items} onDismiss={dismiss} />
+```
+
+## Avoid examples
+
+- No avoid example documented.
+
+## Related
+
+- `ui.feedback-provider`
+- `ui.toast`
+
+## Storybook
+
+- `catalog-ui--toast-viewport`
+
+## Source
+
+- `packages/ui/src/feedback/toast.tsx`
+
+
+---
+
+# VisuallyHidden
+
+> `ui.visually-hidden` · `@commonspace/ui` · stable · version 0.1.0
+
+Keeps essential text available to assistive technology without changing visual layout.
+
+## Import
+
+```tsx
+import { VisuallyHidden } from '@commonspace/ui';
+```
+
+## Use when
+
+- An icon-only control or visual pattern needs an accessible text equivalent.
+
+## Avoid when
+
+- Content should be hidden from everyone; do not render it.
+- Visible instructions would benefit all users.
+
+## Variants
+
+- **default:** Use the default variant only when its semantic role matches the surrounding decision or content hierarchy.
+
+## States
+
+- default
+
+## Accessibility
+
+- Hidden text must remain in the accessibility tree.
+- Do not use it to conceal focusable controls.
+
+
+## Tokens
+
+- `--cs-space-0`
+
+## Props
+
+Props follow the exported TypeScript interface. Use the CLI or package declaration for the exact installed-version type.
+
+## Preferred examples
+
+### Loading name
+
+Retains an accessible name.
+
+```tsx
+<Spinner><VisuallyHidden>Loading posts</VisuallyHidden></Spinner>
+```
+
+## Avoid examples
+
+- No avoid example documented.
+
+## Related
+
+- `ui.icon-button`
+- `ui.spinner`
+
+## Storybook
+
+- `catalog-ui--visually-hidden`
+
+## Source
+
+- `packages/ui/src/visually-hidden/visually-hidden.tsx`
+
+
+---
+
+# Collection states
+
+> `pattern.collection-states` · stable · version 0.2.0
+
+Provides complete loading, empty, populated, pagination, and error states for a collection.
+
+## Use when
+
+- A product needs the collection states pattern.
+
+## Avoid when
+
+- A smaller primitive or a single component fully expresses the task.
+
+## Anatomy
+
+- Collection heading
+- Controls
+- Result region
+- Pagination status
+
+## Components
+
+- `ui.skeleton`
+- `ui.empty-state`
+- `ui.alert`
+- `ui.button`
+- `ui.stack`
+
+## States
+
+- initial-loading
+- empty
+- populated
+- loading-more
+- load-more-error
+- filtered-empty
+
+## Responsive behavior
+
+- Maintain readable row widths.
+- Keep existing rows visible when pagination fails.
+
+## Flow
+
+1. Load the first page.
+2. Render the appropriate state.
+3. Append pages without duplicate rows.
+
+## Accessibility
+
+- Preserve semantic reading and focus order.
+- Represent loading, error, and empty states explicitly.
+
+
+---
+
+# Conversation list
+
+> `pattern.conversation-list` · stable · version 0.2.0
+
+Renders conversations with stable selection, unread semantics, and responsive detail navigation.
+
+## Use when
+
+- A product needs the conversation list pattern.
+
+## Avoid when
+
+- A smaller primitive or a single component fully expresses the task.
+
+## Anatomy
+
+- Inbox heading
+- Conversation rows
+- Unread indicator
+- Selected detail boundary
+
+## Components
+
+- `social.conversation-preview`
+- `ui.empty-state`
+- `ui.skeleton`
+- `ui.alert`
+
+## States
+
+- loading
+- empty
+- populated
+- selected
+- offline
+
+## Responsive behavior
+
+- Use a single-column route transition on small screens.
+- Use split view only when both panes remain usable.
+
+## Flow
+
+1. Load conversations.
+2. Restore selected conversation from the URL.
+3. Reconcile realtime updates without losing selection.
+
+## Accessibility
+
+- Preserve semantic reading and focus order.
+- Represent loading, error, and empty states explicitly.
+
+
+---
+
+# Feedback and recovery
+
+> `pattern.feedback-recovery` · stable · version 0.2.0
+
+Chooses inline, global, or route-level feedback while preserving successful data and unfinished work.
+
+## Use when
+
+- A product needs the feedback and recovery pattern.
+
+## Avoid when
+
+- A smaller primitive or a single component fully expresses the task.
+
+## Anatomy
+
+- Failure boundary
+- Preserved state statement
+- Recovery action
+- Request reference
+
+## Components
+
+- `ui.alert`
+- `ui.feedback-provider`
+- `ui.toast`
+- `ui.empty-state`
+- `ui.button`
+
+## States
+
+- recoverable
+- offline
+- rate-limited
+- critical
+- recovered
+
+## Responsive behavior
+
+- Keep inline feedback adjacent to its owning region.
+- Place global toasts away from mobile navigation and safe areas.
+
+## Flow
+
+1. Classify the error.
+2. State what remains preserved.
+3. Offer one valid recovery action.
+4. Dismiss or reconcile after recovery.
+
+## Accessibility
+
+- Preserve semantic reading and focus order.
+- Represent loading, error, and empty states explicitly.
+
+
+---
+
+# Form actions
+
+> `pattern.form-actions` · stable · version 0.2.0
+
+Orders validation, pending behavior, primary action, and cancellation for a form.
+
+## Use when
+
+- A product needs the form actions pattern.
+
+## Avoid when
+
+- A smaller primitive or a single component fully expresses the task.
+
+## Anatomy
+
+- Form fields
+- Inline validation
+- Form-level feedback
+- Primary and secondary actions
+
+## Components
+
+- `ui.text-field`
+- `ui.text-area`
+- `ui.button`
+- `ui.inline`
+- `ui.stack`
+- `ui.alert`
+
+## States
+
+- pristine
+- dirty
+- invalid
+- submitting
+- failed
+- succeeded
+
+## Responsive behavior
+
+- Stack actions on narrow screens when labels would wrap.
+- Keep destructive actions separate from routine save actions.
+
+## Flow
+
+1. Validate fields.
+2. Move focus to the first invalid field.
+3. Submit once.
+4. Preserve input on failure.
+
+## Accessibility
+
+- Preserve semantic reading and focus order.
+- Represent loading, error, and empty states explicitly.
+
+
+---
+
+# Profile surface
+
+> `pattern.profile-surface` · stable · version 0.2.0
+
+Combines profile identity, relationship action, tabs, and state-complete collections.
+
+## Use when
+
+- A product needs the profile surface pattern.
+
+## Avoid when
+
+- A smaller primitive or a single component fully expresses the task.
+
+## Anatomy
+
+- Profile identity
+- Primary relationship action
+- Peer view tabs
+- Collection region
+
+## Components
+
+- `social.profile-header`
+- `social.user-cell`
+- `ui.tabs`
+- `ui.empty-state`
+- `ui.alert`
+
+## States
+
+- loading
+- self
+- other
+- private
+- blocked
+- not-found
+
+## Responsive behavior
+
+- Stack identity and actions on narrow screens.
+- Keep the primary action visible without covering biography text.
+
+## Flow
+
+1. Load profile and relationship summary.
+2. Choose the correct action state.
+3. Render the selected collection.
+
+## Accessibility
+
+- Preserve semantic reading and focus order.
+- Represent loading, error, and empty states explicitly.
+
+
+---
+
+# Social feed
+
+> `pattern.social-feed` · stable · version 0.2.0
+
+Composes a readable, state-complete social timeline without moving content unexpectedly.
+
+## Use when
+
+- A product needs the social feed pattern.
+
+## Avoid when
+
+- A smaller primitive or a single component fully expresses the task.
+
+## Anatomy
+
+- Feed controls
+- Composer
+- New-item notice
+- Timeline rows
+- Pagination sentinel
+
+## Components
+
+- `social.timeline-view`
+- `social.post-card`
+- `social.post-card-skeleton`
+- `social.post-composer-view`
+
+## States
+
+- initial-loading
+- populated
+- empty
+- loading-more
+- load-more-error
+- new-items-available
+
+## Responsive behavior
+
+- Keep one reading column on narrow viewports.
+- Do not insert new rows above the current viewport without user action.
+
+## Flow
+
+1. Load or restore a snapshot.
+2. Render stable rows.
+3. Poll or subscribe for new-item count.
+4. Accept new items and reset to a new snapshot.
+
+## Accessibility
+
+- Preserve semantic reading and focus order.
+- Represent loading, error, and empty states explicitly.

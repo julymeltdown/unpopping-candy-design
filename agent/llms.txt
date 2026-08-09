@@ -1,0 +1,20 @@
+# Commonspace UI
+
+> AI-operable React design system for content-rich and social products. Version 0.2.0.
+
+## Core context
+
+- [Design contract](../DESIGN.md)
+- [Components](./llms-components.txt)
+- [Patterns](./llms-patterns.txt)
+- [Tokens](./llms-tokens.txt)
+- [Migrations](./llms-migrations.txt)
+- [Full context](./llms-full.txt)
+- [Machine catalog](./manifests/catalog.json)
+
+## Agent sequence
+
+1. Detect the installed project version.
+2. Search the catalog.
+3. Compose from existing patterns and templates.
+4. Validate imports, props, tokens, states, and accessibility.

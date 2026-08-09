@@ -20,11 +20,13 @@
     "test": "pnpm test:pure && pnpm verify",
     "test:pure": "node --experimental-strip-types --test packages/*/test/*.test.ts && node --test tests/architecture/*.test.mjs",
     "typecheck": "pnpm --recursive typecheck",
-    "verify": "node --experimental-strip-types scripts/generate-knowledge.mjs --check && node scripts/verify-package-contracts.mjs && node scripts/verify-boundaries.mjs && node scripts/verify-exports.mjs && node scripts/verify-css-contract.mjs && node scripts/verify-docs.mjs && tsc -p tsconfig.syntax.json",
+    "verify": "npm run agent:check && node scripts/verify-package-contracts.mjs && node scripts/verify-boundaries.mjs && node scripts/verify-exports.mjs && node scripts/verify-css-contract.mjs && node scripts/verify-docs.mjs && tsc -p tsconfig.syntax.json",
     "version-packages": "changeset version",
     "preview:capture": "python3 scripts/capture-static-preview.py",
     "knowledge:generate": "node --experimental-strip-types scripts/generate-knowledge.mjs",
-    "knowledge:check": "node --experimental-strip-types scripts/generate-knowledge.mjs --check"
+    "knowledge:check": "node --experimental-strip-types scripts/generate-knowledge.mjs --check",
+    "agent:generate": "npm run knowledge:generate && node --experimental-strip-types scripts/generate-agent-docs.mjs",
+    "agent:check": "npm run knowledge:check && node --experimental-strip-types scripts/generate-agent-docs.mjs --check"
   },
   "devDependencies": {
     "@changesets/cli": "2.29.7",
