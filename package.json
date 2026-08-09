@@ -25,9 +25,11 @@
     "preview:capture": "python3 scripts/capture-static-preview.py",
     "knowledge:generate": "node --experimental-strip-types scripts/generate-knowledge.mjs",
     "knowledge:check": "node --experimental-strip-types scripts/generate-knowledge.mjs --check",
-    "agent:generate": "npm run knowledge:generate && node --experimental-strip-types scripts/generate-agent-docs.mjs",
-    "agent:check": "npm run knowledge:check && node --experimental-strip-types scripts/generate-agent-docs.mjs --check",
-    "commonspace": "node --experimental-strip-types packages/cli/src/bin.ts"
+    "agent:generate": "npm run knowledge:generate && node --experimental-strip-types scripts/generate-agent-docs.mjs && npm run skills:generate",
+    "agent:check": "npm run knowledge:check && node --experimental-strip-types scripts/generate-agent-docs.mjs --check && npm run skills:check",
+    "commonspace": "node --experimental-strip-types packages/cli/src/bin.ts",
+    "skills:generate": "node scripts/verify-skills.mjs --write",
+    "skills:check": "node scripts/verify-skills.mjs --check"
   },
   "devDependencies": {
     "@changesets/cli": "2.29.7",

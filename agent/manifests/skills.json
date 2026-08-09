@@ -1,0 +1,96 @@
+{
+  "schemaVersion": 1,
+  "generatedAt": "2026-08-09T00:00:00.000Z",
+  "entries": [
+    {
+      "name": "author-commonspace-component",
+      "description": "Use when adding or materially changing a public Commonspace UI or social component, including its API, metadata, stories, tests, documentation, and release record.",
+      "version": "0.2.0",
+      "path": "skills/author-commonspace-component/SKILL.md",
+      "allowedTools": [
+        "Bash",
+        "Read",
+        "Grep",
+        "Glob"
+      ],
+      "references": [
+        "references/metadata.md",
+        "references/public-api.md"
+      ],
+      "scripts": [],
+      "sourceDigest": "2497a34c5f89f160feaa6489120d4541f669ea3f9913a79d9ee534a377718cb8"
+    },
+    {
+      "name": "build-commonspace-interface",
+      "description": "Use when building a new page, workflow, block, or application shell with Commonspace UI from a functional requirement or visual reference.",
+      "version": "0.2.0",
+      "path": "skills/build-commonspace-interface/SKILL.md",
+      "allowedTools": [
+        "Bash",
+        "Read",
+        "Grep",
+        "Glob"
+      ],
+      "references": [
+        "references/composition.md",
+        "references/responsive.md"
+      ],
+      "scripts": [],
+      "sourceDigest": "0a7c3a0469d11c1e9cd298a66283db34c7e4f53477608a81fdd4ff3ad64a67ad"
+    },
+    {
+      "name": "commonspace-ui",
+      "description": "Use whenever a task creates, changes, reviews, or migrates a React interface that should use Commonspace UI components, tokens, patterns, or templates.",
+      "version": "0.2.0",
+      "path": "skills/commonspace-ui/SKILL.md",
+      "allowedTools": [
+        "Bash",
+        "Read",
+        "Grep",
+        "Glob"
+      ],
+      "references": [
+        "references/component-discovery.md",
+        "references/state-and-accessibility.md"
+      ],
+      "scripts": [
+        "scripts/project-info.mjs"
+      ],
+      "sourceDigest": "07d14da921bd4eadb7f89b5350f01e7d7f747beefc8f370a4e1a1dabfc9eb11c"
+    },
+    {
+      "name": "migrate-to-commonspace",
+      "description": "Use when replacing an existing React UI library, custom component set, or copied markup with Commonspace UI while preserving application behavior.",
+      "version": "0.2.0",
+      "path": "skills/migrate-to-commonspace/SKILL.md",
+      "allowedTools": [
+        "Bash",
+        "Read",
+        "Grep",
+        "Glob"
+      ],
+      "references": [
+        "references/migration-order.md"
+      ],
+      "scripts": [],
+      "sourceDigest": "a1334aad89b0b79c1f82d3afd203c5b2b966dbec2994214f48524f7ecc6c5daf"
+    },
+    {
+      "name": "review-commonspace-interface",
+      "description": "Use when reviewing generated or hand-written React UI for Commonspace component reuse, design-token compliance, state completeness, accessibility, and product-pattern correctness.",
+      "version": "0.2.0",
+      "path": "skills/review-commonspace-interface/SKILL.md",
+      "allowedTools": [
+        "Bash",
+        "Read",
+        "Grep",
+        "Glob"
+      ],
+      "references": [
+        "references/review-rubric.md"
+      ],
+      "scripts": [],
+      "sourceDigest": "f9e66abb87307833a7315e26318d6633e5dc3a8b4ff59f5f986a0bf13d8123f5"
+    }
+  ]
+}
