@@ -25,8 +25,8 @@
     "preview:capture": "python3 scripts/capture-static-preview.py",
     "knowledge:generate": "node --experimental-strip-types scripts/generate-knowledge.mjs",
     "knowledge:check": "node --experimental-strip-types scripts/generate-knowledge.mjs --check",
-    "agent:generate": "npm run knowledge:generate && npm run registry:generate && npm run stories:generate && node --experimental-strip-types scripts/generate-agent-docs.mjs && npm run skills:generate && npm run evals:generate",
-    "agent:check": "npm run knowledge:check && npm run registry:check && npm run stories:check && node --experimental-strip-types scripts/generate-agent-docs.mjs --check && npm run skills:check && npm run evals:check",
+    "agent:generate": "npm run knowledge:generate && npm run registry:generate && npm run stories:generate && node --experimental-strip-types scripts/generate-agent-docs.mjs && npm run skills:generate && npm run evals:generate && npm run figma:generate",
+    "agent:check": "npm run knowledge:check && npm run registry:check && npm run stories:check && node --experimental-strip-types scripts/generate-agent-docs.mjs --check && npm run skills:check && npm run evals:check && npm run figma:check",
     "commonspace": "node --experimental-strip-types packages/cli/src/bin.ts",
     "skills:generate": "node scripts/verify-skills.mjs --write",
     "skills:check": "node scripts/verify-skills.mjs --check",
@@ -36,13 +36,20 @@
     "stories:generate": "node --experimental-strip-types scripts/verify-story-manifest.mjs",
     "stories:check": "node --experimental-strip-types scripts/verify-story-manifest.mjs --check",
     "evals:generate": "node --experimental-strip-types scripts/generate-agent-evals.mjs",
-    "evals:check": "node --experimental-strip-types scripts/generate-agent-evals.mjs --check"
+    "evals:check": "node --experimental-strip-types scripts/generate-agent-evals.mjs --check",
+    "figma:generate": "node --experimental-strip-types scripts/generate-figma.mjs",
+    "figma:check": "node --experimental-strip-types scripts/generate-figma.mjs --check",
+    "figma:publish-check": "node --experimental-strip-types scripts/generate-figma.mjs --publish-check",
+    "figma:parse": "figma connect parse --config figma.config.json",
+    "figma:preview": "figma connect preview --config figma.config.json",
+    "figma:publish": "npm run figma:publish-check && figma connect publish --config figma.config.json"
   },
   "devDependencies": {
     "@changesets/cli": "2.29.7",
     "@types/node": "24.3.0",
     "eslint": "10.7.0",
     "prettier": "3.6.2",
-    "typescript": "7.0.2"
+    "typescript": "7.0.2",
+    "@figma/code-connect": "1.5.0"
   }
 }

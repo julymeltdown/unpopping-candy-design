@@ -59,6 +59,23 @@
       "sourceDigest": "07d14da921bd4eadb7f89b5350f01e7d7f747beefc8f370a4e1a1dabfc9eb11c"
     },
     {
+      "name": "connect-commonspace-figma",
+      "description": "Use when mapping Commonspace UI components to Figma Code Connect, validating Figma component properties, or preparing Code Connect publication.",
+      "version": "0.2.0",
+      "path": "skills/connect-commonspace-figma/SKILL.md",
+      "allowedTools": [
+        "Bash",
+        "Read",
+        "Grep",
+        "Glob"
+      ],
+      "references": [
+        "references/mapping-rules.md"
+      ],
+      "scripts": [],
+      "sourceDigest": "ae5b85e4d380b9c19b59e02f1d0bc80758a0e50be5a2a7ede143e7b3a17aa2b2"
+    },
+    {
       "name": "migrate-to-commonspace",
       "description": "Use when replacing an existing React UI library, custom component set, or copied markup with Commonspace UI while preserving application behavior.",
       "version": "0.2.0",
