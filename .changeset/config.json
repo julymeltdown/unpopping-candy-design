@@ -3,9 +3,21 @@
   "changelog": "@changesets/cli/changelog",
   "commit": false,
   "fixed": [],
-  "linked": [["@commonspace/tokens", "@commonspace/theme", "@commonspace/icons", "@commonspace/ui", "@commonspace/social"]],
+  "linked": [
+    [
+      "@commonspace/tokens",
+      "@commonspace/theme",
+      "@commonspace/icons",
+      "@commonspace/ui",
+      "@commonspace/social"
+    ]
+  ],
   "access": "public",
   "baseBranch": "master",
   "updateInternalDependencies": "patch",
-  "ignore": ["@commonspace/docs", "@commonspace/playground"]
+  "ignore": [
+    "@commonspace/agent-lab",
+    "@commonspace/docs",
+    "@commonspace/playground"
+  ]
 }

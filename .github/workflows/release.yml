@@ -1,15 +1,20 @@
-name: Release
+name: Release packages
 on:
-  push:
-    branches: [master]
+  workflow_dispatch:
+    inputs:
+      publish:
+        description: Publish the already-versioned packages after all readiness gates pass
+        type: boolean
+        required: true
+        default: false
 permissions:
   contents: write
-  pull-requests: write
   id-token: write
 concurrency: ${{ github.workflow }}-${{ github.ref }}
 jobs:
   release:
     runs-on: ubuntu-latest
+    environment: npm-release
     steps:
       - uses: actions/checkout@v4
       - uses: pnpm/action-setup@v4
@@ -19,14 +24,19 @@ jobs:
           node-version: 22
           registry-url: https://registry.npmjs.org
           cache: pnpm
-      - run: pnpm install --no-frozen-lockfile
-      - run: pnpm test
-      - uses: changesets/action@v1
-        with:
-          version: pnpm version-packages
-          publish: pnpm release
-          title: Release packages
-          commit: Release packages
+      - name: Install locked workspace dependencies
+        run: pnpm install --frozen-lockfile
+      - name: Verify publication prerequisites
+        run: pnpm release:check
+      - name: Run all tests and architecture gates
+        run: pnpm test
+      - name: Typecheck
+        run: pnpm typecheck
+      - name: Build all packages and consumers
+        run: pnpm build
+      - name: Publish packages
+        if: ${{ inputs.publish }}
+        run: pnpm release
         env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+          NPM_CONFIG_PROVENANCE: true

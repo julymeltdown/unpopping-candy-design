@@ -16,11 +16,11 @@
     "format": "prettier --write .",
     "format:check": "prettier --check .",
     "lint": "eslint .",
-    "release": "pnpm build:packages && changeset publish",
+    "release": "npm run release:check && pnpm build:packages && changeset publish",
     "test": "pnpm test:pure && pnpm verify",
     "test:pure": "node --experimental-strip-types --test packages/*/test/*.test.ts && node --test tests/architecture/*.test.mjs",
     "typecheck": "pnpm --recursive typecheck",
-    "verify": "npm run agent:check && node scripts/verify-package-contracts.mjs && node scripts/verify-boundaries.mjs && node scripts/verify-exports.mjs && node scripts/verify-css-contract.mjs && node scripts/verify-docs.mjs && tsc -p tsconfig.syntax.json",
+    "verify": "npm run agent:check && npm run ai:check && node scripts/verify-package-contracts.mjs && node scripts/verify-boundaries.mjs && node scripts/verify-exports.mjs && node scripts/verify-css-contract.mjs && node scripts/verify-docs.mjs && tsc -p tsconfig.syntax.json",
     "version-packages": "changeset version",
     "preview:capture": "python3 scripts/capture-static-preview.py",
     "knowledge:generate": "node --experimental-strip-types scripts/generate-knowledge.mjs",
@@ -42,7 +42,9 @@
     "figma:publish-check": "node --experimental-strip-types scripts/generate-figma.mjs --publish-check",
     "figma:parse": "figma connect parse --config figma.config.json",
     "figma:preview": "figma connect preview --config figma.config.json",
-    "figma:publish": "npm run figma:publish-check && figma connect publish --config figma.config.json"
+    "figma:publish": "npm run figma:publish-check && figma connect publish --config figma.config.json",
+    "ai:check": "node scripts/verify-ai-contracts.mjs",
+    "release:check": "node scripts/verify-release-readiness.mjs"
   },
   "devDependencies": {
     "@changesets/cli": "2.29.7",

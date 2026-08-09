@@ -16,7 +16,22 @@ jobs:
         with:
           node-version: 22
           cache: pnpm
-      - run: pnpm install --no-frozen-lockfile
-      - run: pnpm test
-      - run: pnpm typecheck
-      - run: pnpm build
+      - name: Install workspace dependencies
+        run: pnpm install --no-frozen-lockfile
+      - name: Verify generated AI context is current
+        run: pnpm agent:check
+      - name: Run deterministic package and architecture tests
+        run: pnpm test:pure
+      - name: Run package, AI, export, CSS, documentation, and syntax gates
+        run: pnpm verify
+      - name: Typecheck all workspaces
+        run: pnpm typecheck
+      - name: Build packages and every consumer surface
+        run: pnpm build
+      - name: Upload Storybook
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: commonspace-storybook
+          path: apps/docs/storybook-static
+          if-no-files-found: ignore
