@@ -1300,17 +1300,17 @@ export const bundledCatalog = {
         {
           "path": "src/app/providers/commonspace-provider.tsx",
           "role": "Application provider composition",
-          "source": "registry/templates/fsd-social-shell/src/app/providers/commonspace-provider.tsx"
+          "source": "packages/registry/templates/fsd-social-shell/src/app/providers/commonspace-provider.tsx"
         },
         {
           "path": "src/pages/home/ui/home-page.tsx",
           "role": "Home page composition",
-          "source": "registry/templates/fsd-social-shell/src/pages/home/ui/home-page.tsx"
+          "source": "packages/registry/templates/fsd-social-shell/src/pages/home/ui/home-page.tsx"
         },
         {
           "path": "src/widgets/post-feed/ui/post-feed.tsx",
           "role": "Reusable feed widget",
-          "source": "registry/templates/fsd-social-shell/src/widgets/post-feed/ui/post-feed.tsx"
+          "source": "packages/registry/templates/fsd-social-shell/src/widgets/post-feed/ui/post-feed.tsx"
         }
       ],
       "variables": [
@@ -1367,12 +1367,12 @@ export const bundledCatalog = {
         {
           "path": "src/moderation-workspace.tsx",
           "role": "Moderation workspace composition",
-          "source": "registry/templates/moderation-workspace/src/moderation-workspace.tsx"
+          "source": "packages/registry/templates/moderation-workspace/src/moderation-workspace.tsx"
         },
         {
           "path": "src/moderation-workspace.css",
           "role": "Responsive workspace layout",
-          "source": "registry/templates/moderation-workspace/src/moderation-workspace.css"
+          "source": "packages/registry/templates/moderation-workspace/src/moderation-workspace.css"
         }
       ],
       "variables": [
@@ -1428,7 +1428,7 @@ export const bundledCatalog = {
         {
           "path": "src/profile-settings.tsx",
           "role": "Settings form",
-          "source": "registry/templates/profile-settings/src/profile-settings.tsx"
+          "source": "packages/registry/templates/profile-settings/src/profile-settings.tsx"
         }
       ],
       "variables": [
@@ -1484,12 +1484,12 @@ export const bundledCatalog = {
         {
           "path": "src/social-feed-page.tsx",
           "role": "Feed page composition",
-          "source": "registry/templates/social-feed-page/src/social-feed-page.tsx"
+          "source": "packages/registry/templates/social-feed-page/src/social-feed-page.tsx"
         },
         {
           "path": "src/social-feed-page.css",
           "role": "Page layout styles",
-          "source": "registry/templates/social-feed-page/src/social-feed-page.css"
+          "source": "packages/registry/templates/social-feed-page/src/social-feed-page.css"
         }
       ],
       "variables": [
@@ -1544,17 +1544,17 @@ export const bundledCatalog = {
         {
           "path": "src/app.tsx",
           "role": "Root application component",
-          "source": "registry/templates/vite-app-shell/src/app.tsx"
+          "source": "packages/registry/templates/vite-app-shell/src/app.tsx"
         },
         {
           "path": "src/main.tsx",
           "role": "Browser entry",
-          "source": "registry/templates/vite-app-shell/src/main.tsx"
+          "source": "packages/registry/templates/vite-app-shell/src/main.tsx"
         },
         {
           "path": "src/styles.css",
           "role": "Application-level styles",
-          "source": "registry/templates/vite-app-shell/src/styles.css"
+          "source": "packages/registry/templates/vite-app-shell/src/styles.css"
         }
       ],
       "variables": [

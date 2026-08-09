@@ -1,6 +1,6 @@
 # @commonspace/mcp
 
-Local, read-only Model Context Protocol server for Commonspace UI. It exposes bounded project information, component and pattern discovery, deterministic composition planning, and source validation over the same catalog used by the CLI and generated documents.
+Local Model Context Protocol server for Commonspace UI. It exposes bounded project information, component and pattern discovery, deterministic composition planning, source validation, and a guarded Registry scaffold action over the same catalog used by the CLI and generated documents.
 
 ```json
 {
@@ -13,4 +13,4 @@ Local, read-only Model Context Protocol server for Commonspace UI. It exposes bo
 }
 ```
 
-The default server uses stdio, performs no network requests, and provides no file-mutation tools. Registry writes are a separate, explicit, dry-run-first capability.
+The default server uses stdio and performs no network requests. `commonspace_scaffold` is dry-run by default and writes only when `apply: true` is explicitly supplied. Existing different files are never overwritten and target paths may not escape the selected project root.

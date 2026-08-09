@@ -32,7 +32,7 @@ export default {
     {
       "path": "src/profile-settings.tsx",
       "role": "Settings form",
-      "source": "registry/templates/profile-settings/src/profile-settings.tsx"
+      "source": "packages/registry/templates/profile-settings/src/profile-settings.tsx"
     }
   ],
   "variables": [

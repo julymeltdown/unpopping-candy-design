@@ -5,6 +5,7 @@ const BASE_RESOURCES: readonly McpResourceDescriptor[] = [
   { uri: 'commonspace://design/current', name: 'Current design contract', description: 'Generated portable Commonspace DESIGN.md.', mimeType: 'text/markdown' },
   { uri: 'commonspace://catalog', name: 'Knowledge catalog', description: 'Versioned component, pattern, template, and migration metadata.', mimeType: 'application/json' },
   { uri: 'commonspace://tokens', name: 'Design tokens', description: 'DTCG-compatible Commonspace token source.', mimeType: 'application/json' },
+  { uri: 'commonspace://registry', name: 'Registry manifest', description: 'Versioned templates, files, variables, and checksums available for guarded scaffolding.', mimeType: 'application/json' },
   { uri: 'commonspace://project/info', name: 'Project information', description: 'Detected project framework, Commonspace versions, and style setup.', mimeType: 'application/json' },
 ];
 
@@ -46,6 +47,7 @@ export function createCommonspaceMcpDomain(services: McpDomainServices): Commons
       if (base?.uri === 'commonspace://design/current') return { ...base, text: services.designMarkdown };
       if (base?.uri === 'commonspace://catalog') return jsonResource(base, services.catalog);
       if (base?.uri === 'commonspace://tokens') return jsonResource(base, services.tokens);
+      if (base?.uri === 'commonspace://registry') return jsonResource(base, await services.registryManifest());
       if (base?.uri === 'commonspace://project/info') return jsonResource(base, await services.projectInfo(projectPath));
       const parsed = parseEntryUri(uri);
       if (!parsed) throw new Error(`Unsupported Commonspace resource URI: ${uri}`);
@@ -68,6 +70,16 @@ export function createCommonspaceMcpDomain(services: McpDomainServices): Commons
       return services.compose(input.request.trim());
     },
     async validate(input) { return services.validate(input.path ?? process.cwd()); },
+    async scaffold(input) {
+      if (!input.templateId.trim()) throw new Error('templateId is required');
+      return services.scaffold({
+        templateId: input.templateId.trim(),
+        projectRoot: input.path ?? process.cwd(),
+        targetDirectory: input.targetDirectory ?? '.',
+        variables: input.variables ?? {},
+        mode: input.apply === true ? 'apply' : 'dry-run',
+      });
+    },
     listPrompts: () => PROMPTS,
     getPrompt(name, args) {
       const prompt = PROMPTS.find((item) => item.name === name);

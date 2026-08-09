@@ -33,17 +33,17 @@ export default {
     {
       "path": "src/app/providers/commonspace-provider.tsx",
       "role": "Application provider composition",
-      "source": "registry/templates/fsd-social-shell/src/app/providers/commonspace-provider.tsx"
+      "source": "packages/registry/templates/fsd-social-shell/src/app/providers/commonspace-provider.tsx"
     },
     {
       "path": "src/pages/home/ui/home-page.tsx",
       "role": "Home page composition",
-      "source": "registry/templates/fsd-social-shell/src/pages/home/ui/home-page.tsx"
+      "source": "packages/registry/templates/fsd-social-shell/src/pages/home/ui/home-page.tsx"
     },
     {
       "path": "src/widgets/post-feed/ui/post-feed.tsx",
       "role": "Reusable feed widget",
-      "source": "registry/templates/fsd-social-shell/src/widgets/post-feed/ui/post-feed.tsx"
+      "source": "packages/registry/templates/fsd-social-shell/src/widgets/post-feed/ui/post-feed.tsx"
     }
   ],
   "variables": [

@@ -4,15 +4,30 @@
   "description": "Deterministic project detection, design-system discovery, composition planning, and validation for Commonspace UI.",
   "license": "UNLICENSED",
   "type": "module",
-  "files": ["dist", "README.md"],
+  "files": [
+    "dist",
+    "README.md"
+  ],
   "sideEffects": false,
-  "bin": { "commonspace": "./dist/bin.js" },
-  "exports": {
-    ".": { "types": "./dist/index.d.ts", "import": "./dist/index.js" }
+  "bin": {
+    "commonspace": "./dist/bin.js"
   },
-  "publishConfig": { "access": "public" },
-  "dependencies": { "@commonspace/knowledge": "workspace:^" },
-  "devDependencies": { "@types/node": "24.3.0" },
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js"
+    }
+  },
+  "publishConfig": {
+    "access": "public"
+  },
+  "dependencies": {
+    "@commonspace/knowledge": "workspace:^",
+    "@commonspace/registry": "workspace:^"
+  },
+  "devDependencies": {
+    "@types/node": "24.3.0"
+  },
   "scripts": {
     "build": "tsc -p tsconfig.build.json",
     "test": "node --experimental-strip-types --test test/*.test.ts",

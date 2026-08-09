@@ -1,4 +1,5 @@
 import type { KnowledgeCatalog, KnowledgeEntry, SearchResult } from '@commonspace/knowledge';
+import type { ScaffoldInput, ScaffoldResult } from '@commonspace/registry';
 
 export interface CommonspaceProjectInfo {
   root: string;
@@ -44,6 +45,7 @@ export interface CliServices {
   validate(path: string): Promise<ValidationReport>;
   search(query: string, options?: { kind?: KnowledgeEntry['kind']; limit?: number }): readonly SearchResult[];
   get(idOrName: string): KnowledgeEntry | undefined;
+  scaffold?(input: ScaffoldInput): Promise<ScaffoldResult>;
 }
 
 export type CliResult =

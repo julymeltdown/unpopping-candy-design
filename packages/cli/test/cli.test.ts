@@ -1,21 +1,24 @@
 import assert from 'node:assert/strict';
-import { mkdtemp, mkdir, writeFile } from 'node:fs/promises';
+import { mkdtemp, mkdir, readFile, writeFile } from 'node:fs/promises';
 import { tmpdir } from 'node:os';
-import { join } from 'node:path';
+import { join, resolve } from 'node:path';
 import test from 'node:test';
 import { bundledCatalog, getCatalogEntry, searchCatalog } from '../../knowledge/src/index.ts';
+import { createRegistryService } from '../../registry/src/index.ts';
 import { executeCliCommand } from '../src/commands.ts';
 import { composeInterfacePlan } from '../src/compose.ts';
 import { detectCommonspaceProject } from '../src/project-info.ts';
 import { validateCommonspaceProject } from '../src/validate.ts';
 
 const search = (query: string, options?: Parameters<typeof searchCatalog>[2]) => searchCatalog(bundledCatalog, query, options);
+const registry = createRegistryService({ catalog: bundledCatalog, templateRoot: join(resolve(new URL('../../..', import.meta.url).pathname), 'packages/registry/templates') });
 const services = {
   catalog: bundledCatalog,
   projectInfo: detectCommonspaceProject,
   validate: (path: string) => validateCommonspaceProject(bundledCatalog, path),
   search,
   get: (idOrName: string) => getCatalogEntry(bundledCatalog, idOrName),
+  scaffold: registry.scaffold,
 };
 
 async function fixture(): Promise<string> {
@@ -87,4 +90,20 @@ test('doctor reports missing installation and style prerequisites without mutati
   const recommendations = (result.data as { recommendations: string[] }).recommendations;
   assert.ok(recommendations.some((item) => item.includes('@commonspace/ui')));
   assert.ok(recommendations.some((item) => item.includes('commonspace.config.json')));
+});
+
+
+test('scaffold defaults to dry-run and requires explicit apply for writes', async () => {
+  const root = await mkdtemp(join(tmpdir(), 'commonspace-cli-scaffold-'));
+  const dryRun = await executeCliCommand(services, 'scaffold', ['template.profile-settings', '--target', 'features/profile'], root);
+  assert.equal(dryRun.ok, true);
+  if (!dryRun.ok) throw new Error(dryRun.error.message);
+  assert.equal((dryRun.data as { mode: string; applied: boolean }).mode, 'dry-run');
+  await assert.rejects(readFile(join(root, 'features/profile/src/profile-settings.tsx'), 'utf8'));
+
+  const applied = await executeCliCommand(services, 'scaffold', ['template.profile-settings', '--target', 'features/profile', '--var', 'componentPrefix=Account', '--apply'], root);
+  assert.equal(applied.ok, true);
+  if (!applied.ok) throw new Error(applied.error.message);
+  assert.equal((applied.data as { applied: boolean }).applied, true);
+  assert.match(await readFile(join(root, 'features/profile/src/profile-settings.tsx'), 'utf8'), /AccountProfileSettings/);
 });

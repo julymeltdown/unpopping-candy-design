@@ -1,14 +1,16 @@
 import assert from 'node:assert/strict';
 import { mkdtemp, mkdir, writeFile } from 'node:fs/promises';
 import { tmpdir } from 'node:os';
-import { join } from 'node:path';
+import { join, resolve } from 'node:path';
 import test from 'node:test';
 import { composeInterfacePlan, detectCommonspaceProject, validateCommonspaceProject } from '../../cli/src/index.ts';
 import { bundledCatalog, generateDesignMarkdown, getCatalogEntry, searchCatalog } from '../../knowledge/src/index.ts';
 import tokens from '../../tokens/src/tokens.json' with { type: 'json' };
+import { createRegistryService } from '../../registry/src/index.ts';
 import { createCommonspaceMcpDomain } from '../src/domain.ts';
 
 const search = (query: string, options?: Parameters<typeof searchCatalog>[2]) => searchCatalog(bundledCatalog, query, options);
+const registry = createRegistryService({ catalog: bundledCatalog, templateRoot: join(resolve(new URL('../../..', import.meta.url).pathname), 'packages/registry/templates') });
 const domain = createCommonspaceMcpDomain({
   catalog: bundledCatalog,
   designMarkdown: generateDesignMarkdown(bundledCatalog, tokens),
@@ -18,12 +20,15 @@ const domain = createCommonspaceMcpDomain({
   search,
   get: (id) => getCatalogEntry(bundledCatalog, id),
   compose: (request) => composeInterfacePlan(bundledCatalog, request, search),
+  registryManifest: registry.manifest,
+  scaffold: registry.scaffold,
 });
 
 test('resource list exposes static context and every versioned catalog entry', () => {
   const resources = domain.listResources();
-  assert.equal(resources.length, 48);
+  assert.equal(resources.length, 49);
   assert.ok(resources.some((resource) => resource.uri === 'commonspace://design/current'));
+  assert.ok(resources.some((resource) => resource.uri === 'commonspace://registry'));
   assert.ok(resources.some((resource) => resource.uri === 'commonspace://components/ui.button'));
   assert.equal(new Set(resources.map((resource) => resource.uri)).size, resources.length);
 });
@@ -69,4 +74,15 @@ test('prompts encode the mandatory detect-search-compose-validate workflow', () 
 test('unknown resources and entries fail instead of returning invented context', async () => {
   await assert.rejects(domain.readResource('commonspace://components/ui.missing'), /not found/i);
   assert.throws(() => domain.get({ id: 'ui.missing' }), /not found/i);
+});
+
+
+test('scaffold tool is dry-run by default and writes only after explicit apply', async () => {
+  const root = await mkdtemp(join(tmpdir(), 'commonspace-mcp-scaffold-'));
+  const dryRun = await domain.scaffold({ templateId: 'template.profile-settings', path: root, targetDirectory: 'profile', variables: { componentPrefix: 'Agent' } }) as { mode: string; applied: boolean };
+  assert.equal(dryRun.mode, 'dry-run');
+  assert.equal(dryRun.applied, false);
+  const applied = await domain.scaffold({ templateId: 'template.profile-settings', path: root, targetDirectory: 'profile', variables: { componentPrefix: 'Agent' }, apply: true }) as { applied: boolean };
+  assert.equal(applied.applied, true);
+  assert.match(await (await import('node:fs/promises')).readFile(join(root, 'profile/src/profile-settings.tsx'), 'utf8'), /AgentProfileSettings/);
 });

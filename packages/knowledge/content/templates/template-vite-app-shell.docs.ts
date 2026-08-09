@@ -31,17 +31,17 @@ export default {
     {
       "path": "src/app.tsx",
       "role": "Root application component",
-      "source": "registry/templates/vite-app-shell/src/app.tsx"
+      "source": "packages/registry/templates/vite-app-shell/src/app.tsx"
     },
     {
       "path": "src/main.tsx",
       "role": "Browser entry",
-      "source": "registry/templates/vite-app-shell/src/main.tsx"
+      "source": "packages/registry/templates/vite-app-shell/src/main.tsx"
     },
     {
       "path": "src/styles.css",
       "role": "Application-level styles",
-      "source": "registry/templates/vite-app-shell/src/styles.css"
+      "source": "packages/registry/templates/vite-app-shell/src/styles.css"
     }
   ],
   "variables": [

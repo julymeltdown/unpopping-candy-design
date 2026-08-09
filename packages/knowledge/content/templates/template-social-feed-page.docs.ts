@@ -32,12 +32,12 @@ export default {
     {
       "path": "src/social-feed-page.tsx",
       "role": "Feed page composition",
-      "source": "registry/templates/social-feed-page/src/social-feed-page.tsx"
+      "source": "packages/registry/templates/social-feed-page/src/social-feed-page.tsx"
     },
     {
       "path": "src/social-feed-page.css",
       "role": "Page layout styles",
-      "source": "registry/templates/social-feed-page/src/social-feed-page.css"
+      "source": "packages/registry/templates/social-feed-page/src/social-feed-page.css"
     }
   ],
   "variables": [

@@ -1,6 +1,6 @@
 # Commonspace MCP configuration
 
-`@commonspace/mcp` is a local stdio server. It exposes read-only resources, five generic tools, and four workflow prompts. It does not call an LLM, fetch remote URLs, or modify files.
+`@commonspace/mcp` is a local stdio server. It exposes versioned resources, six generic tools, and four workflow prompts. It does not call an LLM or fetch remote URLs.
 
 ## Tool surface
 
@@ -10,9 +10,12 @@ commonspace_search
 commonspace_get
 commonspace_compose
 commonspace_validate
+commonspace_scaffold
 ```
 
 The small generic surface prevents component-per-tool context bloat. Component, pattern, template, and migration detail is passed as an input to `commonspace_get` or read as a resource.
+
+`commonspace_scaffold` returns a dry-run plan unless `apply: true` is explicit. It rejects path traversal, absolute targets, symlink escapes, unknown variables, and conflicting files.
 
 ## Local source checkout
 

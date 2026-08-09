@@ -33,12 +33,12 @@ export default {
     {
       "path": "src/moderation-workspace.tsx",
       "role": "Moderation workspace composition",
-      "source": "registry/templates/moderation-workspace/src/moderation-workspace.tsx"
+      "source": "packages/registry/templates/moderation-workspace/src/moderation-workspace.tsx"
     },
     {
       "path": "src/moderation-workspace.css",
       "role": "Responsive workspace layout",
-      "source": "registry/templates/moderation-workspace/src/moderation-workspace.css"
+      "source": "packages/registry/templates/moderation-workspace/src/moderation-workspace.css"
     }
   ],
   "variables": [

@@ -7,9 +7,31 @@ function option(args: readonly string[], name: string): string | undefined {
   return index >= 0 ? args[index + 1] : undefined;
 }
 
+
+function options(args: readonly string[], name: string): string[] {
+  const output: string[] = [];
+  for (let index = 0; index < args.length; index += 1) {
+    if (args[index] === name && args[index + 1]) output.push(args[index + 1] as string);
+  }
+  return output;
+}
+
+function scaffoldVariables(values: readonly string[]): Readonly<Record<string, string>> {
+  const output: Record<string, string> = {};
+  for (const value of values) {
+    const separator = value.indexOf('=');
+    if (separator <= 0) throw new Error(`Invalid --var value: ${value}. Expected name=value.`);
+    const name = value.slice(0, separator).trim();
+    const variableValue = value.slice(separator + 1);
+    if (!name || name in output) throw new Error(`Duplicate or empty scaffold variable: ${name || '(empty)'}`);
+    output[name] = variableValue;
+  }
+  return output;
+}
+
 function positional(args: readonly string[]): string[] {
   const output: string[] = [];
-  const valueFlags = new Set(['--kind', '--limit']);
+  const valueFlags = new Set(['--kind', '--limit', '--target', '--var']);
   for (let index = 0; index < args.length; index += 1) {
     const value = args[index];
     if (value?.startsWith('--')) { if (valueFlags.has(value)) index += 1; continue; }
@@ -70,7 +92,20 @@ export async function executeCliCommand(services: CliServices, command: string, 
         if (!info.configPath) recommendations.push('Add commonspace.config.json for deterministic scaffolding and validation paths.');
         return { ok: report.summary.errors === 0, command, ...(report.summary.errors === 0 ? { data: { info, validation: report.summary, recommendations } } : { error: { code: 'DOCTOR_FAILED', message: 'Project has blocking Commonspace issues.', details: { info, report, recommendations } } }) } as CliResult;
       }
-      case 'scaffold': return { ok: false, command, error: { code: 'REGISTRY_REQUIRED', message: 'Scaffolding is available after @commonspace/registry is installed. Run with --dry-run before --apply.' } };
+      case 'scaffold': {
+        if (!services.scaffold) return { ok: false, command, error: { code: 'REGISTRY_REQUIRED', message: 'Scaffolding requires @commonspace/registry.' } };
+        const templateId = positional(args)[0];
+        if (!templateId) throw new Error('scaffold requires a template id.');
+        if (args.includes('--apply') && args.includes('--dry-run')) throw new Error('Use either --apply or --dry-run, not both.');
+        const data = await services.scaffold({
+          templateId,
+          projectRoot: cwd,
+          targetDirectory: option(args, '--target') ?? '.',
+          mode: args.includes('--apply') ? 'apply' : 'dry-run',
+          variables: scaffoldVariables(options(args, '--var')),
+        });
+        return { ok: true, command, data };
+      }
       default: return { ok: false, command, error: { code: 'UNKNOWN_COMMAND', message: `Unknown command: ${command || '(empty)'}`, details: { commands: ['info','list','get','search','compose','validate','doctor','scaffold'] } } };
     }
   } catch (error) {
