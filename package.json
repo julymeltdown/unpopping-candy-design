@@ -26,7 +26,8 @@
     "knowledge:generate": "node --experimental-strip-types scripts/generate-knowledge.mjs",
     "knowledge:check": "node --experimental-strip-types scripts/generate-knowledge.mjs --check",
     "agent:generate": "npm run knowledge:generate && node --experimental-strip-types scripts/generate-agent-docs.mjs",
-    "agent:check": "npm run knowledge:check && node --experimental-strip-types scripts/generate-agent-docs.mjs --check"
+    "agent:check": "npm run knowledge:check && node --experimental-strip-types scripts/generate-agent-docs.mjs --check",
+    "commonspace": "node --experimental-strip-types packages/cli/src/bin.ts"
   },
   "devDependencies": {
     "@changesets/cli": "2.29.7",
