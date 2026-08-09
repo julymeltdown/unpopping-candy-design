@@ -1,96 +1,200 @@
 # Commonspace UI
 
-A standalone React design system for content-rich, social, editorial, and community products.
+**Commonspace UI is a publishable React design system and an AI-operable knowledge platform for building social, content, moderation, and collaboration interfaces.**
 
-Commonspace UI extracts the reusable visual layer from the Commonspace social reference application and turns it into independently versioned packages. The library provides layered design tokens, scoped themes, semantic Ant Design icon wrappers, accessible general-purpose UI components, and API-agnostic social presentation patterns.
+It combines five conventional design-system packages with a structured knowledge compiler, deterministic CLI, Agent Skills, a compressed MCP server, a checksum-backed template Registry, Storybook contracts, agent-output evaluations, and Figma Code Connect templates.
 
-It deliberately does **not** contain authentication, JWT handling, TanStack Query, SWR, Zustand, React Router, Feature-Sliced Design application code, or backend services. Those concerns belong to an application kit. This repository is the visual and interaction contract only.
+![Commonspace UI component overview](./docs/preview/captures/commonspace-ui-overview.png)
 
-![Commonspace UI component and foundation overview](./docs/preview/captures/commonspace-ui-overview.png)
+## What this repository is
 
-The image above is a static documentation preview rendered from the package CSS and local representative content assets. Interactive behavior is documented and tested separately.
-
-> **Repository status:** implemented as a publishable-package monorepo, with offline architecture and pure-logic verification. Dependency-aware Vite, Storybook, and consumer builds are configured but require a successful package installation. See [Verification status](#verification-status).
-
-## What this repository provides
-
-| Package | Purpose | Owns network or application state? |
-|---|---|---:|
-| [`@commonspace/tokens`](./packages/tokens) | Reference, semantic, and component tokens | No |
-| [`@commonspace/theme`](./packages/theme) | Theme, density, accent, and document/local scoping | No |
-| [`@commonspace/icons`](./packages/icons) | Semantic icon API backed by Ant Design Icons | No |
-| [`@commonspace/ui`](./packages/ui) | Product-independent accessible React components | No |
-| [`@commonspace/social`](./packages/social) | Social presentation models and composed UI patterns | No |
-
-The repository also contains:
-
-- [`apps/docs`](./apps/docs): Storybook component catalog.
-- [`apps/playground`](./apps/playground): source-linked Vite playground for design-system development.
-- [`apps/consumer-fixture`](./apps/consumer-fixture): a consumer that resolves only package export maps and built `dist` files.
-- [Changesets](./.changeset): package versioning and changelog workflow.
-- [Architecture gates](./scripts): dependency, export-map, CSS namespace, and package-contract verification.
-- [CI and release workflows](./.github/workflows): verification and npm publication automation.
-
-## Design position
-
-Commonspace UI is not an attempt to duplicate every component in a broad enterprise suite. It has two focused layers:
+Commonspace UI is designed to support two equally important consumers.
 
 ```text
-General UI foundations
-→ forms, buttons, overlays, feedback, layout, loading
+Human developers and designers
+→ install packages
+→ read Storybook and typed APIs
+→ compose components and product patterns
+→ test and release
 
-Social product patterns
-→ posts, timelines, profiles, notifications, conversations, composition
+AI agents
+→ detect the current project and package versions
+→ search the exact installed catalog
+→ inspect valid components, props, states, and tokens
+→ compose a bounded implementation plan
+→ scaffold approved templates
+→ create stories and run validation
+→ evaluate generated source
+→ connect implementation to Figma components
 ```
 
-The system is built around six rules:
+The core proposition is not “put a large Markdown file in the prompt.” It is:
 
-1. **Content leads; chrome recedes.**
-2. **State is explicit.** Interactive components expose stable `data-cs-*` attributes.
-3. **Feedback preserves context.** Errors explain what failed, what remains intact, and what can happen next.
-4. **Consumers own data.** Components receive serializable view models and callbacks; they never fetch.
-5. **Theme is a CSS contract.** Styling does not depend on a hidden runtime CSS-in-JS engine.
-6. **Application architecture stays outside the library.** No router, auth, cache, API DTO, or FSD slice leaks into a publishable package.
+> Write component intent once beside the source, derive machine-readable contracts from the public API, and expose the same versioned knowledge through every human and AI interface.
 
-The full contract is in [`DESIGN.md`](./DESIGN.md).
+## What this repository is not
 
-## Repository structure
+Commonspace UI is not:
+
+- an application framework;
+- an authentication or authorization system;
+- a data-fetching abstraction;
+- a Router wrapper;
+- a Zustand, TanStack Query, or SWR opinion;
+- a backend API contract;
+- a remote code-generation service;
+- a general-purpose clone of Ant Design's entire component catalogue;
+- a claim that static metadata replaces visual design review.
+
+Application state, API calls, routing, JWTs, server entities, and business workflows remain in the consuming application.
+
+---
+
+# Status at a glance
+
+| Area | Current status |
+|---|---|
+| Layered design tokens | Implemented |
+| Scoped light, dark, system, high-contrast themes | Implemented |
+| Semantic Ant Design icon wrappers | Implemented |
+| General React UI components | Implemented |
+| API-independent social presentation components | Implemented |
+| Storybook documentation and component contracts | Implemented |
+| Canonical structured knowledge catalog | Implemented |
+| Generated `DESIGN.md`, `llms*.txt`, and JSON manifests | Implemented |
+| Deterministic local CLI | Implemented |
+| Portable Agent Skills | Implemented |
+| Read-oriented MCP resources and tools | Implemented |
+| Guarded Registry scaffolding | Implemented |
+| Static agent-output evaluation harness | Implemented |
+| Agent Lab evaluation viewer | Implemented |
+| Figma Code Connect template generation | Implemented |
+| Real Figma component-node mappings | **Not configured; publish gate intentionally fails** |
+| Dependency lockfile | **Not committed yet** |
+| Public npm publication | **Blocked by UNLICENSED repository status** |
+| Full dependency-aware build in this delivery environment | Verified only if dependency installation succeeds; see QA report |
+
+Canonical catalog inventory:
+
+```text
+44 knowledge entries
+├─ 32 public components
+├─ 6 product patterns
+├─ 5 Registry templates
+└─ 1 migration record
+
+32 Storybook contract stories
+6 Agent Skills
+6 general MCP tools
+5 Registry templates
+6 deterministic agent-evaluation scenarios
+32 generated Figma Code Connect templates
+```
+
+---
+
+# Repository architecture
 
 ```text
 commonspace-ui/
 ├─ apps/
-│  ├─ docs/                    Storybook documentation
-│  ├─ playground/              source-linked development app
-│  └─ consumer-fixture/        built-package consumer verification
+│  ├─ docs/                    Storybook documentation and MCP endpoint
+│  ├─ playground/              source-linked Vite development app
+│  ├─ consumer-fixture/        built-package/export acceptance app
+│  └─ agent-lab/               agent-evaluation dashboard
 │
 ├─ packages/
-│  ├─ tokens/                  reference, semantic, component tokens
-│  ├─ theme/                   CommonspaceProvider and bootstrap script
+│  ├─ tokens/                  reference, semantic, and component tokens
+│  ├─ theme/                   scoped theme and density provider
 │  ├─ icons/                   semantic Ant Design icon wrappers
-│  ├─ ui/                      general-purpose components
-│  └─ social/                  API-independent social patterns
+│  ├─ ui/                      general styled React components
+│  ├─ social/                  API-independent social product patterns
+│  ├─ knowledge/               canonical metadata and generators
+│  ├─ registry/                checksum-backed templates and safe scaffolding
+│  ├─ cli/                     deterministic project, discovery, compose, validate CLI
+│  ├─ mcp/                     thin Model Context Protocol adapter
+│  ├─ evals/                   deterministic generated-source quality evaluation
+│  └─ figma/                   Code Connect manifest and template generation
 │
-├─ docs/
-│  ├─ adr/                     architecture decisions
-│  ├─ plans/                   implementation plan
-│  ├─ ARCHITECTURE.md
-│  ├─ COMPONENT_GUIDELINES.md
-│  ├─ MIGRATION.md
-│  ├─ PUBLISHING.md
-│  ├─ QA_REPORT.md
-│  └─ THEMING.md
+├─ skills/                     portable Agent Skills and focused references
+├─ agent/
+│  ├─ components/              generated component documents
+│  ├─ patterns/                generated pattern documents
+│  ├─ manifests/               canonical machine-readable outputs
+│  ├─ mcp/                     client configuration examples
+│  └─ llms*.txt                portable context surfaces
 │
-├─ scripts/                    release and architecture verification
-├─ tests/architecture/         tests for the verification tooling
-├─ .changeset/                 release intent files
-└─ .github/workflows/          CI and package release automation
+├─ figma/
+│  ├─ code-connect/            generated `.figma.ts` templates
+│  ├─ commonspace.figma.json   mapping configuration
+│  └─ manifest.json            connection status
+│
+├─ schemas/                    Commonspace configuration JSON Schema
+├─ docs/                       architecture, workflows, ADRs, QA, publishing
+├─ scripts/                    generators and deterministic gates
+├─ tests/architecture/         verifier regression tests
+├─ commonspace.config.json     local AI integration map
+├─ AGENTS.md                   mandatory agent operating contract
+└─ DESIGN.md                   generated portable design contract
 ```
+
+## Runtime package graph
+
+```text
+@commonspace/tokens
+    ├──────────────→ @commonspace/theme
+    ├──────────────→ @commonspace/icons
+    ├──────────────→ @commonspace/ui
+    └──────────────→ @commonspace/social
+
+@commonspace/icons ───────────→ @commonspace/ui
+@commonspace/icons ───────────→ @commonspace/social
+@commonspace/ui ──────────────→ @commonspace/social
+```
+
+## AI knowledge plane
+
+```text
+public TypeScript API
+component-adjacent *.docs.ts
+semantic tokens
+product pattern metadata
+Registry templates
+Storybook contract stories
+                 │
+                 ▼
+       @commonspace/knowledge
+                 │
+   ┌─────────────┼───────────────┬────────────────┐
+   ▼             ▼               ▼                ▼
+DESIGN.md     llms files     JSON manifests   component docs
+   │             │               │                │
+   └─────────────┴─────────┬─────┴──────────┬─────┘
+                           ▼                ▼
+                  @commonspace/cli   @commonspace/registry
+                           │                │
+                           ├────────┬───────┤
+                           ▼        ▼       ▼
+                       Skills     MCP    scaffold
+                           │        │
+                           └───┬────┘
+                               ▼
+                   generated application source
+                               │
+                ┌──────────────┼──────────────┐
+                ▼              ▼              ▼
+          Storybook MCP   agent evaluations  Figma mapping
+```
+
+See [AI context architecture](./docs/AI_CONTEXT_ARCHITECTURE.md).
+
+---
+
+# Quick start for React consumers
 
 ## Installation
 
-The packages are configured for public npm publication under the `@commonspace` scope. Until the repository owner selects a distribution license and publishes them, consume them through the workspace or an internal registry.
-
-A published consumer would install the layers it needs:
+The packages are currently source-complete but not publicly published. In a workspace or internal Registry, install the packages required by the interface.
 
 ```bash
 pnpm add \
@@ -100,13 +204,13 @@ pnpm add \
   @commonspace/ui
 ```
 
-Social products can add:
+For social product patterns:
 
 ```bash
 pnpm add @commonspace/social
 ```
 
-React and React DOM are peer dependencies:
+React and React DOM are peer dependencies.
 
 ```text
 react      >=18.3 <20
@@ -115,440 +219,192 @@ react-dom  >=18.3 <20
 
 ## Required styles
 
-Commonspace ships static, zero-runtime CSS. Import the styles once near the application entry point:
+Import global package styles once at the application entry.
 
 ```tsx
 import '@commonspace/tokens/styles.css';
 import '@commonspace/icons/styles.css';
 import '@commonspace/ui/styles.css';
-import '@commonspace/social/styles.css'; // only for social patterns
+import '@commonspace/social/styles.css';
 ```
 
-The import order is intentional:
+The `social` stylesheet is only required when using `@commonspace/social`.
 
-```text
-tokens
-→ icons
-→ ui
-→ social
-→ consumer overrides
-```
-
-All public custom properties use `--cs-*`. All public CSS classes use `.cs-*` or the state prefix `.is-*`.
-
-## Quick start
+## Provider
 
 ```tsx
-import { createRoot } from 'react-dom/client';
-import '@commonspace/tokens/styles.css';
-import '@commonspace/icons/styles.css';
-import '@commonspace/ui/styles.css';
-
 import { CommonspaceProvider } from '@commonspace/theme';
-import { Button, Stack, TextField } from '@commonspace/ui';
 
-function App() {
+export function Root() {
   return (
     <CommonspaceProvider
+      scope="document"
       theme="system"
       density="comfortable"
       accent="blue"
     >
-      <Stack gap={4} style={{ maxWidth: 420, padding: 24 }}>
-        <TextField
-          label="Collection title"
-          description="Visible to people who can open this collection."
-        />
-        <Button variant="primary">Create collection</Button>
-      </Stack>
+      <App />
     </CommonspaceProvider>
   );
 }
-
-createRoot(document.getElementById('root')!).render(<App />);
 ```
 
-## Package architecture
+## General UI
 
-Dependencies flow in one direction:
+```tsx
+import {
+  Alert,
+  Button,
+  Stack,
+  TextField,
+} from '@commonspace/ui';
+
+export function ProfileSettings() {
+  return (
+    <form aria-label="Profile settings">
+      <Stack gap="md">
+        <Alert
+          tone="neutral"
+          title="Public information"
+          description="Changes appear beside your published work."
+        />
+        <TextField
+          label="Display name"
+          description="Use the name readers should recognize."
+        />
+        <Button type="submit">Save profile</Button>
+      </Stack>
+    </form>
+  );
+}
+```
+
+Stable subpath imports are also available.
+
+```tsx
+import { Button } from '@commonspace/ui/button';
+import { Stack, Inline } from '@commonspace/ui/layout';
+```
+
+Private imports are not supported.
+
+```tsx
+// Invalid
+import { Button } from '@commonspace/ui/src/button/button';
+```
+
+## Social presentation components
+
+`@commonspace/social` consumes presentation models and callbacks. It does not fetch data, mutate a cache, navigate, or read authentication state.
+
+```tsx
+import {
+  PostCard,
+  type SocialPostViewModel,
+} from '@commonspace/social/post';
+
+const post: SocialPostViewModel = mapApiPost(apiPost);
+
+<PostCard
+  post={post}
+  onOpenPost={() => navigate(`/posts/${post.id}`)}
+  onOpenAuthor={() => navigate(`/users/${post.author.handle}`)}
+  onReply={() => openReplyComposer(post.id)}
+  onLike={() => likePost(post.id)}
+  onRepost={() => repostPost(post.id)}
+  onBookmark={() => bookmarkPost(post.id)}
+/>;
+```
+
+Data boundary:
 
 ```text
-@commonspace/tokens
-        ↑
-@commonspace/theme
-
-@commonspace/tokens
-        ↑
-@commonspace/icons ────────────────┐
-        ↑                          │
-@commonspace/ui                    │
-        ↑                          │
-@commonspace/social ───────────────┘
+REST / GraphQL / Firebase / local fixture
+→ consumer entity mapper
+→ Commonspace presentation model
+→ social component
 ```
 
-More precisely:
-
-| Package | Allowed runtime dependencies |
-|---|---|
-| `tokens` | none |
-| `theme` | React, `tokens` |
-| `icons` | React, Ant Design Icons |
-| `ui` | React, `tokens`, `icons` |
-| `social` | React, `tokens`, `icons`, `ui` |
-
-Architecture verification rejects the following inside `ui` and `social`:
-
-```text
-fetch
-TanStack Query
-SWR
-Zustand
-React Router
-API contracts
-Authentication contracts
-Authorization headers
-Application slices
-```
-
-See [`docs/ARCHITECTURE.md`](./docs/ARCHITECTURE.md).
+---
 
 # Packages
 
 ## `@commonspace/tokens`
 
-The token package is split into three levels.
+Provides reference, semantic, and component token layers.
 
 ### Reference tokens
 
-Raw values without product intent:
+Raw scales for:
 
-```text
-neutral palette
-blue / green / amber / red / violet references
-spacing scale
-radius scale
-font families
-motion durations and easing
-```
+- neutral and chromatic colors;
+- spacing;
+- radius;
+- typography;
+- elevation;
+- motion;
+- component dimensions.
 
 ### Semantic tokens
 
-Roles that components and consumers can rely on:
+Public intent-based variables include:
 
-```text
+```css
 --cs-canvas
 --cs-surface
 --cs-surface-muted
---cs-surface-raised
 --cs-ink
 --cs-ink-muted
 --cs-border
---cs-border-strong
 --cs-accent
 --cs-positive
 --cs-warning
 --cs-critical
---cs-focus
+--cs-focus-ring
 ```
 
 ### Component tokens
 
-Shared dimensions used by component families:
-
-```text
+```css
 --cs-button-height-sm
 --cs-button-height-md
---cs-button-height-lg
 --cs-field-height
---cs-dialog-width-sm
 --cs-dialog-width-md
---cs-dialog-width-lg
---cs-shell-max
 ```
 
-JavaScript/TypeScript consumers can import named token maps:
+### Consumption
 
-```ts
+```tsx
+import '@commonspace/tokens/styles.css';
 import {
   referenceColors,
   semanticTokenNames,
-  space,
-  radii,
   componentDimensions,
 } from '@commonspace/tokens';
-```
-
-Design-tool and automation consumers can use:
-
-```ts
 import tokens from '@commonspace/tokens/tokens.json';
 ```
 
 ## `@commonspace/theme`
 
-### Local theme scope
+Provides scoped theme behavior without forcing CSS-in-JS.
 
-The default provider renders a local token boundary:
-
-```tsx
-<CommonspaceProvider theme="dark" accent="violet">
-  <MediaViewer />
-</CommonspaceProvider>
-```
-
-Rendered public attributes:
-
-```html
-<div
-  class="cs-theme-scope"
-  data-cs-theme="dark"
-  data-cs-density="comfortable"
-  data-cs-accent="violet"
->
-```
-
-### Document scope
-
-Use document scope when the whole page belongs to Commonspace:
-
-```tsx
-<CommonspaceProvider scope="document" theme="system">
-  <App />
-</CommonspaceProvider>
-```
-
-The provider applies and restores attributes on `document.documentElement`.
-
-### Controlled and uncontrolled modes
-
-```tsx
-// Uncontrolled with persisted defaults
-<CommonspaceProvider defaultTheme="system" defaultDensity="comfortable" />
-
-// Controlled
-<CommonspaceProvider
-  theme={theme}
-  density={density}
-  accent={accent}
-  onThemeChange={setTheme}
-  onDensityChange={setDensity}
-  onAccentChange={setAccent}
-/>
-```
-
-### Avoiding first-paint theme flashes
-
-The package exports a sanitized bootstrap script generator through `ThemeScript`/theme utilities. It reads only the configured theme record and writes the three documented data attributes before React mounts.
-
-Detailed guidance: [`docs/THEMING.md`](./docs/THEMING.md).
-
-## `@commonspace/icons`
-
-The icon package currently uses Ant Design Icons as its visual source, but consumers import **semantic Commonspace names**:
-
-```tsx
-import {
-  BookmarkIcon,
-  HeartIcon,
-  ReplyIcon,
-  RepostIcon,
-  SearchIcon,
-} from '@commonspace/icons';
-
-<HeartIcon />;                 // decorative, aria-hidden
-<SearchIcon label="Search" />; // meaningful, role=img
-<BookmarkIcon size="lg" />;
-<ReplyIcon size={20} />;
-```
-
-This boundary prevents product code from coupling to source names such as `RetweetOutlined`. The implementation can change icon libraries without changing consumer imports.
-
-Available semantic categories include:
-
-- navigation and direction
-- profile and community
-- content and media
-- social reactions
-- feedback and status
-- settings and session actions
-
-The current mapping is exported as `iconRegistry` for documentation and audits.
-
-## `@commonspace/ui`
-
-### Public components
-
-| Family | Components |
-|---|---|
-| Actions | `Button`, `IconButton` |
-| Identity | `Avatar`, `Badge` |
-| Forms | `TextField`, `TextArea` |
-| Overlay | `Dialog` |
-| Navigation | `Tabs` |
-| Feedback | `Alert`, `Toast`, `ToastViewport`, `FeedbackProvider` |
-| Loading | `Skeleton`, `Spinner` |
-| Layout | `Container`, `Stack`, `Inline`, `Surface`, `Separator` |
-| Empty/accessibility | `EmptyState`, `VisuallyHidden` |
-
-### Stable subpath imports
-
-Use the root entry point for convenience:
-
-```tsx
-import { Button, Dialog, Stack } from '@commonspace/ui';
-```
-
-Use public subpaths for tighter entry points:
-
-```tsx
-import { Button } from '@commonspace/ui/button';
-import { Dialog } from '@commonspace/ui/dialog';
-import { Stack, Inline } from '@commonspace/ui/layout';
-```
-
-Internal source paths are not public contracts:
-
-```tsx
-// Do not use
-import { Button } from '@commonspace/ui/src/button/button';
-```
-
-### Native props and refs
-
-Primitive components preserve native element props where practical. Action and form primitives forward refs where their underlying element is part of the public contract.
-
-Components expose testable state without requiring internal class inspection:
-
-```html
-<button
-  data-cs-component="button"
-  data-cs-variant="primary"
-  data-cs-size="md"
-  data-cs-state="pending"
->
-```
-
-### Feedback queue
-
-`FeedbackProvider` owns only transient presentation state. Application errors remain owned by the consumer.
-
-```tsx
-function SaveButton() {
-  const feedback = useFeedback();
-
-  async function save() {
-    try {
-      await persist();
-      feedback.show({
-        tone: 'success',
-        title: 'Changes saved',
-        description: 'The public version now uses the latest content.',
-        dedupeKey: 'save-success',
-      });
-    } catch {
-      feedback.show({
-        tone: 'critical',
-        title: 'Changes were not saved',
-        description: 'Your draft remains available. Try again.',
-        dedupeKey: 'save-failure',
-      });
-    }
-  }
-
-  return <Button onClick={save}>Save</Button>;
-}
-```
-
-Queue behavior is covered by pure Node tests:
-
-- duplicate notices merge by `dedupeKey`
-- repeated occurrences are counted
-- critical feedback is persistent by default
-- transient durations are bounded
-- non-critical feedback is evicted first when the queue is full
-- invalid runtime inputs are rejected before rendering
-
-## `@commonspace/social`
-
-`@commonspace/social` contains presentation patterns, not application features.
-
-### Public patterns
-
-| Area | Components |
-|---|---|
-| Post | `PostCard`, `PostHeader`, `PostMediaGrid`, `PostActions`, `PostCardSkeleton` |
-| Composition | `PostComposerView` |
-| Feed | `TimelineView` |
-| Profile | `ProfileHeader`, `UserCell` |
-| Activity | `NotificationItem` |
-| Messaging | `ConversationPreview` |
-
-### API-independent view models
-
-The package defines its own presentation types:
-
-```ts
-interface SocialPostViewModel {
-  id: string;
-  author: SocialUserViewModel;
-  text: string;
-  createdAt: string;
-  media: readonly SocialMediaViewModel[];
-  metrics: SocialPostMetrics;
-  viewerState: SocialPostViewerState;
-  quotedPost?: SocialPostSummary;
-  timelineContext?: SocialTimelineContext;
-}
-```
-
-A consuming application maps backend data at its entity boundary:
-
-```text
-REST / GraphQL / Firebase / mock DTO
-→ application mapper
-→ SocialPostViewModel
-→ PostCard
-```
-
-Example:
-
-```tsx
-import { PostCard, type SocialPostViewModel } from '@commonspace/social/post';
-
-const post: SocialPostViewModel = mapPostDto(response);
-
-<PostCard
-  post={post}
-  onOpen={() => navigateToPost(post.id)}
-  onOpenAuthor={() => navigateToProfile(post.author.handle)}
-  onLike={() => likePost(post.id)}
-  onReply={() => openReplyComposer(post.id)}
-  onRepost={() => repost(post.id)}
-  onBookmark={() => bookmark(post.id)}
-/>;
-```
-
-The component does not know whether the callbacks use TanStack Query, Redux, Apollo, REST, local state, or server actions.
-
-# Theming and customization
-
-## Supported themes
+Supported theme values:
 
 ```text
 light
- dark
+dark
 system
 high-contrast
 ```
 
-## Supported densities
+Supported density values:
 
 ```text
 comfortable
 compact
 ```
 
-## Supported accents
+Supported accent values:
 
 ```text
 blue
@@ -556,20 +412,15 @@ violet
 neutral
 ```
 
-## Consumer token overrides
+Local scope:
 
-Override semantic or component tokens at a deliberate scope:
-
-```css
-.my-product-scope {
-  --cs-accent: #0057ff;
-  --cs-accent-hover: #0046cc;
-  --cs-button-height-md: 42px;
-  --cs-dialog-width-md: 600px;
-}
+```tsx
+<CommonspaceProvider theme="dark" density="compact" accent="violet">
+  <MediaWorkspace />
+</CommonspaceProvider>
 ```
 
-Or use the Provider's typed variable API:
+Consumer overrides:
 
 ```tsx
 <CommonspaceProvider
@@ -582,34 +433,560 @@ Or use the Provider's typed variable API:
 </CommonspaceProvider>
 ```
 
-Consumer overrides should target token contracts, component props, and documented `data-cs-*` attributes. Internal DOM nesting and internal class names are not SemVer-stable extension points.
+The package sanitizes persisted values and supplies a safe bootstrap script to reduce first-paint theme flashes.
+
+See [Theming](./docs/THEMING.md).
+
+## `@commonspace/icons`
+
+Wraps Ant Design Icons behind semantic product names.
+
+```tsx
+import {
+  BookmarkIcon,
+  HeartIcon,
+  ReplyIcon,
+  RepostIcon,
+  SearchIcon,
+} from '@commonspace/icons';
+```
+
+Consumers do not depend on Ant Design source names. The backing icon can change without changing the semantic Commonspace import.
+
+The icon contract includes:
+
+- semantic name uniqueness;
+- source-name uniqueness;
+- `sm`, `md`, `lg`, and numeric sizes;
+- decorative `aria-hidden` behavior;
+- accessible labels for meaningful standalone icons.
+
+## `@commonspace/ui`
+
+General styled React components.
+
+| Area | Components |
+|---|---|
+| Actions | `Button`, `IconButton` |
+| Identity | `Avatar`, `Badge` |
+| Forms | `TextField`, `TextArea` |
+| Overlay | `Dialog` |
+| Navigation | `Tabs` |
+| Feedback | `Alert`, `Toast`, `ToastViewport`, `FeedbackProvider` |
+| Loading | `Skeleton`, `Spinner` |
+| Layout | `Container`, `Stack`, `Inline`, `Surface`, `Separator` |
+| Accessibility | `EmptyState`, `VisuallyHidden` |
+
+Public components expose native props and refs where appropriate, plus documented `data-cs-*` state attributes.
+
+### Feedback queue
+
+The feedback system supports:
+
+```text
+neutral
+success
+warning
+critical
+```
+
+Queue behavior:
+
+- default maximum of four visible items;
+- deduplication by key;
+- repeat count;
+- critical-item preservation;
+- persistent critical feedback by default;
+- bounded transient duration;
+- deterministic dismissal;
+- timer cleanup on provider unmount;
+- runtime validation of title, tone, duration, action, and identity.
+
+## `@commonspace/social`
+
+API-independent social product patterns.
+
+| Area | Components |
+|---|---|
+| Post | `PostCard`, `PostHeader`, `PostMediaGrid`, `PostActions`, `PostCardSkeleton` |
+| Composer | `PostComposerView` |
+| Timeline | `TimelineView` |
+| Profile | `ProfileHeader`, `UserCell` |
+| Notifications | `NotificationItem` |
+| Messaging | `ConversationPreview` |
+
+This package is intentionally forbidden from importing:
+
+```text
+fetch
+TanStack Query
+SWR
+Zustand
+React Router
+JWT or auth contracts
+backend API DTOs
+Authorization headers
+```
+
+## `@commonspace/knowledge`
+
+Canonical typed design-system knowledge.
+
+It provides:
+
+- component, pattern, template, and migration types;
+- catalog construction and validation;
+- deterministic search;
+- component API extraction from TypeScript source;
+- generated portable documents;
+- stable JSON serialization;
+- the bundled catalog.
+
+```ts
+import {
+  bundledCatalog,
+  getCatalogEntry,
+  searchCatalog,
+} from '@commonspace/knowledge';
+```
+
+It has no React runtime and performs no network requests.
+
+## `@commonspace/registry`
+
+Versioned templates with deterministic SHA-256 manifests and guarded local scaffolding.
+
+```ts
+import { bundledCatalog } from '@commonspace/knowledge';
+import { createRegistryService } from '@commonspace/registry';
+
+const registry = createRegistryService({
+  catalog: bundledCatalog,
+  templateRoot: new URL('./templates', import.meta.url).pathname,
+});
+
+const plan = await registry.scaffold({
+  templateId: 'template.social-feed-page',
+  projectRoot: process.cwd(),
+  mode: 'dry-run',
+});
+```
+
+See [Registry](./docs/REGISTRY.md).
+
+## `@commonspace/cli`
+
+Deterministic project inspection, search, composition, validation, and scaffold interface.
+
+```bash
+commonspace info --json
+commonspace search "profile settings" --json
+commonspace get ui.button --json
+commonspace compose "moderation queue" --json
+commonspace validate . --json
+commonspace doctor --json
+```
+
+See [CLI](./docs/CLI.md).
+
+## `@commonspace/mcp`
+
+Local MCP server over the same catalog and operational services used by CLI.
+
+```json
+{
+  "mcpServers": {
+    "commonspace": {
+      "command": "npx",
+      "args": ["-y", "@commonspace/mcp@0.2.0"]
+    }
+  }
+}
+```
+
+It exposes general project, search, get, compose, validate, and scaffold tools rather than one tool per component.
+
+See [MCP](./docs/MCP.md).
+
+## `@commonspace/evals`
+
+Deterministic source evaluation against the exact catalog.
+
+```ts
+import { bundledCatalog } from '@commonspace/knowledge';
+import { evaluateAgentOutput } from '@commonspace/evals';
+
+const report = evaluateAgentOutput(bundledCatalog, scenario);
+```
+
+See [Agent evaluations](./docs/AGENT_EVALS.md).
+
+## `@commonspace/figma`
+
+Generates Code Connect manifests and parserless `.figma.ts` templates from the component catalog.
+
+```bash
+npm run figma:generate
+npm run figma:check
+npm run figma:publish-check
+```
+
+The publish check intentionally fails until real Figma node URLs replace placeholders.
+
+See [Figma integration](./docs/FIGMA.md).
+
+---
+
+# AI-agent workflow
+
+## 1. Project detection
+
+```bash
+npm run commonspace -- info --path . --json
+```
+
+Example information:
+
+```text
+framework
+package manager
+installed @commonspace package versions
+source roots
+configuration path
+required style imports already present
+```
+
+## 2. Discovery
+
+```bash
+npm run commonspace -- search "social profile" --json
+npm run commonspace -- compose \
+  "social profile with loading, error, empty, and editable states" \
+  --json
+```
+
+## 3. Exact contract inspection
+
+```bash
+npm run commonspace -- get social.profile-header --json
+npm run commonspace -- get pattern.profile-surface --json
+```
+
+The component record includes exact public props, entrypoints, variants, states, tokens, accessibility requirements, preferred examples, and Story IDs.
+
+## 4. Implementation
+
+The agent uses public imports and keeps application state outside presentation packages.
+
+## 5. Storybook
+
+Create or update stories for every applicable state and use Storybook MCP or browser tests to inspect the actual result.
+
+```text
+Commonspace MCP
+→ select and contract
+
+Storybook MCP
+→ browser state, interactions, accessibility
+```
+
+## 6. Validation
+
+```bash
+npm run commonspace -- validate --path . --json
+npm run agent:check
+npm run verify
+```
+
+## 7. Evaluation
+
+```bash
+npm run evals:check
+pnpm --filter @commonspace/agent-lab dev
+```
+
+The reference baseline is recorded in [Agent evaluation baseline](./docs/agent-evals/baseline.md).
+
+---
+
+# Agent Skills
+
+Included Skills:
+
+```text
+commonspace-ui
+build-commonspace-interface
+migrate-to-commonspace
+review-commonspace-interface
+author-commonspace-component
+connect-commonspace-figma
+```
+
+Each Skill uses progressive disclosure. The procedure remains in `SKILL.md`; detailed rules and examples live in references.
+
+The portable inventory is generated at:
+
+```text
+agent/manifests/skills.json
+```
+
+See [Agent Skills](./docs/AGENT_SKILLS.md).
+
+---
+
+# MCP
+
+## Resources
+
+```text
+commonspace://design/current
+commonspace://catalog
+commonspace://tokens
+commonspace://registry
+commonspace://project/info
+commonspace://components/{id}
+commonspace://patterns/{id}
+commonspace://templates/{id}
+commonspace://migrations/{id}
+```
+
+## Tools
+
+```text
+commonspace_project_info
+commonspace_search
+commonspace_get
+commonspace_compose
+commonspace_validate
+commonspace_scaffold
+```
+
+## Prompts
+
+```text
+build-interface
+migrate-interface
+review-interface
+author-component
+```
+
+The write-capable scaffold tool is dry-run by default and requires explicit `apply: true`.
+
+Client configuration examples:
+
+- [MCP setup overview](./agent/mcp/README.md)
+- [Claude Desktop](./agent/mcp/claude-desktop.json)
+- [VS Code](./agent/mcp/vscode.json)
+- [Codex](./agent/mcp/codex.toml)
+- [Storybook HTTP MCP](./agent/mcp/storybook-http.json)
+
+---
+
+# Registry templates
+
+```text
+template.vite-app-shell
+template.profile-settings
+template.social-feed-page
+template.moderation-workspace
+template.fsd-social-shell
+```
+
+Dry-run:
+
+```bash
+npm run commonspace -- scaffold template.profile-settings \
+  --path ../my-app \
+  --target src/profile \
+  --json
+```
+
+Apply:
+
+```bash
+npm run commonspace -- scaffold template.profile-settings \
+  --path ../my-app \
+  --target src/profile \
+  --apply \
+  --json
+```
+
+Security properties:
+
+- no arbitrary remote Registry fetch;
+- no executable template hooks;
+- no absolute target paths;
+- no traversal;
+- no symlink escape;
+- no partial write on conflict;
+- no overwrite;
+- deterministic checksums;
+- idempotent repeated apply.
+
+---
+
+# Storybook
+
+The docs app contains:
+
+- introduction and foundations;
+- component and social-pattern examples;
+- 32 dedicated catalog contract stories;
+- theme, density, and accent controls;
+- accessibility addon;
+- Vitest Storybook integration;
+- Storybook MCP addon.
+
+```bash
+pnpm --filter @commonspace/docs dev
+```
+
+Local Storybook:
+
+```text
+http://localhost:6006
+```
+
+Local Storybook MCP:
+
+```text
+http://localhost:6006/mcp
+```
+
+Static Story ID verification can run without installing browser dependencies:
+
+```bash
+npm run stories:check
+```
+
+Browser interaction and accessibility checks still require installed dependencies and a running browser environment.
+
+See [Storybook AI verification](./docs/STORYBOOK_AI.md).
+
+---
+
+# Agent evaluations
+
+The committed reference suite evaluates one profile-settings task with progressively richer context.
+
+| Context | Score | Result |
+|---|---:|---|
+| No design context | 27 | Fail |
+| Generated `DESIGN.md` | 79 | Fail |
+| Skill | 93 | Fail |
+| MCP | 100 | Pass |
+| Skill + MCP | 100 | Pass |
+| Skill + MCP + Storybook | 100 | Pass |
+
+These are deterministic fixture scores, not claims about every model or prompt.
+
+Release modes using MCP must have:
+
+```text
+0 invalid imports
+0 unknown props
+0 hardcoded visual values
+0 basic accessibility failures
+100% expected component recall
+100% required state coverage
+```
+
+---
+
+# Figma Code Connect
+
+The repository generates one Code Connect template for each public component.
+
+```text
+32 public components
+→ 32 generated .figma.ts templates
+```
+
+The files include exact public imports, preferred examples, source paths, Story IDs, and mapping status.
+
+Current state:
+
+```text
+ready mappings        0
+placeholder mappings 32
+```
+
+This is intentional. The repository has not been given real Figma component node URLs.
+
+```bash
+npm run figma:check
+```
+
+passes deterministic template validation.
+
+```bash
+npm run figma:publish-check
+```
+
+must fail until all target mappings are real and reviewed.
+
+---
+
+# Design language
+
+## Visual principle
+
+Commonspace emphasizes content, legibility, and explicit system state over decorative container density.
+
+The visual system uses:
+
+- neutral surfaces;
+- a small semantic color set;
+- controlled radii;
+- typography-led hierarchy;
+- borders and spacing before shadows;
+- semantic icons;
+- visible focus;
+- state attributes rather than undocumented class inspection.
+
+## What to avoid
+
+- hardcoded visual values when a token exists;
+- one-off gradients or glow effects;
+- excessive pills and badges;
+- nested cards without information-hierarchy purpose;
+- icon-only controls without names;
+- ambiguous button copy;
+- hidden error or loading states;
+- business logic inside visual packages;
+- styling against undocumented internal DOM.
+
+The generated portable contract is [DESIGN.md](./DESIGN.md).
+
+---
 
 # Accessibility contract
 
-The initial component set includes the following behavior:
+Public components are expected to support:
 
-- visible `:focus-visible` treatment
-- status/alert semantics based on feedback urgency
-- accessible names for icon-only controls
-- reduced-motion token overrides
-- native `dialog` semantics and escape/backdrop handling
-- controlled/uncontrolled state for `Dialog` and `Tabs`
-- form label, description, error, and counter associations
-- `aria-busy` for pending actions and timelines
-- high-contrast theme roles
-- semantic HTML for empty states and alerts
+- keyboard operation appropriate to the control;
+- visible focus;
+- accessible names;
+- semantic status or alert announcements;
+- state communication beyond color;
+- reduced-motion preferences;
+- high-contrast theme behavior;
+- mobile and zoom reflow;
+- native element props and refs where applicable.
 
-A public component is not complete until its Storybook page covers keyboard focus, disabled/pending states, long content, Korean/English content, dark mode, compact density, and mobile layout.
+Component-adjacent metadata records exact requirements. Storybook and browser tests are the executable verification surface.
 
-See [`docs/COMPONENT_GUIDELINES.md`](./docs/COMPONENT_GUIDELINES.md).
+An agent must not treat static source validation as complete accessibility proof.
+
+---
 
 # Development
 
 ## Requirements
 
 ```text
-Node.js  >=22.13
-pnpm     11.4
+Node.js >= 22.13
+pnpm 11.4.0
 ```
 
 ## Install
@@ -619,235 +996,374 @@ corepack enable
 pnpm install
 ```
 
-## Start documentation and playground
+A reviewed `pnpm-lock.yaml` must be committed before public release. Until then CI uses a non-frozen install and the release-readiness gate rejects publication.
+
+## Development apps
 
 ```bash
 pnpm dev
 ```
 
-This starts the configured Storybook documentation and Vite playground in parallel.
+Runs the Vite playground, Storybook, and Agent Lab in parallel.
 
-## Build everything
+Individually:
 
 ```bash
+pnpm --filter @commonspace/playground dev
+pnpm --filter @commonspace/docs dev
+pnpm --filter @commonspace/agent-lab dev
+```
+
+## Build
+
+```bash
+pnpm build:packages
 pnpm build
 ```
 
-Build order:
+Full build sequence:
 
 ```text
-publishable packages
+all publishable packages
 → playground
-→ built-package consumer fixture
-→ Storybook static site
+→ agent lab
+→ consumer fixture using package exports
+→ Storybook static build
 ```
 
-The consumer fixture has no source aliases. It verifies that a consuming Vite application can resolve only the packages' declared `exports` and built `dist` files.
+## Generate AI artifacts
+
+```bash
+npm run agent:generate
+```
+
+This runs:
+
+```text
+knowledge generation
+Registry manifest generation
+Story contract generation
+portable agent document generation
+Skill inventory generation
+agent evaluation generation
+Figma mapping generation
+```
+
+Check without writing:
+
+```bash
+npm run agent:check
+```
+
+## Tests
+
+```bash
+npm run test:pure
+npm run verify
+```
+
+Dependency-aware:
+
+```bash
+pnpm typecheck
+pnpm build
+```
 
 ## Common commands
 
-```bash
-pnpm test                 # pure tests + architecture verification
-pnpm test:pure            # tests that do not require browser rendering
-pnpm verify               # package, dependency, export, CSS, syntax gates
-pnpm typecheck            # workspace TypeScript checks
-pnpm build:packages       # only publishable packages
-pnpm clean                # remove generated build directories
-pnpm changeset            # record a versioned package change
-pnpm version-packages     # apply queued versions/changelogs
-pnpm release              # build packages and publish queued releases
-```
+| Command | Purpose |
+|---|---|
+| `npm run commonspace -- info --json` | Detect project and installed versions |
+| `npm run commonspace -- search <query> --json` | Search the exact catalog |
+| `npm run commonspace -- compose <request> --json` | Build a bounded component plan |
+| `npm run commonspace -- validate --path <path> --json` | Validate a consumer project |
+| `npm run knowledge:check` | Verify canonical catalog output |
+| `npm run stories:check` | Verify all public Story contracts |
+| `npm run skills:check` | Verify portable Skills |
+| `npm run evals:check` | Verify agent benchmark and release gate |
+| `npm run figma:check` | Verify Code Connect templates |
+| `npm run figma:publish-check` | Require all real Figma mappings |
+| `npm run ai:check` | Verify cross-interface AI contracts |
+| `npm run release:check` | Verify license and lockfile publication prerequisites |
+| `npm run preview:capture` | Capture the static visual overview |
+
+---
 
 # Verification architecture
 
-The repository verifies the library itself, not just individual components.
+## Pure tests
 
-## Pure logic tests
+Pure package tests run through Node's test runner with TypeScript stripping. They cover:
 
-Current pure tests cover:
+- tokens and theme normalization;
+- icon registry uniqueness;
+- UI feedback state;
+- social formatting;
+- knowledge validation and generation;
+- source API extraction;
+- CLI detection, search, compose, validation, and scaffolding;
+- Registry path safety, conflicts, checksums, and idempotency;
+- MCP resources, tools, prompts, and guarded actions;
+- agent evaluation metrics and release gate;
+- Figma template generation and placeholder publication gate.
 
-- token scale invariants
-- persisted theme sanitization
-- bootstrap-script escaping
-- semantic icon registry uniqueness
-- social metric/time formatting
-- class-name composition
-- feedback queue validation, deduplication, eviction, and dismissal
+## Architecture tests
+
+Architecture-tool tests verify the verifiers themselves:
+
+- static import parsing;
+- scoped package-name extraction;
+- CSS namespace contracts;
+- Markdown links and code fences;
+- Agent Skill metadata and references;
+- Story ID derivation and inspection;
+- AI cross-interface contract integrity.
+
+## Generated-context gate
+
+`agent:check` fails when any generated catalog, document, Registry manifest, Story manifest, Skill manifest, evaluation report, or Figma template differs from canonical source.
 
 ## Package contract gate
 
-Every publishable package must:
+All publishable packages must:
 
-- expose only `dist`
-- define a license field
-- use ESM
-- include build, test, and typecheck scripts
-- publish with public access configuration
-- use React peer ranges rather than exact React versions
-- declare internal package dependencies through the workspace protocol
-- include a package README
+- be ESM;
+- publish only declared files;
+- expose `dist` rather than `src`;
+- provide build, test, and typecheck scripts;
+- declare a license field;
+- use workspace protocol for internal dependencies;
+- include package documentation;
+- use a compatible React peer range when applicable.
 
 ## Dependency boundary gate
 
-The verifier statically scans imports and banned runtime patterns. It rejects network/state/application dependencies in presentational packages.
+The scanner verifies the explicit package graph and rejects application dependencies in visual packages or network/state dependencies in deterministic AI tooling.
 
-## Export-map gate
+## Public export gate
 
-Every JavaScript subpath must expose both:
+Every JavaScript export requires:
 
-```json
-{
-  "types": "./dist/<entry>.d.ts",
-  "import": "./dist/<entry>.js"
-}
+```text
+source entry
+ESM dist target
+type declaration target
 ```
 
-No export may point to `src`.
+CSS and JSON subpath exports require source assets.
 
-## CSS contract gate
+## CSS namespace gate
 
-The verifier rejects:
+Public classes and custom properties use Commonspace namespaces.
 
-- custom properties outside `--cs-*`
-- public classes outside `.cs-*` or `.is-*`
+```text
+.cs-*
+.is-*
+--cs-*
+```
 
-The verifier itself has regression tests, including a case proving BEM modifiers such as `.cs-button--primary` are not mistaken for custom-property declarations.
+## Documentation gate
+
+All tracked Markdown files are checked for:
+
+- balanced fenced code blocks;
+- valid repository-relative links;
+- repository-root containment.
+
+## AI contract gate
+
+The cross-interface verifier checks:
+
+- required AI entry documents and manifests;
+- catalog counts and stable IDs;
+- component operational metadata;
+- Story, Registry, Skill, eval, and Figma count agreement;
+- deterministic manifest timestamps;
+- valid local integration paths;
+- bounded MCP tool surface;
+- absence of duplicate evaluator prop hints.
 
 ## Consumer fixture
 
-`apps/consumer-fixture` imports:
+The consumer fixture resolves built package `exports`. It does not use source aliases. Passing the playground build alone is not accepted as package-distribution proof.
 
-```tsx
-@commonspace/tokens/styles.css
-@commonspace/icons/styles.css
-@commonspace/theme
-@commonspace/ui/button
-@commonspace/social/post
-```
+---
 
-It intentionally uses no source alias. Its build is the package-consumption acceptance test.
+# Adding a public component
+
+1. Define one reusable responsibility.
+2. Implement the component and namespaced CSS.
+3. Export it through a documented package entrypoint.
+4. Add component-adjacent `*.docs.ts` metadata.
+5. Add exact usage, avoidance, state, token, accessibility, and composition guidance.
+6. Add a dedicated Storybook contract story.
+7. Add non-visual tests.
+8. Run:
+   ```bash
+   npm run agent:generate
+   npm run test:pure
+   npm run verify
+   ```
+9. Inspect the generated Figma template.
+10. Add a Changeset.
+
+Use the [`author-commonspace-component`](./skills/author-commonspace-component/SKILL.md) Skill and [component guidelines](./docs/COMPONENT_GUIDELINES.md).
+
+---
 
 # Versioning and publication
 
-Changesets controls package-level SemVer and changelogs.
-
-Typical flow:
+Changesets controls package SemVer and changelogs.
 
 ```bash
 pnpm changeset
-# select affected packages and bump levels
-
-git add .changeset
-
-git commit -m "docs: record button API change"
+pnpm version-packages
 ```
 
-On `master`, the release workflow can open or update a version pull request. Once versioned changes land, it publishes the changed packages to npm using provenance-capable GitHub Actions permissions.
-
-Publication is currently blocked by repository policy because package licenses are `UNLICENSED`. Select and apply an explicit license before external distribution.
-
-See [`docs/PUBLISHING.md`](./docs/PUBLISHING.md).
-
-# Migration from the social application
-
-The extraction follows these boundaries:
+Recommended release levels:
 
 ```text
-Old application design-tokens  → @commonspace/tokens
-Old application icon wrapper   → @commonspace/icons
-Old application UI primitives  → @commonspace/ui
-Old application social-ui      → @commonspace/social
-
-JWT, Query, SWR, Zustand, FSD, APIs, backends
-                                → remain in the application repository
+patch  compatible defect fix
+minor  compatible component, token, pattern, or AI-interface addition
+major  breaking export, prop, token, behavior, or accessibility change
 ```
 
-The largest breaking change is that `@commonspace/social` no longer accepts backend DTOs. Consumers must map their domain/API data to the package's view models.
+Public npm publication is currently blocked because:
 
-See [`docs/MIGRATION.md`](./docs/MIGRATION.md).
+1. the repository is `UNLICENSED`;
+2. no reviewed `pnpm-lock.yaml` is committed;
+3. dependency-aware package, consumer, Storybook, and browser gates must pass in the release environment;
+4. package tarballs must be inspected;
+5. the npm organization, provenance, and release environment must be configured.
 
-# Verification status
+The release workflow is manual and protected. It runs `release:check` before any publish action.
 
-The following checks have been run in the current environment:
+Figma publication is separate. Package publication does not silently publish placeholder Code Connect mappings.
+
+See [Publishing](./docs/PUBLISHING.md).
+
+---
+
+# Migration from the original social application
+
+The design system was extracted from a React + Vite social-service reference repository. The standalone repository deliberately excludes:
 
 ```text
-Pure package tests                    passing
-Architecture-tool tests              passing
-Package manifest contracts           passing
-Dependency boundary scan             passing
-Public export map scan               passing
-CSS namespace scan                   passing
-TypeScript syntax/no-check scan       passing
-Git whitespace validation            passing
+JWT access and refresh logic
+Auth API
+Social API
+TanStack Query
+SWR
+Zustand
+React Router
+FSD application slices
+backend persistence
 ```
 
-The environment's package registry did not provide the declared dependencies, so these dependency-aware commands have **not** been claimed as passing here:
+Recommended application migration order:
 
 ```text
-pnpm install
-full workspace typecheck
-Vite package build
-Vite playground build
-consumer fixture build
-Storybook build/browser tests
+1. tokens and theme
+2. semantic icons
+3. UI primitives
+4. global feedback surfaces
+5. social presentation models and mappers
+6. route-by-route social patterns
+7. remove duplicated application CSS
 ```
 
-They are configured in CI and must pass before a release. A lockfile must be generated and committed from an environment that can resolve the declared package versions before enabling frozen-lockfile CI.
+See [Migration](./docs/MIGRATION.md).
 
-The detailed record is in [`docs/QA_REPORT.md`](./docs/QA_REPORT.md).
-
-# Current scope and roadmap
-
-## Implemented in this extraction
-
-- separate Git repository and independent history
-- layered tokens and DTCG-style token artifact
-- light, dark, system, and high-contrast theme contracts
-- comfortable and compact densities
-- blue, violet, and neutral accents
-- local and document theme scopes
-- semantic Ant Design icon wrappers
-- general UI component package
-- API-independent social component package
-- Storybook catalog structure and initial stories
-- Vite development playground
-- built-package consumer fixture
-- Changesets version workflow
-- CI and npm release workflows
-- package/export/dependency/CSS architecture gates
-- pure-logic tests for critical non-DOM behavior
-
-## Deliberately deferred
-
-- broad enterprise components such as date pickers, data grids, trees, transfers, and rich editors
-- framework adapters for Vue or Web Components
-- React Server Components-specific entry points
-- complete browser interaction coverage for every component
-- visual regression service integration
-- Figma plugin or token synchronization service
-- CLI and codemods
-- finalized public license
-- first published npm release
+---
 
 # Governance
 
-A new component should be added only when it has:
+## Source-of-truth rule
 
-1. a clear product-independent or social-presentation responsibility
-2. a stable public API and package owner
-3. documented controlled/uncontrolled behavior where applicable
-4. keyboard and screen-reader behavior
-5. token-based styling with no unscoped CSS
-6. default, pending, disabled, error, empty, long-content, mobile, and theme states
-7. tests for non-DOM state logic
-8. Storybook documentation
-9. a Changeset when the public API changes
-10. a passing consumer fixture build
+Do not manually maintain parallel component inventories for CLI, MCP, Skills, Figma, or documentation.
 
-The component and API contribution rules are in [`docs/COMPONENT_GUIDELINES.md`](./docs/COMPONENT_GUIDELINES.md).
+```text
+source + adjacent metadata + stories + tokens
+→ compiler
+→ every human and AI output
+```
+
+## AI-interface rule
+
+A new AI integration must query the catalog or a generated manifest. It must be bounded, version-aware, deterministic where possible, read-only by default, and independently testable.
+
+## Write-action rule
+
+Any AI-triggered write must:
+
+- provide a dry-run;
+- show every affected path;
+- remain inside the project root;
+- refuse conflicts;
+- require explicit approval;
+- be idempotent where possible.
+
+## Evidence rule
+
+Do not claim a build, Storybook, browser, Figma, or publication gate passed unless the exact command ran successfully in the current verification cycle.
+
+Architecture decisions:
+
+- [Separate repository](./docs/adr/0001-separate-design-system-repository.md)
+- [Canonical knowledge source](./docs/adr/0002-canonical-knowledge-source.md)
+- [Compressed MCP and guarded actions](./docs/adr/0003-compressed-mcp-and-guarded-actions.md)
+- [Agent eval and Figma gates](./docs/adr/0004-agent-evals-and-figma-publish-gates.md)
+
+---
+
+# Documentation index
+
+| Document | Purpose |
+|---|---|
+| [DESIGN.md](./DESIGN.md) | Generated portable design contract |
+| [Architecture](./docs/ARCHITECTURE.md) | Package and consumer architecture |
+| [AI context architecture](./docs/AI_CONTEXT_ARCHITECTURE.md) | Canonical knowledge and AI interfaces |
+| [Theming](./docs/THEMING.md) | Theme, density, accents, overrides |
+| [Component guidelines](./docs/COMPONENT_GUIDELINES.md) | Public component authoring contract |
+| [CLI](./docs/CLI.md) | Local project, discovery, compose, validate, scaffold interface |
+| [MCP](./docs/MCP.md) | MCP resources, tools, prompts, and security |
+| [Registry](./docs/REGISTRY.md) | Template distribution and guarded writes |
+| [Agent Skills](./docs/AGENT_SKILLS.md) | Portable procedures and validation |
+| [Storybook AI](./docs/STORYBOOK_AI.md) | Executable stories and MCP relationship |
+| [Agent evaluations](./docs/AGENT_EVALS.md) | Metrics and release gate |
+| [Figma](./docs/FIGMA.md) | Code Connect generation and publication gate |
+| [Migration](./docs/MIGRATION.md) | Migration from the original application |
+| [Publishing](./docs/PUBLISHING.md) | SemVer, release readiness, and tarballs |
+| [QA report](./docs/QA_REPORT.md) | Executed and blocked verification |
+| [Implementation plan](./docs/plans/2026-08-09-ai-native-design-system.md) | AI-native upgrade plan |
+
+---
+
+# Current limitations
+
+The following are not complete and are not presented as complete:
+
+- real Figma component-node URLs;
+- published Code Connect mappings;
+- a hosted Commonspace MCP service;
+- remote Registry distribution or authenticated private Registry support;
+- automated codemods for arbitrary external UI systems;
+- browser-level visual regression in this repository environment;
+- a model-running evaluation farm across multiple agent providers;
+- automatic human-design scoring;
+- Figma variable synchronization;
+- public npm packages;
+- an explicit redistribution license;
+- a committed dependency lockfile.
+
+The local AI context, deterministic search and validation, guarded scaffolding, Storybook contracts, static evals, and Figma templates are implemented. External publication and organization-specific Figma mapping remain governed follow-up work.
+
+---
 
 # License
 
-The repository and its Commonspace packages are currently **UNLICENSED**. See [`LICENSE.md`](./LICENSE.md).
+Copyright © 2026. All rights reserved.
 
-Ant Design Icons are used under their upstream MIT license. See [`THIRD_PARTY_NOTICES.md`](./THIRD_PARTY_NOTICES.md).
+This repository is currently marked **UNLICENSED**. No permission is granted to publish, redistribute, sublicense, or sell the packages until the owner selects an explicit license. Internal evaluation and development may proceed under the owner's authorization.
+
+See [LICENSE.md](./LICENSE.md) and [THIRD_PARTY_NOTICES.md](./THIRD_PARTY_NOTICES.md).

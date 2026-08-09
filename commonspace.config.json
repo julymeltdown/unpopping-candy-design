@@ -1,0 +1,30 @@
+{
+  "$schema": "./schemas/commonspace-config.schema.json",
+  "schemaVersion": 1,
+  "catalog": "./agent/manifests/catalog.json",
+  "design": "./DESIGN.md",
+  "llms": {
+    "index": "./agent/llms.txt",
+    "small": "./agent/llms-small.txt",
+    "full": "./agent/llms-full.txt",
+    "components": "./agent/llms-components.txt",
+    "patterns": "./agent/llms-patterns.txt",
+    "tokens": "./agent/llms-tokens.txt",
+    "migrations": "./agent/llms-migrations.txt"
+  },
+  "registry": "./agent/manifests/registry.json",
+  "skills": "./agent/manifests/skills.json",
+  "stories": {
+    "manifest": "./agent/manifests/stories.json",
+    "storybookUrl": "http://localhost:6006",
+    "mcpUrl": "http://localhost:6006/mcp"
+  },
+  "evaluations": "./agent/manifests/evals.json",
+  "figma": "./agent/manifests/figma.json",
+  "styles": [
+    "@commonspace/tokens/styles.css",
+    "@commonspace/icons/styles.css",
+    "@commonspace/ui/styles.css",
+    "@commonspace/social/styles.css"
+  ]
+}

@@ -1,16 +1,53 @@
 # Publishing
 
+## Current status
+
+Public publication is intentionally blocked.
+
+```text
+repository license  UNLICENSED
+package licenses    UNLICENSED
+pnpm-lock.yaml      not committed
+npm release         not approved
+```
+
+The manual release workflow calls `pnpm release:check` and fails until these blockers are removed.
+
 ## Preconditions
 
-External publication is blocked until all of the following are true:
+External publication requires all of the following:
 
-1. the repository owner selects an explicit license;
-2. `pnpm install` succeeds from the intended registry;
-3. a reviewed `pnpm-lock.yaml` is committed;
-4. full typecheck, package builds, consumer build, and Storybook build pass;
-5. browser interaction and accessibility tests pass;
-6. npm organization and provenance settings are configured;
-7. `NPM_TOKEN` is available to the release workflow if required by the registry.
+1. the owner selects and reviews an explicit repository license;
+2. package manifest license fields are updated consistently;
+3. `pnpm install` succeeds from the intended Registry;
+4. a reviewed `pnpm-lock.yaml` is committed;
+5. generated AI context is current;
+6. pure and architecture tests pass;
+7. full typecheck passes;
+8. all package builds pass;
+9. the consumer fixture builds from package exports;
+10. Storybook static build and browser tests pass;
+11. accessibility and interaction tests pass;
+12. package tarballs are inspected;
+13. npm organization, provenance, and protected release environment are configured;
+14. `NPM_TOKEN` or trusted publishing is configured appropriately.
+
+Figma Code Connect publication has a separate gate. Placeholder mappings must not be published.
+
+## Release-readiness command
+
+```bash
+pnpm release:check
+```
+
+It checks at least:
+
+- repository license status;
+- package license fields;
+- lockfile presence;
+- publishable-package status.
+
+It does not replace tests, builds, or tarball inspection.
 
 ## Changeset workflow
 
@@ -23,31 +60,130 @@ pnpm changeset
 Choose affected packages and bump level:
 
 ```text
-patch  bug fix with compatible API
-minor  compatible component/token/feature addition
-major  breaking API, token, export, or behavior change
+patch  compatible defect fix
+minor  compatible component, token, pattern, template, or AI-tool addition
+major  breaking API, token, export, behavior, or accessibility change
 ```
 
-Commit the generated Markdown file with the implementation.
+AI packages are versioned independently from visual packages unless a change crosses their public contracts.
 
-## Version pull request
+## Versioning
 
-The release workflow uses Changesets Action on `master` to maintain a version pull request. The version PR:
+```bash
+pnpm version-packages
+```
 
-- applies package versions;
-- converts queued changesets into changelogs;
-- updates internal package ranges;
-- removes consumed changeset files.
+Review:
+
+- generated changelogs;
+- internal dependency ranges;
+- generated documents and manifests;
+- migration records;
+- README installation examples;
+- MCP and CLI advertised versions.
+
+## Manual release workflow
+
+The GitHub release workflow is manual and protected by the `npm-release` environment.
+
+It executes:
+
+```text
+frozen dependency installation
+release readiness
+all tests and architecture gates
+typecheck
+all builds
+optional publication
+```
+
+The publish input must be selected explicitly.
 
 ## Publish
 
-After the version PR is merged, the action runs:
+Once packages are versioned and every precondition passes:
 
 ```bash
 pnpm release
 ```
 
-The command builds publishable packages before publication.
+The command repeats release readiness, builds packages, and invokes Changesets publication.
+
+## Package inspection
+
+Before first publication and after changes to package files or exports:
+
+```bash
+pnpm --filter @commonspace/ui pack
+pnpm --filter @commonspace/social pack
+pnpm --filter @commonspace/knowledge pack
+pnpm --filter @commonspace/cli pack
+pnpm --filter @commonspace/mcp pack
+```
+
+Inspect every tarball for:
+
+- only `dist`, README, approved templates/fixtures, and notices;
+- no source-only private implementation unless explicitly intended;
+- no tests or local application fixtures;
+- no absolute local paths;
+- no secrets;
+- valid `exports` targets;
+- valid CSS and JSON assets;
+- declaration and declaration-map resolution;
+- CLI `bin` resolution where applicable;
+- bundled Registry templates and checksums where applicable.
+
+## Consumer acceptance
+
+Build packages first, then build `apps/consumer-fixture` without source aliases.
+
+```bash
+pnpm build:packages
+pnpm --filter @commonspace/consumer-fixture typecheck
+pnpm --filter @commonspace/consumer-fixture build
+```
+
+The fixture must consume only package exports.
+
+## AI artifact acceptance
+
+```bash
+pnpm agent:check
+pnpm ai:check
+```
+
+Verify:
+
+- generated docs and manifests are current;
+- component props match public source;
+- every component has a Story contract;
+- MCP tool surface remains bounded;
+- Registry checksums are current;
+- eval release modes pass;
+- Figma templates are deterministic.
+
+## Storybook acceptance
+
+```bash
+pnpm --filter @commonspace/docs test
+pnpm --filter @commonspace/docs build-storybook
+```
+
+Inspect the Storybook artifact and ensure the MCP endpoint configuration corresponds to the released docs version.
+
+## Figma publication
+
+Figma mappings are published separately:
+
+```bash
+npm run figma:parse
+npm run figma:preview
+npm run figma:publish-check
+npm run figma:publish
+```
+
+`figma:publish-check` must fail while any component has a placeholder node URL.
 
 ## Release channels
 
@@ -59,34 +195,23 @@ next     release candidates and next-major work
 canary   commit-scoped integration testing
 ```
 
-Do not publish canary packages from unverified source aliases. Build and test the actual package tarballs.
-
-## Package inspection
-
-Before first publication, add a tarball inspection step:
-
-```bash
-pnpm --filter @commonspace/ui pack
-```
-
-Verify:
-
-- only `dist`, README, package manifest, and permitted notices ship;
-- source, tests, Storybook, and application fixtures are excluded;
-- every export exists in the tarball;
-- CSS assets and declaration maps resolve;
-- no secrets or local paths are present.
+Canary packages must still build and be tested from actual tarballs. Do not publish source-alias-only results.
 
 ## Compatibility policy
 
 Breaking changes include:
 
-- removal or rename of an export;
+- export removal or rename;
 - required prop additions;
+- public presentation-model field removal;
 - token removal or semantic redefinition;
 - changed controlled-state semantics;
-- changed accessibility behavior that requires consumer action;
+- changed accessibility behavior requiring consumer changes;
 - changed required CSS import order;
-- presentation model field removal or incompatible type change.
+- stable knowledge ID changes;
+- CLI or MCP schema incompatibility;
+- Registry template variable removal or destination changes;
+- Skill procedure changes that invalidate existing automation;
+- Figma mapping changes to a semantically different component.
 
-Internal file moves are not breaking when all public exports and behavior remain stable.
+Internal file moves are not breaking when public exports, metadata IDs, behavior, and generated contracts remain stable.
