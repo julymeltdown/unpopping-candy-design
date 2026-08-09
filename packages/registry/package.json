@@ -1,0 +1,34 @@
+{
+  "name": "@commonspace/registry",
+  "version": "0.2.0",
+  "description": "Versioned, checksum-verified Commonspace templates with guarded dry-run and apply scaffolding.",
+  "license": "UNLICENSED",
+  "type": "module",
+  "files": [
+    "dist",
+    "templates",
+    "README.md"
+  ],
+  "sideEffects": false,
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js"
+    },
+    "./registry.json": "./dist/registry.json"
+  },
+  "publishConfig": {
+    "access": "public"
+  },
+  "dependencies": {
+    "@commonspace/knowledge": "workspace:^"
+  },
+  "devDependencies": {
+    "@types/node": "24.3.0"
+  },
+  "scripts": {
+    "build": "tsc -p tsconfig.build.json && node ../../scripts/copy-package-assets.mjs . src/registry.json dist/registry.json",
+    "test": "node --experimental-strip-types --test test/*.test.ts",
+    "typecheck": "tsc --noEmit -p tsconfig.json"
+  }
+}

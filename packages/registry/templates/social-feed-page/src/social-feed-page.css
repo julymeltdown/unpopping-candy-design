@@ -1,0 +1,3 @@
+.cs-social-feed-page { width: min(100%, 42rem); margin-inline: auto; border-inline: 1px solid var(--cs-border); }
+.cs-social-feed-page__header { position: sticky; top: 0; z-index: 2; padding: var(--cs-space-4); background: color-mix(in srgb, var(--cs-canvas) 92%, transparent); border-bottom: 1px solid var(--cs-border); }
+.cs-social-feed-page__header h1 { margin: 0; font-size: 1.25rem; }

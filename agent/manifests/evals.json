@@ -1,0 +1,345 @@
+{
+  "generatedAt": "2026-08-09T00:00:00.000Z",
+  "scenarios": [
+    {
+      "coveredStates": [],
+      "findings": [
+        {
+          "code": "hardcoded-color",
+          "evidence": "line 1: #444444",
+          "message": "Use a Commonspace semantic color token instead of a literal color.",
+          "path": "src/profile-settings.tsx",
+          "severity": "error"
+        },
+        {
+          "code": "hardcoded-spacing",
+          "evidence": "line 1: padding: '24px'",
+          "message": "Use a Commonspace spacing or radius token instead of a literal visual value.",
+          "path": "src/profile-settings.tsx",
+          "severity": "error"
+        },
+        {
+          "code": "missing-component",
+          "message": "Expected Commonspace component ui.alert is not used.",
+          "path": "src/profile-settings.tsx",
+          "severity": "warning"
+        },
+        {
+          "code": "missing-component",
+          "message": "Expected Commonspace component ui.button is not used.",
+          "path": "src/profile-settings.tsx",
+          "severity": "warning"
+        },
+        {
+          "code": "missing-component",
+          "message": "Expected Commonspace component ui.empty-state is not used.",
+          "path": "src/profile-settings.tsx",
+          "severity": "warning"
+        },
+        {
+          "code": "missing-component",
+          "message": "Expected Commonspace component ui.stack is not used.",
+          "path": "src/profile-settings.tsx",
+          "severity": "warning"
+        },
+        {
+          "code": "missing-component",
+          "message": "Expected Commonspace component ui.text-field is not used.",
+          "path": "src/profile-settings.tsx",
+          "severity": "warning"
+        },
+        {
+          "code": "missing-state",
+          "message": "Required empty state is not represented.",
+          "path": "src/profile-settings.tsx",
+          "severity": "warning"
+        },
+        {
+          "code": "missing-state",
+          "message": "Required error state is not represented.",
+          "path": "src/profile-settings.tsx",
+          "severity": "warning"
+        },
+        {
+          "code": "missing-state",
+          "message": "Required loading state is not represented.",
+          "path": "src/profile-settings.tsx",
+          "severity": "warning"
+        },
+        {
+          "code": "unnamed-button",
+          "evidence": "line 1",
+          "message": "Button controls require a visible or accessible name.",
+          "path": "src/profile-settings.tsx",
+          "severity": "error"
+        },
+        {
+          "code": "unnamed-field",
+          "evidence": "line 1",
+          "message": "Raw input controls require a programmatic label.",
+          "path": "src/profile-settings.tsx",
+          "severity": "error"
+        }
+      ],
+      "id": "profile-settings-no-context",
+      "metrics": {
+        "accessibilityIssues": 2,
+        "commonspaceComponentsUsed": 0,
+        "commonspaceReuse": 0,
+        "componentRecall": 0,
+        "hardcodedVisualValues": 2,
+        "invalidImports": 0,
+        "jsxComponentsUsed": 0,
+        "stateCoverage": 0,
+        "unknownProps": 0
+      },
+      "missingComponents": [
+        "ui.alert",
+        "ui.button",
+        "ui.empty-state",
+        "ui.stack",
+        "ui.text-field"
+      ],
+      "missingStates": [
+        "empty",
+        "error",
+        "loading"
+      ],
+      "mode": "none",
+      "passed": false,
+      "schemaVersion": 1,
+      "score": 27,
+      "task": "Build a profile settings form with loading, error, empty, disabled, and pending behavior."
+    },
+    {
+      "coveredStates": [
+        "loading"
+      ],
+      "findings": [
+        {
+          "code": "hardcoded-spacing",
+          "evidence": "line 4: gap: '17px'",
+          "message": "Use a Commonspace spacing or radius token instead of a literal visual value.",
+          "path": "src/profile-settings.tsx",
+          "severity": "error"
+        },
+        {
+          "code": "missing-component",
+          "message": "Expected Commonspace component ui.alert is not used.",
+          "path": "src/profile-settings.tsx",
+          "severity": "warning"
+        },
+        {
+          "code": "missing-component",
+          "message": "Expected Commonspace component ui.empty-state is not used.",
+          "path": "src/profile-settings.tsx",
+          "severity": "warning"
+        },
+        {
+          "code": "missing-state",
+          "message": "Required empty state is not represented.",
+          "path": "src/profile-settings.tsx",
+          "severity": "warning"
+        },
+        {
+          "code": "missing-state",
+          "message": "Required error state is not represented.",
+          "path": "src/profile-settings.tsx",
+          "severity": "warning"
+        }
+      ],
+      "id": "profile-settings-design-md",
+      "metrics": {
+        "accessibilityIssues": 0,
+        "commonspaceComponentsUsed": 3,
+        "commonspaceReuse": 1,
+        "componentRecall": 0.6,
+        "hardcodedVisualValues": 1,
+        "invalidImports": 0,
+        "jsxComponentsUsed": 3,
+        "stateCoverage": 0.3333333333333333,
+        "unknownProps": 0
+      },
+      "missingComponents": [
+        "ui.alert",
+        "ui.empty-state"
+      ],
+      "missingStates": [
+        "empty",
+        "error"
+      ],
+      "mode": "design-md",
+      "passed": false,
+      "schemaVersion": 1,
+      "score": 79,
+      "task": "Build a profile settings form with loading, error, empty, disabled, and pending behavior."
+    },
+    {
+      "coveredStates": [
+        "error",
+        "loading"
+      ],
+      "findings": [
+        {
+          "code": "missing-component",
+          "message": "Expected Commonspace component ui.empty-state is not used.",
+          "path": "src/profile-settings.tsx",
+          "severity": "warning"
+        },
+        {
+          "code": "missing-state",
+          "message": "Required empty state is not represented.",
+          "path": "src/profile-settings.tsx",
+          "severity": "warning"
+        }
+      ],
+      "id": "profile-settings-skill",
+      "metrics": {
+        "accessibilityIssues": 0,
+        "commonspaceComponentsUsed": 4,
+        "commonspaceReuse": 1,
+        "componentRecall": 0.8,
+        "hardcodedVisualValues": 0,
+        "invalidImports": 0,
+        "jsxComponentsUsed": 4,
+        "stateCoverage": 0.6666666666666666,
+        "unknownProps": 0
+      },
+      "missingComponents": [
+        "ui.empty-state"
+      ],
+      "missingStates": [
+        "empty"
+      ],
+      "mode": "skill",
+      "passed": false,
+      "schemaVersion": 1,
+      "score": 93,
+      "task": "Build a profile settings form with loading, error, empty, disabled, and pending behavior."
+    },
+    {
+      "coveredStates": [
+        "empty",
+        "error",
+        "loading"
+      ],
+      "findings": [],
+      "id": "profile-settings-mcp",
+      "metrics": {
+        "accessibilityIssues": 0,
+        "commonspaceComponentsUsed": 5,
+        "commonspaceReuse": 1,
+        "componentRecall": 1,
+        "hardcodedVisualValues": 0,
+        "invalidImports": 0,
+        "jsxComponentsUsed": 5,
+        "stateCoverage": 1,
+        "unknownProps": 0
+      },
+      "missingComponents": [],
+      "missingStates": [],
+      "mode": "mcp",
+      "passed": true,
+      "schemaVersion": 1,
+      "score": 100,
+      "task": "Build a profile settings form with loading, error, empty, disabled, and pending behavior."
+    },
+    {
+      "coveredStates": [
+        "disabled",
+        "empty",
+        "error",
+        "loading",
+        "pending"
+      ],
+      "findings": [],
+      "id": "profile-settings-skill-mcp",
+      "metrics": {
+        "accessibilityIssues": 0,
+        "commonspaceComponentsUsed": 5,
+        "commonspaceReuse": 1,
+        "componentRecall": 1,
+        "hardcodedVisualValues": 0,
+        "invalidImports": 0,
+        "jsxComponentsUsed": 5,
+        "stateCoverage": 1,
+        "unknownProps": 0
+      },
+      "missingComponents": [],
+      "missingStates": [],
+      "mode": "skill-mcp",
+      "passed": true,
+      "schemaVersion": 1,
+      "score": 100,
+      "task": "Build a profile settings form with loading, error, empty, disabled, and pending behavior."
+    },
+    {
+      "coveredStates": [
+        "disabled",
+        "empty",
+        "error",
+        "loading",
+        "pending"
+      ],
+      "findings": [],
+      "id": "profile-settings-skill-mcp-storybook",
+      "metrics": {
+        "accessibilityIssues": 0,
+        "commonspaceComponentsUsed": 6,
+        "commonspaceReuse": 1,
+        "componentRecall": 1,
+        "hardcodedVisualValues": 0,
+        "invalidImports": 0,
+        "jsxComponentsUsed": 6,
+        "stateCoverage": 1,
+        "unknownProps": 0
+      },
+      "missingComponents": [],
+      "missingStates": [],
+      "mode": "skill-mcp-storybook",
+      "passed": true,
+      "schemaVersion": 1,
+      "score": 100,
+      "task": "Build a profile settings form with loading, error, empty, disabled, and pending behavior."
+    }
+  ],
+  "schemaVersion": 1,
+  "summary": {
+    "averageScore": 83.17,
+    "byMode": {
+      "design-md": {
+        "averageScore": 79,
+        "passing": 0,
+        "total": 1
+      },
+      "mcp": {
+        "averageScore": 100,
+        "passing": 1,
+        "total": 1
+      },
+      "none": {
+        "averageScore": 27,
+        "passing": 0,
+        "total": 1
+      },
+      "skill": {
+        "averageScore": 93,
+        "passing": 0,
+        "total": 1
+      },
+      "skill-mcp": {
+        "averageScore": 100,
+        "passing": 1,
+        "total": 1
+      },
+      "skill-mcp-storybook": {
+        "averageScore": 100,
+        "passing": 1,
+        "total": 1
+      }
+    },
+    "failing": 3,
+    "passing": 3,
+    "total": 6
+  }
+}

@@ -1,0 +1,59 @@
+{
+  "entries": [
+    {
+      "accessibility": {
+        "requirements": [
+          "No visual or interaction behavior changes are implied by adopting the tooling layer."
+        ]
+      },
+      "avoidWhen": [
+        "The project only consumes visual packages and does not need AI tooling."
+      ],
+      "changes": [
+        {
+          "from": "Hand-written DESIGN.md",
+          "guidance": "Edit component and pattern metadata, then regenerate agent artifacts.",
+          "kind": "manual",
+          "to": "Generated DESIGN.md"
+        },
+        {
+          "from": "Unstructured component discovery",
+          "guidance": "Run project detection before generating interfaces.",
+          "kind": "manual",
+          "to": "commonspace search and MCP resources"
+        },
+        {
+          "from": "Visual package source imports",
+          "guidance": "Continue importing only documented @commonspace/* entrypoints.",
+          "kind": "manual",
+          "to": "Published package entrypoints"
+        }
+      ],
+      "examples": {
+        "avoid": [],
+        "preferred": []
+      },
+      "fromVersion": "0.1.0",
+      "id": "migration.0-1-to-0-2",
+      "keywords": [
+        "migration",
+        "0.1",
+        "0.2",
+        "ai",
+        "knowledge"
+      ],
+      "kind": "migration",
+      "name": "Commonspace UI 0.1 to 0.2",
+      "schemaVersion": 1,
+      "status": "stable",
+      "summary": "Introduces the AI-native knowledge, CLI, MCP, Registry, and generated-document layer without changing existing visual package APIs.",
+      "toVersion": "0.2.0",
+      "useWhen": [
+        "A 0.1.x consumer adopts the 0.2 AI tooling and generated documentation."
+      ],
+      "version": "0.2.0"
+    }
+  ],
+  "generatedAt": "2026-08-09T00:00:00.000Z",
+  "schemaVersion": 1
+}

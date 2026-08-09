@@ -12,6 +12,9 @@ const markdownFiles = [
   join(root, 'DESIGN.md'),
   ...(await listFiles(join(root, 'docs'), (path) => path.endsWith('.md'))),
   ...(await listFiles(join(root, 'packages'), (path) => path.endsWith('README.md'))),
+  ...(await listFiles(join(root, 'skills'), (path) => path.endsWith('.md'))),
+  ...(await listFiles(join(root, 'agent/components'), (path) => path.endsWith('.md'))),
+  ...(await listFiles(join(root, 'agent/patterns'), (path) => path.endsWith('.md'))),
 ];
 const errors = [];
 

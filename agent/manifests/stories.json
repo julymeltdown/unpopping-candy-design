@@ -1,0 +1,200 @@
+{
+  "entries": [
+    {
+      "componentId": "social.conversation-preview",
+      "file": "apps/docs/stories/catalog/social/ConversationPreview.stories.tsx",
+      "storyId": "catalog-social-conversation-preview--contract",
+      "url": "/?path=/story/catalog-social-conversation-preview--contract"
+    },
+    {
+      "componentId": "social.notification-item",
+      "file": "apps/docs/stories/catalog/social/NotificationItem.stories.tsx",
+      "storyId": "catalog-social-notification-item--contract",
+      "url": "/?path=/story/catalog-social-notification-item--contract"
+    },
+    {
+      "componentId": "social.post-actions",
+      "file": "apps/docs/stories/catalog/social/PostActions.stories.tsx",
+      "storyId": "catalog-social-post-actions--contract",
+      "url": "/?path=/story/catalog-social-post-actions--contract"
+    },
+    {
+      "componentId": "social.post-card",
+      "file": "apps/docs/stories/catalog/social/PostCard.stories.tsx",
+      "storyId": "catalog-social-post-card--contract",
+      "url": "/?path=/story/catalog-social-post-card--contract"
+    },
+    {
+      "componentId": "social.post-card-skeleton",
+      "file": "apps/docs/stories/catalog/social/PostCardSkeleton.stories.tsx",
+      "storyId": "catalog-social-post-card-skeleton--contract",
+      "url": "/?path=/story/catalog-social-post-card-skeleton--contract"
+    },
+    {
+      "componentId": "social.post-composer-view",
+      "file": "apps/docs/stories/catalog/social/PostComposerView.stories.tsx",
+      "storyId": "catalog-social-post-composer-view--contract",
+      "url": "/?path=/story/catalog-social-post-composer-view--contract"
+    },
+    {
+      "componentId": "social.post-header",
+      "file": "apps/docs/stories/catalog/social/PostHeader.stories.tsx",
+      "storyId": "catalog-social-post-header--contract",
+      "url": "/?path=/story/catalog-social-post-header--contract"
+    },
+    {
+      "componentId": "social.post-media-grid",
+      "file": "apps/docs/stories/catalog/social/PostMediaGrid.stories.tsx",
+      "storyId": "catalog-social-post-media-grid--contract",
+      "url": "/?path=/story/catalog-social-post-media-grid--contract"
+    },
+    {
+      "componentId": "social.profile-header",
+      "file": "apps/docs/stories/catalog/social/ProfileHeader.stories.tsx",
+      "storyId": "catalog-social-profile-header--contract",
+      "url": "/?path=/story/catalog-social-profile-header--contract"
+    },
+    {
+      "componentId": "social.timeline-view",
+      "file": "apps/docs/stories/catalog/social/TimelineView.stories.tsx",
+      "storyId": "catalog-social-timeline-view--contract",
+      "url": "/?path=/story/catalog-social-timeline-view--contract"
+    },
+    {
+      "componentId": "social.user-cell",
+      "file": "apps/docs/stories/catalog/social/UserCell.stories.tsx",
+      "storyId": "catalog-social-user-cell--contract",
+      "url": "/?path=/story/catalog-social-user-cell--contract"
+    },
+    {
+      "componentId": "ui.alert",
+      "file": "apps/docs/stories/catalog/ui/Alert.stories.tsx",
+      "storyId": "catalog-ui-alert--contract",
+      "url": "/?path=/story/catalog-ui-alert--contract"
+    },
+    {
+      "componentId": "ui.avatar",
+      "file": "apps/docs/stories/catalog/ui/Avatar.stories.tsx",
+      "storyId": "catalog-ui-avatar--contract",
+      "url": "/?path=/story/catalog-ui-avatar--contract"
+    },
+    {
+      "componentId": "ui.badge",
+      "file": "apps/docs/stories/catalog/ui/Badge.stories.tsx",
+      "storyId": "catalog-ui-badge--contract",
+      "url": "/?path=/story/catalog-ui-badge--contract"
+    },
+    {
+      "componentId": "ui.button",
+      "file": "apps/docs/stories/catalog/ui/Button.stories.tsx",
+      "storyId": "catalog-ui-button--contract",
+      "url": "/?path=/story/catalog-ui-button--contract"
+    },
+    {
+      "componentId": "ui.container",
+      "file": "apps/docs/stories/catalog/ui/Container.stories.tsx",
+      "storyId": "catalog-ui-container--contract",
+      "url": "/?path=/story/catalog-ui-container--contract"
+    },
+    {
+      "componentId": "ui.dialog",
+      "file": "apps/docs/stories/catalog/ui/Dialog.stories.tsx",
+      "storyId": "catalog-ui-dialog--contract",
+      "url": "/?path=/story/catalog-ui-dialog--contract"
+    },
+    {
+      "componentId": "ui.empty-state",
+      "file": "apps/docs/stories/catalog/ui/EmptyState.stories.tsx",
+      "storyId": "catalog-ui-empty-state--contract",
+      "url": "/?path=/story/catalog-ui-empty-state--contract"
+    },
+    {
+      "componentId": "ui.feedback-provider",
+      "file": "apps/docs/stories/catalog/ui/FeedbackProvider.stories.tsx",
+      "storyId": "catalog-ui-feedback-provider--contract",
+      "url": "/?path=/story/catalog-ui-feedback-provider--contract"
+    },
+    {
+      "componentId": "ui.icon-button",
+      "file": "apps/docs/stories/catalog/ui/IconButton.stories.tsx",
+      "storyId": "catalog-ui-icon-button--contract",
+      "url": "/?path=/story/catalog-ui-icon-button--contract"
+    },
+    {
+      "componentId": "ui.inline",
+      "file": "apps/docs/stories/catalog/ui/Inline.stories.tsx",
+      "storyId": "catalog-ui-inline--contract",
+      "url": "/?path=/story/catalog-ui-inline--contract"
+    },
+    {
+      "componentId": "ui.separator",
+      "file": "apps/docs/stories/catalog/ui/Separator.stories.tsx",
+      "storyId": "catalog-ui-separator--contract",
+      "url": "/?path=/story/catalog-ui-separator--contract"
+    },
+    {
+      "componentId": "ui.skeleton",
+      "file": "apps/docs/stories/catalog/ui/Skeleton.stories.tsx",
+      "storyId": "catalog-ui-skeleton--contract",
+      "url": "/?path=/story/catalog-ui-skeleton--contract"
+    },
+    {
+      "componentId": "ui.spinner",
+      "file": "apps/docs/stories/catalog/ui/Spinner.stories.tsx",
+      "storyId": "catalog-ui-spinner--contract",
+      "url": "/?path=/story/catalog-ui-spinner--contract"
+    },
+    {
+      "componentId": "ui.stack",
+      "file": "apps/docs/stories/catalog/ui/Stack.stories.tsx",
+      "storyId": "catalog-ui-stack--contract",
+      "url": "/?path=/story/catalog-ui-stack--contract"
+    },
+    {
+      "componentId": "ui.surface",
+      "file": "apps/docs/stories/catalog/ui/Surface.stories.tsx",
+      "storyId": "catalog-ui-surface--contract",
+      "url": "/?path=/story/catalog-ui-surface--contract"
+    },
+    {
+      "componentId": "ui.tabs",
+      "file": "apps/docs/stories/catalog/ui/Tabs.stories.tsx",
+      "storyId": "catalog-ui-tabs--contract",
+      "url": "/?path=/story/catalog-ui-tabs--contract"
+    },
+    {
+      "componentId": "ui.text-area",
+      "file": "apps/docs/stories/catalog/ui/TextArea.stories.tsx",
+      "storyId": "catalog-ui-text-area--contract",
+      "url": "/?path=/story/catalog-ui-text-area--contract"
+    },
+    {
+      "componentId": "ui.text-field",
+      "file": "apps/docs/stories/catalog/ui/TextField.stories.tsx",
+      "storyId": "catalog-ui-text-field--contract",
+      "url": "/?path=/story/catalog-ui-text-field--contract"
+    },
+    {
+      "componentId": "ui.toast",
+      "file": "apps/docs/stories/catalog/ui/Toast.stories.tsx",
+      "storyId": "catalog-ui-toast--contract",
+      "url": "/?path=/story/catalog-ui-toast--contract"
+    },
+    {
+      "componentId": "ui.toast-viewport",
+      "file": "apps/docs/stories/catalog/ui/ToastViewport.stories.tsx",
+      "storyId": "catalog-ui-toast-viewport--contract",
+      "url": "/?path=/story/catalog-ui-toast-viewport--contract"
+    },
+    {
+      "componentId": "ui.visually-hidden",
+      "file": "apps/docs/stories/catalog/ui/VisuallyHidden.stories.tsx",
+      "storyId": "catalog-ui-visually-hidden--contract",
+      "url": "/?path=/story/catalog-ui-visually-hidden--contract"
+    }
+  ],
+  "generatedAt": "2026-08-09T00:00:00.000Z",
+  "mcpEndpoint": "/mcp",
+  "schemaVersion": 1,
+  "storybookVersion": "10.5.0"
+}

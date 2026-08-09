@@ -1,0 +1,12 @@
+{
+  "counts": {
+    "components": 32,
+    "migrations": 1,
+    "patterns": 6,
+    "templates": 5
+  },
+  "generatedAt": "2026-08-09T00:00:00.000Z",
+  "packageVersion": "0.2.0",
+  "schemaVersion": 1,
+  "sourceDigest": "aa1e1105ebbfb83e643f08300b23aaf7465e1f53ec631d77d90e66c77fab44dc"
+}

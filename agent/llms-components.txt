@@ -1,0 +1,34 @@
+# Commonspace UI components
+
+- [ConversationPreview](./components/social.conversation-preview.md): Presents a conversation summary with participants, latest message, time, and unread state.
+- [NotificationItem](./components/social.notification-item.md): Presents one social notification with actor context, event description, and optional target content.
+- [PostActions](./components/social.post-actions.md): Presents reply, repost, like, bookmark, and share actions as controlled social interactions.
+- [PostCard](./components/social.post-card.md): Presents a social post with author, content, distribution context, metrics, and injected actions.
+- [PostCardSkeleton](./components/social.post-card-skeleton.md): Reserves the expected geometry of a PostCard while timeline data loads.
+- [PostComposerView](./components/social.post-composer-view.md): Presents a controlled social composer while the application owns draft, validation, upload, and publishing state.
+- [PostHeader](./components/social.post-header.md): Presents post identity, timestamp, and distribution context without owning navigation.
+- [PostMediaGrid](./components/social.post-media-grid.md): Arranges one to four social media assets with stable aspect ratios and selection callbacks.
+- [ProfileHeader](./components/social.profile-header.md): Presents a curator or user profile summary with injected primary and secondary actions.
+- [TimelineView](./components/social.timeline-view.md): Composes timeline states and rendered post rows without owning pagination or virtualization.
+- [UserCell](./components/social.user-cell.md): Presents a compact person row with optional supporting text and injected action.
+- [Alert](./components/ui.alert.md): Presents contextual feedback beside the task or content that produced it.
+- [Avatar](./components/ui.avatar.md): Represents a person or organization with an image and deterministic fallback.
+- [Badge](./components/ui.badge.md): Displays a compact status or categorical label without becoming the primary action.
+- [Button](./components/ui.button.md): Triggers an immediate user action with explicit priority and pending behavior.
+- [Container](./components/ui.container.md): Constrains page content to a readable width and consistent horizontal gutter.
+- [Dialog](./components/ui.dialog.md): Interrupts the current context for a focused task that must be completed or dismissed.
+- [EmptyState](./components/ui.empty-state.md): Explains why a meaningful region has no content and offers the next valid action.
+- [FeedbackProvider](./components/ui.feedback-provider.md): Owns the application-level transient feedback queue and exposes a bounded controller.
+- [IconButton](./components/ui.icon-button.md): Triggers a frequent action where a well-known icon can replace visible text.
+- [Inline](./components/ui.inline.md): Arranges related items horizontally with tokenized gap, alignment, and wrapping.
+- [Separator](./components/ui.separator.md): Separates adjacent regions when spacing alone cannot communicate the boundary.
+- [Skeleton](./components/ui.skeleton.md): Reserves stable geometry while content is loading.
+- [Spinner](./components/ui.spinner.md): Indicates an indeterminate operation in a compact region.
+- [Stack](./components/ui.stack.md): Arranges a vertical reading or task sequence with tokenized spacing.
+- [Surface](./components/ui.surface.md): Creates a semantic background and boundary without prescribing product content.
+- [Tabs](./components/ui.tabs.md): Switches among peer views that share one context and URL or controlled state.
+- [TextArea](./components/ui.text-area.md): Collects multi-line text with label, description, validation, and native textarea semantics.
+- [TextField](./components/ui.text-field.md): Collects one short value with label, description, validation, and native input semantics.
+- [Toast](./components/ui.toast.md): Renders one transient or persistent item from the feedback queue.
+- [ToastViewport](./components/ui.toast-viewport.md): Positions and announces the bounded stack of global feedback items.
+- [VisuallyHidden](./components/ui.visually-hidden.md): Keeps essential text available to assistive technology without changing visual layout.

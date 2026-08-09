@@ -6,6 +6,9 @@ const root = repositoryRoot();
 const packagesDirectory = join(root, 'packages');
 const manifests = await listFiles(packagesDirectory, (path) => path.endsWith('/package.json'));
 const errors = [];
+const baseTypeScript = await readJson(join(root, 'tsconfig.base.json'));
+if (baseTypeScript.compilerOptions?.allowImportingTsExtensions !== true) errors.push('tsconfig.base.json: allowImportingTsExtensions must be true while source imports use .ts extensions');
+if (baseTypeScript.compilerOptions?.rewriteRelativeImportExtensions !== true) errors.push('tsconfig.base.json: rewriteRelativeImportExtensions must be true so emitted JavaScript resolves .js files');
 
 for (const manifestPath of manifests) {
   const manifest = await readJson(manifestPath);

@@ -1,0 +1,470 @@
+{
+  "components": [
+    {
+      "componentId": "social.conversation-preview",
+      "componentName": "ConversationPreview",
+      "entrypoint": "@commonspace/social/conversation",
+      "nodeUrl": "https://www.figma.com/design/COMMONSPACE_LIBRARY/Commonspace-UI?node-id=0-1",
+      "package": "@commonspace/social",
+      "propertyMap": {
+        "Selected": "selected",
+        "Variant": "direct|group"
+      },
+      "sourcePath": "packages/social/src/conversation/conversation-preview.tsx",
+      "status": "placeholder",
+      "storyId": "catalog-social-conversation-preview--contract",
+      "templatePath": "figma/code-connect/social-conversation-preview.figma.ts"
+    },
+    {
+      "componentId": "social.notification-item",
+      "componentName": "NotificationItem",
+      "entrypoint": "@commonspace/social/notification",
+      "nodeUrl": "https://www.figma.com/design/COMMONSPACE_LIBRARY/Commonspace-UI?node-id=0-2",
+      "package": "@commonspace/social",
+      "propertyMap": {
+        "Selected": "selected",
+        "Variant": "like|reply|repost|follow|system"
+      },
+      "sourcePath": "packages/social/src/notification/notification-item.tsx",
+      "status": "placeholder",
+      "storyId": "catalog-social-notification-item--contract",
+      "templatePath": "figma/code-connect/social-notification-item.figma.ts"
+    },
+    {
+      "componentId": "social.post-actions",
+      "componentName": "PostActions",
+      "entrypoint": "@commonspace/social/post",
+      "nodeUrl": "https://www.figma.com/design/COMMONSPACE_LIBRARY/Commonspace-UI?node-id=0-3",
+      "package": "@commonspace/social",
+      "propertyMap": {
+        "Pending": "pending",
+        "Variant": "default|compact"
+      },
+      "sourcePath": "packages/social/src/post-card/post-actions.tsx",
+      "status": "placeholder",
+      "storyId": "catalog-social-post-actions--contract",
+      "templatePath": "figma/code-connect/social-post-actions.figma.ts"
+    },
+    {
+      "componentId": "social.post-card",
+      "componentName": "PostCard",
+      "entrypoint": "@commonspace/social/post",
+      "nodeUrl": "https://www.figma.com/design/COMMONSPACE_LIBRARY/Commonspace-UI?node-id=0-4",
+      "package": "@commonspace/social",
+      "propertyMap": {
+        "Selected": "selected",
+        "Variant": "timeline|detail|quoted"
+      },
+      "sourcePath": "packages/social/src/post-card/post-card.tsx",
+      "status": "placeholder",
+      "storyId": "catalog-social-post-card--contract",
+      "templatePath": "figma/code-connect/social-post-card.figma.ts"
+    },
+    {
+      "componentId": "social.post-card-skeleton",
+      "componentName": "PostCardSkeleton",
+      "entrypoint": "@commonspace/social/post",
+      "nodeUrl": "https://www.figma.com/design/COMMONSPACE_LIBRARY/Commonspace-UI?node-id=0-5",
+      "package": "@commonspace/social",
+      "propertyMap": {
+        "Variant": "default"
+      },
+      "sourcePath": "packages/social/src/post-card/post-card-skeleton.tsx",
+      "status": "placeholder",
+      "storyId": "catalog-social-post-card-skeleton--contract",
+      "templatePath": "figma/code-connect/social-post-card-skeleton.figma.ts"
+    },
+    {
+      "componentId": "social.post-composer-view",
+      "componentName": "PostComposerView",
+      "entrypoint": "@commonspace/social/post",
+      "nodeUrl": "https://www.figma.com/design/COMMONSPACE_LIBRARY/Commonspace-UI?node-id=0-6",
+      "package": "@commonspace/social",
+      "propertyMap": {
+        "Variant": "inline|dialog"
+      },
+      "sourcePath": "packages/social/src/post-composer/post-composer-view.tsx",
+      "status": "placeholder",
+      "storyId": "catalog-social-post-composer-view--contract",
+      "templatePath": "figma/code-connect/social-post-composer-view.figma.ts"
+    },
+    {
+      "componentId": "social.post-header",
+      "componentName": "PostHeader",
+      "entrypoint": "@commonspace/social/post",
+      "nodeUrl": "https://www.figma.com/design/COMMONSPACE_LIBRARY/Commonspace-UI?node-id=0-7",
+      "package": "@commonspace/social",
+      "propertyMap": {
+        "Variant": "default|repost-context"
+      },
+      "sourcePath": "packages/social/src/post-card/post-header.tsx",
+      "status": "placeholder",
+      "storyId": "catalog-social-post-header--contract",
+      "templatePath": "figma/code-connect/social-post-header.figma.ts"
+    },
+    {
+      "componentId": "social.post-media-grid",
+      "componentName": "PostMediaGrid",
+      "entrypoint": "@commonspace/social/post",
+      "nodeUrl": "https://www.figma.com/design/COMMONSPACE_LIBRARY/Commonspace-UI?node-id=0-8",
+      "package": "@commonspace/social",
+      "propertyMap": {
+        "Variant": "one|two|three|four"
+      },
+      "sourcePath": "packages/social/src/post-card/post-media-grid.tsx",
+      "status": "placeholder",
+      "storyId": "catalog-social-post-media-grid--contract",
+      "templatePath": "figma/code-connect/social-post-media-grid.figma.ts"
+    },
+    {
+      "componentId": "social.profile-header",
+      "componentName": "ProfileHeader",
+      "entrypoint": "@commonspace/social/profile",
+      "nodeUrl": "https://www.figma.com/design/COMMONSPACE_LIBRARY/Commonspace-UI?node-id=0-9",
+      "package": "@commonspace/social",
+      "propertyMap": {
+        "Pending": "pending",
+        "Variant": "self|other|private"
+      },
+      "sourcePath": "packages/social/src/profile/profile-header.tsx",
+      "status": "placeholder",
+      "storyId": "catalog-social-profile-header--contract",
+      "templatePath": "figma/code-connect/social-profile-header.figma.ts"
+    },
+    {
+      "componentId": "social.timeline-view",
+      "componentName": "TimelineView",
+      "entrypoint": "@commonspace/social/timeline",
+      "nodeUrl": "https://www.figma.com/design/COMMONSPACE_LIBRARY/Commonspace-UI?node-id=0-10",
+      "package": "@commonspace/social",
+      "propertyMap": {
+        "Variant": "default"
+      },
+      "sourcePath": "packages/social/src/timeline/timeline-view.tsx",
+      "status": "placeholder",
+      "storyId": "catalog-social-timeline-view--contract",
+      "templatePath": "figma/code-connect/social-timeline-view.figma.ts"
+    },
+    {
+      "componentId": "social.user-cell",
+      "componentName": "UserCell",
+      "entrypoint": "@commonspace/social/user",
+      "nodeUrl": "https://www.figma.com/design/COMMONSPACE_LIBRARY/Commonspace-UI?node-id=0-11",
+      "package": "@commonspace/social",
+      "propertyMap": {
+        "Pending": "pending",
+        "Selected": "selected",
+        "Variant": "default|compact"
+      },
+      "sourcePath": "packages/social/src/user-cell/user-cell.tsx",
+      "status": "placeholder",
+      "storyId": "catalog-social-user-cell--contract",
+      "templatePath": "figma/code-connect/social-user-cell.figma.ts"
+    },
+    {
+      "componentId": "ui.alert",
+      "componentName": "Alert",
+      "entrypoint": "@commonspace/ui/alert",
+      "nodeUrl": "https://www.figma.com/design/COMMONSPACE_LIBRARY/Commonspace-UI?node-id=0-12",
+      "package": "@commonspace/ui",
+      "propertyMap": {
+        "Variant": "neutral|success|warning|critical"
+      },
+      "sourcePath": "packages/ui/src/alert/alert.tsx",
+      "status": "placeholder",
+      "storyId": "catalog-ui-alert--contract",
+      "templatePath": "figma/code-connect/ui-alert.figma.ts"
+    },
+    {
+      "componentId": "ui.avatar",
+      "componentName": "Avatar",
+      "entrypoint": "@commonspace/ui/avatar",
+      "nodeUrl": "https://www.figma.com/design/COMMONSPACE_LIBRARY/Commonspace-UI?node-id=0-13",
+      "package": "@commonspace/ui",
+      "propertyMap": {
+        "Variant": "sm|md|lg"
+      },
+      "sourcePath": "packages/ui/src/avatar/avatar.tsx",
+      "status": "placeholder",
+      "storyId": "catalog-ui-avatar--contract",
+      "templatePath": "figma/code-connect/ui-avatar.figma.ts"
+    },
+    {
+      "componentId": "ui.badge",
+      "componentName": "Badge",
+      "entrypoint": "@commonspace/ui/badge",
+      "nodeUrl": "https://www.figma.com/design/COMMONSPACE_LIBRARY/Commonspace-UI?node-id=0-14",
+      "package": "@commonspace/ui",
+      "propertyMap": {
+        "Variant": "neutral|accent|positive|warning|critical"
+      },
+      "sourcePath": "packages/ui/src/badge/badge.tsx",
+      "status": "placeholder",
+      "storyId": "catalog-ui-badge--contract",
+      "templatePath": "figma/code-connect/ui-badge.figma.ts"
+    },
+    {
+      "componentId": "ui.button",
+      "componentName": "Button",
+      "entrypoint": "@commonspace/ui/button",
+      "nodeUrl": "https://www.figma.com/design/COMMONSPACE_LIBRARY/Commonspace-UI?node-id=0-15",
+      "package": "@commonspace/ui",
+      "propertyMap": {
+        "Disabled": "disabled",
+        "Pending": "pending",
+        "Variant": "primary|secondary|ghost|danger"
+      },
+      "sourcePath": "packages/ui/src/button/button.tsx",
+      "status": "placeholder",
+      "storyId": "catalog-ui-button--contract",
+      "templatePath": "figma/code-connect/ui-button.figma.ts"
+    },
+    {
+      "componentId": "ui.container",
+      "componentName": "Container",
+      "entrypoint": "@commonspace/ui/layout",
+      "nodeUrl": "https://www.figma.com/design/COMMONSPACE_LIBRARY/Commonspace-UI?node-id=0-16",
+      "package": "@commonspace/ui",
+      "propertyMap": {
+        "Variant": "sm|md|lg|full"
+      },
+      "sourcePath": "packages/ui/src/container/container.tsx",
+      "status": "placeholder",
+      "storyId": "catalog-ui-container--contract",
+      "templatePath": "figma/code-connect/ui-container.figma.ts"
+    },
+    {
+      "componentId": "ui.dialog",
+      "componentName": "Dialog",
+      "entrypoint": "@commonspace/ui/dialog",
+      "nodeUrl": "https://www.figma.com/design/COMMONSPACE_LIBRARY/Commonspace-UI?node-id=0-17",
+      "package": "@commonspace/ui",
+      "propertyMap": {
+        "Variant": "sm|md|lg"
+      },
+      "sourcePath": "packages/ui/src/dialog/dialog.tsx",
+      "status": "placeholder",
+      "storyId": "catalog-ui-dialog--contract",
+      "templatePath": "figma/code-connect/ui-dialog.figma.ts"
+    },
+    {
+      "componentId": "ui.empty-state",
+      "componentName": "EmptyState",
+      "entrypoint": "@commonspace/ui",
+      "nodeUrl": "https://www.figma.com/design/COMMONSPACE_LIBRARY/Commonspace-UI?node-id=0-18",
+      "package": "@commonspace/ui",
+      "propertyMap": {
+        "Variant": "compact|default"
+      },
+      "sourcePath": "packages/ui/src/empty-state/empty-state.tsx",
+      "status": "placeholder",
+      "storyId": "catalog-ui-empty-state--contract",
+      "templatePath": "figma/code-connect/ui-empty-state.figma.ts"
+    },
+    {
+      "componentId": "ui.feedback-provider",
+      "componentName": "FeedbackProvider",
+      "entrypoint": "@commonspace/ui/feedback",
+      "nodeUrl": "https://www.figma.com/design/COMMONSPACE_LIBRARY/Commonspace-UI?node-id=0-19",
+      "package": "@commonspace/ui",
+      "propertyMap": {
+        "Variant": "default"
+      },
+      "sourcePath": "packages/ui/src/feedback/feedback-provider.tsx",
+      "status": "placeholder",
+      "storyId": "catalog-ui-feedback-provider--contract",
+      "templatePath": "figma/code-connect/ui-feedback-provider.figma.ts"
+    },
+    {
+      "componentId": "ui.icon-button",
+      "componentName": "IconButton",
+      "entrypoint": "@commonspace/ui/button",
+      "nodeUrl": "https://www.figma.com/design/COMMONSPACE_LIBRARY/Commonspace-UI?node-id=0-20",
+      "package": "@commonspace/ui",
+      "propertyMap": {
+        "Disabled": "disabled",
+        "Variant": "ghost|secondary|danger"
+      },
+      "sourcePath": "packages/ui/src/icon-button/icon-button.tsx",
+      "status": "placeholder",
+      "storyId": "catalog-ui-icon-button--contract",
+      "templatePath": "figma/code-connect/ui-icon-button.figma.ts"
+    },
+    {
+      "componentId": "ui.inline",
+      "componentName": "Inline",
+      "entrypoint": "@commonspace/ui/layout",
+      "nodeUrl": "https://www.figma.com/design/COMMONSPACE_LIBRARY/Commonspace-UI?node-id=0-21",
+      "package": "@commonspace/ui",
+      "propertyMap": {
+        "Variant": "start|center|end|space-between"
+      },
+      "sourcePath": "packages/ui/src/inline/inline.tsx",
+      "status": "placeholder",
+      "storyId": "catalog-ui-inline--contract",
+      "templatePath": "figma/code-connect/ui-inline.figma.ts"
+    },
+    {
+      "componentId": "ui.separator",
+      "componentName": "Separator",
+      "entrypoint": "@commonspace/ui/layout",
+      "nodeUrl": "https://www.figma.com/design/COMMONSPACE_LIBRARY/Commonspace-UI?node-id=0-22",
+      "package": "@commonspace/ui",
+      "propertyMap": {
+        "Variant": "horizontal|vertical"
+      },
+      "sourcePath": "packages/ui/src/separator/separator.tsx",
+      "status": "placeholder",
+      "storyId": "catalog-ui-separator--contract",
+      "templatePath": "figma/code-connect/ui-separator.figma.ts"
+    },
+    {
+      "componentId": "ui.skeleton",
+      "componentName": "Skeleton",
+      "entrypoint": "@commonspace/ui/loading",
+      "nodeUrl": "https://www.figma.com/design/COMMONSPACE_LIBRARY/Commonspace-UI?node-id=0-23",
+      "package": "@commonspace/ui",
+      "propertyMap": {
+        "Variant": "text|circle|block"
+      },
+      "sourcePath": "packages/ui/src/skeleton/skeleton.tsx",
+      "status": "placeholder",
+      "storyId": "catalog-ui-skeleton--contract",
+      "templatePath": "figma/code-connect/ui-skeleton.figma.ts"
+    },
+    {
+      "componentId": "ui.spinner",
+      "componentName": "Spinner",
+      "entrypoint": "@commonspace/ui/loading",
+      "nodeUrl": "https://www.figma.com/design/COMMONSPACE_LIBRARY/Commonspace-UI?node-id=0-24",
+      "package": "@commonspace/ui",
+      "propertyMap": {
+        "Variant": "sm|md|lg"
+      },
+      "sourcePath": "packages/ui/src/spinner/spinner.tsx",
+      "status": "placeholder",
+      "storyId": "catalog-ui-spinner--contract",
+      "templatePath": "figma/code-connect/ui-spinner.figma.ts"
+    },
+    {
+      "componentId": "ui.stack",
+      "componentName": "Stack",
+      "entrypoint": "@commonspace/ui/layout",
+      "nodeUrl": "https://www.figma.com/design/COMMONSPACE_LIBRARY/Commonspace-UI?node-id=0-25",
+      "package": "@commonspace/ui",
+      "propertyMap": {
+        "Variant": "xs|sm|md|lg|xl"
+      },
+      "sourcePath": "packages/ui/src/stack/stack.tsx",
+      "status": "placeholder",
+      "storyId": "catalog-ui-stack--contract",
+      "templatePath": "figma/code-connect/ui-stack.figma.ts"
+    },
+    {
+      "componentId": "ui.surface",
+      "componentName": "Surface",
+      "entrypoint": "@commonspace/ui/layout",
+      "nodeUrl": "https://www.figma.com/design/COMMONSPACE_LIBRARY/Commonspace-UI?node-id=0-26",
+      "package": "@commonspace/ui",
+      "propertyMap": {
+        "Variant": "plain|subtle|raised"
+      },
+      "sourcePath": "packages/ui/src/surface/surface.tsx",
+      "status": "placeholder",
+      "storyId": "catalog-ui-surface--contract",
+      "templatePath": "figma/code-connect/ui-surface.figma.ts"
+    },
+    {
+      "componentId": "ui.tabs",
+      "componentName": "Tabs",
+      "entrypoint": "@commonspace/ui/tabs",
+      "nodeUrl": "https://www.figma.com/design/COMMONSPACE_LIBRARY/Commonspace-UI?node-id=0-27",
+      "package": "@commonspace/ui",
+      "propertyMap": {
+        "Disabled": "disabled",
+        "Selected": "selected",
+        "Variant": "line|compact"
+      },
+      "sourcePath": "packages/ui/src/tabs/tabs.tsx",
+      "status": "placeholder",
+      "storyId": "catalog-ui-tabs--contract",
+      "templatePath": "figma/code-connect/ui-tabs.figma.ts"
+    },
+    {
+      "componentId": "ui.text-area",
+      "componentName": "TextArea",
+      "entrypoint": "@commonspace/ui/forms",
+      "nodeUrl": "https://www.figma.com/design/COMMONSPACE_LIBRARY/Commonspace-UI?node-id=0-28",
+      "package": "@commonspace/ui",
+      "propertyMap": {
+        "Disabled": "disabled",
+        "Variant": "default"
+      },
+      "sourcePath": "packages/ui/src/text-area/text-area.tsx",
+      "status": "placeholder",
+      "storyId": "catalog-ui-text-area--contract",
+      "templatePath": "figma/code-connect/ui-text-area.figma.ts"
+    },
+    {
+      "componentId": "ui.text-field",
+      "componentName": "TextField",
+      "entrypoint": "@commonspace/ui/forms",
+      "nodeUrl": "https://www.figma.com/design/COMMONSPACE_LIBRARY/Commonspace-UI?node-id=0-29",
+      "package": "@commonspace/ui",
+      "propertyMap": {
+        "Disabled": "disabled",
+        "Variant": "text|email|password|search"
+      },
+      "sourcePath": "packages/ui/src/text-field/text-field.tsx",
+      "status": "placeholder",
+      "storyId": "catalog-ui-text-field--contract",
+      "templatePath": "figma/code-connect/ui-text-field.figma.ts"
+    },
+    {
+      "componentId": "ui.toast",
+      "componentName": "Toast",
+      "entrypoint": "@commonspace/ui/feedback",
+      "nodeUrl": "https://www.figma.com/design/COMMONSPACE_LIBRARY/Commonspace-UI?node-id=0-30",
+      "package": "@commonspace/ui",
+      "propertyMap": {
+        "Variant": "neutral|success|warning|critical"
+      },
+      "sourcePath": "packages/ui/src/feedback/toast.tsx",
+      "status": "placeholder",
+      "storyId": "catalog-ui-toast--contract",
+      "templatePath": "figma/code-connect/ui-toast.figma.ts"
+    },
+    {
+      "componentId": "ui.toast-viewport",
+      "componentName": "ToastViewport",
+      "entrypoint": "@commonspace/ui/feedback",
+      "nodeUrl": "https://www.figma.com/design/COMMONSPACE_LIBRARY/Commonspace-UI?node-id=0-31",
+      "package": "@commonspace/ui",
+      "propertyMap": {
+        "Variant": "top-right|bottom-right|bottom-center"
+      },
+      "sourcePath": "packages/ui/src/feedback/toast.tsx",
+      "status": "placeholder",
+      "storyId": "catalog-ui-toast-viewport--contract",
+      "templatePath": "figma/code-connect/ui-toast-viewport.figma.ts"
+    },
+    {
+      "componentId": "ui.visually-hidden",
+      "componentName": "VisuallyHidden",
+      "entrypoint": "@commonspace/ui",
+      "nodeUrl": "https://www.figma.com/design/COMMONSPACE_LIBRARY/Commonspace-UI?node-id=0-32",
+      "package": "@commonspace/ui",
+      "propertyMap": {
+        "Variant": "default"
+      },
+      "sourcePath": "packages/ui/src/visually-hidden/visually-hidden.tsx",
+      "status": "placeholder",
+      "storyId": "catalog-ui-visually-hidden--contract",
+      "templatePath": "figma/code-connect/ui-visually-hidden.figma.ts"
+    }
+  ],
+  "generatedAt": "2026-08-09T00:00:00.000Z",
+  "libraryName": "Commonspace UI",
+  "packageVersion": "0.2.0",
+  "schemaVersion": 1
+}

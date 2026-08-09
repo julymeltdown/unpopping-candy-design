@@ -1,0 +1,164 @@
+{
+  "generatedAt": "2026-08-09T00:00:00.000Z",
+  "packageVersion": "0.2.0",
+  "schemaVersion": 1,
+  "templates": [
+    {
+      "digest": "92abba874df823cf01737930832b0400c00368e899b4ef1c14fda5f105de9b4d",
+      "files": [
+        {
+          "bytes": 351,
+          "digest": "bc40d5e31b46c05ba65261bce55303a44c98bc918bcfb16c446f984fab77b904",
+          "path": "src/app/providers/commonspace-provider.tsx",
+          "role": "Application provider composition",
+          "source": "packages/registry/templates/fsd-social-shell/src/app/providers/commonspace-provider.tsx"
+        },
+        {
+          "bytes": 594,
+          "digest": "e2b3a53c1ffbb7d40ddf670a12a32d4de1fd107ed9f88638df682315d3ed0222",
+          "path": "src/pages/home/ui/home-page.tsx",
+          "role": "Home page composition",
+          "source": "packages/registry/templates/fsd-social-shell/src/pages/home/ui/home-page.tsx"
+        },
+        {
+          "bytes": 310,
+          "digest": "c51f14db285b193a3c0bcfec9b867ba0e41810935f6204a3607c303f49a9d38f",
+          "path": "src/widgets/post-feed/ui/post-feed.tsx",
+          "role": "Reusable feed widget",
+          "source": "packages/registry/templates/fsd-social-shell/src/widgets/post-feed/ui/post-feed.tsx"
+        }
+      ],
+      "id": "template.fsd-social-shell",
+      "name": "Strict FSD social shell",
+      "target": "react-vite-fsd",
+      "variables": [
+        {
+          "defaultValue": "",
+          "description": "Optional folder or component-name prefix.",
+          "name": "componentPrefix"
+        }
+      ],
+      "version": "0.2.0"
+    },
+    {
+      "digest": "be5b41d82e80b86232dde902fdcb5ac204089ba225ee417f9fe95777dc3b1154",
+      "files": [
+        {
+          "bytes": 700,
+          "digest": "ca7f4e141af4d580a29d95b9938f774e2ed857e9e2f696b798d9f539729f7849",
+          "path": "src/moderation-workspace.css",
+          "role": "Responsive workspace layout",
+          "source": "packages/registry/templates/moderation-workspace/src/moderation-workspace.css"
+        },
+        {
+          "bytes": 1984,
+          "digest": "53956527fe5fc3fc4d8ed8bae1f3c7bdce9d8cb6c98f4c0dcd86e34ba7d23c27",
+          "path": "src/moderation-workspace.tsx",
+          "role": "Moderation workspace composition",
+          "source": "packages/registry/templates/moderation-workspace/src/moderation-workspace.tsx"
+        }
+      ],
+      "id": "template.moderation-workspace",
+      "name": "Moderation workspace",
+      "target": "react-vite",
+      "variables": [
+        {
+          "defaultValue": "",
+          "description": "Optional folder or component-name prefix.",
+          "name": "componentPrefix"
+        }
+      ],
+      "version": "0.2.0"
+    },
+    {
+      "digest": "373143fac70c513f554265c4f14f735e5db3a7b63af6b154facb57fddc55d67f",
+      "files": [
+        {
+          "bytes": 1612,
+          "digest": "e282190b17fed8aadabc4310e8c941072e3efd9cd1534b4ecb512f57dc8218f1",
+          "path": "src/profile-settings.tsx",
+          "role": "Settings form",
+          "source": "packages/registry/templates/profile-settings/src/profile-settings.tsx"
+        }
+      ],
+      "id": "template.profile-settings",
+      "name": "Profile settings",
+      "target": "react-vite",
+      "variables": [
+        {
+          "defaultValue": "",
+          "description": "Optional folder or component-name prefix.",
+          "name": "componentPrefix"
+        }
+      ],
+      "version": "0.2.0"
+    },
+    {
+      "digest": "c2a6211ee52fa4657e94c8b259ad49c56b00d77ebd503e8efb47cb9841b93070",
+      "files": [
+        {
+          "bytes": 390,
+          "digest": "5fee8868733ef501ec53a3f7c0f6e65522b290a5df90c7c1d820b6b4a21d568b",
+          "path": "src/social-feed-page.css",
+          "role": "Page layout styles",
+          "source": "packages/registry/templates/social-feed-page/src/social-feed-page.css"
+        },
+        {
+          "bytes": 1357,
+          "digest": "40459f0d12d20ee215ada8538d51ded7e201fdb68cc3bebe7479c13b8ecc6d9c",
+          "path": "src/social-feed-page.tsx",
+          "role": "Feed page composition",
+          "source": "packages/registry/templates/social-feed-page/src/social-feed-page.tsx"
+        }
+      ],
+      "id": "template.social-feed-page",
+      "name": "Social feed page",
+      "target": "react-vite",
+      "variables": [
+        {
+          "defaultValue": "",
+          "description": "Optional folder or component-name prefix.",
+          "name": "componentPrefix"
+        }
+      ],
+      "version": "0.2.0"
+    },
+    {
+      "digest": "3a999d553c68c18615bf40b5cbe270876384da68acd101b1bf3bcae31841eade",
+      "files": [
+        {
+          "bytes": 1014,
+          "digest": "cbaec347c80761899685f782067f91897108a2a999e7bfb870265d08b7b125ca",
+          "path": "src/app.tsx",
+          "role": "Root application component",
+          "source": "packages/registry/templates/vite-app-shell/src/app.tsx"
+        },
+        {
+          "bytes": 710,
+          "digest": "4a69540f474ead8a3d07c99eb0e7ee6e70771fa1b1d98a9d5e923c8212dae60c",
+          "path": "src/main.tsx",
+          "role": "Browser entry",
+          "source": "packages/registry/templates/vite-app-shell/src/main.tsx"
+        },
+        {
+          "bytes": 214,
+          "digest": "c14019af9f5e594d15c091982e0507d1e96d18b21f290f1ee742e9b72d0e9786",
+          "path": "src/styles.css",
+          "role": "Application-level styles",
+          "source": "packages/registry/templates/vite-app-shell/src/styles.css"
+        }
+      ],
+      "id": "template.vite-app-shell",
+      "name": "Vite app shell",
+      "target": "react-vite",
+      "variables": [
+        {
+          "defaultValue": "",
+          "description": "Optional folder or component-name prefix.",
+          "name": "componentPrefix"
+        }
+      ],
+      "version": "0.2.0"
+    }
+  ]
+}

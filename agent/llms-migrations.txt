@@ -1,0 +1,9 @@
+# Commonspace UI migrations
+
+## Commonspace UI 0.1 to 0.2
+
+Introduces the AI-native knowledge, CLI, MCP, Registry, and generated-document layer without changing existing visual package APIs.
+
+- **Manual:** `Hand-written DESIGN.md` → `Generated DESIGN.md`. Edit component and pattern metadata, then regenerate agent artifacts.
+- **Manual:** `Unstructured component discovery` → `commonspace search and MCP resources`. Run project detection before generating interfaces.
+- **Manual:** `Visual package source imports` → `Published package entrypoints`. Continue importing only documented @commonspace/* entrypoints.

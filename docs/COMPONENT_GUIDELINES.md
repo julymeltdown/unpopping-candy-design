@@ -1,128 +1,312 @@
 # Component guidelines
 
-## Decide the package first
+## Definition of a public component
 
-A component belongs in `@commonspace/ui` when its meaning is product-independent. It belongs in `@commonspace/social` when it expresses a social/content concept but remains network-independent.
+A public component has one reusable responsibility, a declared package export, a typed API, documented states, accessible behavior, component-adjacent knowledge metadata, and an executable Storybook contract.
 
-Do not place application features in either package.
+A component is not complete because its JSX renders.
+
+## Required file set
+
+A typical component includes:
 
 ```text
-Button                 → ui
-Dialog                 → ui
-PostCard               → social
-NotificationItem       → social
-useLikePost mutation   → application, not this repository
+packages/ui/src/button/
+├─ button.tsx
+├─ button.css
+└─ button.docs.ts
+
+apps/docs/stories/catalog/ui-button.stories.tsx
+packages/ui/test/<relevant-pure-logic>.test.ts
 ```
 
-## Public API requirements
+The exact file split can differ, but the public responsibilities may not be omitted.
 
-A public component must:
+## Responsibility boundary
 
-- have one clear responsibility;
-- use explicit props for controlled state;
-- provide a documented uncontrolled mode when appropriate;
-- preserve native element props where practical;
-- forward the primary element ref when useful;
-- accept `className` and documented style overrides where safe;
-- expose stable `data-cs-component`, state, size, tone, and variant attributes;
-- use semantic tokens;
-- avoid network and application state;
-- have package-level exports rather than internal-path imports.
+Create a component when at least one is true:
 
-## Controlled state
+- it owns independent interaction behavior;
+- it has a distinct accessibility contract;
+- it is reused across surfaces;
+- it has states requiring independent stories;
+- it changes for reasons different from its parent;
+- it defines a stable composition or extension boundary.
 
-Use controlled/uncontrolled state for stateful primitives:
+Do not create a public component solely to wrap one `<div>` with no semantic contract.
+
+## Package placement
+
+### `@commonspace/ui`
+
+Use for product-independent primitives and styled controls.
+
+It must not know about:
+
+```text
+Post
+User
+Notification
+Conversation
+routing
+server cache
+JWT
+API URLs
+```
+
+### `@commonspace/social`
+
+Use for social and content presentation models. It may understand a social `Post` view model, but not the backend DTO, Query cache, or route.
+
+### `@commonspace/icons`
+
+Use semantic product names. Components should not import Ant Design icon implementation names directly when a semantic wrapper exists.
+
+## Public API design
+
+### Preserve native behavior
+
+Where applicable, extend native element props and forward refs.
+
+```ts
+export interface ButtonProps
+  extends React.ButtonHTMLAttributes<HTMLButtonElement> {
+  variant?: ButtonVariant;
+  size?: ButtonSize;
+  pending?: boolean;
+  pendingLabel?: string;
+}
+```
+
+### Controlled and uncontrolled state
+
+Support both only when the uncontrolled behavior is stable and unambiguous. Document ownership explicitly.
 
 ```tsx
-<Dialog open={open} onOpenChange={setOpen} />
-<Dialog defaultOpen />
+<Tabs value={tab} onValueChange={setTab} />
+<Tabs defaultValue="posts" />
 ```
 
-A component must not silently switch between controlled and uncontrolled modes.
+### Composition
 
-## Callbacks
-
-Callbacks describe user intent, not transport details.
+Prefer composition over a large matrix of Boolean props.
 
 ```tsx
-<PostCard onLike={() => onLike(post.id)} />
+<Dialog.Root open={open} onOpenChange={setOpen}>
+  <Dialog.Trigger asChild>
+    <Button>Edit profile</Button>
+  </Dialog.Trigger>
+  <Dialog.Content>
+    <Dialog.Header>
+      <Dialog.Title>Edit profile</Dialog.Title>
+    </Dialog.Header>
+    <Dialog.Body>{form}</Dialog.Body>
+    <Dialog.Footer>{actions}</Dialog.Footer>
+  </Dialog.Content>
+</Dialog.Root>
 ```
 
-Do not expose props such as `likeEndpoint`, `accessToken`, or `queryClient`.
+A focused convenience component may wrap a frequent composition, but the semantic behavior must remain clear.
 
-## Presentation models
+### Public imports
 
-Social models should be:
+Expose root and justified subpath imports through `package.json` exports.
 
-- serializable;
-- stable for rendering;
-- free of methods and framework instances;
-- independent from API naming accidents;
-- explicit about viewer-specific state;
-- explicit about absent/optional data.
+```tsx
+import { Button } from '@commonspace/ui';
+import { Button } from '@commonspace/ui/button';
+```
 
-## Accessibility
+Never document source or `dist` internals.
 
-Before adding a component, define:
+## Styling contract
 
-- semantic element or ARIA role;
-- accessible name source;
+### Tokens
+
+Use semantic and component tokens.
+
+```css
+.cs-button {
+  min-block-size: var(--cs-button-height-md);
+  color: var(--cs-ink);
+  background: var(--cs-surface);
+  border: 1px solid var(--cs-border);
+}
+```
+
+Do not introduce a new token when an existing semantic token expresses the same intent.
+
+### Namespace
+
+```text
+classes            .cs-*
+state helpers      .is-*
+custom properties  --cs-*
+```
+
+### State attributes
+
+Expose stable state hooks where useful.
+
+```html
+<button
+  data-cs-component="button"
+  data-cs-size="md"
+  data-cs-variant="primary"
+  data-cs-state="pending"
+>
+```
+
+Class names and undocumented descendants are not public styling APIs.
+
+## Accessibility contract
+
+Define before implementation:
+
+- native role or element;
+- accessible name;
 - keyboard interaction;
-- focus entry and restoration;
-- disabled and pending behavior;
-- live-region behavior;
-- screen-reader treatment for icons/media;
-- mobile target size;
-- reduced-motion behavior.
+- focus entry, movement, restoration, and escape;
+- disabled and pending semantics;
+- announcement behavior;
+- color-independent state indication;
+- reduced-motion behavior;
+- reflow and touch-target behavior.
 
-## States to document
+Use native HTML first. For complex composites, the public Commonspace API may wrap an internal accessible primitive library, but consumers must not depend on that internal library.
 
-At minimum:
+## Component-adjacent knowledge metadata
+
+Every public component requires a `*.docs.ts` entry containing:
 
 ```text
-default
-hover
-focus-visible
-active/selected
-disabled
-pending/loading
-error/invalid
-empty
-long content
-mobile
-compact density
-dark theme
-high contrast
-reduced motion
+stable ID
+name
+package and version
+status
+summary
+keywords
+when to use
+when to avoid
+public entrypoints
+variants
+states
+tokens
+composition
+accessibility
+preferred and discouraged examples
+related entries
+Story IDs
+optional Figma mapping metadata
 ```
 
-## Styling
+Public props are compiler-derived from TypeScript source. Do not maintain a separate hand-written prop table unless a description or default cannot be inferred; contribute that information through the supported metadata schema rather than a duplicate list.
 
-- use `.cs-*` for components and parts;
-- use `.is-*` only for exposed state selectors;
-- use `--cs-*` for custom properties;
-- prefer tokens over literal values;
-- prefer spacing and boundaries over ornamental shadows;
-- do not use generated or arbitrary class names as the public API;
-- do not use global element selectors except inside a component scope.
+Example:
 
-## Tests
+```ts
+export default defineComponentDoc({
+  id: 'ui.button',
+  name: 'Button',
+  kind: 'component',
+  package: '@commonspace/ui',
+  version: '0.1.0',
+  status: 'stable',
+  summary: 'Triggers an immediate user action.',
+  useWhen: ['The user can perform a clear immediate action.'],
+  avoidWhen: ['Navigation is the actual behavior; use a link.'],
+  entrypoints: ['@commonspace/ui', '@commonspace/ui/button'],
+  states: ['default', 'hover', 'focus', 'disabled', 'pending'],
+  tokens: ['--cs-button-height-md', '--cs-accent', '--cs-focus-ring'],
+  accessibility: {
+    requirements: [
+      'Use a visible label unless IconButton is intended.',
+      'Pending state preserves an accessible action name.',
+    ],
+  },
+  examples: {
+    preferred: [{
+      title: 'Submit a form',
+      code: '<Button type="submit" pending={saving}>Save profile</Button>',
+    }],
+    avoid: [],
+  },
+  stories: ['catalog-ui-button--contract'],
+});
+```
 
-Non-DOM state logic should be extracted into pure functions and tested with Node's test runner. DOM behavior belongs in Storybook interaction/browser tests.
+## Storybook contract
 
-Architecture verification should reject an invalid implementation rather than relying solely on review comments.
+Every public component must have a dedicated catalog story. Metadata and source must agree on a stable Story ID.
 
-## Exports
+Cover all declared states, variants, and key content stress cases. Include interaction tests when behavior exists and accessibility checks in browser mode.
 
-Every public subpath has a source entry and `dist` export. Root barrels use explicit exports; wildcard exports are avoided to keep the public surface reviewable.
+`npm run stories:check` verifies the static contract; it does not replace Storybook browser tests.
 
-## Review questions
+## Figma contract
 
-1. Is the component truly reusable across at least two product contexts?
-2. Is it in the correct package?
-3. Does it own only presentation state?
-4. Can it render from fixtures without an app provider?
-5. Does it preserve native semantics?
-6. Are all visible states represented by tokens and attributes?
-7. Does the consumer fixture still build?
-8. Is a Changeset required?
+The knowledge compiler creates a Code Connect template for each component. The template must use the public import and a preferred valid example.
+
+Do not insert guessed Figma URLs. Keep the mapping as a placeholder until the real Figma component exists, then follow [Figma integration](./FIGMA.md).
+
+## Evaluation impact
+
+Public component changes can alter agent-output validation. Review:
+
+- props extracted by the catalog compiler;
+- expected component IDs in eval scenarios;
+- Registry templates using the component;
+- Story IDs;
+- generated docs and Figma templates.
+
+Do not introduce a second static prop table in `@commonspace/evals` or another AI package.
+
+## Testing
+
+### Pure tests
+
+Use for token logic, state reducers, formatter behavior, sanitization, registry actions, metadata validation, and other non-DOM behavior.
+
+### Component stories and interaction tests
+
+Use for visible variants, keyboard interaction, focus, and accessibility.
+
+### Consumer fixture
+
+Use to prove built package exports and declarations work without source aliases.
+
+### Architecture tests
+
+Add a regression fixture when changing a verifier. A verifier is not trusted solely because it passes the current repository.
+
+## Release impact
+
+Add a Changeset for public changes.
+
+```text
+patch
+→ compatible defect fix or documentation correction with shipped-package effect
+
+minor
+→ compatible component, prop, token, pattern, template, or tooling addition
+
+major
+→ removed/renamed export, required prop, token removal, incompatible behavior, accessibility contract change
+```
+
+## Completion checklist
+
+- [ ] responsibility and package boundary are clear;
+- [ ] typed public API and ref/native behavior are correct;
+- [ ] CSS uses Commonspace tokens and namespaces;
+- [ ] accessible semantics and keyboard behavior are defined;
+- [ ] adjacent metadata exists;
+- [ ] Storybook contract exists;
+- [ ] pure and interaction tests exist where applicable;
+- [ ] generated agent artifacts are current;
+- [ ] Figma template is current;
+- [ ] Registry templates and eval scenarios are reviewed;
+- [ ] Changeset is added;
+- [ ] `npm run test:pure` passes;
+- [ ] `npm run verify` passes;
+- [ ] dependency-aware typecheck/build passes before release.

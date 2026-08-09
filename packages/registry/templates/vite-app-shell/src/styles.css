@@ -1,0 +1,3 @@
+body { margin: 0; background: var(--cs-canvas); color: var(--cs-ink); }
+main { padding-block: var(--cs-space-10); }
+.cs-app-shell__eyebrow { color: var(--cs-ink-muted); font: 500 0.75rem/1.4 var(--cs-font-mono); }
