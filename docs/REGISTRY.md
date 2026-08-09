@@ -1,8 +1,8 @@
-# Commonspace Registry
+# Unpopping Candy Registry
 
 ## Purpose
 
-`@commonspace/registry` distributes complete, reviewable interface compositions without turning private package internals into public APIs.
+`@unpopping-candy/registry` distributes complete, reviewable interface compositions without turning private package internals into public APIs.
 
 Registry items are templates, not opaque compiled generators. Every file is represented in a deterministic manifest with role, source, byte length, and SHA-256 digest.
 
@@ -40,7 +40,7 @@ Each template contains:
 Every scaffold begins as a plan.
 
 ```bash
-npm run commonspace -- scaffold template.social-feed-page \
+npm run popcandy -- scaffold template.social-feed-page \
   --path ../consumer \
   --target src/feed \
   --json
@@ -57,7 +57,7 @@ conflict
 ## Apply
 
 ```bash
-npm run commonspace -- scaffold template.social-feed-page \
+npm run popcandy -- scaffold template.social-feed-page \
   --path ../consumer \
   --target src/feed \
   --apply \
@@ -87,7 +87,7 @@ It does not download arbitrary Registry code or execute template scripts.
 1. Define a `TemplateDoc` in the canonical knowledge source.
 2. Put source files under `packages/registry/templates/<template>/`.
 3. Declare each destination path, role, and source.
-4. Use only public Commonspace imports.
+4. Use only public Unpopping Candy imports.
 5. Include complete loading, empty, error, disabled, and pending states where applicable.
 6. Add Registry tests for dry-run, apply, conflict, and idempotency.
 7. Run:
@@ -95,7 +95,7 @@ It does not download arbitrary Registry code or execute template scripts.
 ```bash
 npm run registry:generate
 npm run registry:check
-npm run commonspace -- scaffold <id> --path <fixture> --json
+npm run popcandy -- scaffold <id> --path <fixture> --json
 ```
 
 8. Add a Changeset when the template is part of a released package.

@@ -1,8 +1,8 @@
 {
-  "name": "@commonspace/tokens",
+  "name": "@unpopping-candy/tokens",
   "version": "0.1.0",
-  "description": "Reference, semantic, and component design tokens for Commonspace UI.",
-  "license": "UNLICENSED",
+  "description": "Reference, semantic, and component design tokens for Unpopping Candy.",
+  "license": "MIT",
   "type": "module",
   "files": ["dist", "README.md"],
   "sideEffects": ["./dist/styles.css"],

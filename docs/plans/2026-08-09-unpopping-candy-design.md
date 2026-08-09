@@ -1,8 +1,8 @@
-# Commonspace UI Extraction Plan
+# Unpopping Candy Extraction Plan
 
 ## Goal
 
-Turn the reusable visual layer of the existing Commonspace social application into a publishable, API-agnostic React component library.
+Turn the reusable visual layer of the existing Unpopping Candy social application into a publishable, API-agnostic React component library.
 
 ## Work packages
 

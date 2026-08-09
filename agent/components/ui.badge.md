@@ -1,17 +1,17 @@
 # Badge
 
-> `ui.badge` · `@commonspace/ui` · stable · version 0.1.0
+> `ui.badge` · `@unpopping-candy/ui` · stable · version 0.1.0
 
 Displays a compact status or categorical label without becoming the primary action.
 
 ## Import
 
 ```tsx
-import { Badge } from '@commonspace/ui';
+import { Badge } from '@unpopping-candy/ui';
 ```
 
 ```tsx
-import { Badge } from '@commonspace/ui/badge';
+import { Badge } from '@unpopping-candy/ui/badge';
 ```
 
 ## Use when
@@ -43,9 +43,9 @@ import { Badge } from '@commonspace/ui/badge';
 
 ## Tokens
 
-- `--cs-surface-muted`
-- `--cs-border`
-- `--cs-ink-muted`
+- `--popcandy-surface-muted`
+- `--popcandy-border`
+- `--popcandy-ink-muted`
 
 ## Props
 

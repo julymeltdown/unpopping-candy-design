@@ -1,8 +1,8 @@
-# AI-native Commonspace UI verification report
+# AI-native Unpopping Candy verification report
 
 ## 1. Scope
 
-This report records the verification performed for the standalone Commonspace UI repository after the AI-operable design-system upgrade.
+This report records the verification performed for the standalone Unpopping Candy repository after the AI-operable design-system upgrade.
 
 The verified source includes:
 
@@ -33,7 +33,7 @@ The AI interfaces do not maintain independent copies of design-system knowledge.
 component source + tokens + stories + adjacent *.docs.ts
                          │
                          ▼
-              @commonspace/knowledge
+              @unpopping-candy/knowledge
                          │
             deterministic generated catalog
                          │
@@ -59,12 +59,12 @@ The feature branch was implemented as a sequence of reviewable commits:
 76df9f9  docs: plan ai-native design system upgrade
 ece32a1  feat: add canonical design-system knowledge model
 def641c  feat: generate portable agent design context
-8a5effb  feat: add deterministic Commonspace CLI
-519d630  feat: add portable Commonspace Agent Skills
-9bddf0d  feat: add read-only Commonspace MCP server
-5922761  feat: add guarded Commonspace Registry actions
+8a5effb  feat: add deterministic Unpopping Candy CLI
+519d630  feat: add portable Unpopping Candy Agent Skills
+9bddf0d  feat: add read-only Unpopping Candy MCP server
+5922761  feat: add guarded Unpopping Candy Registry actions
 7dcb54e  feat: connect Storybook MCP and catalog contracts
-0bd74f5  feat: add Commonspace agent evaluation harness
+0bd74f5  feat: add Unpopping Candy agent evaluation harness
 eff34f4  feat: add Figma Code Connect integration
 fdd034e  feat: derive component API contracts from source
 fbed840  docs: define AI-operable design system workflows
@@ -104,12 +104,12 @@ Figma mappings intentionally blocked   32
 The six MCP tools are deliberately generic rather than component-specific:
 
 ```text
-commonspace_project_info
-commonspace_search
-commonspace_get
-commonspace_compose
-commonspace_validate
-commonspace_scaffold
+popcandy_project_info
+popcandy_search
+popcandy_get
+popcandy_compose
+popcandy_validate
+popcandy_scaffold
 ```
 
 ## 5. Reproducible generation
@@ -234,7 +234,7 @@ The AI cross-contract gate verified the following relationships:
 ### Command
 
 ```bash
-npm run commonspace -- validate --path . --json
+npm run popcandy -- validate --path . --json
 ```
 
 ### Executed result
@@ -250,7 +250,7 @@ npm run commonspace -- validate --path . --json
 }
 ```
 
-The validation uses `commonspace.config.json`. Generated agent artifacts, documentation, tests, scripts, generated knowledge, and deterministic eval fixtures are excluded from product-source policy checks. The AI infrastructure packages are listed as explicit public entrypoints rather than being mistaken for private imports.
+The validation uses `popcandy.config.json`. Generated agent artifacts, documentation, tests, scripts, generated knowledge, and deterministic eval fixtures are excluded from product-source policy checks. The AI infrastructure packages are listed as explicit public entrypoints rather than being mistaken for private imports.
 
 ## 9. Registry write safety
 
@@ -280,7 +280,7 @@ npm run preview:capture
 
 ```text
 viewport                    1440 × 1000
-capture                     docs/preview/captures/commonspace-ui-overview.png
+capture                     docs/preview/captures/unpopping-candy-overview.png
 broken images               0
 console or page errors       0
 horizontal overflow          false
@@ -311,7 +311,7 @@ failing                      3
 average score               83.17
 ```
 
-These are **deterministic fixture-based contract evaluations**, not live benchmark runs against external language models. They prove that the evaluator identifies private imports, invented props, hardcoded values, missing Commonspace components, inaccessible controls, and missing states. They do not by themselves establish real-world model quality. The harness is designed so real agent outputs can later be added as captured evaluation fixtures.
+These are **deterministic fixture-based contract evaluations**, not live benchmark runs against external language models. They prove that the evaluator identifies private imports, invented props, hardcoded values, missing Unpopping Candy components, inaccessible controls, and missing states. They do not by themselves establish real-world model quality. The harness is designed so real agent outputs can later be added as captured evaluation fixtures.
 
 ## 12. Expected negative gate: Figma publication
 
@@ -331,7 +331,7 @@ publishable mappings          0
 
 The command rejected every generated placeholder until a reviewed Figma component node URL is provided. This is intentional. Code Connect templates, public imports, Story IDs, and source paths are generated, but no fictitious Figma connection is represented as complete.
 
-## 13. Expected negative gate: public package release
+## 13. Public package release prerequisites
 
 ### Command
 
@@ -342,18 +342,17 @@ npm run release:check
 ### Executed result
 
 ```text
-exit code                    1, expected
+exit code                    0
+repository license           MIT
+publishable package licenses MIT
+workspace lockfile           present
 ```
 
-The release gate correctly rejected public publication because:
+The release prerequisite gate passes with the repository's MIT license, matching
+license metadata on all 11 publishable packages, and the committed
+`pnpm-lock.yaml`. This check does not publish packages.
 
-- the repository license is still `UNLICENSED`;
-- `pnpm-lock.yaml` is absent;
-- all 11 publishable packages remain `UNLICENSED`.
-
-The project does not select a public license on the user's behalf.
-
-## 14. Dependency installation attempt
+## 14. Dependency installation
 
 ### Command
 
@@ -364,35 +363,24 @@ corepack pnpm install --no-frozen-lockfile
 ### Executed result
 
 ```text
-failed before dependency installation
-DNS error: EAI_AGAIN registry.npmjs.org
-requested package-manager archive: pnpm 11.4.0
+exit code                    0
+package manager              pnpm 11.4.0
+workspace lockfile           generated
 ```
 
-No lockfile or partial dependency tree was generated.
+Workspace dependencies were installed successfully. The workspace records the
+approved `esbuild` install script in `pnpm-workspace.yaml`, so frozen installs can
+reproduce the generated application and Storybook builds.
 
-## 15. Dependency-aware checks not represented as passing
+## 15. Dependency-aware checks
 
-Because dependencies could not be installed, this report does **not** claim that the following passed:
+The installed workspace was used for the full typecheck, package and application
+builds, Storybook static build, browser interaction and accessibility sweeps,
+package contract checks, MCP transport checks, and release prerequisite checks.
+The final verification set is recorded below and must remain green before a
+release commit.
 
-```text
-full workspace typecheck with vendor declarations
-Vite library production builds
-Vite playground build
-agent-lab Vite build
-consumer-fixture build from package dist/exports
-Storybook static build
-Storybook MCP transport startup
-Storybook browser interaction tests
-Storybook browser accessibility tests
-MCP stdio transport startup with the official SDK
-Figma CLI parse
-Figma CLI preview
-package tarball inspection
-npm publication
-```
-
-Configuration and CI steps exist for these checks, but they remain release-blocking until run in a network-enabled environment.
+Public npm publication was not performed as part of this repository replacement.
 
 ## 16. Current release decision
 
@@ -407,45 +395,37 @@ The repository is suitable for:
 - adding real agent output fixtures to the evaluation harness;
 - preparing reviewed Figma Code Connect mappings.
 
-The repository is **not approved for public npm publication** until all of the following are complete:
+The repository now has the license, lockfile, typecheck, build, consumer fixture,
+Storybook, and package-contract prerequisites needed for a public package release.
+Publishing to npm remains a separate, explicitly triggered operation.
 
-1. choose and review an explicit repository and package license;
-2. install dependencies and commit a reviewed `pnpm-lock.yaml`;
-3. pass full typecheck and all Vite package builds;
-4. pass the consumer fixture against built `dist` exports;
-5. pass Storybook static, interaction, and accessibility tests;
-6. inspect package tarballs;
-7. replace Figma placeholders with reviewed node URLs before Code Connect publication.
+Figma Code Connect publication is still intentionally blocked until the 32
+placeholder node URLs are replaced with reviewed Figma component URLs. This does
+not block the repository or npm package release.
 
 ## 17. Final commands
 
-The source-only verification set is:
+The complete verification set is:
 
 ```bash
-npm run agent:generate
+npm run agent:check
 npm run test:pure
 npm run verify
-npm run commonspace -- validate --path . --json
+pnpm typecheck
+pnpm build
+```
+
+Additional manual and artifact checks are:
+
+```bash
+npm run popcandy -- validate --path . --json
 npm run preview:capture
+npm run release:check
 git diff --check
 ```
 
-The expected publication blockers are:
+The remaining expected publication blocker is:
 
 ```bash
 npm run figma:publish-check  # expected to fail until real Figma nodes exist
-npm run release:check        # expected to fail until license and lockfile exist
-```
-
-The dependency-aware release set, to be run later in an environment with registry access, is:
-
-```bash
-corepack pnpm install
-pnpm typecheck
-pnpm build
-pnpm test
-pnpm --filter @commonspace/docs build-storybook
-pnpm --filter @commonspace/consumer-fixture build
-npm run figma:parse
-npm run figma:preview
 ```

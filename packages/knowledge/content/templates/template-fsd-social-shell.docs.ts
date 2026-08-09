@@ -5,8 +5,8 @@ export default {
   "name": "Strict FSD social shell",
   "version": "0.2.0",
   "status": "stable",
-  "summary": "A React and Vite application shell that keeps Commonspace presentation packages below FSD application slices.",
-  "description": "A React and Vite application shell that keeps Commonspace presentation packages below FSD application slices.",
+  "summary": "A React and Vite application shell that keeps Unpopping Candy presentation packages below FSD application slices.",
+  "description": "A React and Vite application shell that keeps Unpopping Candy presentation packages below FSD application slices.",
   "keywords": [
     "strict",
     "fsd",
@@ -15,7 +15,7 @@ export default {
     "template"
   ],
   "useWhen": [
-    "A React and Vite application shell that keeps Commonspace presentation packages below FSD application slices."
+    "A React and Vite application shell that keeps Unpopping Candy presentation packages below FSD application slices."
   ],
   "avoidWhen": [
     "The target project uses a different framework or the requested surface is substantially smaller."
@@ -31,9 +31,9 @@ export default {
   ],
   "files": [
     {
-      "path": "src/app/providers/commonspace-provider.tsx",
+      "path": "src/app/providers/unpopping-candy-provider.tsx",
       "role": "Application provider composition",
-      "source": "packages/registry/templates/fsd-social-shell/src/app/providers/commonspace-provider.tsx"
+      "source": "packages/registry/templates/fsd-social-shell/src/app/providers/unpopping-candy-provider.tsx"
     },
     {
       "path": "src/pages/home/ui/home-page.tsx",

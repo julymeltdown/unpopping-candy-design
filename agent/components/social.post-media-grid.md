@@ -1,17 +1,17 @@
 # PostMediaGrid
 
-> `social.post-media-grid` · `@commonspace/social` · stable · version 0.1.0
+> `social.post-media-grid` · `@unpopping-candy/social` · stable · version 0.1.0
 
 Arranges one to four social media assets with stable aspect ratios and selection callbacks.
 
 ## Import
 
 ```tsx
-import { PostMediaGrid } from '@commonspace/social';
+import { PostMediaGrid } from '@unpopping-candy/social';
 ```
 
 ```tsx
-import { PostMediaGrid } from '@commonspace/social/post';
+import { PostMediaGrid } from '@unpopping-candy/social/post';
 ```
 
 ## Use when
@@ -44,8 +44,8 @@ import { PostMediaGrid } from '@commonspace/social/post';
 
 ## Tokens
 
-- `--cs-border`
-- `--cs-radius-md`
+- `--popcandy-border`
+- `--popcandy-radius-md`
 
 ## Props
 

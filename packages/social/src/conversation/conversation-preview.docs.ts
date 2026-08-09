@@ -3,15 +3,15 @@ export default {
   "kind": "component",
   "id": "social.conversation-preview",
   "name": "ConversationPreview",
-  "package": "@commonspace/social",
+  "package": "@unpopping-candy/social",
   "version": "0.1.0",
   "status": "stable",
   "category": "messaging",
   "summary": "Presents a conversation summary with participants, latest message, time, and unread state.",
   "sourcePath": "packages/social/src/conversation/conversation-preview.tsx",
   "entrypoints": [
-    "@commonspace/social",
-    "@commonspace/social/conversation"
+    "@unpopping-candy/social",
+    "@unpopping-candy/social/conversation"
   ],
   "keywords": [
     "conversation",
@@ -26,10 +26,10 @@ export default {
     "A message bubble or full thread is required."
   ],
   "tokens": [
-    "--cs-surface",
-    "--cs-border",
-    "--cs-ink-muted",
-    "--cs-accent"
+    "--popcandy-surface",
+    "--popcandy-border",
+    "--popcandy-ink-muted",
+    "--popcandy-accent"
   ],
   "related": [
     "social.user-cell",

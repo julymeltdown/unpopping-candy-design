@@ -5,5 +5,5 @@ export interface ContainerProps extends HTMLAttributes<HTMLDivElement> {
   size?: 'sm' | 'md' | 'lg' | 'full' | undefined;
 }
 export function Container({ className, size = 'lg', ...props }: ContainerProps) {
-  return <div {...props} className={mergeClassNames('cs-container', `cs-container--${size}`, className)} data-cs-size={size} />;
+  return <div {...props} className={mergeClassNames('popcandy-container', `popcandy-container--${size}`, className)} data-popcandy-size={size} />;
 }

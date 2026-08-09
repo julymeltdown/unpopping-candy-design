@@ -1,12 +1,12 @@
-# Commonspace AI-Native Design System Implementation Plan
+# Unpopping Candy AI-Native Design System Implementation Plan
 
-**Goal:** Upgrade Commonspace UI into an AI-operable design system with one canonical knowledge source, generated agent documents, deterministic CLI, Agent Skills, MCP, Registry, Storybook integration, agent evaluations, and Figma Code Connect scaffolding.
+**Goal:** Upgrade Unpopping Candy into an AI-operable design system with one canonical knowledge source, generated agent documents, deterministic CLI, Agent Skills, MCP, Registry, Storybook integration, agent evaluations, and Figma Code Connect scaffolding.
 
 **Architecture:** Component, pattern, template, token, story, and migration metadata are validated once and compiled into versioned manifests. CLI, MCP, Skills, Registry, Storybook, Figma, and portable documents consume those artifacts; none maintains a separate component truth.
 
 **Constraints:**
 
-- Preserve existing `@commonspace/*` visual package APIs.
+- Preserve existing `@unpopping-candy/*` visual package APIs.
 - Keep visual packages free of filesystem, CLI, MCP, agent, registry, and Node-only dependencies.
 - Generated output must be deterministic and fail CI when stale.
 - MCP mutation requires project-root confinement, dry-run output, an explicit apply flag, and allowlisted registry entries.
@@ -34,6 +34,6 @@
 - CLI and MCP return structured, bounded, version-aware results.
 - Skills invoke project detection and component search before code generation.
 - Registry writes cannot escape the selected project root.
-- Agent evaluation detects invalid imports, hallucinated props, hardcoded visual values, missing states, and low Commonspace reuse.
+- Agent evaluation detects invalid imports, hallucinated props, hardcoded visual values, missing states, and low Unpopping Candy reuse.
 - All generated files reproduce byte-for-byte.
 - Existing package tests and architecture checks remain green.

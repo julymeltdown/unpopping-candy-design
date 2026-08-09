@@ -5,19 +5,19 @@
   "fixed": [],
   "linked": [
     [
-      "@commonspace/tokens",
-      "@commonspace/theme",
-      "@commonspace/icons",
-      "@commonspace/ui",
-      "@commonspace/social"
+      "@unpopping-candy/tokens",
+      "@unpopping-candy/theme",
+      "@unpopping-candy/icons",
+      "@unpopping-candy/ui",
+      "@unpopping-candy/social"
     ]
   ],
   "access": "public",
   "baseBranch": "master",
   "updateInternalDependencies": "patch",
   "ignore": [
-    "@commonspace/agent-lab",
-    "@commonspace/docs",
-    "@commonspace/playground"
+    "@unpopping-candy/agent-lab",
+    "@unpopping-candy/docs",
+    "@unpopping-candy/playground"
   ]
 }

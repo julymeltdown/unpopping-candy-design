@@ -2,7 +2,7 @@
 
 ## Ant Design Icons
 
-`@commonspace/icons` uses `@ant-design/icons` as its current visual source. Ant Design Icons is distributed under the MIT License.
+`@unpopping-candy/icons` uses `@ant-design/icons` as its current visual source. Ant Design Icons is distributed under the MIT License.
 
 Copyright (c) 2018-present Ant UED.
 

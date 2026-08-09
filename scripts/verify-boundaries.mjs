@@ -7,19 +7,19 @@ const root = repositoryRoot();
 const deterministicBans = [/\bfetch\s*\(/, /useQuery\b/, /useMutation\b/, /useSWR\b/, /zustand/, /react-router/, /Authorization\s*:/];
 const rules = {
   tokens: { allowed: new Set(), bannedText: [...deterministicBans, /createStore\b/] },
-  theme: { allowed: new Set(['react', '@commonspace/tokens']), bannedText: deterministicBans },
+  theme: { allowed: new Set(['react', '@unpopping-candy/tokens']), bannedText: deterministicBans },
   icons: { allowed: new Set(['react', '@ant-design/icons']), bannedText: deterministicBans },
-  ui: { allowed: new Set(['react', '@commonspace/icons', '@commonspace/tokens']), bannedText: [...deterministicBans, /api-contract/, /auth-contract/] },
-  social: { allowed: new Set(['react', '@commonspace/icons', '@commonspace/tokens', '@commonspace/ui']), bannedText: [...deterministicBans, /api-contract/, /auth-contract/] },
+  ui: { allowed: new Set(['react', '@unpopping-candy/icons', '@unpopping-candy/tokens']), bannedText: [...deterministicBans, /api-contract/, /auth-contract/] },
+  social: { allowed: new Set(['react', '@unpopping-candy/icons', '@unpopping-candy/tokens', '@unpopping-candy/ui']), bannedText: [...deterministicBans, /api-contract/, /auth-contract/] },
   knowledge: { allowed: new Set(), bannedText: deterministicBans },
-  registry: { allowed: new Set(['@commonspace/knowledge']), bannedText: deterministicBans },
-  cli: { allowed: new Set(['@commonspace/knowledge', '@commonspace/registry']), bannedText: deterministicBans },
+  registry: { allowed: new Set(['@unpopping-candy/knowledge']), bannedText: deterministicBans },
+  cli: { allowed: new Set(['@unpopping-candy/knowledge', '@unpopping-candy/registry']), bannedText: deterministicBans },
   mcp: {
-    allowed: new Set(['@commonspace/cli', '@commonspace/knowledge', '@commonspace/registry', '@commonspace/tokens', '@modelcontextprotocol/server', 'zod']),
+    allowed: new Set(['@unpopping-candy/cli', '@unpopping-candy/knowledge', '@unpopping-candy/registry', '@unpopping-candy/tokens', '@modelcontextprotocol/server', 'zod']),
     bannedText: [/useQuery\b/, /useMutation\b/, /useSWR\b/, /zustand/, /react-router/, /Authorization\s*:/],
   },
-  evals: { allowed: new Set(['@commonspace/knowledge']), bannedText: deterministicBans },
-  figma: { allowed: new Set(['@commonspace/knowledge']), bannedText: deterministicBans },
+  evals: { allowed: new Set(['@unpopping-candy/knowledge']), bannedText: deterministicBans },
+  figma: { allowed: new Set(['@unpopping-candy/knowledge']), bannedText: deterministicBans },
 };
 const errors = [];
 for (const [packageDirectory, rule] of Object.entries(rules)) {

@@ -3,15 +3,15 @@ export default {
   "kind": "component",
   "id": "social.user-cell",
   "name": "UserCell",
-  "package": "@commonspace/social",
+  "package": "@unpopping-candy/social",
   "version": "0.1.0",
   "status": "stable",
   "category": "identity",
   "summary": "Presents a compact person row with optional supporting text and injected action.",
   "sourcePath": "packages/social/src/user-cell/user-cell.tsx",
   "entrypoints": [
-    "@commonspace/social",
-    "@commonspace/social/user"
+    "@unpopping-candy/social",
+    "@unpopping-candy/social/user"
   ],
   "keywords": [
     "user",
@@ -27,9 +27,9 @@ export default {
     "A full profile context is needed; use ProfileHeader."
   ],
   "tokens": [
-    "--cs-ink",
-    "--cs-ink-muted",
-    "--cs-border"
+    "--popcandy-ink",
+    "--popcandy-ink-muted",
+    "--popcandy-border"
   ],
   "related": [
     "ui.avatar",

@@ -31,7 +31,7 @@ test('registry exposes all catalog templates with deterministic checksums', asyn
 });
 
 test('dry-run produces a complete plan without mutating the target project', async () => {
-  const root = await mkdtemp(join(tmpdir(), 'commonspace-registry-dry-'));
+  const root = await mkdtemp(join(tmpdir(), 'popcandy-registry-dry-'));
   const plan = await service().scaffold({ templateId: 'template.vite-app-shell', projectRoot: root, mode: 'dry-run' });
   assert.equal(plan.mode, 'dry-run');
   assert.equal(plan.summary.create, 3);
@@ -41,11 +41,11 @@ test('dry-run produces a complete plan without mutating the target project', asy
 });
 
 test('apply writes a template once and a second run is idempotent', async () => {
-  const root = await mkdtemp(join(tmpdir(), 'commonspace-registry-apply-'));
+  const root = await mkdtemp(join(tmpdir(), 'popcandy-registry-apply-'));
   const first = await service().scaffold({ templateId: 'template.vite-app-shell', projectRoot: root, mode: 'apply' });
   assert.equal(first.applied, true);
   assert.equal(first.summary.create, 3);
-  assert.match(await readFile(join(root, 'src/main.tsx'), 'utf8'), /CommonspaceProvider/);
+  assert.match(await readFile(join(root, 'src/main.tsx'), 'utf8'), /UnpoppingCandyProvider/);
 
   const second = await service().scaffold({ templateId: 'template.vite-app-shell', projectRoot: root, mode: 'apply' });
   assert.equal(second.summary.create, 0);
@@ -54,7 +54,7 @@ test('apply writes a template once and a second run is idempotent', async () => 
 });
 
 test('conflicting files block the entire apply before any other file is written', async () => {
-  const root = await mkdtemp(join(tmpdir(), 'commonspace-registry-conflict-'));
+  const root = await mkdtemp(join(tmpdir(), 'popcandy-registry-conflict-'));
   await mkdir(join(root, 'src'), { recursive: true });
   await writeFile(join(root, 'src/main.tsx'), 'consumer-owned\n');
   await assert.rejects(
@@ -66,8 +66,8 @@ test('conflicting files block the entire apply before any other file is written'
 });
 
 test('target paths cannot escape the project root through traversal, absolute paths, or symlinks', async () => {
-  const root = await mkdtemp(join(tmpdir(), 'commonspace-registry-root-'));
-  const outside = await mkdtemp(join(tmpdir(), 'commonspace-registry-outside-'));
+  const root = await mkdtemp(join(tmpdir(), 'popcandy-registry-root-'));
+  const outside = await mkdtemp(join(tmpdir(), 'popcandy-registry-outside-'));
   await assert.rejects(service().scaffold({ templateId: 'template.profile-settings', projectRoot: root, targetDirectory: '../outside', mode: 'dry-run' }), /project root/i);
   await assert.rejects(service().scaffold({ templateId: 'template.profile-settings', projectRoot: root, targetDirectory: outside, mode: 'dry-run' }), /relative/i);
   await symlink(outside, join(root, 'linked-outside'), 'dir');
@@ -88,7 +88,7 @@ test('malicious registry metadata is rejected before reading a source file', asy
 });
 
 test('template variables are strictly allow-listed and safely substituted', async () => {
-  const root = await mkdtemp(join(tmpdir(), 'commonspace-registry-variable-'));
+  const root = await mkdtemp(join(tmpdir(), 'popcandy-registry-variable-'));
   const result = await service().scaffold({
     templateId: 'template.profile-settings',
     projectRoot: root,

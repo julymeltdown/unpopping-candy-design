@@ -1,17 +1,17 @@
 # Separator
 
-> `ui.separator` · `@commonspace/ui` · stable · version 0.1.0
+> `ui.separator` · `@unpopping-candy/ui` · stable · version 0.1.0
 
 Separates adjacent regions when spacing alone cannot communicate the boundary.
 
 ## Import
 
 ```tsx
-import { Separator } from '@commonspace/ui';
+import { Separator } from '@unpopping-candy/ui';
 ```
 
 ```tsx
-import { Separator } from '@commonspace/ui/layout';
+import { Separator } from '@unpopping-candy/ui/layout';
 ```
 
 ## Use when
@@ -39,7 +39,7 @@ import { Separator } from '@commonspace/ui/layout';
 
 ## Tokens
 
-- `--cs-border`
+- `--popcandy-border`
 
 ## Props
 

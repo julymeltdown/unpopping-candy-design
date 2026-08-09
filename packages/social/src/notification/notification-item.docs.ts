@@ -3,15 +3,15 @@ export default {
   "kind": "component",
   "id": "social.notification-item",
   "name": "NotificationItem",
-  "package": "@commonspace/social",
+  "package": "@unpopping-candy/social",
   "version": "0.1.0",
   "status": "stable",
   "category": "notification",
   "summary": "Presents one social notification with actor context, event description, and optional target content.",
   "sourcePath": "packages/social/src/notification/notification-item.tsx",
   "entrypoints": [
-    "@commonspace/social",
-    "@commonspace/social/notification"
+    "@unpopping-candy/social",
+    "@unpopping-candy/social/notification"
   ],
   "keywords": [
     "notification",
@@ -26,9 +26,9 @@ export default {
     "A global application Toast is needed."
   ],
   "tokens": [
-    "--cs-surface",
-    "--cs-border",
-    "--cs-ink-muted"
+    "--popcandy-surface",
+    "--popcandy-border",
+    "--popcandy-ink-muted"
   ],
   "related": [
     "ui.toast",

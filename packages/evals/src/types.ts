@@ -34,9 +34,9 @@ export interface AgentEvaluationMetrics {
   hardcodedVisualValues: number;
   accessibilityIssues: number;
   stateCoverage: number;
-  commonspaceReuse: number;
+  popcandyReuse: number;
   componentRecall: number;
-  commonspaceComponentsUsed: number;
+  popcandyComponentsUsed: number;
   jsxComponentsUsed: number;
 }
 

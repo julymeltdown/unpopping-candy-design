@@ -1,4 +1,4 @@
-// url=https://www.figma.com/design/COMMONSPACE_LIBRARY/Commonspace-UI?node-id=0-1
+// url=https://www.figma.com/design/POPCANDY_LIBRARY/Unpopping-Candy?node-id=0-1
 // source=packages/social/src/conversation/conversation-preview.tsx
 // component=ConversationPreview
 import figma from 'figma'
@@ -7,7 +7,7 @@ export default {
   example: figma.code`
     <ConversationPreview conversation={conversation} onSelect={openConversation} />
   `,
-  imports: ['import { ConversationPreview } from "@commonspace/social/conversation"'],
+  imports: ['import { ConversationPreview } from "@unpopping-candy/social/conversation"'],
   id: 'social-conversation-preview',
   metadata: {
     nestable: true,

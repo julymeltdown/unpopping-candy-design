@@ -9,8 +9,8 @@ import {
 
 const placeholderConfig = {
   schemaVersion: 1 as const,
-  libraryName: 'Commonspace UI',
-  designFileUrl: 'https://www.figma.com/design/COMMONSPACE_LIBRARY/Commonspace-UI',
+  libraryName: 'Unpopping Candy',
+  designFileUrl: 'https://www.figma.com/design/POPCANDY_LIBRARY/Unpopping-Candy',
   mappings: {},
 };
 
@@ -30,9 +30,9 @@ test('generated template files use public imports and parserless Code Connect fo
   assert.ok(button);
   assert.match(button.content, /^\/\/ url=https:\/\/www\.figma\.com\/design\//);
   assert.match(button.content, /import figma from 'figma'/);
-  assert.match(button.content, /import \{ Button \} from "@commonspace\/ui\/button"/);
+  assert.match(button.content, /import \{ Button \} from "@unpopping-candy\/ui\/button"/);
   assert.match(button.content, /figma\.code`/);
-  assert.doesNotMatch(button.content, /@commonspace\/ui\/src\//);
+  assert.doesNotMatch(button.content, /@unpopping-candy\/ui\/src\//);
 });
 
 test('publish validation rejects placeholder nodes and accepts explicit Figma node URLs', () => {
@@ -42,7 +42,7 @@ test('publish validation rejects placeholder nodes and accepts explicit Figma no
   const ready = createFigmaManifest(bundledCatalog, {
     ...placeholderConfig,
     mappings: {
-      'ui.button': { nodeUrl: 'https://www.figma.com/design/abc123/Commonspace-UI?node-id=101-202' },
+      'ui.button': { nodeUrl: 'https://www.figma.com/design/abc123/Unpopping-Candy?node-id=101-202' },
     },
   });
   const button = ready.components.find((entry) => entry.componentId === 'ui.button');

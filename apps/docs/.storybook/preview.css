@@ -1,5 +1,8 @@
 html, body, #storybook-root { min-height: 100%; margin: 0; }
-body { background: var(--cs-canvas); color: var(--cs-ink); font-family: var(--cs-font-sans); }
-.cs-docs-canvas { min-height: 100vh; padding: 32px; background: var(--cs-canvas); color: var(--cs-ink); }
-.cs-docs-frame { width: min(680px, calc(100vw - 64px)); border: 1px solid var(--cs-border); background: var(--cs-surface); }
-.cs-docs-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(190px, 1fr)); gap: 16px; width: min(900px, calc(100vw - 64px)); }
+#storybook-root, .popcandy-docs-canvas { box-sizing: border-box; max-width: 100%; }
+body { background: var(--popcandy-canvas); color: var(--popcandy-ink); font-family: var(--popcandy-font-sans); }
+.popcandy-docs-canvas { min-height: 100vh; padding: 32px; background: var(--popcandy-canvas); color: var(--popcandy-ink); }
+.popcandy-docs-canvas .popcandy-skeleton { max-width: 100%; }
+.popcandy-docs-frame { width: min(680px, calc(100vw - 64px)); border: 1px solid var(--popcandy-border); background: var(--popcandy-surface); }
+.popcandy-docs-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(190px, 1fr)); gap: 16px; width: min(900px, calc(100vw - 64px)); }
+table.docblock-argstable { display: block; max-width: 100%; overflow-x: auto; }

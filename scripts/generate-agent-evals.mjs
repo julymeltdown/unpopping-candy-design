@@ -23,9 +23,9 @@ function markdown(suite) {
     String(scenario.metrics.hardcodedVisualValues),
     String(scenario.metrics.accessibilityIssues),
   ]);
-  return `# Commonspace agent evaluation baseline
+  return `# Unpopping Candy agent evaluation baseline
 
-This deterministic reference benchmark evaluates the same profile-settings task with progressively richer Commonspace context. It is a regression fixture, not a claim about every model or prompt.
+This deterministic reference benchmark evaluates the same profile-settings task with progressively richer Unpopping Candy context. It is a regression fixture, not a claim about every model or prompt.
 
 | Context mode | Score | Result | Component recall | State coverage | Invalid imports | Unknown props | Hardcoded values | A11y issues |
 |---|---:|---|---:|---:|---:|---:|---:|---:|
@@ -43,14 +43,14 @@ The no-context, DESIGN.md-only, and Skill-only fixtures intentionally preserve r
 
 ## Metrics
 
-- **Component recall:** expected Commonspace components actually used.
+- **Component recall:** expected Unpopping Candy components actually used.
 - **State coverage:** required loading, error, empty, disabled, and pending states represented in source.
-- **Invalid imports:** private paths or unknown Commonspace entrypoints.
+- **Invalid imports:** private paths or unknown Unpopping Candy entrypoints.
 - **Unknown props:** props not present in the installed component contract.
 - **Hardcoded visual values:** colors, spacing, radii, shadows, or gradients that bypass tokens.
 - **Accessibility issues:** unnamed controls and images without alt text.
 
-Generated from \`@commonspace/evals\` and the installed \`@commonspace/knowledge\` catalog.
+Generated from \`@unpopping-candy/evals\` and the installed \`@unpopping-candy/knowledge\` catalog.
 `;
 }
 

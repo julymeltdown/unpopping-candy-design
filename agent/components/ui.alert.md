@@ -1,17 +1,17 @@
 # Alert
 
-> `ui.alert` · `@commonspace/ui` · stable · version 0.1.0
+> `ui.alert` · `@unpopping-candy/ui` · stable · version 0.1.0
 
 Presents contextual feedback beside the task or content that produced it.
 
 ## Import
 
 ```tsx
-import { Alert } from '@commonspace/ui';
+import { Alert } from '@unpopping-candy/ui';
 ```
 
 ```tsx
-import { Alert } from '@commonspace/ui/alert';
+import { Alert } from '@unpopping-candy/ui/alert';
 ```
 
 ## Use when
@@ -46,11 +46,11 @@ import { Alert } from '@commonspace/ui/alert';
 
 ## Tokens
 
-- `--cs-surface`
-- `--cs-border`
-- `--cs-positive`
-- `--cs-warning`
-- `--cs-critical`
+- `--popcandy-surface`
+- `--popcandy-border`
+- `--popcandy-positive`
+- `--popcandy-warning`
+- `--popcandy-critical`
 
 ## Props
 

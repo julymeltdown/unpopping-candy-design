@@ -3,15 +3,15 @@ export default {
   "kind": "component",
   "id": "ui.alert",
   "name": "Alert",
-  "package": "@commonspace/ui",
+  "package": "@unpopping-candy/ui",
   "version": "0.1.0",
   "status": "stable",
   "category": "feedback",
   "summary": "Presents contextual feedback beside the task or content that produced it.",
   "sourcePath": "packages/ui/src/alert/alert.tsx",
   "entrypoints": [
-    "@commonspace/ui",
-    "@commonspace/ui/alert"
+    "@unpopping-candy/ui",
+    "@unpopping-candy/ui/alert"
   ],
   "keywords": [
     "feedback",
@@ -29,11 +29,11 @@ export default {
     "The entire route is unusable; use a route-level error surface."
   ],
   "tokens": [
-    "--cs-surface",
-    "--cs-border",
-    "--cs-positive",
-    "--cs-warning",
-    "--cs-critical"
+    "--popcandy-surface",
+    "--popcandy-border",
+    "--popcandy-positive",
+    "--popcandy-warning",
+    "--popcandy-critical"
   ],
   "related": [
     "ui.toast",

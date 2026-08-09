@@ -16,7 +16,7 @@ horizontal overflow  0
 The preview illustrates:
 
 - general UI and social composition;
-- actual Commonspace package CSS;
+- actual Unpopping Candy package CSS;
 - canonical component, pattern, template, and Story counts;
 - the detect → search/compose → implement/story → validate workflow;
 - the compressed MCP and dry-run Registry model.

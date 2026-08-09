@@ -1,5 +1,5 @@
 import { useState, type FormEvent } from 'react';
-import { Alert, Button, Inline, Stack, TextArea, TextField } from '@commonspace/ui';
+import { Alert, Button, Inline, Stack, TextArea, TextField } from '@unpopping-candy/ui';
 
 export const profileSettingsComponentName = '{{componentPrefix}}ProfileSettings';
 

@@ -3,15 +3,15 @@ export default {
   "kind": "component",
   "id": "ui.avatar",
   "name": "Avatar",
-  "package": "@commonspace/ui",
+  "package": "@unpopping-candy/ui",
   "version": "0.1.0",
   "status": "stable",
   "category": "identity",
   "summary": "Represents a person or organization with an image and deterministic fallback.",
   "sourcePath": "packages/ui/src/avatar/avatar.tsx",
   "entrypoints": [
-    "@commonspace/ui",
-    "@commonspace/ui/avatar"
+    "@unpopping-candy/ui",
+    "@unpopping-candy/ui/avatar"
   ],
   "keywords": [
     "avatar",
@@ -29,9 +29,9 @@ export default {
     "A product or content thumbnail is being displayed."
   ],
   "tokens": [
-    "--cs-surface-muted",
-    "--cs-border",
-    "--cs-ink"
+    "--popcandy-surface-muted",
+    "--popcandy-border",
+    "--popcandy-ink"
   ],
   "related": [
     "social.user-cell"

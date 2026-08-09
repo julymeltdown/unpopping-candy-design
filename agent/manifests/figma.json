@@ -3,9 +3,9 @@
     {
       "componentId": "social.conversation-preview",
       "componentName": "ConversationPreview",
-      "entrypoint": "@commonspace/social/conversation",
-      "nodeUrl": "https://www.figma.com/design/COMMONSPACE_LIBRARY/Commonspace-UI?node-id=0-1",
-      "package": "@commonspace/social",
+      "entrypoint": "@unpopping-candy/social/conversation",
+      "nodeUrl": "https://www.figma.com/design/POPCANDY_LIBRARY/Unpopping-Candy?node-id=0-1",
+      "package": "@unpopping-candy/social",
       "propertyMap": {
         "Selected": "selected",
         "Variant": "direct|group"
@@ -18,9 +18,9 @@
     {
       "componentId": "social.notification-item",
       "componentName": "NotificationItem",
-      "entrypoint": "@commonspace/social/notification",
-      "nodeUrl": "https://www.figma.com/design/COMMONSPACE_LIBRARY/Commonspace-UI?node-id=0-2",
-      "package": "@commonspace/social",
+      "entrypoint": "@unpopping-candy/social/notification",
+      "nodeUrl": "https://www.figma.com/design/POPCANDY_LIBRARY/Unpopping-Candy?node-id=0-2",
+      "package": "@unpopping-candy/social",
       "propertyMap": {
         "Selected": "selected",
         "Variant": "like|reply|repost|follow|system"
@@ -33,9 +33,9 @@
     {
       "componentId": "social.post-actions",
       "componentName": "PostActions",
-      "entrypoint": "@commonspace/social/post",
-      "nodeUrl": "https://www.figma.com/design/COMMONSPACE_LIBRARY/Commonspace-UI?node-id=0-3",
-      "package": "@commonspace/social",
+      "entrypoint": "@unpopping-candy/social/post",
+      "nodeUrl": "https://www.figma.com/design/POPCANDY_LIBRARY/Unpopping-Candy?node-id=0-3",
+      "package": "@unpopping-candy/social",
       "propertyMap": {
         "Pending": "pending",
         "Variant": "default|compact"
@@ -48,9 +48,9 @@
     {
       "componentId": "social.post-card",
       "componentName": "PostCard",
-      "entrypoint": "@commonspace/social/post",
-      "nodeUrl": "https://www.figma.com/design/COMMONSPACE_LIBRARY/Commonspace-UI?node-id=0-4",
-      "package": "@commonspace/social",
+      "entrypoint": "@unpopping-candy/social/post",
+      "nodeUrl": "https://www.figma.com/design/POPCANDY_LIBRARY/Unpopping-Candy?node-id=0-4",
+      "package": "@unpopping-candy/social",
       "propertyMap": {
         "Selected": "selected",
         "Variant": "timeline|detail|quoted"
@@ -63,9 +63,9 @@
     {
       "componentId": "social.post-card-skeleton",
       "componentName": "PostCardSkeleton",
-      "entrypoint": "@commonspace/social/post",
-      "nodeUrl": "https://www.figma.com/design/COMMONSPACE_LIBRARY/Commonspace-UI?node-id=0-5",
-      "package": "@commonspace/social",
+      "entrypoint": "@unpopping-candy/social/post",
+      "nodeUrl": "https://www.figma.com/design/POPCANDY_LIBRARY/Unpopping-Candy?node-id=0-5",
+      "package": "@unpopping-candy/social",
       "propertyMap": {
         "Variant": "default"
       },
@@ -77,9 +77,9 @@
     {
       "componentId": "social.post-composer-view",
       "componentName": "PostComposerView",
-      "entrypoint": "@commonspace/social/post",
-      "nodeUrl": "https://www.figma.com/design/COMMONSPACE_LIBRARY/Commonspace-UI?node-id=0-6",
-      "package": "@commonspace/social",
+      "entrypoint": "@unpopping-candy/social/post",
+      "nodeUrl": "https://www.figma.com/design/POPCANDY_LIBRARY/Unpopping-Candy?node-id=0-6",
+      "package": "@unpopping-candy/social",
       "propertyMap": {
         "Variant": "inline|dialog"
       },
@@ -91,9 +91,9 @@
     {
       "componentId": "social.post-header",
       "componentName": "PostHeader",
-      "entrypoint": "@commonspace/social/post",
-      "nodeUrl": "https://www.figma.com/design/COMMONSPACE_LIBRARY/Commonspace-UI?node-id=0-7",
-      "package": "@commonspace/social",
+      "entrypoint": "@unpopping-candy/social/post",
+      "nodeUrl": "https://www.figma.com/design/POPCANDY_LIBRARY/Unpopping-Candy?node-id=0-7",
+      "package": "@unpopping-candy/social",
       "propertyMap": {
         "Variant": "default|repost-context"
       },
@@ -105,9 +105,9 @@
     {
       "componentId": "social.post-media-grid",
       "componentName": "PostMediaGrid",
-      "entrypoint": "@commonspace/social/post",
-      "nodeUrl": "https://www.figma.com/design/COMMONSPACE_LIBRARY/Commonspace-UI?node-id=0-8",
-      "package": "@commonspace/social",
+      "entrypoint": "@unpopping-candy/social/post",
+      "nodeUrl": "https://www.figma.com/design/POPCANDY_LIBRARY/Unpopping-Candy?node-id=0-8",
+      "package": "@unpopping-candy/social",
       "propertyMap": {
         "Variant": "one|two|three|four"
       },
@@ -119,9 +119,9 @@
     {
       "componentId": "social.profile-header",
       "componentName": "ProfileHeader",
-      "entrypoint": "@commonspace/social/profile",
-      "nodeUrl": "https://www.figma.com/design/COMMONSPACE_LIBRARY/Commonspace-UI?node-id=0-9",
-      "package": "@commonspace/social",
+      "entrypoint": "@unpopping-candy/social/profile",
+      "nodeUrl": "https://www.figma.com/design/POPCANDY_LIBRARY/Unpopping-Candy?node-id=0-9",
+      "package": "@unpopping-candy/social",
       "propertyMap": {
         "Pending": "pending",
         "Variant": "self|other|private"
@@ -134,9 +134,9 @@
     {
       "componentId": "social.timeline-view",
       "componentName": "TimelineView",
-      "entrypoint": "@commonspace/social/timeline",
-      "nodeUrl": "https://www.figma.com/design/COMMONSPACE_LIBRARY/Commonspace-UI?node-id=0-10",
-      "package": "@commonspace/social",
+      "entrypoint": "@unpopping-candy/social/timeline",
+      "nodeUrl": "https://www.figma.com/design/POPCANDY_LIBRARY/Unpopping-Candy?node-id=0-10",
+      "package": "@unpopping-candy/social",
       "propertyMap": {
         "Variant": "default"
       },
@@ -148,9 +148,9 @@
     {
       "componentId": "social.user-cell",
       "componentName": "UserCell",
-      "entrypoint": "@commonspace/social/user",
-      "nodeUrl": "https://www.figma.com/design/COMMONSPACE_LIBRARY/Commonspace-UI?node-id=0-11",
-      "package": "@commonspace/social",
+      "entrypoint": "@unpopping-candy/social/user",
+      "nodeUrl": "https://www.figma.com/design/POPCANDY_LIBRARY/Unpopping-Candy?node-id=0-11",
+      "package": "@unpopping-candy/social",
       "propertyMap": {
         "Pending": "pending",
         "Selected": "selected",
@@ -164,9 +164,9 @@
     {
       "componentId": "ui.alert",
       "componentName": "Alert",
-      "entrypoint": "@commonspace/ui/alert",
-      "nodeUrl": "https://www.figma.com/design/COMMONSPACE_LIBRARY/Commonspace-UI?node-id=0-12",
-      "package": "@commonspace/ui",
+      "entrypoint": "@unpopping-candy/ui/alert",
+      "nodeUrl": "https://www.figma.com/design/POPCANDY_LIBRARY/Unpopping-Candy?node-id=0-12",
+      "package": "@unpopping-candy/ui",
       "propertyMap": {
         "Variant": "neutral|success|warning|critical"
       },
@@ -178,9 +178,9 @@
     {
       "componentId": "ui.avatar",
       "componentName": "Avatar",
-      "entrypoint": "@commonspace/ui/avatar",
-      "nodeUrl": "https://www.figma.com/design/COMMONSPACE_LIBRARY/Commonspace-UI?node-id=0-13",
-      "package": "@commonspace/ui",
+      "entrypoint": "@unpopping-candy/ui/avatar",
+      "nodeUrl": "https://www.figma.com/design/POPCANDY_LIBRARY/Unpopping-Candy?node-id=0-13",
+      "package": "@unpopping-candy/ui",
       "propertyMap": {
         "Variant": "sm|md|lg"
       },
@@ -192,9 +192,9 @@
     {
       "componentId": "ui.badge",
       "componentName": "Badge",
-      "entrypoint": "@commonspace/ui/badge",
-      "nodeUrl": "https://www.figma.com/design/COMMONSPACE_LIBRARY/Commonspace-UI?node-id=0-14",
-      "package": "@commonspace/ui",
+      "entrypoint": "@unpopping-candy/ui/badge",
+      "nodeUrl": "https://www.figma.com/design/POPCANDY_LIBRARY/Unpopping-Candy?node-id=0-14",
+      "package": "@unpopping-candy/ui",
       "propertyMap": {
         "Variant": "neutral|accent|positive|warning|critical"
       },
@@ -206,9 +206,9 @@
     {
       "componentId": "ui.button",
       "componentName": "Button",
-      "entrypoint": "@commonspace/ui/button",
-      "nodeUrl": "https://www.figma.com/design/COMMONSPACE_LIBRARY/Commonspace-UI?node-id=0-15",
-      "package": "@commonspace/ui",
+      "entrypoint": "@unpopping-candy/ui/button",
+      "nodeUrl": "https://www.figma.com/design/POPCANDY_LIBRARY/Unpopping-Candy?node-id=0-15",
+      "package": "@unpopping-candy/ui",
       "propertyMap": {
         "Disabled": "disabled",
         "Pending": "pending",
@@ -222,9 +222,9 @@
     {
       "componentId": "ui.container",
       "componentName": "Container",
-      "entrypoint": "@commonspace/ui/layout",
-      "nodeUrl": "https://www.figma.com/design/COMMONSPACE_LIBRARY/Commonspace-UI?node-id=0-16",
-      "package": "@commonspace/ui",
+      "entrypoint": "@unpopping-candy/ui/layout",
+      "nodeUrl": "https://www.figma.com/design/POPCANDY_LIBRARY/Unpopping-Candy?node-id=0-16",
+      "package": "@unpopping-candy/ui",
       "propertyMap": {
         "Variant": "sm|md|lg|full"
       },
@@ -236,9 +236,9 @@
     {
       "componentId": "ui.dialog",
       "componentName": "Dialog",
-      "entrypoint": "@commonspace/ui/dialog",
-      "nodeUrl": "https://www.figma.com/design/COMMONSPACE_LIBRARY/Commonspace-UI?node-id=0-17",
-      "package": "@commonspace/ui",
+      "entrypoint": "@unpopping-candy/ui/dialog",
+      "nodeUrl": "https://www.figma.com/design/POPCANDY_LIBRARY/Unpopping-Candy?node-id=0-17",
+      "package": "@unpopping-candy/ui",
       "propertyMap": {
         "Variant": "sm|md|lg"
       },
@@ -250,9 +250,9 @@
     {
       "componentId": "ui.empty-state",
       "componentName": "EmptyState",
-      "entrypoint": "@commonspace/ui",
-      "nodeUrl": "https://www.figma.com/design/COMMONSPACE_LIBRARY/Commonspace-UI?node-id=0-18",
-      "package": "@commonspace/ui",
+      "entrypoint": "@unpopping-candy/ui",
+      "nodeUrl": "https://www.figma.com/design/POPCANDY_LIBRARY/Unpopping-Candy?node-id=0-18",
+      "package": "@unpopping-candy/ui",
       "propertyMap": {
         "Variant": "compact|default"
       },
@@ -264,9 +264,9 @@
     {
       "componentId": "ui.feedback-provider",
       "componentName": "FeedbackProvider",
-      "entrypoint": "@commonspace/ui/feedback",
-      "nodeUrl": "https://www.figma.com/design/COMMONSPACE_LIBRARY/Commonspace-UI?node-id=0-19",
-      "package": "@commonspace/ui",
+      "entrypoint": "@unpopping-candy/ui/feedback",
+      "nodeUrl": "https://www.figma.com/design/POPCANDY_LIBRARY/Unpopping-Candy?node-id=0-19",
+      "package": "@unpopping-candy/ui",
       "propertyMap": {
         "Variant": "default"
       },
@@ -278,9 +278,9 @@
     {
       "componentId": "ui.icon-button",
       "componentName": "IconButton",
-      "entrypoint": "@commonspace/ui/button",
-      "nodeUrl": "https://www.figma.com/design/COMMONSPACE_LIBRARY/Commonspace-UI?node-id=0-20",
-      "package": "@commonspace/ui",
+      "entrypoint": "@unpopping-candy/ui/button",
+      "nodeUrl": "https://www.figma.com/design/POPCANDY_LIBRARY/Unpopping-Candy?node-id=0-20",
+      "package": "@unpopping-candy/ui",
       "propertyMap": {
         "Disabled": "disabled",
         "Variant": "ghost|secondary|danger"
@@ -293,9 +293,9 @@
     {
       "componentId": "ui.inline",
       "componentName": "Inline",
-      "entrypoint": "@commonspace/ui/layout",
-      "nodeUrl": "https://www.figma.com/design/COMMONSPACE_LIBRARY/Commonspace-UI?node-id=0-21",
-      "package": "@commonspace/ui",
+      "entrypoint": "@unpopping-candy/ui/layout",
+      "nodeUrl": "https://www.figma.com/design/POPCANDY_LIBRARY/Unpopping-Candy?node-id=0-21",
+      "package": "@unpopping-candy/ui",
       "propertyMap": {
         "Variant": "start|center|end|space-between"
       },
@@ -307,9 +307,9 @@
     {
       "componentId": "ui.separator",
       "componentName": "Separator",
-      "entrypoint": "@commonspace/ui/layout",
-      "nodeUrl": "https://www.figma.com/design/COMMONSPACE_LIBRARY/Commonspace-UI?node-id=0-22",
-      "package": "@commonspace/ui",
+      "entrypoint": "@unpopping-candy/ui/layout",
+      "nodeUrl": "https://www.figma.com/design/POPCANDY_LIBRARY/Unpopping-Candy?node-id=0-22",
+      "package": "@unpopping-candy/ui",
       "propertyMap": {
         "Variant": "horizontal|vertical"
       },
@@ -321,9 +321,9 @@
     {
       "componentId": "ui.skeleton",
       "componentName": "Skeleton",
-      "entrypoint": "@commonspace/ui/loading",
-      "nodeUrl": "https://www.figma.com/design/COMMONSPACE_LIBRARY/Commonspace-UI?node-id=0-23",
-      "package": "@commonspace/ui",
+      "entrypoint": "@unpopping-candy/ui/loading",
+      "nodeUrl": "https://www.figma.com/design/POPCANDY_LIBRARY/Unpopping-Candy?node-id=0-23",
+      "package": "@unpopping-candy/ui",
       "propertyMap": {
         "Variant": "text|circle|block"
       },
@@ -335,9 +335,9 @@
     {
       "componentId": "ui.spinner",
       "componentName": "Spinner",
-      "entrypoint": "@commonspace/ui/loading",
-      "nodeUrl": "https://www.figma.com/design/COMMONSPACE_LIBRARY/Commonspace-UI?node-id=0-24",
-      "package": "@commonspace/ui",
+      "entrypoint": "@unpopping-candy/ui/loading",
+      "nodeUrl": "https://www.figma.com/design/POPCANDY_LIBRARY/Unpopping-Candy?node-id=0-24",
+      "package": "@unpopping-candy/ui",
       "propertyMap": {
         "Variant": "sm|md|lg"
       },
@@ -349,9 +349,9 @@
     {
       "componentId": "ui.stack",
       "componentName": "Stack",
-      "entrypoint": "@commonspace/ui/layout",
-      "nodeUrl": "https://www.figma.com/design/COMMONSPACE_LIBRARY/Commonspace-UI?node-id=0-25",
-      "package": "@commonspace/ui",
+      "entrypoint": "@unpopping-candy/ui/layout",
+      "nodeUrl": "https://www.figma.com/design/POPCANDY_LIBRARY/Unpopping-Candy?node-id=0-25",
+      "package": "@unpopping-candy/ui",
       "propertyMap": {
         "Variant": "xs|sm|md|lg|xl"
       },
@@ -363,9 +363,9 @@
     {
       "componentId": "ui.surface",
       "componentName": "Surface",
-      "entrypoint": "@commonspace/ui/layout",
-      "nodeUrl": "https://www.figma.com/design/COMMONSPACE_LIBRARY/Commonspace-UI?node-id=0-26",
-      "package": "@commonspace/ui",
+      "entrypoint": "@unpopping-candy/ui/layout",
+      "nodeUrl": "https://www.figma.com/design/POPCANDY_LIBRARY/Unpopping-Candy?node-id=0-26",
+      "package": "@unpopping-candy/ui",
       "propertyMap": {
         "Variant": "plain|subtle|raised"
       },
@@ -377,9 +377,9 @@
     {
       "componentId": "ui.tabs",
       "componentName": "Tabs",
-      "entrypoint": "@commonspace/ui/tabs",
-      "nodeUrl": "https://www.figma.com/design/COMMONSPACE_LIBRARY/Commonspace-UI?node-id=0-27",
-      "package": "@commonspace/ui",
+      "entrypoint": "@unpopping-candy/ui/tabs",
+      "nodeUrl": "https://www.figma.com/design/POPCANDY_LIBRARY/Unpopping-Candy?node-id=0-27",
+      "package": "@unpopping-candy/ui",
       "propertyMap": {
         "Disabled": "disabled",
         "Selected": "selected",
@@ -393,9 +393,9 @@
     {
       "componentId": "ui.text-area",
       "componentName": "TextArea",
-      "entrypoint": "@commonspace/ui/forms",
-      "nodeUrl": "https://www.figma.com/design/COMMONSPACE_LIBRARY/Commonspace-UI?node-id=0-28",
-      "package": "@commonspace/ui",
+      "entrypoint": "@unpopping-candy/ui/forms",
+      "nodeUrl": "https://www.figma.com/design/POPCANDY_LIBRARY/Unpopping-Candy?node-id=0-28",
+      "package": "@unpopping-candy/ui",
       "propertyMap": {
         "Disabled": "disabled",
         "Variant": "default"
@@ -408,9 +408,9 @@
     {
       "componentId": "ui.text-field",
       "componentName": "TextField",
-      "entrypoint": "@commonspace/ui/forms",
-      "nodeUrl": "https://www.figma.com/design/COMMONSPACE_LIBRARY/Commonspace-UI?node-id=0-29",
-      "package": "@commonspace/ui",
+      "entrypoint": "@unpopping-candy/ui/forms",
+      "nodeUrl": "https://www.figma.com/design/POPCANDY_LIBRARY/Unpopping-Candy?node-id=0-29",
+      "package": "@unpopping-candy/ui",
       "propertyMap": {
         "Disabled": "disabled",
         "Variant": "text|email|password|search"
@@ -423,9 +423,9 @@
     {
       "componentId": "ui.toast",
       "componentName": "Toast",
-      "entrypoint": "@commonspace/ui/feedback",
-      "nodeUrl": "https://www.figma.com/design/COMMONSPACE_LIBRARY/Commonspace-UI?node-id=0-30",
-      "package": "@commonspace/ui",
+      "entrypoint": "@unpopping-candy/ui/feedback",
+      "nodeUrl": "https://www.figma.com/design/POPCANDY_LIBRARY/Unpopping-Candy?node-id=0-30",
+      "package": "@unpopping-candy/ui",
       "propertyMap": {
         "Variant": "neutral|success|warning|critical"
       },
@@ -437,9 +437,9 @@
     {
       "componentId": "ui.toast-viewport",
       "componentName": "ToastViewport",
-      "entrypoint": "@commonspace/ui/feedback",
-      "nodeUrl": "https://www.figma.com/design/COMMONSPACE_LIBRARY/Commonspace-UI?node-id=0-31",
-      "package": "@commonspace/ui",
+      "entrypoint": "@unpopping-candy/ui/feedback",
+      "nodeUrl": "https://www.figma.com/design/POPCANDY_LIBRARY/Unpopping-Candy?node-id=0-31",
+      "package": "@unpopping-candy/ui",
       "propertyMap": {
         "Variant": "top-right|bottom-right|bottom-center"
       },
@@ -451,9 +451,9 @@
     {
       "componentId": "ui.visually-hidden",
       "componentName": "VisuallyHidden",
-      "entrypoint": "@commonspace/ui",
-      "nodeUrl": "https://www.figma.com/design/COMMONSPACE_LIBRARY/Commonspace-UI?node-id=0-32",
-      "package": "@commonspace/ui",
+      "entrypoint": "@unpopping-candy/ui",
+      "nodeUrl": "https://www.figma.com/design/POPCANDY_LIBRARY/Unpopping-Candy?node-id=0-32",
+      "package": "@unpopping-candy/ui",
       "propertyMap": {
         "Variant": "default"
       },
@@ -464,7 +464,7 @@
     }
   ],
   "generatedAt": "2026-08-09T00:00:00.000Z",
-  "libraryName": "Commonspace UI",
+  "libraryName": "Unpopping Candy",
   "packageVersion": "0.2.0",
   "schemaVersion": 1
 }

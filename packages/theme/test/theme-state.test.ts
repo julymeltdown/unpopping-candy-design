@@ -1,3 +1,5 @@
+/// <reference types="node" />
+
 import assert from 'node:assert/strict';
 import test from 'node:test';
 import {
@@ -23,9 +25,9 @@ test('theme attributes use the public data contract', () => {
   assert.deepEqual(
     themeDataAttributes({ theme: 'dark', density: 'compact', accent: 'neutral' }),
     {
-      'data-cs-theme': 'dark',
-      'data-cs-density': 'compact',
-      'data-cs-accent': 'neutral',
+      'data-popcandy-theme': 'dark',
+      'data-popcandy-density': 'compact',
+      'data-popcandy-accent': 'neutral',
     },
   );
 });
@@ -33,5 +35,7 @@ test('theme attributes use the public data contract', () => {
 test('bootstrap script does not interpolate an unsafe raw key', () => {
   const script = createThemeBootstrapScript('theme";</script>');
   assert.match(script, /localStorage\.getItem/);
+  assert.match(script, /dataset\.popcandyTheme/);
+  assert.doesNotMatch(script, /dataset\.cs(?:Theme|Density|Accent)/);
   assert.doesNotMatch(script, /key=theme"/);
 });

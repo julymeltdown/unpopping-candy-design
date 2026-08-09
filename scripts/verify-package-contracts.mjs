@@ -26,7 +26,7 @@ for (const manifestPath of manifests) {
   if (manifest.peerDependencies?.react && /^\d/.test(manifest.peerDependencies.react)) errors.push(`${label}: React peer dependency must be a range`);
   if (manifest.peerDependencies?.['react-dom'] && /^\d/.test(manifest.peerDependencies['react-dom'])) errors.push(`${label}: React DOM peer dependency must be a range`);
   for (const [name, version] of Object.entries(manifest.dependencies ?? {})) {
-    if (name.startsWith('@commonspace/') && !String(version).startsWith('workspace:')) errors.push(`${label}: internal dependency ${name} must use workspace protocol`);
+    if (name.startsWith('@unpopping-candy/') && !String(version).startsWith('workspace:')) errors.push(`${label}: internal dependency ${name} must use workspace protocol`);
   }
   try { await access(join(manifestPath, '..', 'README.md')); } catch { errors.push(`${label}: package README.md is required`); }
 }

@@ -1,8 +1,8 @@
 {
-  "name": "@commonspace/social",
+  "name": "@unpopping-candy/social",
   "version": "0.1.0",
-  "description": "API-agnostic social presentation patterns for Commonspace UI.",
-  "license": "UNLICENSED",
+  "description": "API-agnostic social presentation patterns for Unpopping Candy.",
+  "license": "MIT",
   "type": "module",
   "files": ["dist", "README.md"],
   "sideEffects": ["./dist/styles.css"],
@@ -23,9 +23,9 @@
     "react-dom": ">=18.3 <20"
   },
   "dependencies": {
-    "@commonspace/icons": "workspace:^",
-    "@commonspace/tokens": "workspace:^",
-    "@commonspace/ui": "workspace:^"
+    "@unpopping-candy/icons": "workspace:^",
+    "@unpopping-candy/tokens": "workspace:^",
+    "@unpopping-candy/ui": "workspace:^"
   },
   "devDependencies": {
     "@types/react": "19.2.14",

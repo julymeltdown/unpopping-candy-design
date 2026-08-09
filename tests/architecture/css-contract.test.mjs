@@ -4,8 +4,8 @@ import { inspectCssContract } from '../../scripts/lib/css-contract.mjs';
 
 test('class modifiers are not mistaken for custom-property declarations', () => {
   const errors = inspectCssContract(`
-    .cs-button--primary { color: var(--cs-color-action-primary); }
-    .cs-post-card--skeleton::before { content: ''; }
+    .popcandy-button--primary { color: var(--popcandy-color-action-primary); }
+    .popcandy-post-card--skeleton::before { content: ''; }
   `, 'fixture.css');
 
   assert.deepEqual(errors, []);
@@ -18,7 +18,7 @@ test('non-namespaced classes and custom properties are rejected', () => {
   `, 'fixture.css');
 
   assert.deepEqual(errors, [
-    'fixture.css: custom property --brand-color must use --cs- prefix',
-    'fixture.css: class .button must use cs- or is- namespace',
+    'fixture.css: custom property --brand-color must use --popcandy- prefix',
+    'fixture.css: class .button must use popcandy- or is- namespace',
   ]);
 });

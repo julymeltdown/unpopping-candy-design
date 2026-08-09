@@ -6,12 +6,12 @@ export default defineConfig({
   plugins: [react()],
   resolve: {
     alias: {
-      '@commonspace/eval-report': resolve(root, 'agent/manifests/evals.json'),
-      '@commonspace/tokens/styles.css': resolve(root, 'packages/tokens/src/styles.css'),
-      '@commonspace/ui/styles.css': resolve(root, 'packages/ui/src/styles.css'),
-      '@commonspace/tokens': resolve(root, 'packages/tokens/src/index.ts'),
-      '@commonspace/theme': resolve(root, 'packages/theme/src/index.ts'),
-      '@commonspace/ui': resolve(root, 'packages/ui/src/index.ts'),
+      '@unpopping-candy/eval-report': resolve(root, 'agent/manifests/evals.json'),
+      '@unpopping-candy/tokens/styles.css': resolve(root, 'packages/tokens/src/styles.css'),
+      '@unpopping-candy/ui/styles.css': resolve(root, 'packages/ui/src/styles.css'),
+      '@unpopping-candy/tokens': resolve(root, 'packages/tokens/src/index.ts'),
+      '@unpopping-candy/theme': resolve(root, 'packages/theme/src/index.ts'),
+      '@unpopping-candy/ui': resolve(root, 'packages/ui/src/index.ts'),
     },
   },
   server: { fs: { allow: [root] } },

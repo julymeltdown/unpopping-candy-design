@@ -1,17 +1,17 @@
 # Skeleton
 
-> `ui.skeleton` · `@commonspace/ui` · stable · version 0.1.0
+> `ui.skeleton` · `@unpopping-candy/ui` · stable · version 0.1.0
 
 Reserves stable geometry while content is loading.
 
 ## Import
 
 ```tsx
-import { Skeleton } from '@commonspace/ui';
+import { Skeleton } from '@unpopping-candy/ui';
 ```
 
 ```tsx
-import { Skeleton } from '@commonspace/ui/loading';
+import { Skeleton } from '@unpopping-candy/ui/loading';
 ```
 
 ## Use when
@@ -41,8 +41,8 @@ import { Skeleton } from '@commonspace/ui/loading';
 
 ## Tokens
 
-- `--cs-surface-muted`
-- `--cs-motion-slow`
+- `--popcandy-surface-muted`
+- `--popcandy-motion-slow`
 
 ## Props
 

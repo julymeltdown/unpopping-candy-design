@@ -1,8 +1,8 @@
 {
-  "name": "@commonspace/evals",
+  "name": "@unpopping-candy/evals",
   "version": "0.2.0",
-  "description": "Deterministic evaluation harness for AI-generated Commonspace interfaces.",
-  "license": "UNLICENSED",
+  "description": "Deterministic evaluation harness for AI-generated Unpopping Candy interfaces.",
+  "license": "MIT",
   "type": "module",
   "files": ["dist", "fixtures", "README.md"],
   "sideEffects": false,
@@ -11,7 +11,7 @@
   },
   "publishConfig": { "access": "public" },
   "dependencies": {
-    "@commonspace/knowledge": "workspace:^"
+    "@unpopping-candy/knowledge": "workspace:^"
   },
   "devDependencies": {
     "@types/node": "24.3.0"

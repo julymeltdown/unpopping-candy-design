@@ -2,19 +2,19 @@
 
 ## Token layers
 
-Commonspace uses reference, semantic, and component tokens.
+Unpopping Candy uses reference, semantic, and component tokens.
 
 ### Reference
 
 Reference tokens are raw values. Components should not generally consume them when a semantic role exists.
 
 ```css
---cs-ref-neutral-0
---cs-ref-neutral-950
---cs-ref-blue-500
---cs-space-4
---cs-radius-md
---cs-motion-normal
+--popcandy-ref-neutral-0
+--popcandy-ref-neutral-950
+--popcandy-ref-blue-500
+--popcandy-space-4
+--popcandy-radius-md
+--popcandy-motion-normal
 ```
 
 ### Semantic
@@ -22,15 +22,15 @@ Reference tokens are raw values. Components should not generally consume them wh
 Semantic tokens define intent and are the primary consumer extension surface.
 
 ```css
---cs-canvas
---cs-surface
---cs-ink
---cs-ink-muted
---cs-border
---cs-accent
---cs-positive
---cs-warning
---cs-critical
+--popcandy-canvas
+--popcandy-surface
+--popcandy-ink
+--popcandy-ink-muted
+--popcandy-border
+--popcandy-accent
+--popcandy-positive
+--popcandy-warning
+--popcandy-critical
 ```
 
 ### Component
@@ -38,20 +38,20 @@ Semantic tokens define intent and are the primary consumer extension surface.
 Component tokens coordinate shared dimensions without exposing a component's internal DOM.
 
 ```css
---cs-button-height-md
---cs-field-height
---cs-dialog-width-md
+--popcandy-button-height-md
+--popcandy-field-height
+--popcandy-dialog-width-md
 ```
 
 ## Theme contract
 
-Themes are selected by `data-cs-theme`:
+Themes are selected by `data-popcandy-theme`:
 
 ```html
-<html data-cs-theme="light">
-<html data-cs-theme="dark">
-<html data-cs-theme="system">
-<html data-cs-theme="high-contrast">
+<html data-popcandy-theme="light">
+<html data-popcandy-theme="dark">
+<html data-popcandy-theme="system">
+<html data-popcandy-theme="high-contrast">
 ```
 
 `system` follows `prefers-color-scheme`. High contrast uses stronger boundaries and avoids relying on shadows.
@@ -59,8 +59,8 @@ Themes are selected by `data-cs-theme`:
 ## Density contract
 
 ```html
-<div data-cs-density="comfortable">
-<div data-cs-density="compact">
+<div data-popcandy-density="comfortable">
+<div data-popcandy-density="compact">
 ```
 
 Density changes control dimensions, not information hierarchy. A compact component must retain target-size and accessibility requirements.
@@ -68,9 +68,9 @@ Density changes control dimensions, not information hierarchy. A compact compone
 ## Accent contract
 
 ```html
-<div data-cs-accent="blue">
-<div data-cs-accent="violet">
-<div data-cs-accent="neutral">
+<div data-popcandy-accent="blue">
+<div data-popcandy-accent="violet">
+<div data-popcandy-accent="neutral">
 ```
 
 Accent is reserved for action, selection, focus, and meaningful product emphasis. Status feedback uses positive, warning, and critical roles instead.
@@ -83,14 +83,14 @@ Local scope renders a theme boundary. Use it for embedded products, previews, an
 
 ### Document
 
-Document scope writes attributes to the document root. Use it for applications where Commonspace owns the page.
+Document scope writes attributes to the document root. Use it for applications where Unpopping Candy owns the page.
 
 ## Persistence
 
 By default, the provider uses:
 
 ```text
-commonspace:theme:v1
+popcandy:theme:v1
 ```
 
 Only theme, density, and accent are persisted. Invalid JSON or unknown values are replaced by documented defaults. Set `storageKey={false}` to disable persistence.
@@ -105,12 +105,12 @@ Prefer scoped semantic overrides:
 
 ```css
 .brand-area {
-  --cs-accent: #2458e6;
-  --cs-accent-hover: #1947c4;
+  --popcandy-accent: #2458e6;
+  --popcandy-accent-hover: #1947c4;
 }
 ```
 
-Avoid overriding raw reference tokens globally unless you own every Commonspace surface in the document.
+Avoid overriding raw reference tokens globally unless you own every Unpopping Candy surface in the document.
 
 ## Theme review checklist
 

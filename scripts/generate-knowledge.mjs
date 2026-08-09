@@ -50,7 +50,7 @@ async function readJson(path) {
 
 async function collectTokenNames() {
   const css = await readFile(join(repositoryRoot, 'packages/tokens/src/styles.css'), 'utf8');
-  return new Set([...css.matchAll(/--cs-[a-z0-9-]+/g)].map((match) => match[0]));
+  return new Set([...css.matchAll(/--popcandy-[a-z0-9-]+/g)].map((match) => match[0]));
 }
 
 async function packageExportMap() {

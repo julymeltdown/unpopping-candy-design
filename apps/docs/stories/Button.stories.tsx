@@ -1,6 +1,6 @@
 import type { Meta, StoryObj } from '@storybook/react-vite';
-import { PlusIcon, ShareIcon } from '@commonspace/icons';
-import { Button, Inline, Stack } from '@commonspace/ui';
+import { PlusIcon, ShareIcon } from '@unpopping-candy/icons';
+import { Button, Inline, Stack } from '@unpopping-candy/ui';
 
 const meta = {
   title: 'UI/Button',

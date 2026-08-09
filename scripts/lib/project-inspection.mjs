@@ -1,6 +1,8 @@
 import { readFile, readdir, stat } from 'node:fs/promises';
 import { extname, join, relative, resolve } from 'node:path';
 
+const SKIP_DIRECTORIES = new Set(['.git', 'build', 'coverage', 'dist', 'node_modules', 'storybook-static']);
+
 export async function readJson(path) {
   return JSON.parse(await readFile(path, 'utf8'));
 }
@@ -11,7 +13,7 @@ export async function listFiles(directory, predicate = () => true) {
     for (const name of await readdir(current)) {
       const path = join(current, name);
       const info = await stat(path);
-      if (info.isDirectory()) await walk(path);
+      if (info.isDirectory() && !SKIP_DIRECTORIES.has(name)) await walk(path);
       else if (predicate(path)) output.push(path);
     }
   }

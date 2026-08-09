@@ -1,18 +1,18 @@
 ---
-name: review-commonspace-interface
-description: Use when reviewing generated or hand-written React UI for Commonspace component reuse, design-token compliance, state completeness, accessibility, and product-pattern correctness.
-license: UNLICENSED
-compatibility: Requires Commonspace CLI 0.2.x; Storybook is recommended.
+name: review-popcandy-interface
+description: Use when reviewing generated or hand-written React UI for Unpopping Candy component reuse, design-token compliance, state completeness, accessibility, and product-pattern correctness.
+license: MIT
+compatibility: Requires Unpopping Candy CLI 0.2.x; Storybook is recommended.
 metadata:
-  author: Commonspace
+  author: Unpopping Candy
   version: "0.2.0"
 allowed-tools: Bash Read Grep Glob
 ---
 
-# Review a Commonspace interface
+# Review a Unpopping Candy interface
 
-1. Run `commonspace info --json` and `commonspace validate . --json`.
-2. Identify the user task, selected Commonspace pattern, and expected states.
+1. Run `popcandy info --json` and `popcandy validate . --json`.
+2. Identify the user task, selected Unpopping Candy pattern, and expected states.
 3. Search the catalog for every custom control or duplicated pattern. Flag invented or bypassed APIs.
 4. Review public imports, token use, data ownership, semantic DOM, focus, keyboard behavior, announcements, reflow, zoom, themes, and reduced motion.
 5. Inspect Storybook stories and browser behavior; static source review is insufficient for overlays, focus, and responsive states.

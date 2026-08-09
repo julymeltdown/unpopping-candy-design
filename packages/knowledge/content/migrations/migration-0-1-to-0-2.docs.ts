@@ -2,7 +2,7 @@ export default {
   "schemaVersion": 1,
   "kind": "migration",
   "id": "migration.0-1-to-0-2",
-  "name": "Commonspace UI 0.1 to 0.2",
+  "name": "Unpopping Candy 0.1 to 0.2",
   "version": "0.2.0",
   "status": "stable",
   "summary": "Introduces the AI-native knowledge, CLI, MCP, Registry, and generated-document layer without changing existing visual package APIs.",
@@ -31,14 +31,14 @@ export default {
     {
       "kind": "manual",
       "from": "Unstructured component discovery",
-      "to": "commonspace search and MCP resources",
+      "to": "popcandy search and MCP resources",
       "guidance": "Run project detection before generating interfaces."
     },
     {
       "kind": "manual",
       "from": "Visual package source imports",
       "to": "Published package entrypoints",
-      "guidance": "Continue importing only documented @commonspace/* entrypoints."
+      "guidance": "Continue importing only documented @unpopping-candy/* entrypoints."
     }
   ],
   "accessibility": {

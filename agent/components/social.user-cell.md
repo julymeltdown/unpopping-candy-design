@@ -1,17 +1,17 @@
 # UserCell
 
-> `social.user-cell` · `@commonspace/social` · stable · version 0.1.0
+> `social.user-cell` · `@unpopping-candy/social` · stable · version 0.1.0
 
 Presents a compact person row with optional supporting text and injected action.
 
 ## Import
 
 ```tsx
-import { UserCell } from '@commonspace/social';
+import { UserCell } from '@unpopping-candy/social';
 ```
 
 ```tsx
-import { UserCell } from '@commonspace/social/user';
+import { UserCell } from '@unpopping-candy/social/user';
 ```
 
 ## Use when
@@ -41,9 +41,9 @@ import { UserCell } from '@commonspace/social/user';
 
 ## Tokens
 
-- `--cs-ink`
-- `--cs-ink-muted`
-- `--cs-border`
+- `--popcandy-ink`
+- `--popcandy-ink-muted`
+- `--popcandy-border`
 
 ## Props
 

@@ -3,15 +3,15 @@ export default {
   "kind": "component",
   "id": "ui.text-area",
   "name": "TextArea",
-  "package": "@commonspace/ui",
+  "package": "@unpopping-candy/ui",
   "version": "0.1.0",
   "status": "stable",
   "category": "form",
   "summary": "Collects multi-line text with label, description, validation, and native textarea semantics.",
   "sourcePath": "packages/ui/src/text-area/text-area.tsx",
   "entrypoints": [
-    "@commonspace/ui",
-    "@commonspace/ui/forms"
+    "@unpopping-candy/ui",
+    "@unpopping-candy/ui/forms"
   ],
   "keywords": [
     "textarea",
@@ -27,10 +27,10 @@ export default {
     "Rich text structure is required."
   ],
   "tokens": [
-    "--cs-field-height",
-    "--cs-border",
-    "--cs-focus",
-    "--cs-critical"
+    "--popcandy-field-height",
+    "--popcandy-border",
+    "--popcandy-focus",
+    "--popcandy-critical"
   ],
   "related": [
     "ui.text-field",

@@ -1,14 +1,14 @@
-# @commonspace/theme
+# @unpopping-candy/theme
 
-Theme and density scoping for Commonspace UI.
+Theme and density scoping for Unpopping Candy.
 
 ```tsx
-import '@commonspace/tokens/styles.css';
-import { CommonspaceProvider } from '@commonspace/theme';
+import '@unpopping-candy/tokens/styles.css';
+import { UnpoppingCandyProvider } from '@unpopping-candy/theme';
 
-<CommonspaceProvider theme="system" density="comfortable" accent="blue">
+<UnpoppingCandyProvider theme="system" density="comfortable" accent="blue">
   <App />
-</CommonspaceProvider>;
+</UnpoppingCandyProvider>;
 ```
 
-Use `scope="document"` when the whole document belongs to Commonspace. The default local scope renders a token boundary around its children.
+Use `scope="document"` when the whole document belongs to Unpopping Candy. The default local scope renders a token boundary around its children.

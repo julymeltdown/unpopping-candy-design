@@ -7,8 +7,8 @@ import {
   ReplyIcon,
   RepostIcon,
   ShareIcon,
-} from '@commonspace/icons';
-import { IconButton } from '@commonspace/ui';
+} from '@unpopping-candy/icons';
+import { IconButton } from '@unpopping-candy/ui';
 import { formatCompactMetric } from '../lib/format.js';
 import type { SocialPostMetrics, SocialPostViewerState } from '../model/types.js';
 
@@ -38,7 +38,7 @@ interface MetricActionProps {
 
 function MetricAction({ disabled, icon, label, locale, onClick, selected, tone, value }: MetricActionProps) {
   return (
-    <span className="cs-post-action">
+    <span className="popcandy-post-action">
       <IconButton
         size="sm"
         label={label}
@@ -55,7 +55,7 @@ function MetricAction({ disabled, icon, label, locale, onClick, selected, tone, 
 
 export function PostActions({ disabled, locale, metrics, onBookmark, onLike, onReply, onRepost, onShare, pendingAction, viewerState }: PostActionsProps) {
   return (
-    <footer className="cs-post-actions" aria-label="Post engagement" data-cs-component="post-actions">
+    <footer className="popcandy-post-actions" aria-label="Post engagement" data-popcandy-component="post-actions">
       <MetricAction label="Reply" icon={<ReplyIcon />} value={metrics.replies} locale={locale} disabled={disabled} onClick={onReply} />
       <MetricAction label={viewerState.reposted ? 'Undo repost' : 'Repost'} icon={<RepostIcon />} value={metrics.reposts} locale={locale} selected={viewerState.reposted} tone="accent" disabled={disabled || pendingAction === 'repost'} onClick={onRepost} />
       <MetricAction label={viewerState.liked ? 'Unlike' : 'Like'} icon={viewerState.liked ? <HeartFilledIcon /> : <HeartIcon />} value={metrics.likes} locale={locale} selected={viewerState.liked} tone="danger" disabled={disabled || pendingAction === 'like'} onClick={onLike} />

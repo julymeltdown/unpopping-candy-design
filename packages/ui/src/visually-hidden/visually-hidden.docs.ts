@@ -3,14 +3,14 @@ export default {
   "kind": "component",
   "id": "ui.visually-hidden",
   "name": "VisuallyHidden",
-  "package": "@commonspace/ui",
+  "package": "@unpopping-candy/ui",
   "version": "0.1.0",
   "status": "stable",
   "category": "accessibility",
   "summary": "Keeps essential text available to assistive technology without changing visual layout.",
   "sourcePath": "packages/ui/src/visually-hidden/visually-hidden.tsx",
   "entrypoints": [
-    "@commonspace/ui"
+    "@unpopping-candy/ui"
   ],
   "keywords": [
     "accessibility",
@@ -25,7 +25,7 @@ export default {
     "Visible instructions would benefit all users."
   ],
   "tokens": [
-    "--cs-space-0"
+    "--popcandy-space-0"
   ],
   "related": [
     "ui.icon-button",

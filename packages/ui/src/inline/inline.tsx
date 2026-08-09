@@ -11,9 +11,9 @@ export function Inline({ align = 'center', className, gap = 3, justify, style, w
   return (
     <div
       {...props}
-      className={mergeClassNames('cs-inline', className)}
-      data-cs-gap={gap}
-      data-cs-wrap={wrap ? 'wrap' : 'nowrap'}
+      className={mergeClassNames('popcandy-inline', className)}
+      data-popcandy-gap={gap}
+      data-popcandy-wrap={wrap ? 'wrap' : 'nowrap'}
       style={{ ...style, alignItems: align, justifyContent: justify }}
     />
   );

@@ -1,13 +1,13 @@
 # EmptyState
 
-> `ui.empty-state` · `@commonspace/ui` · stable · version 0.1.0
+> `ui.empty-state` · `@unpopping-candy/ui` · stable · version 0.1.0
 
 Explains why a meaningful region has no content and offers the next valid action.
 
 ## Import
 
 ```tsx
-import { EmptyState } from '@commonspace/ui';
+import { EmptyState } from '@unpopping-candy/ui';
 ```
 
 ## Use when
@@ -38,9 +38,9 @@ import { EmptyState } from '@commonspace/ui';
 
 ## Tokens
 
-- `--cs-ink`
-- `--cs-ink-muted`
-- `--cs-space-8`
+- `--popcandy-ink`
+- `--popcandy-ink-muted`
+- `--popcandy-space-8`
 
 ## Props
 

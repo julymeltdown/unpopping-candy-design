@@ -1,4 +1,4 @@
-import type { KnowledgeEntry } from '@commonspace/knowledge';
+import type { KnowledgeEntry } from '@unpopping-candy/knowledge';
 import { composeInterfacePlan } from './compose.ts';
 import type { CliResult, CliServices, SearchResponse } from './types.ts';
 
@@ -64,14 +64,21 @@ export async function executeCliCommand(services: CliServices, command: string, 
         const target = positional(args).join(' ').trim();
         if (!target) throw new Error('get requires a component, pattern, template, or migration name.');
         const entry = services.get(target);
-        if (!entry) return { ok: false, command, error: { code: 'NOT_FOUND', message: `No Commonspace knowledge entry matched: ${target}` } };
+        if (!entry) return { ok: false, command, error: { code: 'NOT_FOUND', message: `No Unpopping Candy knowledge entry matched: ${target}` } };
         return { ok: true, command, data: entry };
       }
       case 'search': {
         const query = positional(args).join(' ').trim();
         if (!query) throw new Error('search requires a query.');
         const kind = optionalKind(option(args, '--kind'));
-        const data: SearchResponse = { query, catalogVersion: services.catalog.packageVersion, results: services.search(query, { kind, limit: boundedLimit(option(args, '--limit')) }) };
+        const data: SearchResponse = {
+          query,
+          catalogVersion: services.catalog.packageVersion,
+          results: services.search(query, {
+            ...(kind ? { kind } : {}),
+            limit: boundedLimit(option(args, '--limit')),
+          }),
+        };
         return { ok: true, command, data };
       }
       case 'compose': {
@@ -81,19 +88,19 @@ export async function executeCliCommand(services: CliServices, command: string, 
       case 'validate': {
         const target = positional(args)[0] ?? cwd;
         const data = await services.validate(target);
-        return data.summary.errors ? { ok: false, command, error: { code: 'VALIDATION_FAILED', message: `${data.summary.errors} Commonspace validation errors found.`, details: data } } : { ok: true, command, data };
+        return data.summary.errors ? { ok: false, command, error: { code: 'VALIDATION_FAILED', message: `${data.summary.errors} Unpopping Candy validation errors found.`, details: data } } : { ok: true, command, data };
       }
       case 'doctor': {
         const info = await services.projectInfo(cwd);
         const report = await services.validate(info.root);
         const recommendations: string[] = [];
-        for (const required of ['@commonspace/tokens', '@commonspace/theme', '@commonspace/ui']) if (!info.installed[required]) recommendations.push(`Install ${required}.`);
-        for (const stylesheet of ['@commonspace/tokens/styles.css', '@commonspace/icons/styles.css', '@commonspace/ui/styles.css']) if (!info.styleImports.includes(stylesheet)) recommendations.push(`Import ${stylesheet} once at the application entry.`);
-        if (!info.configPath) recommendations.push('Add commonspace.config.json for deterministic scaffolding and validation paths.');
-        return { ok: report.summary.errors === 0, command, ...(report.summary.errors === 0 ? { data: { info, validation: report.summary, recommendations } } : { error: { code: 'DOCTOR_FAILED', message: 'Project has blocking Commonspace issues.', details: { info, report, recommendations } } }) } as CliResult;
+        for (const required of ['@unpopping-candy/tokens', '@unpopping-candy/theme', '@unpopping-candy/ui']) if (!info.installed[required]) recommendations.push(`Install ${required}.`);
+        for (const stylesheet of ['@unpopping-candy/tokens/styles.css', '@unpopping-candy/icons/styles.css', '@unpopping-candy/ui/styles.css']) if (!info.styleImports.includes(stylesheet)) recommendations.push(`Import ${stylesheet} once at the application entry.`);
+        if (!info.configPath) recommendations.push('Add popcandy.config.json for deterministic scaffolding and validation paths.');
+        return { ok: report.summary.errors === 0, command, ...(report.summary.errors === 0 ? { data: { info, validation: report.summary, recommendations } } : { error: { code: 'DOCTOR_FAILED', message: 'Project has blocking Unpopping Candy issues.', details: { info, report, recommendations } } }) } as CliResult;
       }
       case 'scaffold': {
-        if (!services.scaffold) return { ok: false, command, error: { code: 'REGISTRY_REQUIRED', message: 'Scaffolding requires @commonspace/registry.' } };
+        if (!services.scaffold) return { ok: false, command, error: { code: 'REGISTRY_REQUIRED', message: 'Scaffolding requires @unpopping-candy/registry.' } };
         const templateId = positional(args)[0];
         if (!templateId) throw new Error('scaffold requires a template id.');
         if (args.includes('--apply') && args.includes('--dry-run')) throw new Error('Use either --apply or --dry-run, not both.');

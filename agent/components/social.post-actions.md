@@ -1,17 +1,17 @@
 # PostActions
 
-> `social.post-actions` · `@commonspace/social` · stable · version 0.1.0
+> `social.post-actions` · `@unpopping-candy/social` · stable · version 0.1.0
 
 Presents reply, repost, like, bookmark, and share actions as controlled social interactions.
 
 ## Import
 
 ```tsx
-import { PostActions } from '@commonspace/social';
+import { PostActions } from '@unpopping-candy/social';
 ```
 
 ```tsx
-import { PostActions } from '@commonspace/social/post';
+import { PostActions } from '@unpopping-candy/social/post';
 ```
 
 ## Use when
@@ -43,10 +43,10 @@ import { PostActions } from '@commonspace/social/post';
 
 ## Tokens
 
-- `--cs-ink-muted`
-- `--cs-accent`
-- `--cs-positive`
-- `--cs-critical`
+- `--popcandy-ink-muted`
+- `--popcandy-accent`
+- `--popcandy-positive`
+- `--popcandy-critical`
 
 ## Props
 

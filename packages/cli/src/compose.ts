@@ -1,4 +1,4 @@
-import type { ComponentDoc, KnowledgeCatalog, KnowledgeEntry } from '@commonspace/knowledge';
+import type { ComponentDoc, KnowledgeCatalog, KnowledgeEntry } from '@unpopping-candy/knowledge';
 import type { CompositionPlan } from './types.ts';
 
 function uniqueById(entries: readonly KnowledgeEntry[]): KnowledgeEntry[] {
@@ -41,14 +41,14 @@ export function composeInterfacePlan(
     components,
     imports: componentImports(components),
     steps: [
-      { phase: 'detect', action: 'Confirm framework, installed Commonspace versions, theme, and source paths.', references: [] },
+      { phase: 'detect', action: 'Confirm framework, installed Unpopping Candy versions, theme, and source paths.', references: [] },
       { phase: 'frame', action: template ? `Use ${template.name} as the nearest complete frame.` : 'Compose a page frame from Container, Stack, and the nearest product pattern.', references: template ? [template.id] : ['ui.container', 'ui.stack'] },
       { phase: 'compose', action: 'Implement the selected patterns with public component entrypoints and consumer-owned state.', references },
       { phase: 'states', action: 'Add loading, empty, populated, error, disabled, pending, responsive, dark, and high-contrast states where applicable.', references: patterns.map((entry) => entry.id) },
-      { phase: 'verify', action: 'Generate a Storybook story, run Commonspace validation, then run interaction and accessibility checks.', references: components.flatMap((entry) => entry.kind === 'component' ? entry.stories : []) },
+      { phase: 'verify', action: 'Generate a Storybook story, run Unpopping Candy validation, then run interaction and accessibility checks.', references: components.flatMap((entry) => entry.kind === 'component' ? entry.stories : []) },
     ],
     validation: [
-      'No @commonspace/*/src imports.',
+      'No @unpopping-candy/*/src imports.',
       'No invented component names or props.',
       'No hardcoded design-system colors, spacing, radius, shadows, or motion.',
       'No data fetching, routing, authentication, or remote-state ownership inside visual components.',

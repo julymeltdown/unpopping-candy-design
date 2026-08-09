@@ -18,10 +18,10 @@ test('repository AI contracts are internally consistent', async () => {
 });
 
 test('AI contract inspection fails closed when generated context is missing', async () => {
-  const fixture = await mkdtemp(join(tmpdir(), 'commonspace-ai-contract-'));
+  const fixture = await mkdtemp(join(tmpdir(), 'popcandy-ai-contract-'));
   await mkdir(join(fixture, 'agent/manifests'), { recursive: true });
   await writeFile(join(fixture, 'AGENTS.md'), '# Fixture\n');
   const result = await inspectAiContracts(fixture);
-  assert.ok(result.errors.some((error) => error.includes('commonspace.config.json')));
+  assert.ok(result.errors.some((error) => error.includes('popcandy.config.json')));
   assert.ok(result.errors.some((error) => error.includes('catalog.json')));
 });

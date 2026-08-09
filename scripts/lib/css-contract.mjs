@@ -1,8 +1,8 @@
 /**
- * Inspect CSS source for Commonspace public namespace violations.
+ * Inspect CSS source for Unpopping Candy public namespace violations.
  *
  * Custom properties are matched only where declarations can begin. This
- * intentionally excludes BEM modifiers such as `.cs-button--primary:`.
+ * intentionally excludes BEM modifiers such as `.popcandy-button--primary:`.
  */
 export function inspectCssContract(source, label) {
   const errors = [];
@@ -11,15 +11,15 @@ export function inspectCssContract(source, label) {
 
   for (const match of source.matchAll(customPropertyDeclaration)) {
     const name = match[1];
-    if (!name.startsWith('--cs-')) {
-      errors.push(`${label}: custom property ${name} must use --cs- prefix`);
+    if (!name.startsWith('--popcandy-')) {
+      errors.push(`${label}: custom property ${name} must use --popcandy- prefix`);
     }
   }
 
   for (const match of source.matchAll(classReference)) {
     const name = match[1];
-    if (!name.startsWith('cs-') && !name.startsWith('is-')) {
-      errors.push(`${label}: class .${name} must use cs- or is- namespace`);
+    if (!name.startsWith('popcandy-') && !name.startsWith('is-')) {
+      errors.push(`${label}: class .${name} must use popcandy- or is- namespace`);
     }
   }
 

@@ -1,3 +1,3 @@
-export { createCommonspaceMcpDomain } from './domain.ts';
-export { createCommonspaceMcpServer } from './server.ts';
-export type { CommonspaceMcpDomain, McpDomainServices, McpPromptDefinition, McpResourceContent, McpResourceDescriptor } from './types.ts';
+export { createPopcandyMcpDomain } from './domain.ts';
+export { createPopcandyMcpServer } from './server.ts';
+export type { PopcandyMcpDomain, McpDomainServices, McpPromptDefinition, McpResourceContent, McpResourceDescriptor } from './types.ts';

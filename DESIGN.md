@@ -1,7 +1,7 @@
 ---
 schema: "https://designmd.org/spec/0.1"
 version: "0.2.0"
-name: "Commonspace UI"
+name: "Unpopping Candy"
 description: "AI-operable React design system for content-rich, social, editorial, and community products."
 sourceOfTruth: "agent/manifests/catalog.json"
 generated: true
@@ -23,28 +23,28 @@ density:
   supported: ["comfortable", "compact"]
 themes: ["light", "dark", "system", "high-contrast"]
 packages:
-  - "@commonspace/tokens"
-  - "@commonspace/theme"
-  - "@commonspace/icons"
-  - "@commonspace/ui"
-  - "@commonspace/social"
+  - "@unpopping-candy/tokens"
+  - "@unpopping-candy/theme"
+  - "@unpopping-candy/icons"
+  - "@unpopping-candy/ui"
+  - "@unpopping-candy/social"
 stableComponents: 32
 ---
 
-# Commonspace UI Design Contract
+# Unpopping Candy Design Contract
 
-Commonspace UI is a reusable React design system for content-rich, social, editorial, and community products. This file is generated from component-adjacent metadata and token manifests. Do not edit generated sections by hand; update the canonical `*.docs.ts` entry and run `npm run agent:generate`.
+Unpopping Candy is a reusable React design system for content-rich, social, editorial, and community products. This file is generated from component-adjacent metadata and token manifests. Do not edit generated sections by hand; update the canonical `*.docs.ts` entry and run `npm run agent:generate`.
 
 ## Agent operating contract
 
-1. Detect the project and installed Commonspace versions before generating code.
+1. Detect the project and installed Unpopping Candy versions before generating code.
 2. Search existing components, patterns, and templates before inventing a new surface.
 3. Import only documented public entrypoints; never import `src` or package internals.
 4. Keep remote state, routing, authentication, and application workflow outside visual packages.
-5. Use Commonspace tokens instead of hardcoded color, spacing, radius, shadow, or motion values.
+5. Use Unpopping Candy tokens instead of hardcoded color, spacing, radius, shadow, or motion values.
 6. Cover loading, empty, populated, error, disabled, pending, and responsive states when they apply.
 7. Generate or update a Storybook story and run accessibility and interaction checks.
-8. Run `commonspace validate` before presenting the result.
+8. Run `popcandy validate` before presenting the result.
 
 ## System promise
 
@@ -69,11 +69,11 @@ Commonspace UI is a reusable React design system for content-rich, social, edito
 
 | Package | Responsibility | Must not own |
 |---|---|---|
-| `@commonspace/tokens` | Reference, semantic, and component tokens | React state or product behavior |
-| `@commonspace/theme` | Theme, density, accent, and scope | Product data |
-| `@commonspace/icons` | Semantic icon names backed by Ant Design Icons | Product-specific actions |
-| `@commonspace/ui` | Product-independent accessible components | Network, router, cache, auth |
-| `@commonspace/social` | API-independent social presentation models and patterns | Fetching, mutations, application state |
+| `@unpopping-candy/tokens` | Reference, semantic, and component tokens | React state or product behavior |
+| `@unpopping-candy/theme` | Theme, density, accent, and scope | Product data |
+| `@unpopping-candy/icons` | Semantic icon names backed by Ant Design Icons | Product-specific actions |
+| `@unpopping-candy/ui` | Product-independent accessible components | Network, router, cache, auth |
+| `@unpopping-candy/social` | API-independent social presentation models and patterns | Fetching, mutations, application state |
 
 Authentication, server state, Feature-Sliced Design application code, API clients, and backend services belong to the separate application kit.
 
@@ -81,7 +81,7 @@ Authentication, server state, Feature-Sliced Design application code, API client
 
 ### Color
 
-Use semantic variables such as `--cs-canvas`, `--cs-surface`, `--cs-ink`, `--cs-border`, `--cs-accent`, `--cs-positive`, `--cs-warning`, and `--cs-critical`. Reference colors are implementation inputs; product code should normally consume semantic roles.
+Use semantic variables such as `--popcandy-canvas`, `--popcandy-surface`, `--popcandy-ink`, `--popcandy-border`, `--popcandy-accent`, `--popcandy-positive`, `--popcandy-warning`, and `--popcandy-critical`. Reference colors are implementation inputs; product code should normally consume semantic roles.
 
 ### Typography
 
@@ -89,48 +89,48 @@ Use the sans stack for interface and content text. Use the mono stack only for i
 
 ### Spacing and layout
 
-Use the `--cs-space-*` scale and the Stack, Inline, Container, Surface, and Separator primitives. Do not create arbitrary one-off margins when a composition primitive expresses the relationship.
+Use the `--popcandy-space-*` scale and the Stack, Inline, Container, Surface, and Separator primitives. Do not create arbitrary one-off margins when a composition primitive expresses the relationship.
 
 ### Motion
 
-Use `--cs-motion-fast`, `--cs-motion-normal`, and `--cs-motion-slow` with the shared easing variables. Motion explains state change; it must not delay task completion and must respect reduced-motion preferences.
+Use `--popcandy-motion-fast`, `--popcandy-motion-normal`, and `--popcandy-motion-slow` with the shared easing variables. Motion explains state change; it must not delay task completion and must respect reduced-motion preferences.
 
 ## Stable components
 
 | Component | Package | Category | Summary |
 |---|---|---|---|
-| [ConversationPreview](./agent/components/social.conversation-preview.md) | `@commonspace/social` | messaging | Presents a conversation summary with participants, latest message, time, and unread state. |
-| [NotificationItem](./agent/components/social.notification-item.md) | `@commonspace/social` | notification | Presents one social notification with actor context, event description, and optional target content. |
-| [PostActions](./agent/components/social.post-actions.md) | `@commonspace/social` | post | Presents reply, repost, like, bookmark, and share actions as controlled social interactions. |
-| [PostCard](./agent/components/social.post-card.md) | `@commonspace/social` | post | Presents a social post with author, content, distribution context, metrics, and injected actions. |
-| [PostCardSkeleton](./agent/components/social.post-card-skeleton.md) | `@commonspace/social` | loading | Reserves the expected geometry of a PostCard while timeline data loads. |
-| [PostComposerView](./agent/components/social.post-composer-view.md) | `@commonspace/social` | composer | Presents a controlled social composer while the application owns draft, validation, upload, and publishing state. |
-| [PostHeader](./agent/components/social.post-header.md) | `@commonspace/social` | post | Presents post identity, timestamp, and distribution context without owning navigation. |
-| [PostMediaGrid](./agent/components/social.post-media-grid.md) | `@commonspace/social` | media | Arranges one to four social media assets with stable aspect ratios and selection callbacks. |
-| [ProfileHeader](./agent/components/social.profile-header.md) | `@commonspace/social` | profile | Presents a curator or user profile summary with injected primary and secondary actions. |
-| [TimelineView](./agent/components/social.timeline-view.md) | `@commonspace/social` | timeline | Composes timeline states and rendered post rows without owning pagination or virtualization. |
-| [UserCell](./agent/components/social.user-cell.md) | `@commonspace/social` | identity | Presents a compact person row with optional supporting text and injected action. |
-| [Alert](./agent/components/ui.alert.md) | `@commonspace/ui` | feedback | Presents contextual feedback beside the task or content that produced it. |
-| [Avatar](./agent/components/ui.avatar.md) | `@commonspace/ui` | identity | Represents a person or organization with an image and deterministic fallback. |
-| [Badge](./agent/components/ui.badge.md) | `@commonspace/ui` | data-display | Displays a compact status or categorical label without becoming the primary action. |
-| [Button](./agent/components/ui.button.md) | `@commonspace/ui` | action | Triggers an immediate user action with explicit priority and pending behavior. |
-| [Container](./agent/components/ui.container.md) | `@commonspace/ui` | layout | Constrains page content to a readable width and consistent horizontal gutter. |
-| [Dialog](./agent/components/ui.dialog.md) | `@commonspace/ui` | overlay | Interrupts the current context for a focused task that must be completed or dismissed. |
-| [EmptyState](./agent/components/ui.empty-state.md) | `@commonspace/ui` | feedback | Explains why a meaningful region has no content and offers the next valid action. |
-| [FeedbackProvider](./agent/components/ui.feedback-provider.md) | `@commonspace/ui` | feedback | Owns the application-level transient feedback queue and exposes a bounded controller. |
-| [IconButton](./agent/components/ui.icon-button.md) | `@commonspace/ui` | action | Triggers a frequent action where a well-known icon can replace visible text. |
-| [Inline](./agent/components/ui.inline.md) | `@commonspace/ui` | layout | Arranges related items horizontally with tokenized gap, alignment, and wrapping. |
-| [Separator](./agent/components/ui.separator.md) | `@commonspace/ui` | layout | Separates adjacent regions when spacing alone cannot communicate the boundary. |
-| [Skeleton](./agent/components/ui.skeleton.md) | `@commonspace/ui` | loading | Reserves stable geometry while content is loading. |
-| [Spinner](./agent/components/ui.spinner.md) | `@commonspace/ui` | loading | Indicates an indeterminate operation in a compact region. |
-| [Stack](./agent/components/ui.stack.md) | `@commonspace/ui` | layout | Arranges a vertical reading or task sequence with tokenized spacing. |
-| [Surface](./agent/components/ui.surface.md) | `@commonspace/ui` | layout | Creates a semantic background and boundary without prescribing product content. |
-| [Tabs](./agent/components/ui.tabs.md) | `@commonspace/ui` | navigation | Switches among peer views that share one context and URL or controlled state. |
-| [TextArea](./agent/components/ui.text-area.md) | `@commonspace/ui` | form | Collects multi-line text with label, description, validation, and native textarea semantics. |
-| [TextField](./agent/components/ui.text-field.md) | `@commonspace/ui` | form | Collects one short value with label, description, validation, and native input semantics. |
-| [Toast](./agent/components/ui.toast.md) | `@commonspace/ui` | feedback | Renders one transient or persistent item from the feedback queue. |
-| [ToastViewport](./agent/components/ui.toast-viewport.md) | `@commonspace/ui` | feedback | Positions and announces the bounded stack of global feedback items. |
-| [VisuallyHidden](./agent/components/ui.visually-hidden.md) | `@commonspace/ui` | accessibility | Keeps essential text available to assistive technology without changing visual layout. |
+| [ConversationPreview](./agent/components/social.conversation-preview.md) | `@unpopping-candy/social` | messaging | Presents a conversation summary with participants, latest message, time, and unread state. |
+| [NotificationItem](./agent/components/social.notification-item.md) | `@unpopping-candy/social` | notification | Presents one social notification with actor context, event description, and optional target content. |
+| [PostActions](./agent/components/social.post-actions.md) | `@unpopping-candy/social` | post | Presents reply, repost, like, bookmark, and share actions as controlled social interactions. |
+| [PostCard](./agent/components/social.post-card.md) | `@unpopping-candy/social` | post | Presents a social post with author, content, distribution context, metrics, and injected actions. |
+| [PostCardSkeleton](./agent/components/social.post-card-skeleton.md) | `@unpopping-candy/social` | loading | Reserves the expected geometry of a PostCard while timeline data loads. |
+| [PostComposerView](./agent/components/social.post-composer-view.md) | `@unpopping-candy/social` | composer | Presents a controlled social composer while the application owns draft, validation, upload, and publishing state. |
+| [PostHeader](./agent/components/social.post-header.md) | `@unpopping-candy/social` | post | Presents post identity, timestamp, and distribution context without owning navigation. |
+| [PostMediaGrid](./agent/components/social.post-media-grid.md) | `@unpopping-candy/social` | media | Arranges one to four social media assets with stable aspect ratios and selection callbacks. |
+| [ProfileHeader](./agent/components/social.profile-header.md) | `@unpopping-candy/social` | profile | Presents a curator or user profile summary with injected primary and secondary actions. |
+| [TimelineView](./agent/components/social.timeline-view.md) | `@unpopping-candy/social` | timeline | Composes timeline states and rendered post rows without owning pagination or virtualization. |
+| [UserCell](./agent/components/social.user-cell.md) | `@unpopping-candy/social` | identity | Presents a compact person row with optional supporting text and injected action. |
+| [Alert](./agent/components/ui.alert.md) | `@unpopping-candy/ui` | feedback | Presents contextual feedback beside the task or content that produced it. |
+| [Avatar](./agent/components/ui.avatar.md) | `@unpopping-candy/ui` | identity | Represents a person or organization with an image and deterministic fallback. |
+| [Badge](./agent/components/ui.badge.md) | `@unpopping-candy/ui` | data-display | Displays a compact status or categorical label without becoming the primary action. |
+| [Button](./agent/components/ui.button.md) | `@unpopping-candy/ui` | action | Triggers an immediate user action with explicit priority and pending behavior. |
+| [Container](./agent/components/ui.container.md) | `@unpopping-candy/ui` | layout | Constrains page content to a readable width and consistent horizontal gutter. |
+| [Dialog](./agent/components/ui.dialog.md) | `@unpopping-candy/ui` | overlay | Interrupts the current context for a focused task that must be completed or dismissed. |
+| [EmptyState](./agent/components/ui.empty-state.md) | `@unpopping-candy/ui` | feedback | Explains why a meaningful region has no content and offers the next valid action. |
+| [FeedbackProvider](./agent/components/ui.feedback-provider.md) | `@unpopping-candy/ui` | feedback | Owns the application-level transient feedback queue and exposes a bounded controller. |
+| [IconButton](./agent/components/ui.icon-button.md) | `@unpopping-candy/ui` | action | Triggers a frequent action where a well-known icon can replace visible text. |
+| [Inline](./agent/components/ui.inline.md) | `@unpopping-candy/ui` | layout | Arranges related items horizontally with tokenized gap, alignment, and wrapping. |
+| [Separator](./agent/components/ui.separator.md) | `@unpopping-candy/ui` | layout | Separates adjacent regions when spacing alone cannot communicate the boundary. |
+| [Skeleton](./agent/components/ui.skeleton.md) | `@unpopping-candy/ui` | loading | Reserves stable geometry while content is loading. |
+| [Spinner](./agent/components/ui.spinner.md) | `@unpopping-candy/ui` | loading | Indicates an indeterminate operation in a compact region. |
+| [Stack](./agent/components/ui.stack.md) | `@unpopping-candy/ui` | layout | Arranges a vertical reading or task sequence with tokenized spacing. |
+| [Surface](./agent/components/ui.surface.md) | `@unpopping-candy/ui` | layout | Creates a semantic background and boundary without prescribing product content. |
+| [Tabs](./agent/components/ui.tabs.md) | `@unpopping-candy/ui` | navigation | Switches among peer views that share one context and URL or controlled state. |
+| [TextArea](./agent/components/ui.text-area.md) | `@unpopping-candy/ui` | form | Collects multi-line text with label, description, validation, and native textarea semantics. |
+| [TextField](./agent/components/ui.text-field.md) | `@unpopping-candy/ui` | form | Collects one short value with label, description, validation, and native input semantics. |
+| [Toast](./agent/components/ui.toast.md) | `@unpopping-candy/ui` | feedback | Renders one transient or persistent item from the feedback queue. |
+| [ToastViewport](./agent/components/ui.toast-viewport.md) | `@unpopping-candy/ui` | feedback | Positions and announces the bounded stack of global feedback items. |
+| [VisuallyHidden](./agent/components/ui.visually-hidden.md) | `@unpopping-candy/ui` | accessibility | Keeps essential text available to assistive technology without changing visual layout. |
 
 ## Product patterns
 
@@ -326,11 +326,11 @@ Composes a readable, state-complete social timeline without moving content unexp
 
 ## Templates
 
-- **Strict FSD social shell** (`template.fsd-social-shell`, target: `react-vite-fsd`): A React and Vite application shell that keeps Commonspace presentation packages below FSD application slices.
+- **Strict FSD social shell** (`template.fsd-social-shell`, target: `react-vite-fsd`): A React and Vite application shell that keeps Unpopping Candy presentation packages below FSD application slices.
 - **Moderation workspace** (`template.moderation-workspace`, target: `react-vite`): A three-region moderation decision workspace with queue, evidence, and controlled actions.
 - **Profile settings** (`template.profile-settings`, target: `react-vite`): A profile settings form with validation, pending state, and preserved failure feedback.
 - **Social feed page** (`template.social-feed-page`, target: `react-vite`): A state-complete social feed page using presentation models and externally owned remote state.
-- **Vite app shell** (`template.vite-app-shell`, target: `react-vite`): A minimal React and Vite shell with Commonspace theme and feedback providers.
+- **Vite app shell** (`template.vite-app-shell`, target: `react-vite`): A minimal React and Vite shell with Unpopping Candy theme and feedback providers.
 
 ## Accessibility baseline
 
@@ -356,8 +356,8 @@ Use specific verbs and name the affected object. For failures, state what failed
 
 ## Do not
 
-- Import from `@commonspace/*/src/*`.
-- Fetch, navigate, authenticate, or mutate inside `@commonspace/ui` or `@commonspace/social`.
+- Import from `@unpopping-candy/*/src/*`.
+- Fetch, navigate, authenticate, or mutate inside `@unpopping-candy/ui` or `@unpopping-candy/social`.
 - Hardcode brand colors, spacing, radius, shadows, or motion durations.
 - invent component props or component names.
 - Treat a static screenshot as functional UI.
@@ -366,13 +366,13 @@ Use specific verbs and name the affected object. For failures, state what failed
 ## AI workflow
 
 ```text
-commonspace info --json
-→ commonspace search "<task>" --json
-→ commonspace compose "<task>" --json
+popcandy info --json
+→ popcandy search "<task>" --json
+→ popcandy compose "<task>" --json
 → inspect selected component and pattern guidance
 → scaffold or implement with public imports
 → create/update Storybook stories
-→ commonspace validate --json
+→ popcandy validate --json
 → Storybook interaction and accessibility checks
 ```
 

@@ -2,7 +2,7 @@ import { createHash } from 'node:crypto';
 import { lstat, mkdir, readFile, realpath, stat, writeFile } from 'node:fs/promises';
 import { dirname, isAbsolute, join, relative, resolve, sep } from 'node:path';
 import { fileURLToPath } from 'node:url';
-import type { TemplateDoc } from '@commonspace/knowledge';
+import type { TemplateDoc } from '@unpopping-candy/knowledge';
 import type {
   RegistryFileManifest,
   RegistryManifest,

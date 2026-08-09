@@ -11,8 +11,8 @@ export function Skeleton({ className, height, radius, style, width, ...props }: 
   return (
     <span
       {...props}
-      className={mergeClassNames('cs-skeleton', className)}
-      data-cs-component="skeleton"
+      className={mergeClassNames('popcandy-skeleton', className)}
+      data-popcandy-component="skeleton"
       aria-hidden="true"
       style={{ ...style, width, height, borderRadius: radius }}
     />

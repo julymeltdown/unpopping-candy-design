@@ -4,25 +4,25 @@
   "schemaVersion": 1,
   "templates": [
     {
-      "digest": "92abba874df823cf01737930832b0400c00368e899b4ef1c14fda5f105de9b4d",
+      "digest": "a8cc40cc359a7a2cfc797763e0dbc20d6267e3bd5c98ce135397d3ced2d6a532",
       "files": [
         {
-          "bytes": 351,
-          "digest": "bc40d5e31b46c05ba65261bce55303a44c98bc918bcfb16c446f984fab77b904",
-          "path": "src/app/providers/commonspace-provider.tsx",
+          "bytes": 368,
+          "digest": "b2c1df7efe5cc1559e44dfd9ece39e533a316a561c68d99cf78bc80f8e072a5f",
+          "path": "src/app/providers/unpopping-candy-provider.tsx",
           "role": "Application provider composition",
-          "source": "packages/registry/templates/fsd-social-shell/src/app/providers/commonspace-provider.tsx"
+          "source": "packages/registry/templates/fsd-social-shell/src/app/providers/unpopping-candy-provider.tsx"
         },
         {
-          "bytes": 594,
-          "digest": "e2b3a53c1ffbb7d40ddf670a12a32d4de1fd107ed9f88638df682315d3ed0222",
+          "bytes": 602,
+          "digest": "0ef0fd8348a335fee039440200f8bc9ca0d5eeab508b49c71c154da1637a66f8",
           "path": "src/pages/home/ui/home-page.tsx",
           "role": "Home page composition",
           "source": "packages/registry/templates/fsd-social-shell/src/pages/home/ui/home-page.tsx"
         },
         {
-          "bytes": 310,
-          "digest": "c51f14db285b193a3c0bcfec9b867ba0e41810935f6204a3607c303f49a9d38f",
+          "bytes": 314,
+          "digest": "15eed3e456deb3e7bf72f52526cf9c3d81f9fe306c94c93d22b80569267d7144",
           "path": "src/widgets/post-feed/ui/post-feed.tsx",
           "role": "Reusable feed widget",
           "source": "packages/registry/templates/fsd-social-shell/src/widgets/post-feed/ui/post-feed.tsx"
@@ -41,18 +41,18 @@
       "version": "0.2.0"
     },
     {
-      "digest": "be5b41d82e80b86232dde902fdcb5ac204089ba225ee417f9fe95777dc3b1154",
+      "digest": "8795bb12e531db33e93042d17da8e33f0777b73f312607d26e103a0d5ffda9b5",
       "files": [
         {
-          "bytes": 700,
-          "digest": "ca7f4e141af4d580a29d95b9938f774e2ed857e9e2f696b798d9f539729f7849",
+          "bytes": 766,
+          "digest": "03e8c842e51ddac0d080246e5eb1b298e02590bd6320a04e78a99c81932d70fe",
           "path": "src/moderation-workspace.css",
           "role": "Responsive workspace layout",
           "source": "packages/registry/templates/moderation-workspace/src/moderation-workspace.css"
         },
         {
-          "bytes": 1984,
-          "digest": "53956527fe5fc3fc4d8ed8bae1f3c7bdce9d8cb6c98f4c0dcd86e34ba7d23c27",
+          "bytes": 2012,
+          "digest": "08d0559d5f5f57ae28978d4195745e4c515a41c7a7a0faa673961fcf90d81995",
           "path": "src/moderation-workspace.tsx",
           "role": "Moderation workspace composition",
           "source": "packages/registry/templates/moderation-workspace/src/moderation-workspace.tsx"
@@ -71,11 +71,11 @@
       "version": "0.2.0"
     },
     {
-      "digest": "373143fac70c513f554265c4f14f735e5db3a7b63af6b154facb57fddc55d67f",
+      "digest": "5ee9f774e528020313475227b17b8b02ef42356026b2726ad9c157d192b8b883",
       "files": [
         {
-          "bytes": 1612,
-          "digest": "e282190b17fed8aadabc4310e8c941072e3efd9cd1534b4ecb512f57dc8218f1",
+          "bytes": 1616,
+          "digest": "be3e8804bcf48e84ac9f2ead0ae7cac37f22b8f3c9436f09a98e58ed6213253f",
           "path": "src/profile-settings.tsx",
           "role": "Settings form",
           "source": "packages/registry/templates/profile-settings/src/profile-settings.tsx"
@@ -94,18 +94,18 @@
       "version": "0.2.0"
     },
     {
-      "digest": "c2a6211ee52fa4657e94c8b259ad49c56b00d77ebd503e8efb47cb9841b93070",
+      "digest": "7a378efa8fbc6acbccad925576f20a0e211ae7f92ef22ec1a6f19efa6495a6f7",
       "files": [
         {
-          "bytes": 390,
-          "digest": "5fee8868733ef501ec53a3f7c0f6e65522b290a5df90c7c1d820b6b4a21d568b",
+          "bytes": 432,
+          "digest": "3b9484d732a18d45b7430cd9ec1cb670d46106e943372e106a247a29bb3184ad",
           "path": "src/social-feed-page.css",
           "role": "Page layout styles",
           "source": "packages/registry/templates/social-feed-page/src/social-feed-page.css"
         },
         {
-          "bytes": 1357,
-          "digest": "40459f0d12d20ee215ada8538d51ded7e201fdb68cc3bebe7479c13b8ecc6d9c",
+          "bytes": 1377,
+          "digest": "3651277f539baa241b90bcbbb56773d0dd05ada5635492c0cca0f498ee99a5de",
           "path": "src/social-feed-page.tsx",
           "role": "Feed page composition",
           "source": "packages/registry/templates/social-feed-page/src/social-feed-page.tsx"
@@ -124,25 +124,25 @@
       "version": "0.2.0"
     },
     {
-      "digest": "3a999d553c68c18615bf40b5cbe270876384da68acd101b1bf3bcae31841eade",
+      "digest": "871a0a5913baf4963889607d933cb76801a32ed3a93ef0ef87bf80fe8c4e96d3",
       "files": [
         {
-          "bytes": 1014,
-          "digest": "cbaec347c80761899685f782067f91897108a2a999e7bfb870265d08b7b125ca",
+          "bytes": 1023,
+          "digest": "6c22956e294280dfb7dda28e396e00bf2844feddf9fed3860455a4a900762540",
           "path": "src/app.tsx",
           "role": "Root application component",
           "source": "packages/registry/templates/vite-app-shell/src/app.tsx"
         },
         {
-          "bytes": 710,
-          "digest": "4a69540f474ead8a3d07c99eb0e7ee6e70771fa1b1d98a9d5e923c8212dae60c",
+          "bytes": 739,
+          "digest": "e5536db8012d75c3fc881f871f3928d03410d8e79481977c10d79d04b2db1681",
           "path": "src/main.tsx",
           "role": "Browser entry",
           "source": "packages/registry/templates/vite-app-shell/src/main.tsx"
         },
         {
-          "bytes": 214,
-          "digest": "c14019af9f5e594d15c091982e0507d1e96d18b21f290f1ee742e9b72d0e9786",
+          "bytes": 250,
+          "digest": "b1239d496a9dd6ac7f86ca3432e1bce54e6c3df8be402ff28b09699c8a1bc720",
           "path": "src/styles.css",
           "role": "Application-level styles",
           "source": "packages/registry/templates/vite-app-shell/src/styles.css"

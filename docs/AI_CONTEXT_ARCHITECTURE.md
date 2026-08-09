@@ -2,7 +2,7 @@
 
 ## Purpose
 
-Commonspace UI is not considered AI-friendly merely because an agent can read its README. The repository is designed so an agent can discover the exact installed system, select valid components and patterns, generate code through public APIs, and verify the result against the same contracts used by human contributors.
+Unpopping Candy is not considered AI-friendly merely because an agent can read its README. The repository is designed so an agent can discover the exact installed system, select valid components and patterns, generate code through public APIs, and verify the result against the same contracts used by human contributors.
 
 The central rule is:
 
@@ -18,7 +18,7 @@ Pattern, template, and migration metadata
 Storybook contract stories
                  │
                  ▼
-       @commonspace/knowledge
+       @unpopping-candy/knowledge
        deterministic compiler
                  │
      ┌───────────┼───────────────┬────────────────┬──────────────┐
@@ -27,7 +27,7 @@ DESIGN.md   llms*.txt       JSON manifests   component docs   pattern docs
      │           │               │                │              │
      └───────────┴───────┬───────┴───────────┬────┴──────────────┘
                          ▼                   ▼
-               @commonspace/cli      @commonspace/registry
+               @unpopping-candy/cli      @unpopping-candy/registry
                          │                   │
                          ├───────────┬───────┤
                          ▼           ▼       ▼
@@ -39,7 +39,7 @@ DESIGN.md   llms*.txt       JSON manifests   component docs   pattern docs
                                │
              ┌─────────────────┼──────────────────┐
              ▼                 ▼                  ▼
-     Storybook MCP       @commonspace/evals    Figma Code Connect
+     Storybook MCP       @unpopping-candy/evals    Figma Code Connect
      browser/a11y test   static quality gate   code-design mapping
 ```
 
@@ -142,7 +142,7 @@ Start of task
 → AGENTS.md and Skill name/description
 
 Project inspection
-→ commonspace_project_info or CLI info
+→ popcandy_project_info or CLI info
 
 Discovery
 → bounded search and compose results
@@ -172,7 +172,7 @@ Skills describe procedures, not a duplicate component catalog. They require agen
 
 ### Storybook
 
-Storybook is the executable UI truth. Dedicated contract stories bind every public component to a stable Story ID. The Storybook MCP addon provides browser-facing component context and validation without moving browser logic into the Commonspace MCP.
+Storybook is the executable UI truth. Dedicated contract stories bind every public component to a stable Story ID. The Storybook MCP addon provides browser-facing component context and validation without moving browser logic into the Unpopping Candy MCP.
 
 ### Registry
 
@@ -180,7 +180,7 @@ Registry templates distribute page and block compositions. The Registry is local
 
 ### Evaluations
 
-The evaluation harness measures generated source against the installed catalog. It reports invalid imports, invented props, token bypass, basic accessibility failures, state coverage, Commonspace component reuse, and expected-component recall.
+The evaluation harness measures generated source against the installed catalog. It reports invalid imports, invented props, token bypass, basic accessibility failures, state coverage, Unpopping Candy component reuse, and expected-component recall.
 
 ### Figma Code Connect
 
@@ -218,7 +218,7 @@ Project inspection returns package, framework, source-root, configuration, and s
 
 ## Version accuracy
 
-Every catalog entry contains a package version. The project detector reports installed `@commonspace/*` versions. An agent should never assume that documentation from another branch or release matches the consumer project.
+Every catalog entry contains a package version. The project detector reports installed `@unpopping-candy/*` versions. An agent should never assume that documentation from another branch or release matches the consumer project.
 
 The expected sequence is:
 

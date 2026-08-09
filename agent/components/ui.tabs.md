@@ -1,17 +1,17 @@
 # Tabs
 
-> `ui.tabs` · `@commonspace/ui` · stable · version 0.1.0
+> `ui.tabs` · `@unpopping-candy/ui` · stable · version 0.1.0
 
 Switches among peer views that share one context and URL or controlled state.
 
 ## Import
 
 ```tsx
-import { Tabs } from '@commonspace/ui';
+import { Tabs } from '@unpopping-candy/ui';
 ```
 
 ```tsx
-import { Tabs } from '@commonspace/ui/tabs';
+import { Tabs } from '@unpopping-candy/ui/tabs';
 ```
 
 ## Use when
@@ -44,9 +44,9 @@ import { Tabs } from '@commonspace/ui/tabs';
 
 ## Tokens
 
-- `--cs-accent`
-- `--cs-border`
-- `--cs-focus`
+- `--popcandy-accent`
+- `--popcandy-border`
+- `--popcandy-focus`
 
 ## Props
 

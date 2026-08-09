@@ -1,8 +1,8 @@
 {
-  "name": "@commonspace/figma",
+  "name": "@unpopping-candy/figma",
   "version": "0.2.0",
-  "description": "Figma Code Connect manifests and parserless template generation for Commonspace UI.",
-  "license": "UNLICENSED",
+  "description": "Figma Code Connect manifests and parserless template generation for Unpopping Candy.",
+  "license": "MIT",
   "type": "module",
   "files": ["dist", "README.md"],
   "sideEffects": false,
@@ -11,7 +11,7 @@
   },
   "publishConfig": { "access": "public" },
   "dependencies": {
-    "@commonspace/knowledge": "workspace:^"
+    "@unpopping-candy/knowledge": "workspace:^"
   },
   "devDependencies": {
     "@types/node": "24.3.0"

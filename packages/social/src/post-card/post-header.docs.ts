@@ -3,15 +3,15 @@ export default {
   "kind": "component",
   "id": "social.post-header",
   "name": "PostHeader",
-  "package": "@commonspace/social",
+  "package": "@unpopping-candy/social",
   "version": "0.1.0",
   "status": "stable",
   "category": "post",
   "summary": "Presents post identity, timestamp, and distribution context without owning navigation.",
   "sourcePath": "packages/social/src/post-card/post-header.tsx",
   "entrypoints": [
-    "@commonspace/social",
-    "@commonspace/social/post"
+    "@unpopping-candy/social",
+    "@unpopping-candy/social/post"
   ],
   "keywords": [
     "post",
@@ -26,8 +26,8 @@ export default {
     "A generic person row is needed; use UserCell."
   ],
   "tokens": [
-    "--cs-ink",
-    "--cs-ink-muted"
+    "--popcandy-ink",
+    "--popcandy-ink-muted"
   ],
   "related": [
     "social.post-card",

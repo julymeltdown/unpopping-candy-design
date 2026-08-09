@@ -25,8 +25,8 @@ function validateComponent(entry, errors) {
   for (const field of ['entrypoints', 'tokens', 'stories', 'props', 'states', 'useWhen', 'avoidWhen']) {
     if (!Array.isArray(entry?.[field])) errors.push(`${label}: ${field} must be an array`);
   }
-  if (!entry?.entrypoints?.every((value) => typeof value === 'string' && value.startsWith('@commonspace/'))) {
-    errors.push(`${label}: every entrypoint must be a public @commonspace import`);
+  if (!entry?.entrypoints?.every((value) => typeof value === 'string' && value.startsWith('@unpopping-candy/'))) {
+    errors.push(`${label}: every entrypoint must be a public @unpopping-candy import`);
   }
   if (!entry?.stories?.length) errors.push(`${label}: at least one Storybook contract is required`);
   if (!entry?.accessibility || !Array.isArray(entry.accessibility.requirements) || entry.accessibility.requirements.length === 0) {
@@ -47,8 +47,8 @@ export async function inspectAiContracts(rootDirectory) {
   const errors = [];
   const requiredFiles = [
     'AGENTS.md',
-    'commonspace.config.json',
-    'schemas/commonspace-config.schema.json',
+    'popcandy.config.json',
+    'schemas/popcandy-config.schema.json',
     'DESIGN.md',
     'agent/llms.txt',
     'agent/llms-full.txt',
@@ -86,11 +86,11 @@ export async function inspectAiContracts(rootDirectory) {
   const generatedAt = new Set(GENERATED_AT_KEYS.map((key) => manifests[key]?.generatedAt).filter(Boolean));
   if (generatedAt.size !== 1) errors.push(`generated manifests must share one deterministic timestamp; found ${[...generatedAt].join(', ')}`);
 
-  const config = await json(join(root, 'commonspace.config.json'));
-  if (config.schemaVersion !== 1) errors.push('commonspace.config.json: schemaVersion must be 1');
+  const config = await json(join(root, 'popcandy.config.json'));
+  if (config.schemaVersion !== 1) errors.push('popcandy.config.json: schemaVersion must be 1');
   for (const relative of [config.catalog, config.design, config.registry, config.skills, config.evaluations, config.figma, ...Object.values(config.llms ?? {}), config.stories?.manifest]) {
-    if (typeof relative !== 'string' || !relative.startsWith('./')) { errors.push(`commonspace.config.json: invalid local path ${String(relative)}`); continue; }
-    if (!(await exists(join(root, relative)))) errors.push(`commonspace.config.json: missing configured path ${relative}`);
+    if (typeof relative !== 'string' || !relative.startsWith('./')) { errors.push(`popcandy.config.json: invalid local path ${String(relative)}`); continue; }
+    if (!(await exists(join(root, relative)))) errors.push(`popcandy.config.json: missing configured path ${relative}`);
   }
 
   const mcpServerSource = await readFile(join(root, 'packages/mcp/src/server.ts'), 'utf8');

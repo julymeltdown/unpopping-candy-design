@@ -1,5 +1,5 @@
 {
-  "name": "@commonspace/agent-lab",
+  "name": "@unpopping-candy/agent-lab",
   "version": "0.2.0",
   "private": true,
   "type": "module",
@@ -9,9 +9,9 @@
     "typecheck": "tsc --noEmit -p tsconfig.json"
   },
   "dependencies": {
-    "@commonspace/theme": "workspace:*",
-    "@commonspace/tokens": "workspace:*",
-    "@commonspace/ui": "workspace:*",
+    "@unpopping-candy/theme": "workspace:*",
+    "@unpopping-candy/tokens": "workspace:*",
+    "@unpopping-candy/ui": "workspace:*",
     "react": "19.2.8",
     "react-dom": "19.2.8"
   },

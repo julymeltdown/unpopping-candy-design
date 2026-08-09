@@ -1,12 +1,12 @@
-# Commonspace UI — compact agent context
+# Unpopping Candy — compact agent context
 
 Version: 0.2.0
 
-- Public packages: @commonspace/tokens, @commonspace/theme, @commonspace/icons, @commonspace/ui, @commonspace/social.
+- Public packages: @unpopping-candy/tokens, @unpopping-candy/theme, @unpopping-candy/icons, @unpopping-candy/ui, @unpopping-candy/social.
 - Visual packages never fetch, route, authenticate, or own remote state.
 - Use semantic tokens and public entrypoints only.
 - Search before generating. Cover loading, empty, error, disabled, pending, mobile, dark, and high-contrast states.
-- Run commonspace validate and Storybook checks.
+- Run popcandy validate and Storybook checks.
 
 Stable components: social.conversation-preview, social.notification-item, social.post-actions, social.post-card, social.post-card-skeleton, social.post-composer-view, social.post-header, social.post-media-grid, social.profile-header, social.timeline-view, social.user-cell, ui.alert, ui.avatar, ui.badge, ui.button, ui.container, ui.dialog, ui.empty-state, ui.feedback-provider, ui.icon-button, ui.inline, ui.separator, ui.skeleton, ui.spinner, ui.stack, ui.surface, ui.tabs, ui.text-area, ui.text-field, ui.toast, ui.toast-viewport, ui.visually-hidden
 

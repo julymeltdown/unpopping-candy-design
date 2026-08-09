@@ -3,15 +3,15 @@ export default {
   "kind": "component",
   "id": "ui.button",
   "name": "Button",
-  "package": "@commonspace/ui",
+  "package": "@unpopping-candy/ui",
   "version": "0.1.0",
   "status": "stable",
   "category": "action",
   "summary": "Triggers an immediate user action with explicit priority and pending behavior.",
   "sourcePath": "packages/ui/src/button/button.tsx",
   "entrypoints": [
-    "@commonspace/ui",
-    "@commonspace/ui/button"
+    "@unpopping-candy/ui",
+    "@unpopping-candy/ui/button"
   ],
   "keywords": [
     "button",
@@ -29,10 +29,10 @@ export default {
     "The control only contains an icon; use IconButton."
   ],
   "tokens": [
-    "--cs-button-height-md",
-    "--cs-accent",
-    "--cs-critical",
-    "--cs-focus"
+    "--popcandy-button-height-md",
+    "--popcandy-accent",
+    "--popcandy-critical",
+    "--popcandy-focus"
   ],
   "related": [
     "ui.icon-button",

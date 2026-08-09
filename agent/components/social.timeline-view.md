@@ -1,17 +1,17 @@
 # TimelineView
 
-> `social.timeline-view` · `@commonspace/social` · stable · version 0.1.0
+> `social.timeline-view` · `@unpopping-candy/social` · stable · version 0.1.0
 
 Composes timeline states and rendered post rows without owning pagination or virtualization.
 
 ## Import
 
 ```tsx
-import { TimelineView } from '@commonspace/social';
+import { TimelineView } from '@unpopping-candy/social';
 ```
 
 ```tsx
-import { TimelineView } from '@commonspace/social/timeline';
+import { TimelineView } from '@unpopping-candy/social/timeline';
 ```
 
 ## Use when
@@ -44,8 +44,8 @@ import { TimelineView } from '@commonspace/social/timeline';
 
 ## Tokens
 
-- `--cs-border`
-- `--cs-surface`
+- `--popcandy-border`
+- `--popcandy-surface`
 
 ## Props
 

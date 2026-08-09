@@ -1,4 +1,4 @@
-import type { KnowledgeCatalog, TemplateDoc } from '@commonspace/knowledge';
+import type { KnowledgeCatalog, TemplateDoc } from '@unpopping-candy/knowledge';
 
 export type ScaffoldMode = 'dry-run' | 'apply';
 export type ScaffoldFileStatus = 'create' | 'unchanged' | 'conflict';

@@ -3,15 +3,15 @@ export default {
   "kind": "component",
   "id": "ui.tabs",
   "name": "Tabs",
-  "package": "@commonspace/ui",
+  "package": "@unpopping-candy/ui",
   "version": "0.1.0",
   "status": "stable",
   "category": "navigation",
   "summary": "Switches among peer views that share one context and URL or controlled state.",
   "sourcePath": "packages/ui/src/tabs/tabs.tsx",
   "entrypoints": [
-    "@commonspace/ui",
-    "@commonspace/ui/tabs"
+    "@unpopping-candy/ui",
+    "@unpopping-candy/ui/tabs"
   ],
   "keywords": [
     "tabs",
@@ -27,9 +27,9 @@ export default {
     "The targets are unrelated pages in global navigation."
   ],
   "tokens": [
-    "--cs-accent",
-    "--cs-border",
-    "--cs-focus"
+    "--popcandy-accent",
+    "--popcandy-border",
+    "--popcandy-focus"
   ],
   "related": [
     "ui.button"

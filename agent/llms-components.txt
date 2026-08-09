@@ -1,4 +1,4 @@
-# Commonspace UI components
+# Unpopping Candy components
 
 - [ConversationPreview](./components/social.conversation-preview.md): Presents a conversation summary with participants, latest message, time, and unread state.
 - [NotificationItem](./components/social.notification-item.md): Presents one social notification with actor context, event description, and optional target content.

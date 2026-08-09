@@ -3,14 +3,14 @@ export default {
   "kind": "component",
   "id": "ui.empty-state",
   "name": "EmptyState",
-  "package": "@commonspace/ui",
+  "package": "@unpopping-candy/ui",
   "version": "0.1.0",
   "status": "stable",
   "category": "feedback",
   "summary": "Explains why a meaningful region has no content and offers the next valid action.",
   "sourcePath": "packages/ui/src/empty-state/empty-state.tsx",
   "entrypoints": [
-    "@commonspace/ui"
+    "@unpopping-candy/ui"
   ],
   "keywords": [
     "empty",
@@ -26,9 +26,9 @@ export default {
     "The region failed to load; use Alert."
   ],
   "tokens": [
-    "--cs-ink",
-    "--cs-ink-muted",
-    "--cs-space-8"
+    "--popcandy-ink",
+    "--popcandy-ink-muted",
+    "--popcandy-space-8"
   ],
   "related": [
     "ui.alert",

@@ -1,29 +1,29 @@
 import type { ComponentProps, ComponentType, CSSProperties } from 'react';
 import { HomeOutlined } from '@ant-design/icons';
 
-export type CommonspaceIconSize = 'sm' | 'md' | 'lg' | number;
+export type UnpoppingCandyIconSize = 'sm' | 'md' | 'lg' | number;
 type AntIconProps = ComponentProps<typeof HomeOutlined>;
 
-export interface CommonspaceIconProps extends Omit<AntIconProps, 'aria-label'> {
-  size?: CommonspaceIconSize | undefined;
+export interface UnpoppingCandyIconProps extends Omit<AntIconProps, 'aria-label' | 'size'> {
+  size?: UnpoppingCandyIconSize | undefined;
   label?: string | undefined;
 }
 
-function sizeStyle(size: CommonspaceIconSize | undefined): CSSProperties | undefined {
+function sizeStyle(size: UnpoppingCandyIconSize | undefined): CSSProperties | undefined {
   return typeof size === 'number' ? { fontSize: `${size}px` } : undefined;
 }
 
-export function createCommonspaceIcon(
+export function createUnpoppingCandyIcon(
   AntIcon: ComponentType<AntIconProps>,
   semanticName: string,
 ) {
-  function CommonspaceIcon({ className, label, size = 'md', style, ...props }: CommonspaceIconProps) {
+  function UnpoppingCandyIcon({ className, label, size = 'md', style, ...props }: UnpoppingCandyIconProps) {
     return (
       <AntIcon
         {...props}
-        className={className ? `cs-icon ${className}` : 'cs-icon'}
-        data-cs-icon={semanticName}
-        data-cs-icon-size={typeof size === 'number' ? 'custom' : size}
+        className={className ? `popcandy-icon ${className}` : 'popcandy-icon'}
+        data-popcandy-icon={semanticName}
+        data-popcandy-icon-size={typeof size === 'number' ? 'custom' : size}
         aria-hidden={label ? undefined : true}
         aria-label={label}
         role={label ? 'img' : undefined}
@@ -32,6 +32,6 @@ export function createCommonspaceIcon(
     );
   }
 
-  CommonspaceIcon.displayName = semanticName;
-  return CommonspaceIcon;
+  UnpoppingCandyIcon.displayName = semanticName;
+  return UnpoppingCandyIcon;
 }

@@ -9,7 +9,7 @@ const publishCheck = process.argv.includes('--publish-check');
 const generatedAt = process.env.SOURCE_DATE_EPOCH
   ? new Date(Number(process.env.SOURCE_DATE_EPOCH) * 1_000).toISOString()
   : '2026-08-09T00:00:00.000Z';
-const config = JSON.parse(await readFile(join(root, 'figma/commonspace.figma.json'), 'utf8'));
+const config = JSON.parse(await readFile(join(root, 'figma/popcandy.figma.json'), 'utf8'));
 const manifest = createFigmaManifest(bundledCatalog, config, generatedAt);
 const issues = validateFigmaManifest(manifest, { allowPlaceholders: !publishCheck });
 const errors = issues.filter((issue) => issue.severity === 'error');

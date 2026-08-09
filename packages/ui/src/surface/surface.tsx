@@ -10,9 +10,9 @@ export function Surface({ border = false, className, padding = 'md', tone = 'bas
   return (
     <div
       {...props}
-      className={mergeClassNames('cs-surface', `cs-surface--${tone}`, `cs-surface--padding-${padding}`, border && 'cs-surface--bordered', className)}
-      data-cs-tone={tone}
-      data-cs-padding={padding}
+      className={mergeClassNames('popcandy-surface', `popcandy-surface--${tone}`, `popcandy-surface--padding-${padding}`, border && 'popcandy-surface--bordered', className)}
+      data-popcandy-tone={tone}
+      data-popcandy-padding={padding}
     />
   );
 }

@@ -1,15 +1,15 @@
 {
-  "name": "@commonspace/consumer-fixture",
+  "name": "@unpopping-candy/consumer-fixture",
   "version": "0.1.0",
   "private": true,
   "type": "module",
   "scripts": { "build": "vite build", "typecheck": "tsc --noEmit -p tsconfig.json" },
   "dependencies": {
-    "@commonspace/icons": "workspace:*",
-    "@commonspace/social": "workspace:*",
-    "@commonspace/theme": "workspace:*",
-    "@commonspace/tokens": "workspace:*",
-    "@commonspace/ui": "workspace:*",
+    "@unpopping-candy/icons": "workspace:*",
+    "@unpopping-candy/social": "workspace:*",
+    "@unpopping-candy/theme": "workspace:*",
+    "@unpopping-candy/tokens": "workspace:*",
+    "@unpopping-candy/ui": "workspace:*",
     "react": "19.2.8",
     "react-dom": "19.2.8"
   },

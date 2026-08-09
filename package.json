@@ -1,5 +1,5 @@
 {
-  "name": "commonspace-ui-monorepo",
+  "name": "unpopping-candy-design",
   "version": "0.1.0",
   "private": true,
   "type": "module",
@@ -8,11 +8,11 @@
     "node": ">=22.13.0"
   },
   "scripts": {
-    "build": "pnpm --recursive --filter './packages/**' build && pnpm --filter @commonspace/playground build && pnpm --filter @commonspace/agent-lab build && pnpm --filter @commonspace/consumer-fixture build && pnpm --filter @commonspace/docs build-storybook",
+    "build": "pnpm --recursive --filter './packages/**' build && pnpm --filter @unpopping-candy/playground build && pnpm --filter @unpopping-candy/agent-lab build && pnpm --filter @unpopping-candy/consumer-fixture build && pnpm --filter @unpopping-candy/docs build-storybook",
     "build:packages": "pnpm --recursive --filter './packages/**' build",
     "changeset": "changeset",
     "clean": "node scripts/clean.mjs",
-    "dev": "pnpm --parallel --filter @commonspace/playground --filter @commonspace/docs --filter @commonspace/agent-lab dev",
+    "dev": "pnpm --parallel --filter @unpopping-candy/playground --filter @unpopping-candy/docs --filter @unpopping-candy/agent-lab dev",
     "format": "prettier --write .",
     "format:check": "prettier --check .",
     "lint": "eslint .",
@@ -27,7 +27,7 @@
     "knowledge:check": "node --experimental-strip-types scripts/generate-knowledge.mjs --check",
     "agent:generate": "npm run knowledge:generate && npm run registry:generate && npm run stories:generate && node --experimental-strip-types scripts/generate-agent-docs.mjs && npm run skills:generate && npm run evals:generate && npm run figma:generate",
     "agent:check": "npm run knowledge:check && npm run registry:check && npm run stories:check && node --experimental-strip-types scripts/generate-agent-docs.mjs --check && npm run skills:check && npm run evals:check && npm run figma:check",
-    "commonspace": "node --experimental-strip-types packages/cli/src/bin.ts",
+    "popcandy": "node --experimental-strip-types packages/cli/src/bin.ts",
     "skills:generate": "node scripts/verify-skills.mjs --write",
     "skills:check": "node scripts/verify-skills.mjs --check",
     "mcp:dev": "node --experimental-strip-types packages/mcp/src/stdio.ts",

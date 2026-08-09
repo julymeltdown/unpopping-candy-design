@@ -3,15 +3,15 @@ export default {
   "kind": "component",
   "id": "social.timeline-view",
   "name": "TimelineView",
-  "package": "@commonspace/social",
+  "package": "@unpopping-candy/social",
   "version": "0.1.0",
   "status": "stable",
   "category": "timeline",
   "summary": "Composes timeline states and rendered post rows without owning pagination or virtualization.",
   "sourcePath": "packages/social/src/timeline/timeline-view.tsx",
   "entrypoints": [
-    "@commonspace/social",
-    "@commonspace/social/timeline"
+    "@unpopping-candy/social",
+    "@unpopping-candy/social/timeline"
   ],
   "keywords": [
     "timeline",
@@ -27,8 +27,8 @@ export default {
     "A static arbitrary list has no social semantics."
   ],
   "tokens": [
-    "--cs-border",
-    "--cs-surface"
+    "--popcandy-border",
+    "--popcandy-surface"
   ],
   "related": [
     "social.post-card",

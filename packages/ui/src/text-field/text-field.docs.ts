@@ -3,15 +3,15 @@ export default {
   "kind": "component",
   "id": "ui.text-field",
   "name": "TextField",
-  "package": "@commonspace/ui",
+  "package": "@unpopping-candy/ui",
   "version": "0.1.0",
   "status": "stable",
   "category": "form",
   "summary": "Collects one short value with label, description, validation, and native input semantics.",
   "sourcePath": "packages/ui/src/text-field/text-field.tsx",
   "entrypoints": [
-    "@commonspace/ui",
-    "@commonspace/ui/forms"
+    "@unpopping-candy/ui",
+    "@unpopping-candy/ui/forms"
   ],
   "keywords": [
     "input",
@@ -27,10 +27,10 @@ export default {
     "A fixed choice set is known; use a selection control."
   ],
   "tokens": [
-    "--cs-field-height",
-    "--cs-border",
-    "--cs-focus",
-    "--cs-critical"
+    "--popcandy-field-height",
+    "--popcandy-border",
+    "--popcandy-focus",
+    "--popcandy-critical"
   ],
   "related": [
     "ui.text-area",

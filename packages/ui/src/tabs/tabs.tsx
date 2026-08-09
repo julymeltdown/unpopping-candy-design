@@ -77,9 +77,9 @@ export function Tabs<TValue extends string>({
 
   return (
     <div
-      className={mergeClassNames('cs-tabs', `cs-tabs--${orientation}`, className)}
-      data-cs-component="tabs"
-      data-cs-orientation={orientation}
+      className={mergeClassNames('popcandy-tabs', `popcandy-tabs--${orientation}`, className)}
+      data-popcandy-component="tabs"
+      data-popcandy-orientation={orientation}
       role="tablist"
       aria-label={ariaLabel}
       aria-orientation={orientation}
@@ -100,8 +100,8 @@ export function Tabs<TValue extends string>({
             aria-selected={selected}
             tabIndex={selected ? 0 : -1}
             disabled={item.disabled}
-            data-cs-state={selected ? 'selected' : item.disabled ? 'disabled' : 'idle'}
-            className={mergeClassNames('cs-tabs__tab', selected && 'is-selected')}
+            data-popcandy-state={selected ? 'selected' : item.disabled ? 'disabled' : 'idle'}
+            className={mergeClassNames('popcandy-tabs__tab', selected && 'is-selected')}
             onClick={() => setValue(item.value)}
           >
             {item.label}

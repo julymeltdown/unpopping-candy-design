@@ -1,8 +1,8 @@
-# Commonspace MCP server
+# Unpopping Candy MCP server
 
 ## Purpose
 
-`@commonspace/mcp` exposes the exact Commonspace catalog through Model Context Protocol without duplicating the knowledge store. It is designed for local `stdio` use first.
+`@unpopping-candy/mcp` exposes the exact Unpopping Candy catalog through Model Context Protocol without duplicating the knowledge store. It is designed for local `stdio` use first.
 
 ```bash
 npm run mcp:dev
@@ -11,7 +11,7 @@ npm run mcp:dev
 After publication:
 
 ```bash
-npx @commonspace/mcp
+npx @unpopping-candy/mcp
 ```
 
 Configuration examples are committed under [`agent/mcp`](../agent/mcp/README.md).
@@ -22,11 +22,11 @@ Configuration examples are committed under [`agent/mcp`](../agent/mcp/README.md)
 MCP client
    │
    ▼
-@commonspace/mcp
-   ├─ @commonspace/knowledge
-   ├─ @commonspace/cli
-   ├─ @commonspace/registry
-   └─ @commonspace/tokens
+@unpopping-candy/mcp
+   ├─ @unpopping-candy/knowledge
+   ├─ @unpopping-candy/cli
+   ├─ @unpopping-candy/registry
+   └─ @unpopping-candy/tokens
 ```
 
 The MCP server does not contain component-specific business logic and does not call an LLM.
@@ -36,47 +36,47 @@ The MCP server does not contain component-specific business logic and does not c
 Static resources:
 
 ```text
-commonspace://design/current
-commonspace://catalog
-commonspace://tokens
-commonspace://registry
-commonspace://project/info
+popcandy://design/current
+popcandy://catalog
+popcandy://tokens
+popcandy://registry
+popcandy://project/info
 ```
 
 Dynamic resources:
 
 ```text
-commonspace://components/{id}
-commonspace://patterns/{id}
-commonspace://templates/{id}
-commonspace://migrations/{id}
+popcandy://components/{id}
+popcandy://patterns/{id}
+popcandy://templates/{id}
+popcandy://migrations/{id}
 ```
 
 The server advertises a bounded resource template for each knowledge kind. Reading an unknown stable ID fails.
 
 ## Tools
 
-### `commonspace_project_info`
+### `popcandy_project_info`
 
-Detects framework, package manager, configuration, installed Commonspace versions, source roots, and style imports.
+Detects framework, package manager, configuration, installed Unpopping Candy versions, source roots, and style imports.
 
-### `commonspace_search`
+### `popcandy_search`
 
 Returns bounded, scored component, pattern, template, or migration results.
 
-### `commonspace_get`
+### `popcandy_get`
 
 Returns one exact structured entry by stable ID.
 
-### `commonspace_compose`
+### `popcandy_compose`
 
 Creates a bounded implementation plan from a product request.
 
-### `commonspace_validate`
+### `popcandy_validate`
 
 Scans the selected project without mutation.
 
-### `commonspace_scaffold`
+### `popcandy_scaffold`
 
 Returns a dry-run template plan by default. `apply: true` is required to write.
 
@@ -124,6 +124,6 @@ Run the MCP with the minimum filesystem permissions appropriate to the selected 
 
 ## Storybook MCP relationship
 
-Commonspace MCP answers **what should be used and how it is contracted**. Storybook MCP answers **how the actual component or generated story renders and behaves in a browser**.
+Unpopping Candy MCP answers **what should be used and how it is contracted**. Storybook MCP answers **how the actual component or generated story renders and behaves in a browser**.
 
-Do not duplicate Storybook browser execution inside Commonspace MCP.
+Do not duplicate Storybook browser execution inside Unpopping Candy MCP.

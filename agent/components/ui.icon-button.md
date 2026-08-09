@@ -1,17 +1,17 @@
 # IconButton
 
-> `ui.icon-button` · `@commonspace/ui` · stable · version 0.1.0
+> `ui.icon-button` · `@unpopping-candy/ui` · stable · version 0.1.0
 
 Triggers a frequent action where a well-known icon can replace visible text.
 
 ## Import
 
 ```tsx
-import { IconButton } from '@commonspace/ui';
+import { IconButton } from '@unpopping-candy/ui';
 ```
 
 ```tsx
-import { IconButton } from '@commonspace/ui/button';
+import { IconButton } from '@unpopping-candy/ui/button';
 ```
 
 ## Use when
@@ -46,9 +46,9 @@ import { IconButton } from '@commonspace/ui/button';
 
 ## Tokens
 
-- `--cs-button-height-md`
-- `--cs-focus`
-- `--cs-ink-muted`
+- `--popcandy-button-height-md`
+- `--popcandy-focus`
+- `--popcandy-ink-muted`
 
 ## Props
 

@@ -2,16 +2,16 @@
 
 ## Current status
 
-Public publication is intentionally blocked.
+Public publication has not been executed. Repository-level prerequisites are configured, while npm organization and release-environment approval remain external steps.
 
 ```text
-repository license  UNLICENSED
-package licenses    UNLICENSED
-pnpm-lock.yaml      not committed
-npm release         not approved
+repository license  MIT
+package licenses    MIT
+pnpm-lock.yaml      committed
+npm release         not executed
 ```
 
-The manual release workflow calls `pnpm release:check` and fails until these blockers are removed.
+The manual release workflow calls `npm run release:check` before any publish action.
 
 ## Preconditions
 
@@ -114,11 +114,11 @@ The command repeats release readiness, builds packages, and invokes Changesets p
 Before first publication and after changes to package files or exports:
 
 ```bash
-pnpm --filter @commonspace/ui pack
-pnpm --filter @commonspace/social pack
-pnpm --filter @commonspace/knowledge pack
-pnpm --filter @commonspace/cli pack
-pnpm --filter @commonspace/mcp pack
+pnpm --filter @unpopping-candy/ui pack
+pnpm --filter @unpopping-candy/social pack
+pnpm --filter @unpopping-candy/knowledge pack
+pnpm --filter @unpopping-candy/cli pack
+pnpm --filter @unpopping-candy/mcp pack
 ```
 
 Inspect every tarball for:
@@ -140,8 +140,8 @@ Build packages first, then build `apps/consumer-fixture` without source aliases.
 
 ```bash
 pnpm build:packages
-pnpm --filter @commonspace/consumer-fixture typecheck
-pnpm --filter @commonspace/consumer-fixture build
+pnpm --filter @unpopping-candy/consumer-fixture typecheck
+pnpm --filter @unpopping-candy/consumer-fixture build
 ```
 
 The fixture must consume only package exports.
@@ -166,8 +166,8 @@ Verify:
 ## Storybook acceptance
 
 ```bash
-pnpm --filter @commonspace/docs test
-pnpm --filter @commonspace/docs build-storybook
+pnpm --filter @unpopping-candy/docs test
+pnpm --filter @unpopping-candy/docs build-storybook
 ```
 
 Inspect the Storybook artifact and ensure the MCP endpoint configuration corresponds to the released docs version.

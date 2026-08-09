@@ -3,15 +3,15 @@ export default {
   "kind": "component",
   "id": "ui.spinner",
   "name": "Spinner",
-  "package": "@commonspace/ui",
+  "package": "@unpopping-candy/ui",
   "version": "0.1.0",
   "status": "stable",
   "category": "loading",
   "summary": "Indicates an indeterminate operation in a compact region.",
   "sourcePath": "packages/ui/src/spinner/spinner.tsx",
   "entrypoints": [
-    "@commonspace/ui",
-    "@commonspace/ui/loading"
+    "@unpopping-candy/ui",
+    "@unpopping-candy/ui/loading"
   ],
   "keywords": [
     "spinner",
@@ -27,8 +27,8 @@ export default {
     "Progress is measurable; use a determinate progress indicator."
   ],
   "tokens": [
-    "--cs-accent",
-    "--cs-motion-fast"
+    "--popcandy-accent",
+    "--popcandy-motion-fast"
   ],
   "related": [
     "ui.skeleton",

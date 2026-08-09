@@ -5,8 +5,8 @@ export default {
   "name": "Vite app shell",
   "version": "0.2.0",
   "status": "stable",
-  "summary": "A minimal React and Vite shell with Commonspace theme and feedback providers.",
-  "description": "A minimal React and Vite shell with Commonspace theme and feedback providers.",
+  "summary": "A minimal React and Vite shell with Unpopping Candy theme and feedback providers.",
+  "description": "A minimal React and Vite shell with Unpopping Candy theme and feedback providers.",
   "keywords": [
     "vite",
     "app",
@@ -14,7 +14,7 @@ export default {
     "template"
   ],
   "useWhen": [
-    "A minimal React and Vite shell with Commonspace theme and feedback providers."
+    "A minimal React and Vite shell with Unpopping Candy theme and feedback providers."
   ],
   "avoidWhen": [
     "The target project uses a different framework or the requested surface is substantially smaller."

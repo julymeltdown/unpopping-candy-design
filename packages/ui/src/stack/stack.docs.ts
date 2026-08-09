@@ -3,15 +3,15 @@ export default {
   "kind": "component",
   "id": "ui.stack",
   "name": "Stack",
-  "package": "@commonspace/ui",
+  "package": "@unpopping-candy/ui",
   "version": "0.1.0",
   "status": "stable",
   "category": "layout",
   "summary": "Arranges a vertical reading or task sequence with tokenized spacing.",
   "sourcePath": "packages/ui/src/stack/stack.tsx",
   "entrypoints": [
-    "@commonspace/ui",
-    "@commonspace/ui/layout"
+    "@unpopping-candy/ui",
+    "@unpopping-candy/ui/layout"
   ],
   "keywords": [
     "stack",
@@ -26,11 +26,11 @@ export default {
     "Items form a compact horizontal group; use Inline."
   ],
   "tokens": [
-    "--cs-space-1",
-    "--cs-space-2",
-    "--cs-space-3",
-    "--cs-space-4",
-    "--cs-space-6"
+    "--popcandy-space-1",
+    "--popcandy-space-2",
+    "--popcandy-space-3",
+    "--popcandy-space-4",
+    "--popcandy-space-6"
   ],
   "related": [
     "ui.inline",

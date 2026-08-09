@@ -1,8 +1,8 @@
 {
-  "name": "@commonspace/knowledge",
+  "name": "@unpopping-candy/knowledge",
   "version": "0.2.0",
-  "description": "Canonical structured design-system knowledge, generators, and search for Commonspace UI.",
-  "license": "UNLICENSED",
+  "description": "Canonical structured design-system knowledge, generators, and search for Unpopping Candy.",
+  "license": "MIT",
   "type": "module",
   "files": ["dist", "README.md"],
   "sideEffects": false,

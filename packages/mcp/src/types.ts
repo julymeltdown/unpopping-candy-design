@@ -1,6 +1,6 @@
-import type { KnowledgeCatalog, KnowledgeEntry, SearchResult } from '@commonspace/knowledge';
-import type { CommonspaceProjectInfo, CompositionPlan, ValidationReport } from '@commonspace/cli';
-import type { RegistryManifest, ScaffoldInput, ScaffoldResult } from '@commonspace/registry';
+import type { KnowledgeCatalog, KnowledgeEntry, SearchResult } from '@unpopping-candy/knowledge';
+import type { PopcandyProjectInfo, CompositionPlan, ValidationReport } from '@unpopping-candy/cli';
+import type { RegistryManifest, ScaffoldInput, ScaffoldResult } from '@unpopping-candy/registry';
 
 export interface McpResourceDescriptor {
   uri: string;
@@ -24,7 +24,7 @@ export interface McpDomainServices {
   catalog: KnowledgeCatalog;
   designMarkdown: string;
   tokens: Record<string, unknown>;
-  projectInfo(path: string): Promise<CommonspaceProjectInfo>;
+  projectInfo(path: string): Promise<PopcandyProjectInfo>;
   validate(path: string): Promise<ValidationReport>;
   search(query: string, options?: { kind?: KnowledgeEntry['kind']; limit?: number }): readonly SearchResult[];
   get(idOrName: string): KnowledgeEntry | undefined;
@@ -33,15 +33,15 @@ export interface McpDomainServices {
   scaffold(input: ScaffoldInput): Promise<ScaffoldResult>;
 }
 
-export interface CommonspaceMcpDomain {
+export interface PopcandyMcpDomain {
   listResources(): readonly McpResourceDescriptor[];
   readResource(uri: string, projectPath?: string): Promise<McpResourceContent>;
-  projectInfo(input: { path?: string }): Promise<unknown>;
-  search(input: { query: string; kind?: KnowledgeEntry['kind']; limit?: number }): unknown;
+  projectInfo(input: { path?: string | undefined }): Promise<unknown>;
+  search(input: { query: string; kind?: KnowledgeEntry['kind'] | undefined; limit?: number | undefined }): unknown;
   get(input: { id: string }): unknown;
   compose(input: { request: string }): unknown;
-  validate(input: { path?: string }): Promise<unknown>;
-  scaffold(input: { templateId: string; path?: string; targetDirectory?: string; variables?: Readonly<Record<string, string>>; apply?: boolean }): Promise<unknown>;
+  validate(input: { path?: string | undefined }): Promise<unknown>;
+  scaffold(input: { templateId: string; path?: string | undefined; targetDirectory?: string | undefined; variables?: Readonly<Record<string, string>> | undefined; apply?: boolean | undefined }): Promise<unknown>;
   listPrompts(): readonly McpPromptDefinition[];
   getPrompt(name: McpPromptDefinition['name'], args: Record<string, string | undefined>): { description: string; text: string };
 }

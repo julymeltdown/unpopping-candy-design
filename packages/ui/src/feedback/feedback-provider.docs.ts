@@ -3,15 +3,15 @@ export default {
   "kind": "component",
   "id": "ui.feedback-provider",
   "name": "FeedbackProvider",
-  "package": "@commonspace/ui",
+  "package": "@unpopping-candy/ui",
   "version": "0.1.0",
   "status": "stable",
   "category": "feedback",
   "summary": "Owns the application-level transient feedback queue and exposes a bounded controller.",
   "sourcePath": "packages/ui/src/feedback/feedback-provider.tsx",
   "entrypoints": [
-    "@commonspace/ui",
-    "@commonspace/ui/feedback"
+    "@unpopping-candy/ui",
+    "@unpopping-candy/ui/feedback"
   ],
   "keywords": [
     "toast",
@@ -26,8 +26,8 @@ export default {
     "Feedback belongs permanently beside a field or panel; use Alert."
   ],
   "tokens": [
-    "--cs-dialog-width-sm",
-    "--cs-shadow-dialog"
+    "--popcandy-dialog-width-sm",
+    "--popcandy-shadow-dialog"
   ],
   "related": [
     "ui.toast",

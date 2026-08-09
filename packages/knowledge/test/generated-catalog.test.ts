@@ -3,11 +3,10 @@ import test from 'node:test';
 import { bundledCatalog, getCatalogEntry, searchCatalog, validateCatalog } from '../src/index.ts';
 
 test('bundled catalog contains every stable public surface', () => {
-  const counts = Object.groupBy(bundledCatalog.entries, (entry) => entry.kind);
-  assert.equal(counts.component?.length, 32);
-  assert.equal(counts.pattern?.length, 6);
-  assert.equal(counts.template?.length, 5);
-  assert.equal(counts.migration?.length, 1);
+  assert.equal(bundledCatalog.entries.filter((entry) => entry.kind === 'component').length, 32);
+  assert.equal(bundledCatalog.entries.filter((entry) => entry.kind === 'pattern').length, 6);
+  assert.equal(bundledCatalog.entries.filter((entry) => entry.kind === 'template').length, 5);
+  assert.equal(bundledCatalog.entries.filter((entry) => entry.kind === 'migration').length, 1);
   assert.deepEqual(validateCatalog(bundledCatalog), []);
 });
 
@@ -17,7 +16,7 @@ test('bundled catalog exposes version-aware component guidance', () => {
   assert.equal(button?.version, '0.1.0');
   assert.equal(button?.kind, 'component');
   if (button?.kind !== 'component') throw new Error('Button metadata must be a component.');
-  assert.ok(button.entrypoints.includes('@commonspace/ui/button'));
+  assert.ok(button.entrypoints.includes('@unpopping-candy/ui/button'));
   assert.ok(button.accessibility.requirements.length >= 2);
   assert.ok(button.stories.includes('catalog-ui-button--contract'));
 });

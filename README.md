@@ -1,14 +1,14 @@
-# Commonspace UI
+# Unpopping Candy
 
-**Commonspace UI is a publishable React design system and an AI-operable knowledge platform for building social, content, moderation, and collaboration interfaces.**
+**Unpopping Candy is a publishable React design system and an AI-operable knowledge platform for building social, content, moderation, and collaboration interfaces.**
 
 It combines five conventional design-system packages with a structured knowledge compiler, deterministic CLI, Agent Skills, a compressed MCP server, a checksum-backed template Registry, Storybook contracts, agent-output evaluations, and Figma Code Connect templates.
 
-![Commonspace UI component overview](./docs/preview/captures/commonspace-ui-overview.png)
+![Unpopping Candy component overview](./docs/preview/captures/unpopping-candy-overview.png)
 
 ## What this repository is
 
-Commonspace UI is designed to support two equally important consumers.
+Unpopping Candy is designed to support two equally important consumers.
 
 ```text
 Human developers and designers
@@ -34,7 +34,7 @@ The core proposition is not “put a large Markdown file in the prompt.” It is
 
 ## What this repository is not
 
-Commonspace UI is not:
+Unpopping Candy is not:
 
 - an application framework;
 - an authentication or authorization system;
@@ -70,9 +70,9 @@ Application state, API calls, routing, JWTs, server entities, and business workf
 | Agent Lab evaluation viewer | Implemented |
 | Figma Code Connect template generation | Implemented |
 | Real Figma component-node mappings | **Not configured; publish gate intentionally fails** |
-| Dependency lockfile | **Not committed yet** |
-| Public npm publication | **Blocked by UNLICENSED repository status** |
-| Full dependency-aware build in this delivery environment | Verified only if dependency installation succeeds; see QA report |
+| Dependency lockfile | Generated and committed with the workspace |
+| Public npm publication | Not executed; MIT and lockfile prerequisites are configured |
+| Full dependency-aware build in this delivery environment | Verified |
 
 Canonical catalog inventory:
 
@@ -96,7 +96,7 @@ Canonical catalog inventory:
 # Repository architecture
 
 ```text
-commonspace-ui/
+unpopping-candy-design/
 ├─ apps/
 │  ├─ docs/                    Storybook documentation and MCP endpoint
 │  ├─ playground/              source-linked Vite development app
@@ -126,14 +126,14 @@ commonspace-ui/
 │
 ├─ figma/
 │  ├─ code-connect/            generated `.figma.ts` templates
-│  ├─ commonspace.figma.json   mapping configuration
+│  ├─ popcandy.figma.json   mapping configuration
 │  └─ manifest.json            connection status
 │
-├─ schemas/                    Commonspace configuration JSON Schema
+├─ schemas/                    Unpopping Candy configuration JSON Schema
 ├─ docs/                       architecture, workflows, ADRs, QA, publishing
 ├─ scripts/                    generators and deterministic gates
 ├─ tests/architecture/         verifier regression tests
-├─ commonspace.config.json     local AI integration map
+├─ popcandy.config.json     local AI integration map
 ├─ AGENTS.md                   mandatory agent operating contract
 └─ DESIGN.md                   generated portable design contract
 ```
@@ -141,15 +141,15 @@ commonspace-ui/
 ## Runtime package graph
 
 ```text
-@commonspace/tokens
-    ├──────────────→ @commonspace/theme
-    ├──────────────→ @commonspace/icons
-    ├──────────────→ @commonspace/ui
-    └──────────────→ @commonspace/social
+@unpopping-candy/tokens
+    ├──────────────→ @unpopping-candy/theme
+    ├──────────────→ @unpopping-candy/icons
+    ├──────────────→ @unpopping-candy/ui
+    └──────────────→ @unpopping-candy/social
 
-@commonspace/icons ───────────→ @commonspace/ui
-@commonspace/icons ───────────→ @commonspace/social
-@commonspace/ui ──────────────→ @commonspace/social
+@unpopping-candy/icons ───────────→ @unpopping-candy/ui
+@unpopping-candy/icons ───────────→ @unpopping-candy/social
+@unpopping-candy/ui ──────────────→ @unpopping-candy/social
 ```
 
 ## AI knowledge plane
@@ -163,7 +163,7 @@ Registry templates
 Storybook contract stories
                  │
                  ▼
-       @commonspace/knowledge
+       @unpopping-candy/knowledge
                  │
    ┌─────────────┼───────────────┬────────────────┐
    ▼             ▼               ▼                ▼
@@ -171,7 +171,7 @@ DESIGN.md     llms files     JSON manifests   component docs
    │             │               │                │
    └─────────────┴─────────┬─────┴──────────┬─────┘
                            ▼                ▼
-                  @commonspace/cli   @commonspace/registry
+                  @unpopping-candy/cli   @unpopping-candy/registry
                            │                │
                            ├────────┬───────┤
                            ▼        ▼       ▼
@@ -198,16 +198,16 @@ The packages are currently source-complete but not publicly published. In a work
 
 ```bash
 pnpm add \
-  @commonspace/tokens \
-  @commonspace/theme \
-  @commonspace/icons \
-  @commonspace/ui
+  @unpopping-candy/tokens \
+  @unpopping-candy/theme \
+  @unpopping-candy/icons \
+  @unpopping-candy/ui
 ```
 
 For social product patterns:
 
 ```bash
-pnpm add @commonspace/social
+pnpm add @unpopping-candy/social
 ```
 
 React and React DOM are peer dependencies.
@@ -222,29 +222,29 @@ react-dom  >=18.3 <20
 Import global package styles once at the application entry.
 
 ```tsx
-import '@commonspace/tokens/styles.css';
-import '@commonspace/icons/styles.css';
-import '@commonspace/ui/styles.css';
-import '@commonspace/social/styles.css';
+import '@unpopping-candy/tokens/styles.css';
+import '@unpopping-candy/icons/styles.css';
+import '@unpopping-candy/ui/styles.css';
+import '@unpopping-candy/social/styles.css';
 ```
 
-The `social` stylesheet is only required when using `@commonspace/social`.
+The `social` stylesheet is only required when using `@unpopping-candy/social`.
 
 ## Provider
 
 ```tsx
-import { CommonspaceProvider } from '@commonspace/theme';
+import { UnpoppingCandyProvider } from '@unpopping-candy/theme';
 
 export function Root() {
   return (
-    <CommonspaceProvider
+    <UnpoppingCandyProvider
       scope="document"
       theme="system"
       density="comfortable"
       accent="blue"
     >
       <App />
-    </CommonspaceProvider>
+    </UnpoppingCandyProvider>
   );
 }
 ```
@@ -257,7 +257,7 @@ import {
   Button,
   Stack,
   TextField,
-} from '@commonspace/ui';
+} from '@unpopping-candy/ui';
 
 export function ProfileSettings() {
   return (
@@ -282,26 +282,26 @@ export function ProfileSettings() {
 Stable subpath imports are also available.
 
 ```tsx
-import { Button } from '@commonspace/ui/button';
-import { Stack, Inline } from '@commonspace/ui/layout';
+import { Button } from '@unpopping-candy/ui/button';
+import { Stack, Inline } from '@unpopping-candy/ui/layout';
 ```
 
 Private imports are not supported.
 
 ```tsx
 // Invalid
-import { Button } from '@commonspace/ui/src/button/button';
+import { Button } from '@unpopping-candy/ui/src/button/button';
 ```
 
 ## Social presentation components
 
-`@commonspace/social` consumes presentation models and callbacks. It does not fetch data, mutate a cache, navigate, or read authentication state.
+`@unpopping-candy/social` consumes presentation models and callbacks. It does not fetch data, mutate a cache, navigate, or read authentication state.
 
 ```tsx
 import {
   PostCard,
   type SocialPostViewModel,
-} from '@commonspace/social/post';
+} from '@unpopping-candy/social/post';
 
 const post: SocialPostViewModel = mapApiPost(apiPost);
 
@@ -321,7 +321,7 @@ Data boundary:
 ```text
 REST / GraphQL / Firebase / local fixture
 → consumer entity mapper
-→ Commonspace presentation model
+→ Unpopping Candy presentation model
 → social component
 ```
 
@@ -329,7 +329,7 @@ REST / GraphQL / Firebase / local fixture
 
 # Packages
 
-## `@commonspace/tokens`
+## `@unpopping-candy/tokens`
 
 Provides reference, semantic, and component token layers.
 
@@ -350,41 +350,41 @@ Raw scales for:
 Public intent-based variables include:
 
 ```css
---cs-canvas
---cs-surface
---cs-surface-muted
---cs-ink
---cs-ink-muted
---cs-border
---cs-accent
---cs-positive
---cs-warning
---cs-critical
---cs-focus-ring
+--popcandy-canvas
+--popcandy-surface
+--popcandy-surface-muted
+--popcandy-ink
+--popcandy-ink-muted
+--popcandy-border
+--popcandy-accent
+--popcandy-positive
+--popcandy-warning
+--popcandy-critical
+--popcandy-focus-ring
 ```
 
 ### Component tokens
 
 ```css
---cs-button-height-sm
---cs-button-height-md
---cs-field-height
---cs-dialog-width-md
+--popcandy-button-height-sm
+--popcandy-button-height-md
+--popcandy-field-height
+--popcandy-dialog-width-md
 ```
 
 ### Consumption
 
 ```tsx
-import '@commonspace/tokens/styles.css';
+import '@unpopping-candy/tokens/styles.css';
 import {
   referenceColors,
   semanticTokenNames,
   componentDimensions,
-} from '@commonspace/tokens';
-import tokens from '@commonspace/tokens/tokens.json';
+} from '@unpopping-candy/tokens';
+import tokens from '@unpopping-candy/tokens/tokens.json';
 ```
 
-## `@commonspace/theme`
+## `@unpopping-candy/theme`
 
 Provides scoped theme behavior without forcing CSS-in-JS.
 
@@ -415,29 +415,29 @@ neutral
 Local scope:
 
 ```tsx
-<CommonspaceProvider theme="dark" density="compact" accent="violet">
+<UnpoppingCandyProvider theme="dark" density="compact" accent="violet">
   <MediaWorkspace />
-</CommonspaceProvider>
+</UnpoppingCandyProvider>
 ```
 
 Consumer overrides:
 
 ```tsx
-<CommonspaceProvider
+<UnpoppingCandyProvider
   variables={{
-    '--cs-accent': '#0057ff',
-    '--cs-button-height-md': '42px',
+    '--popcandy-accent': '#0057ff',
+    '--popcandy-button-height-md': '42px',
   }}
 >
   <App />
-</CommonspaceProvider>
+</UnpoppingCandyProvider>
 ```
 
 The package sanitizes persisted values and supplies a safe bootstrap script to reduce first-paint theme flashes.
 
 See [Theming](./docs/THEMING.md).
 
-## `@commonspace/icons`
+## `@unpopping-candy/icons`
 
 Wraps Ant Design Icons behind semantic product names.
 
@@ -448,10 +448,10 @@ import {
   ReplyIcon,
   RepostIcon,
   SearchIcon,
-} from '@commonspace/icons';
+} from '@unpopping-candy/icons';
 ```
 
-Consumers do not depend on Ant Design source names. The backing icon can change without changing the semantic Commonspace import.
+Consumers do not depend on Ant Design source names. The backing icon can change without changing the semantic Unpopping Candy import.
 
 The icon contract includes:
 
@@ -461,7 +461,7 @@ The icon contract includes:
 - decorative `aria-hidden` behavior;
 - accessible labels for meaningful standalone icons.
 
-## `@commonspace/ui`
+## `@unpopping-candy/ui`
 
 General styled React components.
 
@@ -477,7 +477,7 @@ General styled React components.
 | Layout | `Container`, `Stack`, `Inline`, `Surface`, `Separator` |
 | Accessibility | `EmptyState`, `VisuallyHidden` |
 
-Public components expose native props and refs where appropriate, plus documented `data-cs-*` state attributes.
+Public components expose native props and refs where appropriate, plus documented `data-popcandy-*` state attributes.
 
 ### Feedback queue
 
@@ -502,7 +502,7 @@ Queue behavior:
 - timer cleanup on provider unmount;
 - runtime validation of title, tone, duration, action, and identity.
 
-## `@commonspace/social`
+## `@unpopping-candy/social`
 
 API-independent social product patterns.
 
@@ -528,7 +528,7 @@ backend API DTOs
 Authorization headers
 ```
 
-## `@commonspace/knowledge`
+## `@unpopping-candy/knowledge`
 
 Canonical typed design-system knowledge.
 
@@ -547,18 +547,18 @@ import {
   bundledCatalog,
   getCatalogEntry,
   searchCatalog,
-} from '@commonspace/knowledge';
+} from '@unpopping-candy/knowledge';
 ```
 
 It has no React runtime and performs no network requests.
 
-## `@commonspace/registry`
+## `@unpopping-candy/registry`
 
 Versioned templates with deterministic SHA-256 manifests and guarded local scaffolding.
 
 ```ts
-import { bundledCatalog } from '@commonspace/knowledge';
-import { createRegistryService } from '@commonspace/registry';
+import { bundledCatalog } from '@unpopping-candy/knowledge';
+import { createRegistryService } from '@unpopping-candy/registry';
 
 const registry = createRegistryService({
   catalog: bundledCatalog,
@@ -574,31 +574,31 @@ const plan = await registry.scaffold({
 
 See [Registry](./docs/REGISTRY.md).
 
-## `@commonspace/cli`
+## `@unpopping-candy/cli`
 
 Deterministic project inspection, search, composition, validation, and scaffold interface.
 
 ```bash
-commonspace info --json
-commonspace search "profile settings" --json
-commonspace get ui.button --json
-commonspace compose "moderation queue" --json
-commonspace validate . --json
-commonspace doctor --json
+popcandy info --json
+popcandy search "profile settings" --json
+popcandy get ui.button --json
+popcandy compose "moderation queue" --json
+popcandy validate . --json
+popcandy doctor --json
 ```
 
 See [CLI](./docs/CLI.md).
 
-## `@commonspace/mcp`
+## `@unpopping-candy/mcp`
 
 Local MCP server over the same catalog and operational services used by CLI.
 
 ```json
 {
   "mcpServers": {
-    "commonspace": {
+    "popcandy": {
       "command": "npx",
-      "args": ["-y", "@commonspace/mcp@0.2.0"]
+      "args": ["-y", "@unpopping-candy/mcp@0.2.0"]
     }
   }
 }
@@ -608,20 +608,20 @@ It exposes general project, search, get, compose, validate, and scaffold tools r
 
 See [MCP](./docs/MCP.md).
 
-## `@commonspace/evals`
+## `@unpopping-candy/evals`
 
 Deterministic source evaluation against the exact catalog.
 
 ```ts
-import { bundledCatalog } from '@commonspace/knowledge';
-import { evaluateAgentOutput } from '@commonspace/evals';
+import { bundledCatalog } from '@unpopping-candy/knowledge';
+import { evaluateAgentOutput } from '@unpopping-candy/evals';
 
 const report = evaluateAgentOutput(bundledCatalog, scenario);
 ```
 
 See [Agent evaluations](./docs/AGENT_EVALS.md).
 
-## `@commonspace/figma`
+## `@unpopping-candy/figma`
 
 Generates Code Connect manifests and parserless `.figma.ts` templates from the component catalog.
 
@@ -642,7 +642,7 @@ See [Figma integration](./docs/FIGMA.md).
 ## 1. Project detection
 
 ```bash
-npm run commonspace -- info --path . --json
+npm run popcandy -- info --path . --json
 ```
 
 Example information:
@@ -650,7 +650,7 @@ Example information:
 ```text
 framework
 package manager
-installed @commonspace package versions
+installed @unpopping-candy package versions
 source roots
 configuration path
 required style imports already present
@@ -659,8 +659,8 @@ required style imports already present
 ## 2. Discovery
 
 ```bash
-npm run commonspace -- search "social profile" --json
-npm run commonspace -- compose \
+npm run popcandy -- search "social profile" --json
+npm run popcandy -- compose \
   "social profile with loading, error, empty, and editable states" \
   --json
 ```
@@ -668,8 +668,8 @@ npm run commonspace -- compose \
 ## 3. Exact contract inspection
 
 ```bash
-npm run commonspace -- get social.profile-header --json
-npm run commonspace -- get pattern.profile-surface --json
+npm run popcandy -- get social.profile-header --json
+npm run popcandy -- get pattern.profile-surface --json
 ```
 
 The component record includes exact public props, entrypoints, variants, states, tokens, accessibility requirements, preferred examples, and Story IDs.
@@ -683,7 +683,7 @@ The agent uses public imports and keeps application state outside presentation p
 Create or update stories for every applicable state and use Storybook MCP or browser tests to inspect the actual result.
 
 ```text
-Commonspace MCP
+Unpopping Candy MCP
 → select and contract
 
 Storybook MCP
@@ -693,7 +693,7 @@ Storybook MCP
 ## 6. Validation
 
 ```bash
-npm run commonspace -- validate --path . --json
+npm run popcandy -- validate --path . --json
 npm run agent:check
 npm run verify
 ```
@@ -702,7 +702,7 @@ npm run verify
 
 ```bash
 npm run evals:check
-pnpm --filter @commonspace/agent-lab dev
+pnpm --filter @unpopping-candy/agent-lab dev
 ```
 
 The reference baseline is recorded in [Agent evaluation baseline](./docs/agent-evals/baseline.md).
@@ -714,12 +714,12 @@ The reference baseline is recorded in [Agent evaluation baseline](./docs/agent-e
 Included Skills:
 
 ```text
-commonspace-ui
-build-commonspace-interface
-migrate-to-commonspace
-review-commonspace-interface
-author-commonspace-component
-connect-commonspace-figma
+popcandy-ui
+build-popcandy-interface
+migrate-to-popcandy
+review-popcandy-interface
+author-popcandy-component
+connect-popcandy-figma
 ```
 
 Each Skill uses progressive disclosure. The procedure remains in `SKILL.md`; detailed rules and examples live in references.
@@ -739,26 +739,26 @@ See [Agent Skills](./docs/AGENT_SKILLS.md).
 ## Resources
 
 ```text
-commonspace://design/current
-commonspace://catalog
-commonspace://tokens
-commonspace://registry
-commonspace://project/info
-commonspace://components/{id}
-commonspace://patterns/{id}
-commonspace://templates/{id}
-commonspace://migrations/{id}
+popcandy://design/current
+popcandy://catalog
+popcandy://tokens
+popcandy://registry
+popcandy://project/info
+popcandy://components/{id}
+popcandy://patterns/{id}
+popcandy://templates/{id}
+popcandy://migrations/{id}
 ```
 
 ## Tools
 
 ```text
-commonspace_project_info
-commonspace_search
-commonspace_get
-commonspace_compose
-commonspace_validate
-commonspace_scaffold
+popcandy_project_info
+popcandy_search
+popcandy_get
+popcandy_compose
+popcandy_validate
+popcandy_scaffold
 ```
 
 ## Prompts
@@ -795,7 +795,7 @@ template.fsd-social-shell
 Dry-run:
 
 ```bash
-npm run commonspace -- scaffold template.profile-settings \
+npm run popcandy -- scaffold template.profile-settings \
   --path ../my-app \
   --target src/profile \
   --json
@@ -804,7 +804,7 @@ npm run commonspace -- scaffold template.profile-settings \
 Apply:
 
 ```bash
-npm run commonspace -- scaffold template.profile-settings \
+npm run popcandy -- scaffold template.profile-settings \
   --path ../my-app \
   --target src/profile \
   --apply \
@@ -838,7 +838,7 @@ The docs app contains:
 - Storybook MCP addon.
 
 ```bash
-pnpm --filter @commonspace/docs dev
+pnpm --filter @unpopping-candy/docs dev
 ```
 
 Local Storybook:
@@ -931,7 +931,7 @@ must fail until all target mappings are real and reviewed.
 
 ## Visual principle
 
-Commonspace emphasizes content, legibility, and explicit system state over decorative container density.
+Unpopping Candy emphasizes content, legibility, and explicit system state over decorative container density.
 
 The visual system uses:
 
@@ -1009,9 +1009,9 @@ Runs the Vite playground, Storybook, and Agent Lab in parallel.
 Individually:
 
 ```bash
-pnpm --filter @commonspace/playground dev
-pnpm --filter @commonspace/docs dev
-pnpm --filter @commonspace/agent-lab dev
+pnpm --filter @unpopping-candy/playground dev
+pnpm --filter @unpopping-candy/docs dev
+pnpm --filter @unpopping-candy/agent-lab dev
 ```
 
 ## Build
@@ -1073,10 +1073,10 @@ pnpm build
 
 | Command | Purpose |
 |---|---|
-| `npm run commonspace -- info --json` | Detect project and installed versions |
-| `npm run commonspace -- search <query> --json` | Search the exact catalog |
-| `npm run commonspace -- compose <request> --json` | Build a bounded component plan |
-| `npm run commonspace -- validate --path <path> --json` | Validate a consumer project |
+| `npm run popcandy -- info --json` | Detect project and installed versions |
+| `npm run popcandy -- search <query> --json` | Search the exact catalog |
+| `npm run popcandy -- compose <request> --json` | Build a bounded component plan |
+| `npm run popcandy -- validate --path <path> --json` | Validate a consumer project |
 | `npm run knowledge:check` | Verify canonical catalog output |
 | `npm run stories:check` | Verify all public Story contracts |
 | `npm run skills:check` | Verify portable Skills |
@@ -1154,12 +1154,12 @@ CSS and JSON subpath exports require source assets.
 
 ## CSS namespace gate
 
-Public classes and custom properties use Commonspace namespaces.
+Public classes and custom properties use Unpopping Candy namespaces.
 
 ```text
-.cs-*
+.popcandy-*
 .is-*
---cs-*
+--popcandy-*
 ```
 
 ## Documentation gate
@@ -1207,7 +1207,7 @@ The consumer fixture resolves built package `exports`. It does not use source al
 9. Inspect the generated Figma template.
 10. Add a Changeset.
 
-Use the [`author-commonspace-component`](./skills/author-commonspace-component/SKILL.md) Skill and [component guidelines](./docs/COMPONENT_GUIDELINES.md).
+Use the [`author-popcandy-component`](./skills/author-popcandy-component/SKILL.md) Skill and [component guidelines](./docs/COMPONENT_GUIDELINES.md).
 
 ---
 
@@ -1228,13 +1228,11 @@ minor  compatible component, token, pattern, or AI-interface addition
 major  breaking export, prop, token, behavior, or accessibility change
 ```
 
-Public npm publication is currently blocked because:
+Before public npm publication:
 
-1. the repository is `UNLICENSED`;
-2. no reviewed `pnpm-lock.yaml` is committed;
-3. dependency-aware package, consumer, Storybook, and browser gates must pass in the release environment;
-4. package tarballs must be inspected;
-5. the npm organization, provenance, and release environment must be configured.
+1. run the dependency-aware package, consumer, Storybook, and browser gates in the release environment;
+2. inspect package tarballs;
+3. configure the npm organization, provenance, and release environment.
 
 The release workflow is manual and protected. It runs `release:check` before any publish action.
 
@@ -1334,7 +1332,7 @@ Architecture decisions:
 | [Figma](./docs/FIGMA.md) | Code Connect generation and publication gate |
 | [Migration](./docs/MIGRATION.md) | Migration from the original application |
 | [Publishing](./docs/PUBLISHING.md) | SemVer, release readiness, and tarballs |
-| [QA report](./docs/QA_REPORT.md) | Executed and blocked verification |
+| [QA report](./docs/QA_REPORT.md) | Executed verification and intentional publication gates |
 | [Implementation plan](./docs/plans/2026-08-09-ai-native-design-system.md) | AI-native upgrade plan |
 
 ---
@@ -1345,7 +1343,7 @@ The following are not complete and are not presented as complete:
 
 - real Figma component-node URLs;
 - published Code Connect mappings;
-- a hosted Commonspace MCP service;
+- a hosted Unpopping Candy MCP service;
 - remote Registry distribution or authenticated private Registry support;
 - automated codemods for arbitrary external UI systems;
 - browser-level visual regression in this repository environment;
@@ -1353,8 +1351,6 @@ The following are not complete and are not presented as complete:
 - automatic human-design scoring;
 - Figma variable synchronization;
 - public npm packages;
-- an explicit redistribution license;
-- a committed dependency lockfile.
 
 The local AI context, deterministic search and validation, guarded scaffolding, Storybook contracts, static evals, and Figma templates are implemented. External publication and organization-specific Figma mapping remain governed follow-up work.
 
@@ -1362,8 +1358,6 @@ The local AI context, deterministic search and validation, guarded scaffolding, 
 
 # License
 
-Copyright © 2026. All rights reserved.
-
-This repository is currently marked **UNLICENSED**. No permission is granted to publish, redistribute, sublicense, or sell the packages until the owner selects an explicit license. Internal evaluation and development may proceed under the owner's authorization.
+Unpopping Candy is available under the MIT License. Copyright © 2026 Hyunsu Lee.
 
 See [LICENSE.md](./LICENSE.md) and [THIRD_PARTY_NOTICES.md](./THIRD_PARTY_NOTICES.md).

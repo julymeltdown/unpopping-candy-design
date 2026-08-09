@@ -1,14 +1,14 @@
 import type { Meta, StoryObj } from '@storybook/react-vite';
-import { Badge, Inline, Stack, Surface } from '@commonspace/ui';
+import { Badge, Inline, Stack, Surface } from '@unpopping-candy/ui';
 
 function Foundations() {
   return (
-    <Stack gap={6} style={{ width: 760 }}>
-      <div><h2 style={{ margin: 0 }}>Semantic roles</h2><p style={{ color: 'var(--cs-ink-muted)' }}>The theme changes roles, not component markup.</p></div>
-      <div className="cs-docs-grid">
+    <Stack gap={6} style={{ width: 'min(100%, 760px)' }}>
+      <div><h2 style={{ margin: 0 }}>Semantic roles</h2><p style={{ color: 'var(--popcandy-ink-muted)' }}>The theme changes roles, not component markup.</p></div>
+      <div className="popcandy-docs-grid">
         {['canvas', 'surface', 'surface-muted', 'ink', 'ink-muted', 'border', 'accent', 'positive', 'warning', 'critical'].map((token) => (
-          <Surface key={token} border padding="md" style={{ background: `var(--cs-${token})`, color: token.includes('ink') || ['accent', 'positive', 'critical', 'warning'].includes(token) ? 'white' : 'var(--cs-ink)' }}>
-            <code>--cs-{token}</code>
+          <Surface key={token} border padding="md" style={{ background: `var(--popcandy-${token})`, color: token.includes('ink') || ['accent', 'positive', 'critical', 'warning'].includes(token) ? 'white' : 'var(--popcandy-ink)' }}>
+            <code>--popcandy-{token}</code>
           </Surface>
         ))}
       </div>

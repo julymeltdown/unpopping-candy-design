@@ -1,17 +1,17 @@
 # PostCardSkeleton
 
-> `social.post-card-skeleton` · `@commonspace/social` · stable · version 0.1.0
+> `social.post-card-skeleton` · `@unpopping-candy/social` · stable · version 0.1.0
 
 Reserves the expected geometry of a PostCard while timeline data loads.
 
 ## Import
 
 ```tsx
-import { PostCardSkeleton } from '@commonspace/social';
+import { PostCardSkeleton } from '@unpopping-candy/social';
 ```
 
 ```tsx
-import { PostCardSkeleton } from '@commonspace/social/post';
+import { PostCardSkeleton } from '@unpopping-candy/social/post';
 ```
 
 ## Use when
@@ -38,7 +38,7 @@ import { PostCardSkeleton } from '@commonspace/social/post';
 
 ## Tokens
 
-- `--cs-surface-muted`
+- `--popcandy-surface-muted`
 
 ## Props
 

@@ -1,16 +1,16 @@
 * { box-sizing: border-box; }
-body { margin: 0; background: var(--cs-canvas); }
-.agent-lab { min-height: 100vh; padding: 72px 0 120px; background: var(--cs-canvas); color: var(--cs-ink); font-family: var(--cs-font-sans); }
+body { margin: 0; background: var(--popcandy-canvas); }
+.agent-lab { min-height: 100vh; padding: 72px 0 120px; background: var(--popcandy-canvas); color: var(--popcandy-ink); font-family: var(--popcandy-font-sans); }
 .agent-lab__header { max-width: 860px; }
-.agent-lab__header > p:first-child, .agent-lab__mode { margin: 0 0 12px; color: var(--cs-ink-muted); font-family: var(--cs-font-mono); font-size: 12px; letter-spacing: .08em; text-transform: uppercase; }
+.agent-lab__header > p:first-child, .agent-lab__mode { margin: 0 0 12px; color: var(--popcandy-ink-muted); font-family: var(--popcandy-font-mono); font-size: 12px; letter-spacing: .08em; text-transform: uppercase; }
 .agent-lab__header h1 { margin: 0; font-size: clamp(38px, 7vw, 78px); line-height: .98; letter-spacing: -.05em; }
-.agent-lab__header > p:last-child { max-width: 660px; margin: 24px 0 0; color: var(--cs-ink-muted); font-size: 17px; line-height: 1.6; }
+.agent-lab__header > p:last-child { max-width: 660px; margin: 24px 0 0; color: var(--popcandy-ink-muted); font-size: 17px; line-height: 1.6; }
 .agent-lab__grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 16px; }
 .agent-lab__scenario h2 { max-width: 460px; margin: 0; font-size: 18px; line-height: 1.35; }
-.agent-lab__score { height: 5px; margin: 24px 0; overflow: hidden; background: var(--cs-surface-muted); }
-.agent-lab__score span { display: block; height: 100%; background: var(--cs-accent); }
+.agent-lab__score { height: 5px; margin: 24px 0; overflow: hidden; background: var(--popcandy-surface-muted); }
+.agent-lab__score span { display: block; height: 100%; background: var(--popcandy-accent); }
 .agent-lab__metrics { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 12px; }
 .agent-lab__metric { display: grid; gap: 6px; }
-.agent-lab__metric span { color: var(--cs-ink-muted); font-size: 12px; }
-.agent-lab__metric strong { font-family: var(--cs-font-mono); font-size: 14px; }
+.agent-lab__metric span { color: var(--popcandy-ink-muted); font-size: 12px; }
+.agent-lab__metric strong { font-family: var(--popcandy-font-mono); font-size: 14px; }
 @media (max-width: 800px) { .agent-lab { padding-top: 40px; } .agent-lab__grid { grid-template-columns: 1fr; } .agent-lab__metrics { grid-template-columns: repeat(2, minmax(0, 1fr)); } }

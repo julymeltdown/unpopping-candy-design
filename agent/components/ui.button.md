@@ -1,17 +1,17 @@
 # Button
 
-> `ui.button` · `@commonspace/ui` · stable · version 0.1.0
+> `ui.button` · `@unpopping-candy/ui` · stable · version 0.1.0
 
 Triggers an immediate user action with explicit priority and pending behavior.
 
 ## Import
 
 ```tsx
-import { Button } from '@commonspace/ui';
+import { Button } from '@unpopping-candy/ui';
 ```
 
 ```tsx
-import { Button } from '@commonspace/ui/button';
+import { Button } from '@unpopping-candy/ui/button';
 ```
 
 ## Use when
@@ -48,10 +48,10 @@ import { Button } from '@commonspace/ui/button';
 
 ## Tokens
 
-- `--cs-button-height-md`
-- `--cs-accent`
-- `--cs-critical`
-- `--cs-focus`
+- `--popcandy-button-height-md`
+- `--popcandy-accent`
+- `--popcandy-critical`
+- `--popcandy-focus`
 
 ## Props
 

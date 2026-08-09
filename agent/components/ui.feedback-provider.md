@@ -1,17 +1,17 @@
 # FeedbackProvider
 
-> `ui.feedback-provider` · `@commonspace/ui` · stable · version 0.1.0
+> `ui.feedback-provider` · `@unpopping-candy/ui` · stable · version 0.1.0
 
 Owns the application-level transient feedback queue and exposes a bounded controller.
 
 ## Import
 
 ```tsx
-import { FeedbackProvider } from '@commonspace/ui';
+import { FeedbackProvider } from '@unpopping-candy/ui';
 ```
 
 ```tsx
-import { FeedbackProvider } from '@commonspace/ui/feedback';
+import { FeedbackProvider } from '@unpopping-candy/ui/feedback';
 ```
 
 ## Use when
@@ -41,8 +41,8 @@ import { FeedbackProvider } from '@commonspace/ui/feedback';
 
 ## Tokens
 
-- `--cs-dialog-width-sm`
-- `--cs-shadow-dialog`
+- `--popcandy-dialog-width-sm`
+- `--popcandy-shadow-dialog`
 
 ## Props
 

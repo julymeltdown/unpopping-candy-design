@@ -3,11 +3,11 @@
 Use exact installed-version knowledge.
 
 ```bash
-commonspace info --json
-commonspace search "profile settings" --kind pattern --json
-commonspace compose "profile settings" --json
-commonspace get pattern.form-actions --json
-commonspace get ui.text-field --json
+popcandy info --json
+popcandy search "profile settings" --kind pattern --json
+popcandy compose "profile settings" --json
+popcandy get pattern.form-actions --json
+popcandy get ui.text-field --json
 ```
 
 Prefer, in order:

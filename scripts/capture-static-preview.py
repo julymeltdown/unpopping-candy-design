@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Render the dependency-free Commonspace documentation preview.
+"""Render the dependency-free Unpopping Candy documentation preview.
 
 This is an optional documentation utility. It requires Python Playwright and a
 Chromium executable, but it does not require the JavaScript workspace packages
@@ -21,7 +21,7 @@ except ImportError as exc:  # pragma: no cover - environment guard
 
 ROOT = Path(__file__).resolve().parents[1]
 PREVIEW = ROOT / "docs" / "preview"
-CAPTURE = PREVIEW / "captures" / "commonspace-ui-overview.png"
+CAPTURE = PREVIEW / "captures" / "unpopping-candy-overview.png"
 AUDIT = PREVIEW / "capture-audit.json"
 VIEWPORT = {"width": 1440, "height": 1000}
 

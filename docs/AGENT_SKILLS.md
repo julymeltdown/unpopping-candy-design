@@ -1,19 +1,19 @@
-# Commonspace Agent Skills
+# Unpopping Candy Agent Skills
 
 ## Purpose
 
-Skills teach an agent the procedure for using Commonspace correctly. They do not duplicate the component catalog. Component and pattern facts are retrieved from CLI or MCP at task time.
+Skills teach an agent the procedure for using Unpopping Candy correctly. They do not duplicate the component catalog. Component and pattern facts are retrieved from CLI or MCP at task time.
 
 ## Included Skills
 
 | Skill | Trigger |
 |---|---|
-| `commonspace-ui` | Any task in a project that uses Commonspace packages |
-| `build-commonspace-interface` | Creating a new page, block, or product surface |
-| `migrate-to-commonspace` | Migrating an existing interface without changing business behavior |
-| `review-commonspace-interface` | Reviewing imports, composition, tokens, states, and accessibility |
-| `author-commonspace-component` | Adding or changing a public design-system component |
-| `connect-commonspace-figma` | Mapping code components to real Figma component nodes |
+| `popcandy-ui` | Any task in a project that uses Unpopping Candy packages |
+| `build-popcandy-interface` | Creating a new page, block, or product surface |
+| `migrate-to-popcandy` | Migrating an existing interface without changing business behavior |
+| `review-popcandy-interface` | Reviewing imports, composition, tokens, states, and accessibility |
+| `author-popcandy-component` | Adding or changing a public design-system component |
+| `connect-popcandy-figma` | Mapping code components to real Figma component nodes |
 
 ## Structure
 

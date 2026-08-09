@@ -1,17 +1,17 @@
 # Dialog
 
-> `ui.dialog` · `@commonspace/ui` · stable · version 0.1.0
+> `ui.dialog` · `@unpopping-candy/ui` · stable · version 0.1.0
 
 Interrupts the current context for a focused task that must be completed or dismissed.
 
 ## Import
 
 ```tsx
-import { Dialog } from '@commonspace/ui';
+import { Dialog } from '@unpopping-candy/ui';
 ```
 
 ```tsx
-import { Dialog } from '@commonspace/ui/dialog';
+import { Dialog } from '@unpopping-candy/ui/dialog';
 ```
 
 ## Use when
@@ -46,10 +46,10 @@ import { Dialog } from '@commonspace/ui/dialog';
 
 ## Tokens
 
-- `--cs-dialog-width-md`
-- `--cs-surface`
-- `--cs-shadow-dialog`
-- `--cs-focus`
+- `--popcandy-dialog-width-md`
+- `--popcandy-surface`
+- `--popcandy-shadow-dialog`
+- `--popcandy-focus`
 
 ## Props
 

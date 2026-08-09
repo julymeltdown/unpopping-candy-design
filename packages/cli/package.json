@@ -1,8 +1,8 @@
 {
-  "name": "@commonspace/cli",
+  "name": "@unpopping-candy/cli",
   "version": "0.2.0",
-  "description": "Deterministic project detection, design-system discovery, composition planning, and validation for Commonspace UI.",
-  "license": "UNLICENSED",
+  "description": "Deterministic project detection, design-system discovery, composition planning, and validation for Unpopping Candy.",
+  "license": "MIT",
   "type": "module",
   "files": [
     "dist",
@@ -10,7 +10,7 @@
   ],
   "sideEffects": false,
   "bin": {
-    "commonspace": "./dist/bin.js"
+    "popcandy": "./dist/bin.js"
   },
   "exports": {
     ".": {
@@ -22,8 +22,8 @@
     "access": "public"
   },
   "dependencies": {
-    "@commonspace/knowledge": "workspace:^",
-    "@commonspace/registry": "workspace:^"
+    "@unpopping-candy/knowledge": "workspace:^",
+    "@unpopping-candy/registry": "workspace:^"
   },
   "devDependencies": {
     "@types/node": "24.3.0"

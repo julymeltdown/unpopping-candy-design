@@ -2,7 +2,7 @@
 
 ## Goal
 
-`@commonspace/evals` measures whether agent-generated source actually uses Commonspace correctly. It is deterministic and can run without a model, browser, or network.
+`@unpopping-candy/evals` measures whether agent-generated source actually uses Unpopping Candy correctly. It is deterministic and can run without a model, browser, or network.
 
 ## Reference comparison modes
 
@@ -23,13 +23,13 @@ The low-context fixtures intentionally preserve representative failures. They pr
 
 | Metric | Meaning |
 |---|---|
-| Invalid imports | Private paths or unknown Commonspace entrypoints |
+| Invalid imports | Private paths or unknown Unpopping Candy entrypoints |
 | Unknown props | JSX props absent from the installed component contract |
 | Hardcoded visual values | Colors, spacing, radii, shadows, or gradients bypassing tokens |
 | Accessibility issues | Basic unnamed controls and missing image alternatives |
 | State coverage | Required loading, empty, error, disabled, pending, and related states |
-| Commonspace reuse | Share of JSX components sourced from Commonspace |
-| Component recall | Expected Commonspace components present in the solution |
+| Unpopping Candy reuse | Share of JSX components sourced from Unpopping Candy |
+| Component recall | Expected Unpopping Candy components present in the solution |
 
 ## Outputs
 
@@ -57,7 +57,7 @@ The reference modes using MCP must pass with:
 ```bash
 npm run evals:generate
 npm run evals:check
-pnpm --filter @commonspace/agent-lab dev
+pnpm --filter @unpopping-candy/agent-lab dev
 ```
 
 ## Adding a scenario

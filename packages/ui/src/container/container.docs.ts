@@ -3,15 +3,15 @@ export default {
   "kind": "component",
   "id": "ui.container",
   "name": "Container",
-  "package": "@commonspace/ui",
+  "package": "@unpopping-candy/ui",
   "version": "0.1.0",
   "status": "stable",
   "category": "layout",
   "summary": "Constrains page content to a readable width and consistent horizontal gutter.",
   "sourcePath": "packages/ui/src/container/container.tsx",
   "entrypoints": [
-    "@commonspace/ui",
-    "@commonspace/ui/layout"
+    "@unpopping-candy/ui",
+    "@unpopping-candy/ui/layout"
   ],
   "keywords": [
     "container",
@@ -20,16 +20,16 @@ export default {
     "gutter"
   ],
   "useWhen": [
-    "A page or section needs the standard Commonspace reading width."
+    "A page or section needs the standard Unpopping Candy reading width."
   ],
   "avoidWhen": [
     "The element must be full bleed.",
     "A local group only needs spacing; use Stack or Inline."
   ],
   "tokens": [
-    "--cs-space-4",
-    "--cs-space-6",
-    "--cs-shell-max"
+    "--popcandy-space-4",
+    "--popcandy-space-6",
+    "--popcandy-shell-max"
   ],
   "related": [
     "ui.stack",

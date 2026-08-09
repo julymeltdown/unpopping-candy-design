@@ -3,15 +3,15 @@ export default {
   "kind": "component",
   "id": "ui.inline",
   "name": "Inline",
-  "package": "@commonspace/ui",
+  "package": "@unpopping-candy/ui",
   "version": "0.1.0",
   "status": "stable",
   "category": "layout",
   "summary": "Arranges related items horizontally with tokenized gap, alignment, and wrapping.",
   "sourcePath": "packages/ui/src/inline/inline.tsx",
   "entrypoints": [
-    "@commonspace/ui",
-    "@commonspace/ui/layout"
+    "@unpopping-candy/ui",
+    "@unpopping-candy/ui/layout"
   ],
   "keywords": [
     "inline",
@@ -27,10 +27,10 @@ export default {
     "Items represent a vertical reading sequence; use Stack."
   ],
   "tokens": [
-    "--cs-space-1",
-    "--cs-space-2",
-    "--cs-space-3",
-    "--cs-space-4"
+    "--popcandy-space-1",
+    "--popcandy-space-2",
+    "--popcandy-space-3",
+    "--popcandy-space-4"
   ],
   "related": [
     "ui.stack",

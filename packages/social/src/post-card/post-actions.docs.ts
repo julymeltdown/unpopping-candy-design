@@ -3,15 +3,15 @@ export default {
   "kind": "component",
   "id": "social.post-actions",
   "name": "PostActions",
-  "package": "@commonspace/social",
+  "package": "@unpopping-candy/social",
   "version": "0.1.0",
   "status": "stable",
   "category": "post",
   "summary": "Presents reply, repost, like, bookmark, and share actions as controlled social interactions.",
   "sourcePath": "packages/social/src/post-card/post-actions.tsx",
   "entrypoints": [
-    "@commonspace/social",
-    "@commonspace/social/post"
+    "@unpopping-candy/social",
+    "@unpopping-candy/social/post"
   ],
   "keywords": [
     "post",
@@ -28,10 +28,10 @@ export default {
     "A product has different action semantics; compose explicit Buttons instead."
   ],
   "tokens": [
-    "--cs-ink-muted",
-    "--cs-accent",
-    "--cs-positive",
-    "--cs-critical"
+    "--popcandy-ink-muted",
+    "--popcandy-accent",
+    "--popcandy-positive",
+    "--popcandy-critical"
   ],
   "related": [
     "social.post-card",

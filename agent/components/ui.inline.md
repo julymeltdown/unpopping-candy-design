@@ -1,17 +1,17 @@
 # Inline
 
-> `ui.inline` · `@commonspace/ui` · stable · version 0.1.0
+> `ui.inline` · `@unpopping-candy/ui` · stable · version 0.1.0
 
 Arranges related items horizontally with tokenized gap, alignment, and wrapping.
 
 ## Import
 
 ```tsx
-import { Inline } from '@commonspace/ui';
+import { Inline } from '@unpopping-candy/ui';
 ```
 
 ```tsx
-import { Inline } from '@commonspace/ui/layout';
+import { Inline } from '@unpopping-candy/ui/layout';
 ```
 
 ## Use when
@@ -42,10 +42,10 @@ import { Inline } from '@commonspace/ui/layout';
 
 ## Tokens
 
-- `--cs-space-1`
-- `--cs-space-2`
-- `--cs-space-3`
-- `--cs-space-4`
+- `--popcandy-space-1`
+- `--popcandy-space-2`
+- `--popcandy-space-3`
+- `--popcandy-space-4`
 
 ## Props
 

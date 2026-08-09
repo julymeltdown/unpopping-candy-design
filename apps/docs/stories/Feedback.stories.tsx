@@ -1,10 +1,10 @@
 import type { Meta, StoryObj } from '@storybook/react-vite';
-import { Alert, Button, Stack, useFeedback } from '@commonspace/ui';
+import { Alert, Button, Stack, useFeedback } from '@unpopping-candy/ui';
 
 function FeedbackDemo() {
   const feedback = useFeedback();
   return (
-    <Stack gap={4} style={{ width: 620 }}>
+    <Stack gap={4} style={{ width: 'min(100%, 620px)' }}>
       <Alert title="Post was not published" description="Your draft is still available. Review the connection and try again." tone="critical" metadata="Request req_01J9" action={<Button size="sm">Try again</Button>} />
       <Alert title="Connection restored" description="New requests can be sent again." tone="success" />
       <Button onClick={() => feedback.notify({ title: 'Saved to collection', description: 'The item remains available in its original context.', tone: 'success' })}>Show toast</Button>

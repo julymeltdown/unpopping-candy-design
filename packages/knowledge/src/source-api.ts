@@ -114,10 +114,11 @@ export function extractExportedInterfaces(source: string): Map<string, Extracted
     const openingIndex = (match.index ?? 0) + (match[0]?.lastIndexOf('{') ?? 0);
     const closingIndex = matchingBrace(source, openingIndex);
     const header = match[2] ?? '';
+    const nativeElement = nativeElementFromText(header);
     output.set(name, {
       name,
       props: propsFromBody(source.slice(openingIndex + 1, closingIndex)),
-      nativeElement: nativeElementFromText(header),
+      ...(nativeElement ? { nativeElement } : {}),
       picks: picksFromHeader(header),
     });
   }
@@ -154,8 +155,9 @@ export function extractComponentApi(source: string, componentName: string, regis
   if (componentInterface) {
     return {
       props: resolvedProps(componentInterface, combined),
-      nativeElement: componentInterface.nativeElement,
+      ...(componentInterface.nativeElement ? { nativeElement: componentInterface.nativeElement } : {}),
     };
   }
-  return { props: [], nativeElement: functionNativeElement(source, componentName) };
+  const nativeElement = functionNativeElement(source, componentName);
+  return { props: [], ...(nativeElement ? { nativeElement } : {}) };
 }

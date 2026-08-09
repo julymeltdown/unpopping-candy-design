@@ -1,8 +1,8 @@
 {
-  "name": "@commonspace/registry",
+  "name": "@unpopping-candy/registry",
   "version": "0.2.0",
-  "description": "Versioned, checksum-verified Commonspace templates with guarded dry-run and apply scaffolding.",
-  "license": "UNLICENSED",
+  "description": "Versioned, checksum-verified Unpopping Candy templates with guarded dry-run and apply scaffolding.",
+  "license": "MIT",
   "type": "module",
   "files": [
     "dist",
@@ -21,7 +21,7 @@
     "access": "public"
   },
   "dependencies": {
-    "@commonspace/knowledge": "workspace:^"
+    "@unpopping-candy/knowledge": "workspace:^"
   },
   "devDependencies": {
     "@types/node": "24.3.0"

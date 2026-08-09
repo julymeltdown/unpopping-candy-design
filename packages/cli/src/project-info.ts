@@ -1,6 +1,6 @@
 import { access, readFile } from 'node:fs/promises';
 import { dirname, join, parse, resolve } from 'node:path';
-import type { CommonspaceProjectInfo } from './types.ts';
+import type { PopcandyProjectInfo } from './types.ts';
 
 async function exists(path: string): Promise<boolean> {
   try { await access(path); return true; } catch { return false; }
@@ -20,7 +20,7 @@ function dependenciesOf(manifest: Record<string, unknown>): Record<string, strin
   return output;
 }
 
-async function detectPackageManager(root: string, manifest: Record<string, unknown>): Promise<CommonspaceProjectInfo['packageManager']> {
+async function detectPackageManager(root: string, manifest: Record<string, unknown>): Promise<PopcandyProjectInfo['packageManager']> {
   const declared = typeof manifest.packageManager === 'string' ? manifest.packageManager.split('@')[0] : null;
   if (declared === 'pnpm' || declared === 'npm' || declared === 'yarn' || declared === 'bun') return declared;
   if (await exists(join(root, 'pnpm-lock.yaml'))) return 'pnpm';
@@ -30,7 +30,7 @@ async function detectPackageManager(root: string, manifest: Record<string, unkno
   return 'unknown';
 }
 
-function detectFramework(dependencies: Record<string, string>): CommonspaceProjectInfo['framework'] {
+function detectFramework(dependencies: Record<string, string>): PopcandyProjectInfo['framework'] {
   if ('vite' in dependencies && 'react' in dependencies) return 'vite-react';
   if ('next' in dependencies && 'react' in dependencies) return 'next-react';
   if ('react' in dependencies) return 'react';
@@ -49,14 +49,14 @@ async function findRoot(startDirectory: string): Promise<string> {
 }
 
 function collectInstalled(dependencies: Record<string, string>): Record<string, string> {
-  return Object.fromEntries(Object.entries(dependencies).filter(([name]) => name.startsWith('@commonspace/')).sort(([a], [b]) => a.localeCompare(b)));
+  return Object.fromEntries(Object.entries(dependencies).filter(([name]) => name.startsWith('@unpopping-candy/')).sort(([a], [b]) => a.localeCompare(b)));
 }
 
-export async function detectCommonspaceProject(startDirectory = process.cwd()): Promise<CommonspaceProjectInfo> {
+export async function detectPopcandyProject(startDirectory = process.cwd()): Promise<PopcandyProjectInfo> {
   const root = await findRoot(startDirectory);
   const manifest = await readJson(join(root, 'package.json'));
   const dependencies = dependenciesOf(manifest);
-  const configCandidates = ['commonspace.config.json', 'commonspace.json'];
+  const configCandidates = ['popcandy.config.json', 'popcandy.json'];
   const configPath = (await Promise.all(configCandidates.map(async (name) => (await exists(join(root, name)) ? join(root, name) : null)))).find(Boolean) ?? null;
   const sourceDirectories: string[] = [];
   for (const name of ['src', 'app', 'pages']) if (await exists(join(root, name))) sourceDirectories.push(name);
@@ -66,7 +66,7 @@ export async function detectCommonspaceProject(startDirectory = process.cwd()): 
     const path = join(root, candidate);
     if (!(await exists(path))) continue;
     const source = await readFile(path, 'utf8');
-    for (const match of source.matchAll(/['"](@commonspace\/[a-z-]+\/styles\.css)['"]/g)) if (match[1]) styleImports.add(match[1]);
+    for (const match of source.matchAll(/['"](@unpopping-candy\/[a-z-]+\/styles\.css)['"]/g)) if (match[1]) styleImports.add(match[1]);
   }
   return {
     root,

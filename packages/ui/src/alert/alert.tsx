@@ -1,5 +1,5 @@
 import type { HTMLAttributes, ReactNode } from 'react';
-import { CloseIcon } from '@commonspace/icons';
+import { CloseIcon } from '@unpopping-candy/icons';
 import { FeedbackIcon } from '../feedback/feedback-icon.js';
 import type { FeedbackTone } from '../feedback/feedback-state.js';
 import { IconButton } from '../icon-button/icon-button.js';
@@ -32,21 +32,21 @@ export function Alert({
   return (
     <section
       {...props}
-      className={mergeClassNames('cs-alert', `cs-alert--${tone}`, className)}
-      data-cs-component="alert"
-      data-cs-tone={tone}
+      className={mergeClassNames('popcandy-alert', `popcandy-alert--${tone}`, className)}
+      data-popcandy-component="alert"
+      data-popcandy-tone={tone}
       role={urgent ? 'alert' : 'status'}
       aria-atomic="true"
     >
-      <div className="cs-alert__icon" aria-hidden="true">{icon ?? <FeedbackIcon tone={tone} />}</div>
-      <div className="cs-alert__content">
-        <div className="cs-alert__title">{title}</div>
-        {description ? <div className="cs-alert__description">{description}</div> : null}
-        {metadata ? <div className="cs-alert__metadata">{metadata}</div> : null}
-        {action ? <div className="cs-alert__action">{action}</div> : null}
+      <div className="popcandy-alert__icon" aria-hidden="true">{icon ?? <FeedbackIcon tone={tone} />}</div>
+      <div className="popcandy-alert__content">
+        <div className="popcandy-alert__title">{title}</div>
+        {description ? <div className="popcandy-alert__description">{description}</div> : null}
+        {metadata ? <div className="popcandy-alert__metadata">{metadata}</div> : null}
+        {action ? <div className="popcandy-alert__action">{action}</div> : null}
       </div>
       {onDismiss ? (
-        <IconButton className="cs-alert__dismiss" size="sm" label={dismissLabel} icon={<CloseIcon />} onClick={onDismiss} />
+        <IconButton className="popcandy-alert__dismiss" size="sm" label={dismissLabel} icon={<CloseIcon />} onClick={onDismiss} />
       ) : null}
     </section>
   );

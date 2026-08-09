@@ -20,16 +20,16 @@ import {
   type ThemeState,
 } from './theme-state.js';
 
-export interface CommonspaceThemeController extends ThemeState {
+export interface UnpoppingCandyThemeController extends ThemeState {
   setTheme(theme: ThemeName): void;
   setDensity(density: DensityName): void;
   setAccent(accent: AccentName): void;
   reset(): void;
 }
 
-const ThemeContext = createContext<CommonspaceThemeController | null>(null);
+const ThemeContext = createContext<UnpoppingCandyThemeController | null>(null);
 
-export interface CommonspaceProviderProps
+export interface UnpoppingCandyProviderProps
   extends Omit<HTMLAttributes<HTMLDivElement>, 'color' | 'onChange'> {
   children: ReactNode;
   theme?: ThemeName | undefined;
@@ -43,11 +43,11 @@ export interface CommonspaceProviderProps
   onThemeChange?: ((theme: ThemeName) => void) | undefined;
   onDensityChange?: ((density: DensityName) => void) | undefined;
   onAccentChange?: ((accent: AccentName) => void) | undefined;
-  variables?: Readonly<Record<`--cs-${string}`, string>> | undefined;
+  variables?: Readonly<Record<`--popcandy-${string}`, string>> | undefined;
 }
 
 function useInitialState(
-  storageKey: CommonspaceProviderProps['storageKey'],
+  storageKey: string | false,
   defaults: ThemeState,
 ): ThemeState {
   return useMemo(() => {
@@ -57,7 +57,7 @@ function useInitialState(
   }, [defaults, storageKey]);
 }
 
-export function CommonspaceProvider({
+export function UnpoppingCandyProvider({
   accent: controlledAccent,
   children,
   className,
@@ -69,12 +69,12 @@ export function CommonspaceProvider({
   onDensityChange,
   onThemeChange,
   scope = 'local',
-  storageKey = 'commonspace:theme:v1',
+  storageKey = 'popcandy:theme:v1',
   style,
   theme: controlledTheme,
   variables,
   ...props
-}: CommonspaceProviderProps) {
+}: UnpoppingCandyProviderProps) {
   const defaults = useMemo(
     () => ({ theme: defaultTheme, density: defaultDensity, accent: defaultAccent }),
     [defaultAccent, defaultDensity, defaultTheme],
@@ -98,22 +98,22 @@ export function CommonspaceProvider({
     if (scope !== 'document' || typeof document === 'undefined') return;
     const root = document.documentElement;
     const previous = {
-      theme: root.dataset.csTheme,
-      density: root.dataset.csDensity,
-      accent: root.dataset.csAccent,
+      theme: root.dataset.popcandyTheme,
+      density: root.dataset.popcandyDensity,
+      accent: root.dataset.popcandyAccent,
     };
     Object.assign(root.dataset, {
-      csTheme: theme,
-      csDensity: density,
-      csAccent: accent,
+      popcandyTheme: theme,
+      popcandyDensity: density,
+      popcandyAccent: accent,
     });
     return () => {
-      if (previous.theme) root.dataset.csTheme = previous.theme;
-      else delete root.dataset.csTheme;
-      if (previous.density) root.dataset.csDensity = previous.density;
-      else delete root.dataset.csDensity;
-      if (previous.accent) root.dataset.csAccent = previous.accent;
-      else delete root.dataset.csAccent;
+      if (previous.theme) root.dataset.popcandyTheme = previous.theme;
+      else delete root.dataset.popcandyTheme;
+      if (previous.density) root.dataset.popcandyDensity = previous.density;
+      else delete root.dataset.popcandyDensity;
+      if (previous.accent) root.dataset.popcandyAccent = previous.accent;
+      else delete root.dataset.popcandyAccent;
     };
   }, [accent, density, scope, theme]);
 
@@ -154,7 +154,7 @@ export function CommonspaceProvider({
     <div
       {...props}
       {...themeDataAttributes(state)}
-      className={className ? `cs-theme-scope ${className}` : 'cs-theme-scope'}
+      className={className ? `popcandy-theme-scope ${className}` : 'popcandy-theme-scope'}
       style={mergedStyle}
     >
       {children}
@@ -166,10 +166,10 @@ export function CommonspaceProvider({
   return <ThemeContext.Provider value={controller}>{content}</ThemeContext.Provider>;
 }
 
-export function useCommonspaceTheme(): CommonspaceThemeController {
+export function useUnpoppingCandyTheme(): UnpoppingCandyThemeController {
   const value = useContext(ThemeContext);
   if (!value) {
-    throw new Error('useCommonspaceTheme must be used inside CommonspaceProvider.');
+    throw new Error('useUnpoppingCandyTheme must be used inside UnpoppingCandyProvider.');
   }
   return value;
 }

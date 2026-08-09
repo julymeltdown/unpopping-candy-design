@@ -1,4 +1,4 @@
-# Commonspace UI
+# Unpopping Candy
 
 > AI-operable React design system for content-rich and social products. Version 0.2.0.
 
@@ -22,15 +22,15 @@
 
 ---
 
-# Commonspace UI — compact agent context
+# Unpopping Candy — compact agent context
 
 Version: 0.2.0
 
-- Public packages: @commonspace/tokens, @commonspace/theme, @commonspace/icons, @commonspace/ui, @commonspace/social.
+- Public packages: @unpopping-candy/tokens, @unpopping-candy/theme, @unpopping-candy/icons, @unpopping-candy/ui, @unpopping-candy/social.
 - Visual packages never fetch, route, authenticate, or own remote state.
 - Use semantic tokens and public entrypoints only.
 - Search before generating. Cover loading, empty, error, disabled, pending, mobile, dark, and high-contrast states.
-- Run commonspace validate and Storybook checks.
+- Run popcandy validate and Storybook checks.
 
 Stable components: social.conversation-preview, social.notification-item, social.post-actions, social.post-card, social.post-card-skeleton, social.post-composer-view, social.post-header, social.post-media-grid, social.profile-header, social.timeline-view, social.user-cell, ui.alert, ui.avatar, ui.badge, ui.button, ui.container, ui.dialog, ui.empty-state, ui.feedback-provider, ui.icon-button, ui.inline, ui.separator, ui.skeleton, ui.spinner, ui.stack, ui.surface, ui.tabs, ui.text-area, ui.text-field, ui.toast, ui.toast-viewport, ui.visually-hidden
 
@@ -39,7 +39,7 @@ Patterns: pattern.collection-states, pattern.conversation-list, pattern.feedback
 
 ---
 
-# Commonspace UI components
+# Unpopping Candy components
 
 - [ConversationPreview](./components/social.conversation-preview.md): Presents a conversation summary with participants, latest message, time, and unread state.
 - [NotificationItem](./components/social.notification-item.md): Presents one social notification with actor context, event description, and optional target content.
@@ -77,7 +77,7 @@ Patterns: pattern.collection-states, pattern.conversation-list, pattern.feedback
 
 ---
 
-# Commonspace UI patterns
+# Unpopping Candy patterns
 
 - [Collection states](./patterns/pattern.collection-states.md): Provides complete loading, empty, populated, pagination, and error states for a collection.
 - [Conversation list](./patterns/pattern.conversation-list.md): Renders conversations with stable selection, unread semantics, and responsive detail navigation.
@@ -88,16 +88,16 @@ Patterns: pattern.collection-states, pattern.conversation-list, pattern.feedback
 
 ## Templates
 
-- **Strict FSD social shell** (`template.fsd-social-shell`): A React and Vite application shell that keeps Commonspace presentation packages below FSD application slices.
+- **Strict FSD social shell** (`template.fsd-social-shell`): A React and Vite application shell that keeps Unpopping Candy presentation packages below FSD application slices.
 - **Moderation workspace** (`template.moderation-workspace`): A three-region moderation decision workspace with queue, evidence, and controlled actions.
 - **Profile settings** (`template.profile-settings`): A profile settings form with validation, pending state, and preserved failure feedback.
 - **Social feed page** (`template.social-feed-page`): A state-complete social feed page using presentation models and externally owned remote state.
-- **Vite app shell** (`template.vite-app-shell`): A minimal React and Vite shell with Commonspace theme and feedback providers.
+- **Vite app shell** (`template.vite-app-shell`): A minimal React and Vite shell with Unpopping Candy theme and feedback providers.
 
 
 ---
 
-# Commonspace UI tokens
+# Unpopping Candy tokens
 
 Use semantic and component tokens instead of hardcoded visual values.
 
@@ -221,33 +221,33 @@ Use semantic and component tokens instead of hardcoded visual values.
 
 ---
 
-# Commonspace UI migrations
+# Unpopping Candy migrations
 
-## Commonspace UI 0.1 to 0.2
+## Unpopping Candy 0.1 to 0.2
 
 Introduces the AI-native knowledge, CLI, MCP, Registry, and generated-document layer without changing existing visual package APIs.
 
 - **Manual:** `Hand-written DESIGN.md` → `Generated DESIGN.md`. Edit component and pattern metadata, then regenerate agent artifacts.
-- **Manual:** `Unstructured component discovery` → `commonspace search and MCP resources`. Run project detection before generating interfaces.
-- **Manual:** `Visual package source imports` → `Published package entrypoints`. Continue importing only documented @commonspace/* entrypoints.
+- **Manual:** `Unstructured component discovery` → `popcandy search and MCP resources`. Run project detection before generating interfaces.
+- **Manual:** `Visual package source imports` → `Published package entrypoints`. Continue importing only documented @unpopping-candy/* entrypoints.
 
 
 ---
 
 # ConversationPreview
 
-> `social.conversation-preview` · `@commonspace/social` · stable · version 0.1.0
+> `social.conversation-preview` · `@unpopping-candy/social` · stable · version 0.1.0
 
 Presents a conversation summary with participants, latest message, time, and unread state.
 
 ## Import
 
 ```tsx
-import { ConversationPreview } from '@commonspace/social';
+import { ConversationPreview } from '@unpopping-candy/social';
 ```
 
 ```tsx
-import { ConversationPreview } from '@commonspace/social/conversation';
+import { ConversationPreview } from '@unpopping-candy/social/conversation';
 ```
 
 ## Use when
@@ -278,10 +278,10 @@ import { ConversationPreview } from '@commonspace/social/conversation';
 
 ## Tokens
 
-- `--cs-surface`
-- `--cs-border`
-- `--cs-ink-muted`
-- `--cs-accent`
+- `--popcandy-surface`
+- `--popcandy-border`
+- `--popcandy-ink-muted`
+- `--popcandy-accent`
 
 ## Props
 
@@ -323,18 +323,18 @@ Injects navigation and keeps data ownership external.
 
 # NotificationItem
 
-> `social.notification-item` · `@commonspace/social` · stable · version 0.1.0
+> `social.notification-item` · `@unpopping-candy/social` · stable · version 0.1.0
 
 Presents one social notification with actor context, event description, and optional target content.
 
 ## Import
 
 ```tsx
-import { NotificationItem } from '@commonspace/social';
+import { NotificationItem } from '@unpopping-candy/social';
 ```
 
 ```tsx
-import { NotificationItem } from '@commonspace/social/notification';
+import { NotificationItem } from '@unpopping-candy/social/notification';
 ```
 
 ## Use when
@@ -368,9 +368,9 @@ import { NotificationItem } from '@commonspace/social/notification';
 
 ## Tokens
 
-- `--cs-surface`
-- `--cs-border`
-- `--cs-ink-muted`
+- `--popcandy-surface`
+- `--popcandy-border`
+- `--popcandy-ink-muted`
 
 ## Props
 
@@ -413,18 +413,18 @@ Keeps routing outside the package.
 
 # PostActions
 
-> `social.post-actions` · `@commonspace/social` · stable · version 0.1.0
+> `social.post-actions` · `@unpopping-candy/social` · stable · version 0.1.0
 
 Presents reply, repost, like, bookmark, and share actions as controlled social interactions.
 
 ## Import
 
 ```tsx
-import { PostActions } from '@commonspace/social';
+import { PostActions } from '@unpopping-candy/social';
 ```
 
 ```tsx
-import { PostActions } from '@commonspace/social/post';
+import { PostActions } from '@unpopping-candy/social/post';
 ```
 
 ## Use when
@@ -456,10 +456,10 @@ import { PostActions } from '@commonspace/social/post';
 
 ## Tokens
 
-- `--cs-ink-muted`
-- `--cs-accent`
-- `--cs-positive`
-- `--cs-critical`
+- `--popcandy-ink-muted`
+- `--popcandy-accent`
+- `--popcandy-positive`
+- `--popcandy-critical`
 
 ## Props
 
@@ -508,18 +508,18 @@ Keeps mutation ownership outside the component.
 
 # PostCard
 
-> `social.post-card` · `@commonspace/social` · stable · version 0.1.0
+> `social.post-card` · `@unpopping-candy/social` · stable · version 0.1.0
 
 Presents a social post with author, content, distribution context, metrics, and injected actions.
 
 ## Import
 
 ```tsx
-import { PostCard } from '@commonspace/social';
+import { PostCard } from '@unpopping-candy/social';
 ```
 
 ```tsx
-import { PostCard } from '@commonspace/social/post';
+import { PostCard } from '@unpopping-candy/social/post';
 ```
 
 ## Use when
@@ -553,10 +553,10 @@ import { PostCard } from '@commonspace/social/post';
 
 ## Tokens
 
-- `--cs-surface`
-- `--cs-border`
-- `--cs-ink`
-- `--cs-accent`
+- `--popcandy-surface`
+- `--popcandy-border`
+- `--popcandy-ink`
+- `--popcandy-accent`
 
 ## Props
 
@@ -618,18 +618,18 @@ function PostCard({ id }) { const post = useQuery(...); }
 
 # PostCardSkeleton
 
-> `social.post-card-skeleton` · `@commonspace/social` · stable · version 0.1.0
+> `social.post-card-skeleton` · `@unpopping-candy/social` · stable · version 0.1.0
 
 Reserves the expected geometry of a PostCard while timeline data loads.
 
 ## Import
 
 ```tsx
-import { PostCardSkeleton } from '@commonspace/social';
+import { PostCardSkeleton } from '@unpopping-candy/social';
 ```
 
 ```tsx
-import { PostCardSkeleton } from '@commonspace/social/post';
+import { PostCardSkeleton } from '@unpopping-candy/social/post';
 ```
 
 ## Use when
@@ -656,7 +656,7 @@ import { PostCardSkeleton } from '@commonspace/social/post';
 
 ## Tokens
 
-- `--cs-surface-muted`
+- `--popcandy-surface-muted`
 
 ## Props
 
@@ -694,18 +694,18 @@ Matches the post layout without fake content.
 
 # PostComposerView
 
-> `social.post-composer-view` · `@commonspace/social` · stable · version 0.1.0
+> `social.post-composer-view` · `@unpopping-candy/social` · stable · version 0.1.0
 
 Presents a controlled social composer while the application owns draft, validation, upload, and publishing state.
 
 ## Import
 
 ```tsx
-import { PostComposerView } from '@commonspace/social';
+import { PostComposerView } from '@unpopping-candy/social';
 ```
 
 ```tsx
-import { PostComposerView } from '@commonspace/social/post';
+import { PostComposerView } from '@unpopping-candy/social/post';
 ```
 
 ## Use when
@@ -738,10 +738,10 @@ import { PostComposerView } from '@commonspace/social/post';
 
 ## Tokens
 
-- `--cs-surface`
-- `--cs-border`
-- `--cs-accent`
-- `--cs-field-height`
+- `--popcandy-surface`
+- `--popcandy-border`
+- `--popcandy-accent`
+- `--popcandy-field-height`
 
 ## Props
 
@@ -793,18 +793,18 @@ Leaves workflow state in the consuming app.
 
 # PostHeader
 
-> `social.post-header` · `@commonspace/social` · stable · version 0.1.0
+> `social.post-header` · `@unpopping-candy/social` · stable · version 0.1.0
 
 Presents post identity, timestamp, and distribution context without owning navigation.
 
 ## Import
 
 ```tsx
-import { PostHeader } from '@commonspace/social';
+import { PostHeader } from '@unpopping-candy/social';
 ```
 
 ```tsx
-import { PostHeader } from '@commonspace/social/post';
+import { PostHeader } from '@unpopping-candy/social/post';
 ```
 
 ## Use when
@@ -833,8 +833,8 @@ import { PostHeader } from '@commonspace/social/post';
 
 ## Tokens
 
-- `--cs-ink`
-- `--cs-ink-muted`
+- `--popcandy-ink`
+- `--popcandy-ink-muted`
 
 ## Props
 
@@ -879,18 +879,18 @@ Injects navigation behavior.
 
 # PostMediaGrid
 
-> `social.post-media-grid` · `@commonspace/social` · stable · version 0.1.0
+> `social.post-media-grid` · `@unpopping-candy/social` · stable · version 0.1.0
 
 Arranges one to four social media assets with stable aspect ratios and selection callbacks.
 
 ## Import
 
 ```tsx
-import { PostMediaGrid } from '@commonspace/social';
+import { PostMediaGrid } from '@unpopping-candy/social';
 ```
 
 ```tsx
-import { PostMediaGrid } from '@commonspace/social/post';
+import { PostMediaGrid } from '@unpopping-candy/social/post';
 ```
 
 ## Use when
@@ -923,8 +923,8 @@ import { PostMediaGrid } from '@commonspace/social/post';
 
 ## Tokens
 
-- `--cs-border`
-- `--cs-radius-md`
+- `--popcandy-border`
+- `--popcandy-radius-md`
 
 ## Props
 
@@ -964,18 +964,18 @@ Uses application-owned media behavior.
 
 # ProfileHeader
 
-> `social.profile-header` · `@commonspace/social` · stable · version 0.1.0
+> `social.profile-header` · `@unpopping-candy/social` · stable · version 0.1.0
 
 Presents a curator or user profile summary with injected primary and secondary actions.
 
 ## Import
 
 ```tsx
-import { ProfileHeader } from '@commonspace/social';
+import { ProfileHeader } from '@unpopping-candy/social';
 ```
 
 ```tsx
-import { ProfileHeader } from '@commonspace/social/profile';
+import { ProfileHeader } from '@unpopping-candy/social/profile';
 ```
 
 ## Use when
@@ -1008,10 +1008,10 @@ import { ProfileHeader } from '@commonspace/social/profile';
 
 ## Tokens
 
-- `--cs-surface`
-- `--cs-border`
-- `--cs-ink`
-- `--cs-ink-muted`
+- `--popcandy-surface`
+- `--popcandy-border`
+- `--popcandy-ink`
+- `--popcandy-ink-muted`
 
 ## Props
 
@@ -1055,18 +1055,18 @@ Keeps relationship behavior in the application.
 
 # TimelineView
 
-> `social.timeline-view` · `@commonspace/social` · stable · version 0.1.0
+> `social.timeline-view` · `@unpopping-candy/social` · stable · version 0.1.0
 
 Composes timeline states and rendered post rows without owning pagination or virtualization.
 
 ## Import
 
 ```tsx
-import { TimelineView } from '@commonspace/social';
+import { TimelineView } from '@unpopping-candy/social';
 ```
 
 ```tsx
-import { TimelineView } from '@commonspace/social/timeline';
+import { TimelineView } from '@unpopping-candy/social/timeline';
 ```
 
 ## Use when
@@ -1099,8 +1099,8 @@ import { TimelineView } from '@commonspace/social/timeline';
 
 ## Tokens
 
-- `--cs-border`
-- `--cs-surface`
+- `--popcandy-border`
+- `--popcandy-surface`
 
 ## Props
 
@@ -1150,18 +1150,18 @@ Keeps remote state outside presentation.
 
 # UserCell
 
-> `social.user-cell` · `@commonspace/social` · stable · version 0.1.0
+> `social.user-cell` · `@unpopping-candy/social` · stable · version 0.1.0
 
 Presents a compact person row with optional supporting text and injected action.
 
 ## Import
 
 ```tsx
-import { UserCell } from '@commonspace/social';
+import { UserCell } from '@unpopping-candy/social';
 ```
 
 ```tsx
-import { UserCell } from '@commonspace/social/user';
+import { UserCell } from '@unpopping-candy/social/user';
 ```
 
 ## Use when
@@ -1191,9 +1191,9 @@ import { UserCell } from '@commonspace/social/user';
 
 ## Tokens
 
-- `--cs-ink`
-- `--cs-ink-muted`
-- `--cs-border`
+- `--popcandy-ink`
+- `--popcandy-ink-muted`
+- `--popcandy-border`
 
 ## Props
 
@@ -1238,18 +1238,18 @@ Separates row navigation and relationship action.
 
 # Alert
 
-> `ui.alert` · `@commonspace/ui` · stable · version 0.1.0
+> `ui.alert` · `@unpopping-candy/ui` · stable · version 0.1.0
 
 Presents contextual feedback beside the task or content that produced it.
 
 ## Import
 
 ```tsx
-import { Alert } from '@commonspace/ui';
+import { Alert } from '@unpopping-candy/ui';
 ```
 
 ```tsx
-import { Alert } from '@commonspace/ui/alert';
+import { Alert } from '@unpopping-candy/ui/alert';
 ```
 
 ## Use when
@@ -1284,11 +1284,11 @@ import { Alert } from '@commonspace/ui/alert';
 
 ## Tokens
 
-- `--cs-surface`
-- `--cs-border`
-- `--cs-positive`
-- `--cs-warning`
-- `--cs-critical`
+- `--popcandy-surface`
+- `--popcandy-border`
+- `--popcandy-positive`
+- `--popcandy-warning`
+- `--popcandy-critical`
 
 ## Props
 
@@ -1342,18 +1342,18 @@ May expose unsafe or irrelevant implementation details.
 
 # Avatar
 
-> `ui.avatar` · `@commonspace/ui` · stable · version 0.1.0
+> `ui.avatar` · `@unpopping-candy/ui` · stable · version 0.1.0
 
 Represents a person or organization with an image and deterministic fallback.
 
 ## Import
 
 ```tsx
-import { Avatar } from '@commonspace/ui';
+import { Avatar } from '@unpopping-candy/ui';
 ```
 
 ```tsx
-import { Avatar } from '@commonspace/ui/avatar';
+import { Avatar } from '@unpopping-candy/ui/avatar';
 ```
 
 ## Use when
@@ -1386,9 +1386,9 @@ import { Avatar } from '@commonspace/ui/avatar';
 
 ## Tokens
 
-- `--cs-surface-muted`
-- `--cs-border`
-- `--cs-ink`
+- `--popcandy-surface-muted`
+- `--popcandy-border`
+- `--popcandy-ink`
 
 ## Props
 
@@ -1431,18 +1431,18 @@ Provides both image and fallback data.
 
 # Badge
 
-> `ui.badge` · `@commonspace/ui` · stable · version 0.1.0
+> `ui.badge` · `@unpopping-candy/ui` · stable · version 0.1.0
 
 Displays a compact status or categorical label without becoming the primary action.
 
 ## Import
 
 ```tsx
-import { Badge } from '@commonspace/ui';
+import { Badge } from '@unpopping-candy/ui';
 ```
 
 ```tsx
-import { Badge } from '@commonspace/ui/badge';
+import { Badge } from '@unpopping-candy/ui/badge';
 ```
 
 ## Use when
@@ -1474,9 +1474,9 @@ import { Badge } from '@commonspace/ui/badge';
 
 ## Tokens
 
-- `--cs-surface-muted`
-- `--cs-border`
-- `--cs-ink-muted`
+- `--popcandy-surface-muted`
+- `--popcandy-border`
+- `--popcandy-ink-muted`
 
 ## Props
 
@@ -1516,18 +1516,18 @@ Pairs text with semantic color.
 
 # Button
 
-> `ui.button` · `@commonspace/ui` · stable · version 0.1.0
+> `ui.button` · `@unpopping-candy/ui` · stable · version 0.1.0
 
 Triggers an immediate user action with explicit priority and pending behavior.
 
 ## Import
 
 ```tsx
-import { Button } from '@commonspace/ui';
+import { Button } from '@unpopping-candy/ui';
 ```
 
 ```tsx
-import { Button } from '@commonspace/ui/button';
+import { Button } from '@unpopping-candy/ui/button';
 ```
 
 ## Use when
@@ -1564,10 +1564,10 @@ import { Button } from '@commonspace/ui/button';
 
 ## Tokens
 
-- `--cs-button-height-md`
-- `--cs-accent`
-- `--cs-critical`
-- `--cs-focus`
+- `--popcandy-button-height-md`
+- `--popcandy-accent`
+- `--popcandy-critical`
+- `--popcandy-focus`
 
 ## Props
 
@@ -1619,23 +1619,23 @@ Navigation should preserve link semantics.
 
 # Container
 
-> `ui.container` · `@commonspace/ui` · stable · version 0.1.0
+> `ui.container` · `@unpopping-candy/ui` · stable · version 0.1.0
 
 Constrains page content to a readable width and consistent horizontal gutter.
 
 ## Import
 
 ```tsx
-import { Container } from '@commonspace/ui';
+import { Container } from '@unpopping-candy/ui';
 ```
 
 ```tsx
-import { Container } from '@commonspace/ui/layout';
+import { Container } from '@unpopping-candy/ui/layout';
 ```
 
 ## Use when
 
-- A page or section needs the standard Commonspace reading width.
+- A page or section needs the standard Unpopping Candy reading width.
 
 ## Avoid when
 
@@ -1661,9 +1661,9 @@ import { Container } from '@commonspace/ui/layout';
 
 ## Tokens
 
-- `--cs-space-4`
-- `--cs-space-6`
-- `--cs-shell-max`
+- `--popcandy-space-4`
+- `--popcandy-space-6`
+- `--popcandy-shell-max`
 
 ## Props
 
@@ -1703,18 +1703,18 @@ Uses standard gutters and width.
 
 # Dialog
 
-> `ui.dialog` · `@commonspace/ui` · stable · version 0.1.0
+> `ui.dialog` · `@unpopping-candy/ui` · stable · version 0.1.0
 
 Interrupts the current context for a focused task that must be completed or dismissed.
 
 ## Import
 
 ```tsx
-import { Dialog } from '@commonspace/ui';
+import { Dialog } from '@unpopping-candy/ui';
 ```
 
 ```tsx
-import { Dialog } from '@commonspace/ui/dialog';
+import { Dialog } from '@unpopping-candy/ui/dialog';
 ```
 
 ## Use when
@@ -1749,10 +1749,10 @@ import { Dialog } from '@commonspace/ui/dialog';
 
 ## Tokens
 
-- `--cs-dialog-width-md`
-- `--cs-surface`
-- `--cs-shadow-dialog`
-- `--cs-focus`
+- `--popcandy-dialog-width-md`
+- `--popcandy-surface`
+- `--popcandy-shadow-dialog`
+- `--popcandy-focus`
 
 ## Props
 
@@ -1802,14 +1802,14 @@ Labels the modal and keeps open state controlled.
 
 # EmptyState
 
-> `ui.empty-state` · `@commonspace/ui` · stable · version 0.1.0
+> `ui.empty-state` · `@unpopping-candy/ui` · stable · version 0.1.0
 
 Explains why a meaningful region has no content and offers the next valid action.
 
 ## Import
 
 ```tsx
-import { EmptyState } from '@commonspace/ui';
+import { EmptyState } from '@unpopping-candy/ui';
 ```
 
 ## Use when
@@ -1840,9 +1840,9 @@ import { EmptyState } from '@commonspace/ui';
 
 ## Tokens
 
-- `--cs-ink`
-- `--cs-ink-muted`
-- `--cs-space-8`
+- `--popcandy-ink`
+- `--popcandy-ink-muted`
+- `--popcandy-space-8`
 
 ## Props
 
@@ -1886,18 +1886,18 @@ Explains the condition and recovery.
 
 # FeedbackProvider
 
-> `ui.feedback-provider` · `@commonspace/ui` · stable · version 0.1.0
+> `ui.feedback-provider` · `@unpopping-candy/ui` · stable · version 0.1.0
 
 Owns the application-level transient feedback queue and exposes a bounded controller.
 
 ## Import
 
 ```tsx
-import { FeedbackProvider } from '@commonspace/ui';
+import { FeedbackProvider } from '@unpopping-candy/ui';
 ```
 
 ```tsx
-import { FeedbackProvider } from '@commonspace/ui/feedback';
+import { FeedbackProvider } from '@unpopping-candy/ui/feedback';
 ```
 
 ## Use when
@@ -1927,8 +1927,8 @@ import { FeedbackProvider } from '@commonspace/ui/feedback';
 
 ## Tokens
 
-- `--cs-dialog-width-sm`
-- `--cs-shadow-dialog`
+- `--popcandy-dialog-width-sm`
+- `--popcandy-shadow-dialog`
 
 ## Props
 
@@ -1970,18 +1970,18 @@ Creates one deterministic queue.
 
 # IconButton
 
-> `ui.icon-button` · `@commonspace/ui` · stable · version 0.1.0
+> `ui.icon-button` · `@unpopping-candy/ui` · stable · version 0.1.0
 
 Triggers a frequent action where a well-known icon can replace visible text.
 
 ## Import
 
 ```tsx
-import { IconButton } from '@commonspace/ui';
+import { IconButton } from '@unpopping-candy/ui';
 ```
 
 ```tsx
-import { IconButton } from '@commonspace/ui/button';
+import { IconButton } from '@unpopping-candy/ui/button';
 ```
 
 ## Use when
@@ -2016,9 +2016,9 @@ import { IconButton } from '@commonspace/ui/button';
 
 ## Tokens
 
-- `--cs-button-height-md`
-- `--cs-focus`
-- `--cs-ink-muted`
+- `--popcandy-button-height-md`
+- `--popcandy-focus`
+- `--popcandy-ink-muted`
 
 ## Props
 
@@ -2067,18 +2067,18 @@ Screen-reader users cannot identify the action.
 
 # Inline
 
-> `ui.inline` · `@commonspace/ui` · stable · version 0.1.0
+> `ui.inline` · `@unpopping-candy/ui` · stable · version 0.1.0
 
 Arranges related items horizontally with tokenized gap, alignment, and wrapping.
 
 ## Import
 
 ```tsx
-import { Inline } from '@commonspace/ui';
+import { Inline } from '@unpopping-candy/ui';
 ```
 
 ```tsx
-import { Inline } from '@commonspace/ui/layout';
+import { Inline } from '@unpopping-candy/ui/layout';
 ```
 
 ## Use when
@@ -2109,10 +2109,10 @@ import { Inline } from '@commonspace/ui/layout';
 
 ## Tokens
 
-- `--cs-space-1`
-- `--cs-space-2`
-- `--cs-space-3`
-- `--cs-space-4`
+- `--popcandy-space-1`
+- `--popcandy-space-2`
+- `--popcandy-space-3`
+- `--popcandy-space-4`
 
 ## Props
 
@@ -2155,18 +2155,18 @@ Groups related actions without arbitrary margins.
 
 # Separator
 
-> `ui.separator` · `@commonspace/ui` · stable · version 0.1.0
+> `ui.separator` · `@unpopping-candy/ui` · stable · version 0.1.0
 
 Separates adjacent regions when spacing alone cannot communicate the boundary.
 
 ## Import
 
 ```tsx
-import { Separator } from '@commonspace/ui';
+import { Separator } from '@unpopping-candy/ui';
 ```
 
 ```tsx
-import { Separator } from '@commonspace/ui/layout';
+import { Separator } from '@unpopping-candy/ui/layout';
 ```
 
 ## Use when
@@ -2194,7 +2194,7 @@ import { Separator } from '@commonspace/ui/layout';
 
 ## Tokens
 
-- `--cs-border`
+- `--popcandy-border`
 
 ## Props
 
@@ -2234,18 +2234,18 @@ Uses the shared border token.
 
 # Skeleton
 
-> `ui.skeleton` · `@commonspace/ui` · stable · version 0.1.0
+> `ui.skeleton` · `@unpopping-candy/ui` · stable · version 0.1.0
 
 Reserves stable geometry while content is loading.
 
 ## Import
 
 ```tsx
-import { Skeleton } from '@commonspace/ui';
+import { Skeleton } from '@unpopping-candy/ui';
 ```
 
 ```tsx
-import { Skeleton } from '@commonspace/ui/loading';
+import { Skeleton } from '@unpopping-candy/ui/loading';
 ```
 
 ## Use when
@@ -2275,8 +2275,8 @@ import { Skeleton } from '@commonspace/ui/loading';
 
 ## Tokens
 
-- `--cs-surface-muted`
-- `--cs-motion-slow`
+- `--popcandy-surface-muted`
+- `--popcandy-motion-slow`
 
 ## Props
 
@@ -2318,18 +2318,18 @@ Reserves layout without announcing fake content.
 
 # Spinner
 
-> `ui.spinner` · `@commonspace/ui` · stable · version 0.1.0
+> `ui.spinner` · `@unpopping-candy/ui` · stable · version 0.1.0
 
 Indicates an indeterminate operation in a compact region.
 
 ## Import
 
 ```tsx
-import { Spinner } from '@commonspace/ui';
+import { Spinner } from '@unpopping-candy/ui';
 ```
 
 ```tsx
-import { Spinner } from '@commonspace/ui/loading';
+import { Spinner } from '@unpopping-candy/ui/loading';
 ```
 
 ## Use when
@@ -2359,8 +2359,8 @@ import { Spinner } from '@commonspace/ui/loading';
 
 ## Tokens
 
-- `--cs-accent`
-- `--cs-motion-fast`
+- `--popcandy-accent`
+- `--popcandy-motion-fast`
 
 ## Props
 
@@ -2401,18 +2401,18 @@ Announces the current operation.
 
 # Stack
 
-> `ui.stack` · `@commonspace/ui` · stable · version 0.1.0
+> `ui.stack` · `@unpopping-candy/ui` · stable · version 0.1.0
 
 Arranges a vertical reading or task sequence with tokenized spacing.
 
 ## Import
 
 ```tsx
-import { Stack } from '@commonspace/ui';
+import { Stack } from '@unpopping-candy/ui';
 ```
 
 ```tsx
-import { Stack } from '@commonspace/ui/layout';
+import { Stack } from '@unpopping-candy/ui/layout';
 ```
 
 ## Use when
@@ -2443,11 +2443,11 @@ import { Stack } from '@commonspace/ui/layout';
 
 ## Tokens
 
-- `--cs-space-1`
-- `--cs-space-2`
-- `--cs-space-3`
-- `--cs-space-4`
-- `--cs-space-6`
+- `--popcandy-space-1`
+- `--popcandy-space-2`
+- `--popcandy-space-3`
+- `--popcandy-space-4`
+- `--popcandy-space-6`
 
 ## Props
 
@@ -2488,18 +2488,18 @@ Creates consistent vertical rhythm.
 
 # Surface
 
-> `ui.surface` · `@commonspace/ui` · stable · version 0.1.0
+> `ui.surface` · `@unpopping-candy/ui` · stable · version 0.1.0
 
 Creates a semantic background and boundary without prescribing product content.
 
 ## Import
 
 ```tsx
-import { Surface } from '@commonspace/ui';
+import { Surface } from '@unpopping-candy/ui';
 ```
 
 ```tsx
-import { Surface } from '@commonspace/ui/layout';
+import { Surface } from '@unpopping-candy/ui/layout';
 ```
 
 ## Use when
@@ -2530,10 +2530,10 @@ import { Surface } from '@commonspace/ui/layout';
 
 ## Tokens
 
-- `--cs-surface`
-- `--cs-surface-muted`
-- `--cs-border`
-- `--cs-shadow-dialog`
+- `--popcandy-surface`
+- `--popcandy-surface-muted`
+- `--popcandy-border`
+- `--popcandy-shadow-dialog`
 
 ## Props
 
@@ -2575,18 +2575,18 @@ Adds bounded contrast to a local region.
 
 # Tabs
 
-> `ui.tabs` · `@commonspace/ui` · stable · version 0.1.0
+> `ui.tabs` · `@unpopping-candy/ui` · stable · version 0.1.0
 
 Switches among peer views that share one context and URL or controlled state.
 
 ## Import
 
 ```tsx
-import { Tabs } from '@commonspace/ui';
+import { Tabs } from '@unpopping-candy/ui';
 ```
 
 ```tsx
-import { Tabs } from '@commonspace/ui/tabs';
+import { Tabs } from '@unpopping-candy/ui/tabs';
 ```
 
 ## Use when
@@ -2619,9 +2619,9 @@ import { Tabs } from '@commonspace/ui/tabs';
 
 ## Tokens
 
-- `--cs-accent`
-- `--cs-border`
-- `--cs-focus`
+- `--popcandy-accent`
+- `--popcandy-border`
+- `--popcandy-focus`
 
 ## Props
 
@@ -2667,18 +2667,18 @@ Keeps selection controlled and explicit.
 
 # TextArea
 
-> `ui.text-area` · `@commonspace/ui` · stable · version 0.1.0
+> `ui.text-area` · `@unpopping-candy/ui` · stable · version 0.1.0
 
 Collects multi-line text with label, description, validation, and native textarea semantics.
 
 ## Import
 
 ```tsx
-import { TextArea } from '@commonspace/ui';
+import { TextArea } from '@unpopping-candy/ui';
 ```
 
 ```tsx
-import { TextArea } from '@commonspace/ui/forms';
+import { TextArea } from '@unpopping-candy/ui/forms';
 ```
 
 ## Use when
@@ -2711,10 +2711,10 @@ import { TextArea } from '@commonspace/ui/forms';
 
 ## Tokens
 
-- `--cs-field-height`
-- `--cs-border`
-- `--cs-focus`
-- `--cs-critical`
+- `--popcandy-field-height`
+- `--popcandy-border`
+- `--popcandy-focus`
+- `--popcandy-critical`
 
 ## Props
 
@@ -2758,18 +2758,18 @@ Associates label and validation feedback.
 
 # TextField
 
-> `ui.text-field` · `@commonspace/ui` · stable · version 0.1.0
+> `ui.text-field` · `@unpopping-candy/ui` · stable · version 0.1.0
 
 Collects one short value with label, description, validation, and native input semantics.
 
 ## Import
 
 ```tsx
-import { TextField } from '@commonspace/ui';
+import { TextField } from '@unpopping-candy/ui';
 ```
 
 ```tsx
-import { TextField } from '@commonspace/ui/forms';
+import { TextField } from '@unpopping-candy/ui/forms';
 ```
 
 ## Use when
@@ -2805,10 +2805,10 @@ import { TextField } from '@commonspace/ui/forms';
 
 ## Tokens
 
-- `--cs-field-height`
-- `--cs-border`
-- `--cs-focus`
-- `--cs-critical`
+- `--popcandy-field-height`
+- `--popcandy-border`
+- `--popcandy-focus`
+- `--popcandy-critical`
 
 ## Props
 
@@ -2853,18 +2853,18 @@ Uses native semantics and autofill metadata.
 
 # Toast
 
-> `ui.toast` · `@commonspace/ui` · stable · version 0.1.0
+> `ui.toast` · `@unpopping-candy/ui` · stable · version 0.1.0
 
 Renders one transient or persistent item from the feedback queue.
 
 ## Import
 
 ```tsx
-import { Toast } from '@commonspace/ui';
+import { Toast } from '@unpopping-candy/ui';
 ```
 
 ```tsx
-import { Toast } from '@commonspace/ui/feedback';
+import { Toast } from '@unpopping-candy/ui/feedback';
 ```
 
 ## Use when
@@ -2898,11 +2898,11 @@ import { Toast } from '@commonspace/ui/feedback';
 
 ## Tokens
 
-- `--cs-surface`
-- `--cs-shadow-dialog`
-- `--cs-positive`
-- `--cs-warning`
-- `--cs-critical`
+- `--popcandy-surface`
+- `--popcandy-shadow-dialog`
+- `--popcandy-positive`
+- `--popcandy-warning`
+- `--popcandy-critical`
 
 ## Props
 
@@ -2943,18 +2943,18 @@ feedback.show({ tone: 'success', title: 'Link copied' })
 
 # ToastViewport
 
-> `ui.toast-viewport` · `@commonspace/ui` · stable · version 0.1.0
+> `ui.toast-viewport` · `@unpopping-candy/ui` · stable · version 0.1.0
 
 Positions and announces the bounded stack of global feedback items.
 
 ## Import
 
 ```tsx
-import { ToastViewport } from '@commonspace/ui';
+import { ToastViewport } from '@unpopping-candy/ui';
 ```
 
 ```tsx
-import { ToastViewport } from '@commonspace/ui/feedback';
+import { ToastViewport } from '@unpopping-candy/ui/feedback';
 ```
 
 ## Use when
@@ -2984,8 +2984,8 @@ import { ToastViewport } from '@commonspace/ui/feedback';
 
 ## Tokens
 
-- `--cs-dialog-width-sm`
-- `--cs-space-4`
+- `--popcandy-dialog-width-sm`
+- `--popcandy-space-4`
 
 ## Props
 
@@ -3026,14 +3026,14 @@ Binds queue state to presentation.
 
 # VisuallyHidden
 
-> `ui.visually-hidden` · `@commonspace/ui` · stable · version 0.1.0
+> `ui.visually-hidden` · `@unpopping-candy/ui` · stable · version 0.1.0
 
 Keeps essential text available to assistive technology without changing visual layout.
 
 ## Import
 
 ```tsx
-import { VisuallyHidden } from '@commonspace/ui';
+import { VisuallyHidden } from '@unpopping-candy/ui';
 ```
 
 ## Use when
@@ -3061,7 +3061,7 @@ import { VisuallyHidden } from '@commonspace/ui';
 
 ## Tokens
 
-- `--cs-space-0`
+- `--popcandy-space-0`
 
 ## Props
 

@@ -1,7 +1,7 @@
 {
   "codeConnect": {
     "include": ["figma/code-connect/**/*.figma.ts"],
-    "label": "Commonspace UI",
+    "label": "Unpopping Candy",
     "language": "jsx"
   }
 }

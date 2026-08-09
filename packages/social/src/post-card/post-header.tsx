@@ -1,6 +1,6 @@
 import type { ReactNode } from 'react';
-import { CheckCircleFilledIcon, MoreIcon } from '@commonspace/icons';
-import { IconButton } from '@commonspace/ui';
+import { CheckCircleFilledIcon, MoreIcon } from '@unpopping-candy/icons';
+import { IconButton } from '@unpopping-candy/ui';
 import { formatRelativeTime } from '../lib/format.js';
 import type { SocialUserViewModel } from '../model/types.js';
 
@@ -17,7 +17,7 @@ function AuthorIdentity({ author, createdAt, locale, nowMs }: Pick<PostHeaderPro
   return (
     <>
       <strong>{author.displayName}</strong>
-      {author.verified ? <CheckCircleFilledIcon className="cs-post-header__verified" label="Verified" size="sm" /> : null}
+      {author.verified ? <CheckCircleFilledIcon className="popcandy-post-header__verified" label="Verified" size="sm" /> : null}
       <span>@{author.handle}</span>
       <span aria-hidden="true">·</span>
       <time dateTime={createdAt}>{formatRelativeTime(createdAt, nowMs, locale)}</time>
@@ -28,11 +28,11 @@ function AuthorIdentity({ author, createdAt, locale, nowMs }: Pick<PostHeaderPro
 export function PostHeader({ author, createdAt, locale, nowMs, onOpenAuthor, onOpenMenu }: PostHeaderProps) {
   const identity = <AuthorIdentity author={author} createdAt={createdAt} locale={locale} nowMs={nowMs} />;
   return (
-    <header className="cs-post-header">
+    <header className="popcandy-post-header">
       {onOpenAuthor ? (
-        <button type="button" className="cs-post-header__identity" onClick={onOpenAuthor}>{identity}</button>
+        <button type="button" className="popcandy-post-header__identity" onClick={onOpenAuthor}>{identity}</button>
       ) : (
-        <div className="cs-post-header__identity cs-post-header__identity--static">{identity}</div>
+        <div className="popcandy-post-header__identity popcandy-post-header__identity--static">{identity}</div>
       )}
       {onOpenMenu ? <IconButton size="sm" label="Post actions" icon={<MoreIcon />} onClick={onOpenMenu} /> : null}
     </header>

@@ -11,7 +11,7 @@ export default defineConfig({
       fileName: () => 'index.js',
     },
     rollupOptions: {
-      external: ['react', 'react-dom', 'react/jsx-runtime', '@commonspace/tokens'],
+      external: ['react', 'react-dom', 'react/jsx-runtime', '@unpopping-candy/tokens'],
     },
     sourcemap: true,
     emptyOutDir: false,

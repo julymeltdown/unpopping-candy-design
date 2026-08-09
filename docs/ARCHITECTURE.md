@@ -2,7 +2,7 @@
 
 ## Purpose
 
-Commonspace UI is a standalone design-system repository and an AI-operable knowledge platform. Its architecture preserves six properties:
+Unpopping Candy is a standalone design-system repository and an AI-operable knowledge platform. Its architecture preserves six properties:
 
 1. visual packages can be installed independently;
 2. presentational packages do not acquire application dependencies;
@@ -15,23 +15,23 @@ Commonspace UI is a standalone design-system repository and an AI-operable knowl
 
 ```text
                          ┌──────────────────────┐
-                         │ @commonspace/theme   │
+                         │ @unpopping-candy/theme   │
                          └──────────▲───────────┘
                                     │
 ┌──────────────────────┐            │
-│ @commonspace/tokens  │────────────┼──────────────────────────┐
+│ @unpopping-candy/tokens  │────────────┼──────────────────────────┐
 └──────────▲───────────┘            │                          │
            │                        │                          │
            │              ┌─────────┴─────────┐                │
-           └──────────────│ @commonspace/ui   │◀──────┐        │
+           └──────────────│ @unpopping-candy/ui   │◀──────┐        │
                           └─────────▲─────────┘       │        │
                                     │                 │        │
                           ┌─────────┴─────────┐       │        │
-                          │@commonspace/social│───────┘        │
+                          │@unpopping-candy/social│───────┘        │
                           └───────────────────┘                │
                                                               │
                           ┌────────────────────┐               │
-                          │@commonspace/icons  │───────────────┘
+                          │@unpopping-candy/icons  │───────────────┘
                           └────────────────────┘
 ```
 
@@ -51,15 +51,15 @@ social  → React + tokens + icons + ui
 component source + adjacent metadata + tokens + stories + patterns + templates
                                    │
                                    ▼
-                         @commonspace/knowledge
+                         @unpopping-candy/knowledge
                                    │
        ┌───────────────┬───────────┼───────────┬─────────────────┐
        ▼               ▼           ▼           ▼                 ▼
-@commonspace/cli  generated docs  manifests  Registry metadata  Figma templates
+@unpopping-candy/cli  generated docs  manifests  Registry metadata  Figma templates
        │                           │           │                 │
        ├───────────────┬───────────┘           │                 │
        ▼               ▼                       ▼                 ▼
- Agent Skills    @commonspace/mcp         safe scaffold    Code Connect gate
+ Agent Skills    @unpopping-candy/mcp         safe scaffold    Code Connect gate
        │               │
        └───────┬───────┘
                ▼
@@ -106,7 +106,7 @@ The social package uses presentation models that describe only what a component 
 ```text
 API response
 → consuming application's entity mapper
-→ Commonspace presentation model
+→ Unpopping Candy presentation model
 → social component
 ```
 
@@ -163,7 +163,7 @@ The public API consists of:
 - emitted TypeScript declarations;
 - component props and callbacks;
 - semantic design tokens;
-- documented `data-cs-*` attributes;
+- documented `data-popcandy-*` attributes;
 - documented behavior and accessibility semantics;
 - stable knowledge IDs;
 - stable Storybook contract IDs where documented;
@@ -265,7 +265,7 @@ Every JavaScript entry point exposes an ESM implementation and declaration file.
 
 ### CSS contract
 
-Custom properties and public classes use Commonspace namespaces. Scanner behavior is protected by regression tests.
+Custom properties and public classes use Unpopping Candy namespaces. Scanner behavior is protected by regression tests.
 
 ### Documentation contract
 
@@ -277,7 +277,7 @@ The AI verifier checks catalog completeness, component operational guidance, man
 
 ### Release-readiness contract
 
-Public release fails while the repository is unlicensed, package manifests remain `UNLICENSED`, or a reviewed lockfile is missing.
+Public release requires the repository and every publishable package to carry the approved MIT license, together with a reviewed dependency lockfile.
 
 ## Changes and compatibility
 

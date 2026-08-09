@@ -1,8 +1,8 @@
-export { CommonspaceProvider, useCommonspaceTheme } from './commonspace-provider.js';
+export { UnpoppingCandyProvider, useUnpoppingCandyTheme } from './unpopping-candy-provider.js';
 export type {
-  CommonspaceProviderProps,
-  CommonspaceThemeController,
-} from './commonspace-provider.js';
+  UnpoppingCandyProviderProps,
+  UnpoppingCandyThemeController,
+} from './unpopping-candy-provider.js';
 export { ThemeScript } from './theme-script.js';
 export type { ThemeScriptProps } from './theme-script.js';
 export {

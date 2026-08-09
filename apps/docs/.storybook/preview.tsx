@@ -1,16 +1,16 @@
 import type { Preview } from '@storybook/react-vite';
-import { CommonspaceProvider } from '@commonspace/theme';
-import { FeedbackProvider } from '@commonspace/ui';
-import '@commonspace/tokens/styles.css';
-import '@commonspace/icons/styles.css';
-import '@commonspace/ui/styles.css';
-import '@commonspace/social/styles.css';
+import { UnpoppingCandyProvider } from '@unpopping-candy/theme';
+import { FeedbackProvider } from '@unpopping-candy/ui';
+import '@unpopping-candy/tokens/styles.css';
+import '@unpopping-candy/icons/styles.css';
+import '@unpopping-candy/ui/styles.css';
+import '@unpopping-candy/social/styles.css';
 import './preview.css';
 
 const preview: Preview = {
   globalTypes: {
     theme: {
-      description: 'Commonspace theme',
+      description: 'Unpopping Candy theme',
       defaultValue: 'light',
       toolbar: { icon: 'paintbrush', items: ['light', 'dark', 'system', 'high-contrast'] },
     },
@@ -27,17 +27,17 @@ const preview: Preview = {
   },
   decorators: [
     (Story, context) => (
-      <CommonspaceProvider
+      <UnpoppingCandyProvider
         theme={context.globals.theme}
         density={context.globals.density}
         accent={context.globals.accent}
         storageKey={false}
-        className="cs-docs-canvas"
+        className="popcandy-docs-canvas"
       >
         <FeedbackProvider>
           <Story />
         </FeedbackProvider>
-      </CommonspaceProvider>
+      </UnpoppingCandyProvider>
     ),
   ],
   parameters: {

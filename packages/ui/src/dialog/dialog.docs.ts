@@ -3,15 +3,15 @@ export default {
   "kind": "component",
   "id": "ui.dialog",
   "name": "Dialog",
-  "package": "@commonspace/ui",
+  "package": "@unpopping-candy/ui",
   "version": "0.1.0",
   "status": "stable",
   "category": "overlay",
   "summary": "Interrupts the current context for a focused task that must be completed or dismissed.",
   "sourcePath": "packages/ui/src/dialog/dialog.tsx",
   "entrypoints": [
-    "@commonspace/ui",
-    "@commonspace/ui/dialog"
+    "@unpopping-candy/ui",
+    "@unpopping-candy/ui/dialog"
   ],
   "keywords": [
     "dialog",
@@ -28,10 +28,10 @@ export default {
     "A non-blocking message is sufficient."
   ],
   "tokens": [
-    "--cs-dialog-width-md",
-    "--cs-surface",
-    "--cs-shadow-dialog",
-    "--cs-focus"
+    "--popcandy-dialog-width-md",
+    "--popcandy-surface",
+    "--popcandy-shadow-dialog",
+    "--popcandy-focus"
   ],
   "related": [
     "ui.button",

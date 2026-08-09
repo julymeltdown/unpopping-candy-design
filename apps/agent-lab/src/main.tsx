@@ -1,10 +1,10 @@
 import { StrictMode } from 'react';
 import { createRoot } from 'react-dom/client';
-import '@commonspace/tokens/styles.css';
-import '@commonspace/ui/styles.css';
-import { CommonspaceProvider } from '@commonspace/theme';
-import report from '@commonspace/eval-report';
-import { Badge, Container, Inline, Stack, Surface } from '@commonspace/ui';
+import '@unpopping-candy/tokens/styles.css';
+import '@unpopping-candy/ui/styles.css';
+import { UnpoppingCandyProvider } from '@unpopping-candy/theme';
+import report from '@unpopping-candy/eval-report';
+import { Badge, Container, Inline, Stack, Surface } from '@unpopping-candy/ui';
 import './styles.css';
 
 type Scenario = (typeof report.scenarios)[number];
@@ -35,12 +35,12 @@ function ScenarioCard({ scenario }: { scenario: Scenario }) {
 }
 
 function App() {
-  return <CommonspaceProvider scope="document" theme="light">
+  return <UnpoppingCandyProvider scope="document" theme="light">
     <main className="agent-lab">
       <Container size="lg">
         <Stack gap={8}>
           <header className="agent-lab__header">
-            <p>COMMONSPACE / AGENT LAB</p>
+            <p>UNPOPPING CANDY / AGENT LAB</p>
             <h1>Measure the design context, not the confidence of the model.</h1>
             <p>{report.summary.passing} of {report.summary.total} reference scenarios pass the current release gate. Average score: {report.summary.averageScore}.</p>
           </header>
@@ -48,7 +48,13 @@ function App() {
         </Stack>
       </Container>
     </main>
-  </CommonspaceProvider>;
+  </UnpoppingCandyProvider>;
 }
 
-createRoot(document.getElementById('root')!).render(<StrictMode><App /></StrictMode>);
+const rootElement = document.getElementById('root');
+
+if (!rootElement) {
+  throw new Error('Missing #root application mount.');
+}
+
+createRoot(rootElement).render(<StrictMode><App /></StrictMode>);

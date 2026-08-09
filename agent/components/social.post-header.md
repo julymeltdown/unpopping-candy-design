@@ -1,17 +1,17 @@
 # PostHeader
 
-> `social.post-header` · `@commonspace/social` · stable · version 0.1.0
+> `social.post-header` · `@unpopping-candy/social` · stable · version 0.1.0
 
 Presents post identity, timestamp, and distribution context without owning navigation.
 
 ## Import
 
 ```tsx
-import { PostHeader } from '@commonspace/social';
+import { PostHeader } from '@unpopping-candy/social';
 ```
 
 ```tsx
-import { PostHeader } from '@commonspace/social/post';
+import { PostHeader } from '@unpopping-candy/social/post';
 ```
 
 ## Use when
@@ -40,8 +40,8 @@ import { PostHeader } from '@commonspace/social/post';
 
 ## Tokens
 
-- `--cs-ink`
-- `--cs-ink-muted`
+- `--popcandy-ink`
+- `--popcandy-ink-muted`
 
 ## Props
 

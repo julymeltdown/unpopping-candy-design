@@ -1,17 +1,17 @@
 # Stack
 
-> `ui.stack` · `@commonspace/ui` · stable · version 0.1.0
+> `ui.stack` · `@unpopping-candy/ui` · stable · version 0.1.0
 
 Arranges a vertical reading or task sequence with tokenized spacing.
 
 ## Import
 
 ```tsx
-import { Stack } from '@commonspace/ui';
+import { Stack } from '@unpopping-candy/ui';
 ```
 
 ```tsx
-import { Stack } from '@commonspace/ui/layout';
+import { Stack } from '@unpopping-candy/ui/layout';
 ```
 
 ## Use when
@@ -42,11 +42,11 @@ import { Stack } from '@commonspace/ui/layout';
 
 ## Tokens
 
-- `--cs-space-1`
-- `--cs-space-2`
-- `--cs-space-3`
-- `--cs-space-4`
-- `--cs-space-6`
+- `--popcandy-space-1`
+- `--popcandy-space-2`
+- `--popcandy-space-3`
+- `--popcandy-space-4`
+- `--popcandy-space-6`
 
 ## Props
 

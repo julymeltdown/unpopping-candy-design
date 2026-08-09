@@ -3,15 +3,15 @@ export default {
   "kind": "component",
   "id": "ui.icon-button",
   "name": "IconButton",
-  "package": "@commonspace/ui",
+  "package": "@unpopping-candy/ui",
   "version": "0.1.0",
   "status": "stable",
   "category": "action",
   "summary": "Triggers a frequent action where a well-known icon can replace visible text.",
   "sourcePath": "packages/ui/src/icon-button/icon-button.tsx",
   "entrypoints": [
-    "@commonspace/ui",
-    "@commonspace/ui/button"
+    "@unpopping-candy/ui",
+    "@unpopping-candy/ui/button"
   ],
   "keywords": [
     "icon",
@@ -27,9 +27,9 @@ export default {
     "The icon is decorative."
   ],
   "tokens": [
-    "--cs-button-height-md",
-    "--cs-focus",
-    "--cs-ink-muted"
+    "--popcandy-button-height-md",
+    "--popcandy-focus",
+    "--popcandy-ink-muted"
   ],
   "related": [
     "ui.button"

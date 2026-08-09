@@ -1,5 +1,5 @@
 import type { HTMLAttributes, ReactNode } from 'react';
-import { UserIcon } from '@commonspace/icons';
+import { UserIcon } from '@unpopping-candy/icons';
 import { mergeClassNames } from '../lib/merge-class-names.js';
 
 export interface AvatarProps extends Omit<HTMLAttributes<HTMLSpanElement>, 'children'> {
@@ -22,14 +22,14 @@ export function Avatar({
   return (
     <span
       {...props}
-      data-cs-component="avatar"
-      data-cs-size={size}
-      className={mergeClassNames('cs-avatar', `cs-avatar--${size}`, className)}
+      data-popcandy-component="avatar"
+      data-popcandy-size={size}
+      className={mergeClassNames('popcandy-avatar', `popcandy-avatar--${size}`, className)}
     >
       {src ? (
         <img src={src} alt={alt} loading={loading} decoding="async" />
       ) : fallback ? (
-        <span className="cs-avatar__fallback">{fallback}</span>
+        <span className="popcandy-avatar__fallback">{fallback}</span>
       ) : (
         <UserIcon aria-hidden="true" />
       )}

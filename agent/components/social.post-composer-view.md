@@ -1,17 +1,17 @@
 # PostComposerView
 
-> `social.post-composer-view` · `@commonspace/social` · stable · version 0.1.0
+> `social.post-composer-view` · `@unpopping-candy/social` · stable · version 0.1.0
 
 Presents a controlled social composer while the application owns draft, validation, upload, and publishing state.
 
 ## Import
 
 ```tsx
-import { PostComposerView } from '@commonspace/social';
+import { PostComposerView } from '@unpopping-candy/social';
 ```
 
 ```tsx
-import { PostComposerView } from '@commonspace/social/post';
+import { PostComposerView } from '@unpopping-candy/social/post';
 ```
 
 ## Use when
@@ -44,10 +44,10 @@ import { PostComposerView } from '@commonspace/social/post';
 
 ## Tokens
 
-- `--cs-surface`
-- `--cs-border`
-- `--cs-accent`
-- `--cs-field-height`
+- `--popcandy-surface`
+- `--popcandy-border`
+- `--popcandy-accent`
+- `--popcandy-field-height`
 
 ## Props
 

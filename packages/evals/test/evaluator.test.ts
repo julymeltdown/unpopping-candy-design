@@ -4,7 +4,7 @@ import { bundledCatalog } from '../../knowledge/src/index.ts';
 import { evaluateAgentOutput, evaluateScenarioSuite } from '../src/index.ts';
 
 const complete = `
-import { Alert, Button, EmptyState, Stack, TextField } from '@commonspace/ui';
+import { Alert, Button, EmptyState, Stack, TextField } from '@unpopping-candy/ui';
 export function LoginSurface({ loading, error, users }) {
   if (loading) return <p role="status">Loading</p>;
   if (error) return <Alert title="Login failed" description={error} tone="critical" />;
@@ -13,11 +13,11 @@ export function LoginSurface({ loading, error, users }) {
 }`;
 
 const broken = `
-import { Button } from '@commonspace/ui/src/button/button';
+import { Button } from '@unpopping-candy/ui/src/button/button';
 export const Login = () => <div style={{ color: '#ff00aa', padding: '17px' }}><button><span /></button><Button shadow="xl">Go</Button></div>;
 `;
 
-test('complete Commonspace output passes bounded quality thresholds', () => {
+test('complete Unpopping Candy output passes bounded quality thresholds', () => {
   const report = evaluateAgentOutput(bundledCatalog, { id: 'complete', mode: 'skill-mcp-storybook', task: 'Login form', requiredStates: ['loading', 'error', 'empty'], files: [{ path: 'login.tsx', content: complete }] });
   assert.equal(report.passed, true);
   assert.equal(report.metrics.invalidImports, 0);
@@ -56,7 +56,7 @@ test('expected component recall measures catalog reuse without requiring exact m
     mode: 'mcp',
     task: 'Profile form',
     expectedComponents: ['ui.alert', 'ui.button', 'ui.text-field'],
-    files: [{ path: 'profile.tsx', content: `import { Button, TextField } from '@commonspace/ui'; export const Profile = () => <form aria-label="Profile"><TextField label="Name" /><Button>Save</Button></form>;` }],
+    files: [{ path: 'profile.tsx', content: `import { Button, TextField } from '@unpopping-candy/ui'; export const Profile = () => <form aria-label="Profile"><TextField label="Name" /><Button>Save</Button></form>;` }],
   });
   assert.equal(report.metrics.componentRecall, 2 / 3);
   assert.deepEqual(report.missingComponents, ['ui.alert']);

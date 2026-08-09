@@ -1,5 +1,5 @@
-import { Alert, Button, Stack } from '@commonspace/ui';
-import { PostComposerView, TimelineView, type SocialPostViewModel } from '@commonspace/social';
+import { Alert, Button, Stack } from '@unpopping-candy/ui';
+import { PostComposerView, TimelineView, type SocialPostViewModel } from '@unpopping-candy/social';
 
 export interface SocialFeedPageProps {
   posts: readonly SocialPostViewModel[];
@@ -16,9 +16,9 @@ export interface SocialFeedPageProps {
 
 export function SocialFeedPage({ posts, draft, loading, loadingMore, publishing, error, onDraftChange, onPublish, onRetry, onLoadMore }: SocialFeedPageProps) {
   return (
-    <main className="cs-social-feed-page" aria-labelledby="social-feed-title">
+    <main className="popcandy-social-feed-page" aria-labelledby="social-feed-title">
       <Stack gap={0}>
-        <header className="cs-social-feed-page__header"><h1 id="social-feed-title">Home</h1></header>
+        <header className="popcandy-social-feed-page__header"><h1 id="social-feed-title">Home</h1></header>
         <PostComposerView value={draft} pending={publishing} onChange={onDraftChange} onSubmit={onPublish} />
         {error && posts.length > 0 ? <Alert title="New posts could not be loaded" description={error} tone="warning" action={<Button onClick={onRetry}>Try again</Button>} /> : null}
         <TimelineView posts={posts} loading={loading} loadingMore={loadingMore} error={error} onRetry={onRetry} footer={onLoadMore ? <Button variant="ghost" onClick={onLoadMore}>Load more</Button> : null} />

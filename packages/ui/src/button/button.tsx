@@ -40,20 +40,20 @@ export const Button = forwardRef<HTMLButtonElement, ButtonProps>(function Button
       type={type}
       disabled={unavailable}
       aria-busy={pending || undefined}
-      data-cs-component="button"
-      data-cs-variant={variant}
-      data-cs-size={size}
-      data-cs-state={pending ? 'pending' : unavailable ? 'disabled' : 'ready'}
+      data-popcandy-component="button"
+      data-popcandy-variant={variant}
+      data-popcandy-size={size}
+      data-popcandy-state={pending ? 'pending' : unavailable ? 'disabled' : 'ready'}
       className={mergeClassNames(
-        'cs-button',
-        `cs-button--${variant}`,
-        `cs-button--${size}`,
-        fullWidth && 'cs-button--full',
+        'popcandy-button',
+        `popcandy-button--${variant}`,
+        `popcandy-button--${size}`,
+        fullWidth && 'popcandy-button--full',
         className,
       )}
     >
       {pending ? <Spinner size="sm" label={pendingLabel} /> : leadingIcon}
-      <span className="cs-button__label">{pending ? pendingLabel : children}</span>
+      <span className="popcandy-button__label">{pending ? pendingLabel : children}</span>
       {!pending ? trailingIcon : null}
     </button>
   );

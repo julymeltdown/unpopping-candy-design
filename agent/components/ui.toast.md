@@ -1,17 +1,17 @@
 # Toast
 
-> `ui.toast` · `@commonspace/ui` · stable · version 0.1.0
+> `ui.toast` · `@unpopping-candy/ui` · stable · version 0.1.0
 
 Renders one transient or persistent item from the feedback queue.
 
 ## Import
 
 ```tsx
-import { Toast } from '@commonspace/ui';
+import { Toast } from '@unpopping-candy/ui';
 ```
 
 ```tsx
-import { Toast } from '@commonspace/ui/feedback';
+import { Toast } from '@unpopping-candy/ui/feedback';
 ```
 
 ## Use when
@@ -45,11 +45,11 @@ import { Toast } from '@commonspace/ui/feedback';
 
 ## Tokens
 
-- `--cs-surface`
-- `--cs-shadow-dialog`
-- `--cs-positive`
-- `--cs-warning`
-- `--cs-critical`
+- `--popcandy-surface`
+- `--popcandy-shadow-dialog`
+- `--popcandy-positive`
+- `--popcandy-warning`
+- `--popcandy-critical`
 
 ## Props
 

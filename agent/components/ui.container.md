@@ -1,22 +1,22 @@
 # Container
 
-> `ui.container` · `@commonspace/ui` · stable · version 0.1.0
+> `ui.container` · `@unpopping-candy/ui` · stable · version 0.1.0
 
 Constrains page content to a readable width and consistent horizontal gutter.
 
 ## Import
 
 ```tsx
-import { Container } from '@commonspace/ui';
+import { Container } from '@unpopping-candy/ui';
 ```
 
 ```tsx
-import { Container } from '@commonspace/ui/layout';
+import { Container } from '@unpopping-candy/ui/layout';
 ```
 
 ## Use when
 
-- A page or section needs the standard Commonspace reading width.
+- A page or section needs the standard Unpopping Candy reading width.
 
 ## Avoid when
 
@@ -42,9 +42,9 @@ import { Container } from '@commonspace/ui/layout';
 
 ## Tokens
 
-- `--cs-space-4`
-- `--cs-space-6`
-- `--cs-shell-max`
+- `--popcandy-space-4`
+- `--popcandy-space-6`
+- `--popcandy-shell-max`
 
 ## Props
 

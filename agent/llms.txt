@@ -1,4 +1,4 @@
-# Commonspace UI
+# Unpopping Candy
 
 > AI-operable React design system for content-rich and social products. Version 0.2.0.
 

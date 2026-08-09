@@ -1,5 +1,5 @@
 {
-  "$schema": "./schemas/commonspace-config.schema.json",
+  "$schema": "./schemas/popcandy-config.schema.json",
   "schemaVersion": 1,
   "catalog": "./agent/manifests/catalog.json",
   "design": "./DESIGN.md",
@@ -22,10 +22,10 @@
   "evaluations": "./agent/manifests/evals.json",
   "figma": "./agent/manifests/figma.json",
   "styles": [
-    "@commonspace/tokens/styles.css",
-    "@commonspace/icons/styles.css",
-    "@commonspace/ui/styles.css",
-    "@commonspace/social/styles.css"
+    "@unpopping-candy/tokens/styles.css",
+    "@unpopping-candy/icons/styles.css",
+    "@unpopping-candy/ui/styles.css",
+    "@unpopping-candy/social/styles.css"
   ],
   "validation": {
     "exclude": [
@@ -41,13 +41,13 @@
       "packages/evals/src/reference-scenarios.ts"
     ],
     "allowedEntrypoints": [
-      "@commonspace/knowledge",
-      "@commonspace/registry",
-      "@commonspace/cli",
-      "@commonspace/mcp",
-      "@commonspace/evals",
-      "@commonspace/figma",
-      "@commonspace/eval-report"
+      "@unpopping-candy/knowledge",
+      "@unpopping-candy/registry",
+      "@unpopping-candy/cli",
+      "@unpopping-candy/mcp",
+      "@unpopping-candy/evals",
+      "@unpopping-candy/figma",
+      "@unpopping-candy/eval-report"
     ]
   }
 }

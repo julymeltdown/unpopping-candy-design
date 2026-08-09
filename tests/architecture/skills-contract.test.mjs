@@ -12,7 +12,7 @@ test('skill parser reads required and nested metadata', () => {
 });
 
 test('skill inspection rejects mismatched names and missing references', async () => {
-  const root = await mkdtemp(join(tmpdir(), 'commonspace-skill-'));
+  const root = await mkdtemp(join(tmpdir(), 'popcandy-skill-'));
   const skill = join(root, 'valid-name');
   await mkdir(join(skill, 'references'), { recursive: true });
   await writeFile(join(skill, 'SKILL.md'), `---\nname: wrong-name\ndescription: Use for a fixture.\nmetadata:\n  version: "1.0.0"\n---\n\n# Fixture\n\nRead [missing](references/missing.md).\n`);

@@ -6,5 +6,5 @@ export interface StackProps extends HTMLAttributes<HTMLDivElement> {
   align?: CSSProperties['alignItems'];
 }
 export function Stack({ align, className, gap = 4, style, ...props }: StackProps) {
-  return <div {...props} className={mergeClassNames('cs-stack', className)} data-cs-gap={gap} style={{ ...style, alignItems: align }} />;
+  return <div {...props} className={mergeClassNames('popcandy-stack', className)} data-popcandy-gap={gap} style={{ ...style, alignItems: align }} />;
 }

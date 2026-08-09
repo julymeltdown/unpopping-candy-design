@@ -3,15 +3,15 @@ export default {
   "kind": "component",
   "id": "ui.badge",
   "name": "Badge",
-  "package": "@commonspace/ui",
+  "package": "@unpopping-candy/ui",
   "version": "0.1.0",
   "status": "stable",
   "category": "data-display",
   "summary": "Displays a compact status or categorical label without becoming the primary action.",
   "sourcePath": "packages/ui/src/badge/badge.tsx",
   "entrypoints": [
-    "@commonspace/ui",
-    "@commonspace/ui/badge"
+    "@unpopping-candy/ui",
+    "@unpopping-candy/ui/badge"
   ],
   "keywords": [
     "badge",
@@ -27,9 +27,9 @@ export default {
     "The text is ordinary metadata and does not need a container."
   ],
   "tokens": [
-    "--cs-surface-muted",
-    "--cs-border",
-    "--cs-ink-muted"
+    "--popcandy-surface-muted",
+    "--popcandy-border",
+    "--popcandy-ink-muted"
   ],
   "related": [
     "ui.alert"

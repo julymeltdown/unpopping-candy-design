@@ -1,6 +1,6 @@
-# @commonspace/registry
+# @unpopping-candy/registry
 
-Versioned Commonspace page and block templates with deterministic SHA-256 manifests and guarded local scaffolding.
+Versioned Unpopping Candy page and block templates with deterministic SHA-256 manifests and guarded local scaffolding.
 
 - Dry-run is the default.
 - `apply` is explicit.
@@ -9,8 +9,8 @@ Versioned Commonspace page and block templates with deterministic SHA-256 manife
 - Template variables are allow-listed by the canonical knowledge catalog.
 
 ```ts
-import { bundledCatalog } from '@commonspace/knowledge';
-import { createRegistryService } from '@commonspace/registry';
+import { bundledCatalog } from '@unpopping-candy/knowledge';
+import { createRegistryService } from '@unpopping-candy/registry';
 
 const registry = createRegistryService({
   catalog: bundledCatalog,

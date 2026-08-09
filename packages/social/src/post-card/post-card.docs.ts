@@ -3,15 +3,15 @@ export default {
   "kind": "component",
   "id": "social.post-card",
   "name": "PostCard",
-  "package": "@commonspace/social",
+  "package": "@unpopping-candy/social",
   "version": "0.1.0",
   "status": "stable",
   "category": "post",
   "summary": "Presents a social post with author, content, distribution context, metrics, and injected actions.",
   "sourcePath": "packages/social/src/post-card/post-card.tsx",
   "entrypoints": [
-    "@commonspace/social",
-    "@commonspace/social/post"
+    "@unpopping-candy/social",
+    "@unpopping-candy/social/post"
   ],
   "keywords": [
     "post",
@@ -27,10 +27,10 @@ export default {
     "A compact reference is sufficient; use a post summary pattern."
   ],
   "tokens": [
-    "--cs-surface",
-    "--cs-border",
-    "--cs-ink",
-    "--cs-accent"
+    "--popcandy-surface",
+    "--popcandy-border",
+    "--popcandy-ink",
+    "--popcandy-accent"
   ],
   "related": [
     "social.post-header",

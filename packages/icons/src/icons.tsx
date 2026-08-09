@@ -4,9 +4,6 @@ import {
   ArrowUpOutlined,
   BellOutlined,
   BookOutlined,
-  BookmarkFilled,
-  BookmarkOutlined,
-  BookmarksOutlined,
   CalendarOutlined,
   CheckCircleFilled,
   CheckOutlined,
@@ -41,56 +38,59 @@ import {
   ShareAltOutlined,
   SmileOutlined,
   TeamOutlined,
+  TagFilled,
+  TagOutlined,
+  TagsOutlined,
   UserAddOutlined,
   UserDeleteOutlined,
   UserOutlined,
   WarningOutlined,
 } from '@ant-design/icons';
-import { createCommonspaceIcon } from './create-icon.js';
+import { createUnpoppingCandyIcon } from './create-icon.js';
 
-export const ArrowLeftIcon = createCommonspaceIcon(ArrowLeftOutlined, 'ArrowLeftIcon');
-export const ArrowRightIcon = createCommonspaceIcon(ArrowRightOutlined, 'ArrowRightIcon');
-export const ArrowUpIcon = createCommonspaceIcon(ArrowUpOutlined, 'ArrowUpIcon');
-export const BellIcon = createCommonspaceIcon(BellOutlined, 'BellIcon');
-export const BookIcon = createCommonspaceIcon(BookOutlined, 'BookIcon');
-export const BookmarkFilledIcon = createCommonspaceIcon(BookmarkFilled, 'BookmarkFilledIcon');
-export const BookmarkIcon = createCommonspaceIcon(BookmarkOutlined, 'BookmarkIcon');
-export const BookmarksIcon = createCommonspaceIcon(BookmarksOutlined, 'BookmarksIcon');
-export const CalendarIcon = createCommonspaceIcon(CalendarOutlined, 'CalendarIcon');
-export const CheckCircleFilledIcon = createCommonspaceIcon(CheckCircleFilled, 'CheckCircleFilledIcon');
-export const CheckIcon = createCommonspaceIcon(CheckOutlined, 'CheckIcon');
-export const CloseIcon = createCommonspaceIcon(CloseOutlined, 'CloseIcon');
-export const CommunityIcon = createCommonspaceIcon(TeamOutlined, 'CommunityIcon');
-export const CompassIcon = createCommonspaceIcon(CompassOutlined, 'CompassIcon');
-export const DeleteIcon = createCommonspaceIcon(DeleteOutlined, 'DeleteIcon');
-export const EditIcon = createCommonspaceIcon(EditOutlined, 'EditIcon');
-export const EmojiIcon = createCommonspaceIcon(SmileOutlined, 'EmojiIcon');
-export const ErrorCircleIcon = createCommonspaceIcon(CloseCircleOutlined, 'ErrorCircleIcon');
-export const ExportIcon = createCommonspaceIcon(ExportOutlined, 'ExportIcon');
-export const FollowIcon = createCommonspaceIcon(UserAddOutlined, 'FollowIcon');
-export const HeartFilledIcon = createCommonspaceIcon(HeartFilled, 'HeartFilledIcon');
-export const HeartIcon = createCommonspaceIcon(HeartOutlined, 'HeartIcon');
-export const HomeIcon = createCommonspaceIcon(HomeOutlined, 'HomeIcon');
-export const InfoCircleIcon = createCommonspaceIcon(InfoCircleOutlined, 'InfoCircleIcon');
-export const LinkIcon = createCommonspaceIcon(LinkOutlined, 'LinkIcon');
-export const LoadingIcon = createCommonspaceIcon(LoadingOutlined, 'LoadingIcon');
-export const LocationIcon = createCommonspaceIcon(EnvironmentOutlined, 'LocationIcon');
-export const LockIcon = createCommonspaceIcon(LockOutlined, 'LockIcon');
-export const LogoutIcon = createCommonspaceIcon(LogoutOutlined, 'LogoutIcon');
-export const MailIcon = createCommonspaceIcon(MailOutlined, 'MailIcon');
-export const MediaIcon = createCommonspaceIcon(FileImageOutlined, 'MediaIcon');
-export const MenuIcon = createCommonspaceIcon(MenuOutlined, 'MenuIcon');
-export const MoreIcon = createCommonspaceIcon(EllipsisOutlined, 'MoreIcon');
-export const NotificationIcon = createCommonspaceIcon(NotificationOutlined, 'NotificationIcon');
-export const PictureIcon = createCommonspaceIcon(PictureOutlined, 'PictureIcon');
-export const PlusIcon = createCommonspaceIcon(PlusOutlined, 'PlusIcon');
-export const ReplyIcon = createCommonspaceIcon(MessageOutlined, 'ReplyIcon');
-export const RepostIcon = createCommonspaceIcon(RetweetOutlined, 'RepostIcon');
-export const SearchIcon = createCommonspaceIcon(SearchOutlined, 'SearchIcon');
-export const SendIcon = createCommonspaceIcon(SendOutlined, 'SendIcon');
-export const SettingsIcon = createCommonspaceIcon(SettingOutlined, 'SettingsIcon');
-export const ShareIcon = createCommonspaceIcon(ShareAltOutlined, 'ShareIcon');
-export const UnfollowIcon = createCommonspaceIcon(UserDeleteOutlined, 'UnfollowIcon');
-export const UserIcon = createCommonspaceIcon(UserOutlined, 'UserIcon');
-export const ViewIcon = createCommonspaceIcon(EyeOutlined, 'ViewIcon');
-export const WarningIcon = createCommonspaceIcon(WarningOutlined, 'WarningIcon');
+export const ArrowLeftIcon = createUnpoppingCandyIcon(ArrowLeftOutlined, 'ArrowLeftIcon');
+export const ArrowRightIcon = createUnpoppingCandyIcon(ArrowRightOutlined, 'ArrowRightIcon');
+export const ArrowUpIcon = createUnpoppingCandyIcon(ArrowUpOutlined, 'ArrowUpIcon');
+export const BellIcon = createUnpoppingCandyIcon(BellOutlined, 'BellIcon');
+export const BookIcon = createUnpoppingCandyIcon(BookOutlined, 'BookIcon');
+export const BookmarkFilledIcon = createUnpoppingCandyIcon(TagFilled, 'BookmarkFilledIcon');
+export const BookmarkIcon = createUnpoppingCandyIcon(TagOutlined, 'BookmarkIcon');
+export const BookmarksIcon = createUnpoppingCandyIcon(TagsOutlined, 'BookmarksIcon');
+export const CalendarIcon = createUnpoppingCandyIcon(CalendarOutlined, 'CalendarIcon');
+export const CheckCircleFilledIcon = createUnpoppingCandyIcon(CheckCircleFilled, 'CheckCircleFilledIcon');
+export const CheckIcon = createUnpoppingCandyIcon(CheckOutlined, 'CheckIcon');
+export const CloseIcon = createUnpoppingCandyIcon(CloseOutlined, 'CloseIcon');
+export const CommunityIcon = createUnpoppingCandyIcon(TeamOutlined, 'CommunityIcon');
+export const CompassIcon = createUnpoppingCandyIcon(CompassOutlined, 'CompassIcon');
+export const DeleteIcon = createUnpoppingCandyIcon(DeleteOutlined, 'DeleteIcon');
+export const EditIcon = createUnpoppingCandyIcon(EditOutlined, 'EditIcon');
+export const EmojiIcon = createUnpoppingCandyIcon(SmileOutlined, 'EmojiIcon');
+export const ErrorCircleIcon = createUnpoppingCandyIcon(CloseCircleOutlined, 'ErrorCircleIcon');
+export const ExportIcon = createUnpoppingCandyIcon(ExportOutlined, 'ExportIcon');
+export const FollowIcon = createUnpoppingCandyIcon(UserAddOutlined, 'FollowIcon');
+export const HeartFilledIcon = createUnpoppingCandyIcon(HeartFilled, 'HeartFilledIcon');
+export const HeartIcon = createUnpoppingCandyIcon(HeartOutlined, 'HeartIcon');
+export const HomeIcon = createUnpoppingCandyIcon(HomeOutlined, 'HomeIcon');
+export const InfoCircleIcon = createUnpoppingCandyIcon(InfoCircleOutlined, 'InfoCircleIcon');
+export const LinkIcon = createUnpoppingCandyIcon(LinkOutlined, 'LinkIcon');
+export const LoadingIcon = createUnpoppingCandyIcon(LoadingOutlined, 'LoadingIcon');
+export const LocationIcon = createUnpoppingCandyIcon(EnvironmentOutlined, 'LocationIcon');
+export const LockIcon = createUnpoppingCandyIcon(LockOutlined, 'LockIcon');
+export const LogoutIcon = createUnpoppingCandyIcon(LogoutOutlined, 'LogoutIcon');
+export const MailIcon = createUnpoppingCandyIcon(MailOutlined, 'MailIcon');
+export const MediaIcon = createUnpoppingCandyIcon(FileImageOutlined, 'MediaIcon');
+export const MenuIcon = createUnpoppingCandyIcon(MenuOutlined, 'MenuIcon');
+export const MoreIcon = createUnpoppingCandyIcon(EllipsisOutlined, 'MoreIcon');
+export const NotificationIcon = createUnpoppingCandyIcon(NotificationOutlined, 'NotificationIcon');
+export const PictureIcon = createUnpoppingCandyIcon(PictureOutlined, 'PictureIcon');
+export const PlusIcon = createUnpoppingCandyIcon(PlusOutlined, 'PlusIcon');
+export const ReplyIcon = createUnpoppingCandyIcon(MessageOutlined, 'ReplyIcon');
+export const RepostIcon = createUnpoppingCandyIcon(RetweetOutlined, 'RepostIcon');
+export const SearchIcon = createUnpoppingCandyIcon(SearchOutlined, 'SearchIcon');
+export const SendIcon = createUnpoppingCandyIcon(SendOutlined, 'SendIcon');
+export const SettingsIcon = createUnpoppingCandyIcon(SettingOutlined, 'SettingsIcon');
+export const ShareIcon = createUnpoppingCandyIcon(ShareAltOutlined, 'ShareIcon');
+export const UnfollowIcon = createUnpoppingCandyIcon(UserDeleteOutlined, 'UnfollowIcon');
+export const UserIcon = createUnpoppingCandyIcon(UserOutlined, 'UserIcon');
+export const ViewIcon = createUnpoppingCandyIcon(EyeOutlined, 'ViewIcon');
+export const WarningIcon = createUnpoppingCandyIcon(WarningOutlined, 'WarningIcon');

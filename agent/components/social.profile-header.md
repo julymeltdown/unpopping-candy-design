@@ -1,17 +1,17 @@
 # ProfileHeader
 
-> `social.profile-header` · `@commonspace/social` · stable · version 0.1.0
+> `social.profile-header` · `@unpopping-candy/social` · stable · version 0.1.0
 
 Presents a curator or user profile summary with injected primary and secondary actions.
 
 ## Import
 
 ```tsx
-import { ProfileHeader } from '@commonspace/social';
+import { ProfileHeader } from '@unpopping-candy/social';
 ```
 
 ```tsx
-import { ProfileHeader } from '@commonspace/social/profile';
+import { ProfileHeader } from '@unpopping-candy/social/profile';
 ```
 
 ## Use when
@@ -44,10 +44,10 @@ import { ProfileHeader } from '@commonspace/social/profile';
 
 ## Tokens
 
-- `--cs-surface`
-- `--cs-border`
-- `--cs-ink`
-- `--cs-ink-muted`
+- `--popcandy-surface`
+- `--popcandy-border`
+- `--popcandy-ink`
+- `--popcandy-ink-muted`
 
 ## Props
 

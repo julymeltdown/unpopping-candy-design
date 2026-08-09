@@ -1,4 +1,4 @@
-# Commonspace UI tokens
+# Unpopping Candy tokens
 
 Use semantic and component tokens instead of hardcoded visual values.
 

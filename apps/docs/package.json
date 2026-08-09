@@ -1,5 +1,5 @@
 {
-  "name": "@commonspace/docs",
+  "name": "@unpopping-candy/docs",
   "version": "0.1.0",
   "private": true,
   "type": "module",
@@ -9,11 +9,11 @@
     "test": "vitest --project=storybook"
   },
   "dependencies": {
-    "@commonspace/icons": "workspace:*",
-    "@commonspace/social": "workspace:*",
-    "@commonspace/theme": "workspace:*",
-    "@commonspace/tokens": "workspace:*",
-    "@commonspace/ui": "workspace:*",
+    "@unpopping-candy/icons": "workspace:*",
+    "@unpopping-candy/social": "workspace:*",
+    "@unpopping-candy/theme": "workspace:*",
+    "@unpopping-candy/tokens": "workspace:*",
+    "@unpopping-candy/ui": "workspace:*",
     "react": "19.2.8",
     "react-dom": "19.2.8"
   },
@@ -25,6 +25,7 @@
     "@types/react": "19.2.14",
     "@types/react-dom": "19.2.3",
     "storybook": "10.5.0",
+    "vite": "8.1.0",
     "vitest": "4.1.10",
     "@storybook/addon-mcp": "0.6.0"
   }

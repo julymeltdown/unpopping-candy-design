@@ -1,17 +1,17 @@
 # TextArea
 
-> `ui.text-area` · `@commonspace/ui` · stable · version 0.1.0
+> `ui.text-area` · `@unpopping-candy/ui` · stable · version 0.1.0
 
 Collects multi-line text with label, description, validation, and native textarea semantics.
 
 ## Import
 
 ```tsx
-import { TextArea } from '@commonspace/ui';
+import { TextArea } from '@unpopping-candy/ui';
 ```
 
 ```tsx
-import { TextArea } from '@commonspace/ui/forms';
+import { TextArea } from '@unpopping-candy/ui/forms';
 ```
 
 ## Use when
@@ -44,10 +44,10 @@ import { TextArea } from '@commonspace/ui/forms';
 
 ## Tokens
 
-- `--cs-field-height`
-- `--cs-border`
-- `--cs-focus`
-- `--cs-critical`
+- `--popcandy-field-height`
+- `--popcandy-border`
+- `--popcandy-focus`
+- `--popcandy-critical`
 
 ## Props
 

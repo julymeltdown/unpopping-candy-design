@@ -1,4 +1,4 @@
-# Commonspace UI patterns
+# Unpopping Candy patterns
 
 - [Collection states](./patterns/pattern.collection-states.md): Provides complete loading, empty, populated, pagination, and error states for a collection.
 - [Conversation list](./patterns/pattern.conversation-list.md): Renders conversations with stable selection, unread semantics, and responsive detail navigation.
@@ -9,8 +9,8 @@
 
 ## Templates
 
-- **Strict FSD social shell** (`template.fsd-social-shell`): A React and Vite application shell that keeps Commonspace presentation packages below FSD application slices.
+- **Strict FSD social shell** (`template.fsd-social-shell`): A React and Vite application shell that keeps Unpopping Candy presentation packages below FSD application slices.
 - **Moderation workspace** (`template.moderation-workspace`): A three-region moderation decision workspace with queue, evidence, and controlled actions.
 - **Profile settings** (`template.profile-settings`): A profile settings form with validation, pending state, and preserved failure feedback.
 - **Social feed page** (`template.social-feed-page`): A state-complete social feed page using presentation models and externally owned remote state.
-- **Vite app shell** (`template.vite-app-shell`): A minimal React and Vite shell with Commonspace theme and feedback providers.
+- **Vite app shell** (`template.vite-app-shell`): A minimal React and Vite shell with Unpopping Candy theme and feedback providers.

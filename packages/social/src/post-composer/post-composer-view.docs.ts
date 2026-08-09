@@ -3,15 +3,15 @@ export default {
   "kind": "component",
   "id": "social.post-composer-view",
   "name": "PostComposerView",
-  "package": "@commonspace/social",
+  "package": "@unpopping-candy/social",
   "version": "0.1.0",
   "status": "stable",
   "category": "composer",
   "summary": "Presents a controlled social composer while the application owns draft, validation, upload, and publishing state.",
   "sourcePath": "packages/social/src/post-composer/post-composer-view.tsx",
   "entrypoints": [
-    "@commonspace/social",
-    "@commonspace/social/post"
+    "@unpopping-candy/social",
+    "@unpopping-candy/social/post"
   ],
   "keywords": [
     "composer",
@@ -26,10 +26,10 @@ export default {
     "The component would need to own persistence, authentication, or uploads."
   ],
   "tokens": [
-    "--cs-surface",
-    "--cs-border",
-    "--cs-accent",
-    "--cs-field-height"
+    "--popcandy-surface",
+    "--popcandy-border",
+    "--popcandy-accent",
+    "--popcandy-field-height"
   ],
   "related": [
     "ui.text-area",

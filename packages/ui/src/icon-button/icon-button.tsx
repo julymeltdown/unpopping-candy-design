@@ -32,14 +32,14 @@ export const IconButton = forwardRef<HTMLButtonElement, IconButtonProps>(
         aria-label={label}
         aria-pressed={selected || undefined}
         title={label}
-        data-cs-component="icon-button"
-        data-cs-size={size}
-        data-cs-tone={tone}
-        data-cs-state={selected ? 'selected' : props.disabled ? 'disabled' : 'idle'}
+        data-popcandy-component="icon-button"
+        data-popcandy-size={size}
+        data-popcandy-tone={tone}
+        data-popcandy-state={selected ? 'selected' : props.disabled ? 'disabled' : 'idle'}
         className={mergeClassNames(
-          'cs-icon-button',
-          `cs-icon-button--${size}`,
-          `cs-icon-button--${tone}`,
+          'popcandy-icon-button',
+          `popcandy-icon-button--${size}`,
+          `popcandy-icon-button--${tone}`,
           selected && 'is-selected',
           className,
         )}

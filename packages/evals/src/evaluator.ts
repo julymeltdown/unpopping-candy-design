@@ -1,4 +1,4 @@
-import type { ComponentDoc, KnowledgeCatalog } from '@commonspace/knowledge';
+import type { ComponentDoc, KnowledgeCatalog } from '@unpopping-candy/knowledge';
 import type {
   AgentContextMode,
   AgentEvaluationReport,
@@ -63,7 +63,7 @@ function parseNamedImports(source: string, catalog: KnowledgeCatalog): ImportedC
   const pattern = /import\s*\{([\s\S]*?)\}\s*from\s*['"]([^'"]+)['"];?/g;
   for (const match of source.matchAll(pattern)) {
     const entrypoint = match[2] ?? '';
-    if (!entrypoint.startsWith('@commonspace/')) continue;
+    if (!entrypoint.startsWith('@unpopping-candy/')) continue;
     const members = (match[1] ?? '').split(',').map((item) => item.trim()).filter(Boolean);
     for (const member of members) {
       if (member.startsWith('type ')) continue;
@@ -72,7 +72,12 @@ function parseNamedImports(source: string, catalog: KnowledgeCatalog): ImportedC
       const localName = localRaw?.trim() || exportedName;
       if (!exportedName || !localName) continue;
       const directDoc = byName.get(exportedName);
-      output.push({ exportedName, localName, entrypoint, doc: directDoc });
+      output.push({
+        exportedName,
+        localName,
+        entrypoint,
+        ...(directDoc ? { doc: directDoc } : {}),
+      });
     }
   }
   return output;
@@ -81,7 +86,7 @@ function parseNamedImports(source: string, catalog: KnowledgeCatalog): ImportedC
 function findInvalidImports(catalog: KnowledgeCatalog, filePath: string, source: string): EvaluationFinding[] {
   const allowed = entrypointSet(catalog);
   const findings: EvaluationFinding[] = [];
-  const pattern = /(?:import|export)\s+(?:[\s\S]*?\s+from\s+)?['"](@commonspace\/[^'"]+)['"]/g;
+  const pattern = /(?:import|export)\s+(?:[\s\S]*?\s+from\s+)?['"](@unpopping-candy\/[^'"]+)['"]/g;
   for (const match of source.matchAll(pattern)) {
     const specifier = match[1] ?? '';
     const invalidPrivatePath = /\/(?:src|dist)(?:\/|$)/.test(specifier);
@@ -93,7 +98,7 @@ function findInvalidImports(catalog: KnowledgeCatalog, filePath: string, source:
       path: filePath,
       message: invalidPrivatePath
         ? `Import ${specifier} bypasses a public package entrypoint.`
-        : `Import ${specifier} is not present in the installed Commonspace catalog.`,
+        : `Import ${specifier} is not present in the installed Unpopping Candy catalog.`,
       evidence: `line ${lineOf(source, match.index ?? 0)}`,
     });
   }
@@ -189,15 +194,15 @@ function findUnknownProps(catalog: KnowledgeCatalog, filePath: string, source: s
 function findHardcodedVisualValues(filePath: string, source: string): EvaluationFinding[] {
   const findings: EvaluationFinding[] = [];
   const candidates: Array<{ code: string; pattern: RegExp; message: string }> = [
-    { code: 'hardcoded-color', pattern: /#[0-9a-fA-F]{3,8}\b|\b(?:rgb|hsl)a?\([^)]*\)/g, message: 'Use a Commonspace semantic color token instead of a literal color.' },
-    { code: 'hardcoded-spacing', pattern: /\b(?:padding|margin|gap|rowGap|columnGap|borderRadius)\s*:\s*['"](?:-?\d+(?:\.\d+)?)(?:px|rem|em)['"]/g, message: 'Use a Commonspace spacing or radius token instead of a literal visual value.' },
+    { code: 'hardcoded-color', pattern: /#[0-9a-fA-F]{3,8}\b|\b(?:rgb|hsl)a?\([^)]*\)/g, message: 'Use a Unpopping Candy semantic color token instead of a literal color.' },
+    { code: 'hardcoded-spacing', pattern: /\b(?:padding|margin|gap|rowGap|columnGap|borderRadius)\s*:\s*['"](?:-?\d+(?:\.\d+)?)(?:px|rem|em)['"]/g, message: 'Use a Unpopping Candy spacing or radius token instead of a literal visual value.' },
     { code: 'hardcoded-shadow', pattern: /\b(?:boxShadow|filter|backdropFilter)\s*:\s*['"][^'"]+['"]/g, message: 'Use a documented elevation or surface treatment.' },
-    { code: 'generic-gradient', pattern: /(?:linear|radial)-gradient\s*\(/g, message: 'Unspecified gradients are not part of the Commonspace visual contract.' },
+    { code: 'generic-gradient', pattern: /(?:linear|radial)-gradient\s*\(/g, message: 'Unspecified gradients are not part of the Unpopping Candy visual contract.' },
   ];
   for (const candidate of candidates) {
     for (const match of source.matchAll(candidate.pattern)) {
       const evidence = match[0] ?? '';
-      if (evidence.includes('var(--cs-')) continue;
+      if (evidence.includes('var(--popcandy-')) continue;
       findings.push({ code: candidate.code, severity: 'error', path: filePath, message: candidate.message, evidence: `line ${lineOf(source, match.index ?? 0)}: ${evidence}` });
     }
   }
@@ -247,21 +252,21 @@ function stateIsCovered(state: string, source: string): boolean {
   return patterns[normalized]?.test(source) ?? new RegExp(`\\b${normalized.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')}\\b`, 'i').test(source);
 }
 
-function componentUsage(catalog: KnowledgeCatalog, source: string): { commonspace: number; total: number; ids: readonly string[] } {
+function componentUsage(catalog: KnowledgeCatalog, source: string): { popcandy: number; total: number; ids: readonly string[] } {
   const imports = parseNamedImports(source, catalog);
-  const commonspaceNames = new Set(imports.filter((entry) => entry.doc).map((entry) => entry.localName));
+  const popcandyNames = new Set(imports.filter((entry) => entry.doc).map((entry) => entry.localName));
   const tags = [...source.matchAll(/<([A-Z][A-Za-z0-9.]*)\b/g)].map((match) => match[1] ?? '');
-  let commonspace = 0;
+  let popcandy = 0;
   const ids = new Set<string>();
   const byLocalName = new Map(imports.filter((entry) => entry.doc).map((entry) => [entry.localName, entry.doc?.id] as const));
   for (const tag of tags) {
     const rootTag = tag.split('.')[0] ?? tag;
-    if (!commonspaceNames.has(rootTag)) continue;
-    commonspace += 1;
+    if (!popcandyNames.has(rootTag)) continue;
+    popcandy += 1;
     const id = byLocalName.get(rootTag);
     if (id) ids.add(id);
   }
-  return { commonspace, total: tags.length, ids: [...ids].sort() };
+  return { popcandy, total: tags.length, ids: [...ids].sort() };
 }
 
 function bounded(value: number, min = 0, max = 100): number {
@@ -271,7 +276,7 @@ function bounded(value: number, min = 0, max = 100): number {
 export function evaluateAgentOutput(catalog: KnowledgeCatalog, scenario: AgentEvaluationScenario): AgentEvaluationReport {
   const findings: EvaluationFinding[] = [];
   const fullSource = scenario.files.map((file) => file.content).join('\n');
-  let commonspaceComponentsUsed = 0;
+  let popcandyComponentsUsed = 0;
   let jsxComponentsUsed = 0;
   const usedComponentIds = new Set<string>();
 
@@ -282,7 +287,7 @@ export function evaluateAgentOutput(catalog: KnowledgeCatalog, scenario: AgentEv
     findings.push(...findHardcodedVisualValues(path, file.content));
     findings.push(...findAccessibilityIssues(path, file.content));
     const usage = componentUsage(catalog, file.content);
-    commonspaceComponentsUsed += usage.commonspace;
+    popcandyComponentsUsed += usage.popcandy;
     jsxComponentsUsed += usage.total;
     for (const id of usage.ids) usedComponentIds.add(id);
   }
@@ -295,7 +300,7 @@ export function evaluateAgentOutput(catalog: KnowledgeCatalog, scenario: AgentEv
   const expectedComponents = [...new Set(scenario.expectedComponents ?? [])].sort();
   const missingComponents = expectedComponents.filter((id) => !usedComponentIds.has(id));
   const componentRecall = expectedComponents.length ? (expectedComponents.length - missingComponents.length) / expectedComponents.length : 1;
-  for (const id of missingComponents) findings.push({ code: 'missing-component', severity: 'warning', path: scenario.files[0]?.path ?? '.', message: `Expected Commonspace component ${id} is not used.` });
+  for (const id of missingComponents) findings.push({ code: 'missing-component', severity: 'warning', path: scenario.files[0]?.path ?? '.', message: `Expected Unpopping Candy component ${id} is not used.` });
 
   const metrics = {
     invalidImports: findings.filter((finding) => finding.code === 'private-import' || finding.code === 'unknown-entrypoint').length,
@@ -303,9 +308,9 @@ export function evaluateAgentOutput(catalog: KnowledgeCatalog, scenario: AgentEv
     hardcodedVisualValues: findings.filter((finding) => finding.code.startsWith('hardcoded-') || finding.code === 'generic-gradient').length,
     accessibilityIssues: findings.filter((finding) => ['unnamed-button', 'missing-alt', 'unnamed-field'].includes(finding.code)).length,
     stateCoverage: requiredStates.length ? coveredStates.length / requiredStates.length : 1,
-    commonspaceReuse: jsxComponentsUsed ? commonspaceComponentsUsed / jsxComponentsUsed : 0,
+    popcandyReuse: jsxComponentsUsed ? popcandyComponentsUsed / jsxComponentsUsed : 0,
     componentRecall,
-    commonspaceComponentsUsed,
+    popcandyComponentsUsed,
     jsxComponentsUsed,
   };
 
@@ -315,7 +320,7 @@ export function evaluateAgentOutput(catalog: KnowledgeCatalog, scenario: AgentEv
   score -= Math.min(24, metrics.hardcodedVisualValues * 6);
   score -= Math.min(24, metrics.accessibilityIssues * 12);
   score -= Math.round((1 - metrics.stateCoverage) * 15);
-  if (metrics.commonspaceReuse < 0.6) score -= Math.round((0.6 - metrics.commonspaceReuse) / 0.6 * 10);
+  if (metrics.popcandyReuse < 0.6) score -= Math.round((0.6 - metrics.popcandyReuse) / 0.6 * 10);
   score -= Math.round((1 - metrics.componentRecall) * 12);
   score = bounded(score);
 
@@ -325,7 +330,7 @@ export function evaluateAgentOutput(catalog: KnowledgeCatalog, scenario: AgentEv
     && metrics.hardcodedVisualValues === 0
     && metrics.accessibilityIssues === 0
     && metrics.stateCoverage >= 0.75
-    && metrics.commonspaceReuse >= 0.6
+    && metrics.popcandyReuse >= 0.6
     && metrics.componentRecall >= 0.75;
 
   return {

@@ -1,17 +1,17 @@
 # Surface
 
-> `ui.surface` · `@commonspace/ui` · stable · version 0.1.0
+> `ui.surface` · `@unpopping-candy/ui` · stable · version 0.1.0
 
 Creates a semantic background and boundary without prescribing product content.
 
 ## Import
 
 ```tsx
-import { Surface } from '@commonspace/ui';
+import { Surface } from '@unpopping-candy/ui';
 ```
 
 ```tsx
-import { Surface } from '@commonspace/ui/layout';
+import { Surface } from '@unpopping-candy/ui/layout';
 ```
 
 ## Use when
@@ -42,10 +42,10 @@ import { Surface } from '@commonspace/ui/layout';
 
 ## Tokens
 
-- `--cs-surface`
-- `--cs-surface-muted`
-- `--cs-border`
-- `--cs-shadow-dialog`
+- `--popcandy-surface`
+- `--popcandy-surface-muted`
+- `--popcandy-border`
+- `--popcandy-shadow-dialog`
 
 ## Props
 

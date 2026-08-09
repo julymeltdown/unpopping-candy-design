@@ -39,10 +39,10 @@ Local configuration is recorded in:
 agent/mcp/storybook-http.json
 ```
 
-Commonspace MCP and Storybook MCP have separate responsibilities:
+Unpopping Candy MCP and Storybook MCP have separate responsibilities:
 
 ```text
-Commonspace MCP
+Unpopping Candy MCP
 → select exact components, patterns, templates, tokens, and rules
 
 Storybook MCP
@@ -78,9 +78,9 @@ Not every primitive needs every state. The adjacent metadata declares the requir
 With dependencies installed:
 
 ```bash
-pnpm --filter @commonspace/docs dev
-pnpm --filter @commonspace/docs test-storybook
-pnpm --filter @commonspace/docs build-storybook
+pnpm --filter @unpopping-candy/docs dev
+pnpm --filter @unpopping-candy/docs test-storybook
+pnpm --filter @unpopping-candy/docs build-storybook
 ```
 
 The repository also runs static Story contracts without starting a browser:

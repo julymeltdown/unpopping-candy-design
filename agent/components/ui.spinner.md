@@ -1,17 +1,17 @@
 # Spinner
 
-> `ui.spinner` · `@commonspace/ui` · stable · version 0.1.0
+> `ui.spinner` · `@unpopping-candy/ui` · stable · version 0.1.0
 
 Indicates an indeterminate operation in a compact region.
 
 ## Import
 
 ```tsx
-import { Spinner } from '@commonspace/ui';
+import { Spinner } from '@unpopping-candy/ui';
 ```
 
 ```tsx
-import { Spinner } from '@commonspace/ui/loading';
+import { Spinner } from '@unpopping-candy/ui/loading';
 ```
 
 ## Use when
@@ -41,8 +41,8 @@ import { Spinner } from '@commonspace/ui/loading';
 
 ## Tokens
 
-- `--cs-accent`
-- `--cs-motion-fast`
+- `--popcandy-accent`
+- `--popcandy-motion-fast`
 
 ## Props
 

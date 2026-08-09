@@ -1,5 +1,5 @@
-import { Stack } from '@commonspace/ui';
-import type { SocialPostViewModel } from '@commonspace/social';
+import { Stack } from '@unpopping-candy/ui';
+import type { SocialPostViewModel } from '@unpopping-candy/social';
 import { PostFeed } from '../../../widgets/post-feed/ui/post-feed';
 
 export interface HomePageProps {

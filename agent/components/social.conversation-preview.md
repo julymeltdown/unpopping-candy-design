@@ -1,17 +1,17 @@
 # ConversationPreview
 
-> `social.conversation-preview` · `@commonspace/social` · stable · version 0.1.0
+> `social.conversation-preview` · `@unpopping-candy/social` · stable · version 0.1.0
 
 Presents a conversation summary with participants, latest message, time, and unread state.
 
 ## Import
 
 ```tsx
-import { ConversationPreview } from '@commonspace/social';
+import { ConversationPreview } from '@unpopping-candy/social';
 ```
 
 ```tsx
-import { ConversationPreview } from '@commonspace/social/conversation';
+import { ConversationPreview } from '@unpopping-candy/social/conversation';
 ```
 
 ## Use when
@@ -42,10 +42,10 @@ import { ConversationPreview } from '@commonspace/social/conversation';
 
 ## Tokens
 
-- `--cs-surface`
-- `--cs-border`
-- `--cs-ink-muted`
-- `--cs-accent`
+- `--popcandy-surface`
+- `--popcandy-border`
+- `--popcandy-ink-muted`
+- `--popcandy-accent`
 
 ## Props
 

@@ -1,6 +1,6 @@
 import type { HTMLAttributes } from 'react';
-import { BellIcon, FollowIcon, HeartIcon, ReplyIcon, RepostIcon } from '@commonspace/icons';
-import { Avatar, Inline, Stack } from '@commonspace/ui';
+import { BellIcon, FollowIcon, HeartIcon, ReplyIcon, RepostIcon } from '@unpopping-candy/icons';
+import { Avatar, Inline, Stack } from '@unpopping-candy/ui';
 import { formatRelativeTime } from '../lib/format.js';
 import type { SocialNotificationViewModel } from '../model/types.js';
 
@@ -22,8 +22,8 @@ function NotificationIcon({ type }: Pick<SocialNotificationViewModel, 'type'>) {
 export function NotificationItem({ locale, notification, nowMs, onSelect, ...props }: NotificationItemProps) {
   const content = (
     <>
-      <div className="cs-notification-item__icon" aria-hidden="true"><NotificationIcon type={notification.type} /></div>
-      <Stack gap={2} className="cs-notification-item__content">
+      <div className="popcandy-notification-item__icon" aria-hidden="true"><NotificationIcon type={notification.type} /></div>
+      <Stack gap={2} className="popcandy-notification-item__content">
         <Inline gap={1}>{notification.actors.slice(0, 3).map((actor) => <Avatar key={actor.id} src={actor.avatarUrl} alt="" size="sm" />)}</Inline>
         <p>{notification.message}</p>
         {notification.post ? <blockquote>{notification.post.text}</blockquote> : null}
@@ -31,6 +31,6 @@ export function NotificationItem({ locale, notification, nowMs, onSelect, ...pro
       </Stack>
     </>
   );
-  const className = `cs-notification-item${notification.read ? '' : ' is-unread'}${props.className ? ` ${props.className}` : ''}`;
-  return onSelect ? <button {...props as HTMLAttributes<HTMLButtonElement>} type="button" className={className} data-cs-component="notification-item" onClick={onSelect}>{content}</button> : <article {...props} className={className} data-cs-component="notification-item">{content}</article>;
+  const className = `popcandy-notification-item${notification.read ? '' : ' is-unread'}${props.className ? ` ${props.className}` : ''}`;
+  return onSelect ? <button {...props as HTMLAttributes<HTMLButtonElement>} type="button" className={className} data-popcandy-component="notification-item" onClick={onSelect}>{content}</button> : <article {...props} className={className} data-popcandy-component="notification-item">{content}</article>;
 }

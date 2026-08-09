@@ -1,17 +1,17 @@
 # TextField
 
-> `ui.text-field` · `@commonspace/ui` · stable · version 0.1.0
+> `ui.text-field` · `@unpopping-candy/ui` · stable · version 0.1.0
 
 Collects one short value with label, description, validation, and native input semantics.
 
 ## Import
 
 ```tsx
-import { TextField } from '@commonspace/ui';
+import { TextField } from '@unpopping-candy/ui';
 ```
 
 ```tsx
-import { TextField } from '@commonspace/ui/forms';
+import { TextField } from '@unpopping-candy/ui/forms';
 ```
 
 ## Use when
@@ -47,10 +47,10 @@ import { TextField } from '@commonspace/ui/forms';
 
 ## Tokens
 
-- `--cs-field-height`
-- `--cs-border`
-- `--cs-focus`
-- `--cs-critical`
+- `--popcandy-field-height`
+- `--popcandy-border`
+- `--popcandy-focus`
+- `--popcandy-critical`
 
 ## Props
 

@@ -1,17 +1,17 @@
 # Avatar
 
-> `ui.avatar` · `@commonspace/ui` · stable · version 0.1.0
+> `ui.avatar` · `@unpopping-candy/ui` · stable · version 0.1.0
 
 Represents a person or organization with an image and deterministic fallback.
 
 ## Import
 
 ```tsx
-import { Avatar } from '@commonspace/ui';
+import { Avatar } from '@unpopping-candy/ui';
 ```
 
 ```tsx
-import { Avatar } from '@commonspace/ui/avatar';
+import { Avatar } from '@unpopping-candy/ui/avatar';
 ```
 
 ## Use when
@@ -44,9 +44,9 @@ import { Avatar } from '@commonspace/ui/avatar';
 
 ## Tokens
 
-- `--cs-surface-muted`
-- `--cs-border`
-- `--cs-ink`
+- `--popcandy-surface-muted`
+- `--popcandy-border`
+- `--popcandy-ink`
 
 ## Props
 

@@ -1,4 +1,4 @@
-# Commonspace UI agent operating contract
+# Unpopping Candy agent operating contract
 
 This repository is an AI-operable design system. Agents must use the same structured knowledge, public package exports, Storybook contracts, and validation gates as human contributors.
 
@@ -6,26 +6,26 @@ This repository is an AI-operable design system. Agents must use the same struct
 
 Before changing interface code:
 
-1. Detect the target project and installed Commonspace versions.
+1. Detect the target project and installed Unpopping Candy versions.
    ```bash
-   npm run commonspace -- info --path . --json
+   npm run popcandy -- info --path . --json
    ```
 2. Search the installed catalog instead of inventing components or props.
    ```bash
-   npm run commonspace -- search "profile settings" --json
-   npm run commonspace -- compose "profile settings with loading, empty, error, and pending states" --json
+   npm run popcandy -- search "profile settings" --json
+   npm run popcandy -- compose "profile settings with loading, empty, error, and pending states" --json
    ```
 3. Inspect every selected component, pattern, or template by stable ID.
    ```bash
-   npm run commonspace -- get ui.text-field --json
-   npm run commonspace -- get pattern.form-actions --json
+   npm run popcandy -- get ui.text-field --json
+   npm run popcandy -- get pattern.form-actions --json
    ```
 4. Use only documented public imports and semantic tokens.
-5. Keep server state, routing, authentication, and business workflow ownership outside `@commonspace/ui` and `@commonspace/social`.
+5. Keep server state, routing, authentication, and business workflow ownership outside `@unpopping-candy/ui` and `@unpopping-candy/social`.
 6. Add or update Storybook stories for all visible states.
 7. Validate the changed project and run Storybook interaction and accessibility checks.
    ```bash
-   npm run commonspace -- validate --path . --json
+   npm run popcandy -- validate --path . --json
    npm run verify
    ```
 
@@ -33,9 +33,9 @@ Before changing interface code:
 
 Agents must not:
 
-- invent a Commonspace component, prop, token, template, Story ID, or import path;
-- import from `@commonspace/*/src`, `dist` internals, or repository-relative package internals;
-- hardcode colors, spacing, radii, shadows, or gradients when a Commonspace token exists;
+- invent a Unpopping Candy component, prop, token, template, Story ID, or import path;
+- import from `@unpopping-candy/*/src`, `dist` internals, or repository-relative package internals;
+- hardcode colors, spacing, radii, shadows, or gradients when a Unpopping Candy token exists;
 - place `fetch`, TanStack Query, SWR, Zustand, routing, JWT, or API DTO ownership inside presentation packages;
 - scaffold files outside the detected project root;
 - run Registry writes without first returning a dry-run plan and obtaining explicit approval;
@@ -46,7 +46,7 @@ Agents must not:
 
 Use these sources in this order:
 
-1. `commonspace.config.json` for local integration paths;
+1. `popcandy.config.json` for local integration paths;
 2. `agent/manifests/catalog.json` for the exact installed knowledge catalog;
 3. component-adjacent `*.docs.ts` metadata and public TypeScript source;
 4. Storybook contract stories and `agent/manifests/stories.json`;
@@ -90,7 +90,7 @@ A public component change is incomplete until it includes:
 - generated catalog, agent documents, and Figma template updates;
 - an appropriate Changeset.
 
-Read [`docs/COMPONENT_GUIDELINES.md`](./docs/COMPONENT_GUIDELINES.md) and the `author-commonspace-component` Skill before authoring a public component.
+Read [`docs/COMPONENT_GUIDELINES.md`](./docs/COMPONENT_GUIDELINES.md) and the `author-popcandy-component` Skill before authoring a public component.
 
 ## Verification before completion
 

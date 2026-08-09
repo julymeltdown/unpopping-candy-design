@@ -23,7 +23,7 @@ export const referenceAgentScenarios: readonly AgentEvaluationScenario[] = [
     expectedComponents,
     files: [{
       path: 'src/profile-settings.tsx',
-      content: `import { Button, Stack, TextField } from '@commonspace/ui';
+      content: `import { Button, Stack, TextField } from '@unpopping-candy/ui';
 export function ProfileSettings({ loading }) {
   if (loading) return <p role="status">Loading profile</p>;
   return <form aria-label="Profile settings"><Stack style={{ gap: '17px' }}><TextField label="Display name" /><Button type="submit">Save profile</Button></Stack></form>;
@@ -38,7 +38,7 @@ export function ProfileSettings({ loading }) {
     expectedComponents,
     files: [{
       path: 'src/profile-settings.tsx',
-      content: `import { Alert, Button, Stack, TextField } from '@commonspace/ui';
+      content: `import { Alert, Button, Stack, TextField } from '@unpopping-candy/ui';
 export function ProfileSettings({ loading, error }) {
   if (loading) return <p role="status">Loading profile</p>;
   if (error) return <Alert tone="critical" title="Profile unavailable" description="Existing information remains unchanged." />;
@@ -54,7 +54,7 @@ export function ProfileSettings({ loading, error }) {
     expectedComponents,
     files: [{
       path: 'src/profile-settings.tsx',
-      content: `import { Alert, Button, EmptyState, Stack, TextField } from '@commonspace/ui';
+      content: `import { Alert, Button, EmptyState, Stack, TextField } from '@unpopping-candy/ui';
 export function ProfileSettings({ loading, error, profiles }) {
   if (loading) return <p role="status">Loading profile</p>;
   if (error) return <Alert tone="critical" title="Profile unavailable" description="Existing information remains unchanged." />;
@@ -71,7 +71,7 @@ export function ProfileSettings({ loading, error, profiles }) {
     expectedComponents,
     files: [{
       path: 'src/profile-settings.tsx',
-      content: `import { Alert, Button, EmptyState, Stack, TextField } from '@commonspace/ui';
+      content: `import { Alert, Button, EmptyState, Stack, TextField } from '@unpopping-candy/ui';
 export function ProfileSettings({ loading, error, profiles, pending, canEdit }) {
   if (loading) return <p role="status">Loading profile</p>;
   if (error) return <Alert tone="critical" title="Profile unavailable" description="Existing information remains unchanged." />;
@@ -88,7 +88,7 @@ export function ProfileSettings({ loading, error, profiles, pending, canEdit }) 
     expectedComponents,
     files: [{
       path: 'src/profile-settings.tsx',
-      content: `import { Alert, Button, EmptyState, Stack, TextField } from '@commonspace/ui';
+      content: `import { Alert, Button, EmptyState, Stack, TextField } from '@unpopping-candy/ui';
 export function ProfileSettings({ loading, error, profiles, pending, canEdit }) {
   if (loading) return <p role="status" aria-live="polite">Loading profile</p>;
   if (error) return <Alert tone="critical" title="Profile unavailable" description="Existing information remains unchanged. Retry when the connection recovers." />;

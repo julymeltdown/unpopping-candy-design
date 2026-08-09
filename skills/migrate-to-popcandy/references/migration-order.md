@@ -1,7 +1,7 @@
 # Migration order
 
 1. Add token, icon, UI, and optional social style imports.
-2. Add CommonspaceProvider without changing business logic.
+2. Add UnpoppingCandyProvider without changing business logic.
 3. Replace layout and feedback primitives.
 4. Replace forms and overlays.
 5. Replace repeated product patterns.

@@ -1,13 +1,13 @@
 # VisuallyHidden
 
-> `ui.visually-hidden` · `@commonspace/ui` · stable · version 0.1.0
+> `ui.visually-hidden` · `@unpopping-candy/ui` · stable · version 0.1.0
 
 Keeps essential text available to assistive technology without changing visual layout.
 
 ## Import
 
 ```tsx
-import { VisuallyHidden } from '@commonspace/ui';
+import { VisuallyHidden } from '@unpopping-candy/ui';
 ```
 
 ## Use when
@@ -35,7 +35,7 @@ import { VisuallyHidden } from '@commonspace/ui';
 
 ## Tokens
 
-- `--cs-space-0`
+- `--popcandy-space-0`
 
 ## Props
 

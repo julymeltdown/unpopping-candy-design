@@ -1,7 +1,7 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "$id": "https://commonspace.local/schemas/commonspace-config.schema.json",
-  "title": "Commonspace project configuration",
+  "$id": "https://popcandy.local/schemas/popcandy-config.schema.json",
+  "title": "Unpopping Candy project configuration",
   "type": "object",
   "additionalProperties": false,
   "required": [
@@ -105,7 +105,7 @@
       "uniqueItems": true,
       "items": {
         "type": "string",
-        "pattern": "^@commonspace/[a-z-]+/styles\\.css$"
+        "pattern": "^@unpopping-candy/[a-z-]+/styles\\.css$"
       }
     },
     "validation": {
@@ -125,7 +125,7 @@
           "uniqueItems": true,
           "items": {
             "type": "string",
-            "pattern": "^@commonspace/[a-z-]+(?:/[a-z0-9.-]+)?$"
+            "pattern": "^@unpopping-candy/[a-z-]+(?:/[a-z0-9.-]+)?$"
           }
         }
       }

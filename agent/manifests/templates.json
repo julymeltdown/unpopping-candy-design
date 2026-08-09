@@ -15,16 +15,16 @@
         "social.post-card",
         "ui.feedback-provider"
       ],
-      "description": "A React and Vite application shell that keeps Commonspace presentation packages below FSD application slices.",
+      "description": "A React and Vite application shell that keeps Unpopping Candy presentation packages below FSD application slices.",
       "examples": {
         "avoid": [],
         "preferred": []
       },
       "files": [
         {
-          "path": "src/app/providers/commonspace-provider.tsx",
+          "path": "src/app/providers/unpopping-candy-provider.tsx",
           "role": "Application provider composition",
-          "source": "packages/registry/templates/fsd-social-shell/src/app/providers/commonspace-provider.tsx"
+          "source": "packages/registry/templates/fsd-social-shell/src/app/providers/unpopping-candy-provider.tsx"
         },
         {
           "path": "src/pages/home/ui/home-page.tsx",
@@ -53,10 +53,10 @@
       ],
       "schemaVersion": 1,
       "status": "stable",
-      "summary": "A React and Vite application shell that keeps Commonspace presentation packages below FSD application slices.",
+      "summary": "A React and Vite application shell that keeps Unpopping Candy presentation packages below FSD application slices.",
       "target": "react-vite-fsd",
       "useWhen": [
-        "A React and Vite application shell that keeps Commonspace presentation packages below FSD application slices."
+        "A React and Vite application shell that keeps Unpopping Candy presentation packages below FSD application slices."
       ],
       "variables": [
         {
@@ -261,7 +261,7 @@
         "ui.feedback-provider",
         "ui.stack"
       ],
-      "description": "A minimal React and Vite shell with Commonspace theme and feedback providers.",
+      "description": "A minimal React and Vite shell with Unpopping Candy theme and feedback providers.",
       "examples": {
         "avoid": [],
         "preferred": []
@@ -297,10 +297,10 @@
       ],
       "schemaVersion": 1,
       "status": "stable",
-      "summary": "A minimal React and Vite shell with Commonspace theme and feedback providers.",
+      "summary": "A minimal React and Vite shell with Unpopping Candy theme and feedback providers.",
       "target": "react-vite",
       "useWhen": [
-        "A minimal React and Vite shell with Commonspace theme and feedback providers."
+        "A minimal React and Vite shell with Unpopping Candy theme and feedback providers."
       ],
       "variables": [
         {

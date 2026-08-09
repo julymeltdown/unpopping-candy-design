@@ -1,17 +1,17 @@
 # NotificationItem
 
-> `social.notification-item` · `@commonspace/social` · stable · version 0.1.0
+> `social.notification-item` · `@unpopping-candy/social` · stable · version 0.1.0
 
 Presents one social notification with actor context, event description, and optional target content.
 
 ## Import
 
 ```tsx
-import { NotificationItem } from '@commonspace/social';
+import { NotificationItem } from '@unpopping-candy/social';
 ```
 
 ```tsx
-import { NotificationItem } from '@commonspace/social/notification';
+import { NotificationItem } from '@unpopping-candy/social/notification';
 ```
 
 ## Use when
@@ -45,9 +45,9 @@ import { NotificationItem } from '@commonspace/social/notification';
 
 ## Tokens
 
-- `--cs-surface`
-- `--cs-border`
-- `--cs-ink-muted`
+- `--popcandy-surface`
+- `--popcandy-border`
+- `--popcandy-ink-muted`
 
 ## Props
 

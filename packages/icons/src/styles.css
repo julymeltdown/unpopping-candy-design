@@ -1,11 +1,11 @@
-.cs-icon {
+.popcandy-icon {
   display: inline-flex;
   flex: 0 0 auto;
   color: currentColor;
   line-height: 1;
   vertical-align: -0.125em;
 }
-.cs-icon[data-cs-icon-size='sm'] { font-size: 14px; }
-.cs-icon[data-cs-icon-size='md'] { font-size: 18px; }
-.cs-icon[data-cs-icon-size='lg'] { font-size: 24px; }
-.cs-icon > svg { width: 1em; height: 1em; }
+.popcandy-icon[data-popcandy-icon-size='sm'] { font-size: 14px; }
+.popcandy-icon[data-popcandy-icon-size='md'] { font-size: 18px; }
+.popcandy-icon[data-popcandy-icon-size='lg'] { font-size: 24px; }
+.popcandy-icon > svg { width: 1em; height: 1em; }

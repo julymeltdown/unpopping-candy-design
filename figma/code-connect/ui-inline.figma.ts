@@ -1,4 +1,4 @@
-// url=https://www.figma.com/design/COMMONSPACE_LIBRARY/Commonspace-UI?node-id=0-21
+// url=https://www.figma.com/design/POPCANDY_LIBRARY/Unpopping-Candy?node-id=0-21
 // source=packages/ui/src/inline/inline.tsx
 // component=Inline
 import figma from 'figma'
@@ -7,7 +7,7 @@ export default {
   example: figma.code`
     <Inline gap="sm"><Button>Save</Button><Button variant="secondary">Cancel</Button></Inline>
   `,
-  imports: ['import { Inline } from "@commonspace/ui/layout"'],
+  imports: ['import { Inline } from "@unpopping-candy/ui/layout"'],
   id: 'ui-inline',
   metadata: {
     nestable: true,

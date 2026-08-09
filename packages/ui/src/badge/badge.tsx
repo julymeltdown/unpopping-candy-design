@@ -10,10 +10,10 @@ export function Badge({ className, size = 'md', tone = 'neutral', ...props }: Ba
   return (
     <span
       {...props}
-      data-cs-component="badge"
-      data-cs-size={size}
-      data-cs-tone={tone}
-      className={mergeClassNames('cs-badge', `cs-badge--${tone}`, `cs-badge--${size}`, className)}
+      data-popcandy-component="badge"
+      data-popcandy-size={size}
+      data-popcandy-tone={tone}
+      className={mergeClassNames('popcandy-badge', `popcandy-badge--${tone}`, `popcandy-badge--${size}`, className)}
     />
   );
 }

@@ -1,9 +1,9 @@
 ---
-"@commonspace/tokens": minor
-"@commonspace/theme": minor
-"@commonspace/icons": minor
-"@commonspace/ui": minor
-"@commonspace/social": minor
+"@unpopping-candy/tokens": minor
+"@unpopping-candy/theme": minor
+"@unpopping-candy/icons": minor
+"@unpopping-candy/ui": minor
+"@unpopping-candy/social": minor
 ---
 
-Create the initial standalone Commonspace design-system packages with scoped themes, semantic icons, accessible UI components, and API-agnostic social patterns.
+Create the initial standalone Unpopping Candy design-system packages with scoped themes, semantic icons, accessible UI components, and API-agnostic social patterns.

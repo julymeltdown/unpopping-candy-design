@@ -12,8 +12,8 @@
       ],
       "category": "messaging",
       "entrypoints": [
-        "@commonspace/social",
-        "@commonspace/social/conversation"
+        "@unpopping-candy/social",
+        "@unpopping-candy/social/conversation"
       ],
       "examples": {
         "avoid": [],
@@ -35,7 +35,7 @@
       "kind": "component",
       "name": "ConversationPreview",
       "nativeElement": "button",
-      "package": "@commonspace/social",
+      "package": "@unpopping-candy/social",
       "props": [
         {
           "name": "conversation",
@@ -71,10 +71,10 @@
       ],
       "summary": "Presents a conversation summary with participants, latest message, time, and unread state.",
       "tokens": [
-        "--cs-surface",
-        "--cs-border",
-        "--cs-ink-muted",
-        "--cs-accent"
+        "--popcandy-surface",
+        "--popcandy-border",
+        "--popcandy-ink-muted",
+        "--popcandy-accent"
       ],
       "useWhen": [
         "A messaging inbox lists conversations."
@@ -104,8 +104,8 @@
       ],
       "category": "notification",
       "entrypoints": [
-        "@commonspace/social",
-        "@commonspace/social/notification"
+        "@unpopping-candy/social",
+        "@unpopping-candy/social/notification"
       ],
       "examples": {
         "avoid": [],
@@ -127,7 +127,7 @@
       "kind": "component",
       "name": "NotificationItem",
       "nativeElement": "element",
-      "package": "@commonspace/social",
+      "package": "@unpopping-candy/social",
       "props": [
         {
           "name": "locale",
@@ -167,9 +167,9 @@
       ],
       "summary": "Presents one social notification with actor context, event description, and optional target content.",
       "tokens": [
-        "--cs-surface",
-        "--cs-border",
-        "--cs-ink-muted"
+        "--popcandy-surface",
+        "--popcandy-border",
+        "--popcandy-ink-muted"
       ],
       "useWhen": [
         "A notification center renders typed social activity."
@@ -210,8 +210,8 @@
       ],
       "category": "post",
       "entrypoints": [
-        "@commonspace/social",
-        "@commonspace/social/post"
+        "@unpopping-candy/social",
+        "@unpopping-candy/social/post"
       ],
       "examples": {
         "avoid": [],
@@ -234,7 +234,7 @@
       ],
       "kind": "component",
       "name": "PostActions",
-      "package": "@commonspace/social",
+      "package": "@unpopping-candy/social",
       "props": [
         {
           "name": "disabled",
@@ -306,10 +306,10 @@
       ],
       "summary": "Presents reply, repost, like, bookmark, and share actions as controlled social interactions.",
       "tokens": [
-        "--cs-ink-muted",
-        "--cs-accent",
-        "--cs-positive",
-        "--cs-critical"
+        "--popcandy-ink-muted",
+        "--popcandy-accent",
+        "--popcandy-positive",
+        "--popcandy-critical"
       ],
       "useWhen": [
         "A post exposes standard engagement actions."
@@ -340,8 +340,8 @@
       ],
       "category": "post",
       "entrypoints": [
-        "@commonspace/social",
-        "@commonspace/social/post"
+        "@unpopping-candy/social",
+        "@unpopping-candy/social/post"
       ],
       "examples": {
         "avoid": [
@@ -368,7 +368,7 @@
       ],
       "kind": "component",
       "name": "PostCard",
-      "package": "@commonspace/social",
+      "package": "@unpopping-candy/social",
       "props": [
         {
           "name": "compact",
@@ -466,10 +466,10 @@
       ],
       "summary": "Presents a social post with author, content, distribution context, metrics, and injected actions.",
       "tokens": [
-        "--cs-surface",
-        "--cs-border",
-        "--cs-ink",
-        "--cs-accent"
+        "--popcandy-surface",
+        "--popcandy-border",
+        "--popcandy-ink",
+        "--popcandy-accent"
       ],
       "useWhen": [
         "A timeline or thread needs a complete post presentation."
@@ -502,8 +502,8 @@
       ],
       "category": "loading",
       "entrypoints": [
-        "@commonspace/social",
-        "@commonspace/social/post"
+        "@unpopping-candy/social",
+        "@unpopping-candy/social/post"
       ],
       "examples": {
         "avoid": [],
@@ -524,7 +524,7 @@
       ],
       "kind": "component",
       "name": "PostCardSkeleton",
-      "package": "@commonspace/social",
+      "package": "@unpopping-candy/social",
       "props": [],
       "related": [
         "social.post-card",
@@ -541,7 +541,7 @@
       ],
       "summary": "Reserves the expected geometry of a PostCard while timeline data loads.",
       "tokens": [
-        "--cs-surface-muted"
+        "--popcandy-surface-muted"
       ],
       "useWhen": [
         "A timeline is loading its first page."
@@ -567,8 +567,8 @@
       ],
       "category": "composer",
       "entrypoints": [
-        "@commonspace/social",
-        "@commonspace/social/post"
+        "@unpopping-candy/social",
+        "@unpopping-candy/social/post"
       ],
       "examples": {
         "avoid": [],
@@ -589,7 +589,7 @@
       ],
       "kind": "component",
       "name": "PostComposerView",
-      "package": "@commonspace/social",
+      "package": "@unpopping-candy/social",
       "props": [
         {
           "name": "error",
@@ -672,10 +672,10 @@
       ],
       "summary": "Presents a controlled social composer while the application owns draft, validation, upload, and publishing state.",
       "tokens": [
-        "--cs-surface",
-        "--cs-border",
-        "--cs-accent",
-        "--cs-field-height"
+        "--popcandy-surface",
+        "--popcandy-border",
+        "--popcandy-accent",
+        "--popcandy-field-height"
       ],
       "useWhen": [
         "A social product needs a reusable text-post composition surface."
@@ -704,8 +704,8 @@
       ],
       "category": "post",
       "entrypoints": [
-        "@commonspace/social",
-        "@commonspace/social/post"
+        "@unpopping-candy/social",
+        "@unpopping-candy/social/post"
       ],
       "examples": {
         "avoid": [],
@@ -726,7 +726,7 @@
       ],
       "kind": "component",
       "name": "PostHeader",
-      "package": "@commonspace/social",
+      "package": "@unpopping-candy/social",
       "props": [
         {
           "name": "author",
@@ -775,8 +775,8 @@
       ],
       "summary": "Presents post identity, timestamp, and distribution context without owning navigation.",
       "tokens": [
-        "--cs-ink",
-        "--cs-ink-muted"
+        "--popcandy-ink",
+        "--popcandy-ink-muted"
       ],
       "useWhen": [
         "A post or compact content item needs consistent identity metadata."
@@ -806,8 +806,8 @@
       ],
       "category": "media",
       "entrypoints": [
-        "@commonspace/social",
-        "@commonspace/social/post"
+        "@unpopping-candy/social",
+        "@unpopping-candy/social/post"
       ],
       "examples": {
         "avoid": [],
@@ -829,7 +829,7 @@
       ],
       "kind": "component",
       "name": "PostMediaGrid",
-      "package": "@commonspace/social",
+      "package": "@unpopping-candy/social",
       "props": [
         {
           "name": "media",
@@ -858,8 +858,8 @@
       ],
       "summary": "Arranges one to four social media assets with stable aspect ratios and selection callbacks.",
       "tokens": [
-        "--cs-border",
-        "--cs-radius-md"
+        "--popcandy-border",
+        "--popcandy-radius-md"
       ],
       "useWhen": [
         "A post contains one to four media assets."
@@ -897,8 +897,8 @@
       ],
       "category": "profile",
       "entrypoints": [
-        "@commonspace/social",
-        "@commonspace/social/profile"
+        "@unpopping-candy/social",
+        "@unpopping-candy/social/profile"
       ],
       "examples": {
         "avoid": [],
@@ -919,7 +919,7 @@
       ],
       "kind": "component",
       "name": "ProfileHeader",
-      "package": "@commonspace/social",
+      "package": "@unpopping-candy/social",
       "props": [
         {
           "name": "locale",
@@ -965,10 +965,10 @@
       ],
       "summary": "Presents a curator or user profile summary with injected primary and secondary actions.",
       "tokens": [
-        "--cs-surface",
-        "--cs-border",
-        "--cs-ink",
-        "--cs-ink-muted"
+        "--popcandy-surface",
+        "--popcandy-border",
+        "--popcandy-ink",
+        "--popcandy-ink-muted"
       ],
       "useWhen": [
         "A profile route needs consistent cover, identity, biography, and counts."
@@ -1003,8 +1003,8 @@
       ],
       "category": "timeline",
       "entrypoints": [
-        "@commonspace/social",
-        "@commonspace/social/timeline"
+        "@unpopping-candy/social",
+        "@unpopping-candy/social/timeline"
       ],
       "examples": {
         "avoid": [],
@@ -1025,7 +1025,7 @@
       ],
       "kind": "component",
       "name": "TimelineView",
-      "package": "@commonspace/social",
+      "package": "@unpopping-candy/social",
       "props": [
         {
           "name": "emptyDescription",
@@ -1098,8 +1098,8 @@
       ],
       "summary": "Composes timeline states and rendered post rows without owning pagination or virtualization.",
       "tokens": [
-        "--cs-border",
-        "--cs-surface"
+        "--popcandy-border",
+        "--popcandy-surface"
       ],
       "useWhen": [
         "An application needs a consistent loading, empty, error, and populated timeline surface."
@@ -1124,8 +1124,8 @@
       ],
       "category": "identity",
       "entrypoints": [
-        "@commonspace/social",
-        "@commonspace/social/user"
+        "@unpopping-candy/social",
+        "@unpopping-candy/social/user"
       ],
       "examples": {
         "avoid": [],
@@ -1148,7 +1148,7 @@
       "kind": "component",
       "name": "UserCell",
       "nativeElement": "div",
-      "package": "@commonspace/social",
+      "package": "@unpopping-candy/social",
       "props": [
         {
           "name": "actionLabel",
@@ -1198,9 +1198,9 @@
       ],
       "summary": "Presents a compact person row with optional supporting text and injected action.",
       "tokens": [
-        "--cs-ink",
-        "--cs-ink-muted",
-        "--cs-border"
+        "--popcandy-ink",
+        "--popcandy-ink-muted",
+        "--popcandy-border"
       ],
       "useWhen": [
         "Search, followers, recommendations, or membership lists show people."
@@ -1231,8 +1231,8 @@
       ],
       "category": "feedback",
       "entrypoints": [
-        "@commonspace/ui",
-        "@commonspace/ui/alert"
+        "@unpopping-candy/ui",
+        "@unpopping-candy/ui/alert"
       ],
       "examples": {
         "avoid": [
@@ -1261,7 +1261,7 @@
       "kind": "component",
       "name": "Alert",
       "nativeElement": "element",
-      "package": "@commonspace/ui",
+      "package": "@unpopping-candy/ui",
       "props": [
         {
           "name": "action",
@@ -1322,11 +1322,11 @@
       ],
       "summary": "Presents contextual feedback beside the task or content that produced it.",
       "tokens": [
-        "--cs-surface",
-        "--cs-border",
-        "--cs-positive",
-        "--cs-warning",
-        "--cs-critical"
+        "--popcandy-surface",
+        "--popcandy-border",
+        "--popcandy-positive",
+        "--popcandy-warning",
+        "--popcandy-critical"
       ],
       "useWhen": [
         "A message must remain visible until the user resolves or dismisses its cause.",
@@ -1365,8 +1365,8 @@
       ],
       "category": "identity",
       "entrypoints": [
-        "@commonspace/ui",
-        "@commonspace/ui/avatar"
+        "@unpopping-candy/ui",
+        "@unpopping-candy/ui/avatar"
       ],
       "examples": {
         "avoid": [],
@@ -1389,7 +1389,7 @@
       "kind": "component",
       "name": "Avatar",
       "nativeElement": "span",
-      "package": "@commonspace/ui",
+      "package": "@unpopping-candy/ui",
       "props": [
         {
           "name": "alt",
@@ -1433,9 +1433,9 @@
       ],
       "summary": "Represents a person or organization with an image and deterministic fallback.",
       "tokens": [
-        "--cs-surface-muted",
-        "--cs-border",
-        "--cs-ink"
+        "--popcandy-surface-muted",
+        "--popcandy-border",
+        "--popcandy-ink"
       ],
       "useWhen": [
         "An identity must remain recognizable at compact sizes.",
@@ -1470,8 +1470,8 @@
       ],
       "category": "data-display",
       "entrypoints": [
-        "@commonspace/ui",
-        "@commonspace/ui/badge"
+        "@unpopping-candy/ui",
+        "@unpopping-candy/ui/badge"
       ],
       "examples": {
         "avoid": [],
@@ -1493,7 +1493,7 @@
       "kind": "component",
       "name": "Badge",
       "nativeElement": "span",
-      "package": "@commonspace/ui",
+      "package": "@unpopping-candy/ui",
       "props": [
         {
           "name": "size",
@@ -1520,9 +1520,9 @@
       ],
       "summary": "Displays a compact status or categorical label without becoming the primary action.",
       "tokens": [
-        "--cs-surface-muted",
-        "--cs-border",
-        "--cs-ink-muted"
+        "--popcandy-surface-muted",
+        "--popcandy-border",
+        "--popcandy-ink-muted"
       ],
       "useWhen": [
         "A short status, category, or count needs compact emphasis."
@@ -1565,8 +1565,8 @@
       ],
       "category": "action",
       "entrypoints": [
-        "@commonspace/ui",
-        "@commonspace/ui/button"
+        "@unpopping-candy/ui",
+        "@unpopping-candy/ui/button"
       ],
       "examples": {
         "avoid": [
@@ -1595,7 +1595,7 @@
       "kind": "component",
       "name": "Button",
       "nativeElement": "button",
-      "package": "@commonspace/ui",
+      "package": "@unpopping-candy/ui",
       "props": [
         {
           "name": "fullWidth",
@@ -1652,10 +1652,10 @@
       ],
       "summary": "Triggers an immediate user action with explicit priority and pending behavior.",
       "tokens": [
-        "--cs-button-height-md",
-        "--cs-accent",
-        "--cs-critical",
-        "--cs-focus"
+        "--popcandy-button-height-md",
+        "--popcandy-accent",
+        "--popcandy-critical",
+        "--popcandy-focus"
       ],
       "useWhen": [
         "The user can perform an immediate action.",
@@ -1694,8 +1694,8 @@
       ],
       "category": "layout",
       "entrypoints": [
-        "@commonspace/ui",
-        "@commonspace/ui/layout"
+        "@unpopping-candy/ui",
+        "@unpopping-candy/ui/layout"
       ],
       "examples": {
         "avoid": [],
@@ -1717,7 +1717,7 @@
       "kind": "component",
       "name": "Container",
       "nativeElement": "div",
-      "package": "@commonspace/ui",
+      "package": "@unpopping-candy/ui",
       "props": [
         {
           "name": "size",
@@ -1740,12 +1740,12 @@
       ],
       "summary": "Constrains page content to a readable width and consistent horizontal gutter.",
       "tokens": [
-        "--cs-space-4",
-        "--cs-space-6",
-        "--cs-shell-max"
+        "--popcandy-space-4",
+        "--popcandy-space-6",
+        "--popcandy-shell-max"
       ],
       "useWhen": [
-        "A page or section needs the standard Commonspace reading width."
+        "A page or section needs the standard Unpopping Candy reading width."
       ],
       "variants": [
         {
@@ -1781,8 +1781,8 @@
       ],
       "category": "overlay",
       "entrypoints": [
-        "@commonspace/ui",
-        "@commonspace/ui/dialog"
+        "@unpopping-candy/ui",
+        "@unpopping-candy/ui/dialog"
       ],
       "examples": {
         "avoid": [],
@@ -1803,7 +1803,7 @@
       ],
       "kind": "component",
       "name": "Dialog",
-      "package": "@commonspace/ui",
+      "package": "@unpopping-candy/ui",
       "props": [
         {
           "name": "children",
@@ -1879,10 +1879,10 @@
       ],
       "summary": "Interrupts the current context for a focused task that must be completed or dismissed.",
       "tokens": [
-        "--cs-dialog-width-md",
-        "--cs-surface",
-        "--cs-shadow-dialog",
-        "--cs-focus"
+        "--popcandy-dialog-width-md",
+        "--popcandy-surface",
+        "--popcandy-shadow-dialog",
+        "--popcandy-focus"
       ],
       "useWhen": [
         "A short focused task cannot fit safely inline.",
@@ -1917,7 +1917,7 @@
       ],
       "category": "feedback",
       "entrypoints": [
-        "@commonspace/ui"
+        "@unpopping-candy/ui"
       ],
       "examples": {
         "avoid": [],
@@ -1939,7 +1939,7 @@
       "kind": "component",
       "name": "EmptyState",
       "nativeElement": "element",
-      "package": "@commonspace/ui",
+      "package": "@unpopping-candy/ui",
       "props": [
         {
           "name": "action",
@@ -1984,9 +1984,9 @@
       ],
       "summary": "Explains why a meaningful region has no content and offers the next valid action.",
       "tokens": [
-        "--cs-ink",
-        "--cs-ink-muted",
-        "--cs-space-8"
+        "--popcandy-ink",
+        "--popcandy-ink-muted",
+        "--popcandy-space-8"
       ],
       "useWhen": [
         "A list, search, or workspace has no content."
@@ -2016,8 +2016,8 @@
       ],
       "category": "feedback",
       "entrypoints": [
-        "@commonspace/ui",
-        "@commonspace/ui/feedback"
+        "@unpopping-candy/ui",
+        "@unpopping-candy/ui/feedback"
       ],
       "examples": {
         "avoid": [],
@@ -2038,7 +2038,7 @@
       ],
       "kind": "component",
       "name": "FeedbackProvider",
-      "package": "@commonspace/ui",
+      "package": "@unpopping-candy/ui",
       "props": [
         {
           "name": "children",
@@ -2069,8 +2069,8 @@
       ],
       "summary": "Owns the application-level transient feedback queue and exposes a bounded controller.",
       "tokens": [
-        "--cs-dialog-width-sm",
-        "--cs-shadow-dialog"
+        "--popcandy-dialog-width-sm",
+        "--popcandy-shadow-dialog"
       ],
       "useWhen": [
         "An application needs global confirmations and non-blocking errors."
@@ -2097,8 +2097,8 @@
       ],
       "category": "action",
       "entrypoints": [
-        "@commonspace/ui",
-        "@commonspace/ui/button"
+        "@unpopping-candy/ui",
+        "@unpopping-candy/ui/button"
       ],
       "examples": {
         "avoid": [
@@ -2126,7 +2126,7 @@
       "kind": "component",
       "name": "IconButton",
       "nativeElement": "button",
-      "package": "@commonspace/ui",
+      "package": "@unpopping-candy/ui",
       "props": [
         {
           "name": "icon",
@@ -2172,9 +2172,9 @@
       ],
       "summary": "Triggers a frequent action where a well-known icon can replace visible text.",
       "tokens": [
-        "--cs-button-height-md",
-        "--cs-focus",
-        "--cs-ink-muted"
+        "--popcandy-button-height-md",
+        "--popcandy-focus",
+        "--popcandy-ink-muted"
       ],
       "useWhen": [
         "A compact toolbar or repeated row action has a familiar icon."
@@ -2207,8 +2207,8 @@
       ],
       "category": "layout",
       "entrypoints": [
-        "@commonspace/ui",
-        "@commonspace/ui/layout"
+        "@unpopping-candy/ui",
+        "@unpopping-candy/ui/layout"
       ],
       "examples": {
         "avoid": [],
@@ -2231,7 +2231,7 @@
       "kind": "component",
       "name": "Inline",
       "nativeElement": "div",
-      "package": "@commonspace/ui",
+      "package": "@unpopping-candy/ui",
       "props": [
         {
           "name": "align",
@@ -2270,10 +2270,10 @@
       ],
       "summary": "Arranges related items horizontally with tokenized gap, alignment, and wrapping.",
       "tokens": [
-        "--cs-space-1",
-        "--cs-space-2",
-        "--cs-space-3",
-        "--cs-space-4"
+        "--popcandy-space-1",
+        "--popcandy-space-2",
+        "--popcandy-space-3",
+        "--popcandy-space-4"
       ],
       "useWhen": [
         "Actions, metadata, or compact controls form one horizontal group."
@@ -2310,8 +2310,8 @@
       ],
       "category": "layout",
       "entrypoints": [
-        "@commonspace/ui",
-        "@commonspace/ui/layout"
+        "@unpopping-candy/ui",
+        "@unpopping-candy/ui/layout"
       ],
       "examples": {
         "avoid": [],
@@ -2332,7 +2332,7 @@
       "kind": "component",
       "name": "Separator",
       "nativeElement": "hr",
-      "package": "@commonspace/ui",
+      "package": "@unpopping-candy/ui",
       "props": [
         {
           "name": "orientation",
@@ -2355,7 +2355,7 @@
       ],
       "summary": "Separates adjacent regions when spacing alone cannot communicate the boundary.",
       "tokens": [
-        "--cs-border"
+        "--popcandy-border"
       ],
       "useWhen": [
         "Two peer regions need a visible boundary."
@@ -2385,8 +2385,8 @@
       ],
       "category": "loading",
       "entrypoints": [
-        "@commonspace/ui",
-        "@commonspace/ui/loading"
+        "@unpopping-candy/ui",
+        "@unpopping-candy/ui/loading"
       ],
       "examples": {
         "avoid": [],
@@ -2407,7 +2407,7 @@
       "kind": "component",
       "name": "Skeleton",
       "nativeElement": "span",
-      "package": "@commonspace/ui",
+      "package": "@unpopping-candy/ui",
       "props": [
         {
           "name": "height",
@@ -2440,8 +2440,8 @@
       ],
       "summary": "Reserves stable geometry while content is loading.",
       "tokens": [
-        "--cs-surface-muted",
-        "--cs-motion-slow"
+        "--popcandy-surface-muted",
+        "--popcandy-motion-slow"
       ],
       "useWhen": [
         "The final content shape is predictable and load time is perceptible."
@@ -2475,8 +2475,8 @@
       ],
       "category": "loading",
       "entrypoints": [
-        "@commonspace/ui",
-        "@commonspace/ui/loading"
+        "@unpopping-candy/ui",
+        "@unpopping-candy/ui/loading"
       ],
       "examples": {
         "avoid": [],
@@ -2498,7 +2498,7 @@
       "kind": "component",
       "name": "Spinner",
       "nativeElement": "span",
-      "package": "@commonspace/ui",
+      "package": "@unpopping-candy/ui",
       "props": [
         {
           "name": "label",
@@ -2526,8 +2526,8 @@
       ],
       "summary": "Indicates an indeterminate operation in a compact region.",
       "tokens": [
-        "--cs-accent",
-        "--cs-motion-fast"
+        "--popcandy-accent",
+        "--popcandy-motion-fast"
       ],
       "useWhen": [
         "A control or small region is waiting and final geometry is unknown."
@@ -2560,8 +2560,8 @@
       ],
       "category": "layout",
       "entrypoints": [
-        "@commonspace/ui",
-        "@commonspace/ui/layout"
+        "@unpopping-candy/ui",
+        "@unpopping-candy/ui/layout"
       ],
       "examples": {
         "avoid": [],
@@ -2583,7 +2583,7 @@
       "kind": "component",
       "name": "Stack",
       "nativeElement": "div",
-      "package": "@commonspace/ui",
+      "package": "@unpopping-candy/ui",
       "props": [
         {
           "name": "align",
@@ -2611,11 +2611,11 @@
       ],
       "summary": "Arranges a vertical reading or task sequence with tokenized spacing.",
       "tokens": [
-        "--cs-space-1",
-        "--cs-space-2",
-        "--cs-space-3",
-        "--cs-space-4",
-        "--cs-space-6"
+        "--popcandy-space-1",
+        "--popcandy-space-2",
+        "--popcandy-space-3",
+        "--popcandy-space-4",
+        "--popcandy-space-6"
       ],
       "useWhen": [
         "Content forms a vertical hierarchy or workflow."
@@ -2657,8 +2657,8 @@
       ],
       "category": "layout",
       "entrypoints": [
-        "@commonspace/ui",
-        "@commonspace/ui/layout"
+        "@unpopping-candy/ui",
+        "@unpopping-candy/ui/layout"
       ],
       "examples": {
         "avoid": [],
@@ -2680,7 +2680,7 @@
       "kind": "component",
       "name": "Surface",
       "nativeElement": "div",
-      "package": "@commonspace/ui",
+      "package": "@unpopping-candy/ui",
       "props": [
         {
           "name": "border",
@@ -2714,10 +2714,10 @@
       ],
       "summary": "Creates a semantic background and boundary without prescribing product content.",
       "tokens": [
-        "--cs-surface",
-        "--cs-surface-muted",
-        "--cs-border",
-        "--cs-shadow-dialog"
+        "--popcandy-surface",
+        "--popcandy-surface-muted",
+        "--popcandy-border",
+        "--popcandy-shadow-dialog"
       ],
       "useWhen": [
         "A local region needs contrast, padding, or elevation."
@@ -2752,8 +2752,8 @@
       ],
       "category": "navigation",
       "entrypoints": [
-        "@commonspace/ui",
-        "@commonspace/ui/tabs"
+        "@unpopping-candy/ui",
+        "@unpopping-candy/ui/tabs"
       ],
       "examples": {
         "avoid": [],
@@ -2774,7 +2774,7 @@
       ],
       "kind": "component",
       "name": "Tabs",
-      "package": "@commonspace/ui",
+      "package": "@unpopping-candy/ui",
       "props": [
         {
           "name": "activationMode",
@@ -2834,9 +2834,9 @@
       ],
       "summary": "Switches among peer views that share one context and URL or controlled state.",
       "tokens": [
-        "--cs-accent",
-        "--cs-border",
-        "--cs-focus"
+        "--popcandy-accent",
+        "--popcandy-border",
+        "--popcandy-focus"
       ],
       "useWhen": [
         "A region has a small set of mutually exclusive peer views."
@@ -2867,8 +2867,8 @@
       ],
       "category": "form",
       "entrypoints": [
-        "@commonspace/ui",
-        "@commonspace/ui/forms"
+        "@unpopping-candy/ui",
+        "@unpopping-candy/ui/forms"
       ],
       "examples": {
         "avoid": [],
@@ -2890,7 +2890,7 @@
       "kind": "component",
       "name": "TextArea",
       "nativeElement": "textarea",
-      "package": "@commonspace/ui",
+      "package": "@unpopping-candy/ui",
       "props": [
         {
           "name": "counter",
@@ -2937,10 +2937,10 @@
       ],
       "summary": "Collects multi-line text with label, description, validation, and native textarea semantics.",
       "tokens": [
-        "--cs-field-height",
-        "--cs-border",
-        "--cs-focus",
-        "--cs-critical"
+        "--popcandy-field-height",
+        "--popcandy-border",
+        "--popcandy-focus",
+        "--popcandy-critical"
       ],
       "useWhen": [
         "The user writes more than one short line."
@@ -2967,8 +2967,8 @@
       ],
       "category": "form",
       "entrypoints": [
-        "@commonspace/ui",
-        "@commonspace/ui/forms"
+        "@unpopping-candy/ui",
+        "@unpopping-candy/ui/forms"
       ],
       "examples": {
         "avoid": [],
@@ -2990,7 +2990,7 @@
       "kind": "component",
       "name": "TextField",
       "nativeElement": "input",
-      "package": "@commonspace/ui",
+      "package": "@unpopping-candy/ui",
       "props": [
         {
           "name": "description",
@@ -3042,10 +3042,10 @@
       ],
       "summary": "Collects one short value with label, description, validation, and native input semantics.",
       "tokens": [
-        "--cs-field-height",
-        "--cs-border",
-        "--cs-focus",
-        "--cs-critical"
+        "--popcandy-field-height",
+        "--popcandy-border",
+        "--popcandy-focus",
+        "--popcandy-critical"
       ],
       "useWhen": [
         "The user enters a concise value such as a name, email, or query."
@@ -3083,8 +3083,8 @@
       ],
       "category": "feedback",
       "entrypoints": [
-        "@commonspace/ui",
-        "@commonspace/ui/feedback"
+        "@unpopping-candy/ui",
+        "@unpopping-candy/ui/feedback"
       ],
       "examples": {
         "avoid": [],
@@ -3105,7 +3105,7 @@
       ],
       "kind": "component",
       "name": "Toast",
-      "package": "@commonspace/ui",
+      "package": "@unpopping-candy/ui",
       "props": [
         {
           "name": "item",
@@ -3136,11 +3136,11 @@
       ],
       "summary": "Renders one transient or persistent item from the feedback queue.",
       "tokens": [
-        "--cs-surface",
-        "--cs-shadow-dialog",
-        "--cs-positive",
-        "--cs-warning",
-        "--cs-critical"
+        "--popcandy-surface",
+        "--popcandy-shadow-dialog",
+        "--popcandy-positive",
+        "--popcandy-warning",
+        "--popcandy-critical"
       ],
       "useWhen": [
         "A result is global and does not require a fixed page position."
@@ -3177,8 +3177,8 @@
       ],
       "category": "feedback",
       "entrypoints": [
-        "@commonspace/ui",
-        "@commonspace/ui/feedback"
+        "@unpopping-candy/ui",
+        "@unpopping-candy/ui/feedback"
       ],
       "examples": {
         "avoid": [],
@@ -3199,7 +3199,7 @@
       ],
       "kind": "component",
       "name": "ToastViewport",
-      "package": "@commonspace/ui",
+      "package": "@unpopping-candy/ui",
       "props": [
         {
           "name": "items",
@@ -3228,8 +3228,8 @@
       ],
       "summary": "Positions and announces the bounded stack of global feedback items.",
       "tokens": [
-        "--cs-dialog-width-sm",
-        "--cs-space-4"
+        "--popcandy-dialog-width-sm",
+        "--popcandy-space-4"
       ],
       "useWhen": [
         "FeedbackProvider needs a visible output region."
@@ -3263,7 +3263,7 @@
       ],
       "category": "accessibility",
       "entrypoints": [
-        "@commonspace/ui"
+        "@unpopping-candy/ui"
       ],
       "examples": {
         "avoid": [],
@@ -3284,7 +3284,7 @@
       "kind": "component",
       "name": "VisuallyHidden",
       "nativeElement": "span",
-      "package": "@commonspace/ui",
+      "package": "@unpopping-candy/ui",
       "props": [],
       "related": [
         "ui.icon-button",
@@ -3301,7 +3301,7 @@
       ],
       "summary": "Keeps essential text available to assistive technology without changing visual layout.",
       "tokens": [
-        "--cs-space-0"
+        "--popcandy-space-0"
       ],
       "useWhen": [
         "An icon-only control or visual pattern needs an accessible text equivalent."

@@ -3,15 +3,15 @@ export default {
   "kind": "component",
   "id": "social.post-media-grid",
   "name": "PostMediaGrid",
-  "package": "@commonspace/social",
+  "package": "@unpopping-candy/social",
   "version": "0.1.0",
   "status": "stable",
   "category": "media",
   "summary": "Arranges one to four social media assets with stable aspect ratios and selection callbacks.",
   "sourcePath": "packages/social/src/post-card/post-media-grid.tsx",
   "entrypoints": [
-    "@commonspace/social",
-    "@commonspace/social/post"
+    "@unpopping-candy/social",
+    "@unpopping-candy/social/post"
   ],
   "keywords": [
     "media",
@@ -28,8 +28,8 @@ export default {
     "A general image gallery is being built."
   ],
   "tokens": [
-    "--cs-border",
-    "--cs-radius-md"
+    "--popcandy-border",
+    "--popcandy-radius-md"
   ],
   "related": [
     "social.post-card"

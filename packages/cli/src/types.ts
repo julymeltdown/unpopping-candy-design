@@ -1,7 +1,7 @@
-import type { KnowledgeCatalog, KnowledgeEntry, SearchResult } from '@commonspace/knowledge';
-import type { ScaffoldInput, ScaffoldResult } from '@commonspace/registry';
+import type { KnowledgeCatalog, KnowledgeEntry, SearchResult } from '@unpopping-candy/knowledge';
+import type { ScaffoldInput, ScaffoldResult } from '@unpopping-candy/registry';
 
-export interface CommonspaceProjectInfo {
+export interface PopcandyProjectInfo {
   root: string;
   packageManager: 'pnpm' | 'npm' | 'yarn' | 'bun' | 'unknown';
   framework: 'vite-react' | 'next-react' | 'react' | 'unknown';
@@ -41,7 +41,7 @@ export interface CompositionPlan {
 
 export interface CliServices {
   catalog: KnowledgeCatalog;
-  projectInfo(startDirectory: string): Promise<CommonspaceProjectInfo>;
+  projectInfo(startDirectory: string): Promise<PopcandyProjectInfo>;
   validate(path: string): Promise<ValidationReport>;
   search(query: string, options?: { kind?: KnowledgeEntry['kind']; limit?: number }): readonly SearchResult[];
   get(idOrName: string): KnowledgeEntry | undefined;

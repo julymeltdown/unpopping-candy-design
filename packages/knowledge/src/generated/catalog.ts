@@ -9,7 +9,7 @@ export const bundledCatalog = {
       "schemaVersion": 1,
       "kind": "migration",
       "id": "migration.0-1-to-0-2",
-      "name": "Commonspace UI 0.1 to 0.2",
+      "name": "Unpopping Candy 0.1 to 0.2",
       "version": "0.2.0",
       "status": "stable",
       "summary": "Introduces the AI-native knowledge, CLI, MCP, Registry, and generated-document layer without changing existing visual package APIs.",
@@ -38,14 +38,14 @@ export const bundledCatalog = {
         {
           "kind": "manual",
           "from": "Unstructured component discovery",
-          "to": "commonspace search and MCP resources",
+          "to": "popcandy search and MCP resources",
           "guidance": "Run project detection before generating interfaces."
         },
         {
           "kind": "manual",
           "from": "Visual package source imports",
           "to": "Published package entrypoints",
-          "guidance": "Continue importing only documented @commonspace/* entrypoints."
+          "guidance": "Continue importing only documented @unpopping-candy/* entrypoints."
         }
       ],
       "accessibility": {
@@ -431,15 +431,15 @@ export const bundledCatalog = {
       "kind": "component",
       "id": "social.conversation-preview",
       "name": "ConversationPreview",
-      "package": "@commonspace/social",
+      "package": "@unpopping-candy/social",
       "version": "0.1.0",
       "status": "stable",
       "category": "messaging",
       "summary": "Presents a conversation summary with participants, latest message, time, and unread state.",
       "sourcePath": "packages/social/src/conversation/conversation-preview.tsx",
       "entrypoints": [
-        "@commonspace/social",
-        "@commonspace/social/conversation"
+        "@unpopping-candy/social",
+        "@unpopping-candy/social/conversation"
       ],
       "keywords": [
         "conversation",
@@ -454,10 +454,10 @@ export const bundledCatalog = {
         "A message bubble or full thread is required."
       ],
       "tokens": [
-        "--cs-surface",
-        "--cs-border",
-        "--cs-ink-muted",
-        "--cs-accent"
+        "--popcandy-surface",
+        "--popcandy-border",
+        "--popcandy-ink-muted",
+        "--popcandy-accent"
       ],
       "related": [
         "social.user-cell",
@@ -522,15 +522,15 @@ export const bundledCatalog = {
       "kind": "component",
       "id": "social.notification-item",
       "name": "NotificationItem",
-      "package": "@commonspace/social",
+      "package": "@unpopping-candy/social",
       "version": "0.1.0",
       "status": "stable",
       "category": "notification",
       "summary": "Presents one social notification with actor context, event description, and optional target content.",
       "sourcePath": "packages/social/src/notification/notification-item.tsx",
       "entrypoints": [
-        "@commonspace/social",
-        "@commonspace/social/notification"
+        "@unpopping-candy/social",
+        "@unpopping-candy/social/notification"
       ],
       "keywords": [
         "notification",
@@ -545,9 +545,9 @@ export const bundledCatalog = {
         "A global application Toast is needed."
       ],
       "tokens": [
-        "--cs-surface",
-        "--cs-border",
-        "--cs-ink-muted"
+        "--popcandy-surface",
+        "--popcandy-border",
+        "--popcandy-ink-muted"
       ],
       "related": [
         "ui.toast",
@@ -629,15 +629,15 @@ export const bundledCatalog = {
       "kind": "component",
       "id": "social.post-actions",
       "name": "PostActions",
-      "package": "@commonspace/social",
+      "package": "@unpopping-candy/social",
       "version": "0.1.0",
       "status": "stable",
       "category": "post",
       "summary": "Presents reply, repost, like, bookmark, and share actions as controlled social interactions.",
       "sourcePath": "packages/social/src/post-card/post-actions.tsx",
       "entrypoints": [
-        "@commonspace/social",
-        "@commonspace/social/post"
+        "@unpopping-candy/social",
+        "@unpopping-candy/social/post"
       ],
       "keywords": [
         "post",
@@ -654,10 +654,10 @@ export const bundledCatalog = {
         "A product has different action semantics; compose explicit Buttons instead."
       ],
       "tokens": [
-        "--cs-ink-muted",
-        "--cs-accent",
-        "--cs-positive",
-        "--cs-critical"
+        "--popcandy-ink-muted",
+        "--popcandy-accent",
+        "--popcandy-positive",
+        "--popcandy-critical"
       ],
       "related": [
         "social.post-card",
@@ -757,15 +757,15 @@ export const bundledCatalog = {
       "kind": "component",
       "id": "social.post-card",
       "name": "PostCard",
-      "package": "@commonspace/social",
+      "package": "@unpopping-candy/social",
       "version": "0.1.0",
       "status": "stable",
       "category": "post",
       "summary": "Presents a social post with author, content, distribution context, metrics, and injected actions.",
       "sourcePath": "packages/social/src/post-card/post-card.tsx",
       "entrypoints": [
-        "@commonspace/social",
-        "@commonspace/social/post"
+        "@unpopping-candy/social",
+        "@unpopping-candy/social/post"
       ],
       "keywords": [
         "post",
@@ -781,10 +781,10 @@ export const bundledCatalog = {
         "A compact reference is sufficient; use a post summary pattern."
       ],
       "tokens": [
-        "--cs-surface",
-        "--cs-border",
-        "--cs-ink",
-        "--cs-accent"
+        "--popcandy-surface",
+        "--popcandy-border",
+        "--popcandy-ink",
+        "--popcandy-accent"
       ],
       "related": [
         "social.post-header",
@@ -921,15 +921,15 @@ export const bundledCatalog = {
       "kind": "component",
       "id": "social.post-card-skeleton",
       "name": "PostCardSkeleton",
-      "package": "@commonspace/social",
+      "package": "@unpopping-candy/social",
       "version": "0.1.0",
       "status": "stable",
       "category": "loading",
       "summary": "Reserves the expected geometry of a PostCard while timeline data loads.",
       "sourcePath": "packages/social/src/post-card/post-card-skeleton.tsx",
       "entrypoints": [
-        "@commonspace/social",
-        "@commonspace/social/post"
+        "@unpopping-candy/social",
+        "@unpopping-candy/social/post"
       ],
       "keywords": [
         "post",
@@ -944,7 +944,7 @@ export const bundledCatalog = {
         "Existing posts are available and only another page is loading."
       ],
       "tokens": [
-        "--cs-surface-muted"
+        "--popcandy-surface-muted"
       ],
       "related": [
         "social.post-card",
@@ -985,15 +985,15 @@ export const bundledCatalog = {
       "kind": "component",
       "id": "social.post-composer-view",
       "name": "PostComposerView",
-      "package": "@commonspace/social",
+      "package": "@unpopping-candy/social",
       "version": "0.1.0",
       "status": "stable",
       "category": "composer",
       "summary": "Presents a controlled social composer while the application owns draft, validation, upload, and publishing state.",
       "sourcePath": "packages/social/src/post-composer/post-composer-view.tsx",
       "entrypoints": [
-        "@commonspace/social",
-        "@commonspace/social/post"
+        "@unpopping-candy/social",
+        "@unpopping-candy/social/post"
       ],
       "keywords": [
         "composer",
@@ -1008,10 +1008,10 @@ export const bundledCatalog = {
         "The component would need to own persistence, authentication, or uploads."
       ],
       "tokens": [
-        "--cs-surface",
-        "--cs-border",
-        "--cs-accent",
-        "--cs-field-height"
+        "--popcandy-surface",
+        "--popcandy-border",
+        "--popcandy-accent",
+        "--popcandy-field-height"
       ],
       "related": [
         "ui.text-area",
@@ -1123,15 +1123,15 @@ export const bundledCatalog = {
       "kind": "component",
       "id": "social.post-header",
       "name": "PostHeader",
-      "package": "@commonspace/social",
+      "package": "@unpopping-candy/social",
       "version": "0.1.0",
       "status": "stable",
       "category": "post",
       "summary": "Presents post identity, timestamp, and distribution context without owning navigation.",
       "sourcePath": "packages/social/src/post-card/post-header.tsx",
       "entrypoints": [
-        "@commonspace/social",
-        "@commonspace/social/post"
+        "@unpopping-candy/social",
+        "@unpopping-candy/social/post"
       ],
       "keywords": [
         "post",
@@ -1146,8 +1146,8 @@ export const bundledCatalog = {
         "A generic person row is needed; use UserCell."
       ],
       "tokens": [
-        "--cs-ink",
-        "--cs-ink-muted"
+        "--popcandy-ink",
+        "--popcandy-ink-muted"
       ],
       "related": [
         "social.post-card",
@@ -1224,15 +1224,15 @@ export const bundledCatalog = {
       "kind": "component",
       "id": "social.post-media-grid",
       "name": "PostMediaGrid",
-      "package": "@commonspace/social",
+      "package": "@unpopping-candy/social",
       "version": "0.1.0",
       "status": "stable",
       "category": "media",
       "summary": "Arranges one to four social media assets with stable aspect ratios and selection callbacks.",
       "sourcePath": "packages/social/src/post-card/post-media-grid.tsx",
       "entrypoints": [
-        "@commonspace/social",
-        "@commonspace/social/post"
+        "@unpopping-candy/social",
+        "@unpopping-candy/social/post"
       ],
       "keywords": [
         "media",
@@ -1249,8 +1249,8 @@ export const bundledCatalog = {
         "A general image gallery is being built."
       ],
       "tokens": [
-        "--cs-border",
-        "--cs-radius-md"
+        "--popcandy-border",
+        "--popcandy-radius-md"
       ],
       "related": [
         "social.post-card"
@@ -1315,15 +1315,15 @@ export const bundledCatalog = {
       "kind": "component",
       "id": "social.profile-header",
       "name": "ProfileHeader",
-      "package": "@commonspace/social",
+      "package": "@unpopping-candy/social",
       "version": "0.1.0",
       "status": "stable",
       "category": "profile",
       "summary": "Presents a curator or user profile summary with injected primary and secondary actions.",
       "sourcePath": "packages/social/src/profile/profile-header.tsx",
       "entrypoints": [
-        "@commonspace/social",
-        "@commonspace/social/profile"
+        "@unpopping-candy/social",
+        "@unpopping-candy/social/profile"
       ],
       "keywords": [
         "profile",
@@ -1338,10 +1338,10 @@ export const bundledCatalog = {
         "A compact list row is sufficient; use UserCell."
       ],
       "tokens": [
-        "--cs-surface",
-        "--cs-border",
-        "--cs-ink",
-        "--cs-ink-muted"
+        "--popcandy-surface",
+        "--popcandy-border",
+        "--popcandy-ink",
+        "--popcandy-ink-muted"
       ],
       "related": [
         "social.user-cell",
@@ -1420,15 +1420,15 @@ export const bundledCatalog = {
       "kind": "component",
       "id": "social.timeline-view",
       "name": "TimelineView",
-      "package": "@commonspace/social",
+      "package": "@unpopping-candy/social",
       "version": "0.1.0",
       "status": "stable",
       "category": "timeline",
       "summary": "Composes timeline states and rendered post rows without owning pagination or virtualization.",
       "sourcePath": "packages/social/src/timeline/timeline-view.tsx",
       "entrypoints": [
-        "@commonspace/social",
-        "@commonspace/social/timeline"
+        "@unpopping-candy/social",
+        "@unpopping-candy/social/timeline"
       ],
       "keywords": [
         "timeline",
@@ -1444,8 +1444,8 @@ export const bundledCatalog = {
         "A static arbitrary list has no social semantics."
       ],
       "tokens": [
-        "--cs-border",
-        "--cs-surface"
+        "--popcandy-border",
+        "--popcandy-surface"
       ],
       "related": [
         "social.post-card",
@@ -1543,15 +1543,15 @@ export const bundledCatalog = {
       "kind": "component",
       "id": "social.user-cell",
       "name": "UserCell",
-      "package": "@commonspace/social",
+      "package": "@unpopping-candy/social",
       "version": "0.1.0",
       "status": "stable",
       "category": "identity",
       "summary": "Presents a compact person row with optional supporting text and injected action.",
       "sourcePath": "packages/social/src/user-cell/user-cell.tsx",
       "entrypoints": [
-        "@commonspace/social",
-        "@commonspace/social/user"
+        "@unpopping-candy/social",
+        "@unpopping-candy/social/user"
       ],
       "keywords": [
         "user",
@@ -1567,9 +1567,9 @@ export const bundledCatalog = {
         "A full profile context is needed; use ProfileHeader."
       ],
       "tokens": [
-        "--cs-ink",
-        "--cs-ink-muted",
-        "--cs-border"
+        "--popcandy-ink",
+        "--popcandy-ink-muted",
+        "--popcandy-border"
       ],
       "related": [
         "ui.avatar",
@@ -1650,8 +1650,8 @@ export const bundledCatalog = {
       "name": "Strict FSD social shell",
       "version": "0.2.0",
       "status": "stable",
-      "summary": "A React and Vite application shell that keeps Commonspace presentation packages below FSD application slices.",
-      "description": "A React and Vite application shell that keeps Commonspace presentation packages below FSD application slices.",
+      "summary": "A React and Vite application shell that keeps Unpopping Candy presentation packages below FSD application slices.",
+      "description": "A React and Vite application shell that keeps Unpopping Candy presentation packages below FSD application slices.",
       "keywords": [
         "strict",
         "fsd",
@@ -1660,7 +1660,7 @@ export const bundledCatalog = {
         "template"
       ],
       "useWhen": [
-        "A React and Vite application shell that keeps Commonspace presentation packages below FSD application slices."
+        "A React and Vite application shell that keeps Unpopping Candy presentation packages below FSD application slices."
       ],
       "avoidWhen": [
         "The target project uses a different framework or the requested surface is substantially smaller."
@@ -1676,9 +1676,9 @@ export const bundledCatalog = {
       ],
       "files": [
         {
-          "path": "src/app/providers/commonspace-provider.tsx",
+          "path": "src/app/providers/unpopping-candy-provider.tsx",
           "role": "Application provider composition",
-          "source": "packages/registry/templates/fsd-social-shell/src/app/providers/commonspace-provider.tsx"
+          "source": "packages/registry/templates/fsd-social-shell/src/app/providers/unpopping-candy-provider.tsx"
         },
         {
           "path": "src/pages/home/ui/home-page.tsx",
@@ -1896,8 +1896,8 @@ export const bundledCatalog = {
       "name": "Vite app shell",
       "version": "0.2.0",
       "status": "stable",
-      "summary": "A minimal React and Vite shell with Commonspace theme and feedback providers.",
-      "description": "A minimal React and Vite shell with Commonspace theme and feedback providers.",
+      "summary": "A minimal React and Vite shell with Unpopping Candy theme and feedback providers.",
+      "description": "A minimal React and Vite shell with Unpopping Candy theme and feedback providers.",
       "keywords": [
         "vite",
         "app",
@@ -1905,7 +1905,7 @@ export const bundledCatalog = {
         "template"
       ],
       "useWhen": [
-        "A minimal React and Vite shell with Commonspace theme and feedback providers."
+        "A minimal React and Vite shell with Unpopping Candy theme and feedback providers."
       ],
       "avoidWhen": [
         "The target project uses a different framework or the requested surface is substantially smaller."
@@ -1959,15 +1959,15 @@ export const bundledCatalog = {
       "kind": "component",
       "id": "ui.alert",
       "name": "Alert",
-      "package": "@commonspace/ui",
+      "package": "@unpopping-candy/ui",
       "version": "0.1.0",
       "status": "stable",
       "category": "feedback",
       "summary": "Presents contextual feedback beside the task or content that produced it.",
       "sourcePath": "packages/ui/src/alert/alert.tsx",
       "entrypoints": [
-        "@commonspace/ui",
-        "@commonspace/ui/alert"
+        "@unpopping-candy/ui",
+        "@unpopping-candy/ui/alert"
       ],
       "keywords": [
         "feedback",
@@ -1985,11 +1985,11 @@ export const bundledCatalog = {
         "The entire route is unusable; use a route-level error surface."
       ],
       "tokens": [
-        "--cs-surface",
-        "--cs-border",
-        "--cs-positive",
-        "--cs-warning",
-        "--cs-critical"
+        "--popcandy-surface",
+        "--popcandy-border",
+        "--popcandy-positive",
+        "--popcandy-warning",
+        "--popcandy-critical"
       ],
       "related": [
         "ui.toast",
@@ -2094,15 +2094,15 @@ export const bundledCatalog = {
       "kind": "component",
       "id": "ui.avatar",
       "name": "Avatar",
-      "package": "@commonspace/ui",
+      "package": "@unpopping-candy/ui",
       "version": "0.1.0",
       "status": "stable",
       "category": "identity",
       "summary": "Represents a person or organization with an image and deterministic fallback.",
       "sourcePath": "packages/ui/src/avatar/avatar.tsx",
       "entrypoints": [
-        "@commonspace/ui",
-        "@commonspace/ui/avatar"
+        "@unpopping-candy/ui",
+        "@unpopping-candy/ui/avatar"
       ],
       "keywords": [
         "avatar",
@@ -2120,9 +2120,9 @@ export const bundledCatalog = {
         "A product or content thumbnail is being displayed."
       ],
       "tokens": [
-        "--cs-surface-muted",
-        "--cs-border",
-        "--cs-ink"
+        "--popcandy-surface-muted",
+        "--popcandy-border",
+        "--popcandy-ink"
       ],
       "related": [
         "social.user-cell"
@@ -2199,15 +2199,15 @@ export const bundledCatalog = {
       "kind": "component",
       "id": "ui.badge",
       "name": "Badge",
-      "package": "@commonspace/ui",
+      "package": "@unpopping-candy/ui",
       "version": "0.1.0",
       "status": "stable",
       "category": "data-display",
       "summary": "Displays a compact status or categorical label without becoming the primary action.",
       "sourcePath": "packages/ui/src/badge/badge.tsx",
       "entrypoints": [
-        "@commonspace/ui",
-        "@commonspace/ui/badge"
+        "@unpopping-candy/ui",
+        "@unpopping-candy/ui/badge"
       ],
       "keywords": [
         "badge",
@@ -2223,9 +2223,9 @@ export const bundledCatalog = {
         "The text is ordinary metadata and does not need a container."
       ],
       "tokens": [
-        "--cs-surface-muted",
-        "--cs-border",
-        "--cs-ink-muted"
+        "--popcandy-surface-muted",
+        "--popcandy-border",
+        "--popcandy-ink-muted"
       ],
       "related": [
         "ui.alert"
@@ -2293,15 +2293,15 @@ export const bundledCatalog = {
       "kind": "component",
       "id": "ui.button",
       "name": "Button",
-      "package": "@commonspace/ui",
+      "package": "@unpopping-candy/ui",
       "version": "0.1.0",
       "status": "stable",
       "category": "action",
       "summary": "Triggers an immediate user action with explicit priority and pending behavior.",
       "sourcePath": "packages/ui/src/button/button.tsx",
       "entrypoints": [
-        "@commonspace/ui",
-        "@commonspace/ui/button"
+        "@unpopping-candy/ui",
+        "@unpopping-candy/ui/button"
       ],
       "keywords": [
         "button",
@@ -2319,10 +2319,10 @@ export const bundledCatalog = {
         "The control only contains an icon; use IconButton."
       ],
       "tokens": [
-        "--cs-button-height-md",
-        "--cs-accent",
-        "--cs-critical",
-        "--cs-focus"
+        "--popcandy-button-height-md",
+        "--popcandy-accent",
+        "--popcandy-critical",
+        "--popcandy-focus"
       ],
       "related": [
         "ui.icon-button",
@@ -2423,15 +2423,15 @@ export const bundledCatalog = {
       "kind": "component",
       "id": "ui.container",
       "name": "Container",
-      "package": "@commonspace/ui",
+      "package": "@unpopping-candy/ui",
       "version": "0.1.0",
       "status": "stable",
       "category": "layout",
       "summary": "Constrains page content to a readable width and consistent horizontal gutter.",
       "sourcePath": "packages/ui/src/container/container.tsx",
       "entrypoints": [
-        "@commonspace/ui",
-        "@commonspace/ui/layout"
+        "@unpopping-candy/ui",
+        "@unpopping-candy/ui/layout"
       ],
       "keywords": [
         "container",
@@ -2440,16 +2440,16 @@ export const bundledCatalog = {
         "gutter"
       ],
       "useWhen": [
-        "A page or section needs the standard Commonspace reading width."
+        "A page or section needs the standard Unpopping Candy reading width."
       ],
       "avoidWhen": [
         "The element must be full bleed.",
         "A local group only needs spacing; use Stack or Inline."
       ],
       "tokens": [
-        "--cs-space-4",
-        "--cs-space-6",
-        "--cs-shell-max"
+        "--popcandy-space-4",
+        "--popcandy-space-6",
+        "--popcandy-shell-max"
       ],
       "related": [
         "ui.stack",
@@ -2509,15 +2509,15 @@ export const bundledCatalog = {
       "kind": "component",
       "id": "ui.dialog",
       "name": "Dialog",
-      "package": "@commonspace/ui",
+      "package": "@unpopping-candy/ui",
       "version": "0.1.0",
       "status": "stable",
       "category": "overlay",
       "summary": "Interrupts the current context for a focused task that must be completed or dismissed.",
       "sourcePath": "packages/ui/src/dialog/dialog.tsx",
       "entrypoints": [
-        "@commonspace/ui",
-        "@commonspace/ui/dialog"
+        "@unpopping-candy/ui",
+        "@unpopping-candy/ui/dialog"
       ],
       "keywords": [
         "dialog",
@@ -2534,10 +2534,10 @@ export const bundledCatalog = {
         "A non-blocking message is sufficient."
       ],
       "tokens": [
-        "--cs-dialog-width-md",
-        "--cs-surface",
-        "--cs-shadow-dialog",
-        "--cs-focus"
+        "--popcandy-dialog-width-md",
+        "--popcandy-surface",
+        "--popcandy-shadow-dialog",
+        "--popcandy-focus"
       ],
       "related": [
         "ui.button",
@@ -2646,14 +2646,14 @@ export const bundledCatalog = {
       "kind": "component",
       "id": "ui.empty-state",
       "name": "EmptyState",
-      "package": "@commonspace/ui",
+      "package": "@unpopping-candy/ui",
       "version": "0.1.0",
       "status": "stable",
       "category": "feedback",
       "summary": "Explains why a meaningful region has no content and offers the next valid action.",
       "sourcePath": "packages/ui/src/empty-state/empty-state.tsx",
       "entrypoints": [
-        "@commonspace/ui"
+        "@unpopping-candy/ui"
       ],
       "keywords": [
         "empty",
@@ -2669,9 +2669,9 @@ export const bundledCatalog = {
         "The region failed to load; use Alert."
       ],
       "tokens": [
-        "--cs-ink",
-        "--cs-ink-muted",
-        "--cs-space-8"
+        "--popcandy-ink",
+        "--popcandy-ink-muted",
+        "--popcandy-space-8"
       ],
       "related": [
         "ui.alert",
@@ -2745,15 +2745,15 @@ export const bundledCatalog = {
       "kind": "component",
       "id": "ui.feedback-provider",
       "name": "FeedbackProvider",
-      "package": "@commonspace/ui",
+      "package": "@unpopping-candy/ui",
       "version": "0.1.0",
       "status": "stable",
       "category": "feedback",
       "summary": "Owns the application-level transient feedback queue and exposes a bounded controller.",
       "sourcePath": "packages/ui/src/feedback/feedback-provider.tsx",
       "entrypoints": [
-        "@commonspace/ui",
-        "@commonspace/ui/feedback"
+        "@unpopping-candy/ui",
+        "@unpopping-candy/ui/feedback"
       ],
       "keywords": [
         "toast",
@@ -2768,8 +2768,8 @@ export const bundledCatalog = {
         "Feedback belongs permanently beside a field or panel; use Alert."
       ],
       "tokens": [
-        "--cs-dialog-width-sm",
-        "--cs-shadow-dialog"
+        "--popcandy-dialog-width-sm",
+        "--popcandy-shadow-dialog"
       ],
       "related": [
         "ui.toast",
@@ -2825,15 +2825,15 @@ export const bundledCatalog = {
       "kind": "component",
       "id": "ui.icon-button",
       "name": "IconButton",
-      "package": "@commonspace/ui",
+      "package": "@unpopping-candy/ui",
       "version": "0.1.0",
       "status": "stable",
       "category": "action",
       "summary": "Triggers a frequent action where a well-known icon can replace visible text.",
       "sourcePath": "packages/ui/src/icon-button/icon-button.tsx",
       "entrypoints": [
-        "@commonspace/ui",
-        "@commonspace/ui/button"
+        "@unpopping-candy/ui",
+        "@unpopping-candy/ui/button"
       ],
       "keywords": [
         "icon",
@@ -2849,9 +2849,9 @@ export const bundledCatalog = {
         "The icon is decorative."
       ],
       "tokens": [
-        "--cs-button-height-md",
-        "--cs-focus",
-        "--cs-ink-muted"
+        "--popcandy-button-height-md",
+        "--popcandy-focus",
+        "--popcandy-ink-muted"
       ],
       "related": [
         "ui.button"
@@ -2937,15 +2937,15 @@ export const bundledCatalog = {
       "kind": "component",
       "id": "ui.inline",
       "name": "Inline",
-      "package": "@commonspace/ui",
+      "package": "@unpopping-candy/ui",
       "version": "0.1.0",
       "status": "stable",
       "category": "layout",
       "summary": "Arranges related items horizontally with tokenized gap, alignment, and wrapping.",
       "sourcePath": "packages/ui/src/inline/inline.tsx",
       "entrypoints": [
-        "@commonspace/ui",
-        "@commonspace/ui/layout"
+        "@unpopping-candy/ui",
+        "@unpopping-candy/ui/layout"
       ],
       "keywords": [
         "inline",
@@ -2961,10 +2961,10 @@ export const bundledCatalog = {
         "Items represent a vertical reading sequence; use Stack."
       ],
       "tokens": [
-        "--cs-space-1",
-        "--cs-space-2",
-        "--cs-space-3",
-        "--cs-space-4"
+        "--popcandy-space-1",
+        "--popcandy-space-2",
+        "--popcandy-space-3",
+        "--popcandy-space-4"
       ],
       "related": [
         "ui.stack",
@@ -3040,15 +3040,15 @@ export const bundledCatalog = {
       "kind": "component",
       "id": "ui.separator",
       "name": "Separator",
-      "package": "@commonspace/ui",
+      "package": "@unpopping-candy/ui",
       "version": "0.1.0",
       "status": "stable",
       "category": "layout",
       "summary": "Separates adjacent regions when spacing alone cannot communicate the boundary.",
       "sourcePath": "packages/ui/src/separator/separator.tsx",
       "entrypoints": [
-        "@commonspace/ui",
-        "@commonspace/ui/layout"
+        "@unpopping-candy/ui",
+        "@unpopping-candy/ui/layout"
       ],
       "keywords": [
         "separator",
@@ -3062,7 +3062,7 @@ export const bundledCatalog = {
         "The rule is decorative only and adds visual noise."
       ],
       "tokens": [
-        "--cs-border"
+        "--popcandy-border"
       ],
       "related": [
         "ui.stack",
@@ -3114,15 +3114,15 @@ export const bundledCatalog = {
       "kind": "component",
       "id": "ui.skeleton",
       "name": "Skeleton",
-      "package": "@commonspace/ui",
+      "package": "@unpopping-candy/ui",
       "version": "0.1.0",
       "status": "stable",
       "category": "loading",
       "summary": "Reserves stable geometry while content is loading.",
       "sourcePath": "packages/ui/src/skeleton/skeleton.tsx",
       "entrypoints": [
-        "@commonspace/ui",
-        "@commonspace/ui/loading"
+        "@unpopping-candy/ui",
+        "@unpopping-candy/ui/loading"
       ],
       "keywords": [
         "skeleton",
@@ -3136,8 +3136,8 @@ export const bundledCatalog = {
         "The operation is immediate or the layout is unknown; use Spinner or a simple pending label."
       ],
       "tokens": [
-        "--cs-surface-muted",
-        "--cs-motion-slow"
+        "--popcandy-surface-muted",
+        "--popcandy-motion-slow"
       ],
       "related": [
         "ui.spinner",
@@ -3204,15 +3204,15 @@ export const bundledCatalog = {
       "kind": "component",
       "id": "ui.spinner",
       "name": "Spinner",
-      "package": "@commonspace/ui",
+      "package": "@unpopping-candy/ui",
       "version": "0.1.0",
       "status": "stable",
       "category": "loading",
       "summary": "Indicates an indeterminate operation in a compact region.",
       "sourcePath": "packages/ui/src/spinner/spinner.tsx",
       "entrypoints": [
-        "@commonspace/ui",
-        "@commonspace/ui/loading"
+        "@unpopping-candy/ui",
+        "@unpopping-candy/ui/loading"
       ],
       "keywords": [
         "spinner",
@@ -3228,8 +3228,8 @@ export const bundledCatalog = {
         "Progress is measurable; use a determinate progress indicator."
       ],
       "tokens": [
-        "--cs-accent",
-        "--cs-motion-fast"
+        "--popcandy-accent",
+        "--popcandy-motion-fast"
       ],
       "related": [
         "ui.skeleton",
@@ -3290,15 +3290,15 @@ export const bundledCatalog = {
       "kind": "component",
       "id": "ui.stack",
       "name": "Stack",
-      "package": "@commonspace/ui",
+      "package": "@unpopping-candy/ui",
       "version": "0.1.0",
       "status": "stable",
       "category": "layout",
       "summary": "Arranges a vertical reading or task sequence with tokenized spacing.",
       "sourcePath": "packages/ui/src/stack/stack.tsx",
       "entrypoints": [
-        "@commonspace/ui",
-        "@commonspace/ui/layout"
+        "@unpopping-candy/ui",
+        "@unpopping-candy/ui/layout"
       ],
       "keywords": [
         "stack",
@@ -3313,11 +3313,11 @@ export const bundledCatalog = {
         "Items form a compact horizontal group; use Inline."
       ],
       "tokens": [
-        "--cs-space-1",
-        "--cs-space-2",
-        "--cs-space-3",
-        "--cs-space-4",
-        "--cs-space-6"
+        "--popcandy-space-1",
+        "--popcandy-space-2",
+        "--popcandy-space-3",
+        "--popcandy-space-4",
+        "--popcandy-space-6"
       ],
       "related": [
         "ui.inline",
@@ -3386,15 +3386,15 @@ export const bundledCatalog = {
       "kind": "component",
       "id": "ui.surface",
       "name": "Surface",
-      "package": "@commonspace/ui",
+      "package": "@unpopping-candy/ui",
       "version": "0.1.0",
       "status": "stable",
       "category": "layout",
       "summary": "Creates a semantic background and boundary without prescribing product content.",
       "sourcePath": "packages/ui/src/surface/surface.tsx",
       "entrypoints": [
-        "@commonspace/ui",
-        "@commonspace/ui/layout"
+        "@unpopping-candy/ui",
+        "@unpopping-candy/ui/layout"
       ],
       "keywords": [
         "surface",
@@ -3410,10 +3410,10 @@ export const bundledCatalog = {
         "Whitespace and a divider communicate the boundary better."
       ],
       "tokens": [
-        "--cs-surface",
-        "--cs-surface-muted",
-        "--cs-border",
-        "--cs-shadow-dialog"
+        "--popcandy-surface",
+        "--popcandy-surface-muted",
+        "--popcandy-border",
+        "--popcandy-shadow-dialog"
       ],
       "related": [
         "ui.container",
@@ -3480,15 +3480,15 @@ export const bundledCatalog = {
       "kind": "component",
       "id": "ui.tabs",
       "name": "Tabs",
-      "package": "@commonspace/ui",
+      "package": "@unpopping-candy/ui",
       "version": "0.1.0",
       "status": "stable",
       "category": "navigation",
       "summary": "Switches among peer views that share one context and URL or controlled state.",
       "sourcePath": "packages/ui/src/tabs/tabs.tsx",
       "entrypoints": [
-        "@commonspace/ui",
-        "@commonspace/ui/tabs"
+        "@unpopping-candy/ui",
+        "@unpopping-candy/ui/tabs"
       ],
       "keywords": [
         "tabs",
@@ -3504,9 +3504,9 @@ export const bundledCatalog = {
         "The targets are unrelated pages in global navigation."
       ],
       "tokens": [
-        "--cs-accent",
-        "--cs-border",
-        "--cs-focus"
+        "--popcandy-accent",
+        "--popcandy-border",
+        "--popcandy-focus"
       ],
       "related": [
         "ui.button"
@@ -3595,15 +3595,15 @@ export const bundledCatalog = {
       "kind": "component",
       "id": "ui.text-area",
       "name": "TextArea",
-      "package": "@commonspace/ui",
+      "package": "@unpopping-candy/ui",
       "version": "0.1.0",
       "status": "stable",
       "category": "form",
       "summary": "Collects multi-line text with label, description, validation, and native textarea semantics.",
       "sourcePath": "packages/ui/src/text-area/text-area.tsx",
       "entrypoints": [
-        "@commonspace/ui",
-        "@commonspace/ui/forms"
+        "@unpopping-candy/ui",
+        "@unpopping-candy/ui/forms"
       ],
       "keywords": [
         "textarea",
@@ -3619,10 +3619,10 @@ export const bundledCatalog = {
         "Rich text structure is required."
       ],
       "tokens": [
-        "--cs-field-height",
-        "--cs-border",
-        "--cs-focus",
-        "--cs-critical"
+        "--popcandy-field-height",
+        "--popcandy-border",
+        "--popcandy-focus",
+        "--popcandy-critical"
       ],
       "related": [
         "ui.text-field",
@@ -3695,15 +3695,15 @@ export const bundledCatalog = {
       "kind": "component",
       "id": "ui.text-field",
       "name": "TextField",
-      "package": "@commonspace/ui",
+      "package": "@unpopping-candy/ui",
       "version": "0.1.0",
       "status": "stable",
       "category": "form",
       "summary": "Collects one short value with label, description, validation, and native input semantics.",
       "sourcePath": "packages/ui/src/text-field/text-field.tsx",
       "entrypoints": [
-        "@commonspace/ui",
-        "@commonspace/ui/forms"
+        "@unpopping-candy/ui",
+        "@unpopping-candy/ui/forms"
       ],
       "keywords": [
         "input",
@@ -3719,10 +3719,10 @@ export const bundledCatalog = {
         "A fixed choice set is known; use a selection control."
       ],
       "tokens": [
-        "--cs-field-height",
-        "--cs-border",
-        "--cs-focus",
-        "--cs-critical"
+        "--popcandy-field-height",
+        "--popcandy-border",
+        "--popcandy-focus",
+        "--popcandy-critical"
       ],
       "related": [
         "ui.text-area",
@@ -3812,15 +3812,15 @@ export const bundledCatalog = {
       "kind": "component",
       "id": "ui.toast",
       "name": "Toast",
-      "package": "@commonspace/ui",
+      "package": "@unpopping-candy/ui",
       "version": "0.1.0",
       "status": "stable",
       "category": "feedback",
       "summary": "Renders one transient or persistent item from the feedback queue.",
       "sourcePath": "packages/ui/src/feedback/toast.tsx",
       "entrypoints": [
-        "@commonspace/ui",
-        "@commonspace/ui/feedback"
+        "@unpopping-candy/ui",
+        "@unpopping-candy/ui/feedback"
       ],
       "keywords": [
         "toast",
@@ -3835,11 +3835,11 @@ export const bundledCatalog = {
         "The message must remain beside its source; use Alert."
       ],
       "tokens": [
-        "--cs-surface",
-        "--cs-shadow-dialog",
-        "--cs-positive",
-        "--cs-warning",
-        "--cs-critical"
+        "--popcandy-surface",
+        "--popcandy-shadow-dialog",
+        "--popcandy-positive",
+        "--popcandy-warning",
+        "--popcandy-critical"
       ],
       "related": [
         "ui.feedback-provider",
@@ -3907,15 +3907,15 @@ export const bundledCatalog = {
       "kind": "component",
       "id": "ui.toast-viewport",
       "name": "ToastViewport",
-      "package": "@commonspace/ui",
+      "package": "@unpopping-candy/ui",
       "version": "0.1.0",
       "status": "stable",
       "category": "feedback",
       "summary": "Positions and announces the bounded stack of global feedback items.",
       "sourcePath": "packages/ui/src/feedback/toast.tsx",
       "entrypoints": [
-        "@commonspace/ui",
-        "@commonspace/ui/feedback"
+        "@unpopping-candy/ui",
+        "@unpopping-candy/ui/feedback"
       ],
       "keywords": [
         "toast",
@@ -3930,8 +3930,8 @@ export const bundledCatalog = {
         "A page needs a custom notification center."
       ],
       "tokens": [
-        "--cs-dialog-width-sm",
-        "--cs-space-4"
+        "--popcandy-dialog-width-sm",
+        "--popcandy-space-4"
       ],
       "related": [
         "ui.feedback-provider",
@@ -3992,14 +3992,14 @@ export const bundledCatalog = {
       "kind": "component",
       "id": "ui.visually-hidden",
       "name": "VisuallyHidden",
-      "package": "@commonspace/ui",
+      "package": "@unpopping-candy/ui",
       "version": "0.1.0",
       "status": "stable",
       "category": "accessibility",
       "summary": "Keeps essential text available to assistive technology without changing visual layout.",
       "sourcePath": "packages/ui/src/visually-hidden/visually-hidden.tsx",
       "entrypoints": [
-        "@commonspace/ui"
+        "@unpopping-candy/ui"
       ],
       "keywords": [
         "accessibility",
@@ -4014,7 +4014,7 @@ export const bundledCatalog = {
         "Visible instructions would benefit all users."
       ],
       "tokens": [
-        "--cs-space-0"
+        "--popcandy-space-0"
       ],
       "related": [
         "ui.icon-button",

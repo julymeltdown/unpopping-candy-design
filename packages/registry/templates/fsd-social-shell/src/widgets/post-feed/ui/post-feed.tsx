@@ -1,4 +1,4 @@
-import { TimelineView, type SocialPostViewModel } from '@commonspace/social';
+import { TimelineView, type SocialPostViewModel } from '@unpopping-candy/social';
 
 export interface PostFeedProps {
   posts: readonly SocialPostViewModel[];

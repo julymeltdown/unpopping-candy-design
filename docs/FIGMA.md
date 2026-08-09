@@ -2,7 +2,7 @@
 
 ## Purpose
 
-Commonspace generates Code Connect mapping templates for every public React component. The mapping allows a Figma component instance to resolve to the exact package import and preferred code usage instead of being reconstructed from visual appearance alone.
+Unpopping Candy generates Code Connect mapping templates for every public React component. The mapping allows a Figma component instance to resolve to the exact package import and preferred code usage instead of being reconstructed from visual appearance alone.
 
 ## Generated files
 
@@ -42,7 +42,7 @@ This command must fail while any publish target is a placeholder. That failure i
 
 1. Publish or identify the canonical Figma component.
 2. Copy its exact node URL.
-3. Update the component's structured Figma metadata or `figma/commonspace.figma.json` according to the generated manifest.
+3. Update the component's structured Figma metadata or `figma/popcandy.figma.json` according to the generated manifest.
 4. Regenerate templates.
 5. Run parse and preview:
    ```bash
@@ -56,7 +56,7 @@ This command must fail while any publish target is a placeholder. That failure i
    npm run figma:publish
    ```
 
-Use the `connect-commonspace-figma` Skill for the detailed mapping procedure.
+Use the `connect-popcandy-figma` Skill for the detailed mapping procedure.
 
 ## Publication requirements
 

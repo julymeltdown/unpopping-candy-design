@@ -1,6 +1,6 @@
 import type { ChangeEvent, FormEvent, ReactNode } from 'react';
-import { EmojiIcon, MediaIcon } from '@commonspace/icons';
-import { Avatar, Button, IconButton, TextArea } from '@commonspace/ui';
+import { EmojiIcon, MediaIcon } from '@unpopping-candy/icons';
+import { Avatar, Button, IconButton, TextArea } from '@unpopping-candy/ui';
 import type { SocialUserViewModel } from '../model/types.js';
 
 export interface PostComposerViewProps {
@@ -22,13 +22,13 @@ export function PostComposerView({ error, feedback, maximumLength = 500, onAddEm
   const unavailable = pending || overLimit || value.trim().length === 0;
   const submit = (event: FormEvent) => { event.preventDefault(); if (!unavailable) onSubmit(); };
   return (
-    <form className="cs-composer" data-cs-component="post-composer" data-cs-state={pending ? 'pending' : overLimit ? 'invalid' : 'ready'} onSubmit={submit}>
+    <form className="popcandy-composer" data-popcandy-component="post-composer" data-popcandy-state={pending ? 'pending' : overLimit ? 'invalid' : 'ready'} onSubmit={submit}>
       <Avatar src={viewer.avatarUrl} alt="" size="lg" />
-      <div className="cs-composer__body">
+      <div className="popcandy-composer__body">
         <TextArea label="Post text" hideLabel value={value} placeholder={placeholder} maxLength={maximumLength + 20} error={error} counter={{ current: value.length, maximum: maximumLength }} onChange={(event: ChangeEvent<HTMLTextAreaElement>) => onValueChange(event.target.value)} />
-        {feedback ? <div className="cs-composer__feedback">{feedback}</div> : null}
-        <div className="cs-composer__footer">
-          <div className="cs-composer__tools" aria-label="Composer tools">
+        {feedback ? <div className="popcandy-composer__feedback">{feedback}</div> : null}
+        <div className="popcandy-composer__footer">
+          <div className="popcandy-composer__tools" aria-label="Composer tools">
             {onAddMedia ? <IconButton label="Add media" icon={<MediaIcon />} onClick={onAddMedia} /> : null}
             {onAddEmoji ? <IconButton label="Add emoji" icon={<EmojiIcon />} onClick={onAddEmoji} /> : null}
           </div>

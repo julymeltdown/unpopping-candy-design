@@ -1,4 +1,4 @@
-// url=https://www.figma.com/design/COMMONSPACE_LIBRARY/Commonspace-UI?node-id=0-6
+// url=https://www.figma.com/design/POPCANDY_LIBRARY/Unpopping-Candy?node-id=0-6
 // source=packages/social/src/post-composer/post-composer-view.tsx
 // component=PostComposerView
 import figma from 'figma'
@@ -7,7 +7,7 @@ export default {
   example: figma.code`
     <PostComposerView value={draft} onChange={setDraft} onSubmit={publish} pending={pending} />
   `,
-  imports: ['import { PostComposerView } from "@commonspace/social/post"'],
+  imports: ['import { PostComposerView } from "@unpopping-candy/social/post"'],
   id: 'social-post-composer-view',
   metadata: {
     nestable: true,

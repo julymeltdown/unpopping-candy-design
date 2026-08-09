@@ -1,17 +1,17 @@
 # PostCard
 
-> `social.post-card` · `@commonspace/social` · stable · version 0.1.0
+> `social.post-card` · `@unpopping-candy/social` · stable · version 0.1.0
 
 Presents a social post with author, content, distribution context, metrics, and injected actions.
 
 ## Import
 
 ```tsx
-import { PostCard } from '@commonspace/social';
+import { PostCard } from '@unpopping-candy/social';
 ```
 
 ```tsx
-import { PostCard } from '@commonspace/social/post';
+import { PostCard } from '@unpopping-candy/social/post';
 ```
 
 ## Use when
@@ -45,10 +45,10 @@ import { PostCard } from '@commonspace/social/post';
 
 ## Tokens
 
-- `--cs-surface`
-- `--cs-border`
-- `--cs-ink`
-- `--cs-accent`
+- `--popcandy-surface`
+- `--popcandy-border`
+- `--popcandy-ink`
+- `--popcandy-accent`
 
 ## Props
 

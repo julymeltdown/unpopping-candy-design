@@ -1,4 +1,4 @@
-import { CheckCircleFilledIcon, ErrorCircleIcon, InfoCircleIcon, WarningIcon } from '@commonspace/icons';
+import { CheckCircleFilledIcon, ErrorCircleIcon, InfoCircleIcon, WarningIcon } from '@unpopping-candy/icons';
 import type { FeedbackTone } from './feedback-state.js';
 
 export function FeedbackIcon({ tone }: { tone: FeedbackTone }) {

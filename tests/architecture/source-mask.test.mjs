@@ -4,9 +4,9 @@ import { extractModuleSpecifiers } from '../../scripts/lib/project-inspection.mj
 import { maskSource } from '../../scripts/lib/source-mask.mjs';
 
 test('source masking keeps executable imports but removes generated code inside templates', () => {
-  const source = `import type { Knowledge } from '@commonspace/knowledge';\nconst generated = \`import figma from 'figma'\\nuseQuery()\`;\n`;
+  const source = `import type { Knowledge } from '@unpopping-candy/knowledge';\nconst generated = \`import figma from 'figma'\\nuseQuery()\`;\n`;
   const imports = extractModuleSpecifiers(maskSource(source));
-  assert.deepEqual(imports, ['@commonspace/knowledge']);
+  assert.deepEqual(imports, ['@unpopping-candy/knowledge']);
 });
 
 test('runtime masking removes identifiers that only occur in strings and comments', () => {

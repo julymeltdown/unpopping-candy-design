@@ -1,19 +1,19 @@
-# Commonspace CLI
+# Unpopping Candy CLI
 
 ## Role
 
-`@commonspace/cli` is the deterministic local interface for humans and agents. It answers questions from the installed Commonspace catalog and local project configuration; it does not invoke a model.
+`@unpopping-candy/cli` is the deterministic local interface for humans and agents. It answers questions from the installed Unpopping Candy catalog and local project configuration; it does not invoke a model.
 
 During repository development:
 
 ```bash
-npm run commonspace -- <command> [options]
+npm run popcandy -- <command> [options]
 ```
 
 After package publication:
 
 ```bash
-commonspace <command> [options]
+popcandy <command> [options]
 ```
 
 Use `--json` in agent workflows so results are not parsed from presentation text.
@@ -27,13 +27,13 @@ Detects the nearest project root and reports:
 - package manager;
 - framework;
 - project package name;
-- Commonspace configuration path;
-- installed Commonspace package versions;
+- Unpopping Candy configuration path;
+- installed Unpopping Candy package versions;
 - source directories;
-- required Commonspace style imports already present.
+- required Unpopping Candy style imports already present.
 
 ```bash
-npm run commonspace -- info --path apps/playground --json
+npm run popcandy -- info --path apps/playground --json
 ```
 
 ### `list`
@@ -41,8 +41,8 @@ npm run commonspace -- info --path apps/playground --json
 Lists catalog entries, optionally by kind.
 
 ```bash
-npm run commonspace -- list --kind component --json
-npm run commonspace -- list --kind pattern --json
+npm run popcandy -- list --kind component --json
+npm run popcandy -- list --kind pattern --json
 ```
 
 ### `search`
@@ -50,7 +50,7 @@ npm run commonspace -- list --kind pattern --json
 Searches names, summaries, keywords, tags, and usage guidance. Results are scored and bounded.
 
 ```bash
-npm run commonspace -- search "moderation queue" --limit 10 --json
+npm run popcandy -- search "moderation queue" --limit 10 --json
 ```
 
 ### `get`
@@ -58,8 +58,8 @@ npm run commonspace -- search "moderation queue" --limit 10 --json
 Returns the exact metadata for a stable ID or known name.
 
 ```bash
-npm run commonspace -- get ui.dialog --json
-npm run commonspace -- get pattern.social-feed --json
+npm run popcandy -- get ui.dialog --json
+npm run popcandy -- get pattern.social-feed --json
 ```
 
 Unknown entries fail instead of returning an approximate component.
@@ -69,7 +69,7 @@ Unknown entries fail instead of returning an approximate component.
 Converts a natural-language interface request into a bounded assembly plan.
 
 ```bash
-npm run commonspace -- compose \
+npm run popcandy -- compose \
   "profile settings with loading, error, empty, disabled, and pending states" \
   --json
 ```
@@ -90,12 +90,12 @@ It is a deterministic retrieval and planning operation, not generated applicatio
 Scans a project for design-system integration failures.
 
 ```bash
-npm run commonspace -- validate --path apps/playground --json
+npm run popcandy -- validate --path apps/playground --json
 ```
 
 Current checks include:
 
-- private or unknown Commonspace imports;
+- private or unknown Unpopping Candy imports;
 - source and `dist` deep imports;
 - hardcoded visual values that bypass tokens;
 - required style setup and project metadata through `doctor`.
@@ -107,7 +107,7 @@ Validation output uses stable issue codes, severity, file, line, message, and gu
 Reports installation and configuration prerequisites without modifying the project.
 
 ```bash
-npm run commonspace -- doctor --path . --json
+npm run popcandy -- doctor --path . --json
 ```
 
 ### `scaffold`
@@ -117,7 +117,7 @@ Plans or applies a Registry template.
 Dry-run is mandatory by default:
 
 ```bash
-npm run commonspace -- scaffold template.profile-settings \
+npm run popcandy -- scaffold template.profile-settings \
   --path ./consumer-app \
   --target src/profile \
   --json
@@ -126,7 +126,7 @@ npm run commonspace -- scaffold template.profile-settings \
 Apply only after reviewing the full plan:
 
 ```bash
-npm run commonspace -- scaffold template.profile-settings \
+npm run popcandy -- scaffold template.profile-settings \
   --path ./consumer-app \
   --target src/profile \
   --apply \

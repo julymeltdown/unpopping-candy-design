@@ -3,15 +3,15 @@ export default {
   "kind": "component",
   "id": "social.profile-header",
   "name": "ProfileHeader",
-  "package": "@commonspace/social",
+  "package": "@unpopping-candy/social",
   "version": "0.1.0",
   "status": "stable",
   "category": "profile",
   "summary": "Presents a curator or user profile summary with injected primary and secondary actions.",
   "sourcePath": "packages/social/src/profile/profile-header.tsx",
   "entrypoints": [
-    "@commonspace/social",
-    "@commonspace/social/profile"
+    "@unpopping-candy/social",
+    "@unpopping-candy/social/profile"
   ],
   "keywords": [
     "profile",
@@ -26,10 +26,10 @@ export default {
     "A compact list row is sufficient; use UserCell."
   ],
   "tokens": [
-    "--cs-surface",
-    "--cs-border",
-    "--cs-ink",
-    "--cs-ink-muted"
+    "--popcandy-surface",
+    "--popcandy-border",
+    "--popcandy-ink",
+    "--popcandy-ink-muted"
   ],
   "related": [
     "social.user-cell",

@@ -1,8 +1,8 @@
 {
-  "name": "@commonspace/theme",
+  "name": "@unpopping-candy/theme",
   "version": "0.1.0",
-  "description": "Theme and density scoping for Commonspace UI.",
-  "license": "UNLICENSED",
+  "description": "Theme and density scoping for Unpopping Candy.",
+  "license": "MIT",
   "type": "module",
   "files": ["dist", "README.md"],
   "sideEffects": false,
@@ -20,7 +20,7 @@
     "react-dom": ">=18.3 <20"
   },
   "dependencies": {
-    "@commonspace/tokens": "workspace:^"
+    "@unpopping-candy/tokens": "workspace:^"
   },
   "devDependencies": {
     "@types/react": "19.2.14",

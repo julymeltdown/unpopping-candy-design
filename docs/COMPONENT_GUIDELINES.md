@@ -37,7 +37,7 @@ Do not create a public component solely to wrap one `<div>` with no semantic con
 
 ## Package placement
 
-### `@commonspace/ui`
+### `@unpopping-candy/ui`
 
 Use for product-independent primitives and styled controls.
 
@@ -54,11 +54,11 @@ JWT
 API URLs
 ```
 
-### `@commonspace/social`
+### `@unpopping-candy/social`
 
 Use for social and content presentation models. It may understand a social `Post` view model, but not the backend DTO, Query cache, or route.
 
-### `@commonspace/icons`
+### `@unpopping-candy/icons`
 
 Use semantic product names. Components should not import Ant Design icon implementation names directly when a semantic wrapper exists.
 
@@ -113,8 +113,8 @@ A focused convenience component may wrap a frequent composition, but the semanti
 Expose root and justified subpath imports through `package.json` exports.
 
 ```tsx
-import { Button } from '@commonspace/ui';
-import { Button } from '@commonspace/ui/button';
+import { Button } from '@unpopping-candy/ui';
+import { Button } from '@unpopping-candy/ui/button';
 ```
 
 Never document source or `dist` internals.
@@ -126,11 +126,11 @@ Never document source or `dist` internals.
 Use semantic and component tokens.
 
 ```css
-.cs-button {
-  min-block-size: var(--cs-button-height-md);
-  color: var(--cs-ink);
-  background: var(--cs-surface);
-  border: 1px solid var(--cs-border);
+.popcandy-button {
+  min-block-size: var(--popcandy-button-height-md);
+  color: var(--popcandy-ink);
+  background: var(--popcandy-surface);
+  border: 1px solid var(--popcandy-border);
 }
 ```
 
@@ -139,9 +139,9 @@ Do not introduce a new token when an existing semantic token expresses the same 
 ### Namespace
 
 ```text
-classes            .cs-*
+classes            .popcandy-*
 state helpers      .is-*
-custom properties  --cs-*
+custom properties  --popcandy-*
 ```
 
 ### State attributes
@@ -150,10 +150,10 @@ Expose stable state hooks where useful.
 
 ```html
 <button
-  data-cs-component="button"
-  data-cs-size="md"
-  data-cs-variant="primary"
-  data-cs-state="pending"
+  data-popcandy-component="button"
+  data-popcandy-size="md"
+  data-popcandy-variant="primary"
+  data-popcandy-state="pending"
 >
 ```
 
@@ -173,7 +173,7 @@ Define before implementation:
 - reduced-motion behavior;
 - reflow and touch-target behavior.
 
-Use native HTML first. For complex composites, the public Commonspace API may wrap an internal accessible primitive library, but consumers must not depend on that internal library.
+Use native HTML first. For complex composites, the public Unpopping Candy API may wrap an internal accessible primitive library, but consumers must not depend on that internal library.
 
 ## Component-adjacent knowledge metadata
 
@@ -209,15 +209,15 @@ export default defineComponentDoc({
   id: 'ui.button',
   name: 'Button',
   kind: 'component',
-  package: '@commonspace/ui',
+  package: '@unpopping-candy/ui',
   version: '0.1.0',
   status: 'stable',
   summary: 'Triggers an immediate user action.',
   useWhen: ['The user can perform a clear immediate action.'],
   avoidWhen: ['Navigation is the actual behavior; use a link.'],
-  entrypoints: ['@commonspace/ui', '@commonspace/ui/button'],
+  entrypoints: ['@unpopping-candy/ui', '@unpopping-candy/ui/button'],
   states: ['default', 'hover', 'focus', 'disabled', 'pending'],
-  tokens: ['--cs-button-height-md', '--cs-accent', '--cs-focus-ring'],
+  tokens: ['--popcandy-button-height-md', '--popcandy-accent', '--popcandy-focus-ring'],
   accessibility: {
     requirements: [
       'Use a visible label unless IconButton is intended.',
@@ -259,7 +259,7 @@ Public component changes can alter agent-output validation. Review:
 - Story IDs;
 - generated docs and Figma templates.
 
-Do not introduce a second static prop table in `@commonspace/evals` or another AI package.
+Do not introduce a second static prop table in `@unpopping-candy/evals` or another AI package.
 
 ## Testing
 
@@ -298,7 +298,7 @@ major
 
 - [ ] responsibility and package boundary are clear;
 - [ ] typed public API and ref/native behavior are correct;
-- [ ] CSS uses Commonspace tokens and namespaces;
+- [ ] CSS uses Unpopping Candy tokens and namespaces;
 - [ ] accessible semantics and keyboard behavior are defined;
 - [ ] adjacent metadata exists;
 - [ ] Storybook contract exists;

@@ -1,8 +1,8 @@
 {
-  "name": "@commonspace/mcp",
+  "name": "@unpopping-candy/mcp",
   "version": "0.2.0",
-  "description": "MCP resources, bounded discovery tools, validation, and guarded registry actions for Commonspace UI.",
-  "license": "UNLICENSED",
+  "description": "MCP resources, bounded discovery tools, validation, and guarded registry actions for Unpopping Candy.",
+  "license": "MIT",
   "type": "module",
   "files": [
     "dist",
@@ -10,7 +10,7 @@
   ],
   "sideEffects": false,
   "bin": {
-    "commonspace-mcp": "./dist/stdio.js"
+    "popcandy-mcp": "./dist/stdio.js"
   },
   "exports": {
     ".": {
@@ -22,12 +22,12 @@
     "access": "public"
   },
   "dependencies": {
-    "@commonspace/cli": "workspace:^",
-    "@commonspace/knowledge": "workspace:^",
-    "@commonspace/tokens": "workspace:^",
+    "@unpopping-candy/cli": "workspace:^",
+    "@unpopping-candy/knowledge": "workspace:^",
+    "@unpopping-candy/tokens": "workspace:^",
     "@modelcontextprotocol/server": "2.0.0",
     "zod": "4.4.3",
-    "@commonspace/registry": "workspace:^"
+    "@unpopping-candy/registry": "workspace:^"
   },
   "devDependencies": {
     "@types/node": "24.3.0"

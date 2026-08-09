@@ -1,4 +1,4 @@
-import type { ComponentDoc, KnowledgeCatalog } from '@commonspace/knowledge';
+import type { ComponentDoc, KnowledgeCatalog } from '@unpopping-candy/knowledge';
 import type {
   FigmaComponentMapping,
   FigmaIntegrationConfig,
@@ -23,7 +23,7 @@ function placeholderNodeUrl(config: FigmaIntegrationConfig, index: number): stri
 }
 
 function isPlaceholderUrl(value: string): boolean {
-  return value.includes('COMMONSPACE_LIBRARY') || /[?&]node-id=0-(?:\d+)(?:&|$)/.test(value);
+  return value.includes('POPCANDY_LIBRARY') || /[?&]node-id=0-(?:\d+)(?:&|$)/.test(value);
 }
 
 function defaultPropertyMap(component: ComponentDoc): Readonly<Record<string, string>> {

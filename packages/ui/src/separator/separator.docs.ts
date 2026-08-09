@@ -3,15 +3,15 @@ export default {
   "kind": "component",
   "id": "ui.separator",
   "name": "Separator",
-  "package": "@commonspace/ui",
+  "package": "@unpopping-candy/ui",
   "version": "0.1.0",
   "status": "stable",
   "category": "layout",
   "summary": "Separates adjacent regions when spacing alone cannot communicate the boundary.",
   "sourcePath": "packages/ui/src/separator/separator.tsx",
   "entrypoints": [
-    "@commonspace/ui",
-    "@commonspace/ui/layout"
+    "@unpopping-candy/ui",
+    "@unpopping-candy/ui/layout"
   ],
   "keywords": [
     "separator",
@@ -25,7 +25,7 @@ export default {
     "The rule is decorative only and adds visual noise."
   ],
   "tokens": [
-    "--cs-border"
+    "--popcandy-border"
   ],
   "related": [
     "ui.stack",

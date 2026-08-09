@@ -1,10 +1,10 @@
-# @commonspace/social
+# @unpopping-candy/social
 
 API-agnostic social presentation patterns.
 
 ```tsx
-import '@commonspace/social/styles.css';
-import { PostCard, type SocialPostViewModel } from '@commonspace/social';
+import '@unpopping-candy/social/styles.css';
+import { PostCard, type SocialPostViewModel } from '@unpopping-candy/social';
 
 const post: SocialPostViewModel = mapApiPost(apiPost);
 <PostCard post={post} onLike={() => likePost(post.id)} />;

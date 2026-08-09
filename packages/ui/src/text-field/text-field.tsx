@@ -33,14 +33,14 @@ export const TextField = forwardRef<HTMLInputElement, TextFieldProps>(
 
     return (
       <label
-        className={mergeClassNames('cs-field', className)}
+        className={mergeClassNames('popcandy-field', className)}
         htmlFor={id}
-        data-cs-component="text-field"
-        data-cs-state={error ? 'invalid' : props.disabled ? 'disabled' : 'valid'}
+        data-popcandy-component="text-field"
+        data-popcandy-state={error ? 'invalid' : props.disabled ? 'disabled' : 'valid'}
       >
-        <span className={hideLabel ? 'cs-visually-hidden' : 'cs-field__label'}>{label}</span>
-        <span className={mergeClassNames('cs-field__control', error && 'is-invalid')}>
-          {leadingIcon ? <span className="cs-field__icon">{leadingIcon}</span> : null}
+        <span className={hideLabel ? 'popcandy-visually-hidden' : 'popcandy-field__label'}>{label}</span>
+        <span className={mergeClassNames('popcandy-field__control', error && 'is-invalid')}>
+          {leadingIcon ? <span className="popcandy-field__icon">{leadingIcon}</span> : null}
           <input
             {...props}
             ref={ref}
@@ -48,10 +48,10 @@ export const TextField = forwardRef<HTMLInputElement, TextFieldProps>(
             aria-invalid={Boolean(error) || undefined}
             aria-describedby={describedBy}
           />
-          {trailingElement ? <span className="cs-field__trailing">{trailingElement}</span> : null}
+          {trailingElement ? <span className="popcandy-field__trailing">{trailingElement}</span> : null}
         </span>
-        {description ? <span id={descriptionId} className="cs-field__description">{description}</span> : null}
-        {error ? <span id={errorId} className="cs-field__error" role="alert">{error}</span> : null}
+        {description ? <span id={descriptionId} className="popcandy-field__description">{description}</span> : null}
+        {error ? <span id={errorId} className="popcandy-field__error" role="alert">{error}</span> : null}
       </label>
     );
   },

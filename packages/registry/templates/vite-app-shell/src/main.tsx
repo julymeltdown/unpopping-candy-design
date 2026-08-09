@@ -1,10 +1,10 @@
 import { StrictMode } from 'react';
 import { createRoot } from 'react-dom/client';
-import { CommonspaceProvider } from '@commonspace/theme';
-import { FeedbackProvider } from '@commonspace/ui';
-import '@commonspace/tokens/styles.css';
-import '@commonspace/icons/styles.css';
-import '@commonspace/ui/styles.css';
+import { UnpoppingCandyProvider } from '@unpopping-candy/theme';
+import { FeedbackProvider } from '@unpopping-candy/ui';
+import '@unpopping-candy/tokens/styles.css';
+import '@unpopping-candy/icons/styles.css';
+import '@unpopping-candy/ui/styles.css';
 import './styles.css';
 import { App } from './app';
 
@@ -13,10 +13,10 @@ if (!root) throw new Error('Expected #root application mount.');
 
 createRoot(root).render(
   <StrictMode>
-    <CommonspaceProvider scope="document" theme="system" density="comfortable">
+    <UnpoppingCandyProvider scope="document" theme="system" density="comfortable">
       <FeedbackProvider>
         <App />
       </FeedbackProvider>
-    </CommonspaceProvider>
+    </UnpoppingCandyProvider>
   </StrictMode>,
 );

@@ -3,15 +3,15 @@ export default {
   "kind": "component",
   "id": "ui.skeleton",
   "name": "Skeleton",
-  "package": "@commonspace/ui",
+  "package": "@unpopping-candy/ui",
   "version": "0.1.0",
   "status": "stable",
   "category": "loading",
   "summary": "Reserves stable geometry while content is loading.",
   "sourcePath": "packages/ui/src/skeleton/skeleton.tsx",
   "entrypoints": [
-    "@commonspace/ui",
-    "@commonspace/ui/loading"
+    "@unpopping-candy/ui",
+    "@unpopping-candy/ui/loading"
   ],
   "keywords": [
     "skeleton",
@@ -25,8 +25,8 @@ export default {
     "The operation is immediate or the layout is unknown; use Spinner or a simple pending label."
   ],
   "tokens": [
-    "--cs-surface-muted",
-    "--cs-motion-slow"
+    "--popcandy-surface-muted",
+    "--popcandy-motion-slow"
   ],
   "related": [
     "ui.spinner",

@@ -1,17 +1,17 @@
 # ToastViewport
 
-> `ui.toast-viewport` · `@commonspace/ui` · stable · version 0.1.0
+> `ui.toast-viewport` · `@unpopping-candy/ui` · stable · version 0.1.0
 
 Positions and announces the bounded stack of global feedback items.
 
 ## Import
 
 ```tsx
-import { ToastViewport } from '@commonspace/ui';
+import { ToastViewport } from '@unpopping-candy/ui';
 ```
 
 ```tsx
-import { ToastViewport } from '@commonspace/ui/feedback';
+import { ToastViewport } from '@unpopping-candy/ui/feedback';
 ```
 
 ## Use when
@@ -41,8 +41,8 @@ import { ToastViewport } from '@commonspace/ui/feedback';
 
 ## Tokens
 
-- `--cs-dialog-width-sm`
-- `--cs-space-4`
+- `--popcandy-dialog-width-sm`
+- `--popcandy-space-4`
 
 ## Props
 

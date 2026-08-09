@@ -3,15 +3,15 @@ export default {
   "kind": "component",
   "id": "ui.toast-viewport",
   "name": "ToastViewport",
-  "package": "@commonspace/ui",
+  "package": "@unpopping-candy/ui",
   "version": "0.1.0",
   "status": "stable",
   "category": "feedback",
   "summary": "Positions and announces the bounded stack of global feedback items.",
   "sourcePath": "packages/ui/src/feedback/toast.tsx",
   "entrypoints": [
-    "@commonspace/ui",
-    "@commonspace/ui/feedback"
+    "@unpopping-candy/ui",
+    "@unpopping-candy/ui/feedback"
   ],
   "keywords": [
     "toast",
@@ -26,8 +26,8 @@ export default {
     "A page needs a custom notification center."
   ],
   "tokens": [
-    "--cs-dialog-width-sm",
-    "--cs-space-4"
+    "--popcandy-dialog-width-sm",
+    "--popcandy-space-4"
   ],
   "related": [
     "ui.feedback-provider",

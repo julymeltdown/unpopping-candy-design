@@ -6,16 +6,16 @@ export interface QuotedPostProps { post: SocialPostSummary; onOpen?: (() => void
 function QuotedPostContent({ post }: { post: SocialPostSummary }): ReactNode {
   return (
     <>
-      <span className="cs-quoted-post__identity"><strong>{post.author.displayName}</strong><span>@{post.author.handle}</span></span>
-      <span className="cs-quoted-post__text">{post.text}</span>
+      <span className="popcandy-quoted-post__identity"><strong>{post.author.displayName}</strong><span>@{post.author.handle}</span></span>
+      <span className="popcandy-quoted-post__text">{post.text}</span>
       <PostMediaGrid media={post.media.slice(0, 1)} />
     </>
   );
 }
 export function QuotedPost({ onOpen, post }: QuotedPostProps) {
   return onOpen ? (
-    <button type="button" className="cs-quoted-post" onClick={onOpen}><QuotedPostContent post={post} /></button>
+    <button type="button" className="popcandy-quoted-post" onClick={onOpen}><QuotedPostContent post={post} /></button>
   ) : (
-    <div className="cs-quoted-post cs-quoted-post--static"><QuotedPostContent post={post} /></div>
+    <div className="popcandy-quoted-post popcandy-quoted-post--static"><QuotedPostContent post={post} /></div>
   );
 }

@@ -46,7 +46,7 @@ function frontmatter(catalog: KnowledgeCatalog, tokens: Record<string, unknown>)
     '---',
     'schema: "https://designmd.org/spec/0.1"',
     `version: "${catalog.packageVersion}"`,
-    'name: "Commonspace UI"',
+    'name: "Unpopping Candy"',
     'description: "AI-operable React design system for content-rich, social, editorial, and community products."',
     'sourceOfTruth: "agent/manifests/catalog.json"',
     'generated: true',
@@ -68,11 +68,11 @@ function frontmatter(catalog: KnowledgeCatalog, tokens: Record<string, unknown>)
     '  supported: ["comfortable", "compact"]',
     'themes: ["light", "dark", "system", "high-contrast"]',
     'packages:',
-    '  - "@commonspace/tokens"',
-    '  - "@commonspace/theme"',
-    '  - "@commonspace/icons"',
-    '  - "@commonspace/ui"',
-    '  - "@commonspace/social"',
+    '  - "@unpopping-candy/tokens"',
+    '  - "@unpopping-candy/theme"',
+    '  - "@unpopping-candy/icons"',
+    '  - "@unpopping-candy/ui"',
+    '  - "@unpopping-candy/social"',
     `stableComponents: ${catalog.entries.filter((entry) => entry.kind === 'component' && entry.status === 'stable').length}`,
     '---',
   ].join('\n');
@@ -84,20 +84,20 @@ export function generateDesignMarkdown(catalog: KnowledgeCatalog, tokens: Record
   const templates = catalog.entries.filter((entry): entry is TemplateDoc => entry.kind === 'template');
   return `${frontmatter(catalog, tokens)}
 
-# Commonspace UI Design Contract
+# Unpopping Candy Design Contract
 
-Commonspace UI is a reusable React design system for content-rich, social, editorial, and community products. This file is generated from component-adjacent metadata and token manifests. Do not edit generated sections by hand; update the canonical \`*.docs.ts\` entry and run \`npm run agent:generate\`.
+Unpopping Candy is a reusable React design system for content-rich, social, editorial, and community products. This file is generated from component-adjacent metadata and token manifests. Do not edit generated sections by hand; update the canonical \`*.docs.ts\` entry and run \`npm run agent:generate\`.
 
 ## Agent operating contract
 
-1. Detect the project and installed Commonspace versions before generating code.
+1. Detect the project and installed Unpopping Candy versions before generating code.
 2. Search existing components, patterns, and templates before inventing a new surface.
 3. Import only documented public entrypoints; never import \`src\` or package internals.
 4. Keep remote state, routing, authentication, and application workflow outside visual packages.
-5. Use Commonspace tokens instead of hardcoded color, spacing, radius, shadow, or motion values.
+5. Use Unpopping Candy tokens instead of hardcoded color, spacing, radius, shadow, or motion values.
 6. Cover loading, empty, populated, error, disabled, pending, and responsive states when they apply.
 7. Generate or update a Storybook story and run accessibility and interaction checks.
-8. Run \`commonspace validate\` before presenting the result.
+8. Run \`popcandy validate\` before presenting the result.
 
 ## System promise
 
@@ -122,11 +122,11 @@ Commonspace UI is a reusable React design system for content-rich, social, edito
 
 | Package | Responsibility | Must not own |
 |---|---|---|
-| \`@commonspace/tokens\` | Reference, semantic, and component tokens | React state or product behavior |
-| \`@commonspace/theme\` | Theme, density, accent, and scope | Product data |
-| \`@commonspace/icons\` | Semantic icon names backed by Ant Design Icons | Product-specific actions |
-| \`@commonspace/ui\` | Product-independent accessible components | Network, router, cache, auth |
-| \`@commonspace/social\` | API-independent social presentation models and patterns | Fetching, mutations, application state |
+| \`@unpopping-candy/tokens\` | Reference, semantic, and component tokens | React state or product behavior |
+| \`@unpopping-candy/theme\` | Theme, density, accent, and scope | Product data |
+| \`@unpopping-candy/icons\` | Semantic icon names backed by Ant Design Icons | Product-specific actions |
+| \`@unpopping-candy/ui\` | Product-independent accessible components | Network, router, cache, auth |
+| \`@unpopping-candy/social\` | API-independent social presentation models and patterns | Fetching, mutations, application state |
 
 Authentication, server state, Feature-Sliced Design application code, API clients, and backend services belong to the separate application kit.
 
@@ -134,7 +134,7 @@ Authentication, server state, Feature-Sliced Design application code, API client
 
 ### Color
 
-Use semantic variables such as \`--cs-canvas\`, \`--cs-surface\`, \`--cs-ink\`, \`--cs-border\`, \`--cs-accent\`, \`--cs-positive\`, \`--cs-warning\`, and \`--cs-critical\`. Reference colors are implementation inputs; product code should normally consume semantic roles.
+Use semantic variables such as \`--popcandy-canvas\`, \`--popcandy-surface\`, \`--popcandy-ink\`, \`--popcandy-border\`, \`--popcandy-accent\`, \`--popcandy-positive\`, \`--popcandy-warning\`, and \`--popcandy-critical\`. Reference colors are implementation inputs; product code should normally consume semantic roles.
 
 ### Typography
 
@@ -142,11 +142,11 @@ Use the sans stack for interface and content text. Use the mono stack only for i
 
 ### Spacing and layout
 
-Use the \`--cs-space-*\` scale and the Stack, Inline, Container, Surface, and Separator primitives. Do not create arbitrary one-off margins when a composition primitive expresses the relationship.
+Use the \`--popcandy-space-*\` scale and the Stack, Inline, Container, Surface, and Separator primitives. Do not create arbitrary one-off margins when a composition primitive expresses the relationship.
 
 ### Motion
 
-Use \`--cs-motion-fast\`, \`--cs-motion-normal\`, and \`--cs-motion-slow\` with the shared easing variables. Motion explains state change; it must not delay task completion and must respect reduced-motion preferences.
+Use \`--popcandy-motion-fast\`, \`--popcandy-motion-normal\`, and \`--popcandy-motion-slow\` with the shared easing variables. Motion explains state change; it must not delay task completion and must respect reduced-motion preferences.
 
 ## Stable components
 
@@ -184,8 +184,8 @@ Use specific verbs and name the affected object. For failures, state what failed
 
 ## Do not
 
-- Import from \`@commonspace/*/src/*\`.
-- Fetch, navigate, authenticate, or mutate inside \`@commonspace/ui\` or \`@commonspace/social\`.
+- Import from \`@unpopping-candy/*/src/*\`.
+- Fetch, navigate, authenticate, or mutate inside \`@unpopping-candy/ui\` or \`@unpopping-candy/social\`.
 - Hardcode brand colors, spacing, radius, shadows, or motion durations.
 - invent component props or component names.
 - Treat a static screenshot as functional UI.
@@ -194,13 +194,13 @@ Use specific verbs and name the affected object. For failures, state what failed
 ## AI workflow
 
 \`\`\`text
-commonspace info --json
-→ commonspace search "<task>" --json
-→ commonspace compose "<task>" --json
+popcandy info --json
+→ popcandy search "<task>" --json
+→ popcandy compose "<task>" --json
 → inspect selected component and pattern guidance
 → scaffold or implement with public imports
 → create/update Storybook stories
-→ commonspace validate --json
+→ popcandy validate --json
 → Storybook interaction and accessibility checks
 \`\`\`
 
@@ -326,7 +326,7 @@ export function generateLlmsFiles(catalog: KnowledgeCatalog, tokens: Record<stri
   const patterns = catalog.entries.filter((entry): entry is PatternDoc => entry.kind === 'pattern');
   const templates = catalog.entries.filter((entry): entry is TemplateDoc => entry.kind === 'template');
   const migrations = catalog.entries.filter((entry): entry is MigrationDoc => entry.kind === 'migration');
-  const index = `# Commonspace UI
+  const index = `# Unpopping Candy
 
 > AI-operable React design system for content-rich and social products. Version ${catalog.packageVersion}.
 
@@ -347,25 +347,25 @@ export function generateLlmsFiles(catalog: KnowledgeCatalog, tokens: Record<stri
 3. Compose from existing patterns and templates.
 4. Validate imports, props, tokens, states, and accessibility.
 `;
-  const small = `# Commonspace UI — compact agent context
+  const small = `# Unpopping Candy — compact agent context
 
 Version: ${catalog.packageVersion}
 
-- Public packages: @commonspace/tokens, @commonspace/theme, @commonspace/icons, @commonspace/ui, @commonspace/social.
+- Public packages: @unpopping-candy/tokens, @unpopping-candy/theme, @unpopping-candy/icons, @unpopping-candy/ui, @unpopping-candy/social.
 - Visual packages never fetch, route, authenticate, or own remote state.
 - Use semantic tokens and public entrypoints only.
 - Search before generating. Cover loading, empty, error, disabled, pending, mobile, dark, and high-contrast states.
-- Run commonspace validate and Storybook checks.
+- Run popcandy validate and Storybook checks.
 
 Stable components: ${components.map((component) => component.id).join(', ')}
 
 Patterns: ${patterns.map((pattern) => pattern.id).join(', ')}
 `;
-  const componentsText = `# Commonspace UI components
+  const componentsText = `# Unpopping Candy components
 
 ${components.map(entryIndexLine).join('\n')}
 `;
-  const patternsText = `# Commonspace UI patterns
+  const patternsText = `# Unpopping Candy patterns
 
 ${patterns.map(entryIndexLine).join('\n')}
 
@@ -373,13 +373,13 @@ ${patterns.map(entryIndexLine).join('\n')}
 
 ${templates.map(entryIndexLine).join('\n')}
 `;
-  const tokenText = `# Commonspace UI tokens
+  const tokenText = `# Unpopping Candy tokens
 
 Use semantic and component tokens instead of hardcoded visual values.
 
 ${fenced(stableStringify(tokens), 'json')}
 `;
-  const migrationText = `# Commonspace UI migrations
+  const migrationText = `# Unpopping Candy migrations
 
 ${migrations.map((migration) => `## ${migration.name}\n\n${migration.summary}\n\n${migration.changes.map((change) => `- **${titleCase(change.kind)}:** \`${change.from}\`${change.to ? ` → \`${change.to}\`` : ''}. ${change.guidance}`).join('\n')}`).join('\n\n')}
 `;

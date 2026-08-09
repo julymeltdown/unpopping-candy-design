@@ -3,15 +3,15 @@ export default {
   "kind": "component",
   "id": "social.post-card-skeleton",
   "name": "PostCardSkeleton",
-  "package": "@commonspace/social",
+  "package": "@unpopping-candy/social",
   "version": "0.1.0",
   "status": "stable",
   "category": "loading",
   "summary": "Reserves the expected geometry of a PostCard while timeline data loads.",
   "sourcePath": "packages/social/src/post-card/post-card-skeleton.tsx",
   "entrypoints": [
-    "@commonspace/social",
-    "@commonspace/social/post"
+    "@unpopping-candy/social",
+    "@unpopping-candy/social/post"
   ],
   "keywords": [
     "post",
@@ -26,7 +26,7 @@ export default {
     "Existing posts are available and only another page is loading."
   ],
   "tokens": [
-    "--cs-surface-muted"
+    "--popcandy-surface-muted"
   ],
   "related": [
     "social.post-card",

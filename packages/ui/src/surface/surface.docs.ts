@@ -3,15 +3,15 @@ export default {
   "kind": "component",
   "id": "ui.surface",
   "name": "Surface",
-  "package": "@commonspace/ui",
+  "package": "@unpopping-candy/ui",
   "version": "0.1.0",
   "status": "stable",
   "category": "layout",
   "summary": "Creates a semantic background and boundary without prescribing product content.",
   "sourcePath": "packages/ui/src/surface/surface.tsx",
   "entrypoints": [
-    "@commonspace/ui",
-    "@commonspace/ui/layout"
+    "@unpopping-candy/ui",
+    "@unpopping-candy/ui/layout"
   ],
   "keywords": [
     "surface",
@@ -27,10 +27,10 @@ export default {
     "Whitespace and a divider communicate the boundary better."
   ],
   "tokens": [
-    "--cs-surface",
-    "--cs-surface-muted",
-    "--cs-border",
-    "--cs-shadow-dialog"
+    "--popcandy-surface",
+    "--popcandy-surface-muted",
+    "--popcandy-border",
+    "--popcandy-shadow-dialog"
   ],
   "related": [
     "ui.container",

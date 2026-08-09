@@ -23,27 +23,27 @@ export const TextArea = forwardRef<HTMLTextAreaElement, TextAreaProps>(
 
     return (
       <label
-        className={mergeClassNames('cs-field', className)}
+        className={mergeClassNames('popcandy-field', className)}
         htmlFor={id}
-        data-cs-component="text-area"
-        data-cs-state={error ? 'invalid' : props.disabled ? 'disabled' : 'valid'}
+        data-popcandy-component="text-area"
+        data-popcandy-state={error ? 'invalid' : props.disabled ? 'disabled' : 'valid'}
       >
-        <span className={hideLabel ? 'cs-visually-hidden' : 'cs-field__label'}>{label}</span>
+        <span className={hideLabel ? 'popcandy-visually-hidden' : 'popcandy-field__label'}>{label}</span>
         <textarea
           {...props}
           ref={ref}
           id={id}
-          className={mergeClassNames('cs-text-area', error && 'is-invalid')}
+          className={mergeClassNames('popcandy-text-area', error && 'is-invalid')}
           aria-invalid={Boolean(error) || undefined}
           aria-describedby={describedBy}
         />
-        {description ? <span id={descriptionId} className="cs-field__description">{description}</span> : null}
-        <span className="cs-field__meta-row">
-          {error ? <span id={errorId} className="cs-field__error" role="alert">{error}</span> : <span />}
+        {description ? <span id={descriptionId} className="popcandy-field__description">{description}</span> : null}
+        <span className="popcandy-field__meta-row">
+          {error ? <span id={errorId} className="popcandy-field__error" role="alert">{error}</span> : <span />}
           {counter ? (
             <span
               id={counterId}
-              className={mergeClassNames('cs-field__counter', counter.current > counter.maximum && 'is-over-limit')}
+              className={mergeClassNames('popcandy-field__counter', counter.current > counter.maximum && 'is-over-limit')}
               aria-live="polite"
             >
               {counter.current}/{counter.maximum}

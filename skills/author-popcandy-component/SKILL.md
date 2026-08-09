@@ -1,17 +1,17 @@
 ---
-name: author-commonspace-component
-description: Use when adding or materially changing a public Commonspace UI or social component, including its API, metadata, stories, tests, documentation, and release record.
-license: UNLICENSED
-compatibility: Requires the Commonspace UI monorepo and Node.js 22+.
+name: author-popcandy-component
+description: Use when adding or materially changing a public Unpopping Candy or social component, including its API, metadata, stories, tests, documentation, and release record.
+license: MIT
+compatibility: Requires the Unpopping Candy monorepo and Node.js 22+.
 metadata:
-  author: Commonspace
+  author: Unpopping Candy
   version: "0.2.0"
 allowed-tools: Bash Read Grep Glob
 ---
 
-# Author a Commonspace component
+# Author a Unpopping Candy component
 
-1. Run `commonspace search "<responsibility>" --json` and prove an existing component, variant, pattern, or composition cannot express the reusable responsibility.
+1. Run `popcandy search "<responsibility>" --json` and prove an existing component, variant, pattern, or composition cannot express the reusable responsibility.
 2. Define purpose, use conditions, avoid conditions, controlled state, native element contract, accessibility, tokens, and package boundary before writing implementation code.
 3. Write a failing behavior or contract test.
 4. Implement the smallest API that passes. Preserve native props and ref behavior where practical.

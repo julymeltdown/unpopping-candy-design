@@ -4,9 +4,9 @@ export const iconRegistry = {
   ArrowUpIcon: 'ArrowUpOutlined',
   BellIcon: 'BellOutlined',
   BookIcon: 'BookOutlined',
-  BookmarkFilledIcon: 'BookmarkFilled',
-  BookmarkIcon: 'BookmarkOutlined',
-  BookmarksIcon: 'BookmarksOutlined',
+  BookmarkFilledIcon: 'TagFilled',
+  BookmarkIcon: 'TagOutlined',
+  BookmarksIcon: 'TagsOutlined',
   CalendarIcon: 'CalendarOutlined',
   CheckCircleFilledIcon: 'CheckCircleFilled',
   CheckIcon: 'CheckOutlined',
@@ -47,4 +47,4 @@ export const iconRegistry = {
   WarningIcon: 'WarningOutlined',
 } as const;
 
-export type CommonspaceIconName = keyof typeof iconRegistry;
+export type UnpoppingCandyIconName = keyof typeof iconRegistry;
