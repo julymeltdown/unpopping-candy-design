@@ -93,3 +93,62 @@ A migration is complete when:
 - theme attributes are set by the Provider or bootstrap contract;
 - package builds and consumer fixture pass;
 - no JWT, Query, Router, SWR, or Zustand dependency enters a design package.
+
+## AI-assisted migration workflow
+
+The portable migration Skill and the CLI use the same versioned catalog as the human documentation. Begin with project detection rather than asking an agent to infer package versions or component names.
+
+```bash
+commonspace info --path . --json
+commonspace search "profile settings" --kind pattern --json
+commonspace compose "migrate the profile route without changing data behavior" --json
+```
+
+The recommended migration order is:
+
+```text
+1. Detect the project and installed Commonspace versions.
+2. Inventory current primitives, tokens, layouts, and state ownership.
+3. Replace the application shell and token imports first.
+4. Migrate one route or bounded surface at a time.
+5. Map API DTOs to Commonspace presentation models at the application boundary.
+6. Preserve Query, Router, form, auth, and business behavior in the application.
+7. Add loading, empty, error, disabled, pending, and success stories.
+8. Run Commonspace validation and Storybook accessibility and interaction checks.
+```
+
+Use the migration Skill when the agent client supports Agent Skills:
+
+```text
+skills/migrate-to-commonspace/SKILL.md
+```
+
+For MCP clients, use the `migrate-interface` prompt and the bounded tools in this order:
+
+```text
+commonspace_project_info
+→ commonspace_search
+→ commonspace_compose
+→ commonspace_get
+→ implement route slice
+→ commonspace_validate
+→ Storybook test
+```
+
+Do not allow an AI migration to:
+
+- move server state into the design package;
+- replace application DTOs with presentation models inside the API layer;
+- import package `src` paths;
+- invent component props or undocumented variants;
+- replace product behavior merely to match a visual example;
+- migrate the entire application in one unreviewable change.
+
+A Registry template may be scaffolded only after a dry-run plan has been reviewed:
+
+```bash
+commonspace scaffold social-feed --path . --target-directory src/ui --json
+commonspace scaffold social-feed --path . --target-directory src/ui --apply --json
+```
+
+Existing different files are never overwritten. Template checksums and path boundaries are verified by the Registry service before any write.
