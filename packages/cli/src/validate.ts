@@ -8,12 +8,72 @@ const SKIP_DIRECTORIES = new Set(['.git', 'node_modules', 'dist', 'build', '.nex
 const COLOR_PATTERN = /(?:#[0-9a-f]{3,8}\b|\brgba?\s*\(|\bhsla?\s*\()/gi;
 const DEEP_IMPORT_PATTERN = /@commonspace\/[a-z-]+\/(?:src|dist)\//g;
 
-async function collectSourceFiles(root: string): Promise<string[]> {
+interface ProjectValidationConfig {
+  exclude: readonly string[];
+  allowedEntrypoints: readonly string[];
+}
+
+function normalizePath(value: string): string {
+  return value.replaceAll('\\', '/').replace(/^\.\//, '');
+}
+
+function globPattern(pattern: string): RegExp {
+  const normalized = normalizePath(pattern);
+  let output = '^';
+  for (let index = 0; index < normalized.length; index += 1) {
+    const character = normalized[index];
+    const next = normalized[index + 1];
+    if (character === '*' && next === '*') {
+      if (normalized[index + 2] === '/') {
+        output += '(?:.*/)?';
+        index += 2;
+      } else {
+        output += '.*';
+        index += 1;
+      }
+      continue;
+    }
+    if (character === '*') { output += '[^/]*'; continue; }
+    if (character === '?') { output += '[^/]'; continue; }
+    output += character.replace(/[|\\{}()[\]^$+?.]/g, '\\$&');
+  }
+  return new RegExp(`${output}$`);
+}
+
+function cleanStringArray(value: unknown): string[] {
+  return Array.isArray(value)
+    ? [...new Set(value.filter((item): item is string => typeof item === 'string' && item.trim().length > 0).map((item) => item.trim()))]
+    : [];
+}
+
+async function readValidationConfig(root: string): Promise<ProjectValidationConfig> {
+  for (const name of ['commonspace.config.json', 'commonspace.json']) {
+    try {
+      const parsed = JSON.parse(await readFile(join(root, name), 'utf8')) as Record<string, unknown>;
+      const validation = parsed.validation;
+      if (!validation || typeof validation !== 'object') return { exclude: [], allowedEntrypoints: [] };
+      const record = validation as Record<string, unknown>;
+      return {
+        exclude: cleanStringArray(record.exclude),
+        allowedEntrypoints: cleanStringArray(record.allowedEntrypoints),
+      };
+    } catch (error) {
+      if ((error as NodeJS.ErrnoException).code === 'ENOENT') continue;
+      throw new Error(`Unable to parse ${name}: ${error instanceof Error ? error.message : String(error)}`);
+    }
+  }
+  return { exclude: [], allowedEntrypoints: [] };
+}
+
+async function collectSourceFiles(root: string, exclude: readonly string[]): Promise<string[]> {
   const files: string[] = [];
+  const exclusionPatterns = exclude.map(globPattern);
+  const isExcluded = (path: string) => exclusionPatterns.some((pattern) => pattern.test(normalizePath(relative(root, path))));
   async function visit(directory: string): Promise<void> {
     for (const entry of await readdir(directory, { withFileTypes: true })) {
       if (entry.isDirectory() && SKIP_DIRECTORIES.has(entry.name)) continue;
       const path = join(directory, entry.name);
+      if (isExcluded(path) || (entry.isDirectory() && isExcluded(`${path}/`))) continue;
       if (entry.isDirectory()) await visit(path);
       else if (SOURCE_EXTENSIONS.has(extname(entry.name))) files.push(path);
     }
@@ -26,12 +86,13 @@ function lineOf(source: string, index: number): number {
   return source.slice(0, index).split('\n').length;
 }
 
-function allowedEntrypoints(catalog: KnowledgeCatalog): Set<string> {
+function allowedEntrypoints(catalog: KnowledgeCatalog, additional: readonly string[]): Set<string> {
   return new Set([
     '@commonspace/tokens', '@commonspace/tokens/styles.css', '@commonspace/tokens/tokens.json',
     '@commonspace/theme', '@commonspace/icons', '@commonspace/icons/styles.css',
     '@commonspace/ui/styles.css', '@commonspace/social/styles.css',
     ...catalog.entries.flatMap((entry) => entry.kind === 'component' ? entry.entrypoints : []),
+    ...additional,
   ]);
 }
 
@@ -68,8 +129,9 @@ function inspectSource(source: string, file: string, root: string, allowed: Set<
 
 export async function validateCommonspaceProject(catalog: KnowledgeCatalog, targetPath: string): Promise<ValidationReport> {
   const root = resolve(targetPath);
-  const files = await collectSourceFiles(root);
-  const allowed = allowedEntrypoints(catalog);
+  const config = await readValidationConfig(root);
+  const files = await collectSourceFiles(root, config.exclude);
+  const allowed = allowedEntrypoints(catalog, config.allowedEntrypoints);
   const issues: ValidationIssue[] = [];
   for (const file of files) issues.push(...inspectSource(await readFile(file, 'utf8'), file, root, allowed));
   return {

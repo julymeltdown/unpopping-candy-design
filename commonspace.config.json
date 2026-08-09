@@ -26,5 +26,28 @@
     "@commonspace/icons/styles.css",
     "@commonspace/ui/styles.css",
     "@commonspace/social/styles.css"
-  ]
+  ],
+  "validation": {
+    "exclude": [
+      "agent/**",
+      "docs/**",
+      "figma/**",
+      "scripts/**",
+      "tests/**",
+      "**/test/**",
+      "**/*.test.ts",
+      "**/*.test.tsx",
+      "packages/knowledge/src/generated/**",
+      "packages/evals/src/reference-scenarios.ts"
+    ],
+    "allowedEntrypoints": [
+      "@commonspace/knowledge",
+      "@commonspace/registry",
+      "@commonspace/cli",
+      "@commonspace/mcp",
+      "@commonspace/evals",
+      "@commonspace/figma",
+      "@commonspace/eval-report"
+    ]
+  }
 }

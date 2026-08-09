@@ -4,48 +4,137 @@
   "title": "Commonspace project configuration",
   "type": "object",
   "additionalProperties": false,
-  "required": ["schemaVersion", "catalog", "design", "llms", "registry", "skills", "stories", "evaluations", "figma", "styles"],
+  "required": [
+    "schemaVersion",
+    "catalog",
+    "design",
+    "llms",
+    "registry",
+    "skills",
+    "stories",
+    "evaluations",
+    "figma",
+    "styles"
+  ],
   "properties": {
-    "$schema": { "type": "string" },
-    "schemaVersion": { "const": 1 },
-    "catalog": { "$ref": "#/$defs/localPath" },
-    "design": { "$ref": "#/$defs/localPath" },
-    "registry": { "$ref": "#/$defs/localPath" },
-    "skills": { "$ref": "#/$defs/localPath" },
-    "evaluations": { "$ref": "#/$defs/localPath" },
-    "figma": { "$ref": "#/$defs/localPath" },
+    "$schema": {
+      "type": "string"
+    },
+    "schemaVersion": {
+      "const": 1
+    },
+    "catalog": {
+      "$ref": "#/$defs/localPath"
+    },
+    "design": {
+      "$ref": "#/$defs/localPath"
+    },
+    "registry": {
+      "$ref": "#/$defs/localPath"
+    },
+    "skills": {
+      "$ref": "#/$defs/localPath"
+    },
+    "evaluations": {
+      "$ref": "#/$defs/localPath"
+    },
+    "figma": {
+      "$ref": "#/$defs/localPath"
+    },
     "llms": {
       "type": "object",
       "additionalProperties": false,
-      "required": ["index", "small", "full", "components", "patterns", "tokens", "migrations"],
+      "required": [
+        "index",
+        "small",
+        "full",
+        "components",
+        "patterns",
+        "tokens",
+        "migrations"
+      ],
       "properties": {
-        "index": { "$ref": "#/$defs/localPath" },
-        "small": { "$ref": "#/$defs/localPath" },
-        "full": { "$ref": "#/$defs/localPath" },
-        "components": { "$ref": "#/$defs/localPath" },
-        "patterns": { "$ref": "#/$defs/localPath" },
-        "tokens": { "$ref": "#/$defs/localPath" },
-        "migrations": { "$ref": "#/$defs/localPath" }
+        "index": {
+          "$ref": "#/$defs/localPath"
+        },
+        "small": {
+          "$ref": "#/$defs/localPath"
+        },
+        "full": {
+          "$ref": "#/$defs/localPath"
+        },
+        "components": {
+          "$ref": "#/$defs/localPath"
+        },
+        "patterns": {
+          "$ref": "#/$defs/localPath"
+        },
+        "tokens": {
+          "$ref": "#/$defs/localPath"
+        },
+        "migrations": {
+          "$ref": "#/$defs/localPath"
+        }
       }
     },
     "stories": {
       "type": "object",
       "additionalProperties": false,
-      "required": ["manifest", "storybookUrl", "mcpUrl"],
+      "required": [
+        "manifest",
+        "storybookUrl",
+        "mcpUrl"
+      ],
       "properties": {
-        "manifest": { "$ref": "#/$defs/localPath" },
-        "storybookUrl": { "type": "string", "format": "uri" },
-        "mcpUrl": { "type": "string", "format": "uri" }
+        "manifest": {
+          "$ref": "#/$defs/localPath"
+        },
+        "storybookUrl": {
+          "type": "string",
+          "format": "uri"
+        },
+        "mcpUrl": {
+          "type": "string",
+          "format": "uri"
+        }
       }
     },
     "styles": {
       "type": "array",
       "minItems": 1,
       "uniqueItems": true,
-      "items": { "type": "string", "pattern": "^@commonspace/[a-z-]+/styles\\.css$" }
+      "items": {
+        "type": "string",
+        "pattern": "^@commonspace/[a-z-]+/styles\\.css$"
+      }
+    },
+    "validation": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "exclude": {
+          "type": "array",
+          "uniqueItems": true,
+          "items": {
+            "type": "string",
+            "minLength": 1
+          }
+        },
+        "allowedEntrypoints": {
+          "type": "array",
+          "uniqueItems": true,
+          "items": {
+            "type": "string",
+            "pattern": "^@commonspace/[a-z-]+(?:/[a-z0-9.-]+)?$"
+          }
+        }
+      }
     }
   },
   "$defs": {
-    "localPath": { "type": "string", "pattern": "^\\./(?!.*(?:^|/)\\.\\.(?:/|$)).+" }
+    "localPath": {
+      "type": "string",
+      "pattern": "^\\./(?!.*(?:^|/)\\.\\.(?:/|$)).+"
+    }
   }
 }

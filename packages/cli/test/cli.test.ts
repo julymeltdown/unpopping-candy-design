@@ -107,3 +107,22 @@ test('scaffold defaults to dry-run and requires explicit apply for writes', asyn
   assert.equal((applied.data as { applied: boolean }).applied, true);
   assert.match(await readFile(join(root, 'features/profile/src/profile-settings.tsx'), 'utf8'), /AccountProfileSettings/);
 });
+
+test('validation honors configured exclusions and additional public entrypoints', async () => {
+  const root = await fixture();
+  await mkdir(join(root, 'test'), { recursive: true });
+  await writeFile(join(root, 'commonspace.config.json'), JSON.stringify({
+    schemaVersion: 1,
+    validation: {
+      exclude: ['test/**'],
+      allowedEntrypoints: ['@commonspace/knowledge'],
+    },
+  }));
+  await writeFile(join(root, 'src/tool.ts'), "import type { KnowledgeCatalog } from '@commonspace/knowledge';\nexport type Catalog = KnowledgeCatalog;\n");
+  await writeFile(join(root, 'test/intentional-invalid.tsx'), "import { Button } from '@commonspace/ui/src/button/button';\nexport const Bad = () => <div style={{ color: '#ff00aa' }}><Button>Save</Button></div>;\n");
+  const report = await validateCommonspaceProject(bundledCatalog, root);
+  assert.equal(report.summary.errors, 0);
+  assert.equal(report.summary.warnings, 0);
+  assert.ok(report.filesScanned >= 2);
+  assert.ok(report.issues.every((issue) => issue.file !== 'test/intentional-invalid.tsx'));
+});
