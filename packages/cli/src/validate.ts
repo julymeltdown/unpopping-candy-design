@@ -44,6 +44,7 @@ function inspectSource(source: string, file: string, root: string, allowed: Set<
   });
   for (const match of source.matchAll(/(?:from\s*|import\s*)['"](@commonspace\/[a-z-]+(?:\/[a-z0-9.-]+)*)['"]/g)) {
     const specifier = match[1];
+    if (specifier?.includes('/src/') || specifier?.includes('/dist/')) continue;
     if (specifier && !allowed.has(specifier)) issues.push({
       code: 'unknown-entrypoint', severity: 'error', file: relative(root, file), line: lineOf(source, match.index ?? 0),
       message: `Unknown Commonspace entrypoint: ${specifier}`,
