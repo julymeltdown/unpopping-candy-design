@@ -45,7 +45,14 @@ import { PostHeader } from '@commonspace/social/post';
 
 ## Props
 
-Props follow the exported TypeScript interface. Use the CLI or package declaration for the exact installed-version type.
+| Name | Type | Required | Default | Description |
+|---|---|---:|---|---|
+| `author` | `SocialUserViewModel` | Yes | — |  |
+| `createdAt` | `string` | Yes | — |  |
+| `locale` | `string \| undefined` | No | — |  |
+| `nowMs` | `number \| undefined` | No | — |  |
+| `onOpenAuthor` | `(() => void) \| undefined` | No | — |  |
+| `onOpenMenu` | `(() => void) \| undefined` | No | — |  |
 
 ## Preferred examples
 

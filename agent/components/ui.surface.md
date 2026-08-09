@@ -49,7 +49,11 @@ import { Surface } from '@commonspace/ui/layout';
 
 ## Props
 
-Props follow the exported TypeScript interface. Use the CLI or package declaration for the exact installed-version type.
+| Name | Type | Required | Default | Description |
+|---|---|---:|---|---|
+| `border` | `boolean \| undefined` | No | — |  |
+| `padding` | `'none' \| 'sm' \| 'md' \| 'lg' \| undefined` | No | — |  |
+| `tone` | `'base' \| 'muted' \| 'raised' \| undefined` | No | — |  |
 
 ## Preferred examples
 

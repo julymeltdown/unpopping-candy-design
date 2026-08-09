@@ -1,3 +1,5 @@
+export { extractComponentApi, extractExportedInterfaces } from './source-api.ts';
+export type { ExtractedComponentApi, ExtractedInterface, InterfacePickReference } from './source-api.ts';
 export { createCatalog, getCatalogEntry, searchCatalog, validateCatalog } from './catalog.ts';
 export type { CreateCatalogOptions } from './catalog.ts';
 export { defineComponentDoc, defineMigrationDoc, definePatternDoc, defineTemplateDoc } from './define.ts';

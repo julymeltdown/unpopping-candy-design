@@ -52,7 +52,13 @@ import { IconButton } from '@commonspace/ui/button';
 
 ## Props
 
-Props follow the exported TypeScript interface. Use the CLI or package declaration for the exact installed-version type.
+| Name | Type | Required | Default | Description |
+|---|---|---:|---|---|
+| `icon` | `ReactNode` | Yes | — |  |
+| `label` | `string` | Yes | — |  |
+| `selected` | `boolean \| undefined` | No | — |  |
+| `size` | `'sm' \| 'md' \| 'lg' \| undefined` | No | — |  |
+| `tone` | `'neutral' \| 'accent' \| 'danger' \| undefined` | No | — |  |
 
 ## Preferred examples
 

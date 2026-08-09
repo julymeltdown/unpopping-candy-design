@@ -55,7 +55,15 @@ import { Button } from '@commonspace/ui/button';
 
 ## Props
 
-Props follow the exported TypeScript interface. Use the CLI or package declaration for the exact installed-version type.
+| Name | Type | Required | Default | Description |
+|---|---|---:|---|---|
+| `fullWidth` | `boolean \| undefined` | No | — |  |
+| `leadingIcon` | `ReactNode \| undefined` | No | — |  |
+| `pending` | `boolean \| undefined` | No | — |  |
+| `pendingLabel` | `string \| undefined` | No | — |  |
+| `size` | `ButtonSize \| undefined` | No | — |  |
+| `trailingIcon` | `ReactNode \| undefined` | No | — |  |
+| `variant` | `ButtonVariant \| undefined` | No | — |  |
 
 ## Preferred examples
 

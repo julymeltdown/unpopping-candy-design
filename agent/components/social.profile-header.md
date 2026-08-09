@@ -51,7 +51,13 @@ import { ProfileHeader } from '@commonspace/social/profile';
 
 ## Props
 
-Props follow the exported TypeScript interface. Use the CLI or package declaration for the exact installed-version type.
+| Name | Type | Required | Default | Description |
+|---|---|---:|---|---|
+| `locale` | `string \| undefined` | No | — |  |
+| `onOpenFollowers` | `(() => void) \| undefined` | No | — |  |
+| `onOpenFollowing` | `(() => void) \| undefined` | No | — |  |
+| `primaryAction` | `ReactNode \| undefined` | No | — |  |
+| `profile` | `SocialProfileViewModel` | Yes | — |  |
 
 ## Preferred examples
 

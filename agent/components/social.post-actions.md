@@ -50,7 +50,18 @@ import { PostActions } from '@commonspace/social/post';
 
 ## Props
 
-Props follow the exported TypeScript interface. Use the CLI or package declaration for the exact installed-version type.
+| Name | Type | Required | Default | Description |
+|---|---|---:|---|---|
+| `disabled` | `boolean \| undefined` | No | — |  |
+| `locale` | `string \| undefined` | No | — |  |
+| `metrics` | `SocialPostMetrics` | Yes | — |  |
+| `onBookmark` | `(() => void) \| undefined` | No | — |  |
+| `onLike` | `(() => void) \| undefined` | No | — |  |
+| `onReply` | `(() => void) \| undefined` | No | — |  |
+| `onRepost` | `(() => void) \| undefined` | No | — |  |
+| `onShare` | `(() => void) \| undefined` | No | — |  |
+| `pendingAction` | `'like' \| 'bookmark' \| 'repost' \| null \| undefined` | No | — |  |
+| `viewerState` | `SocialPostViewerState` | Yes | — |  |
 
 ## Preferred examples
 

@@ -51,7 +51,12 @@ import { NotificationItem } from '@commonspace/social/notification';
 
 ## Props
 
-Props follow the exported TypeScript interface. Use the CLI or package declaration for the exact installed-version type.
+| Name | Type | Required | Default | Description |
+|---|---|---:|---|---|
+| `locale` | `string \| undefined` | No | — |  |
+| `notification` | `SocialNotificationViewModel` | Yes | — |  |
+| `nowMs` | `number \| undefined` | No | — |  |
+| `onSelect` | `(() => void) \| undefined` | No | — |  |
 
 ## Preferred examples
 

@@ -27,42 +27,6 @@ const COMMON_DOM_PROPS = new Set([
   'src', 'alt', 'width', 'height', 'loading', 'decoding', 'open', 'defaultOpen', 'form',
 ]);
 
-const COMPONENT_PROP_HINTS: Readonly<Record<string, readonly string[]>> = {
-  Alert: ['tone', 'title', 'description', 'action', 'dismissLabel', 'onDismiss'],
-  Avatar: ['src', 'alt', 'name', 'size', 'fallback'],
-  Badge: ['tone', 'size'],
-  Button: ['variant', 'size', 'fullWidth', 'pending', 'pendingLabel', 'leadingIcon', 'trailingIcon'],
-  Container: ['size', 'as'],
-  Dialog: ['open', 'title', 'description', 'onOpenChange', 'footer', 'size', 'closeLabel'],
-  EmptyState: ['title', 'description', 'icon', 'action'],
-  FeedbackProvider: ['limit', 'defaultDuration'],
-  IconButton: ['label', 'variant', 'size', 'pending', 'pendingLabel'],
-  Inline: ['gap', 'align', 'justify', 'wrap', 'as'],
-  Separator: ['orientation', 'decorative'],
-  Skeleton: ['width', 'height', 'radius'],
-  Spinner: ['size', 'label'],
-  Stack: ['gap', 'align', 'justify', 'as'],
-  Surface: ['tone', 'padding', 'border', 'as'],
-  Tabs: ['value', 'defaultValue', 'items', 'ariaLabel'],
-  TextArea: ['label', 'description', 'error', 'resize'],
-  TextField: ['label', 'description', 'error', 'leading', 'trailing'],
-  Toast: ['toast', 'onDismiss'],
-  ToastItem: ['toast', 'onDismiss'],
-  ToastViewport: ['label'],
-  VisuallyHidden: ['as'],
-  ConversationPreview: ['conversation', 'selected', 'onOpen'],
-  NotificationItem: ['notification', 'onOpen', 'onActorOpen'],
-  PostActions: ['post', 'pendingAction', 'onReply', 'onRepost', 'onLike', 'onBookmark', 'onShare'],
-  PostCard: ['post', 'pendingAction', 'selected', 'onOpenPost', 'onOpenAuthor', 'onReply', 'onRepost', 'onLike', 'onBookmark', 'onShare', 'onMediaOpen'],
-  PostCardSkeleton: ['compact'],
-  PostComposerView: ['value', 'placeholder', 'pending', 'submitLabel', 'remainingCharacters', 'media', 'onChange', 'onSubmit', 'onAddMedia', 'onRemoveMedia'],
-  PostHeader: ['post', 'onOpenAuthor', 'onOpenMenu'],
-  PostMediaGrid: ['media', 'onOpen'],
-  ProfileHeader: ['profile', 'relationship', 'onFollow', 'onEdit', 'onOpenFollowers', 'onOpenFollowing'],
-  TimelineView: ['posts', 'emptyTitle', 'emptyDescription', 'loading', 'loadingMore', 'onLoadMore'],
-  UserCell: ['user', 'description', 'action', 'onOpen'],
-};
-
 interface ImportedComponent {
   exportedName: string;
   localName: string;
@@ -196,8 +160,7 @@ function isAllowedProp(name: string, component: ImportedComponent): boolean {
   if (COMMON_DOM_PROPS.has(name)) return true;
   if (name.startsWith('aria-') || name.startsWith('data-') || /^on[A-Z]/.test(name)) return true;
   const metadataProps = new Set(component.doc?.props.map((prop) => prop.name) ?? []);
-  const hintedProps = new Set(COMPONENT_PROP_HINTS[component.exportedName] ?? []);
-  return metadataProps.has(name) || hintedProps.has(name);
+  return metadataProps.has(name);
 }
 
 function findUnknownProps(catalog: KnowledgeCatalog, filePath: string, source: string): EvaluationFinding[] {

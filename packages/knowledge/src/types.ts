@@ -17,6 +17,7 @@ export interface ComponentDoc extends KnowledgeBase {
   stories: readonly string[]; props: readonly PropDoc[]; variants: readonly VariantDoc[];
   states: readonly string[]; composition?: { parents?: readonly string[]; children?: readonly string[]; };
   stateAttributes?: Readonly<Record<string, string>>;
+  nativeElement?: string;
   figma?: { componentKey?: string; nodeUrl?: string; propertyMap?: Readonly<Record<string, string>>; };
 }
 export interface PatternDoc extends KnowledgeBase {

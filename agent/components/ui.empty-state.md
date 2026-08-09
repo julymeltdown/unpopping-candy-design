@@ -44,7 +44,13 @@ import { EmptyState } from '@commonspace/ui';
 
 ## Props
 
-Props follow the exported TypeScript interface. Use the CLI or package declaration for the exact installed-version type.
+| Name | Type | Required | Default | Description |
+|---|---|---:|---|---|
+| `action` | `ReactNode \| undefined` | No | — |  |
+| `description` | `ReactNode` | Yes | — |  |
+| `headingLevel` | `2 \| 3 \| 4 \| undefined` | No | — |  |
+| `icon` | `ReactNode \| undefined` | No | — |  |
+| `title` | `ReactNode` | Yes | — |  |
 
 ## Preferred examples
 

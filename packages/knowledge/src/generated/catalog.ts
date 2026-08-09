@@ -472,7 +472,23 @@ export const bundledCatalog = {
           "The preview needs a clear accessible name combining participant and latest message."
         ]
       },
-      "props": [],
+      "props": [
+        {
+          "name": "conversation",
+          "type": "SocialConversationPreviewViewModel",
+          "required": true
+        },
+        {
+          "name": "locale",
+          "type": "string | undefined",
+          "required": false
+        },
+        {
+          "name": "nowMs",
+          "type": "number | undefined",
+          "required": false
+        }
+      ],
       "variants": [
         {
           "name": "direct",
@@ -498,7 +514,8 @@ export const bundledCatalog = {
           }
         ],
         "avoid": []
-      }
+      },
+      "nativeElement": "button"
     },
     {
       "schemaVersion": 1,
@@ -546,7 +563,28 @@ export const bundledCatalog = {
           "The row needs one predictable activation target."
         ]
       },
-      "props": [],
+      "props": [
+        {
+          "name": "locale",
+          "type": "string | undefined",
+          "required": false
+        },
+        {
+          "name": "notification",
+          "type": "SocialNotificationViewModel",
+          "required": true
+        },
+        {
+          "name": "nowMs",
+          "type": "number | undefined",
+          "required": false
+        },
+        {
+          "name": "onSelect",
+          "type": "(() => void) | undefined",
+          "required": false
+        }
+      ],
       "variants": [
         {
           "name": "like",
@@ -583,7 +621,8 @@ export const bundledCatalog = {
           }
         ],
         "avoid": []
-      }
+      },
+      "nativeElement": "element"
     },
     {
       "schemaVersion": 1,
@@ -633,7 +672,58 @@ export const bundledCatalog = {
           "Pending state must prevent duplicate mutation without erasing current state."
         ]
       },
-      "props": [],
+      "props": [
+        {
+          "name": "disabled",
+          "type": "boolean | undefined",
+          "required": false
+        },
+        {
+          "name": "locale",
+          "type": "string | undefined",
+          "required": false
+        },
+        {
+          "name": "metrics",
+          "type": "SocialPostMetrics",
+          "required": true
+        },
+        {
+          "name": "onBookmark",
+          "type": "(() => void) | undefined",
+          "required": false
+        },
+        {
+          "name": "onLike",
+          "type": "(() => void) | undefined",
+          "required": false
+        },
+        {
+          "name": "onReply",
+          "type": "(() => void) | undefined",
+          "required": false
+        },
+        {
+          "name": "onRepost",
+          "type": "(() => void) | undefined",
+          "required": false
+        },
+        {
+          "name": "onShare",
+          "type": "(() => void) | undefined",
+          "required": false
+        },
+        {
+          "name": "pendingAction",
+          "type": "'like' | 'bookmark' | 'repost' | null | undefined",
+          "required": false
+        },
+        {
+          "name": "viewerState",
+          "type": "SocialPostViewerState",
+          "required": true
+        }
+      ],
       "variants": [
         {
           "name": "default",
@@ -712,7 +802,83 @@ export const bundledCatalog = {
           "Metrics must have accessible labels, not numbers alone."
         ]
       },
-      "props": [],
+      "props": [
+        {
+          "name": "compact",
+          "type": "boolean | undefined",
+          "required": false
+        },
+        {
+          "name": "locale",
+          "type": "string | undefined",
+          "required": false
+        },
+        {
+          "name": "nowMs",
+          "type": "number | undefined",
+          "required": false
+        },
+        {
+          "name": "onBookmark",
+          "type": "(() => void) | undefined",
+          "required": false
+        },
+        {
+          "name": "onLike",
+          "type": "(() => void) | undefined",
+          "required": false
+        },
+        {
+          "name": "onOpenAuthor",
+          "type": "(() => void) | undefined",
+          "required": false
+        },
+        {
+          "name": "onOpenMedia",
+          "type": "((mediaId: string) => void) | undefined",
+          "required": false
+        },
+        {
+          "name": "onOpenMenu",
+          "type": "(() => void) | undefined",
+          "required": false
+        },
+        {
+          "name": "onOpenPost",
+          "type": "(() => void) | undefined",
+          "required": false
+        },
+        {
+          "name": "onOpenQuotedPost",
+          "type": "(() => void) | undefined",
+          "required": false
+        },
+        {
+          "name": "onReply",
+          "type": "(() => void) | undefined",
+          "required": false
+        },
+        {
+          "name": "onRepost",
+          "type": "(() => void) | undefined",
+          "required": false
+        },
+        {
+          "name": "onShare",
+          "type": "(() => void) | undefined",
+          "required": false
+        },
+        {
+          "name": "pendingAction",
+          "type": "'like' | 'bookmark' | 'repost' | null | undefined",
+          "required": false
+        },
+        {
+          "name": "post",
+          "type": "SocialPostViewModel",
+          "required": true
+        }
+      ],
       "variants": [
         {
           "name": "timeline",
@@ -862,7 +1028,68 @@ export const bundledCatalog = {
           "Publishing must retain the draft until success."
         ]
       },
-      "props": [],
+      "props": [
+        {
+          "name": "error",
+          "type": "string | undefined",
+          "required": false
+        },
+        {
+          "name": "feedback",
+          "type": "ReactNode | undefined",
+          "required": false
+        },
+        {
+          "name": "maximumLength",
+          "type": "number | undefined",
+          "required": false
+        },
+        {
+          "name": "onAddEmoji",
+          "type": "(() => void) | undefined",
+          "required": false
+        },
+        {
+          "name": "onAddMedia",
+          "type": "(() => void) | undefined",
+          "required": false
+        },
+        {
+          "name": "onSubmit",
+          "type": "() => void",
+          "required": true
+        },
+        {
+          "name": "onValueChange",
+          "type": "(value: string) => void",
+          "required": true
+        },
+        {
+          "name": "pending",
+          "type": "boolean | undefined",
+          "required": false
+        },
+        {
+          "name": "placeholder",
+          "type": "string | undefined",
+          "required": false
+        },
+        {
+          "name": "submitLabel",
+          "type": "string | undefined",
+          "required": false
+        },
+        {
+          "name": "value",
+          "type": "string",
+          "required": true
+        },
+        {
+          "name": "viewer",
+          "type": "SocialUserViewModel",
+          "required": true
+        }
+      ],
       "variants": [
         {
           "name": "inline",
@@ -935,7 +1162,38 @@ export const bundledCatalog = {
           "Author navigation is supplied as a callback or link wrapper by the application."
         ]
       },
-      "props": [],
+      "props": [
+        {
+          "name": "author",
+          "type": "SocialUserViewModel",
+          "required": true
+        },
+        {
+          "name": "createdAt",
+          "type": "string",
+          "required": true
+        },
+        {
+          "name": "locale",
+          "type": "string | undefined",
+          "required": false
+        },
+        {
+          "name": "nowMs",
+          "type": "number | undefined",
+          "required": false
+        },
+        {
+          "name": "onOpenAuthor",
+          "type": "(() => void) | undefined",
+          "required": false
+        },
+        {
+          "name": "onOpenMenu",
+          "type": "(() => void) | undefined",
+          "required": false
+        }
+      ],
       "variants": [
         {
           "name": "default",
@@ -1006,7 +1264,18 @@ export const bundledCatalog = {
           "Buttons opening media need labels that identify the selected item."
         ]
       },
-      "props": [],
+      "props": [
+        {
+          "name": "media",
+          "type": "readonly SocialMediaViewModel[]",
+          "required": true
+        },
+        {
+          "name": "onOpenMedia",
+          "type": "((mediaId: string) => void) | undefined",
+          "required": false
+        }
+      ],
       "variants": [
         {
           "name": "one",
@@ -1088,7 +1357,33 @@ export const bundledCatalog = {
           "Cover imagery must not hide identity text."
         ]
       },
-      "props": [],
+      "props": [
+        {
+          "name": "locale",
+          "type": "string | undefined",
+          "required": false
+        },
+        {
+          "name": "onOpenFollowers",
+          "type": "(() => void) | undefined",
+          "required": false
+        },
+        {
+          "name": "onOpenFollowing",
+          "type": "(() => void) | undefined",
+          "required": false
+        },
+        {
+          "name": "primaryAction",
+          "type": "ReactNode | undefined",
+          "required": false
+        },
+        {
+          "name": "profile",
+          "type": "SocialProfileViewModel",
+          "required": true
+        }
+      ],
       "variants": [
         {
           "name": "self",
@@ -1167,7 +1462,58 @@ export const bundledCatalog = {
           "Announce newly accepted items without moving focus."
         ]
       },
-      "props": [],
+      "props": [
+        {
+          "name": "emptyDescription",
+          "type": "string | undefined",
+          "required": false
+        },
+        {
+          "name": "emptyTitle",
+          "type": "string | undefined",
+          "required": false
+        },
+        {
+          "name": "error",
+          "type": "string | null | undefined",
+          "required": false
+        },
+        {
+          "name": "footer",
+          "type": "ReactNode | undefined",
+          "required": false
+        },
+        {
+          "name": "loading",
+          "type": "boolean | undefined",
+          "required": false
+        },
+        {
+          "name": "loadingMore",
+          "type": "boolean | undefined",
+          "required": false
+        },
+        {
+          "name": "onRetry",
+          "type": "(() => void) | undefined",
+          "required": false
+        },
+        {
+          "name": "posts",
+          "type": "readonly SocialPostViewModel[]",
+          "required": true
+        },
+        {
+          "name": "renderPost",
+          "type": "(post: SocialPostViewModel) => ReactNode",
+          "required": false
+        },
+        {
+          "name": "renderPostActions",
+          "type": "(post: SocialPostViewModel) => Omit<PostCardProps, 'post'>",
+          "required": false
+        }
+      ],
       "variants": [
         {
           "name": "default",
@@ -1238,7 +1584,38 @@ export const bundledCatalog = {
           "Identity text must not be conveyed by avatar alone."
         ]
       },
-      "props": [],
+      "props": [
+        {
+          "name": "actionLabel",
+          "type": "string | undefined",
+          "required": false
+        },
+        {
+          "name": "actionPending",
+          "type": "boolean | undefined",
+          "required": false
+        },
+        {
+          "name": "description",
+          "type": "ReactNode | undefined",
+          "required": false
+        },
+        {
+          "name": "onAction",
+          "type": "(() => void) | undefined",
+          "required": false
+        },
+        {
+          "name": "onSelect",
+          "type": "(() => void) | undefined",
+          "required": false
+        },
+        {
+          "name": "user",
+          "type": "SocialUserViewModel",
+          "required": true
+        }
+      ],
       "variants": [
         {
           "name": "default",
@@ -1263,7 +1640,8 @@ export const bundledCatalog = {
           }
         ],
         "avoid": []
-      }
+      },
+      "nativeElement": "div"
     },
     {
       "schemaVersion": 1,
@@ -1628,7 +2006,48 @@ export const bundledCatalog = {
           "Keep the title specific and state what remains preserved."
         ]
       },
-      "props": [],
+      "props": [
+        {
+          "name": "action",
+          "type": "ReactNode | undefined",
+          "required": false
+        },
+        {
+          "name": "description",
+          "type": "ReactNode | undefined",
+          "required": false
+        },
+        {
+          "name": "dismissLabel",
+          "type": "string | undefined",
+          "required": false
+        },
+        {
+          "name": "icon",
+          "type": "ReactNode | undefined",
+          "required": false
+        },
+        {
+          "name": "metadata",
+          "type": "ReactNode | undefined",
+          "required": false
+        },
+        {
+          "name": "onDismiss",
+          "type": "(() => void) | undefined",
+          "required": false
+        },
+        {
+          "name": "title",
+          "type": "ReactNode",
+          "required": true
+        },
+        {
+          "name": "tone",
+          "type": "FeedbackTone | undefined",
+          "required": false
+        }
+      ],
       "variants": [
         {
           "name": "neutral",
@@ -1667,7 +2086,8 @@ export const bundledCatalog = {
             "reason": "May expose unsafe or irrelevant implementation details."
           }
         ]
-      }
+      },
+      "nativeElement": "element"
     },
     {
       "schemaVersion": 1,
@@ -1716,7 +2136,33 @@ export const bundledCatalog = {
           "Use an empty alt value when the adjacent text already names the person."
         ]
       },
-      "props": [],
+      "props": [
+        {
+          "name": "alt",
+          "type": "string | undefined",
+          "required": false
+        },
+        {
+          "name": "fallback",
+          "type": "ReactNode | undefined",
+          "required": false
+        },
+        {
+          "name": "loading",
+          "type": "'eager' | 'lazy' | undefined",
+          "required": false
+        },
+        {
+          "name": "size",
+          "type": "'sm' | 'md' | 'lg' | 'xl' | undefined",
+          "required": false
+        },
+        {
+          "name": "src",
+          "type": "string | null | undefined",
+          "required": false
+        }
+      ],
       "variants": [
         {
           "name": "sm",
@@ -1745,7 +2191,8 @@ export const bundledCatalog = {
           }
         ],
         "avoid": []
-      }
+      },
+      "nativeElement": "span"
     },
     {
       "schemaVersion": 1,
@@ -1792,7 +2239,18 @@ export const bundledCatalog = {
           "Keep labels concise enough to remain readable at 200% zoom."
         ]
       },
-      "props": [],
+      "props": [
+        {
+          "name": "size",
+          "type": "'sm' | 'md' | undefined",
+          "required": false
+        },
+        {
+          "name": "tone",
+          "type": "'neutral' | 'accent' | 'positive' | 'warning' | 'critical' | undefined",
+          "required": false
+        }
+      ],
       "variants": [
         {
           "name": "neutral",
@@ -1827,7 +2285,8 @@ export const bundledCatalog = {
           }
         ],
         "avoid": []
-      }
+      },
+      "nativeElement": "span"
     },
     {
       "schemaVersion": 1,
@@ -1879,7 +2338,43 @@ export const bundledCatalog = {
           "Use danger only for destructive actions with clear consequences."
         ]
       },
-      "props": [],
+      "props": [
+        {
+          "name": "fullWidth",
+          "type": "boolean | undefined",
+          "required": false
+        },
+        {
+          "name": "leadingIcon",
+          "type": "ReactNode | undefined",
+          "required": false
+        },
+        {
+          "name": "pending",
+          "type": "boolean | undefined",
+          "required": false
+        },
+        {
+          "name": "pendingLabel",
+          "type": "string | undefined",
+          "required": false
+        },
+        {
+          "name": "size",
+          "type": "ButtonSize | undefined",
+          "required": false
+        },
+        {
+          "name": "trailingIcon",
+          "type": "ReactNode | undefined",
+          "required": false
+        },
+        {
+          "name": "variant",
+          "type": "ButtonVariant | undefined",
+          "required": false
+        }
+      ],
       "variants": [
         {
           "name": "primary",
@@ -1920,7 +2415,8 @@ export const bundledCatalog = {
             "reason": "Navigation should preserve link semantics."
           }
         ]
-      }
+      },
+      "nativeElement": "button"
     },
     {
       "schemaVersion": 1,
@@ -1968,7 +2464,13 @@ export const bundledCatalog = {
           "Landmark semantics belong to the element passed through asChild or wrapping structure."
         ]
       },
-      "props": [],
+      "props": [
+        {
+          "name": "size",
+          "type": "'sm' | 'md' | 'lg' | 'full' | undefined",
+          "required": false
+        }
+      ],
       "variants": [
         {
           "name": "sm",
@@ -1999,7 +2501,8 @@ export const bundledCatalog = {
           }
         ],
         "avoid": []
-      }
+      },
+      "nativeElement": "div"
     },
     {
       "schemaVersion": 1,
@@ -2050,7 +2553,63 @@ export const bundledCatalog = {
           "Escape closes unless an irreversible operation is in progress."
         ]
       },
-      "props": [],
+      "props": [
+        {
+          "name": "children",
+          "type": "ReactNode",
+          "required": true
+        },
+        {
+          "name": "className",
+          "type": "string | undefined",
+          "required": false
+        },
+        {
+          "name": "closeLabel",
+          "type": "string | undefined",
+          "required": false
+        },
+        {
+          "name": "defaultOpen",
+          "type": "boolean | undefined",
+          "required": false
+        },
+        {
+          "name": "description",
+          "type": "ReactNode | undefined",
+          "required": false
+        },
+        {
+          "name": "dismissible",
+          "type": "boolean | undefined",
+          "required": false
+        },
+        {
+          "name": "footer",
+          "type": "ReactNode | undefined",
+          "required": false
+        },
+        {
+          "name": "onOpenChange",
+          "type": "((open: boolean) => void) | undefined",
+          "required": false
+        },
+        {
+          "name": "open",
+          "type": "boolean | undefined",
+          "required": false
+        },
+        {
+          "name": "size",
+          "type": "'sm' | 'md' | 'lg' | undefined",
+          "required": false
+        },
+        {
+          "name": "title",
+          "type": "ReactNode",
+          "required": true
+        }
+      ],
       "variants": [
         {
           "name": "sm",
@@ -2127,7 +2686,33 @@ export const bundledCatalog = {
           "Do not imply failure when the empty state is valid."
         ]
       },
-      "props": [],
+      "props": [
+        {
+          "name": "action",
+          "type": "ReactNode | undefined",
+          "required": false
+        },
+        {
+          "name": "description",
+          "type": "ReactNode",
+          "required": true
+        },
+        {
+          "name": "headingLevel",
+          "type": "2 | 3 | 4 | undefined",
+          "required": false
+        },
+        {
+          "name": "icon",
+          "type": "ReactNode | undefined",
+          "required": false
+        },
+        {
+          "name": "title",
+          "type": "ReactNode",
+          "required": true
+        }
+      ],
       "variants": [
         {
           "name": "compact",
@@ -2152,7 +2737,8 @@ export const bundledCatalog = {
           }
         ],
         "avoid": []
-      }
+      },
+      "nativeElement": "element"
     },
     {
       "schemaVersion": 1,
@@ -2200,7 +2786,18 @@ export const bundledCatalog = {
           "Do not enqueue raw server messages."
         ]
       },
-      "props": [],
+      "props": [
+        {
+          "name": "children",
+          "type": "ReactNode",
+          "required": true
+        },
+        {
+          "name": "maximumVisible",
+          "type": "number | undefined",
+          "required": false
+        }
+      ],
       "variants": [
         {
           "name": "default",
@@ -2269,7 +2866,33 @@ export const bundledCatalog = {
           "Pressed toggles must expose aria-pressed."
         ]
       },
-      "props": [],
+      "props": [
+        {
+          "name": "icon",
+          "type": "ReactNode",
+          "required": true
+        },
+        {
+          "name": "label",
+          "type": "string",
+          "required": true
+        },
+        {
+          "name": "selected",
+          "type": "boolean | undefined",
+          "required": false
+        },
+        {
+          "name": "size",
+          "type": "'sm' | 'md' | 'lg' | undefined",
+          "required": false
+        },
+        {
+          "name": "tone",
+          "type": "'neutral' | 'accent' | 'danger' | undefined",
+          "required": false
+        }
+      ],
       "variants": [
         {
           "name": "ghost",
@@ -2306,7 +2929,8 @@ export const bundledCatalog = {
             "reason": "Screen-reader users cannot identify the action."
           }
         ]
-      }
+      },
+      "nativeElement": "button"
     },
     {
       "schemaVersion": 1,
@@ -2355,7 +2979,28 @@ export const bundledCatalog = {
           "Preserve a logical DOM order."
         ]
       },
-      "props": [],
+      "props": [
+        {
+          "name": "align",
+          "type": "CSSProperties['alignItems']",
+          "required": false
+        },
+        {
+          "name": "gap",
+          "type": "0 | 1 | 2 | 3 | 4 | 5 | 6 | 8 | 10 | 12 | 16 | undefined",
+          "required": false
+        },
+        {
+          "name": "justify",
+          "type": "CSSProperties['justifyContent']",
+          "required": false
+        },
+        {
+          "name": "wrap",
+          "type": "boolean | undefined",
+          "required": false
+        }
+      ],
       "variants": [
         {
           "name": "start",
@@ -2387,7 +3032,8 @@ export const bundledCatalog = {
           }
         ],
         "avoid": []
-      }
+      },
+      "nativeElement": "div"
     },
     {
       "schemaVersion": 1,
@@ -2431,7 +3077,13 @@ export const bundledCatalog = {
           "Hide purely decorative separators from assistive technology."
         ]
       },
-      "props": [],
+      "props": [
+        {
+          "name": "orientation",
+          "type": "'horizontal' | 'vertical' | undefined",
+          "required": false
+        }
+      ],
       "variants": [
         {
           "name": "horizontal",
@@ -2454,7 +3106,8 @@ export const bundledCatalog = {
           }
         ],
         "avoid": []
-      }
+      },
+      "nativeElement": "hr"
     },
     {
       "schemaVersion": 1,
@@ -2500,7 +3153,23 @@ export const bundledCatalog = {
           "Respect reduced motion."
         ]
       },
-      "props": [],
+      "props": [
+        {
+          "name": "height",
+          "type": "CSSProperties['height']",
+          "required": false
+        },
+        {
+          "name": "radius",
+          "type": "CSSProperties['borderRadius']",
+          "required": false
+        },
+        {
+          "name": "width",
+          "type": "CSSProperties['width']",
+          "required": false
+        }
+      ],
       "variants": [
         {
           "name": "text",
@@ -2527,7 +3196,8 @@ export const bundledCatalog = {
           }
         ],
         "avoid": []
-      }
+      },
+      "nativeElement": "span"
     },
     {
       "schemaVersion": 1,
@@ -2574,7 +3244,18 @@ export const bundledCatalog = {
           "Respect reduced motion without removing the state indication."
         ]
       },
-      "props": [],
+      "props": [
+        {
+          "name": "label",
+          "type": "string | undefined",
+          "required": false
+        },
+        {
+          "name": "size",
+          "type": "'sm' | 'md' | 'lg' | undefined",
+          "required": false
+        }
+      ],
       "variants": [
         {
           "name": "sm",
@@ -2601,7 +3282,8 @@ export const bundledCatalog = {
           }
         ],
         "avoid": []
-      }
+      },
+      "nativeElement": "span"
     },
     {
       "schemaVersion": 1,
@@ -2650,7 +3332,18 @@ export const bundledCatalog = {
           "Use responsive gaps rather than arbitrary child margins."
         ]
       },
-      "props": [],
+      "props": [
+        {
+          "name": "align",
+          "type": "CSSProperties['alignItems']",
+          "required": false
+        },
+        {
+          "name": "gap",
+          "type": "0 | 1 | 2 | 3 | 4 | 5 | 6 | 8 | 10 | 12 | 16 | undefined",
+          "required": false
+        }
+      ],
       "variants": [
         {
           "name": "xs",
@@ -2685,7 +3378,8 @@ export const bundledCatalog = {
           }
         ],
         "avoid": []
-      }
+      },
+      "nativeElement": "div"
     },
     {
       "schemaVersion": 1,
@@ -2734,7 +3428,23 @@ export const bundledCatalog = {
           "Do not rely on elevation alone for grouping."
         ]
       },
-      "props": [],
+      "props": [
+        {
+          "name": "border",
+          "type": "boolean | undefined",
+          "required": false
+        },
+        {
+          "name": "padding",
+          "type": "'none' | 'sm' | 'md' | 'lg' | undefined",
+          "required": false
+        },
+        {
+          "name": "tone",
+          "type": "'base' | 'muted' | 'raised' | undefined",
+          "required": false
+        }
+      ],
       "variants": [
         {
           "name": "plain",
@@ -2762,7 +3472,8 @@ export const bundledCatalog = {
           }
         ],
         "avoid": []
-      }
+      },
+      "nativeElement": "div"
     },
     {
       "schemaVersion": 1,
@@ -2810,7 +3521,48 @@ export const bundledCatalog = {
           "Reflect restorable view state in the URL when appropriate."
         ]
       },
-      "props": [],
+      "props": [
+        {
+          "name": "activationMode",
+          "type": "'automatic' | 'manual' | undefined",
+          "required": false
+        },
+        {
+          "name": "ariaLabel",
+          "type": "string",
+          "required": true
+        },
+        {
+          "name": "className",
+          "type": "string | undefined",
+          "required": false
+        },
+        {
+          "name": "defaultValue",
+          "type": "TValue | undefined",
+          "required": false
+        },
+        {
+          "name": "items",
+          "type": "readonly TabItem<TValue>[]",
+          "required": true
+        },
+        {
+          "name": "onValueChange",
+          "type": "((value: TValue) => void) | undefined",
+          "required": false
+        },
+        {
+          "name": "orientation",
+          "type": "'horizontal' | 'vertical' | undefined",
+          "required": false
+        },
+        {
+          "name": "value",
+          "type": "TValue | undefined",
+          "required": false
+        }
+      ],
       "variants": [
         {
           "name": "line",
@@ -2886,7 +3638,33 @@ export const bundledCatalog = {
           "Expose aria-invalid when validation fails."
         ]
       },
-      "props": [],
+      "props": [
+        {
+          "name": "counter",
+          "type": "{ current: number; maximum: number } | undefined",
+          "required": false
+        },
+        {
+          "name": "description",
+          "type": "string | undefined",
+          "required": false
+        },
+        {
+          "name": "error",
+          "type": "string | undefined",
+          "required": false
+        },
+        {
+          "name": "hideLabel",
+          "type": "boolean | undefined",
+          "required": false
+        },
+        {
+          "name": "label",
+          "type": "string",
+          "required": true
+        }
+      ],
       "variants": [
         {
           "name": "default",
@@ -2909,7 +3687,8 @@ export const bundledCatalog = {
           }
         ],
         "avoid": []
-      }
+      },
+      "nativeElement": "textarea"
     },
     {
       "schemaVersion": 1,
@@ -2959,7 +3738,38 @@ export const bundledCatalog = {
           "Use an appropriate autocomplete value for personal data."
         ]
       },
-      "props": [],
+      "props": [
+        {
+          "name": "description",
+          "type": "string | undefined",
+          "required": false
+        },
+        {
+          "name": "error",
+          "type": "string | undefined",
+          "required": false
+        },
+        {
+          "name": "hideLabel",
+          "type": "boolean | undefined",
+          "required": false
+        },
+        {
+          "name": "label",
+          "type": "string",
+          "required": true
+        },
+        {
+          "name": "leadingIcon",
+          "type": "ReactNode | undefined",
+          "required": false
+        },
+        {
+          "name": "trailingElement",
+          "type": "ReactNode | undefined",
+          "required": false
+        }
+      ],
       "variants": [
         {
           "name": "text",
@@ -2994,7 +3804,8 @@ export const bundledCatalog = {
           }
         ],
         "avoid": []
-      }
+      },
+      "nativeElement": "input"
     },
     {
       "schemaVersion": 1,
@@ -3044,7 +3855,18 @@ export const bundledCatalog = {
           "Actions need clear labels and keyboard focus."
         ]
       },
-      "props": [],
+      "props": [
+        {
+          "name": "item",
+          "type": "FeedbackItem",
+          "required": true
+        },
+        {
+          "name": "onDismiss",
+          "type": "(id: string) => void",
+          "required": true
+        }
+      ],
       "variants": [
         {
           "name": "neutral",
@@ -3124,7 +3946,18 @@ export const bundledCatalog = {
           "Keep DOM order consistent with announcement order."
         ]
       },
-      "props": [],
+      "props": [
+        {
+          "name": "items",
+          "type": "readonly FeedbackItem[]",
+          "required": true
+        },
+        {
+          "name": "onDismiss",
+          "type": "(id: string) => void",
+          "required": true
+        }
+      ],
       "variants": [
         {
           "name": "top-right",
@@ -3215,7 +4048,8 @@ export const bundledCatalog = {
           }
         ],
         "avoid": []
-      }
+      },
+      "nativeElement": "span"
     }
   ]
 } as const satisfies KnowledgeCatalog;

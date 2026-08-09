@@ -53,7 +53,19 @@ import { Dialog } from '@commonspace/ui/dialog';
 
 ## Props
 
-Props follow the exported TypeScript interface. Use the CLI or package declaration for the exact installed-version type.
+| Name | Type | Required | Default | Description |
+|---|---|---:|---|---|
+| `children` | `ReactNode` | Yes | — |  |
+| `className` | `string \| undefined` | No | — |  |
+| `closeLabel` | `string \| undefined` | No | — |  |
+| `defaultOpen` | `boolean \| undefined` | No | — |  |
+| `description` | `ReactNode \| undefined` | No | — |  |
+| `dismissible` | `boolean \| undefined` | No | — |  |
+| `footer` | `ReactNode \| undefined` | No | — |  |
+| `onOpenChange` | `((open: boolean) => void) \| undefined` | No | — |  |
+| `open` | `boolean \| undefined` | No | — |  |
+| `size` | `'sm' \| 'md' \| 'lg' \| undefined` | No | — |  |
+| `title` | `ReactNode` | Yes | — |  |
 
 ## Preferred examples
 

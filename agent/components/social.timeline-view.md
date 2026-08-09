@@ -49,7 +49,18 @@ import { TimelineView } from '@commonspace/social/timeline';
 
 ## Props
 
-Props follow the exported TypeScript interface. Use the CLI or package declaration for the exact installed-version type.
+| Name | Type | Required | Default | Description |
+|---|---|---:|---|---|
+| `emptyDescription` | `string \| undefined` | No | — |  |
+| `emptyTitle` | `string \| undefined` | No | — |  |
+| `error` | `string \| null \| undefined` | No | — |  |
+| `footer` | `ReactNode \| undefined` | No | — |  |
+| `loading` | `boolean \| undefined` | No | — |  |
+| `loadingMore` | `boolean \| undefined` | No | — |  |
+| `onRetry` | `(() => void) \| undefined` | No | — |  |
+| `posts` | `readonly SocialPostViewModel[]` | Yes | — |  |
+| `renderPost` | `(post: SocialPostViewModel) => ReactNode` | No | — |  |
+| `renderPostActions` | `(post: SocialPostViewModel) => Omit<PostCardProps, 'post'>` | No | — |  |
 
 ## Preferred examples
 

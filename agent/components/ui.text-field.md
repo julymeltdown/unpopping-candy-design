@@ -54,7 +54,14 @@ import { TextField } from '@commonspace/ui/forms';
 
 ## Props
 
-Props follow the exported TypeScript interface. Use the CLI or package declaration for the exact installed-version type.
+| Name | Type | Required | Default | Description |
+|---|---|---:|---|---|
+| `description` | `string \| undefined` | No | — |  |
+| `error` | `string \| undefined` | No | — |  |
+| `hideLabel` | `boolean \| undefined` | No | — |  |
+| `label` | `string` | Yes | — |  |
+| `leadingIcon` | `ReactNode \| undefined` | No | — |  |
+| `trailingElement` | `ReactNode \| undefined` | No | — |  |
 
 ## Preferred examples
 

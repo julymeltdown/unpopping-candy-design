@@ -47,7 +47,14 @@ import { UserCell } from '@commonspace/social/user';
 
 ## Props
 
-Props follow the exported TypeScript interface. Use the CLI or package declaration for the exact installed-version type.
+| Name | Type | Required | Default | Description |
+|---|---|---:|---|---|
+| `actionLabel` | `string \| undefined` | No | — |  |
+| `actionPending` | `boolean \| undefined` | No | — |  |
+| `description` | `ReactNode \| undefined` | No | — |  |
+| `onAction` | `(() => void) \| undefined` | No | — |  |
+| `onSelect` | `(() => void) \| undefined` | No | — |  |
+| `user` | `SocialUserViewModel` | Yes | — |  |
 
 ## Preferred examples
 

@@ -49,7 +49,12 @@ import { Inline } from '@commonspace/ui/layout';
 
 ## Props
 
-Props follow the exported TypeScript interface. Use the CLI or package declaration for the exact installed-version type.
+| Name | Type | Required | Default | Description |
+|---|---|---:|---|---|
+| `align` | `CSSProperties['alignItems']` | No | — |  |
+| `gap` | `0 \| 1 \| 2 \| 3 \| 4 \| 5 \| 6 \| 8 \| 10 \| 12 \| 16 \| undefined` | No | — |  |
+| `justify` | `CSSProperties['justifyContent']` | No | — |  |
+| `wrap` | `boolean \| undefined` | No | — |  |
 
 ## Preferred examples
 

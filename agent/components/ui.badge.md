@@ -49,7 +49,10 @@ import { Badge } from '@commonspace/ui/badge';
 
 ## Props
 
-Props follow the exported TypeScript interface. Use the CLI or package declaration for the exact installed-version type.
+| Name | Type | Required | Default | Description |
+|---|---|---:|---|---|
+| `size` | `'sm' \| 'md' \| undefined` | No | — |  |
+| `tone` | `'neutral' \| 'accent' \| 'positive' \| 'warning' \| 'critical' \| undefined` | No | — |  |
 
 ## Preferred examples
 

@@ -285,7 +285,11 @@ import { ConversationPreview } from '@commonspace/social/conversation';
 
 ## Props
 
-Props follow the exported TypeScript interface. Use the CLI or package declaration for the exact installed-version type.
+| Name | Type | Required | Default | Description |
+|---|---|---:|---|---|
+| `conversation` | `SocialConversationPreviewViewModel` | Yes | — |  |
+| `locale` | `string \| undefined` | No | — |  |
+| `nowMs` | `number \| undefined` | No | — |  |
 
 ## Preferred examples
 
@@ -370,7 +374,12 @@ import { NotificationItem } from '@commonspace/social/notification';
 
 ## Props
 
-Props follow the exported TypeScript interface. Use the CLI or package declaration for the exact installed-version type.
+| Name | Type | Required | Default | Description |
+|---|---|---:|---|---|
+| `locale` | `string \| undefined` | No | — |  |
+| `notification` | `SocialNotificationViewModel` | Yes | — |  |
+| `nowMs` | `number \| undefined` | No | — |  |
+| `onSelect` | `(() => void) \| undefined` | No | — |  |
 
 ## Preferred examples
 
@@ -454,7 +463,18 @@ import { PostActions } from '@commonspace/social/post';
 
 ## Props
 
-Props follow the exported TypeScript interface. Use the CLI or package declaration for the exact installed-version type.
+| Name | Type | Required | Default | Description |
+|---|---|---:|---|---|
+| `disabled` | `boolean \| undefined` | No | — |  |
+| `locale` | `string \| undefined` | No | — |  |
+| `metrics` | `SocialPostMetrics` | Yes | — |  |
+| `onBookmark` | `(() => void) \| undefined` | No | — |  |
+| `onLike` | `(() => void) \| undefined` | No | — |  |
+| `onReply` | `(() => void) \| undefined` | No | — |  |
+| `onRepost` | `(() => void) \| undefined` | No | — |  |
+| `onShare` | `(() => void) \| undefined` | No | — |  |
+| `pendingAction` | `'like' \| 'bookmark' \| 'repost' \| null \| undefined` | No | — |  |
+| `viewerState` | `SocialPostViewerState` | Yes | — |  |
 
 ## Preferred examples
 
@@ -540,7 +560,23 @@ import { PostCard } from '@commonspace/social/post';
 
 ## Props
 
-Props follow the exported TypeScript interface. Use the CLI or package declaration for the exact installed-version type.
+| Name | Type | Required | Default | Description |
+|---|---|---:|---|---|
+| `compact` | `boolean \| undefined` | No | — |  |
+| `locale` | `string \| undefined` | No | — |  |
+| `nowMs` | `number \| undefined` | No | — |  |
+| `onBookmark` | `(() => void) \| undefined` | No | — |  |
+| `onLike` | `(() => void) \| undefined` | No | — |  |
+| `onOpenAuthor` | `(() => void) \| undefined` | No | — |  |
+| `onOpenMedia` | `((mediaId: string) => void) \| undefined` | No | — |  |
+| `onOpenMenu` | `(() => void) \| undefined` | No | — |  |
+| `onOpenPost` | `(() => void) \| undefined` | No | — |  |
+| `onOpenQuotedPost` | `(() => void) \| undefined` | No | — |  |
+| `onReply` | `(() => void) \| undefined` | No | — |  |
+| `onRepost` | `(() => void) \| undefined` | No | — |  |
+| `onShare` | `(() => void) \| undefined` | No | — |  |
+| `pendingAction` | `'like' \| 'bookmark' \| 'repost' \| null \| undefined` | No | — |  |
+| `post` | `SocialPostViewModel` | Yes | — |  |
 
 ## Preferred examples
 
@@ -709,7 +745,20 @@ import { PostComposerView } from '@commonspace/social/post';
 
 ## Props
 
-Props follow the exported TypeScript interface. Use the CLI or package declaration for the exact installed-version type.
+| Name | Type | Required | Default | Description |
+|---|---|---:|---|---|
+| `error` | `string \| undefined` | No | — |  |
+| `feedback` | `ReactNode \| undefined` | No | — |  |
+| `maximumLength` | `number \| undefined` | No | — |  |
+| `onAddEmoji` | `(() => void) \| undefined` | No | — |  |
+| `onAddMedia` | `(() => void) \| undefined` | No | — |  |
+| `onSubmit` | `() => void` | Yes | — |  |
+| `onValueChange` | `(value: string) => void` | Yes | — |  |
+| `pending` | `boolean \| undefined` | No | — |  |
+| `placeholder` | `string \| undefined` | No | — |  |
+| `submitLabel` | `string \| undefined` | No | — |  |
+| `value` | `string` | Yes | — |  |
+| `viewer` | `SocialUserViewModel` | Yes | — |  |
 
 ## Preferred examples
 
@@ -789,7 +838,14 @@ import { PostHeader } from '@commonspace/social/post';
 
 ## Props
 
-Props follow the exported TypeScript interface. Use the CLI or package declaration for the exact installed-version type.
+| Name | Type | Required | Default | Description |
+|---|---|---:|---|---|
+| `author` | `SocialUserViewModel` | Yes | — |  |
+| `createdAt` | `string` | Yes | — |  |
+| `locale` | `string \| undefined` | No | — |  |
+| `nowMs` | `number \| undefined` | No | — |  |
+| `onOpenAuthor` | `(() => void) \| undefined` | No | — |  |
+| `onOpenMenu` | `(() => void) \| undefined` | No | — |  |
 
 ## Preferred examples
 
@@ -872,7 +928,10 @@ import { PostMediaGrid } from '@commonspace/social/post';
 
 ## Props
 
-Props follow the exported TypeScript interface. Use the CLI or package declaration for the exact installed-version type.
+| Name | Type | Required | Default | Description |
+|---|---|---:|---|---|
+| `media` | `readonly SocialMediaViewModel[]` | Yes | — |  |
+| `onOpenMedia` | `((mediaId: string) => void) \| undefined` | No | — |  |
 
 ## Preferred examples
 
@@ -956,7 +1015,13 @@ import { ProfileHeader } from '@commonspace/social/profile';
 
 ## Props
 
-Props follow the exported TypeScript interface. Use the CLI or package declaration for the exact installed-version type.
+| Name | Type | Required | Default | Description |
+|---|---|---:|---|---|
+| `locale` | `string \| undefined` | No | — |  |
+| `onOpenFollowers` | `(() => void) \| undefined` | No | — |  |
+| `onOpenFollowing` | `(() => void) \| undefined` | No | — |  |
+| `primaryAction` | `ReactNode \| undefined` | No | — |  |
+| `profile` | `SocialProfileViewModel` | Yes | — |  |
 
 ## Preferred examples
 
@@ -1039,7 +1104,18 @@ import { TimelineView } from '@commonspace/social/timeline';
 
 ## Props
 
-Props follow the exported TypeScript interface. Use the CLI or package declaration for the exact installed-version type.
+| Name | Type | Required | Default | Description |
+|---|---|---:|---|---|
+| `emptyDescription` | `string \| undefined` | No | — |  |
+| `emptyTitle` | `string \| undefined` | No | — |  |
+| `error` | `string \| null \| undefined` | No | — |  |
+| `footer` | `ReactNode \| undefined` | No | — |  |
+| `loading` | `boolean \| undefined` | No | — |  |
+| `loadingMore` | `boolean \| undefined` | No | — |  |
+| `onRetry` | `(() => void) \| undefined` | No | — |  |
+| `posts` | `readonly SocialPostViewModel[]` | Yes | — |  |
+| `renderPost` | `(post: SocialPostViewModel) => ReactNode` | No | — |  |
+| `renderPostActions` | `(post: SocialPostViewModel) => Omit<PostCardProps, 'post'>` | No | — |  |
 
 ## Preferred examples
 
@@ -1121,7 +1197,14 @@ import { UserCell } from '@commonspace/social/user';
 
 ## Props
 
-Props follow the exported TypeScript interface. Use the CLI or package declaration for the exact installed-version type.
+| Name | Type | Required | Default | Description |
+|---|---|---:|---|---|
+| `actionLabel` | `string \| undefined` | No | — |  |
+| `actionPending` | `boolean \| undefined` | No | — |  |
+| `description` | `ReactNode \| undefined` | No | — |  |
+| `onAction` | `(() => void) \| undefined` | No | — |  |
+| `onSelect` | `(() => void) \| undefined` | No | — |  |
+| `user` | `SocialUserViewModel` | Yes | — |  |
 
 ## Preferred examples
 
@@ -1209,7 +1292,16 @@ import { Alert } from '@commonspace/ui/alert';
 
 ## Props
 
-Props follow the exported TypeScript interface. Use the CLI or package declaration for the exact installed-version type.
+| Name | Type | Required | Default | Description |
+|---|---|---:|---|---|
+| `action` | `ReactNode \| undefined` | No | — |  |
+| `description` | `ReactNode \| undefined` | No | — |  |
+| `dismissLabel` | `string \| undefined` | No | — |  |
+| `icon` | `ReactNode \| undefined` | No | — |  |
+| `metadata` | `ReactNode \| undefined` | No | — |  |
+| `onDismiss` | `(() => void) \| undefined` | No | — |  |
+| `title` | `ReactNode` | Yes | — |  |
+| `tone` | `FeedbackTone \| undefined` | No | — |  |
 
 ## Preferred examples
 
@@ -1300,7 +1392,13 @@ import { Avatar } from '@commonspace/ui/avatar';
 
 ## Props
 
-Props follow the exported TypeScript interface. Use the CLI or package declaration for the exact installed-version type.
+| Name | Type | Required | Default | Description |
+|---|---|---:|---|---|
+| `alt` | `string \| undefined` | No | — |  |
+| `fallback` | `ReactNode \| undefined` | No | — |  |
+| `loading` | `'eager' \| 'lazy' \| undefined` | No | — |  |
+| `size` | `'sm' \| 'md' \| 'lg' \| 'xl' \| undefined` | No | — |  |
+| `src` | `string \| null \| undefined` | No | — |  |
 
 ## Preferred examples
 
@@ -1382,7 +1480,10 @@ import { Badge } from '@commonspace/ui/badge';
 
 ## Props
 
-Props follow the exported TypeScript interface. Use the CLI or package declaration for the exact installed-version type.
+| Name | Type | Required | Default | Description |
+|---|---|---:|---|---|
+| `size` | `'sm' \| 'md' \| undefined` | No | — |  |
+| `tone` | `'neutral' \| 'accent' \| 'positive' \| 'warning' \| 'critical' \| undefined` | No | — |  |
 
 ## Preferred examples
 
@@ -1470,7 +1571,15 @@ import { Button } from '@commonspace/ui/button';
 
 ## Props
 
-Props follow the exported TypeScript interface. Use the CLI or package declaration for the exact installed-version type.
+| Name | Type | Required | Default | Description |
+|---|---|---:|---|---|
+| `fullWidth` | `boolean \| undefined` | No | — |  |
+| `leadingIcon` | `ReactNode \| undefined` | No | — |  |
+| `pending` | `boolean \| undefined` | No | — |  |
+| `pendingLabel` | `string \| undefined` | No | — |  |
+| `size` | `ButtonSize \| undefined` | No | — |  |
+| `trailingIcon` | `ReactNode \| undefined` | No | — |  |
+| `variant` | `ButtonVariant \| undefined` | No | — |  |
 
 ## Preferred examples
 
@@ -1558,7 +1667,9 @@ import { Container } from '@commonspace/ui/layout';
 
 ## Props
 
-Props follow the exported TypeScript interface. Use the CLI or package declaration for the exact installed-version type.
+| Name | Type | Required | Default | Description |
+|---|---|---:|---|---|
+| `size` | `'sm' \| 'md' \| 'lg' \| 'full' \| undefined` | No | — |  |
 
 ## Preferred examples
 
@@ -1645,7 +1756,19 @@ import { Dialog } from '@commonspace/ui/dialog';
 
 ## Props
 
-Props follow the exported TypeScript interface. Use the CLI or package declaration for the exact installed-version type.
+| Name | Type | Required | Default | Description |
+|---|---|---:|---|---|
+| `children` | `ReactNode` | Yes | — |  |
+| `className` | `string \| undefined` | No | — |  |
+| `closeLabel` | `string \| undefined` | No | — |  |
+| `defaultOpen` | `boolean \| undefined` | No | — |  |
+| `description` | `ReactNode \| undefined` | No | — |  |
+| `dismissible` | `boolean \| undefined` | No | — |  |
+| `footer` | `ReactNode \| undefined` | No | — |  |
+| `onOpenChange` | `((open: boolean) => void) \| undefined` | No | — |  |
+| `open` | `boolean \| undefined` | No | — |  |
+| `size` | `'sm' \| 'md' \| 'lg' \| undefined` | No | — |  |
+| `title` | `ReactNode` | Yes | — |  |
 
 ## Preferred examples
 
@@ -1723,7 +1846,13 @@ import { EmptyState } from '@commonspace/ui';
 
 ## Props
 
-Props follow the exported TypeScript interface. Use the CLI or package declaration for the exact installed-version type.
+| Name | Type | Required | Default | Description |
+|---|---|---:|---|---|
+| `action` | `ReactNode \| undefined` | No | — |  |
+| `description` | `ReactNode` | Yes | — |  |
+| `headingLevel` | `2 \| 3 \| 4 \| undefined` | No | — |  |
+| `icon` | `ReactNode \| undefined` | No | — |  |
+| `title` | `ReactNode` | Yes | — |  |
 
 ## Preferred examples
 
@@ -1803,7 +1932,10 @@ import { FeedbackProvider } from '@commonspace/ui/feedback';
 
 ## Props
 
-Props follow the exported TypeScript interface. Use the CLI or package declaration for the exact installed-version type.
+| Name | Type | Required | Default | Description |
+|---|---|---:|---|---|
+| `children` | `ReactNode` | Yes | — |  |
+| `maximumVisible` | `number \| undefined` | No | — |  |
 
 ## Preferred examples
 
@@ -1890,7 +2022,13 @@ import { IconButton } from '@commonspace/ui/button';
 
 ## Props
 
-Props follow the exported TypeScript interface. Use the CLI or package declaration for the exact installed-version type.
+| Name | Type | Required | Default | Description |
+|---|---|---:|---|---|
+| `icon` | `ReactNode` | Yes | — |  |
+| `label` | `string` | Yes | — |  |
+| `selected` | `boolean \| undefined` | No | — |  |
+| `size` | `'sm' \| 'md' \| 'lg' \| undefined` | No | — |  |
+| `tone` | `'neutral' \| 'accent' \| 'danger' \| undefined` | No | — |  |
 
 ## Preferred examples
 
@@ -1978,7 +2116,12 @@ import { Inline } from '@commonspace/ui/layout';
 
 ## Props
 
-Props follow the exported TypeScript interface. Use the CLI or package declaration for the exact installed-version type.
+| Name | Type | Required | Default | Description |
+|---|---|---:|---|---|
+| `align` | `CSSProperties['alignItems']` | No | — |  |
+| `gap` | `0 \| 1 \| 2 \| 3 \| 4 \| 5 \| 6 \| 8 \| 10 \| 12 \| 16 \| undefined` | No | — |  |
+| `justify` | `CSSProperties['justifyContent']` | No | — |  |
+| `wrap` | `boolean \| undefined` | No | — |  |
 
 ## Preferred examples
 
@@ -2055,7 +2198,9 @@ import { Separator } from '@commonspace/ui/layout';
 
 ## Props
 
-Props follow the exported TypeScript interface. Use the CLI or package declaration for the exact installed-version type.
+| Name | Type | Required | Default | Description |
+|---|---|---:|---|---|
+| `orientation` | `'horizontal' \| 'vertical' \| undefined` | No | — |  |
 
 ## Preferred examples
 
@@ -2135,7 +2280,11 @@ import { Skeleton } from '@commonspace/ui/loading';
 
 ## Props
 
-Props follow the exported TypeScript interface. Use the CLI or package declaration for the exact installed-version type.
+| Name | Type | Required | Default | Description |
+|---|---|---:|---|---|
+| `height` | `CSSProperties['height']` | No | — |  |
+| `radius` | `CSSProperties['borderRadius']` | No | — |  |
+| `width` | `CSSProperties['width']` | No | — |  |
 
 ## Preferred examples
 
@@ -2215,7 +2364,10 @@ import { Spinner } from '@commonspace/ui/loading';
 
 ## Props
 
-Props follow the exported TypeScript interface. Use the CLI or package declaration for the exact installed-version type.
+| Name | Type | Required | Default | Description |
+|---|---|---:|---|---|
+| `label` | `string \| undefined` | No | — |  |
+| `size` | `'sm' \| 'md' \| 'lg' \| undefined` | No | — |  |
 
 ## Preferred examples
 
@@ -2299,7 +2451,10 @@ import { Stack } from '@commonspace/ui/layout';
 
 ## Props
 
-Props follow the exported TypeScript interface. Use the CLI or package declaration for the exact installed-version type.
+| Name | Type | Required | Default | Description |
+|---|---|---:|---|---|
+| `align` | `CSSProperties['alignItems']` | No | — |  |
+| `gap` | `0 \| 1 \| 2 \| 3 \| 4 \| 5 \| 6 \| 8 \| 10 \| 12 \| 16 \| undefined` | No | — |  |
 
 ## Preferred examples
 
@@ -2382,7 +2537,11 @@ import { Surface } from '@commonspace/ui/layout';
 
 ## Props
 
-Props follow the exported TypeScript interface. Use the CLI or package declaration for the exact installed-version type.
+| Name | Type | Required | Default | Description |
+|---|---|---:|---|---|
+| `border` | `boolean \| undefined` | No | — |  |
+| `padding` | `'none' \| 'sm' \| 'md' \| 'lg' \| undefined` | No | — |  |
+| `tone` | `'base' \| 'muted' \| 'raised' \| undefined` | No | — |  |
 
 ## Preferred examples
 
@@ -2466,7 +2625,16 @@ import { Tabs } from '@commonspace/ui/tabs';
 
 ## Props
 
-Props follow the exported TypeScript interface. Use the CLI or package declaration for the exact installed-version type.
+| Name | Type | Required | Default | Description |
+|---|---|---:|---|---|
+| `activationMode` | `'automatic' \| 'manual' \| undefined` | No | — |  |
+| `ariaLabel` | `string` | Yes | — |  |
+| `className` | `string \| undefined` | No | — |  |
+| `defaultValue` | `TValue \| undefined` | No | — |  |
+| `items` | `readonly TabItem<TValue>[]` | Yes | — |  |
+| `onValueChange` | `((value: TValue) => void) \| undefined` | No | — |  |
+| `orientation` | `'horizontal' \| 'vertical' \| undefined` | No | — |  |
+| `value` | `TValue \| undefined` | No | — |  |
 
 ## Preferred examples
 
@@ -2550,7 +2718,13 @@ import { TextArea } from '@commonspace/ui/forms';
 
 ## Props
 
-Props follow the exported TypeScript interface. Use the CLI or package declaration for the exact installed-version type.
+| Name | Type | Required | Default | Description |
+|---|---|---:|---|---|
+| `counter` | `{ current: number; maximum: number } \| undefined` | No | — |  |
+| `description` | `string \| undefined` | No | — |  |
+| `error` | `string \| undefined` | No | — |  |
+| `hideLabel` | `boolean \| undefined` | No | — |  |
+| `label` | `string` | Yes | — |  |
 
 ## Preferred examples
 
@@ -2638,7 +2812,14 @@ import { TextField } from '@commonspace/ui/forms';
 
 ## Props
 
-Props follow the exported TypeScript interface. Use the CLI or package declaration for the exact installed-version type.
+| Name | Type | Required | Default | Description |
+|---|---|---:|---|---|
+| `description` | `string \| undefined` | No | — |  |
+| `error` | `string \| undefined` | No | — |  |
+| `hideLabel` | `boolean \| undefined` | No | — |  |
+| `label` | `string` | Yes | — |  |
+| `leadingIcon` | `ReactNode \| undefined` | No | — |  |
+| `trailingElement` | `ReactNode \| undefined` | No | — |  |
 
 ## Preferred examples
 
@@ -2725,7 +2906,10 @@ import { Toast } from '@commonspace/ui/feedback';
 
 ## Props
 
-Props follow the exported TypeScript interface. Use the CLI or package declaration for the exact installed-version type.
+| Name | Type | Required | Default | Description |
+|---|---|---:|---|---|
+| `item` | `FeedbackItem` | Yes | — |  |
+| `onDismiss` | `(id: string) => void` | Yes | — |  |
 
 ## Preferred examples
 
@@ -2805,7 +2989,10 @@ import { ToastViewport } from '@commonspace/ui/feedback';
 
 ## Props
 
-Props follow the exported TypeScript interface. Use the CLI or package declaration for the exact installed-version type.
+| Name | Type | Required | Default | Description |
+|---|---|---:|---|---|
+| `items` | `readonly FeedbackItem[]` | Yes | — |  |
+| `onDismiss` | `(id: string) => void` | Yes | — |  |
 
 ## Preferred examples
 

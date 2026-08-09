@@ -27,3 +27,12 @@ test('search returns product patterns as well as components', () => {
   assert.ok(results.some((result) => result.id === 'pattern.social-feed'));
   assert.ok(results.some((result) => result.id === 'social.timeline-view'));
 });
+
+test('bundled component contracts include compiler-extracted public props', () => {
+  const button = bundledCatalog.entries.find((entry) => entry.id === 'ui.button');
+  assert.ok(button && button.kind === 'component');
+  if (button.kind !== 'component') return;
+  assert.equal(button.nativeElement, 'button');
+  assert.ok(button.props.some((prop) => prop.name === 'pending' && prop.required === false));
+  assert.ok(button.props.some((prop) => prop.name === 'leadingIcon'));
+});

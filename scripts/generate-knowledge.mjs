@@ -10,6 +10,8 @@ import {
   defineTemplateDoc,
   stableStringify,
   validateCatalog,
+  extractComponentApi,
+  extractExportedInterfaces,
 } from '../packages/knowledge/src/index.ts';
 
 const repositoryRoot = resolve(new URL('..', import.meta.url).pathname);
@@ -142,6 +144,19 @@ const metadataRoots = [
   join(repositoryRoot, 'packages/knowledge/content'),
 ];
 const metadataFiles = (await Promise.all(metadataRoots.map((root) => listFiles(root, (path) => path.endsWith('.docs.ts'))))).flat().sort((a, b) => a.localeCompare(b));
+const sourceFiles = (await Promise.all([
+  join(repositoryRoot, 'packages/ui/src'),
+  join(repositoryRoot, 'packages/social/src'),
+].map((root) => listFiles(root, (path) => path.endsWith('.tsx'))))).flat();
+const interfaceRegistry = new Map();
+for (const sourceFile of sourceFiles) {
+  const source = await readFile(sourceFile, 'utf8');
+  for (const [name, entry] of extractExportedInterfaces(source)) {
+    if (interfaceRegistry.has(name)) throw new Error(`Duplicate exported interface name: ${name}`);
+    interfaceRegistry.set(name, entry);
+  }
+}
+
 const entries = [];
 for (const file of metadataFiles) {
   const metadataSource = await readFile(file, 'utf8');
@@ -152,7 +167,15 @@ for (const file of metadataFiles) {
     throw new Error(`${relative(repositoryRoot, file)}: metadata must not import or export runtime code`);
   }
   const module = await import(`${pathToFileURL(file).href}?knowledge=${encodeURIComponent(relative(repositoryRoot, file))}`);
-  try { entries.push(validateEntry(module.default)); }
+  try {
+    let metadata = module.default;
+    if (metadata.kind === 'component') {
+      const componentSource = await readFile(join(repositoryRoot, metadata.sourcePath), 'utf8');
+      const api = extractComponentApi(componentSource, metadata.name, interfaceRegistry);
+      metadata = { ...metadata, props: api.props, ...(api.nativeElement ? { nativeElement: api.nativeElement } : {}) };
+    }
+    entries.push(validateEntry(metadata));
+  }
   catch (error) { throw new Error(`${relative(repositoryRoot, file)}: ${error instanceof Error ? error.message : String(error)}`); }
 }
 const knowledgeManifest = await readJson(join(repositoryRoot, 'packages/knowledge/package.json'));

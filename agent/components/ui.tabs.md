@@ -50,7 +50,16 @@ import { Tabs } from '@commonspace/ui/tabs';
 
 ## Props
 
-Props follow the exported TypeScript interface. Use the CLI or package declaration for the exact installed-version type.
+| Name | Type | Required | Default | Description |
+|---|---|---:|---|---|
+| `activationMode` | `'automatic' \| 'manual' \| undefined` | No | — |  |
+| `ariaLabel` | `string` | Yes | — |  |
+| `className` | `string \| undefined` | No | — |  |
+| `defaultValue` | `TValue \| undefined` | No | — |  |
+| `items` | `readonly TabItem<TValue>[]` | Yes | — |  |
+| `onValueChange` | `((value: TValue) => void) \| undefined` | No | — |  |
+| `orientation` | `'horizontal' \| 'vertical' \| undefined` | No | — |  |
+| `value` | `TValue \| undefined` | No | — |  |
 
 ## Preferred examples
 

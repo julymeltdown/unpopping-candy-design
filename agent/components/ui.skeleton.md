@@ -46,7 +46,11 @@ import { Skeleton } from '@commonspace/ui/loading';
 
 ## Props
 
-Props follow the exported TypeScript interface. Use the CLI or package declaration for the exact installed-version type.
+| Name | Type | Required | Default | Description |
+|---|---|---:|---|---|
+| `height` | `CSSProperties['height']` | No | — |  |
+| `radius` | `CSSProperties['borderRadius']` | No | — |  |
+| `width` | `CSSProperties['width']` | No | — |  |
 
 ## Preferred examples
 

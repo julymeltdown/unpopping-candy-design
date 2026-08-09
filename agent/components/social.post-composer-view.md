@@ -51,7 +51,20 @@ import { PostComposerView } from '@commonspace/social/post';
 
 ## Props
 
-Props follow the exported TypeScript interface. Use the CLI or package declaration for the exact installed-version type.
+| Name | Type | Required | Default | Description |
+|---|---|---:|---|---|
+| `error` | `string \| undefined` | No | — |  |
+| `feedback` | `ReactNode \| undefined` | No | — |  |
+| `maximumLength` | `number \| undefined` | No | — |  |
+| `onAddEmoji` | `(() => void) \| undefined` | No | — |  |
+| `onAddMedia` | `(() => void) \| undefined` | No | — |  |
+| `onSubmit` | `() => void` | Yes | — |  |
+| `onValueChange` | `(value: string) => void` | Yes | — |  |
+| `pending` | `boolean \| undefined` | No | — |  |
+| `placeholder` | `string \| undefined` | No | — |  |
+| `submitLabel` | `string \| undefined` | No | — |  |
+| `value` | `string` | Yes | — |  |
+| `viewer` | `SocialUserViewModel` | Yes | — |  |
 
 ## Preferred examples
 

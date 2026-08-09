@@ -43,7 +43,9 @@ import { Separator } from '@commonspace/ui/layout';
 
 ## Props
 
-Props follow the exported TypeScript interface. Use the CLI or package declaration for the exact installed-version type.
+| Name | Type | Required | Default | Description |
+|---|---|---:|---|---|
+| `orientation` | `'horizontal' \| 'vertical' \| undefined` | No | — |  |
 
 ## Preferred examples
 

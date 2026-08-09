@@ -46,7 +46,10 @@ import { Spinner } from '@commonspace/ui/loading';
 
 ## Props
 
-Props follow the exported TypeScript interface. Use the CLI or package declaration for the exact installed-version type.
+| Name | Type | Required | Default | Description |
+|---|---|---:|---|---|
+| `label` | `string \| undefined` | No | — |  |
+| `size` | `'sm' \| 'md' \| 'lg' \| undefined` | No | — |  |
 
 ## Preferred examples
 

@@ -51,7 +51,13 @@ import { TextArea } from '@commonspace/ui/forms';
 
 ## Props
 
-Props follow the exported TypeScript interface. Use the CLI or package declaration for the exact installed-version type.
+| Name | Type | Required | Default | Description |
+|---|---|---:|---|---|
+| `counter` | `{ current: number; maximum: number } \| undefined` | No | — |  |
+| `description` | `string \| undefined` | No | — |  |
+| `error` | `string \| undefined` | No | — |  |
+| `hideLabel` | `boolean \| undefined` | No | — |  |
+| `label` | `string` | Yes | — |  |
 
 ## Preferred examples
 

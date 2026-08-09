@@ -54,7 +54,16 @@ import { Alert } from '@commonspace/ui/alert';
 
 ## Props
 
-Props follow the exported TypeScript interface. Use the CLI or package declaration for the exact installed-version type.
+| Name | Type | Required | Default | Description |
+|---|---|---:|---|---|
+| `action` | `ReactNode \| undefined` | No | — |  |
+| `description` | `ReactNode \| undefined` | No | — |  |
+| `dismissLabel` | `string \| undefined` | No | — |  |
+| `icon` | `ReactNode \| undefined` | No | — |  |
+| `metadata` | `ReactNode \| undefined` | No | — |  |
+| `onDismiss` | `(() => void) \| undefined` | No | — |  |
+| `title` | `ReactNode` | Yes | — |  |
+| `tone` | `FeedbackTone \| undefined` | No | — |  |
 
 ## Preferred examples
 

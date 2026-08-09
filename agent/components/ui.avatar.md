@@ -50,7 +50,13 @@ import { Avatar } from '@commonspace/ui/avatar';
 
 ## Props
 
-Props follow the exported TypeScript interface. Use the CLI or package declaration for the exact installed-version type.
+| Name | Type | Required | Default | Description |
+|---|---|---:|---|---|
+| `alt` | `string \| undefined` | No | — |  |
+| `fallback` | `ReactNode \| undefined` | No | — |  |
+| `loading` | `'eager' \| 'lazy' \| undefined` | No | — |  |
+| `size` | `'sm' \| 'md' \| 'lg' \| 'xl' \| undefined` | No | — |  |
+| `src` | `string \| null \| undefined` | No | — |  |
 
 ## Preferred examples
 

@@ -34,8 +34,25 @@
       ],
       "kind": "component",
       "name": "ConversationPreview",
+      "nativeElement": "button",
       "package": "@commonspace/social",
-      "props": [],
+      "props": [
+        {
+          "name": "conversation",
+          "required": true,
+          "type": "SocialConversationPreviewViewModel"
+        },
+        {
+          "name": "locale",
+          "required": false,
+          "type": "string | undefined"
+        },
+        {
+          "name": "nowMs",
+          "required": false,
+          "type": "number | undefined"
+        }
+      ],
       "related": [
         "social.user-cell",
         "pattern.conversation-list"
@@ -109,8 +126,30 @@
       ],
       "kind": "component",
       "name": "NotificationItem",
+      "nativeElement": "element",
       "package": "@commonspace/social",
-      "props": [],
+      "props": [
+        {
+          "name": "locale",
+          "required": false,
+          "type": "string | undefined"
+        },
+        {
+          "name": "notification",
+          "required": true,
+          "type": "SocialNotificationViewModel"
+        },
+        {
+          "name": "nowMs",
+          "required": false,
+          "type": "number | undefined"
+        },
+        {
+          "name": "onSelect",
+          "required": false,
+          "type": "(() => void) | undefined"
+        }
+      ],
       "related": [
         "ui.toast",
         "pattern.collection-states"
@@ -196,7 +235,58 @@
       "kind": "component",
       "name": "PostActions",
       "package": "@commonspace/social",
-      "props": [],
+      "props": [
+        {
+          "name": "disabled",
+          "required": false,
+          "type": "boolean | undefined"
+        },
+        {
+          "name": "locale",
+          "required": false,
+          "type": "string | undefined"
+        },
+        {
+          "name": "metrics",
+          "required": true,
+          "type": "SocialPostMetrics"
+        },
+        {
+          "name": "onBookmark",
+          "required": false,
+          "type": "(() => void) | undefined"
+        },
+        {
+          "name": "onLike",
+          "required": false,
+          "type": "(() => void) | undefined"
+        },
+        {
+          "name": "onReply",
+          "required": false,
+          "type": "(() => void) | undefined"
+        },
+        {
+          "name": "onRepost",
+          "required": false,
+          "type": "(() => void) | undefined"
+        },
+        {
+          "name": "onShare",
+          "required": false,
+          "type": "(() => void) | undefined"
+        },
+        {
+          "name": "pendingAction",
+          "required": false,
+          "type": "'like' | 'bookmark' | 'repost' | null | undefined"
+        },
+        {
+          "name": "viewerState",
+          "required": true,
+          "type": "SocialPostViewerState"
+        }
+      ],
       "related": [
         "social.post-card",
         "ui.icon-button"
@@ -279,7 +369,83 @@
       "kind": "component",
       "name": "PostCard",
       "package": "@commonspace/social",
-      "props": [],
+      "props": [
+        {
+          "name": "compact",
+          "required": false,
+          "type": "boolean | undefined"
+        },
+        {
+          "name": "locale",
+          "required": false,
+          "type": "string | undefined"
+        },
+        {
+          "name": "nowMs",
+          "required": false,
+          "type": "number | undefined"
+        },
+        {
+          "name": "onBookmark",
+          "required": false,
+          "type": "(() => void) | undefined"
+        },
+        {
+          "name": "onLike",
+          "required": false,
+          "type": "(() => void) | undefined"
+        },
+        {
+          "name": "onOpenAuthor",
+          "required": false,
+          "type": "(() => void) | undefined"
+        },
+        {
+          "name": "onOpenMedia",
+          "required": false,
+          "type": "((mediaId: string) => void) | undefined"
+        },
+        {
+          "name": "onOpenMenu",
+          "required": false,
+          "type": "(() => void) | undefined"
+        },
+        {
+          "name": "onOpenPost",
+          "required": false,
+          "type": "(() => void) | undefined"
+        },
+        {
+          "name": "onOpenQuotedPost",
+          "required": false,
+          "type": "(() => void) | undefined"
+        },
+        {
+          "name": "onReply",
+          "required": false,
+          "type": "(() => void) | undefined"
+        },
+        {
+          "name": "onRepost",
+          "required": false,
+          "type": "(() => void) | undefined"
+        },
+        {
+          "name": "onShare",
+          "required": false,
+          "type": "(() => void) | undefined"
+        },
+        {
+          "name": "pendingAction",
+          "required": false,
+          "type": "'like' | 'bookmark' | 'repost' | null | undefined"
+        },
+        {
+          "name": "post",
+          "required": true,
+          "type": "SocialPostViewModel"
+        }
+      ],
       "related": [
         "social.post-header",
         "social.post-actions",
@@ -424,7 +590,68 @@
       "kind": "component",
       "name": "PostComposerView",
       "package": "@commonspace/social",
-      "props": [],
+      "props": [
+        {
+          "name": "error",
+          "required": false,
+          "type": "string | undefined"
+        },
+        {
+          "name": "feedback",
+          "required": false,
+          "type": "ReactNode | undefined"
+        },
+        {
+          "name": "maximumLength",
+          "required": false,
+          "type": "number | undefined"
+        },
+        {
+          "name": "onAddEmoji",
+          "required": false,
+          "type": "(() => void) | undefined"
+        },
+        {
+          "name": "onAddMedia",
+          "required": false,
+          "type": "(() => void) | undefined"
+        },
+        {
+          "name": "onSubmit",
+          "required": true,
+          "type": "() => void"
+        },
+        {
+          "name": "onValueChange",
+          "required": true,
+          "type": "(value: string) => void"
+        },
+        {
+          "name": "pending",
+          "required": false,
+          "type": "boolean | undefined"
+        },
+        {
+          "name": "placeholder",
+          "required": false,
+          "type": "string | undefined"
+        },
+        {
+          "name": "submitLabel",
+          "required": false,
+          "type": "string | undefined"
+        },
+        {
+          "name": "value",
+          "required": true,
+          "type": "string"
+        },
+        {
+          "name": "viewer",
+          "required": true,
+          "type": "SocialUserViewModel"
+        }
+      ],
       "related": [
         "ui.text-area",
         "ui.button",
@@ -500,7 +727,38 @@
       "kind": "component",
       "name": "PostHeader",
       "package": "@commonspace/social",
-      "props": [],
+      "props": [
+        {
+          "name": "author",
+          "required": true,
+          "type": "SocialUserViewModel"
+        },
+        {
+          "name": "createdAt",
+          "required": true,
+          "type": "string"
+        },
+        {
+          "name": "locale",
+          "required": false,
+          "type": "string | undefined"
+        },
+        {
+          "name": "nowMs",
+          "required": false,
+          "type": "number | undefined"
+        },
+        {
+          "name": "onOpenAuthor",
+          "required": false,
+          "type": "(() => void) | undefined"
+        },
+        {
+          "name": "onOpenMenu",
+          "required": false,
+          "type": "(() => void) | undefined"
+        }
+      ],
       "related": [
         "social.post-card",
         "social.user-cell"
@@ -572,7 +830,18 @@
       "kind": "component",
       "name": "PostMediaGrid",
       "package": "@commonspace/social",
-      "props": [],
+      "props": [
+        {
+          "name": "media",
+          "required": true,
+          "type": "readonly SocialMediaViewModel[]"
+        },
+        {
+          "name": "onOpenMedia",
+          "required": false,
+          "type": "((mediaId: string) => void) | undefined"
+        }
+      ],
       "related": [
         "social.post-card"
       ],
@@ -651,7 +920,33 @@
       "kind": "component",
       "name": "ProfileHeader",
       "package": "@commonspace/social",
-      "props": [],
+      "props": [
+        {
+          "name": "locale",
+          "required": false,
+          "type": "string | undefined"
+        },
+        {
+          "name": "onOpenFollowers",
+          "required": false,
+          "type": "(() => void) | undefined"
+        },
+        {
+          "name": "onOpenFollowing",
+          "required": false,
+          "type": "(() => void) | undefined"
+        },
+        {
+          "name": "primaryAction",
+          "required": false,
+          "type": "ReactNode | undefined"
+        },
+        {
+          "name": "profile",
+          "required": true,
+          "type": "SocialProfileViewModel"
+        }
+      ],
       "related": [
         "social.user-cell",
         "pattern.profile-surface"
@@ -731,7 +1026,58 @@
       "kind": "component",
       "name": "TimelineView",
       "package": "@commonspace/social",
-      "props": [],
+      "props": [
+        {
+          "name": "emptyDescription",
+          "required": false,
+          "type": "string | undefined"
+        },
+        {
+          "name": "emptyTitle",
+          "required": false,
+          "type": "string | undefined"
+        },
+        {
+          "name": "error",
+          "required": false,
+          "type": "string | null | undefined"
+        },
+        {
+          "name": "footer",
+          "required": false,
+          "type": "ReactNode | undefined"
+        },
+        {
+          "name": "loading",
+          "required": false,
+          "type": "boolean | undefined"
+        },
+        {
+          "name": "loadingMore",
+          "required": false,
+          "type": "boolean | undefined"
+        },
+        {
+          "name": "onRetry",
+          "required": false,
+          "type": "(() => void) | undefined"
+        },
+        {
+          "name": "posts",
+          "required": true,
+          "type": "readonly SocialPostViewModel[]"
+        },
+        {
+          "name": "renderPost",
+          "required": false,
+          "type": "(post: SocialPostViewModel) => ReactNode"
+        },
+        {
+          "name": "renderPostActions",
+          "required": false,
+          "type": "(post: SocialPostViewModel) => Omit<PostCardProps, 'post'>"
+        }
+      ],
       "related": [
         "social.post-card",
         "social.post-card-skeleton",
@@ -801,8 +1147,40 @@
       ],
       "kind": "component",
       "name": "UserCell",
+      "nativeElement": "div",
       "package": "@commonspace/social",
-      "props": [],
+      "props": [
+        {
+          "name": "actionLabel",
+          "required": false,
+          "type": "string | undefined"
+        },
+        {
+          "name": "actionPending",
+          "required": false,
+          "type": "boolean | undefined"
+        },
+        {
+          "name": "description",
+          "required": false,
+          "type": "ReactNode | undefined"
+        },
+        {
+          "name": "onAction",
+          "required": false,
+          "type": "(() => void) | undefined"
+        },
+        {
+          "name": "onSelect",
+          "required": false,
+          "type": "(() => void) | undefined"
+        },
+        {
+          "name": "user",
+          "required": true,
+          "type": "SocialUserViewModel"
+        }
+      ],
       "related": [
         "ui.avatar",
         "social.profile-header"
@@ -882,8 +1260,50 @@
       ],
       "kind": "component",
       "name": "Alert",
+      "nativeElement": "element",
       "package": "@commonspace/ui",
-      "props": [],
+      "props": [
+        {
+          "name": "action",
+          "required": false,
+          "type": "ReactNode | undefined"
+        },
+        {
+          "name": "description",
+          "required": false,
+          "type": "ReactNode | undefined"
+        },
+        {
+          "name": "dismissLabel",
+          "required": false,
+          "type": "string | undefined"
+        },
+        {
+          "name": "icon",
+          "required": false,
+          "type": "ReactNode | undefined"
+        },
+        {
+          "name": "metadata",
+          "required": false,
+          "type": "ReactNode | undefined"
+        },
+        {
+          "name": "onDismiss",
+          "required": false,
+          "type": "(() => void) | undefined"
+        },
+        {
+          "name": "title",
+          "required": true,
+          "type": "ReactNode"
+        },
+        {
+          "name": "tone",
+          "required": false,
+          "type": "FeedbackTone | undefined"
+        }
+      ],
       "related": [
         "ui.toast",
         "ui.empty-state",
@@ -968,8 +1388,35 @@
       ],
       "kind": "component",
       "name": "Avatar",
+      "nativeElement": "span",
       "package": "@commonspace/ui",
-      "props": [],
+      "props": [
+        {
+          "name": "alt",
+          "required": false,
+          "type": "string | undefined"
+        },
+        {
+          "name": "fallback",
+          "required": false,
+          "type": "ReactNode | undefined"
+        },
+        {
+          "name": "loading",
+          "required": false,
+          "type": "'eager' | 'lazy' | undefined"
+        },
+        {
+          "name": "size",
+          "required": false,
+          "type": "'sm' | 'md' | 'lg' | 'xl' | undefined"
+        },
+        {
+          "name": "src",
+          "required": false,
+          "type": "string | null | undefined"
+        }
+      ],
       "related": [
         "social.user-cell"
       ],
@@ -1045,8 +1492,20 @@
       ],
       "kind": "component",
       "name": "Badge",
+      "nativeElement": "span",
       "package": "@commonspace/ui",
-      "props": [],
+      "props": [
+        {
+          "name": "size",
+          "required": false,
+          "type": "'sm' | 'md' | undefined"
+        },
+        {
+          "name": "tone",
+          "required": false,
+          "type": "'neutral' | 'accent' | 'positive' | 'warning' | 'critical' | undefined"
+        }
+      ],
       "related": [
         "ui.alert"
       ],
@@ -1135,8 +1594,45 @@
       ],
       "kind": "component",
       "name": "Button",
+      "nativeElement": "button",
       "package": "@commonspace/ui",
-      "props": [],
+      "props": [
+        {
+          "name": "fullWidth",
+          "required": false,
+          "type": "boolean | undefined"
+        },
+        {
+          "name": "leadingIcon",
+          "required": false,
+          "type": "ReactNode | undefined"
+        },
+        {
+          "name": "pending",
+          "required": false,
+          "type": "boolean | undefined"
+        },
+        {
+          "name": "pendingLabel",
+          "required": false,
+          "type": "string | undefined"
+        },
+        {
+          "name": "size",
+          "required": false,
+          "type": "ButtonSize | undefined"
+        },
+        {
+          "name": "trailingIcon",
+          "required": false,
+          "type": "ReactNode | undefined"
+        },
+        {
+          "name": "variant",
+          "required": false,
+          "type": "ButtonVariant | undefined"
+        }
+      ],
       "related": [
         "ui.icon-button",
         "pattern.form-actions"
@@ -1220,8 +1716,15 @@
       ],
       "kind": "component",
       "name": "Container",
+      "nativeElement": "div",
       "package": "@commonspace/ui",
-      "props": [],
+      "props": [
+        {
+          "name": "size",
+          "required": false,
+          "type": "'sm' | 'md' | 'lg' | 'full' | undefined"
+        }
+      ],
       "related": [
         "ui.stack",
         "ui.inline"
@@ -1301,7 +1804,63 @@
       "kind": "component",
       "name": "Dialog",
       "package": "@commonspace/ui",
-      "props": [],
+      "props": [
+        {
+          "name": "children",
+          "required": true,
+          "type": "ReactNode"
+        },
+        {
+          "name": "className",
+          "required": false,
+          "type": "string | undefined"
+        },
+        {
+          "name": "closeLabel",
+          "required": false,
+          "type": "string | undefined"
+        },
+        {
+          "name": "defaultOpen",
+          "required": false,
+          "type": "boolean | undefined"
+        },
+        {
+          "name": "description",
+          "required": false,
+          "type": "ReactNode | undefined"
+        },
+        {
+          "name": "dismissible",
+          "required": false,
+          "type": "boolean | undefined"
+        },
+        {
+          "name": "footer",
+          "required": false,
+          "type": "ReactNode | undefined"
+        },
+        {
+          "name": "onOpenChange",
+          "required": false,
+          "type": "((open: boolean) => void) | undefined"
+        },
+        {
+          "name": "open",
+          "required": false,
+          "type": "boolean | undefined"
+        },
+        {
+          "name": "size",
+          "required": false,
+          "type": "'sm' | 'md' | 'lg' | undefined"
+        },
+        {
+          "name": "title",
+          "required": true,
+          "type": "ReactNode"
+        }
+      ],
       "related": [
         "ui.button",
         "ui.alert"
@@ -1379,8 +1938,35 @@
       ],
       "kind": "component",
       "name": "EmptyState",
+      "nativeElement": "element",
       "package": "@commonspace/ui",
-      "props": [],
+      "props": [
+        {
+          "name": "action",
+          "required": false,
+          "type": "ReactNode | undefined"
+        },
+        {
+          "name": "description",
+          "required": true,
+          "type": "ReactNode"
+        },
+        {
+          "name": "headingLevel",
+          "required": false,
+          "type": "2 | 3 | 4 | undefined"
+        },
+        {
+          "name": "icon",
+          "required": false,
+          "type": "ReactNode | undefined"
+        },
+        {
+          "name": "title",
+          "required": true,
+          "type": "ReactNode"
+        }
+      ],
       "related": [
         "ui.alert",
         "ui.skeleton"
@@ -1453,7 +2039,18 @@
       "kind": "component",
       "name": "FeedbackProvider",
       "package": "@commonspace/ui",
-      "props": [],
+      "props": [
+        {
+          "name": "children",
+          "required": true,
+          "type": "ReactNode"
+        },
+        {
+          "name": "maximumVisible",
+          "required": false,
+          "type": "number | undefined"
+        }
+      ],
       "related": [
         "ui.toast",
         "ui.toast-viewport",
@@ -1528,8 +2125,35 @@
       ],
       "kind": "component",
       "name": "IconButton",
+      "nativeElement": "button",
       "package": "@commonspace/ui",
-      "props": [],
+      "props": [
+        {
+          "name": "icon",
+          "required": true,
+          "type": "ReactNode"
+        },
+        {
+          "name": "label",
+          "required": true,
+          "type": "string"
+        },
+        {
+          "name": "selected",
+          "required": false,
+          "type": "boolean | undefined"
+        },
+        {
+          "name": "size",
+          "required": false,
+          "type": "'sm' | 'md' | 'lg' | undefined"
+        },
+        {
+          "name": "tone",
+          "required": false,
+          "type": "'neutral' | 'accent' | 'danger' | undefined"
+        }
+      ],
       "related": [
         "ui.button"
       ],
@@ -1606,8 +2230,30 @@
       ],
       "kind": "component",
       "name": "Inline",
+      "nativeElement": "div",
       "package": "@commonspace/ui",
-      "props": [],
+      "props": [
+        {
+          "name": "align",
+          "required": false,
+          "type": "CSSProperties['alignItems']"
+        },
+        {
+          "name": "gap",
+          "required": false,
+          "type": "0 | 1 | 2 | 3 | 4 | 5 | 6 | 8 | 10 | 12 | 16 | undefined"
+        },
+        {
+          "name": "justify",
+          "required": false,
+          "type": "CSSProperties['justifyContent']"
+        },
+        {
+          "name": "wrap",
+          "required": false,
+          "type": "boolean | undefined"
+        }
+      ],
       "related": [
         "ui.stack",
         "ui.separator"
@@ -1685,8 +2331,15 @@
       ],
       "kind": "component",
       "name": "Separator",
+      "nativeElement": "hr",
       "package": "@commonspace/ui",
-      "props": [],
+      "props": [
+        {
+          "name": "orientation",
+          "required": false,
+          "type": "'horizontal' | 'vertical' | undefined"
+        }
+      ],
       "related": [
         "ui.stack",
         "ui.surface"
@@ -1753,8 +2406,25 @@
       ],
       "kind": "component",
       "name": "Skeleton",
+      "nativeElement": "span",
       "package": "@commonspace/ui",
-      "props": [],
+      "props": [
+        {
+          "name": "height",
+          "required": false,
+          "type": "CSSProperties['height']"
+        },
+        {
+          "name": "radius",
+          "required": false,
+          "type": "CSSProperties['borderRadius']"
+        },
+        {
+          "name": "width",
+          "required": false,
+          "type": "CSSProperties['width']"
+        }
+      ],
       "related": [
         "ui.spinner",
         "ui.empty-state"
@@ -1827,8 +2497,20 @@
       ],
       "kind": "component",
       "name": "Spinner",
+      "nativeElement": "span",
       "package": "@commonspace/ui",
-      "props": [],
+      "props": [
+        {
+          "name": "label",
+          "required": false,
+          "type": "string | undefined"
+        },
+        {
+          "name": "size",
+          "required": false,
+          "type": "'sm' | 'md' | 'lg' | undefined"
+        }
+      ],
       "related": [
         "ui.skeleton",
         "ui.button"
@@ -1900,8 +2582,20 @@
       ],
       "kind": "component",
       "name": "Stack",
+      "nativeElement": "div",
       "package": "@commonspace/ui",
-      "props": [],
+      "props": [
+        {
+          "name": "align",
+          "required": false,
+          "type": "CSSProperties['alignItems']"
+        },
+        {
+          "name": "gap",
+          "required": false,
+          "type": "0 | 1 | 2 | 3 | 4 | 5 | 6 | 8 | 10 | 12 | 16 | undefined"
+        }
+      ],
       "related": [
         "ui.inline",
         "ui.container"
@@ -1985,8 +2679,25 @@
       ],
       "kind": "component",
       "name": "Surface",
+      "nativeElement": "div",
       "package": "@commonspace/ui",
-      "props": [],
+      "props": [
+        {
+          "name": "border",
+          "required": false,
+          "type": "boolean | undefined"
+        },
+        {
+          "name": "padding",
+          "required": false,
+          "type": "'none' | 'sm' | 'md' | 'lg' | undefined"
+        },
+        {
+          "name": "tone",
+          "required": false,
+          "type": "'base' | 'muted' | 'raised' | undefined"
+        }
+      ],
       "related": [
         "ui.container",
         "ui.separator"
@@ -2064,7 +2775,48 @@
       "kind": "component",
       "name": "Tabs",
       "package": "@commonspace/ui",
-      "props": [],
+      "props": [
+        {
+          "name": "activationMode",
+          "required": false,
+          "type": "'automatic' | 'manual' | undefined"
+        },
+        {
+          "name": "ariaLabel",
+          "required": true,
+          "type": "string"
+        },
+        {
+          "name": "className",
+          "required": false,
+          "type": "string | undefined"
+        },
+        {
+          "name": "defaultValue",
+          "required": false,
+          "type": "TValue | undefined"
+        },
+        {
+          "name": "items",
+          "required": true,
+          "type": "readonly TabItem<TValue>[]"
+        },
+        {
+          "name": "onValueChange",
+          "required": false,
+          "type": "((value: TValue) => void) | undefined"
+        },
+        {
+          "name": "orientation",
+          "required": false,
+          "type": "'horizontal' | 'vertical' | undefined"
+        },
+        {
+          "name": "value",
+          "required": false,
+          "type": "TValue | undefined"
+        }
+      ],
       "related": [
         "ui.button"
       ],
@@ -2137,8 +2889,35 @@
       ],
       "kind": "component",
       "name": "TextArea",
+      "nativeElement": "textarea",
       "package": "@commonspace/ui",
-      "props": [],
+      "props": [
+        {
+          "name": "counter",
+          "required": false,
+          "type": "{ current: number; maximum: number } | undefined"
+        },
+        {
+          "name": "description",
+          "required": false,
+          "type": "string | undefined"
+        },
+        {
+          "name": "error",
+          "required": false,
+          "type": "string | undefined"
+        },
+        {
+          "name": "hideLabel",
+          "required": false,
+          "type": "boolean | undefined"
+        },
+        {
+          "name": "label",
+          "required": true,
+          "type": "string"
+        }
+      ],
       "related": [
         "ui.text-field",
         "pattern.form-actions"
@@ -2210,8 +2989,40 @@
       ],
       "kind": "component",
       "name": "TextField",
+      "nativeElement": "input",
       "package": "@commonspace/ui",
-      "props": [],
+      "props": [
+        {
+          "name": "description",
+          "required": false,
+          "type": "string | undefined"
+        },
+        {
+          "name": "error",
+          "required": false,
+          "type": "string | undefined"
+        },
+        {
+          "name": "hideLabel",
+          "required": false,
+          "type": "boolean | undefined"
+        },
+        {
+          "name": "label",
+          "required": true,
+          "type": "string"
+        },
+        {
+          "name": "leadingIcon",
+          "required": false,
+          "type": "ReactNode | undefined"
+        },
+        {
+          "name": "trailingElement",
+          "required": false,
+          "type": "ReactNode | undefined"
+        }
+      ],
       "related": [
         "ui.text-area",
         "pattern.form-actions"
@@ -2295,7 +3106,18 @@
       "kind": "component",
       "name": "Toast",
       "package": "@commonspace/ui",
-      "props": [],
+      "props": [
+        {
+          "name": "item",
+          "required": true,
+          "type": "FeedbackItem"
+        },
+        {
+          "name": "onDismiss",
+          "required": true,
+          "type": "(id: string) => void"
+        }
+      ],
       "related": [
         "ui.feedback-provider",
         "ui.toast-viewport"
@@ -2378,7 +3200,18 @@
       "kind": "component",
       "name": "ToastViewport",
       "package": "@commonspace/ui",
-      "props": [],
+      "props": [
+        {
+          "name": "items",
+          "required": true,
+          "type": "readonly FeedbackItem[]"
+        },
+        {
+          "name": "onDismiss",
+          "required": true,
+          "type": "(id: string) => void"
+        }
+      ],
       "related": [
         "ui.feedback-provider",
         "ui.toast"
@@ -2450,6 +3283,7 @@
       ],
       "kind": "component",
       "name": "VisuallyHidden",
+      "nativeElement": "span",
       "package": "@commonspace/ui",
       "props": [],
       "related": [

@@ -46,7 +46,10 @@ import { ToastViewport } from '@commonspace/ui/feedback';
 
 ## Props
 
-Props follow the exported TypeScript interface. Use the CLI or package declaration for the exact installed-version type.
+| Name | Type | Required | Default | Description |
+|---|---|---:|---|---|
+| `items` | `readonly FeedbackItem[]` | Yes | — |  |
+| `onDismiss` | `(id: string) => void` | Yes | — |  |
 
 ## Preferred examples
 

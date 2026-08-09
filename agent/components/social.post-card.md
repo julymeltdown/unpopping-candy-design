@@ -52,7 +52,23 @@ import { PostCard } from '@commonspace/social/post';
 
 ## Props
 
-Props follow the exported TypeScript interface. Use the CLI or package declaration for the exact installed-version type.
+| Name | Type | Required | Default | Description |
+|---|---|---:|---|---|
+| `compact` | `boolean \| undefined` | No | — |  |
+| `locale` | `string \| undefined` | No | — |  |
+| `nowMs` | `number \| undefined` | No | — |  |
+| `onBookmark` | `(() => void) \| undefined` | No | — |  |
+| `onLike` | `(() => void) \| undefined` | No | — |  |
+| `onOpenAuthor` | `(() => void) \| undefined` | No | — |  |
+| `onOpenMedia` | `((mediaId: string) => void) \| undefined` | No | — |  |
+| `onOpenMenu` | `(() => void) \| undefined` | No | — |  |
+| `onOpenPost` | `(() => void) \| undefined` | No | — |  |
+| `onOpenQuotedPost` | `(() => void) \| undefined` | No | — |  |
+| `onReply` | `(() => void) \| undefined` | No | — |  |
+| `onRepost` | `(() => void) \| undefined` | No | — |  |
+| `onShare` | `(() => void) \| undefined` | No | — |  |
+| `pendingAction` | `'like' \| 'bookmark' \| 'repost' \| null \| undefined` | No | — |  |
+| `post` | `SocialPostViewModel` | Yes | — |  |
 
 ## Preferred examples
 

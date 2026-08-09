@@ -48,7 +48,9 @@ import { Container } from '@commonspace/ui/layout';
 
 ## Props
 
-Props follow the exported TypeScript interface. Use the CLI or package declaration for the exact installed-version type.
+| Name | Type | Required | Default | Description |
+|---|---|---:|---|---|
+| `size` | `'sm' \| 'md' \| 'lg' \| 'full' \| undefined` | No | — |  |
 
 ## Preferred examples
 

@@ -49,7 +49,10 @@ import { PostMediaGrid } from '@commonspace/social/post';
 
 ## Props
 
-Props follow the exported TypeScript interface. Use the CLI or package declaration for the exact installed-version type.
+| Name | Type | Required | Default | Description |
+|---|---|---:|---|---|
+| `media` | `readonly SocialMediaViewModel[]` | Yes | — |  |
+| `onOpenMedia` | `((mediaId: string) => void) \| undefined` | No | — |  |
 
 ## Preferred examples
 
