@@ -76,7 +76,7 @@ feedback.show({ tone: 'success', title: 'Link copied' })
 
 ## Storybook
 
-- `catalog-ui--toast`
+- `catalog-ui-toast--contract`
 
 ## Source
 

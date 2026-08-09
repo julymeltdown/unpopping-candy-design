@@ -84,7 +84,7 @@ Navigation should preserve link semantics.
 
 ## Storybook
 
-- `catalog-ui--button`
+- `catalog-ui-button--contract`
 
 ## Source
 

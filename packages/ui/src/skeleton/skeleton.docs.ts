@@ -33,7 +33,7 @@ export default {
     "ui.empty-state"
   ],
   "stories": [
-    "catalog-ui--skeleton"
+    "catalog-ui-skeleton--contract"
   ],
   "accessibility": {
     "requirements": [

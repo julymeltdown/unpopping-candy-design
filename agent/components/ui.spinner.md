@@ -69,7 +69,7 @@ Announces the current operation.
 
 ## Storybook
 
-- `catalog-ui--spinner`
+- `catalog-ui-spinner--contract`
 
 ## Source
 

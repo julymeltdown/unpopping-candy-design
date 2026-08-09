@@ -17,9 +17,15 @@ const aliases = {
 
 const config: StorybookConfig = {
   stories: ['../stories/**/*.mdx', '../stories/**/*.stories.@(ts|tsx)'],
-  addons: ['@storybook/addon-docs', '@storybook/addon-a11y', '@storybook/addon-vitest'],
+  addons: [
+    '@storybook/addon-docs',
+    '@storybook/addon-a11y',
+    '@storybook/addon-vitest',
+    { name: '@storybook/addon-mcp', options: { endpoint: '/mcp', toolsets: { dev: true, docs: true, test: true } } },
+  ],
   framework: { name: '@storybook/react-vite', options: {} },
   docs: { autodocs: 'tag' },
+  features: { componentsManifest: true },
   async viteFinal(config) {
     return mergeConfig(config, { resolve: { alias: aliases } });
   },

@@ -37,7 +37,7 @@ export default {
     "ui.container"
   ],
   "stories": [
-    "catalog-ui--stack"
+    "catalog-ui-stack--contract"
   ],
   "accessibility": {
     "requirements": [

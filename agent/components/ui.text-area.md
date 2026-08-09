@@ -74,7 +74,7 @@ Associates label and validation feedback.
 
 ## Storybook
 
-- `catalog-ui--text-area`
+- `catalog-ui-text-area--contract`
 
 ## Source
 

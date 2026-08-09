@@ -36,7 +36,7 @@ export default {
     "social.profile-header"
   ],
   "stories": [
-    "catalog-social--user-cell"
+    "catalog-social-user-cell--contract"
   ],
   "accessibility": {
     "requirements": [

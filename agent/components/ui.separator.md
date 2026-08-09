@@ -66,7 +66,7 @@ Uses the shared border token.
 
 ## Storybook
 
-- `catalog-ui--separator`
+- `catalog-ui-separator--contract`
 
 ## Source
 

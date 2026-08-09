@@ -38,7 +38,7 @@ export default {
     "ui.alert"
   ],
   "stories": [
-    "catalog-ui--dialog"
+    "catalog-ui-dialog--contract"
   ],
   "accessibility": {
     "requirements": [

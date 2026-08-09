@@ -72,7 +72,7 @@ Adds bounded contrast to a local region.
 
 ## Storybook
 
-- `catalog-ui--surface`
+- `catalog-ui-surface--contract`
 
 ## Source
 

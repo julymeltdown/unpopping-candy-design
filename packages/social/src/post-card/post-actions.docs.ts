@@ -38,7 +38,7 @@ export default {
     "ui.icon-button"
   ],
   "stories": [
-    "catalog-social--post-actions"
+    "catalog-social-post-actions--contract"
   ],
   "accessibility": {
     "requirements": [

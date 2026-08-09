@@ -464,7 +464,7 @@ export const bundledCatalog = {
         "pattern.conversation-list"
       ],
       "stories": [
-        "catalog-social--conversation-preview"
+        "catalog-social-conversation-preview--contract"
       ],
       "accessibility": {
         "requirements": [
@@ -537,7 +537,7 @@ export const bundledCatalog = {
         "pattern.collection-states"
       ],
       "stories": [
-        "catalog-social--notification-item"
+        "catalog-social-notification-item--contract"
       ],
       "accessibility": {
         "requirements": [
@@ -625,7 +625,7 @@ export const bundledCatalog = {
         "ui.icon-button"
       ],
       "stories": [
-        "catalog-social--post-actions"
+        "catalog-social-post-actions--contract"
       ],
       "accessibility": {
         "requirements": [
@@ -703,7 +703,7 @@ export const bundledCatalog = {
         "pattern.social-feed"
       ],
       "stories": [
-        "catalog-social--post-card"
+        "catalog-social-post-card--contract"
       ],
       "accessibility": {
         "requirements": [
@@ -785,7 +785,7 @@ export const bundledCatalog = {
         "ui.skeleton"
       ],
       "stories": [
-        "catalog-social--post-card-skeleton"
+        "catalog-social-post-card-skeleton--contract"
       ],
       "accessibility": {
         "requirements": [
@@ -853,7 +853,7 @@ export const bundledCatalog = {
         "pattern.form-actions"
       ],
       "stories": [
-        "catalog-social--post-composer-view"
+        "catalog-social-post-composer-view--contract"
       ],
       "accessibility": {
         "requirements": [
@@ -927,7 +927,7 @@ export const bundledCatalog = {
         "social.user-cell"
       ],
       "stories": [
-        "catalog-social--post-header"
+        "catalog-social-post-header--contract"
       ],
       "accessibility": {
         "requirements": [
@@ -998,7 +998,7 @@ export const bundledCatalog = {
         "social.post-card"
       ],
       "stories": [
-        "catalog-social--post-media-grid"
+        "catalog-social-post-media-grid--contract"
       ],
       "accessibility": {
         "requirements": [
@@ -1079,7 +1079,7 @@ export const bundledCatalog = {
         "pattern.profile-surface"
       ],
       "stories": [
-        "catalog-social--profile-header"
+        "catalog-social-profile-header--contract"
       ],
       "accessibility": {
         "requirements": [
@@ -1158,7 +1158,7 @@ export const bundledCatalog = {
         "pattern.social-feed"
       ],
       "stories": [
-        "catalog-social--timeline-view"
+        "catalog-social-timeline-view--contract"
       ],
       "accessibility": {
         "requirements": [
@@ -1230,7 +1230,7 @@ export const bundledCatalog = {
         "social.profile-header"
       ],
       "stories": [
-        "catalog-social--user-cell"
+        "catalog-social-user-cell--contract"
       ],
       "accessibility": {
         "requirements": [
@@ -1619,7 +1619,7 @@ export const bundledCatalog = {
         "pattern.feedback-recovery"
       ],
       "stories": [
-        "catalog-ui--alert"
+        "catalog-ui-alert--contract"
       ],
       "accessibility": {
         "requirements": [
@@ -1708,7 +1708,7 @@ export const bundledCatalog = {
         "social.user-cell"
       ],
       "stories": [
-        "catalog-ui--avatar"
+        "catalog-ui-avatar--contract"
       ],
       "accessibility": {
         "requirements": [
@@ -1784,7 +1784,7 @@ export const bundledCatalog = {
         "ui.alert"
       ],
       "stories": [
-        "catalog-ui--badge"
+        "catalog-ui-badge--contract"
       ],
       "accessibility": {
         "requirements": [
@@ -1870,7 +1870,7 @@ export const bundledCatalog = {
         "pattern.form-actions"
       ],
       "stories": [
-        "catalog-ui--button"
+        "catalog-ui-button--contract"
       ],
       "accessibility": {
         "requirements": [
@@ -1960,7 +1960,7 @@ export const bundledCatalog = {
         "ui.inline"
       ],
       "stories": [
-        "catalog-ui--container"
+        "catalog-ui-container--contract"
       ],
       "accessibility": {
         "requirements": [
@@ -2041,7 +2041,7 @@ export const bundledCatalog = {
         "ui.alert"
       ],
       "stories": [
-        "catalog-ui--dialog"
+        "catalog-ui-dialog--contract"
       ],
       "accessibility": {
         "requirements": [
@@ -2119,7 +2119,7 @@ export const bundledCatalog = {
         "ui.skeleton"
       ],
       "stories": [
-        "catalog-ui--empty-state"
+        "catalog-ui-empty-state--contract"
       ],
       "accessibility": {
         "requirements": [
@@ -2191,7 +2191,7 @@ export const bundledCatalog = {
         "ui.alert"
       ],
       "stories": [
-        "catalog-ui--feedback-provider"
+        "catalog-ui-feedback-provider--contract"
       ],
       "accessibility": {
         "requirements": [
@@ -2260,7 +2260,7 @@ export const bundledCatalog = {
         "ui.button"
       ],
       "stories": [
-        "catalog-ui--icon-button"
+        "catalog-ui-icon-button--contract"
       ],
       "accessibility": {
         "requirements": [
@@ -2347,7 +2347,7 @@ export const bundledCatalog = {
         "ui.separator"
       ],
       "stories": [
-        "catalog-ui--inline"
+        "catalog-ui-inline--contract"
       ],
       "accessibility": {
         "requirements": [
@@ -2423,7 +2423,7 @@ export const bundledCatalog = {
         "ui.surface"
       ],
       "stories": [
-        "catalog-ui--separator"
+        "catalog-ui-separator--contract"
       ],
       "accessibility": {
         "requirements": [
@@ -2491,7 +2491,7 @@ export const bundledCatalog = {
         "ui.empty-state"
       ],
       "stories": [
-        "catalog-ui--skeleton"
+        "catalog-ui-skeleton--contract"
       ],
       "accessibility": {
         "requirements": [
@@ -2566,7 +2566,7 @@ export const bundledCatalog = {
         "ui.button"
       ],
       "stories": [
-        "catalog-ui--spinner"
+        "catalog-ui-spinner--contract"
       ],
       "accessibility": {
         "requirements": [
@@ -2642,7 +2642,7 @@ export const bundledCatalog = {
         "ui.container"
       ],
       "stories": [
-        "catalog-ui--stack"
+        "catalog-ui-stack--contract"
       ],
       "accessibility": {
         "requirements": [
@@ -2726,7 +2726,7 @@ export const bundledCatalog = {
         "ui.separator"
       ],
       "stories": [
-        "catalog-ui--surface"
+        "catalog-ui-surface--contract"
       ],
       "accessibility": {
         "requirements": [
@@ -2801,7 +2801,7 @@ export const bundledCatalog = {
         "ui.button"
       ],
       "stories": [
-        "catalog-ui--tabs"
+        "catalog-ui-tabs--contract"
       ],
       "accessibility": {
         "requirements": [
@@ -2877,7 +2877,7 @@ export const bundledCatalog = {
         "pattern.form-actions"
       ],
       "stories": [
-        "catalog-ui--text-area"
+        "catalog-ui-text-area--contract"
       ],
       "accessibility": {
         "requirements": [
@@ -2950,7 +2950,7 @@ export const bundledCatalog = {
         "pattern.form-actions"
       ],
       "stories": [
-        "catalog-ui--text-field"
+        "catalog-ui-text-field--contract"
       ],
       "accessibility": {
         "requirements": [
@@ -3035,7 +3035,7 @@ export const bundledCatalog = {
         "ui.toast-viewport"
       ],
       "stories": [
-        "catalog-ui--toast"
+        "catalog-ui-toast--contract"
       ],
       "accessibility": {
         "requirements": [
@@ -3116,7 +3116,7 @@ export const bundledCatalog = {
         "ui.toast"
       ],
       "stories": [
-        "catalog-ui--toast-viewport"
+        "catalog-ui-toast-viewport--contract"
       ],
       "accessibility": {
         "requirements": [
@@ -3188,7 +3188,7 @@ export const bundledCatalog = {
         "ui.spinner"
       ],
       "stories": [
-        "catalog-ui--visually-hidden"
+        "catalog-ui-visually-hidden--contract"
       ],
       "accessibility": {
         "requirements": [

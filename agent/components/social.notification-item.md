@@ -74,7 +74,7 @@ Keeps routing outside the package.
 
 ## Storybook
 
-- `catalog-social--notification-item`
+- `catalog-social-notification-item--contract`
 
 ## Source
 

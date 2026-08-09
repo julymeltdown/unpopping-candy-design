@@ -32,7 +32,7 @@ export default {
     "ui.surface"
   ],
   "stories": [
-    "catalog-ui--separator"
+    "catalog-ui-separator--contract"
   ],
   "accessibility": {
     "requirements": [

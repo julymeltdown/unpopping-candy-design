@@ -69,7 +69,7 @@ Reserves layout without announcing fake content.
 
 ## Storybook
 
-- `catalog-ui--skeleton`
+- `catalog-ui-skeleton--contract`
 
 ## Source
 

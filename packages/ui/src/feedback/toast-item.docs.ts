@@ -15,7 +15,9 @@ export default {
   "avoidWhen": ["The message must remain beside its source; use Alert."],
   "tokens": ["--cs-surface", "--cs-shadow-dialog", "--cs-positive", "--cs-warning", "--cs-critical"],
   "related": ["ui.feedback-provider", "ui.toast-viewport"],
-  "stories": ["catalog-ui--toast"],
+  "stories": [
+    "catalog-ui-toast--contract"
+  ],
   "accessibility": {
     "requirements": [
       "Neutral and success use polite live regions.",

@@ -74,7 +74,7 @@ Keeps relationship behavior in the application.
 
 ## Storybook
 
-- `catalog-social--profile-header`
+- `catalog-social-profile-header--contract`
 
 ## Source
 

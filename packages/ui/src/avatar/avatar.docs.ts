@@ -37,7 +37,7 @@ export default {
     "social.user-cell"
   ],
   "stories": [
-    "catalog-ui--avatar"
+    "catalog-ui-avatar--contract"
   ],
   "accessibility": {
     "requirements": [

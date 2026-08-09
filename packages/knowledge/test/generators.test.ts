@@ -18,7 +18,7 @@ test('component document includes operational and accessibility guidance', () =>
   assert.match(output, /## Use when/);
   assert.match(output, /## Avoid when/);
   assert.match(output, /## Accessibility/);
-  assert.match(output, /catalog-ui--button/);
+  assert.match(output, /catalog-ui-button--contract/);
 });
 
 test('agent document set is deterministic and has unique paths', () => {

@@ -65,7 +65,7 @@ Matches the post layout without fake content.
 
 ## Storybook
 
-- `catalog-social--post-card-skeleton`
+- `catalog-social-post-card-skeleton--contract`
 
 ## Source
 

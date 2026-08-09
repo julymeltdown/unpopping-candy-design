@@ -19,7 +19,7 @@ test('bundled catalog exposes version-aware component guidance', () => {
   if (button?.kind !== 'component') throw new Error('Button metadata must be a component.');
   assert.ok(button.entrypoints.includes('@commonspace/ui/button'));
   assert.ok(button.accessibility.requirements.length >= 2);
-  assert.ok(button.stories.includes('catalog-ui--button'));
+  assert.ok(button.stories.includes('catalog-ui-button--contract'));
 });
 
 test('search returns product patterns as well as components', () => {

@@ -39,7 +39,7 @@ export default {
     "pattern.form-actions"
   ],
   "stories": [
-    "catalog-ui--button"
+    "catalog-ui-button--contract"
   ],
   "accessibility": {
     "requirements": [

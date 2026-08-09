@@ -84,7 +84,7 @@ May expose unsafe or irrelevant implementation details.
 
 ## Storybook
 
-- `catalog-ui--alert`
+- `catalog-ui-alert--contract`
 
 ## Source
 

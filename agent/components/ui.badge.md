@@ -71,7 +71,7 @@ Pairs text with semantic color.
 
 ## Storybook
 
-- `catalog-ui--badge`
+- `catalog-ui-badge--contract`
 
 ## Source
 

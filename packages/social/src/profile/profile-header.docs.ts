@@ -36,7 +36,7 @@ export default {
     "pattern.profile-surface"
   ],
   "stories": [
-    "catalog-social--profile-header"
+    "catalog-social-profile-header--contract"
   ],
   "accessibility": {
     "requirements": [

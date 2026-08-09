@@ -25,14 +25,16 @@
     "preview:capture": "python3 scripts/capture-static-preview.py",
     "knowledge:generate": "node --experimental-strip-types scripts/generate-knowledge.mjs",
     "knowledge:check": "node --experimental-strip-types scripts/generate-knowledge.mjs --check",
-    "agent:generate": "npm run knowledge:generate && npm run registry:generate && node --experimental-strip-types scripts/generate-agent-docs.mjs && npm run skills:generate",
-    "agent:check": "npm run knowledge:check && npm run registry:check && node --experimental-strip-types scripts/generate-agent-docs.mjs --check && npm run skills:check",
+    "agent:generate": "npm run knowledge:generate && npm run registry:generate && npm run stories:generate && node --experimental-strip-types scripts/generate-agent-docs.mjs && npm run skills:generate",
+    "agent:check": "npm run knowledge:check && npm run registry:check && npm run stories:check && node --experimental-strip-types scripts/generate-agent-docs.mjs --check && npm run skills:check",
     "commonspace": "node --experimental-strip-types packages/cli/src/bin.ts",
     "skills:generate": "node scripts/verify-skills.mjs --write",
     "skills:check": "node scripts/verify-skills.mjs --check",
     "mcp:dev": "node --experimental-strip-types packages/mcp/src/stdio.ts",
     "registry:generate": "node --experimental-strip-types scripts/generate-registry.mjs",
-    "registry:check": "node --experimental-strip-types scripts/generate-registry.mjs --check"
+    "registry:check": "node --experimental-strip-types scripts/generate-registry.mjs --check",
+    "stories:generate": "node --experimental-strip-types scripts/verify-story-manifest.mjs",
+    "stories:check": "node --experimental-strip-types scripts/verify-story-manifest.mjs --check"
   },
   "devDependencies": {
     "@changesets/cli": "2.29.7",

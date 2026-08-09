@@ -73,7 +73,7 @@ Creates consistent vertical rhythm.
 
 ## Storybook
 
-- `catalog-ui--stack`
+- `catalog-ui-stack--contract`
 
 ## Source
 

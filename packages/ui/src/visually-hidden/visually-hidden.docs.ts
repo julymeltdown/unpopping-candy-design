@@ -32,7 +32,7 @@ export default {
     "ui.spinner"
   ],
   "stories": [
-    "catalog-ui--visually-hidden"
+    "catalog-ui-visually-hidden--contract"
   ],
   "accessibility": {
     "requirements": [

@@ -37,7 +37,7 @@ export default {
     "ui.separator"
   ],
   "stories": [
-    "catalog-ui--surface"
+    "catalog-ui-surface--contract"
   ],
   "accessibility": {
     "requirements": [

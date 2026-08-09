@@ -308,7 +308,7 @@ Injects navigation and keeps data ownership external.
 
 ## Storybook
 
-- `catalog-social--conversation-preview`
+- `catalog-social-conversation-preview--contract`
 
 ## Source
 
@@ -393,7 +393,7 @@ Keeps routing outside the package.
 
 ## Storybook
 
-- `catalog-social--notification-item`
+- `catalog-social-notification-item--contract`
 
 ## Source
 
@@ -477,7 +477,7 @@ Keeps mutation ownership outside the component.
 
 ## Storybook
 
-- `catalog-social--post-actions`
+- `catalog-social-post-actions--contract`
 
 ## Source
 
@@ -571,7 +571,7 @@ function PostCard({ id }) { const post = useQuery(...); }
 
 ## Storybook
 
-- `catalog-social--post-card`
+- `catalog-social-post-card--contract`
 
 ## Source
 
@@ -647,7 +647,7 @@ Matches the post layout without fake content.
 
 ## Storybook
 
-- `catalog-social--post-card-skeleton`
+- `catalog-social-post-card-skeleton--contract`
 
 ## Source
 
@@ -733,7 +733,7 @@ Leaves workflow state in the consuming app.
 
 ## Storybook
 
-- `catalog-social--post-composer-view`
+- `catalog-social-post-composer-view--contract`
 
 ## Source
 
@@ -812,7 +812,7 @@ Injects navigation behavior.
 
 ## Storybook
 
-- `catalog-social--post-header`
+- `catalog-social-post-header--contract`
 
 ## Source
 
@@ -894,7 +894,7 @@ Uses application-owned media behavior.
 
 ## Storybook
 
-- `catalog-social--post-media-grid`
+- `catalog-social-post-media-grid--contract`
 
 ## Source
 
@@ -979,7 +979,7 @@ Keeps relationship behavior in the application.
 
 ## Storybook
 
-- `catalog-social--profile-header`
+- `catalog-social-profile-header--contract`
 
 ## Source
 
@@ -1063,7 +1063,7 @@ Keeps remote state outside presentation.
 
 ## Storybook
 
-- `catalog-social--timeline-view`
+- `catalog-social-timeline-view--contract`
 
 ## Source
 
@@ -1144,7 +1144,7 @@ Separates row navigation and relationship action.
 
 ## Storybook
 
-- `catalog-social--user-cell`
+- `catalog-social-user-cell--contract`
 
 ## Source
 
@@ -1239,7 +1239,7 @@ May expose unsafe or irrelevant implementation details.
 
 ## Storybook
 
-- `catalog-ui--alert`
+- `catalog-ui-alert--contract`
 
 ## Source
 
@@ -1322,7 +1322,7 @@ Provides both image and fallback data.
 
 ## Storybook
 
-- `catalog-ui--avatar`
+- `catalog-ui-avatar--contract`
 
 ## Source
 
@@ -1404,7 +1404,7 @@ Pairs text with semantic color.
 
 ## Storybook
 
-- `catalog-ui--badge`
+- `catalog-ui-badge--contract`
 
 ## Source
 
@@ -1499,7 +1499,7 @@ Navigation should preserve link semantics.
 
 ## Storybook
 
-- `catalog-ui--button`
+- `catalog-ui-button--contract`
 
 ## Source
 
@@ -1581,7 +1581,7 @@ Uses standard gutters and width.
 
 ## Storybook
 
-- `catalog-ui--container`
+- `catalog-ui-container--contract`
 
 ## Source
 
@@ -1668,7 +1668,7 @@ Labels the modal and keeps open state controlled.
 
 ## Storybook
 
-- `catalog-ui--dialog`
+- `catalog-ui-dialog--contract`
 
 ## Source
 
@@ -1746,7 +1746,7 @@ Explains the condition and recovery.
 
 ## Storybook
 
-- `catalog-ui--empty-state`
+- `catalog-ui-empty-state--contract`
 
 ## Source
 
@@ -1827,7 +1827,7 @@ Creates one deterministic queue.
 
 ## Storybook
 
-- `catalog-ui--feedback-provider`
+- `catalog-ui-feedback-provider--contract`
 
 ## Source
 
@@ -1918,7 +1918,7 @@ Screen-reader users cannot identify the action.
 
 ## Storybook
 
-- `catalog-ui--icon-button`
+- `catalog-ui-icon-button--contract`
 
 ## Source
 
@@ -2001,7 +2001,7 @@ Groups related actions without arbitrary margins.
 
 ## Storybook
 
-- `catalog-ui--inline`
+- `catalog-ui-inline--contract`
 
 ## Source
 
@@ -2078,7 +2078,7 @@ Uses the shared border token.
 
 ## Storybook
 
-- `catalog-ui--separator`
+- `catalog-ui-separator--contract`
 
 ## Source
 
@@ -2158,7 +2158,7 @@ Reserves layout without announcing fake content.
 
 ## Storybook
 
-- `catalog-ui--skeleton`
+- `catalog-ui-skeleton--contract`
 
 ## Source
 
@@ -2238,7 +2238,7 @@ Announces the current operation.
 
 ## Storybook
 
-- `catalog-ui--spinner`
+- `catalog-ui-spinner--contract`
 
 ## Source
 
@@ -2322,7 +2322,7 @@ Creates consistent vertical rhythm.
 
 ## Storybook
 
-- `catalog-ui--stack`
+- `catalog-ui-stack--contract`
 
 ## Source
 
@@ -2405,7 +2405,7 @@ Adds bounded contrast to a local region.
 
 ## Storybook
 
-- `catalog-ui--surface`
+- `catalog-ui-surface--contract`
 
 ## Source
 
@@ -2488,7 +2488,7 @@ Keeps selection controlled and explicit.
 
 ## Storybook
 
-- `catalog-ui--tabs`
+- `catalog-ui-tabs--contract`
 
 ## Source
 
@@ -2573,7 +2573,7 @@ Associates label and validation feedback.
 
 ## Storybook
 
-- `catalog-ui--text-area`
+- `catalog-ui-text-area--contract`
 
 ## Source
 
@@ -2661,7 +2661,7 @@ Uses native semantics and autofill metadata.
 
 ## Storybook
 
-- `catalog-ui--text-field`
+- `catalog-ui-text-field--contract`
 
 ## Source
 
@@ -2748,7 +2748,7 @@ feedback.show({ tone: 'success', title: 'Link copied' })
 
 ## Storybook
 
-- `catalog-ui--toast`
+- `catalog-ui-toast--contract`
 
 ## Source
 
@@ -2828,7 +2828,7 @@ Binds queue state to presentation.
 
 ## Storybook
 
-- `catalog-ui--toast-viewport`
+- `catalog-ui-toast-viewport--contract`
 
 ## Source
 
@@ -2901,7 +2901,7 @@ Retains an accessible name.
 
 ## Storybook
 
-- `catalog-ui--visually-hidden`
+- `catalog-ui-visually-hidden--contract`
 
 ## Source
 

@@ -73,7 +73,7 @@ Keeps mutation ownership outside the component.
 
 ## Storybook
 
-- `catalog-social--post-actions`
+- `catalog-social-post-actions--contract`
 
 ## Source
 

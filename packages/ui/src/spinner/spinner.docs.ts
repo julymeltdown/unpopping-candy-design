@@ -35,7 +35,7 @@ export default {
     "ui.button"
   ],
   "stories": [
-    "catalog-ui--spinner"
+    "catalog-ui-spinner--contract"
   ],
   "accessibility": {
     "requirements": [

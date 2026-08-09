@@ -37,7 +37,7 @@ export default {
     "pattern.form-actions"
   ],
   "stories": [
-    "catalog-social--post-composer-view"
+    "catalog-social-post-composer-view--contract"
   ],
   "accessibility": {
     "requirements": [

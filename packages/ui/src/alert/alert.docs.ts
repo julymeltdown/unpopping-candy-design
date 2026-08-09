@@ -41,7 +41,7 @@ export default {
     "pattern.feedback-recovery"
   ],
   "stories": [
-    "catalog-ui--alert"
+    "catalog-ui-alert--contract"
   ],
   "accessibility": {
     "requirements": [

@@ -35,7 +35,7 @@ export default {
     "pattern.collection-states"
   ],
   "stories": [
-    "catalog-social--notification-item"
+    "catalog-social-notification-item--contract"
   ],
   "accessibility": {
     "requirements": [

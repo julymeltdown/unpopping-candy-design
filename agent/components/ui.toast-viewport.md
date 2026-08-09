@@ -69,7 +69,7 @@ Binds queue state to presentation.
 
 ## Storybook
 
-- `catalog-ui--toast-viewport`
+- `catalog-ui-toast-viewport--contract`
 
 ## Source
 

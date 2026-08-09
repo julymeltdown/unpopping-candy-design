@@ -36,7 +36,7 @@ export default {
     "ui.inline"
   ],
   "stories": [
-    "catalog-ui--container"
+    "catalog-ui-container--contract"
   ],
   "accessibility": {
     "requirements": [

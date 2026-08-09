@@ -62,7 +62,7 @@ Retains an accessible name.
 
 ## Storybook
 
-- `catalog-ui--visually-hidden`
+- `catalog-ui-visually-hidden--contract`
 
 ## Source
 

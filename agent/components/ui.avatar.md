@@ -72,7 +72,7 @@ Provides both image and fallback data.
 
 ## Storybook
 
-- `catalog-ui--avatar`
+- `catalog-ui-avatar--contract`
 
 ## Source
 

@@ -35,7 +35,7 @@ export default {
     "ui.alert"
   ],
   "stories": [
-    "catalog-ui--badge"
+    "catalog-ui-badge--contract"
   ],
   "accessibility": {
     "requirements": [

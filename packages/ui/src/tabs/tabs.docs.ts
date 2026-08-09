@@ -35,7 +35,7 @@ export default {
     "ui.button"
   ],
   "stories": [
-    "catalog-ui--tabs"
+    "catalog-ui-tabs--contract"
   ],
   "accessibility": {
     "requirements": [

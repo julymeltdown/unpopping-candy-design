@@ -72,7 +72,7 @@ Keeps selection controlled and explicit.
 
 ## Storybook
 
-- `catalog-ui--tabs`
+- `catalog-ui-tabs--contract`
 
 ## Source
 

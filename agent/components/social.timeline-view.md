@@ -73,7 +73,7 @@ Keeps remote state outside presentation.
 
 ## Storybook
 
-- `catalog-social--timeline-view`
+- `catalog-social-timeline-view--contract`
 
 ## Source
 

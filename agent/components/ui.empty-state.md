@@ -67,7 +67,7 @@ Explains the condition and recovery.
 
 ## Storybook
 
-- `catalog-ui--empty-state`
+- `catalog-ui-empty-state--contract`
 
 ## Source
 

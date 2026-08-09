@@ -76,7 +76,7 @@ Labels the modal and keeps open state controlled.
 
 ## Storybook
 
-- `catalog-ui--dialog`
+- `catalog-ui-dialog--contract`
 
 ## Source
 

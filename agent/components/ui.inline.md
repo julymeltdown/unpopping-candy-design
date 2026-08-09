@@ -72,7 +72,7 @@ Groups related actions without arbitrary margins.
 
 ## Storybook
 
-- `catalog-ui--inline`
+- `catalog-ui-inline--contract`
 
 ## Source
 

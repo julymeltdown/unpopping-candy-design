@@ -35,7 +35,7 @@ export default {
     "ui.button"
   ],
   "stories": [
-    "catalog-ui--icon-button"
+    "catalog-ui-icon-button--contract"
   ],
   "accessibility": {
     "requirements": [

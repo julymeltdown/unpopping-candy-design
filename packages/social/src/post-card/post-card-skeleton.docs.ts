@@ -33,7 +33,7 @@ export default {
     "ui.skeleton"
   ],
   "stories": [
-    "catalog-social--post-card-skeleton"
+    "catalog-social-post-card-skeleton--contract"
   ],
   "accessibility": {
     "requirements": [

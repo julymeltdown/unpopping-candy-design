@@ -75,7 +75,7 @@ Leaves workflow state in the consuming app.
 
 ## Storybook
 
-- `catalog-social--post-composer-view`
+- `catalog-social-post-composer-view--contract`
 
 ## Source
 

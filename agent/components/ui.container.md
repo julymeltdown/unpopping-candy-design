@@ -71,7 +71,7 @@ Uses standard gutters and width.
 
 ## Storybook
 
-- `catalog-ui--container`
+- `catalog-ui-container--contract`
 
 ## Source
 

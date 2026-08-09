@@ -36,7 +36,7 @@ export default {
     "pattern.conversation-list"
   ],
   "stories": [
-    "catalog-social--conversation-preview"
+    "catalog-social-conversation-preview--contract"
   ],
   "accessibility": {
     "requirements": [
