@@ -1,0 +1,317 @@
+{
+  "entries": [
+    {
+      "accessibility": {
+        "requirements": [
+          "Keep semantic landmarks and visible focus styles.",
+          "Run Storybook or browser accessibility checks after scaffolding."
+        ]
+      },
+      "avoidWhen": [
+        "The target project uses a different framework or the requested surface is substantially smaller."
+      ],
+      "components": [
+        "social.timeline-view",
+        "social.post-card",
+        "ui.feedback-provider"
+      ],
+      "description": "A React and Vite application shell that keeps Commonspace presentation packages below FSD application slices.",
+      "examples": {
+        "avoid": [],
+        "preferred": []
+      },
+      "files": [
+        {
+          "path": "src/app/providers/commonspace-provider.tsx",
+          "role": "Application provider composition",
+          "source": "registry/templates/fsd-social-shell/src/app/providers/commonspace-provider.tsx"
+        },
+        {
+          "path": "src/pages/home/ui/home-page.tsx",
+          "role": "Home page composition",
+          "source": "registry/templates/fsd-social-shell/src/pages/home/ui/home-page.tsx"
+        },
+        {
+          "path": "src/widgets/post-feed/ui/post-feed.tsx",
+          "role": "Reusable feed widget",
+          "source": "registry/templates/fsd-social-shell/src/widgets/post-feed/ui/post-feed.tsx"
+        }
+      ],
+      "id": "template.fsd-social-shell",
+      "keywords": [
+        "strict",
+        "fsd",
+        "social",
+        "shell",
+        "template"
+      ],
+      "kind": "template",
+      "name": "Strict FSD social shell",
+      "patterns": [
+        "pattern.social-feed",
+        "pattern.feedback-recovery"
+      ],
+      "schemaVersion": 1,
+      "status": "stable",
+      "summary": "A React and Vite application shell that keeps Commonspace presentation packages below FSD application slices.",
+      "target": "react-vite-fsd",
+      "useWhen": [
+        "A React and Vite application shell that keeps Commonspace presentation packages below FSD application slices."
+      ],
+      "variables": [
+        {
+          "defaultValue": "",
+          "description": "Optional folder or component-name prefix.",
+          "name": "componentPrefix"
+        }
+      ],
+      "version": "0.2.0"
+    },
+    {
+      "accessibility": {
+        "requirements": [
+          "Keep semantic landmarks and visible focus styles.",
+          "Run Storybook or browser accessibility checks after scaffolding."
+        ]
+      },
+      "avoidWhen": [
+        "The target project uses a different framework or the requested surface is substantially smaller."
+      ],
+      "components": [
+        "ui.container",
+        "ui.surface",
+        "ui.tabs",
+        "ui.alert",
+        "ui.button"
+      ],
+      "description": "A three-region moderation decision workspace with queue, evidence, and controlled actions.",
+      "examples": {
+        "avoid": [],
+        "preferred": []
+      },
+      "files": [
+        {
+          "path": "src/moderation-workspace.tsx",
+          "role": "Moderation workspace composition",
+          "source": "registry/templates/moderation-workspace/src/moderation-workspace.tsx"
+        },
+        {
+          "path": "src/moderation-workspace.css",
+          "role": "Responsive workspace layout",
+          "source": "registry/templates/moderation-workspace/src/moderation-workspace.css"
+        }
+      ],
+      "id": "template.moderation-workspace",
+      "keywords": [
+        "moderation",
+        "workspace",
+        "template"
+      ],
+      "kind": "template",
+      "name": "Moderation workspace",
+      "patterns": [
+        "pattern.collection-states",
+        "pattern.feedback-recovery"
+      ],
+      "schemaVersion": 1,
+      "status": "stable",
+      "summary": "A three-region moderation decision workspace with queue, evidence, and controlled actions.",
+      "target": "react-vite",
+      "useWhen": [
+        "A three-region moderation decision workspace with queue, evidence, and controlled actions."
+      ],
+      "variables": [
+        {
+          "defaultValue": "",
+          "description": "Optional folder or component-name prefix.",
+          "name": "componentPrefix"
+        }
+      ],
+      "version": "0.2.0"
+    },
+    {
+      "accessibility": {
+        "requirements": [
+          "Keep semantic landmarks and visible focus styles.",
+          "Run Storybook or browser accessibility checks after scaffolding."
+        ]
+      },
+      "avoidWhen": [
+        "The target project uses a different framework or the requested surface is substantially smaller."
+      ],
+      "components": [
+        "ui.text-field",
+        "ui.text-area",
+        "ui.button",
+        "ui.alert"
+      ],
+      "description": "A profile settings form with validation, pending state, and preserved failure feedback.",
+      "examples": {
+        "avoid": [],
+        "preferred": []
+      },
+      "files": [
+        {
+          "path": "src/profile-settings.tsx",
+          "role": "Settings form",
+          "source": "registry/templates/profile-settings/src/profile-settings.tsx"
+        }
+      ],
+      "id": "template.profile-settings",
+      "keywords": [
+        "profile",
+        "settings",
+        "template"
+      ],
+      "kind": "template",
+      "name": "Profile settings",
+      "patterns": [
+        "pattern.form-actions",
+        "pattern.feedback-recovery"
+      ],
+      "schemaVersion": 1,
+      "status": "stable",
+      "summary": "A profile settings form with validation, pending state, and preserved failure feedback.",
+      "target": "react-vite",
+      "useWhen": [
+        "A profile settings form with validation, pending state, and preserved failure feedback."
+      ],
+      "variables": [
+        {
+          "defaultValue": "",
+          "description": "Optional folder or component-name prefix.",
+          "name": "componentPrefix"
+        }
+      ],
+      "version": "0.2.0"
+    },
+    {
+      "accessibility": {
+        "requirements": [
+          "Keep semantic landmarks and visible focus styles.",
+          "Run Storybook or browser accessibility checks after scaffolding."
+        ]
+      },
+      "avoidWhen": [
+        "The target project uses a different framework or the requested surface is substantially smaller."
+      ],
+      "components": [
+        "social.timeline-view",
+        "social.post-card",
+        "social.post-composer-view"
+      ],
+      "description": "A state-complete social feed page using presentation models and externally owned remote state.",
+      "examples": {
+        "avoid": [],
+        "preferred": []
+      },
+      "files": [
+        {
+          "path": "src/social-feed-page.tsx",
+          "role": "Feed page composition",
+          "source": "registry/templates/social-feed-page/src/social-feed-page.tsx"
+        },
+        {
+          "path": "src/social-feed-page.css",
+          "role": "Page layout styles",
+          "source": "registry/templates/social-feed-page/src/social-feed-page.css"
+        }
+      ],
+      "id": "template.social-feed-page",
+      "keywords": [
+        "social",
+        "feed",
+        "page",
+        "template"
+      ],
+      "kind": "template",
+      "name": "Social feed page",
+      "patterns": [
+        "pattern.social-feed",
+        "pattern.collection-states"
+      ],
+      "schemaVersion": 1,
+      "status": "stable",
+      "summary": "A state-complete social feed page using presentation models and externally owned remote state.",
+      "target": "react-vite",
+      "useWhen": [
+        "A state-complete social feed page using presentation models and externally owned remote state."
+      ],
+      "variables": [
+        {
+          "defaultValue": "",
+          "description": "Optional folder or component-name prefix.",
+          "name": "componentPrefix"
+        }
+      ],
+      "version": "0.2.0"
+    },
+    {
+      "accessibility": {
+        "requirements": [
+          "Keep semantic landmarks and visible focus styles.",
+          "Run Storybook or browser accessibility checks after scaffolding."
+        ]
+      },
+      "avoidWhen": [
+        "The target project uses a different framework or the requested surface is substantially smaller."
+      ],
+      "components": [
+        "ui.container",
+        "ui.feedback-provider",
+        "ui.stack"
+      ],
+      "description": "A minimal React and Vite shell with Commonspace theme and feedback providers.",
+      "examples": {
+        "avoid": [],
+        "preferred": []
+      },
+      "files": [
+        {
+          "path": "src/app.tsx",
+          "role": "Root application component",
+          "source": "registry/templates/vite-app-shell/src/app.tsx"
+        },
+        {
+          "path": "src/main.tsx",
+          "role": "Browser entry",
+          "source": "registry/templates/vite-app-shell/src/main.tsx"
+        },
+        {
+          "path": "src/styles.css",
+          "role": "Application-level styles",
+          "source": "registry/templates/vite-app-shell/src/styles.css"
+        }
+      ],
+      "id": "template.vite-app-shell",
+      "keywords": [
+        "vite",
+        "app",
+        "shell",
+        "template"
+      ],
+      "kind": "template",
+      "name": "Vite app shell",
+      "patterns": [
+        "pattern.feedback-recovery"
+      ],
+      "schemaVersion": 1,
+      "status": "stable",
+      "summary": "A minimal React and Vite shell with Commonspace theme and feedback providers.",
+      "target": "react-vite",
+      "useWhen": [
+        "A minimal React and Vite shell with Commonspace theme and feedback providers."
+      ],
+      "variables": [
+        {
+          "defaultValue": "",
+          "description": "Optional folder or component-name prefix.",
+          "name": "componentPrefix"
+        }
+      ],
+      "version": "0.2.0"
+    }
+  ],
+  "generatedAt": "2026-08-09T00:00:00.000Z",
+  "schemaVersion": 1
+}

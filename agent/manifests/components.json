@@ -1,0 +1,2486 @@
+{
+  "entries": [
+    {
+      "accessibility": {
+        "requirements": [
+          "Unread state needs text or a labelled indicator.",
+          "The preview needs a clear accessible name combining participant and latest message."
+        ]
+      },
+      "avoidWhen": [
+        "A message bubble or full thread is required."
+      ],
+      "category": "messaging",
+      "entrypoints": [
+        "@commonspace/social",
+        "@commonspace/social/conversation"
+      ],
+      "examples": {
+        "avoid": [],
+        "preferred": [
+          {
+            "code": "<ConversationPreview conversation={conversation} onSelect={openConversation} />",
+            "reason": "Injects navigation and keeps data ownership external.",
+            "title": "Inbox row"
+          }
+        ]
+      },
+      "id": "social.conversation-preview",
+      "keywords": [
+        "conversation",
+        "message",
+        "inbox",
+        "preview"
+      ],
+      "kind": "component",
+      "name": "ConversationPreview",
+      "package": "@commonspace/social",
+      "props": [],
+      "related": [
+        "social.user-cell",
+        "pattern.conversation-list"
+      ],
+      "schemaVersion": 1,
+      "sourcePath": "packages/social/src/conversation/conversation-preview.tsx",
+      "states": [
+        "read",
+        "unread",
+        "selected",
+        "muted"
+      ],
+      "status": "stable",
+      "stories": [
+        "catalog-social--conversation-preview"
+      ],
+      "summary": "Presents a conversation summary with participants, latest message, time, and unread state.",
+      "tokens": [
+        "--cs-surface",
+        "--cs-border",
+        "--cs-ink-muted",
+        "--cs-accent"
+      ],
+      "useWhen": [
+        "A messaging inbox lists conversations."
+      ],
+      "variants": [
+        {
+          "guidance": "Use the direct variant only when its semantic role matches the surrounding decision or content hierarchy.",
+          "name": "direct"
+        },
+        {
+          "guidance": "Use the group variant only when its semantic role matches the surrounding decision or content hierarchy.",
+          "name": "group"
+        }
+      ],
+      "version": "0.1.0"
+    },
+    {
+      "accessibility": {
+        "requirements": [
+          "Unread state must be communicated beyond color.",
+          "Event text should make sense without relying on iconography.",
+          "The row needs one predictable activation target."
+        ]
+      },
+      "avoidWhen": [
+        "A global application Toast is needed."
+      ],
+      "category": "notification",
+      "entrypoints": [
+        "@commonspace/social",
+        "@commonspace/social/notification"
+      ],
+      "examples": {
+        "avoid": [],
+        "preferred": [
+          {
+            "code": "<NotificationItem notification={item} onSelect={openTarget} />",
+            "reason": "Keeps routing outside the package.",
+            "title": "Notification list"
+          }
+        ]
+      },
+      "id": "social.notification-item",
+      "keywords": [
+        "notification",
+        "activity",
+        "mention",
+        "social"
+      ],
+      "kind": "component",
+      "name": "NotificationItem",
+      "package": "@commonspace/social",
+      "props": [],
+      "related": [
+        "ui.toast",
+        "pattern.collection-states"
+      ],
+      "schemaVersion": 1,
+      "sourcePath": "packages/social/src/notification/notification-item.tsx",
+      "states": [
+        "unread",
+        "read",
+        "selected"
+      ],
+      "status": "stable",
+      "stories": [
+        "catalog-social--notification-item"
+      ],
+      "summary": "Presents one social notification with actor context, event description, and optional target content.",
+      "tokens": [
+        "--cs-surface",
+        "--cs-border",
+        "--cs-ink-muted"
+      ],
+      "useWhen": [
+        "A notification center renders typed social activity."
+      ],
+      "variants": [
+        {
+          "guidance": "Use the like variant only when its semantic role matches the surrounding decision or content hierarchy.",
+          "name": "like"
+        },
+        {
+          "guidance": "Use the reply variant only when its semantic role matches the surrounding decision or content hierarchy.",
+          "name": "reply"
+        },
+        {
+          "guidance": "Use the repost variant only when its semantic role matches the surrounding decision or content hierarchy.",
+          "name": "repost"
+        },
+        {
+          "guidance": "Use the follow variant only when its semantic role matches the surrounding decision or content hierarchy.",
+          "name": "follow"
+        },
+        {
+          "guidance": "Use the system variant only when its semantic role matches the surrounding decision or content hierarchy.",
+          "name": "system"
+        }
+      ],
+      "version": "0.1.0"
+    },
+    {
+      "accessibility": {
+        "requirements": [
+          "Each icon action needs an accessible label and pressed state.",
+          "Pending state must prevent duplicate mutation without erasing current state."
+        ]
+      },
+      "avoidWhen": [
+        "A product has different action semantics; compose explicit Buttons instead."
+      ],
+      "category": "post",
+      "entrypoints": [
+        "@commonspace/social",
+        "@commonspace/social/post"
+      ],
+      "examples": {
+        "avoid": [],
+        "preferred": [
+          {
+            "code": "<PostActions post={post} onLike={onLike} pendingAction={pending} />",
+            "reason": "Keeps mutation ownership outside the component.",
+            "title": "Injected actions"
+          }
+        ]
+      },
+      "id": "social.post-actions",
+      "keywords": [
+        "post",
+        "actions",
+        "reply",
+        "repost",
+        "like",
+        "bookmark"
+      ],
+      "kind": "component",
+      "name": "PostActions",
+      "package": "@commonspace/social",
+      "props": [],
+      "related": [
+        "social.post-card",
+        "ui.icon-button"
+      ],
+      "schemaVersion": 1,
+      "sourcePath": "packages/social/src/post-card/post-actions.tsx",
+      "states": [
+        "idle",
+        "liked",
+        "reposted",
+        "bookmarked",
+        "pending"
+      ],
+      "status": "stable",
+      "stories": [
+        "catalog-social--post-actions"
+      ],
+      "summary": "Presents reply, repost, like, bookmark, and share actions as controlled social interactions.",
+      "tokens": [
+        "--cs-ink-muted",
+        "--cs-accent",
+        "--cs-positive",
+        "--cs-critical"
+      ],
+      "useWhen": [
+        "A post exposes standard engagement actions."
+      ],
+      "variants": [
+        {
+          "guidance": "Use the default variant only when its semantic role matches the surrounding decision or content hierarchy.",
+          "name": "default"
+        },
+        {
+          "guidance": "Use the compact variant only when its semantic role matches the surrounding decision or content hierarchy.",
+          "name": "compact"
+        }
+      ],
+      "version": "0.1.0"
+    },
+    {
+      "accessibility": {
+        "requirements": [
+          "The outer interactive region must not swallow nested action focus.",
+          "Media requires alternative text.",
+          "Metrics must have accessible labels, not numbers alone."
+        ]
+      },
+      "avoidWhen": [
+        "The application needs to fetch or mutate post data inside the component.",
+        "A compact reference is sufficient; use a post summary pattern."
+      ],
+      "category": "post",
+      "entrypoints": [
+        "@commonspace/social",
+        "@commonspace/social/post"
+      ],
+      "examples": {
+        "avoid": [
+          {
+            "code": "function PostCard({ id }) { const post = useQuery(...); }",
+            "reason": "Couples presentation to one data layer and prevents isolated use.",
+            "title": "Fetching inside"
+          }
+        ],
+        "preferred": [
+          {
+            "code": "<PostCard post={post} onLike={() => onLike(post.id)} onOpenPost={() => open(post.id)} />",
+            "reason": "Keeps network and routing concerns in the consuming application.",
+            "title": "Controlled post"
+          }
+        ]
+      },
+      "id": "social.post-card",
+      "keywords": [
+        "post",
+        "social",
+        "content",
+        "timeline"
+      ],
+      "kind": "component",
+      "name": "PostCard",
+      "package": "@commonspace/social",
+      "props": [],
+      "related": [
+        "social.post-header",
+        "social.post-actions",
+        "social.post-media-grid",
+        "pattern.social-feed"
+      ],
+      "schemaVersion": 1,
+      "sourcePath": "packages/social/src/post-card/post-card.tsx",
+      "states": [
+        "default",
+        "selected",
+        "pending-action",
+        "deleted"
+      ],
+      "status": "stable",
+      "stories": [
+        "catalog-social--post-card"
+      ],
+      "summary": "Presents a social post with author, content, distribution context, metrics, and injected actions.",
+      "tokens": [
+        "--cs-surface",
+        "--cs-border",
+        "--cs-ink",
+        "--cs-accent"
+      ],
+      "useWhen": [
+        "A timeline or thread needs a complete post presentation."
+      ],
+      "variants": [
+        {
+          "guidance": "Use the timeline variant only when its semantic role matches the surrounding decision or content hierarchy.",
+          "name": "timeline"
+        },
+        {
+          "guidance": "Use the detail variant only when its semantic role matches the surrounding decision or content hierarchy.",
+          "name": "detail"
+        },
+        {
+          "guidance": "Use the quoted variant only when its semantic role matches the surrounding decision or content hierarchy.",
+          "name": "quoted"
+        }
+      ],
+      "version": "0.1.0"
+    },
+    {
+      "accessibility": {
+        "requirements": [
+          "Mark the containing timeline region busy.",
+          "Do not expose placeholder text as content."
+        ]
+      },
+      "avoidWhen": [
+        "Existing posts are available and only another page is loading."
+      ],
+      "category": "loading",
+      "entrypoints": [
+        "@commonspace/social",
+        "@commonspace/social/post"
+      ],
+      "examples": {
+        "avoid": [],
+        "preferred": [
+          {
+            "code": "<PostCardSkeleton />",
+            "reason": "Matches the post layout without fake content.",
+            "title": "Initial timeline"
+          }
+        ]
+      },
+      "id": "social.post-card-skeleton",
+      "keywords": [
+        "post",
+        "skeleton",
+        "loading",
+        "timeline"
+      ],
+      "kind": "component",
+      "name": "PostCardSkeleton",
+      "package": "@commonspace/social",
+      "props": [],
+      "related": [
+        "social.post-card",
+        "ui.skeleton"
+      ],
+      "schemaVersion": 1,
+      "sourcePath": "packages/social/src/post-card/post-card-skeleton.tsx",
+      "states": [
+        "loading"
+      ],
+      "status": "stable",
+      "stories": [
+        "catalog-social--post-card-skeleton"
+      ],
+      "summary": "Reserves the expected geometry of a PostCard while timeline data loads.",
+      "tokens": [
+        "--cs-surface-muted"
+      ],
+      "useWhen": [
+        "A timeline is loading its first page."
+      ],
+      "variants": [
+        {
+          "guidance": "Use the default variant only when its semantic role matches the surrounding decision or content hierarchy.",
+          "name": "default"
+        }
+      ],
+      "version": "0.1.0"
+    },
+    {
+      "accessibility": {
+        "requirements": [
+          "The text field needs a clear label.",
+          "Character limits and errors must be announced.",
+          "Publishing must retain the draft until success."
+        ]
+      },
+      "avoidWhen": [
+        "The component would need to own persistence, authentication, or uploads."
+      ],
+      "category": "composer",
+      "entrypoints": [
+        "@commonspace/social",
+        "@commonspace/social/post"
+      ],
+      "examples": {
+        "avoid": [],
+        "preferred": [
+          {
+            "code": "<PostComposerView value={draft} onChange={setDraft} onSubmit={publish} pending={pending} />",
+            "reason": "Leaves workflow state in the consuming app.",
+            "title": "Controlled draft"
+          }
+        ]
+      },
+      "id": "social.post-composer-view",
+      "keywords": [
+        "composer",
+        "post",
+        "draft",
+        "publish"
+      ],
+      "kind": "component",
+      "name": "PostComposerView",
+      "package": "@commonspace/social",
+      "props": [],
+      "related": [
+        "ui.text-area",
+        "ui.button",
+        "pattern.form-actions"
+      ],
+      "schemaVersion": 1,
+      "sourcePath": "packages/social/src/post-composer/post-composer-view.tsx",
+      "states": [
+        "empty",
+        "draft",
+        "invalid",
+        "publishing",
+        "failed"
+      ],
+      "status": "stable",
+      "stories": [
+        "catalog-social--post-composer-view"
+      ],
+      "summary": "Presents a controlled social composer while the application owns draft, validation, upload, and publishing state.",
+      "tokens": [
+        "--cs-surface",
+        "--cs-border",
+        "--cs-accent",
+        "--cs-field-height"
+      ],
+      "useWhen": [
+        "A social product needs a reusable text-post composition surface."
+      ],
+      "variants": [
+        {
+          "guidance": "Use the inline variant only when its semantic role matches the surrounding decision or content hierarchy.",
+          "name": "inline"
+        },
+        {
+          "guidance": "Use the dialog variant only when its semantic role matches the surrounding decision or content hierarchy.",
+          "name": "dialog"
+        }
+      ],
+      "version": "0.1.0"
+    },
+    {
+      "accessibility": {
+        "requirements": [
+          "Timestamp text should expose a meaningful date to assistive technology.",
+          "Author navigation is supplied as a callback or link wrapper by the application."
+        ]
+      },
+      "avoidWhen": [
+        "A generic person row is needed; use UserCell."
+      ],
+      "category": "post",
+      "entrypoints": [
+        "@commonspace/social",
+        "@commonspace/social/post"
+      ],
+      "examples": {
+        "avoid": [],
+        "preferred": [
+          {
+            "code": "<PostHeader post={post} onOpenAuthor={openAuthor} />",
+            "reason": "Injects navigation behavior.",
+            "title": "Post identity"
+          }
+        ]
+      },
+      "id": "social.post-header",
+      "keywords": [
+        "post",
+        "author",
+        "identity",
+        "timestamp"
+      ],
+      "kind": "component",
+      "name": "PostHeader",
+      "package": "@commonspace/social",
+      "props": [],
+      "related": [
+        "social.post-card",
+        "social.user-cell"
+      ],
+      "schemaVersion": 1,
+      "sourcePath": "packages/social/src/post-card/post-header.tsx",
+      "states": [
+        "default",
+        "verified"
+      ],
+      "status": "stable",
+      "stories": [
+        "catalog-social--post-header"
+      ],
+      "summary": "Presents post identity, timestamp, and distribution context without owning navigation.",
+      "tokens": [
+        "--cs-ink",
+        "--cs-ink-muted"
+      ],
+      "useWhen": [
+        "A post or compact content item needs consistent identity metadata."
+      ],
+      "variants": [
+        {
+          "guidance": "Use the default variant only when its semantic role matches the surrounding decision or content hierarchy.",
+          "name": "default"
+        },
+        {
+          "guidance": "Use the repost-context variant only when its semantic role matches the surrounding decision or content hierarchy.",
+          "name": "repost-context"
+        }
+      ],
+      "version": "0.1.0"
+    },
+    {
+      "accessibility": {
+        "requirements": [
+          "Every image needs useful alt text or an explicit decorative alt.",
+          "Buttons opening media need labels that identify the selected item."
+        ]
+      },
+      "avoidWhen": [
+        "Media requires editing or upload management.",
+        "A general image gallery is being built."
+      ],
+      "category": "media",
+      "entrypoints": [
+        "@commonspace/social",
+        "@commonspace/social/post"
+      ],
+      "examples": {
+        "avoid": [],
+        "preferred": [
+          {
+            "code": "<PostMediaGrid media={post.media} onOpenMedia={openMedia} />",
+            "reason": "Uses application-owned media behavior.",
+            "title": "Post media"
+          }
+        ]
+      },
+      "id": "social.post-media-grid",
+      "keywords": [
+        "media",
+        "image",
+        "video",
+        "grid",
+        "post"
+      ],
+      "kind": "component",
+      "name": "PostMediaGrid",
+      "package": "@commonspace/social",
+      "props": [],
+      "related": [
+        "social.post-card"
+      ],
+      "schemaVersion": 1,
+      "sourcePath": "packages/social/src/post-card/post-media-grid.tsx",
+      "states": [
+        "loading",
+        "ready",
+        "error"
+      ],
+      "status": "stable",
+      "stories": [
+        "catalog-social--post-media-grid"
+      ],
+      "summary": "Arranges one to four social media assets with stable aspect ratios and selection callbacks.",
+      "tokens": [
+        "--cs-border",
+        "--cs-radius-md"
+      ],
+      "useWhen": [
+        "A post contains one to four media assets."
+      ],
+      "variants": [
+        {
+          "guidance": "Use the one variant only when its semantic role matches the surrounding decision or content hierarchy.",
+          "name": "one"
+        },
+        {
+          "guidance": "Use the two variant only when its semantic role matches the surrounding decision or content hierarchy.",
+          "name": "two"
+        },
+        {
+          "guidance": "Use the three variant only when its semantic role matches the surrounding decision or content hierarchy.",
+          "name": "three"
+        },
+        {
+          "guidance": "Use the four variant only when its semantic role matches the surrounding decision or content hierarchy.",
+          "name": "four"
+        }
+      ],
+      "version": "0.1.0"
+    },
+    {
+      "accessibility": {
+        "requirements": [
+          "Heading levels must fit the page hierarchy.",
+          "Counts need complete accessible labels.",
+          "Cover imagery must not hide identity text."
+        ]
+      },
+      "avoidWhen": [
+        "A compact list row is sufficient; use UserCell."
+      ],
+      "category": "profile",
+      "entrypoints": [
+        "@commonspace/social",
+        "@commonspace/social/profile"
+      ],
+      "examples": {
+        "avoid": [],
+        "preferred": [
+          {
+            "code": "<ProfileHeader profile={profile} action={<FollowButton />} />",
+            "reason": "Keeps relationship behavior in the application.",
+            "title": "External relationship action"
+          }
+        ]
+      },
+      "id": "social.profile-header",
+      "keywords": [
+        "profile",
+        "header",
+        "identity",
+        "follow"
+      ],
+      "kind": "component",
+      "name": "ProfileHeader",
+      "package": "@commonspace/social",
+      "props": [],
+      "related": [
+        "social.user-cell",
+        "pattern.profile-surface"
+      ],
+      "schemaVersion": 1,
+      "sourcePath": "packages/social/src/profile/profile-header.tsx",
+      "states": [
+        "default",
+        "following",
+        "pending",
+        "blocked"
+      ],
+      "status": "stable",
+      "stories": [
+        "catalog-social--profile-header"
+      ],
+      "summary": "Presents a curator or user profile summary with injected primary and secondary actions.",
+      "tokens": [
+        "--cs-surface",
+        "--cs-border",
+        "--cs-ink",
+        "--cs-ink-muted"
+      ],
+      "useWhen": [
+        "A profile route needs consistent cover, identity, biography, and counts."
+      ],
+      "variants": [
+        {
+          "guidance": "Use the self variant only when its semantic role matches the surrounding decision or content hierarchy.",
+          "name": "self"
+        },
+        {
+          "guidance": "Use the other variant only when its semantic role matches the surrounding decision or content hierarchy.",
+          "name": "other"
+        },
+        {
+          "guidance": "Use the private variant only when its semantic role matches the surrounding decision or content hierarchy.",
+          "name": "private"
+        }
+      ],
+      "version": "0.1.0"
+    },
+    {
+      "accessibility": {
+        "requirements": [
+          "Expose the list relationship with semantic list markup.",
+          "Keep existing items when additional loading fails.",
+          "Announce newly accepted items without moving focus."
+        ]
+      },
+      "avoidWhen": [
+        "The component would fetch pages itself.",
+        "A static arbitrary list has no social semantics."
+      ],
+      "category": "timeline",
+      "entrypoints": [
+        "@commonspace/social",
+        "@commonspace/social/timeline"
+      ],
+      "examples": {
+        "avoid": [],
+        "preferred": [
+          {
+            "code": "<TimelineView posts={posts} renderPost={renderPost} loadingMore={isFetchingNextPage} />",
+            "reason": "Keeps remote state outside presentation.",
+            "title": "External pagination"
+          }
+        ]
+      },
+      "id": "social.timeline-view",
+      "keywords": [
+        "timeline",
+        "feed",
+        "list",
+        "infinite-scroll"
+      ],
+      "kind": "component",
+      "name": "TimelineView",
+      "package": "@commonspace/social",
+      "props": [],
+      "related": [
+        "social.post-card",
+        "social.post-card-skeleton",
+        "pattern.social-feed"
+      ],
+      "schemaVersion": 1,
+      "sourcePath": "packages/social/src/timeline/timeline-view.tsx",
+      "states": [
+        "initial-loading",
+        "populated",
+        "empty",
+        "error",
+        "loading-more"
+      ],
+      "status": "stable",
+      "stories": [
+        "catalog-social--timeline-view"
+      ],
+      "summary": "Composes timeline states and rendered post rows without owning pagination or virtualization.",
+      "tokens": [
+        "--cs-border",
+        "--cs-surface"
+      ],
+      "useWhen": [
+        "An application needs a consistent loading, empty, error, and populated timeline surface."
+      ],
+      "variants": [
+        {
+          "guidance": "Use the default variant only when its semantic role matches the surrounding decision or content hierarchy.",
+          "name": "default"
+        }
+      ],
+      "version": "0.1.0"
+    },
+    {
+      "accessibility": {
+        "requirements": [
+          "If the entire row is interactive, preserve nested action behavior.",
+          "Identity text must not be conveyed by avatar alone."
+        ]
+      },
+      "avoidWhen": [
+        "A full profile context is needed; use ProfileHeader."
+      ],
+      "category": "identity",
+      "entrypoints": [
+        "@commonspace/social",
+        "@commonspace/social/user"
+      ],
+      "examples": {
+        "avoid": [],
+        "preferred": [
+          {
+            "code": "<UserCell user={user} onSelect={openProfile} action={<FollowButton />} />",
+            "reason": "Separates row navigation and relationship action.",
+            "title": "Search result"
+          }
+        ]
+      },
+      "id": "social.user-cell",
+      "keywords": [
+        "user",
+        "identity",
+        "row",
+        "follow",
+        "search-result"
+      ],
+      "kind": "component",
+      "name": "UserCell",
+      "package": "@commonspace/social",
+      "props": [],
+      "related": [
+        "ui.avatar",
+        "social.profile-header"
+      ],
+      "schemaVersion": 1,
+      "sourcePath": "packages/social/src/user-cell/user-cell.tsx",
+      "states": [
+        "default",
+        "selected",
+        "pending"
+      ],
+      "status": "stable",
+      "stories": [
+        "catalog-social--user-cell"
+      ],
+      "summary": "Presents a compact person row with optional supporting text and injected action.",
+      "tokens": [
+        "--cs-ink",
+        "--cs-ink-muted",
+        "--cs-border"
+      ],
+      "useWhen": [
+        "Search, followers, recommendations, or membership lists show people."
+      ],
+      "variants": [
+        {
+          "guidance": "Use the default variant only when its semantic role matches the surrounding decision or content hierarchy.",
+          "name": "default"
+        },
+        {
+          "guidance": "Use the compact variant only when its semantic role matches the surrounding decision or content hierarchy.",
+          "name": "compact"
+        }
+      ],
+      "version": "0.1.0"
+    },
+    {
+      "accessibility": {
+        "requirements": [
+          "Use role=status for neutral and success feedback.",
+          "Use role=alert for warning and critical feedback.",
+          "Keep the title specific and state what remains preserved."
+        ]
+      },
+      "avoidWhen": [
+        "A short global confirmation is sufficient; use FeedbackProvider and Toast.",
+        "The entire route is unusable; use a route-level error surface."
+      ],
+      "category": "feedback",
+      "entrypoints": [
+        "@commonspace/ui",
+        "@commonspace/ui/alert"
+      ],
+      "examples": {
+        "avoid": [
+          {
+            "code": "<Alert title={error.message} />",
+            "reason": "May expose unsafe or irrelevant implementation details.",
+            "title": "Raw server error"
+          }
+        ],
+        "preferred": [
+          {
+            "code": "<Alert tone=\"warning\" title=\"Could not refresh posts\">Existing posts remain available.</Alert>",
+            "reason": "Names the failure and preserved state.",
+            "title": "Recoverable failure"
+          }
+        ]
+      },
+      "id": "ui.alert",
+      "keywords": [
+        "feedback",
+        "error",
+        "warning",
+        "status",
+        "callout"
+      ],
+      "kind": "component",
+      "name": "Alert",
+      "package": "@commonspace/ui",
+      "props": [],
+      "related": [
+        "ui.toast",
+        "ui.empty-state",
+        "pattern.feedback-recovery"
+      ],
+      "schemaVersion": 1,
+      "sourcePath": "packages/ui/src/alert/alert.tsx",
+      "states": [
+        "default",
+        "with-action",
+        "dismissible"
+      ],
+      "status": "stable",
+      "stories": [
+        "catalog-ui--alert"
+      ],
+      "summary": "Presents contextual feedback beside the task or content that produced it.",
+      "tokens": [
+        "--cs-surface",
+        "--cs-border",
+        "--cs-positive",
+        "--cs-warning",
+        "--cs-critical"
+      ],
+      "useWhen": [
+        "A message must remain visible until the user resolves or dismisses its cause.",
+        "The message belongs to a specific form, panel, or data region."
+      ],
+      "variants": [
+        {
+          "guidance": "Use the neutral variant only when its semantic role matches the surrounding decision or content hierarchy.",
+          "name": "neutral"
+        },
+        {
+          "guidance": "Use the success variant only when its semantic role matches the surrounding decision or content hierarchy.",
+          "name": "success"
+        },
+        {
+          "guidance": "Use the warning variant only when its semantic role matches the surrounding decision or content hierarchy.",
+          "name": "warning"
+        },
+        {
+          "guidance": "Use the critical variant only when its semantic role matches the surrounding decision or content hierarchy.",
+          "name": "critical"
+        }
+      ],
+      "version": "0.1.0"
+    },
+    {
+      "accessibility": {
+        "requirements": [
+          "Provide a useful accessible label through surrounding identity text.",
+          "Use an empty alt value when the adjacent text already names the person."
+        ]
+      },
+      "avoidWhen": [
+        "The visual is decorative and has no identity meaning.",
+        "A product or content thumbnail is being displayed."
+      ],
+      "category": "identity",
+      "entrypoints": [
+        "@commonspace/ui",
+        "@commonspace/ui/avatar"
+      ],
+      "examples": {
+        "avoid": [],
+        "preferred": [
+          {
+            "code": "<Avatar src={user.avatarUrl} name={user.displayName} />",
+            "reason": "Provides both image and fallback data.",
+            "title": "Identity row"
+          }
+        ]
+      },
+      "id": "ui.avatar",
+      "keywords": [
+        "avatar",
+        "identity",
+        "profile",
+        "image",
+        "initials"
+      ],
+      "kind": "component",
+      "name": "Avatar",
+      "package": "@commonspace/ui",
+      "props": [],
+      "related": [
+        "social.user-cell"
+      ],
+      "schemaVersion": 1,
+      "sourcePath": "packages/ui/src/avatar/avatar.tsx",
+      "states": [
+        "image",
+        "fallback",
+        "loading"
+      ],
+      "status": "stable",
+      "stories": [
+        "catalog-ui--avatar"
+      ],
+      "summary": "Represents a person or organization with an image and deterministic fallback.",
+      "tokens": [
+        "--cs-surface-muted",
+        "--cs-border",
+        "--cs-ink"
+      ],
+      "useWhen": [
+        "An identity must remain recognizable at compact sizes.",
+        "A profile image may fail and needs a text fallback."
+      ],
+      "variants": [
+        {
+          "guidance": "Use the sm variant only when its semantic role matches the surrounding decision or content hierarchy.",
+          "name": "sm"
+        },
+        {
+          "guidance": "Use the md variant only when its semantic role matches the surrounding decision or content hierarchy.",
+          "name": "md"
+        },
+        {
+          "guidance": "Use the lg variant only when its semantic role matches the surrounding decision or content hierarchy.",
+          "name": "lg"
+        }
+      ],
+      "version": "0.1.0"
+    },
+    {
+      "accessibility": {
+        "requirements": [
+          "Do not communicate state by color alone.",
+          "Keep labels concise enough to remain readable at 200% zoom."
+        ]
+      },
+      "avoidWhen": [
+        "The label is interactive; use Button, Tabs, or a link.",
+        "The text is ordinary metadata and does not need a container."
+      ],
+      "category": "data-display",
+      "entrypoints": [
+        "@commonspace/ui",
+        "@commonspace/ui/badge"
+      ],
+      "examples": {
+        "avoid": [],
+        "preferred": [
+          {
+            "code": "<Badge tone=\"positive\">Published</Badge>",
+            "reason": "Pairs text with semantic color.",
+            "title": "Status"
+          }
+        ]
+      },
+      "id": "ui.badge",
+      "keywords": [
+        "badge",
+        "status",
+        "label",
+        "count"
+      ],
+      "kind": "component",
+      "name": "Badge",
+      "package": "@commonspace/ui",
+      "props": [],
+      "related": [
+        "ui.alert"
+      ],
+      "schemaVersion": 1,
+      "sourcePath": "packages/ui/src/badge/badge.tsx",
+      "states": [
+        "default"
+      ],
+      "status": "stable",
+      "stories": [
+        "catalog-ui--badge"
+      ],
+      "summary": "Displays a compact status or categorical label without becoming the primary action.",
+      "tokens": [
+        "--cs-surface-muted",
+        "--cs-border",
+        "--cs-ink-muted"
+      ],
+      "useWhen": [
+        "A short status, category, or count needs compact emphasis."
+      ],
+      "variants": [
+        {
+          "guidance": "Use the neutral variant only when its semantic role matches the surrounding decision or content hierarchy.",
+          "name": "neutral"
+        },
+        {
+          "guidance": "Use the accent variant only when its semantic role matches the surrounding decision or content hierarchy.",
+          "name": "accent"
+        },
+        {
+          "guidance": "Use the positive variant only when its semantic role matches the surrounding decision or content hierarchy.",
+          "name": "positive"
+        },
+        {
+          "guidance": "Use the warning variant only when its semantic role matches the surrounding decision or content hierarchy.",
+          "name": "warning"
+        },
+        {
+          "guidance": "Use the critical variant only when its semantic role matches the surrounding decision or content hierarchy.",
+          "name": "critical"
+        }
+      ],
+      "version": "0.1.0"
+    },
+    {
+      "accessibility": {
+        "requirements": [
+          "Use an action verb as the accessible name.",
+          "Pending state must preserve the accessible name and disable duplicate submission.",
+          "Use danger only for destructive actions with clear consequences."
+        ]
+      },
+      "avoidWhen": [
+        "The target is navigation; use a link.",
+        "The control only contains an icon; use IconButton."
+      ],
+      "category": "action",
+      "entrypoints": [
+        "@commonspace/ui",
+        "@commonspace/ui/button"
+      ],
+      "examples": {
+        "avoid": [
+          {
+            "code": "<Button onClick={() => navigate('/settings')}>Settings</Button>",
+            "reason": "Navigation should preserve link semantics.",
+            "title": "Navigation"
+          }
+        ],
+        "preferred": [
+          {
+            "code": "<Button pending={isSaving}>Save changes</Button>",
+            "reason": "One clear verb and stable pending state.",
+            "title": "Primary action"
+          }
+        ]
+      },
+      "id": "ui.button",
+      "keywords": [
+        "button",
+        "action",
+        "submit",
+        "confirm",
+        "delete"
+      ],
+      "kind": "component",
+      "name": "Button",
+      "package": "@commonspace/ui",
+      "props": [],
+      "related": [
+        "ui.icon-button",
+        "pattern.form-actions"
+      ],
+      "schemaVersion": 1,
+      "sourcePath": "packages/ui/src/button/button.tsx",
+      "states": [
+        "default",
+        "hover",
+        "focus-visible",
+        "disabled",
+        "pending"
+      ],
+      "status": "stable",
+      "stories": [
+        "catalog-ui--button"
+      ],
+      "summary": "Triggers an immediate user action with explicit priority and pending behavior.",
+      "tokens": [
+        "--cs-button-height-md",
+        "--cs-accent",
+        "--cs-critical",
+        "--cs-focus"
+      ],
+      "useWhen": [
+        "The user can perform an immediate action.",
+        "A decision region needs one clearly prioritized primary action."
+      ],
+      "variants": [
+        {
+          "guidance": "Use the primary variant only when its semantic role matches the surrounding decision or content hierarchy.",
+          "name": "primary"
+        },
+        {
+          "guidance": "Use the secondary variant only when its semantic role matches the surrounding decision or content hierarchy.",
+          "name": "secondary"
+        },
+        {
+          "guidance": "Use the ghost variant only when its semantic role matches the surrounding decision or content hierarchy.",
+          "name": "ghost"
+        },
+        {
+          "guidance": "Use the danger variant only when its semantic role matches the surrounding decision or content hierarchy.",
+          "name": "danger"
+        }
+      ],
+      "version": "0.1.0"
+    },
+    {
+      "accessibility": {
+        "requirements": [
+          "Container must not prevent 320px reflow.",
+          "Landmark semantics belong to the element passed through asChild or wrapping structure."
+        ]
+      },
+      "avoidWhen": [
+        "The element must be full bleed.",
+        "A local group only needs spacing; use Stack or Inline."
+      ],
+      "category": "layout",
+      "entrypoints": [
+        "@commonspace/ui",
+        "@commonspace/ui/layout"
+      ],
+      "examples": {
+        "avoid": [],
+        "preferred": [
+          {
+            "code": "<Container size=\"lg\"><main>{children}</main></Container>",
+            "reason": "Uses standard gutters and width.",
+            "title": "Page shell"
+          }
+        ]
+      },
+      "id": "ui.container",
+      "keywords": [
+        "container",
+        "layout",
+        "width",
+        "gutter"
+      ],
+      "kind": "component",
+      "name": "Container",
+      "package": "@commonspace/ui",
+      "props": [],
+      "related": [
+        "ui.stack",
+        "ui.inline"
+      ],
+      "schemaVersion": 1,
+      "sourcePath": "packages/ui/src/container/container.tsx",
+      "states": [
+        "default"
+      ],
+      "status": "stable",
+      "stories": [
+        "catalog-ui--container"
+      ],
+      "summary": "Constrains page content to a readable width and consistent horizontal gutter.",
+      "tokens": [
+        "--cs-space-4",
+        "--cs-space-6",
+        "--cs-shell-max"
+      ],
+      "useWhen": [
+        "A page or section needs the standard Commonspace reading width."
+      ],
+      "variants": [
+        {
+          "guidance": "Use the sm variant only when its semantic role matches the surrounding decision or content hierarchy.",
+          "name": "sm"
+        },
+        {
+          "guidance": "Use the md variant only when its semantic role matches the surrounding decision or content hierarchy.",
+          "name": "md"
+        },
+        {
+          "guidance": "Use the lg variant only when its semantic role matches the surrounding decision or content hierarchy.",
+          "name": "lg"
+        },
+        {
+          "guidance": "Use the full variant only when its semantic role matches the surrounding decision or content hierarchy.",
+          "name": "full"
+        }
+      ],
+      "version": "0.1.0"
+    },
+    {
+      "accessibility": {
+        "requirements": [
+          "Move focus into the dialog on open and restore it on close.",
+          "Provide a labelled title and optional description.",
+          "Escape closes unless an irreversible operation is in progress."
+        ]
+      },
+      "avoidWhen": [
+        "The content is a full workflow or route.",
+        "A non-blocking message is sufficient."
+      ],
+      "category": "overlay",
+      "entrypoints": [
+        "@commonspace/ui",
+        "@commonspace/ui/dialog"
+      ],
+      "examples": {
+        "avoid": [],
+        "preferred": [
+          {
+            "code": "<Dialog open={open} onOpenChange={setOpen} title=\"Delete post?\">...</Dialog>",
+            "reason": "Labels the modal and keeps open state controlled.",
+            "title": "Confirm action"
+          }
+        ]
+      },
+      "id": "ui.dialog",
+      "keywords": [
+        "dialog",
+        "modal",
+        "overlay",
+        "confirmation"
+      ],
+      "kind": "component",
+      "name": "Dialog",
+      "package": "@commonspace/ui",
+      "props": [],
+      "related": [
+        "ui.button",
+        "ui.alert"
+      ],
+      "schemaVersion": 1,
+      "sourcePath": "packages/ui/src/dialog/dialog.tsx",
+      "states": [
+        "closed",
+        "opening",
+        "open",
+        "closing"
+      ],
+      "status": "stable",
+      "stories": [
+        "catalog-ui--dialog"
+      ],
+      "summary": "Interrupts the current context for a focused task that must be completed or dismissed.",
+      "tokens": [
+        "--cs-dialog-width-md",
+        "--cs-surface",
+        "--cs-shadow-dialog",
+        "--cs-focus"
+      ],
+      "useWhen": [
+        "A short focused task cannot fit safely inline.",
+        "A destructive action needs confirmation and consequence text."
+      ],
+      "variants": [
+        {
+          "guidance": "Use the sm variant only when its semantic role matches the surrounding decision or content hierarchy.",
+          "name": "sm"
+        },
+        {
+          "guidance": "Use the md variant only when its semantic role matches the surrounding decision or content hierarchy.",
+          "name": "md"
+        },
+        {
+          "guidance": "Use the lg variant only when its semantic role matches the surrounding decision or content hierarchy.",
+          "name": "lg"
+        }
+      ],
+      "version": "0.1.0"
+    },
+    {
+      "accessibility": {
+        "requirements": [
+          "Use a heading that identifies the empty condition.",
+          "Do not imply failure when the empty state is valid."
+        ]
+      },
+      "avoidWhen": [
+        "Data is still loading; use Skeleton.",
+        "The region failed to load; use Alert."
+      ],
+      "category": "feedback",
+      "entrypoints": [
+        "@commonspace/ui"
+      ],
+      "examples": {
+        "avoid": [],
+        "preferred": [
+          {
+            "code": "<EmptyState title=\"No matching curators\" description=\"Try a broader search.\" />",
+            "reason": "Explains the condition and recovery.",
+            "title": "No results"
+          }
+        ]
+      },
+      "id": "ui.empty-state",
+      "keywords": [
+        "empty",
+        "zero-state",
+        "no-results",
+        "onboarding"
+      ],
+      "kind": "component",
+      "name": "EmptyState",
+      "package": "@commonspace/ui",
+      "props": [],
+      "related": [
+        "ui.alert",
+        "ui.skeleton"
+      ],
+      "schemaVersion": 1,
+      "sourcePath": "packages/ui/src/empty-state/empty-state.tsx",
+      "states": [
+        "first-use",
+        "no-results",
+        "cleared"
+      ],
+      "status": "stable",
+      "stories": [
+        "catalog-ui--empty-state"
+      ],
+      "summary": "Explains why a meaningful region has no content and offers the next valid action.",
+      "tokens": [
+        "--cs-ink",
+        "--cs-ink-muted",
+        "--cs-space-8"
+      ],
+      "useWhen": [
+        "A list, search, or workspace has no content."
+      ],
+      "variants": [
+        {
+          "guidance": "Use the compact variant only when its semantic role matches the surrounding decision or content hierarchy.",
+          "name": "compact"
+        },
+        {
+          "guidance": "Use the default variant only when its semantic role matches the surrounding decision or content hierarchy.",
+          "name": "default"
+        }
+      ],
+      "version": "0.1.0"
+    },
+    {
+      "accessibility": {
+        "requirements": [
+          "Mount one provider per feedback scope.",
+          "Critical items remain until explicitly dismissed.",
+          "Do not enqueue raw server messages."
+        ]
+      },
+      "avoidWhen": [
+        "Feedback belongs permanently beside a field or panel; use Alert."
+      ],
+      "category": "feedback",
+      "entrypoints": [
+        "@commonspace/ui",
+        "@commonspace/ui/feedback"
+      ],
+      "examples": {
+        "avoid": [],
+        "preferred": [
+          {
+            "code": "<FeedbackProvider><App /></FeedbackProvider>",
+            "reason": "Creates one deterministic queue.",
+            "title": "Application provider"
+          }
+        ]
+      },
+      "id": "ui.feedback-provider",
+      "keywords": [
+        "toast",
+        "feedback",
+        "provider",
+        "queue"
+      ],
+      "kind": "component",
+      "name": "FeedbackProvider",
+      "package": "@commonspace/ui",
+      "props": [],
+      "related": [
+        "ui.toast",
+        "ui.toast-viewport",
+        "ui.alert"
+      ],
+      "schemaVersion": 1,
+      "sourcePath": "packages/ui/src/feedback/feedback-provider.tsx",
+      "states": [
+        "idle",
+        "queued",
+        "announcing"
+      ],
+      "status": "stable",
+      "stories": [
+        "catalog-ui--feedback-provider"
+      ],
+      "summary": "Owns the application-level transient feedback queue and exposes a bounded controller.",
+      "tokens": [
+        "--cs-dialog-width-sm",
+        "--cs-shadow-dialog"
+      ],
+      "useWhen": [
+        "An application needs global confirmations and non-blocking errors."
+      ],
+      "variants": [
+        {
+          "guidance": "Use the default variant only when its semantic role matches the surrounding decision or content hierarchy.",
+          "name": "default"
+        }
+      ],
+      "version": "0.1.0"
+    },
+    {
+      "accessibility": {
+        "requirements": [
+          "An aria-label is required.",
+          "Tooltip text should match the accessible name.",
+          "Pressed toggles must expose aria-pressed."
+        ]
+      },
+      "avoidWhen": [
+        "The action is unfamiliar or consequential; use a labeled Button.",
+        "The icon is decorative."
+      ],
+      "category": "action",
+      "entrypoints": [
+        "@commonspace/ui",
+        "@commonspace/ui/button"
+      ],
+      "examples": {
+        "avoid": [
+          {
+            "code": "<IconButton><BookmarkIcon /></IconButton>",
+            "reason": "Screen-reader users cannot identify the action.",
+            "title": "Unnamed icon"
+          }
+        ],
+        "preferred": [
+          {
+            "code": "<IconButton aria-label=\"Bookmark post\"><BookmarkIcon /></IconButton>",
+            "reason": "Provides a stable accessible name.",
+            "title": "Toolbar action"
+          }
+        ]
+      },
+      "id": "ui.icon-button",
+      "keywords": [
+        "icon",
+        "button",
+        "toolbar",
+        "compact-action"
+      ],
+      "kind": "component",
+      "name": "IconButton",
+      "package": "@commonspace/ui",
+      "props": [],
+      "related": [
+        "ui.button"
+      ],
+      "schemaVersion": 1,
+      "sourcePath": "packages/ui/src/icon-button/icon-button.tsx",
+      "states": [
+        "default",
+        "hover",
+        "focus-visible",
+        "disabled",
+        "pressed"
+      ],
+      "status": "stable",
+      "stories": [
+        "catalog-ui--icon-button"
+      ],
+      "summary": "Triggers a frequent action where a well-known icon can replace visible text.",
+      "tokens": [
+        "--cs-button-height-md",
+        "--cs-focus",
+        "--cs-ink-muted"
+      ],
+      "useWhen": [
+        "A compact toolbar or repeated row action has a familiar icon."
+      ],
+      "variants": [
+        {
+          "guidance": "Use the ghost variant only when its semantic role matches the surrounding decision or content hierarchy.",
+          "name": "ghost"
+        },
+        {
+          "guidance": "Use the secondary variant only when its semantic role matches the surrounding decision or content hierarchy.",
+          "name": "secondary"
+        },
+        {
+          "guidance": "Use the danger variant only when its semantic role matches the surrounding decision or content hierarchy.",
+          "name": "danger"
+        }
+      ],
+      "version": "0.1.0"
+    },
+    {
+      "accessibility": {
+        "requirements": [
+          "Allow wrapping when labels may grow or localize.",
+          "Preserve a logical DOM order."
+        ]
+      },
+      "avoidWhen": [
+        "Items represent a vertical reading sequence; use Stack."
+      ],
+      "category": "layout",
+      "entrypoints": [
+        "@commonspace/ui",
+        "@commonspace/ui/layout"
+      ],
+      "examples": {
+        "avoid": [],
+        "preferred": [
+          {
+            "code": "<Inline gap=\"sm\"><Button>Save</Button><Button variant=\"secondary\">Cancel</Button></Inline>",
+            "reason": "Groups related actions without arbitrary margins.",
+            "title": "Action row"
+          }
+        ]
+      },
+      "id": "ui.inline",
+      "keywords": [
+        "inline",
+        "row",
+        "layout",
+        "gap",
+        "wrap"
+      ],
+      "kind": "component",
+      "name": "Inline",
+      "package": "@commonspace/ui",
+      "props": [],
+      "related": [
+        "ui.stack",
+        "ui.separator"
+      ],
+      "schemaVersion": 1,
+      "sourcePath": "packages/ui/src/inline/inline.tsx",
+      "states": [
+        "nowrap",
+        "wrap"
+      ],
+      "status": "stable",
+      "stories": [
+        "catalog-ui--inline"
+      ],
+      "summary": "Arranges related items horizontally with tokenized gap, alignment, and wrapping.",
+      "tokens": [
+        "--cs-space-1",
+        "--cs-space-2",
+        "--cs-space-3",
+        "--cs-space-4"
+      ],
+      "useWhen": [
+        "Actions, metadata, or compact controls form one horizontal group."
+      ],
+      "variants": [
+        {
+          "guidance": "Use the start variant only when its semantic role matches the surrounding decision or content hierarchy.",
+          "name": "start"
+        },
+        {
+          "guidance": "Use the center variant only when its semantic role matches the surrounding decision or content hierarchy.",
+          "name": "center"
+        },
+        {
+          "guidance": "Use the end variant only when its semantic role matches the surrounding decision or content hierarchy.",
+          "name": "end"
+        },
+        {
+          "guidance": "Use the space-between variant only when its semantic role matches the surrounding decision or content hierarchy.",
+          "name": "space-between"
+        }
+      ],
+      "version": "0.1.0"
+    },
+    {
+      "accessibility": {
+        "requirements": [
+          "Use semantic hr behavior for meaningful thematic breaks.",
+          "Hide purely decorative separators from assistive technology."
+        ]
+      },
+      "avoidWhen": [
+        "The rule is decorative only and adds visual noise."
+      ],
+      "category": "layout",
+      "entrypoints": [
+        "@commonspace/ui",
+        "@commonspace/ui/layout"
+      ],
+      "examples": {
+        "avoid": [],
+        "preferred": [
+          {
+            "code": "<Separator />",
+            "reason": "Uses the shared border token.",
+            "title": "Section boundary"
+          }
+        ]
+      },
+      "id": "ui.separator",
+      "keywords": [
+        "separator",
+        "divider",
+        "rule"
+      ],
+      "kind": "component",
+      "name": "Separator",
+      "package": "@commonspace/ui",
+      "props": [],
+      "related": [
+        "ui.stack",
+        "ui.surface"
+      ],
+      "schemaVersion": 1,
+      "sourcePath": "packages/ui/src/separator/separator.tsx",
+      "states": [
+        "default"
+      ],
+      "status": "stable",
+      "stories": [
+        "catalog-ui--separator"
+      ],
+      "summary": "Separates adjacent regions when spacing alone cannot communicate the boundary.",
+      "tokens": [
+        "--cs-border"
+      ],
+      "useWhen": [
+        "Two peer regions need a visible boundary."
+      ],
+      "variants": [
+        {
+          "guidance": "Use the horizontal variant only when its semantic role matches the surrounding decision or content hierarchy.",
+          "name": "horizontal"
+        },
+        {
+          "guidance": "Use the vertical variant only when its semantic role matches the surrounding decision or content hierarchy.",
+          "name": "vertical"
+        }
+      ],
+      "version": "0.1.0"
+    },
+    {
+      "accessibility": {
+        "requirements": [
+          "Mark the containing region busy.",
+          "Skeleton elements themselves should be hidden from assistive technology.",
+          "Respect reduced motion."
+        ]
+      },
+      "avoidWhen": [
+        "The operation is immediate or the layout is unknown; use Spinner or a simple pending label."
+      ],
+      "category": "loading",
+      "entrypoints": [
+        "@commonspace/ui",
+        "@commonspace/ui/loading"
+      ],
+      "examples": {
+        "avoid": [],
+        "preferred": [
+          {
+            "code": "<Skeleton aria-hidden style={{ height: 160 }} />",
+            "reason": "Reserves layout without announcing fake content.",
+            "title": "Timeline row"
+          }
+        ]
+      },
+      "id": "ui.skeleton",
+      "keywords": [
+        "skeleton",
+        "loading",
+        "placeholder"
+      ],
+      "kind": "component",
+      "name": "Skeleton",
+      "package": "@commonspace/ui",
+      "props": [],
+      "related": [
+        "ui.spinner",
+        "ui.empty-state"
+      ],
+      "schemaVersion": 1,
+      "sourcePath": "packages/ui/src/skeleton/skeleton.tsx",
+      "states": [
+        "loading"
+      ],
+      "status": "stable",
+      "stories": [
+        "catalog-ui--skeleton"
+      ],
+      "summary": "Reserves stable geometry while content is loading.",
+      "tokens": [
+        "--cs-surface-muted",
+        "--cs-motion-slow"
+      ],
+      "useWhen": [
+        "The final content shape is predictable and load time is perceptible."
+      ],
+      "variants": [
+        {
+          "guidance": "Use the text variant only when its semantic role matches the surrounding decision or content hierarchy.",
+          "name": "text"
+        },
+        {
+          "guidance": "Use the circle variant only when its semantic role matches the surrounding decision or content hierarchy.",
+          "name": "circle"
+        },
+        {
+          "guidance": "Use the block variant only when its semantic role matches the surrounding decision or content hierarchy.",
+          "name": "block"
+        }
+      ],
+      "version": "0.1.0"
+    },
+    {
+      "accessibility": {
+        "requirements": [
+          "Provide a visible or visually hidden loading label.",
+          "Respect reduced motion without removing the state indication."
+        ]
+      },
+      "avoidWhen": [
+        "A full content layout can be represented with Skeleton.",
+        "Progress is measurable; use a determinate progress indicator."
+      ],
+      "category": "loading",
+      "entrypoints": [
+        "@commonspace/ui",
+        "@commonspace/ui/loading"
+      ],
+      "examples": {
+        "avoid": [],
+        "preferred": [
+          {
+            "code": "<Spinner label=\"Saving changes\" />",
+            "reason": "Announces the current operation.",
+            "title": "Pending control"
+          }
+        ]
+      },
+      "id": "ui.spinner",
+      "keywords": [
+        "spinner",
+        "loading",
+        "progress",
+        "pending"
+      ],
+      "kind": "component",
+      "name": "Spinner",
+      "package": "@commonspace/ui",
+      "props": [],
+      "related": [
+        "ui.skeleton",
+        "ui.button"
+      ],
+      "schemaVersion": 1,
+      "sourcePath": "packages/ui/src/spinner/spinner.tsx",
+      "states": [
+        "active"
+      ],
+      "status": "stable",
+      "stories": [
+        "catalog-ui--spinner"
+      ],
+      "summary": "Indicates an indeterminate operation in a compact region.",
+      "tokens": [
+        "--cs-accent",
+        "--cs-motion-fast"
+      ],
+      "useWhen": [
+        "A control or small region is waiting and final geometry is unknown."
+      ],
+      "variants": [
+        {
+          "guidance": "Use the sm variant only when its semantic role matches the surrounding decision or content hierarchy.",
+          "name": "sm"
+        },
+        {
+          "guidance": "Use the md variant only when its semantic role matches the surrounding decision or content hierarchy.",
+          "name": "md"
+        },
+        {
+          "guidance": "Use the lg variant only when its semantic role matches the surrounding decision or content hierarchy.",
+          "name": "lg"
+        }
+      ],
+      "version": "0.1.0"
+    },
+    {
+      "accessibility": {
+        "requirements": [
+          "Do not change semantic order for visual layout.",
+          "Use responsive gaps rather than arbitrary child margins."
+        ]
+      },
+      "avoidWhen": [
+        "Items form a compact horizontal group; use Inline."
+      ],
+      "category": "layout",
+      "entrypoints": [
+        "@commonspace/ui",
+        "@commonspace/ui/layout"
+      ],
+      "examples": {
+        "avoid": [],
+        "preferred": [
+          {
+            "code": "<Stack gap=\"md\"><TextField /><TextArea /></Stack>",
+            "reason": "Creates consistent vertical rhythm.",
+            "title": "Form layout"
+          }
+        ]
+      },
+      "id": "ui.stack",
+      "keywords": [
+        "stack",
+        "column",
+        "layout",
+        "gap"
+      ],
+      "kind": "component",
+      "name": "Stack",
+      "package": "@commonspace/ui",
+      "props": [],
+      "related": [
+        "ui.inline",
+        "ui.container"
+      ],
+      "schemaVersion": 1,
+      "sourcePath": "packages/ui/src/stack/stack.tsx",
+      "states": [
+        "default"
+      ],
+      "status": "stable",
+      "stories": [
+        "catalog-ui--stack"
+      ],
+      "summary": "Arranges a vertical reading or task sequence with tokenized spacing.",
+      "tokens": [
+        "--cs-space-1",
+        "--cs-space-2",
+        "--cs-space-3",
+        "--cs-space-4",
+        "--cs-space-6"
+      ],
+      "useWhen": [
+        "Content forms a vertical hierarchy or workflow."
+      ],
+      "variants": [
+        {
+          "guidance": "Use the xs variant only when its semantic role matches the surrounding decision or content hierarchy.",
+          "name": "xs"
+        },
+        {
+          "guidance": "Use the sm variant only when its semantic role matches the surrounding decision or content hierarchy.",
+          "name": "sm"
+        },
+        {
+          "guidance": "Use the md variant only when its semantic role matches the surrounding decision or content hierarchy.",
+          "name": "md"
+        },
+        {
+          "guidance": "Use the lg variant only when its semantic role matches the surrounding decision or content hierarchy.",
+          "name": "lg"
+        },
+        {
+          "guidance": "Use the xl variant only when its semantic role matches the surrounding decision or content hierarchy.",
+          "name": "xl"
+        }
+      ],
+      "version": "0.1.0"
+    },
+    {
+      "accessibility": {
+        "requirements": [
+          "Interactive surfaces must use a semantic interactive element.",
+          "Do not rely on elevation alone for grouping."
+        ]
+      },
+      "avoidWhen": [
+        "Every item in a feed would become a nested card.",
+        "Whitespace and a divider communicate the boundary better."
+      ],
+      "category": "layout",
+      "entrypoints": [
+        "@commonspace/ui",
+        "@commonspace/ui/layout"
+      ],
+      "examples": {
+        "avoid": [],
+        "preferred": [
+          {
+            "code": "<Surface tone=\"subtle\"><Stack>...</Stack></Surface>",
+            "reason": "Adds bounded contrast to a local region.",
+            "title": "Settings section"
+          }
+        ]
+      },
+      "id": "ui.surface",
+      "keywords": [
+        "surface",
+        "panel",
+        "card",
+        "background"
+      ],
+      "kind": "component",
+      "name": "Surface",
+      "package": "@commonspace/ui",
+      "props": [],
+      "related": [
+        "ui.container",
+        "ui.separator"
+      ],
+      "schemaVersion": 1,
+      "sourcePath": "packages/ui/src/surface/surface.tsx",
+      "states": [
+        "default",
+        "interactive"
+      ],
+      "status": "stable",
+      "stories": [
+        "catalog-ui--surface"
+      ],
+      "summary": "Creates a semantic background and boundary without prescribing product content.",
+      "tokens": [
+        "--cs-surface",
+        "--cs-surface-muted",
+        "--cs-border",
+        "--cs-shadow-dialog"
+      ],
+      "useWhen": [
+        "A local region needs contrast, padding, or elevation."
+      ],
+      "variants": [
+        {
+          "guidance": "Use the plain variant only when its semantic role matches the surrounding decision or content hierarchy.",
+          "name": "plain"
+        },
+        {
+          "guidance": "Use the subtle variant only when its semantic role matches the surrounding decision or content hierarchy.",
+          "name": "subtle"
+        },
+        {
+          "guidance": "Use the raised variant only when its semantic role matches the surrounding decision or content hierarchy.",
+          "name": "raised"
+        }
+      ],
+      "version": "0.1.0"
+    },
+    {
+      "accessibility": {
+        "requirements": [
+          "Use tablist, tab, and tabpanel semantics.",
+          "Support arrow-key movement and stable focus.",
+          "Reflect restorable view state in the URL when appropriate."
+        ]
+      },
+      "avoidWhen": [
+        "The choices submit form data; use RadioGroup.",
+        "The targets are unrelated pages in global navigation."
+      ],
+      "category": "navigation",
+      "entrypoints": [
+        "@commonspace/ui",
+        "@commonspace/ui/tabs"
+      ],
+      "examples": {
+        "avoid": [],
+        "preferred": [
+          {
+            "code": "<Tabs value={tab} onValueChange={setTab} items={items} />",
+            "reason": "Keeps selection controlled and explicit.",
+            "title": "Profile views"
+          }
+        ]
+      },
+      "id": "ui.tabs",
+      "keywords": [
+        "tabs",
+        "navigation",
+        "view-switcher",
+        "selection"
+      ],
+      "kind": "component",
+      "name": "Tabs",
+      "package": "@commonspace/ui",
+      "props": [],
+      "related": [
+        "ui.button"
+      ],
+      "schemaVersion": 1,
+      "sourcePath": "packages/ui/src/tabs/tabs.tsx",
+      "states": [
+        "default",
+        "selected",
+        "focus-visible",
+        "disabled"
+      ],
+      "status": "stable",
+      "stories": [
+        "catalog-ui--tabs"
+      ],
+      "summary": "Switches among peer views that share one context and URL or controlled state.",
+      "tokens": [
+        "--cs-accent",
+        "--cs-border",
+        "--cs-focus"
+      ],
+      "useWhen": [
+        "A region has a small set of mutually exclusive peer views."
+      ],
+      "variants": [
+        {
+          "guidance": "Use the line variant only when its semantic role matches the surrounding decision or content hierarchy.",
+          "name": "line"
+        },
+        {
+          "guidance": "Use the compact variant only when its semantic role matches the surrounding decision or content hierarchy.",
+          "name": "compact"
+        }
+      ],
+      "version": "0.1.0"
+    },
+    {
+      "accessibility": {
+        "requirements": [
+          "Every field requires a visible label or an equivalent accessible name.",
+          "Connect descriptions and errors with aria-describedby.",
+          "Expose aria-invalid when validation fails."
+        ]
+      },
+      "avoidWhen": [
+        "The value is a single concise field; use TextField.",
+        "Rich text structure is required."
+      ],
+      "category": "form",
+      "entrypoints": [
+        "@commonspace/ui",
+        "@commonspace/ui/forms"
+      ],
+      "examples": {
+        "avoid": [],
+        "preferred": [
+          {
+            "code": "<TextArea label=\"Biography\" error={errors.bio} />",
+            "reason": "Associates label and validation feedback.",
+            "title": "Biography"
+          }
+        ]
+      },
+      "id": "ui.text-area",
+      "keywords": [
+        "textarea",
+        "form",
+        "multiline",
+        "input"
+      ],
+      "kind": "component",
+      "name": "TextArea",
+      "package": "@commonspace/ui",
+      "props": [],
+      "related": [
+        "ui.text-field",
+        "pattern.form-actions"
+      ],
+      "schemaVersion": 1,
+      "sourcePath": "packages/ui/src/text-area/text-area.tsx",
+      "states": [
+        "empty",
+        "filled",
+        "focus",
+        "disabled",
+        "invalid"
+      ],
+      "status": "stable",
+      "stories": [
+        "catalog-ui--text-area"
+      ],
+      "summary": "Collects multi-line text with label, description, validation, and native textarea semantics.",
+      "tokens": [
+        "--cs-field-height",
+        "--cs-border",
+        "--cs-focus",
+        "--cs-critical"
+      ],
+      "useWhen": [
+        "The user writes more than one short line."
+      ],
+      "variants": [
+        {
+          "guidance": "Use the default variant only when its semantic role matches the surrounding decision or content hierarchy.",
+          "name": "default"
+        }
+      ],
+      "version": "0.1.0"
+    },
+    {
+      "accessibility": {
+        "requirements": [
+          "Every field requires a visible label or equivalent accessible name.",
+          "Connect descriptions and errors with aria-describedby.",
+          "Use an appropriate autocomplete value for personal data."
+        ]
+      },
+      "avoidWhen": [
+        "Multi-line input is expected; use TextArea.",
+        "A fixed choice set is known; use a selection control."
+      ],
+      "category": "form",
+      "entrypoints": [
+        "@commonspace/ui",
+        "@commonspace/ui/forms"
+      ],
+      "examples": {
+        "avoid": [],
+        "preferred": [
+          {
+            "code": "<TextField label=\"Email\" type=\"email\" autoComplete=\"email\" />",
+            "reason": "Uses native semantics and autofill metadata.",
+            "title": "Email"
+          }
+        ]
+      },
+      "id": "ui.text-field",
+      "keywords": [
+        "input",
+        "form",
+        "text-field",
+        "search"
+      ],
+      "kind": "component",
+      "name": "TextField",
+      "package": "@commonspace/ui",
+      "props": [],
+      "related": [
+        "ui.text-area",
+        "pattern.form-actions"
+      ],
+      "schemaVersion": 1,
+      "sourcePath": "packages/ui/src/text-field/text-field.tsx",
+      "states": [
+        "empty",
+        "filled",
+        "focus",
+        "disabled",
+        "invalid"
+      ],
+      "status": "stable",
+      "stories": [
+        "catalog-ui--text-field"
+      ],
+      "summary": "Collects one short value with label, description, validation, and native input semantics.",
+      "tokens": [
+        "--cs-field-height",
+        "--cs-border",
+        "--cs-focus",
+        "--cs-critical"
+      ],
+      "useWhen": [
+        "The user enters a concise value such as a name, email, or query."
+      ],
+      "variants": [
+        {
+          "guidance": "Use the text variant only when its semantic role matches the surrounding decision or content hierarchy.",
+          "name": "text"
+        },
+        {
+          "guidance": "Use the email variant only when its semantic role matches the surrounding decision or content hierarchy.",
+          "name": "email"
+        },
+        {
+          "guidance": "Use the password variant only when its semantic role matches the surrounding decision or content hierarchy.",
+          "name": "password"
+        },
+        {
+          "guidance": "Use the search variant only when its semantic role matches the surrounding decision or content hierarchy.",
+          "name": "search"
+        }
+      ],
+      "version": "0.1.0"
+    },
+    {
+      "accessibility": {
+        "requirements": [
+          "Neutral and success use polite live regions.",
+          "Warning and critical use assertive announcements.",
+          "Actions need clear labels and keyboard focus."
+        ]
+      },
+      "avoidWhen": [
+        "The message must remain beside its source; use Alert."
+      ],
+      "category": "feedback",
+      "entrypoints": [
+        "@commonspace/ui",
+        "@commonspace/ui/feedback"
+      ],
+      "examples": {
+        "avoid": [],
+        "preferred": [
+          {
+            "code": "feedback.show({ tone: 'success', title: 'Link copied' })",
+            "reason": "Communicates a short global result.",
+            "title": "Global confirmation"
+          }
+        ]
+      },
+      "id": "ui.toast",
+      "keywords": [
+        "toast",
+        "notification",
+        "confirmation",
+        "global-feedback"
+      ],
+      "kind": "component",
+      "name": "Toast",
+      "package": "@commonspace/ui",
+      "props": [],
+      "related": [
+        "ui.feedback-provider",
+        "ui.toast-viewport"
+      ],
+      "schemaVersion": 1,
+      "sourcePath": "packages/ui/src/feedback/toast.tsx",
+      "states": [
+        "entering",
+        "visible",
+        "leaving",
+        "repeated"
+      ],
+      "status": "stable",
+      "stories": [
+        "catalog-ui--toast"
+      ],
+      "summary": "Renders one transient or persistent item from the feedback queue.",
+      "tokens": [
+        "--cs-surface",
+        "--cs-shadow-dialog",
+        "--cs-positive",
+        "--cs-warning",
+        "--cs-critical"
+      ],
+      "useWhen": [
+        "A result is global and does not require a fixed page position."
+      ],
+      "variants": [
+        {
+          "guidance": "Use for non-semantic information.",
+          "name": "neutral"
+        },
+        {
+          "guidance": "Use after an operation has completed.",
+          "name": "success"
+        },
+        {
+          "guidance": "Use for recoverable failure or degraded state.",
+          "name": "warning"
+        },
+        {
+          "guidance": "Use for security, session, or unrecoverable failure.",
+          "name": "critical"
+        }
+      ],
+      "version": "0.1.0"
+    },
+    {
+      "accessibility": {
+        "requirements": [
+          "Avoid covering primary navigation and mobile safe areas.",
+          "Keep DOM order consistent with announcement order."
+        ]
+      },
+      "avoidWhen": [
+        "A page needs a custom notification center."
+      ],
+      "category": "feedback",
+      "entrypoints": [
+        "@commonspace/ui",
+        "@commonspace/ui/feedback"
+      ],
+      "examples": {
+        "avoid": [],
+        "preferred": [
+          {
+            "code": "<ToastViewport items={items} onDismiss={dismiss} />",
+            "reason": "Binds queue state to presentation.",
+            "title": "Default viewport"
+          }
+        ]
+      },
+      "id": "ui.toast-viewport",
+      "keywords": [
+        "toast",
+        "viewport",
+        "queue",
+        "overlay"
+      ],
+      "kind": "component",
+      "name": "ToastViewport",
+      "package": "@commonspace/ui",
+      "props": [],
+      "related": [
+        "ui.feedback-provider",
+        "ui.toast"
+      ],
+      "schemaVersion": 1,
+      "sourcePath": "packages/ui/src/feedback/toast.tsx",
+      "states": [
+        "empty",
+        "populated"
+      ],
+      "status": "stable",
+      "stories": [
+        "catalog-ui--toast-viewport"
+      ],
+      "summary": "Positions and announces the bounded stack of global feedback items.",
+      "tokens": [
+        "--cs-dialog-width-sm",
+        "--cs-space-4"
+      ],
+      "useWhen": [
+        "FeedbackProvider needs a visible output region."
+      ],
+      "variants": [
+        {
+          "guidance": "Use the top-right variant only when its semantic role matches the surrounding decision or content hierarchy.",
+          "name": "top-right"
+        },
+        {
+          "guidance": "Use the bottom-right variant only when its semantic role matches the surrounding decision or content hierarchy.",
+          "name": "bottom-right"
+        },
+        {
+          "guidance": "Use the bottom-center variant only when its semantic role matches the surrounding decision or content hierarchy.",
+          "name": "bottom-center"
+        }
+      ],
+      "version": "0.1.0"
+    },
+    {
+      "accessibility": {
+        "requirements": [
+          "Hidden text must remain in the accessibility tree.",
+          "Do not use it to conceal focusable controls."
+        ]
+      },
+      "avoidWhen": [
+        "Content should be hidden from everyone; do not render it.",
+        "Visible instructions would benefit all users."
+      ],
+      "category": "accessibility",
+      "entrypoints": [
+        "@commonspace/ui"
+      ],
+      "examples": {
+        "avoid": [],
+        "preferred": [
+          {
+            "code": "<Spinner><VisuallyHidden>Loading posts</VisuallyHidden></Spinner>",
+            "reason": "Retains an accessible name.",
+            "title": "Loading name"
+          }
+        ]
+      },
+      "id": "ui.visually-hidden",
+      "keywords": [
+        "accessibility",
+        "screen-reader",
+        "hidden-label"
+      ],
+      "kind": "component",
+      "name": "VisuallyHidden",
+      "package": "@commonspace/ui",
+      "props": [],
+      "related": [
+        "ui.icon-button",
+        "ui.spinner"
+      ],
+      "schemaVersion": 1,
+      "sourcePath": "packages/ui/src/visually-hidden/visually-hidden.tsx",
+      "states": [
+        "default"
+      ],
+      "status": "stable",
+      "stories": [
+        "catalog-ui--visually-hidden"
+      ],
+      "summary": "Keeps essential text available to assistive technology without changing visual layout.",
+      "tokens": [
+        "--cs-space-0"
+      ],
+      "useWhen": [
+        "An icon-only control or visual pattern needs an accessible text equivalent."
+      ],
+      "variants": [
+        {
+          "guidance": "Use the default variant only when its semantic role matches the surrounding decision or content hierarchy.",
+          "name": "default"
+        }
+      ],
+      "version": "0.1.0"
+    }
+  ],
+  "generatedAt": "2026-08-09T00:00:00.000Z",
+  "schemaVersion": 1
+}

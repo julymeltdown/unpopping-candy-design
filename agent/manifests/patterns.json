@@ -1,0 +1,374 @@
+{
+  "entries": [
+    {
+      "accessibility": {
+        "requirements": [
+          "Preserve semantic reading and focus order.",
+          "Represent loading, error, and empty states explicitly."
+        ]
+      },
+      "anatomy": [
+        "Collection heading",
+        "Controls",
+        "Result region",
+        "Pagination status"
+      ],
+      "avoidWhen": [
+        "A smaller primitive or a single component fully expresses the task."
+      ],
+      "components": [
+        "ui.skeleton",
+        "ui.empty-state",
+        "ui.alert",
+        "ui.button",
+        "ui.stack"
+      ],
+      "examples": {
+        "avoid": [],
+        "preferred": []
+      },
+      "flow": [
+        "Load the first page.",
+        "Render the appropriate state.",
+        "Append pages without duplicate rows."
+      ],
+      "id": "pattern.collection-states",
+      "keywords": [
+        "collection",
+        "states",
+        "collection-states"
+      ],
+      "kind": "pattern",
+      "name": "Collection states",
+      "responsive": [
+        "Maintain readable row widths.",
+        "Keep existing rows visible when pagination fails."
+      ],
+      "schemaVersion": 1,
+      "states": [
+        "initial-loading",
+        "empty",
+        "populated",
+        "loading-more",
+        "load-more-error",
+        "filtered-empty"
+      ],
+      "status": "stable",
+      "stories": [],
+      "summary": "Provides complete loading, empty, populated, pagination, and error states for a collection.",
+      "useWhen": [
+        "A product needs the collection states pattern."
+      ],
+      "version": "0.2.0"
+    },
+    {
+      "accessibility": {
+        "requirements": [
+          "Preserve semantic reading and focus order.",
+          "Represent loading, error, and empty states explicitly."
+        ]
+      },
+      "anatomy": [
+        "Inbox heading",
+        "Conversation rows",
+        "Unread indicator",
+        "Selected detail boundary"
+      ],
+      "avoidWhen": [
+        "A smaller primitive or a single component fully expresses the task."
+      ],
+      "components": [
+        "social.conversation-preview",
+        "ui.empty-state",
+        "ui.skeleton",
+        "ui.alert"
+      ],
+      "examples": {
+        "avoid": [],
+        "preferred": []
+      },
+      "flow": [
+        "Load conversations.",
+        "Restore selected conversation from the URL.",
+        "Reconcile realtime updates without losing selection."
+      ],
+      "id": "pattern.conversation-list",
+      "keywords": [
+        "conversation",
+        "list",
+        "conversation-list"
+      ],
+      "kind": "pattern",
+      "name": "Conversation list",
+      "responsive": [
+        "Use a single-column route transition on small screens.",
+        "Use split view only when both panes remain usable."
+      ],
+      "schemaVersion": 1,
+      "states": [
+        "loading",
+        "empty",
+        "populated",
+        "selected",
+        "offline"
+      ],
+      "status": "stable",
+      "stories": [],
+      "summary": "Renders conversations with stable selection, unread semantics, and responsive detail navigation.",
+      "useWhen": [
+        "A product needs the conversation list pattern."
+      ],
+      "version": "0.2.0"
+    },
+    {
+      "accessibility": {
+        "requirements": [
+          "Preserve semantic reading and focus order.",
+          "Represent loading, error, and empty states explicitly."
+        ]
+      },
+      "anatomy": [
+        "Failure boundary",
+        "Preserved state statement",
+        "Recovery action",
+        "Request reference"
+      ],
+      "avoidWhen": [
+        "A smaller primitive or a single component fully expresses the task."
+      ],
+      "components": [
+        "ui.alert",
+        "ui.feedback-provider",
+        "ui.toast",
+        "ui.empty-state",
+        "ui.button"
+      ],
+      "examples": {
+        "avoid": [],
+        "preferred": []
+      },
+      "flow": [
+        "Classify the error.",
+        "State what remains preserved.",
+        "Offer one valid recovery action.",
+        "Dismiss or reconcile after recovery."
+      ],
+      "id": "pattern.feedback-recovery",
+      "keywords": [
+        "feedback",
+        "and",
+        "recovery",
+        "feedback-recovery"
+      ],
+      "kind": "pattern",
+      "name": "Feedback and recovery",
+      "responsive": [
+        "Keep inline feedback adjacent to its owning region.",
+        "Place global toasts away from mobile navigation and safe areas."
+      ],
+      "schemaVersion": 1,
+      "states": [
+        "recoverable",
+        "offline",
+        "rate-limited",
+        "critical",
+        "recovered"
+      ],
+      "status": "stable",
+      "stories": [],
+      "summary": "Chooses inline, global, or route-level feedback while preserving successful data and unfinished work.",
+      "useWhen": [
+        "A product needs the feedback and recovery pattern."
+      ],
+      "version": "0.2.0"
+    },
+    {
+      "accessibility": {
+        "requirements": [
+          "Preserve semantic reading and focus order.",
+          "Represent loading, error, and empty states explicitly."
+        ]
+      },
+      "anatomy": [
+        "Form fields",
+        "Inline validation",
+        "Form-level feedback",
+        "Primary and secondary actions"
+      ],
+      "avoidWhen": [
+        "A smaller primitive or a single component fully expresses the task."
+      ],
+      "components": [
+        "ui.text-field",
+        "ui.text-area",
+        "ui.button",
+        "ui.inline",
+        "ui.stack",
+        "ui.alert"
+      ],
+      "examples": {
+        "avoid": [],
+        "preferred": []
+      },
+      "flow": [
+        "Validate fields.",
+        "Move focus to the first invalid field.",
+        "Submit once.",
+        "Preserve input on failure."
+      ],
+      "id": "pattern.form-actions",
+      "keywords": [
+        "form",
+        "actions",
+        "form-actions"
+      ],
+      "kind": "pattern",
+      "name": "Form actions",
+      "responsive": [
+        "Stack actions on narrow screens when labels would wrap.",
+        "Keep destructive actions separate from routine save actions."
+      ],
+      "schemaVersion": 1,
+      "states": [
+        "pristine",
+        "dirty",
+        "invalid",
+        "submitting",
+        "failed",
+        "succeeded"
+      ],
+      "status": "stable",
+      "stories": [],
+      "summary": "Orders validation, pending behavior, primary action, and cancellation for a form.",
+      "useWhen": [
+        "A product needs the form actions pattern."
+      ],
+      "version": "0.2.0"
+    },
+    {
+      "accessibility": {
+        "requirements": [
+          "Preserve semantic reading and focus order.",
+          "Represent loading, error, and empty states explicitly."
+        ]
+      },
+      "anatomy": [
+        "Profile identity",
+        "Primary relationship action",
+        "Peer view tabs",
+        "Collection region"
+      ],
+      "avoidWhen": [
+        "A smaller primitive or a single component fully expresses the task."
+      ],
+      "components": [
+        "social.profile-header",
+        "social.user-cell",
+        "ui.tabs",
+        "ui.empty-state",
+        "ui.alert"
+      ],
+      "examples": {
+        "avoid": [],
+        "preferred": []
+      },
+      "flow": [
+        "Load profile and relationship summary.",
+        "Choose the correct action state.",
+        "Render the selected collection."
+      ],
+      "id": "pattern.profile-surface",
+      "keywords": [
+        "profile",
+        "surface",
+        "profile-surface"
+      ],
+      "kind": "pattern",
+      "name": "Profile surface",
+      "responsive": [
+        "Stack identity and actions on narrow screens.",
+        "Keep the primary action visible without covering biography text."
+      ],
+      "schemaVersion": 1,
+      "states": [
+        "loading",
+        "self",
+        "other",
+        "private",
+        "blocked",
+        "not-found"
+      ],
+      "status": "stable",
+      "stories": [],
+      "summary": "Combines profile identity, relationship action, tabs, and state-complete collections.",
+      "useWhen": [
+        "A product needs the profile surface pattern."
+      ],
+      "version": "0.2.0"
+    },
+    {
+      "accessibility": {
+        "requirements": [
+          "Preserve semantic reading and focus order.",
+          "Represent loading, error, and empty states explicitly."
+        ]
+      },
+      "anatomy": [
+        "Feed controls",
+        "Composer",
+        "New-item notice",
+        "Timeline rows",
+        "Pagination sentinel"
+      ],
+      "avoidWhen": [
+        "A smaller primitive or a single component fully expresses the task."
+      ],
+      "components": [
+        "social.timeline-view",
+        "social.post-card",
+        "social.post-card-skeleton",
+        "social.post-composer-view"
+      ],
+      "examples": {
+        "avoid": [],
+        "preferred": []
+      },
+      "flow": [
+        "Load or restore a snapshot.",
+        "Render stable rows.",
+        "Poll or subscribe for new-item count.",
+        "Accept new items and reset to a new snapshot."
+      ],
+      "id": "pattern.social-feed",
+      "keywords": [
+        "social",
+        "feed",
+        "social-feed"
+      ],
+      "kind": "pattern",
+      "name": "Social feed",
+      "responsive": [
+        "Keep one reading column on narrow viewports.",
+        "Do not insert new rows above the current viewport without user action."
+      ],
+      "schemaVersion": 1,
+      "states": [
+        "initial-loading",
+        "populated",
+        "empty",
+        "loading-more",
+        "load-more-error",
+        "new-items-available"
+      ],
+      "status": "stable",
+      "stories": [],
+      "summary": "Composes a readable, state-complete social timeline without moving content unexpectedly.",
+      "useWhen": [
+        "A product needs the social feed pattern."
+      ],
+      "version": "0.2.0"
+    }
+  ],
+  "generatedAt": "2026-08-09T00:00:00.000Z",
+  "schemaVersion": 1
+}

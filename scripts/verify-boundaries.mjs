@@ -15,6 +15,7 @@ for (const [packageDirectory, rule] of Object.entries(rules)) {
   const sourceRoot = join(root, 'packages', packageDirectory, 'src');
   const files = await listFiles(sourceRoot, isSourceFile);
   for (const file of files) {
+    if (file.endsWith('.docs.ts')) continue;
     const source = await readFile(file, 'utf8');
     for (const specifier of extractModuleSpecifiers(source)) {
       if (specifier.startsWith('.') || specifier.startsWith('node:')) continue;
