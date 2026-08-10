@@ -1,7 +1,7 @@
 ---
 title: Unpopping Candy competitive public-library design
 date: 2026-08-10
-status: awaiting-user-review
+status: approved
 owner: Unpopping Candy
 ---
 
