@@ -3,13 +3,13 @@
   "version": "0.2.0",
   "description": "Figma Code Connect manifests and parserless template generation for Unpopping Candy.",
   "license": "MIT",
+  "private": true,
   "type": "module",
   "files": ["dist", "README.md"],
   "sideEffects": false,
   "exports": {
     ".": { "types": "./dist/index.d.ts", "import": "./dist/index.js" }
   },
-  "publishConfig": { "access": "public" },
   "dependencies": {
     "@unpopping-candy/knowledge": "workspace:^"
   },

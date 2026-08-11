@@ -2,22 +2,28 @@
   "$schema": "https://unpkg.com/@changesets/config@3.1.1/schema.json",
   "changelog": "@changesets/cli/changelog",
   "commit": false,
-  "fixed": [],
-  "linked": [
+  "fixed": [
     [
       "@unpopping-candy/tokens",
       "@unpopping-candy/theme",
       "@unpopping-candy/icons",
       "@unpopping-candy/ui",
-      "@unpopping-candy/social"
+      "@unpopping-candy/social",
+      "@unpopping-candy/knowledge",
+      "@unpopping-candy/registry",
+      "@unpopping-candy/cli",
+      "@unpopping-candy/mcp"
     ]
   ],
+  "linked": [],
   "access": "public",
   "baseBranch": "master",
   "updateInternalDependencies": "patch",
   "ignore": [
     "@unpopping-candy/agent-lab",
     "@unpopping-candy/docs",
-    "@unpopping-candy/playground"
+    "@unpopping-candy/playground",
+    "@unpopping-candy/evals",
+    "@unpopping-candy/figma"
   ]
 }

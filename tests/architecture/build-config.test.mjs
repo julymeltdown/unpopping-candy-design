@@ -1,6 +1,11 @@
 import assert from 'node:assert/strict';
-import { readFile } from 'node:fs/promises';
+import { readFile, readdir } from 'node:fs/promises';
 import test from 'node:test';
+import {
+  classifyPackageManifest,
+  PRIVATE_TOOL_PACKAGE_NAMES,
+  PUBLIC_PACKAGE_NAMES,
+} from '../../scripts/lib/public-packages.mjs';
 
 const root = new URL('../..', import.meta.url);
 
@@ -17,4 +22,33 @@ test('CI installs an immutable pnpm 11.4.0 workspace', async () => {
   assert.equal(packageJson.packageManager, 'pnpm@11.4.0');
   assert.match(ci, /pnpm install --frozen-lockfile/);
   assert.doesNotMatch(ci, /--no-frozen-lockfile/);
+});
+
+test('release configuration publishes exactly the coordinated public package set', async () => {
+  const changesets = JSON.parse(await readFile(new URL('.changeset/config.json', root), 'utf8'));
+  const changesetPackageNames = [];
+  const changesetFiles = await readdir(new URL('.changeset/', root));
+
+  for (const changesetFile of changesetFiles.filter((name) => name.endsWith('.md'))) {
+    const contents = await readFile(new URL(`.changeset/${changesetFile}`, root), 'utf8');
+    const frontmatter = contents.match(/^---\n([\s\S]*?)\n---/);
+    if (frontmatter) {
+      for (const match of frontmatter[1].matchAll(/^"([^"]+)":\s+(major|minor|patch)$/gm)) {
+        changesetPackageNames.push(match[1]);
+      }
+    }
+  }
+
+  assert.equal(PUBLIC_PACKAGE_NAMES.length, 9);
+  assert.deepEqual(PRIVATE_TOOL_PACKAGE_NAMES, [
+    '@unpopping-candy/evals',
+    '@unpopping-candy/figma',
+  ]);
+  assert.equal(classifyPackageManifest({ name: '@unpopping-candy/evals' }), 'private-tool');
+  assert.equal(classifyPackageManifest({ name: '@unpopping-candy/figma' }), 'private-tool');
+  assert.deepEqual(changesets.fixed, [PUBLIC_PACKAGE_NAMES]);
+  assert.deepEqual(
+    changesetPackageNames.filter((name) => PRIVATE_TOOL_PACKAGE_NAMES.includes(name)),
+    [],
+  );
 });
