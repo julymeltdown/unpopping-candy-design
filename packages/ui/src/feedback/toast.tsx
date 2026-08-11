@@ -12,7 +12,7 @@ export interface ToastProps {
 export function Toast({ item, onDismiss }: ToastProps) {
   const urgent = item.tone === 'critical' || item.tone === 'warning';
   return (
-    <article
+    <div
       className={`popcandy-toast popcandy-toast--${item.tone}`}
       role={urgent ? 'alert' : 'status'}
       aria-atomic="true"
@@ -47,7 +47,7 @@ export function Toast({ item, onDismiss }: ToastProps) {
         icon={<CloseIcon />}
         onClick={() => onDismiss(item.id)}
       />
-    </article>
+    </div>
   );
 }
 
