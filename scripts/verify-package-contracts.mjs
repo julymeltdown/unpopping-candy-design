@@ -1,7 +1,8 @@
 import { access } from 'node:fs/promises';
-import { join } from 'node:path';
+import { dirname, join } from 'node:path';
 import {
   classifyPackageManifest,
+  isCanonicalPackageDirectory,
   PRIVATE_TOOL_PACKAGE_NAMES,
   PUBLIC_PACKAGE_NAMES,
 } from './lib/public-packages.mjs';
@@ -11,7 +12,7 @@ const root = repositoryRoot();
 const packagesDirectory = join(root, 'packages');
 const manifests = await listFiles(packagesDirectory, (path) => path.endsWith('/package.json'));
 const errors = [];
-const packageNames = new Set();
+const packageNameCounts = new Map();
 const baseTypeScript = await readJson(join(root, 'tsconfig.base.json'));
 if (baseTypeScript.compilerOptions?.allowImportingTsExtensions !== true) errors.push('tsconfig.base.json: allowImportingTsExtensions must be true while source imports use .ts extensions');
 if (baseTypeScript.compilerOptions?.rewriteRelativeImportExtensions !== true) errors.push('tsconfig.base.json: rewriteRelativeImportExtensions must be true so emitted JavaScript resolves .js files');
@@ -20,11 +21,16 @@ for (const manifestPath of manifests) {
   const manifest = await readJson(manifestPath);
   const label = manifest.name ?? manifestPath;
   const packageType = classifyPackageManifest(manifest);
-  packageNames.add(manifest.name);
 
   if (packageType === 'unknown') {
     errors.push(`${label}: package directory is not part of the public or private tooling policy`);
     continue;
+  }
+
+  const manifestCount = (packageNameCounts.get(manifest.name) ?? 0) + 1;
+  packageNameCounts.set(manifest.name, manifestCount);
+  if (!isCanonicalPackageDirectory(dirname(manifestPath), manifest)) {
+    errors.push(`${manifestPath}: package manifest must be in the canonical package directory for ${manifest.name}`);
   }
 
   if (packageType === 'private-tool') {
@@ -57,7 +63,9 @@ for (const manifestPath of manifests) {
 }
 
 for (const packageName of [...PUBLIC_PACKAGE_NAMES, ...PRIVATE_TOOL_PACKAGE_NAMES]) {
-  if (!packageNames.has(packageName)) errors.push(`${packageName}: package manifest is required by package policy`);
+  const manifestCount = packageNameCounts.get(packageName) ?? 0;
+  if (manifestCount === 0) errors.push(`${packageName}: package manifest is required by package policy`);
+  if (manifestCount > 1) errors.push(`${packageName}: package policy requires exactly one package manifest`);
 }
 
 if (errors.length) {

@@ -3,9 +3,11 @@ import { readFile, readdir } from 'node:fs/promises';
 import test from 'node:test';
 import {
   classifyPackageManifest,
+  isCanonicalPackageDirectory,
   PRIVATE_TOOL_PACKAGE_NAMES,
   PUBLIC_PACKAGE_NAMES,
 } from '../../scripts/lib/public-packages.mjs';
+import { parseChangesetFrontmatterPackageNames } from '../../scripts/lib/changeset-frontmatter.mjs';
 
 const root = new URL('../..', import.meta.url);
 
@@ -31,12 +33,7 @@ test('release configuration publishes exactly the coordinated public package set
 
   for (const changesetFile of changesetFiles.filter((name) => name.endsWith('.md'))) {
     const contents = await readFile(new URL(`.changeset/${changesetFile}`, root), 'utf8');
-    const frontmatter = contents.match(/^---\n([\s\S]*?)\n---/);
-    if (frontmatter) {
-      for (const match of frontmatter[1].matchAll(/^"([^"]+)":\s+(major|minor|patch)$/gm)) {
-        changesetPackageNames.push(match[1]);
-      }
-    }
+    changesetPackageNames.push(...parseChangesetFrontmatterPackageNames(contents));
   }
 
   assert.equal(PUBLIC_PACKAGE_NAMES.length, 9);
@@ -50,5 +47,42 @@ test('release configuration publishes exactly the coordinated public package set
   assert.deepEqual(
     changesetPackageNames.filter((name) => PRIVATE_TOOL_PACKAGE_NAMES.includes(name)),
     [],
+  );
+});
+
+test('Changeset frontmatter parser detects private tools in supported key forms', () => {
+  const packageNames = parseChangesetFrontmatterPackageNames(`---
+"@unpopping-candy/evals": patch
+'@unpopping-candy/figma': minor
+@unpopping-candy/evals: patch
+@unpopping-candy/figma: minor
+---
+
+"@unpopping-candy/evals": patch
+`);
+
+  assert.deepEqual(
+    packageNames.filter((name) => PRIVATE_TOOL_PACKAGE_NAMES.includes(name)),
+    [
+      '@unpopping-candy/evals',
+      '@unpopping-candy/figma',
+      '@unpopping-candy/evals',
+      '@unpopping-candy/figma',
+    ],
+  );
+});
+
+test('package policy accepts only canonical package directories', () => {
+  assert.equal(
+    isCanonicalPackageDirectory('/repository/packages/evals', { name: '@unpopping-candy/evals' }),
+    true,
+  );
+  assert.equal(
+    isCanonicalPackageDirectory('/repository/packages/copied-evals', { name: '@unpopping-candy/evals' }),
+    false,
+  );
+  assert.equal(
+    isCanonicalPackageDirectory('/repository/packages/unknown', { name: '@unpopping-candy/unknown' }),
+    false,
   );
 });

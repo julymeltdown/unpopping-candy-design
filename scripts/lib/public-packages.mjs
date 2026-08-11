@@ -20,3 +20,12 @@ export function classifyPackageManifest(manifest) {
   if (PRIVATE_TOOL_PACKAGE_NAMES.includes(manifest.name)) return 'private-tool';
   return 'unknown';
 }
+
+export function isCanonicalPackageDirectory(directory, manifest) {
+  if (typeof directory !== 'string' || typeof manifest?.name !== 'string') return false;
+  if (classifyPackageManifest(manifest) === 'unknown') return false;
+
+  const normalizedDirectory = directory.replaceAll('\\', '/').replace(/\/+$/, '');
+  const expectedDirectory = `packages/${manifest.name.split('/')[1]}`;
+  return normalizedDirectory === expectedDirectory || normalizedDirectory.endsWith(`/${expectedDirectory}`);
+}
