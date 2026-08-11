@@ -17,13 +17,19 @@ jobs:
           node-version: 22
           cache: pnpm
       - name: Install workspace dependencies
-        run: pnpm install --no-frozen-lockfile
+        run: pnpm install --frozen-lockfile
       - name: Verify generated AI context is current
         run: pnpm agent:check
       - name: Run deterministic package and architecture tests
         run: pnpm test:pure
       - name: Run package, AI, export, CSS, documentation, and syntax gates
         run: pnpm verify
+      - name: Install Playwright browsers
+        run: pnpm exec playwright install --with-deps chromium firefox webkit
+      - name: Run Storybook interactions and accessibility checks
+        run: pnpm test:storybook
+      - name: Run cross-browser Storybook smoke tests
+        run: pnpm test:browser
       - name: Typecheck all workspaces
         run: pnpm typecheck
       - name: Build packages and every consumer surface

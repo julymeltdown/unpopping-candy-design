@@ -6,7 +6,7 @@
   "scripts": {
     "build-storybook": "storybook build",
     "dev": "storybook dev -p 6006",
-    "test": "vitest --project=storybook"
+    "test": "vitest --config ../../vitest.config.ts --project=storybook"
   },
   "dependencies": {
     "@unpopping-candy/icons": "workspace:*",
