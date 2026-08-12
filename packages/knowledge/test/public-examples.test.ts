@@ -107,3 +107,23 @@ test("preferred JSX keeps scanning inside quoted attribute expressions", () => {
     "quoted brace attribute: Button.variant expected primary | secondary | ghost | danger",
   ]);
 });
+
+test("preferred JSX keeps scanning after comments inside attribute expressions", () => {
+  for (const [label, code] of [
+    [
+      "block comment expression",
+      '<Button id={/* } */ "safe"} variant="not-a-variant">Save</Button>',
+    ],
+    [
+      "line comment expression",
+      '<Button id={// }\n"safe"} variant="not-a-variant">Save</Button>',
+    ],
+  ] as const) {
+    assert.ok(
+      publicContractErrors(code, label, "Button").some((error) =>
+        error.includes("Button.variant expected"),
+      ),
+      `${label} must inspect the later variant`,
+    );
+  }
+});

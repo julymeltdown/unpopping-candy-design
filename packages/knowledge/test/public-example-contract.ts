@@ -1,4 +1,9 @@
 import { bundledCatalog } from "../src/index.ts";
+import {
+  createScanner,
+  LanguageVariant,
+  SyntaxKind,
+} from "typescript/unstable/ast";
 import { openingTags } from "./public-example-parser.ts";
 
 type ComponentEntry = Extract<
@@ -91,20 +96,21 @@ function attributes(source: string) {
         index = end + 1;
       } else if (quote === "{") {
         let braces = 1;
-        let expressionQuote = "";
-        let escaped = false;
         const start = ++index;
-        while (index < source.length && braces) {
-          const character = source[index] ?? "";
-          if (expressionQuote) {
-            if (escaped) escaped = false;
-            else if (character === "\\") escaped = true;
-            else if (character === expressionQuote) expressionQuote = "";
-          } else if (['"', "'", "`"].includes(character))
-            expressionQuote = character;
-          else if (character === "{") braces += 1;
-          else if (character === "}") braces -= 1;
-          index += 1;
+        const scanner = createScanner(
+          false,
+          LanguageVariant.JSX,
+          source,
+          start,
+        );
+        for (
+          let token = scanner.scan();
+          token !== SyntaxKind.EndOfFile && braces > 0;
+          token = scanner.scan()
+        ) {
+          if (token === SyntaxKind.OpenBraceToken) braces += 1;
+          else if (token === SyntaxKind.CloseBraceToken) braces -= 1;
+          index = scanner.getTokenEnd();
         }
         const value = source.slice(start, index - 1).trim();
         if (/^\d+$/.test(value)) {

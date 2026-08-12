@@ -1,8 +1,30 @@
+import {
+  createScanner,
+  LanguageVariant,
+  SyntaxKind,
+} from "typescript/unstable/ast";
+
 type OpeningTag = {
   name: string;
   attributes: string;
   hasChildren: boolean;
 };
+
+function tagEnd(code: string, start: number) {
+  const scanner = createScanner(false, LanguageVariant.JSX, code, start);
+  let braces = 0;
+  for (
+    let token = scanner.scan();
+    token !== SyntaxKind.EndOfFile;
+    token = scanner.scan()
+  ) {
+    if (token === SyntaxKind.OpenBraceToken) braces += 1;
+    else if (token === SyntaxKind.CloseBraceToken) braces -= 1;
+    else if (token === SyntaxKind.GreaterThanToken && braces === 0)
+      return scanner.getTokenStart();
+  }
+  return code.length;
+}
 
 function maskNonCode(source: string) {
   const output = [...source];
@@ -59,22 +81,7 @@ export function openingTags(code: string) {
       cursor += 1;
       continue;
     }
-    let braces = 0;
-    let quote = "";
-    let escaped = false;
-    let end = cursor + match[0].length;
-    for (; end < code.length; end += 1) {
-      const character = code[end];
-      if (quote) {
-        if (escaped) escaped = false;
-        else if (character === "\\") escaped = true;
-        else if (character === quote) quote = "";
-      } else if (['"', "'", "`"].includes(character ?? ""))
-        quote = character ?? "";
-      else if (character === "{") braces += 1;
-      else if (character === "}") braces -= 1;
-      else if (character === ">" && braces === 0) break;
-    }
+    const end = tagEnd(code, cursor + match[0].length);
     const attributes = code.slice(cursor + match[0].length, end);
     tags.push({
       name: match[1],
