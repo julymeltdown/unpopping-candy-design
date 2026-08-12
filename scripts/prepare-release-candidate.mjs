@@ -104,7 +104,11 @@ export async function prepareReleaseCandidate(options) {
     await run("pnpm", ["agent:check"], workspace);
     await run("pnpm", ["build:packages"], workspace);
     await run("pnpm", ["typecheck"], workspace);
-    await run("pnpm", ["test:pure"], workspace);
+    await run(
+      process.execPath,
+      ["--experimental-strip-types", "--test", "packages/*/test/*.test.ts"],
+      workspace,
+    );
     const packed = await packPublicWorkspace({
       workspaceRoot: workspace,
       outputRoot: packagesRoot,
