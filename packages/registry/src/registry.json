@@ -4,7 +4,7 @@
   "schemaVersion": 1,
   "templates": [
     {
-      "digest": "a8cc40cc359a7a2cfc797763e0dbc20d6267e3bd5c98ce135397d3ced2d6a532",
+      "digest": "b73511260443bfe1b18f8a0bb346e1c2a3a079fb437c4efda2624dbd1f0f2aab",
       "files": [
         {
           "bytes": 368,
@@ -14,15 +14,15 @@
           "source": "packages/registry/templates/fsd-social-shell/src/app/providers/unpopping-candy-provider.tsx"
         },
         {
-          "bytes": 602,
-          "digest": "0ef0fd8348a335fee039440200f8bc9ca0d5eeab508b49c71c154da1637a66f8",
+          "bytes": 741,
+          "digest": "83eb4364b1792c3729929c15fd090f35c33aef847ca4db312e76a649176806ab",
           "path": "src/pages/home/ui/home-page.tsx",
           "role": "Home page composition",
           "source": "packages/registry/templates/fsd-social-shell/src/pages/home/ui/home-page.tsx"
         },
         {
-          "bytes": 314,
-          "digest": "15eed3e456deb3e7bf72f52526cf9c3d81f9fe306c94c93d22b80569267d7144",
+          "bytes": 463,
+          "digest": "74f493f57ed763e561b910f6d6f44d16fc8e134456371ec1487d00707f5f34d1",
           "path": "src/widgets/post-feed/ui/post-feed.tsx",
           "role": "Reusable feed widget",
           "source": "packages/registry/templates/fsd-social-shell/src/widgets/post-feed/ui/post-feed.tsx"

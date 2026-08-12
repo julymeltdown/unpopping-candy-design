@@ -77,15 +77,44 @@ test("visible appended trust contradictions fail closed", async () => {
         `${source}\nAll nine public package candidates can now be installed from npm.\n`,
     ],
     [
+      "npm carries packages paraphrase",
+      "README.md",
+      (source) =>
+        `${source}\nThe npm registry now carries all nine public packages.\n`,
+    ],
+    [
+      "negative npm decoy",
+      "README.md",
+      (source) =>
+        `${source}\nThe packages are not published to npm, but npm can install every package.\n`,
+    ],
+    [
       "cloud Registry paraphrase",
       "README.md",
       (source) =>
         `${source}\nA cloud Registry endpoint is ready for consumers.\n`,
     ],
     [
+      "internet Registry paraphrase",
+      "README.md",
+      (source) =>
+        `${source}\nConsumers can reach the Registry over the internet.\n`,
+    ],
+    [
       "web MCP paraphrase",
       "README.md",
       (source) => `${source}\nWe operate an MCP server on the web.\n`,
+    ],
+    [
+      "internet MCP paraphrase",
+      "README.md",
+      (source) =>
+        `${source}\nAn internet-accessible MCP endpoint is running.\n`,
+    ],
+    [
+      "full matrix green paraphrase",
+      "docs/COMPATIBILITY.md",
+      (source) => `${source}\nThe full 140-cell matrix is green.\n`,
     ],
     [
       "evals classified public",
@@ -106,6 +135,12 @@ test("visible appended trust contradictions fail closed", async () => {
       "docs/SUPPORT.md",
       (source) =>
         `${source}\nEach prior minor receives maintenance for twelve months.\n`,
+    ],
+    [
+      "full-year support paraphrase",
+      "docs/SUPPORT.md",
+      (source) =>
+        `${source}\nPrevious minor releases get maintenance for a full year.\n`,
     ],
     [
       "independent versions",
@@ -179,14 +214,11 @@ test("compatibility evidence stays bound to its historical source commit", async
     "a syntactically valid replacement tarball digest must fail closed",
   );
 
-  const wrongCommit = {
-    ...context,
-    evidence: structuredClone(context.evidence),
-  };
-  wrongCommit.evidence.sourceCommit =
-    "3482eae81ac86a09dbe80755857ce9daa1aa3231";
+  const wrongEvidence = structuredClone(context.evidence);
+  wrongEvidence.sourceCommit = "3482eae81ac86a09dbe80755857ce9daa1aa3231";
+  const wrongCommit = await verifier.loadTrustContext(root, wrongEvidence);
   assert.equal(
-    wrongCommit.evidenceIsExact(wrongCommit.evidence),
+    wrongCommit.evidenceIsExact(wrongEvidence),
     false,
     "an ancestor with a different runner must not claim the retained runs",
   );

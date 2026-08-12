@@ -1,6 +1,7 @@
 import assert from "node:assert/strict";
 import test from "node:test";
 import { bundledCatalog } from "../src/index.ts";
+import { publicContractErrors } from "./public-example-contract.ts";
 
 test("documented variant aliases stay unique and exact", () => {
   for (const entry of bundledCatalog.entries) {
@@ -10,4 +11,37 @@ test("documented variant aliases stay unique and exact", () => {
     if (entry.id === "ui.button")
       assert.deepEqual(names, ["primary", "secondary", "ghost", "danger"]);
   }
+});
+
+test("preferred example literals resolve documented variant aliases", () => {
+  const errors = publicContractErrors(
+    '<Button variant="not-a-variant">Save</Button>',
+    "mutated Button example",
+  );
+  assert.deepEqual(errors, [
+    "mutated Button example: Button.variant expected primary | secondary | ghost | danger",
+  ]);
+});
+
+test("preferred JSX rejects aliases, qualifications, and prop spreads", () => {
+  assert.deepEqual(
+    publicContractErrors(
+      '<Candy.Button variant="primary">Save</Candy.Button>',
+      "qualified Button",
+      "Button",
+    ),
+    ["qualified Button: expected direct Button JSX"],
+  );
+  assert.deepEqual(
+    publicContractErrors("<Action>Save</Action>", "aliased Button", "Button"),
+    ["aliased Button: expected direct Button JSX"],
+  );
+  assert.deepEqual(
+    publicContractErrors(
+      "<Button {...props}>Save</Button>",
+      "spread Button",
+      "Button",
+    ),
+    ["spread Button: Button uses unverified prop spread"],
+  );
 });

@@ -90,7 +90,7 @@ function evidenceValidator(matrix, packages, sourceCommit, runnerDigest) {
   };
 }
 
-export async function loadTrustContext(root) {
+export async function loadTrustContext(root, suppliedEvidence) {
   // prettier-ignore
   const manifests = await listFiles(join(root, "packages"), (path) => path.endsWith("package.json"));
   const packages = [];
@@ -105,12 +105,14 @@ export async function loadTrustContext(root) {
       path: relative(root, path),
     });
   }
-  const evidence = JSON.parse(
-    await readFile(
-      join(root, "docs/evidence/stage-0-compatibility-summary.json"),
-      "utf8",
-    ),
-  );
+  const evidence =
+    suppliedEvidence ??
+    JSON.parse(
+      await readFile(
+        join(root, "docs/evidence/stage-0-compatibility-summary.json"),
+        "utf8",
+      ),
+    );
   if (!/^[0-9a-f]{40}$/.test(evidence.sourceCommit))
     throw new Error("compatibility evidence sourceCommit must be a full SHA");
   await execFileAsync(

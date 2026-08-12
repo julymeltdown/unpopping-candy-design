@@ -730,9 +730,12 @@ git commit -m "test: add packed consumer compatibility matrix"
 - Create: `docs/evidence/stage-0-compatibility-summary.json`
 - Modify: `scripts/verify-docs.mjs`
 - Create: `scripts/lib/documentation-trust.mjs`
+- Create: `scripts/lib/documentation-claims.mjs`
 - Create: `scripts/lib/historical-evidence.mjs`
+- Create: `scripts/verify-registry-templates.mjs`
 - Test: `tests/architecture/markdown-contract.test.mjs`
 - Test: `tests/architecture/documentation-trust.test.mjs`
+- Test: `tests/architecture/registry-template-typecheck.test.mjs`
 - Modify: `packages/social/src/post-composer/post-composer-view.docs.ts`
 - Modify: `packages/social/src/post-card/post-actions.docs.ts`
 - Modify: `packages/ui/src/inline/inline.docs.ts`
@@ -746,8 +749,12 @@ git commit -m "test: add packed consumer compatibility matrix"
 - Modify: `packages/ui/src/surface/surface.docs.ts`
 - Modify: `packages/registry/templates/social-feed-page/src/social-feed-page.tsx`
 - Modify: `packages/registry/templates/moderation-workspace/src/moderation-workspace.tsx`
+- Modify: `packages/registry/templates/fsd-social-shell/src/pages/home/ui/home-page.tsx`
+- Modify: `packages/registry/templates/fsd-social-shell/src/widgets/post-feed/ui/post-feed.tsx`
 - Modify: `packages/knowledge/test/generated-catalog.test.ts`
 - Create: `packages/knowledge/test/public-examples.test.ts`
+- Create: `packages/knowledge/test/public-example-contract.ts`
+- Modify: `package.json`
 - Modify (generator-owned output only): `agent/components/*.md`, `agent/llms-full.txt`, `agent/manifests/{build,catalog,compatibility,components,registry}.json`, `figma/code-connect/*.figma.ts`, `packages/knowledge/src/generated/{catalog,compatibility}.ts`, `packages/registry/src/registry.json`
 
 **Interfaces:**
@@ -787,7 +794,7 @@ Expected: both commands pass and README stays inside 200–300 lines.
 - [ ] **Step 5: Commit**
 
 ```bash
-git add README.md docs/AI_ASSISTED_POST_CASE_STUDY.md docs/COMPATIBILITY.md docs/ACCESSIBILITY.md docs/SUPPORT.md docs/SECURITY.md docs/VERSIONING.md docs/STORYBOOK_AI.md docs/PUBLISHING.md docs/CLI.md docs/evidence/stage-0-compatibility-summary.json scripts/verify-docs.mjs scripts/lib/documentation-trust.mjs scripts/lib/historical-evidence.mjs tests/architecture/markdown-contract.test.mjs tests/architecture/documentation-trust.test.mjs packages/social/src/post-composer/post-composer-view.docs.ts packages/social/src/post-card/post-actions.docs.ts packages/social/src/post-card/post-header.docs.ts packages/social/src/profile/profile-header.docs.ts packages/social/src/user-cell/user-cell.docs.ts packages/ui/src/avatar/avatar.docs.ts packages/ui/src/icon-button/icon-button.docs.ts packages/ui/src/inline/inline.docs.ts packages/ui/src/stack/stack.docs.ts packages/ui/src/surface/surface.docs.ts packages/ui/src/tabs/tabs.docs.ts packages/registry/templates/social-feed-page/src/social-feed-page.tsx packages/registry/templates/moderation-workspace/src/moderation-workspace.tsx packages/knowledge/test/generated-catalog.test.ts packages/knowledge/test/public-examples.test.ts agent/components/*.md agent/llms-full.txt agent/manifests/{build,catalog,compatibility,components,registry}.json figma/code-connect/*.figma.ts packages/knowledge/src/generated/{catalog,compatibility}.ts packages/registry/src/registry.json docs/superpowers/plans/2026-08-11-unpopping-candy-stage-0-foundation.md
+git add README.md docs/AI_ASSISTED_POST_CASE_STUDY.md docs/COMPATIBILITY.md docs/ACCESSIBILITY.md docs/SUPPORT.md docs/SECURITY.md docs/VERSIONING.md docs/STORYBOOK_AI.md docs/PUBLISHING.md docs/CLI.md docs/evidence/stage-0-compatibility-summary.json scripts/verify-docs.mjs scripts/verify-registry-templates.mjs scripts/lib/documentation-trust.mjs scripts/lib/documentation-claims.mjs scripts/lib/historical-evidence.mjs tests/architecture/markdown-contract.test.mjs tests/architecture/documentation-trust.test.mjs tests/architecture/registry-template-typecheck.test.mjs packages/social/src/post-composer/post-composer-view.docs.ts packages/social/src/post-card/post-actions.docs.ts packages/social/src/post-card/post-header.docs.ts packages/social/src/profile/profile-header.docs.ts packages/social/src/user-cell/user-cell.docs.ts packages/ui/src/avatar/avatar.docs.ts packages/ui/src/icon-button/icon-button.docs.ts packages/ui/src/inline/inline.docs.ts packages/ui/src/stack/stack.docs.ts packages/ui/src/surface/surface.docs.ts packages/ui/src/tabs/tabs.docs.ts packages/registry/templates/social-feed-page/src/social-feed-page.tsx packages/registry/templates/moderation-workspace/src/moderation-workspace.tsx packages/registry/templates/fsd-social-shell/src/pages/home/ui/home-page.tsx packages/registry/templates/fsd-social-shell/src/widgets/post-feed/ui/post-feed.tsx packages/knowledge/test/generated-catalog.test.ts packages/knowledge/test/public-examples.test.ts packages/knowledge/test/public-example-contract.ts package.json agent/components/*.md agent/llms-full.txt agent/manifests/{build,catalog,compatibility,components,registry}.json figma/code-connect/*.figma.ts packages/knowledge/src/generated/{catalog,compatibility}.ts packages/registry/src/registry.json docs/superpowers/plans/2026-08-11-unpopping-candy-stage-0-foundation.md
 git commit -m "fix: verify published contracts"
 ```
 

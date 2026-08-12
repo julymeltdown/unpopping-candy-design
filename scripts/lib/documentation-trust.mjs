@@ -1,3 +1,8 @@
+import {
+  availabilityClaimErrors,
+  compatibilityClaimErrors,
+  supportClaimErrors,
+} from "./documentation-claims.mjs";
 const executedIds =
   "base/vite-react-19/pnpm-11\0publish-post/vite-react-19/npm-10\0activity-review/vite-react-19/yarn-4\0member-moderation/vite-react-19/pnpm-11\0base/next-15-react-18/pnpm-10\0base/react-router-7-react-18/npm-11".split(
     "\0",
@@ -61,17 +66,6 @@ function claims(errors, path, source, required, forbidden = []) {
       errors.push(`${path}: forbidden claim: ${pattern}`);
 }
 
-function positiveAvailability(source, subject, state) {
-  return prose(source)
-    .split(/[.\n]/)
-    .some(
-      (sentence) =>
-        subject.test(sentence) &&
-        state.test(sentence) &&
-        !/\b(?:not|none|no|without|unavailable|unpublished)\b/i.test(sentence),
-    );
-}
-
 function unique(errors, path, source, titles) {
   for (const title of titles)
     if (section(source, title).count !== 1)
@@ -108,14 +102,7 @@ function checkReadme(errors, source, context) {
     /(?:hosted|web|remote)[^.\n]*MCP[^.\n]*(?:available|ready|operat(?:e|ing)|live)|operat(?:e|ing)[^.\n]*MCP[^.\n]*(?:web|remote|hosted)/i,
     /makes a public model-quality claim/i,
   ]);
-  if (
-    positiveAvailability(
-      source,
-      /(?:packages|package candidates)/i,
-      /(?:available|published|installed)[^.\n]*(?:on|from|to) npm/i,
-    )
-  )
-    errors.push("README.md: forbidden positive npm availability claim");
+  errors.push(...availabilityClaimErrors("README.md", source));
 }
 
 function checkCompatibility(errors, source, context) {
@@ -168,6 +155,7 @@ function checkCompatibility(errors, source, context) {
       /remaining 134[^.\n]*passed/i,
     ],
   );
+  errors.push(...compatibilityClaimErrors("docs/COMPATIBILITY.md", source));
 }
 
 export function structuredTrustContractErrors(documents, context) {
@@ -234,6 +222,12 @@ export function structuredTrustContractErrors(documents, context) {
   ];
   for (const [path, required, forbidden] of rules)
     claims(errors, path, documents.get(path) ?? "", required, forbidden);
+  errors.push(
+    ...supportClaimErrors(
+      "docs/SUPPORT.md",
+      documents.get("docs/SUPPORT.md") ?? "",
+    ),
+  );
   const storybook = documents.get("docs/STORYBOOK_AI.md") ?? "";
   if (
     !storybook.includes("pnpm test:storybook") ||

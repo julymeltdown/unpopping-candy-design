@@ -22,7 +22,7 @@
     "test:browser": "playwright test",
     "test:pure": "node --experimental-strip-types --test packages/*/test/*.test.ts && node --test tests/architecture/*.test.mjs",
     "typecheck": "pnpm --recursive typecheck",
-    "verify": "npm run agent:check && npm run ai:check && node scripts/verify-package-contracts.mjs && node scripts/verify-boundaries.mjs && node scripts/verify-exports.mjs && node scripts/verify-css-contract.mjs && node scripts/verify-docs.mjs && tsc -p tsconfig.syntax.json",
+    "verify": "npm run agent:check && npm run ai:check && node scripts/verify-package-contracts.mjs && node scripts/verify-boundaries.mjs && node scripts/verify-exports.mjs && node scripts/verify-css-contract.mjs && node scripts/verify-docs.mjs && node scripts/verify-registry-templates.mjs && tsc -p tsconfig.syntax.json",
     "version-packages": "changeset version",
     "preview:capture": "python3 scripts/capture-static-preview.py",
     "knowledge:generate": "node --experimental-strip-types scripts/generate-knowledge.mjs",
