@@ -103,10 +103,9 @@ test("public capture redaction removes API-like secrets and user paths", () => {
   const redacted = redactCapture(
     capture({
       prompt: 'OPENAI_API_KEY="synthetic-double" /Users/alice/work/private.ts',
-      rawOutput:
-        "ANTHROPIC_API_KEY='synthetic-single' Bearer sk-ant-api03-abcdefghijklmnopqrstuvwxyz at C:\\Users\\Alice\\secret.txt",
+      rawOutput: String.raw`{"type":"item.completed","item":{"text":"{\"OPENAI_API_KEY\":\"synthetic-escaped-openai\"} {\"ANTHROPIC_API_KEY\":\"synthetic-escaped-anthropic\"}"}} ANTHROPIC_API_KEY='synthetic-single' Bearer sk-ant-api03-abcdefghijklmnopqrstuvwxyz at C:\Users\Alice\secret.txt`,
       reason:
-        '{"OPENAI_API_KEY":"synthetic-json","ANTHROPIC_API_KEY":"synthetic-json-two"} /home/alice/source.ts ghp_abcdefghijklmnopqrstuvwxyz',
+        'OPENAI_API_KEY variable is documented. {"OPENAI_API_KEY":"synthetic-json","ANTHROPIC_API_KEY":"synthetic-json-two"} /home/alice/source.ts ghp_abcdefghijklmnopqrstuvwxyz',
     }),
   );
   const serialized = JSON.stringify(redacted);
@@ -118,6 +117,8 @@ test("public capture redaction removes API-like secrets and user paths", () => {
     serialized,
     /(?=.*\[REDACTED_SECRET\])(?=.*\[REDACTED_USER_PATH\])/,
   );
+  assert.doesNotMatch(redacted.rawOutput, /OPENAI_API_KEY|ANTHROPIC_API_KEY/);
+  assert.match(redacted.reason, /OPENAI_API_KEY variable is documented/);
 });
 
 test("Wilson intervals are bounded and cover the hand-checked five-run estimate", () => {
