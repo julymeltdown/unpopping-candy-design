@@ -8,6 +8,12 @@ importers:
 
   .:
     devDependencies:
+      '@babel/parser':
+        specifier: 7.29.8
+        version: 7.29.8
+      '@babel/types':
+        specifier: 7.29.8
+        version: 7.29.8
       '@changesets/cli':
         specifier: 2.29.7
         version: 2.29.7(@types/node@24.3.0)

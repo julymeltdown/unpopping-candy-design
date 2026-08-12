@@ -127,3 +127,31 @@ test("preferred JSX keeps scanning after comments inside attribute expressions",
     );
   }
 });
+
+test("preferred JSX parses regex and template expression boundaries", () => {
+  const regexErrors = publicContractErrors(
+    '<Button id={/}/.source} variant="not-a-variant">Save</Button>',
+    "regex expression",
+    "Button",
+  );
+  assert.ok(
+    regexErrors.some((error) => error.includes("Button.variant expected")),
+  );
+
+  assert.deepEqual(
+    publicContractErrors(
+      '<Button id={`safe ${value} tail`} variant="primary">Save</Button>',
+      "template expression",
+      "Button",
+    ),
+    [],
+  );
+  assert.deepEqual(
+    publicContractErrors(
+      '<Button id={`safe ${{ value: { nested: true } }} tail`} variant="primary">Save</Button>',
+      "nested template expression",
+      "Button",
+    ),
+    [],
+  );
+});

@@ -53,6 +53,8 @@
     "release:check": "node scripts/verify-release-readiness.mjs"
   },
   "devDependencies": {
+    "@babel/parser": "7.29.8",
+    "@babel/types": "7.29.8",
     "@changesets/cli": "2.29.7",
     "@playwright/test": "1.62.1",
     "@storybook/addon-vitest": "10.5.0",

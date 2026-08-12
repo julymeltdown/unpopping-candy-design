@@ -1,94 +1,99 @@
-import {
-  createScanner,
-  LanguageVariant,
-  SyntaxKind,
-} from "typescript/unstable/ast";
+import { parse } from "@babel/parser";
+import type {
+  File,
+  JSXAttribute,
+  JSXElement,
+  JSXIdentifier,
+  JSXMemberExpression,
+  JSXNamespacedName,
+  JSXOpeningElement,
+  Node,
+} from "@babel/types";
 
-type OpeningTag = {
+export type ParsedAttribute = {
   name: string;
-  attributes: string;
-  hasChildren: boolean;
+  literal?: string;
+  kind?: "string" | "number";
 };
 
-function tagEnd(code: string, start: number) {
-  const scanner = createScanner(false, LanguageVariant.JSX, code, start);
-  let braces = 0;
-  for (
-    let token = scanner.scan();
-    token !== SyntaxKind.EndOfFile;
-    token = scanner.scan()
-  ) {
-    if (token === SyntaxKind.OpenBraceToken) braces += 1;
-    else if (token === SyntaxKind.CloseBraceToken) braces -= 1;
-    else if (token === SyntaxKind.GreaterThanToken && braces === 0)
-      return scanner.getTokenStart();
-  }
-  return code.length;
+export type OpeningTag = {
+  name: string;
+  attributes: readonly ParsedAttribute[];
+  hasChildren: boolean;
+  hasSpread: boolean;
+};
+
+function jsxName(
+  name: JSXIdentifier | JSXMemberExpression | JSXNamespacedName,
+): string {
+  if (name.type === "JSXIdentifier") return name.name;
+  if (name.type === "JSXMemberExpression")
+    return `${jsxName(name.object)}.${name.property.name}`;
+  return `${name.namespace.name}:${name.name.name}`;
 }
 
-function maskNonCode(source: string) {
-  const output = [...source];
-  let state = "code";
-  let escaped = false;
-  for (let index = 0; index < source.length; index += 1) {
-    const character = source[index] ?? "";
-    const next = source[index + 1];
-    if (state !== "code") {
-      output[index] = character === "\n" ? "\n" : " ";
-      if (state === "line-comment" && character === "\n") state = "code";
-      else if (state === "block-comment" && character === "*" && next === "/") {
-        output[index + 1] = " ";
-        index += 1;
-        state = "code";
-      } else if (!state.endsWith("comment")) {
-        if (escaped) escaped = false;
-        else if (character === "\\") escaped = true;
-        else if (
-          (state === "single" && character === "'") ||
-          (state === "double" && character === '"') ||
-          (state === "template" && character === "`")
-        )
-          state = "code";
-      }
-      continue;
-    }
-    if (character === "/" && ["/", "*"].includes(next ?? "")) {
-      output[index] = output[index + 1] = " ";
-      index += 1;
-      state = next === "/" ? "line-comment" : "block-comment";
-    } else if (["'", '"', "`"].includes(character)) {
-      output[index] = " ";
-      state =
-        character === "'"
-          ? "single"
-          : character === '"'
-            ? "double"
-            : "template";
-    }
+function attribute(attribute: JSXAttribute): ParsedAttribute {
+  const name = jsxName(attribute.name);
+  if (attribute.value?.type === "StringLiteral")
+    return { name, kind: "string", literal: attribute.value.value };
+  if (attribute.value?.type === "JSXExpressionContainer") {
+    const expression = attribute.value.expression;
+    if (expression.type === "StringLiteral")
+      return { name, kind: "string", literal: expression.value };
+    if (expression.type === "NumericLiteral")
+      return { name, kind: "number", literal: String(expression.value) };
   }
-  return output.join("");
+  return { name };
 }
 
-export function openingTags(code: string) {
-  const tags: OpeningTag[] = [];
-  const masked = maskNonCode(code);
-  let cursor = 0;
-  while (cursor < masked.length) {
-    const match = /^<([A-Z][A-Za-z0-9]*(?:\.[A-Za-z_$][\w$]*)*)\b/.exec(
-      masked.slice(cursor),
+function openingTag(
+  opening: JSXOpeningElement,
+  hasChildren: boolean,
+): OpeningTag {
+  return {
+    name: jsxName(opening.name),
+    attributes: opening.attributes
+      .filter((item) => item.type === "JSXAttribute")
+      .map(attribute),
+    hasChildren,
+    hasSpread: opening.attributes.some(
+      (item) => item.type === "JSXSpreadAttribute",
+    ),
+  };
+}
+
+function collect(node: Node, tags: OpeningTag[]): void {
+  if (node.type === "JSXElement") {
+    const element: JSXElement = node;
+    tags.push(
+      openingTag(element.openingElement, !element.openingElement.selfClosing),
     );
-    if (!match?.[1]) {
-      cursor += 1;
-      continue;
-    }
-    const end = tagEnd(code, cursor + match[0].length);
-    const attributes = code.slice(cursor + match[0].length, end);
-    tags.push({
-      name: match[1],
-      attributes,
-      hasChildren: !attributes.trimEnd().endsWith("/"),
-    });
-    cursor = end + 1;
   }
+  for (const value of Object.values(node)) {
+    if (Array.isArray(value)) {
+      for (const item of value)
+        if (item && typeof item === "object" && "type" in item)
+          collect(item, tags);
+    } else if (value && typeof value === "object" && "type" in value) {
+      collect(value, tags);
+    }
+  }
+}
+
+export function openingTags(code: string): OpeningTag[] {
+  let file: File;
+  try {
+    file = parse(code, {
+      allowAwaitOutsideFunction: true,
+      allowReturnOutsideFunction: true,
+      allowUndeclaredExports: true,
+      plugins: ["jsx", "typescript"],
+      sourceType: "module",
+    });
+  } catch {
+    return [];
+  }
+  const tags: OpeningTag[] = [];
+  collect(file.program, tags);
   return tags;
 }

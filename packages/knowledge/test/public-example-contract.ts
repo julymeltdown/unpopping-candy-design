@@ -1,21 +1,10 @@
 import { bundledCatalog } from "../src/index.ts";
-import {
-  createScanner,
-  LanguageVariant,
-  SyntaxKind,
-} from "typescript/unstable/ast";
-import { openingTags } from "./public-example-parser.ts";
+import { openingTags, type ParsedAttribute } from "./public-example-parser.ts";
 
 type ComponentEntry = Extract<
   (typeof bundledCatalog.entries)[number],
   { kind: "component" }
 >;
-
-type ParsedAttribute = {
-  name: string;
-  literal?: string;
-  kind?: "string" | "number";
-};
 
 const components = new Map<string, ComponentEntry>(
   bundledCatalog.entries
@@ -76,58 +65,6 @@ function literalError(
   return undefined;
 }
 
-function attributes(source: string) {
-  const result: ParsedAttribute[] = [];
-  for (let index = 0; index < source.length; ) {
-    while (/\s|\//.test(source[index] ?? "")) index += 1;
-    const match = /^[A-Za-z][\w:-]*/.exec(source.slice(index));
-    if (!match) break;
-    const attribute: ParsedAttribute = { name: match[0] };
-    index += match[0].length;
-    while (/\s/.test(source[index] ?? "")) index += 1;
-    if (source[index] === "=") {
-      index += 1;
-      while (/\s/.test(source[index] ?? "")) index += 1;
-      const quote = source[index];
-      if (quote === '"' || quote === "'") {
-        const end = source.indexOf(quote, index + 1);
-        attribute.kind = "string";
-        attribute.literal = source.slice(index + 1, end);
-        index = end + 1;
-      } else if (quote === "{") {
-        let braces = 1;
-        const start = ++index;
-        const scanner = createScanner(
-          false,
-          LanguageVariant.JSX,
-          source,
-          start,
-        );
-        for (
-          let token = scanner.scan();
-          token !== SyntaxKind.EndOfFile && braces > 0;
-          token = scanner.scan()
-        ) {
-          if (token === SyntaxKind.OpenBraceToken) braces += 1;
-          else if (token === SyntaxKind.CloseBraceToken) braces -= 1;
-          index = scanner.getTokenEnd();
-        }
-        const value = source.slice(start, index - 1).trim();
-        if (/^\d+$/.test(value)) {
-          attribute.kind = "number";
-          attribute.literal = value;
-        }
-        if (/^(['"]).*\1$/.test(value)) {
-          attribute.kind = "string";
-          attribute.literal = value.slice(1, -1);
-        }
-      }
-    }
-    result.push(attribute);
-  }
-  return result;
-}
-
 export function publicContractErrors(
   code: string,
   label: string,
@@ -146,15 +83,19 @@ export function publicContractErrors(
   for (const tag of tags) {
     const component = components.get(tag.name);
     if (!component) {
-      if (expectedComponent && !externalExampleComponents.has(tag.name))
+      if (
+        expectedComponent &&
+        /^[A-Z]/.test(tag.name) &&
+        !externalExampleComponents.has(tag.name)
+      )
         errors.push(`${label}: unknown JSX component ${tag.name}`);
       continue;
     }
     const present = new Set<string>();
-    if (/\{\.\.\./.test(tag.attributes))
+    if (tag.hasSpread)
       errors.push(`${label}: ${component.name} uses unverified prop spread`);
     if (tag.hasChildren) present.add("children");
-    for (const attribute of attributes(tag.attributes)) {
+    for (const attribute of tag.attributes) {
       const name = attribute.name;
       present.add(name);
       const prop = component.props.find((candidate) => candidate.name === name);
