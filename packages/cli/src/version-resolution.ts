@@ -44,31 +44,36 @@ async function readJsonRecord(path: string): Promise<JsonRecord> {
 
 function exactVersion(value: unknown): string | undefined {
   if (typeof value !== 'string') return undefined;
-  const match = /^(\d+\.\d+\.\d+(?:-[0-9A-Za-z.-]+)?)/.exec(value);
-  if (!match) return undefined;
-  const version = match[1];
-  if (!version || !hasBalancedPeerContexts(value.slice(version.length))) return undefined;
+  const version = semverAt(value, 0);
+  if (!version) return undefined;
+  let index = version.length;
+  while (index < value.length) {
+    const next = peerContextEnd(value, index);
+    if (next === undefined) return undefined;
+    index = next;
+  }
   return version;
 }
 
-function hasBalancedPeerContexts(suffix: string): boolean {
-  if (suffix.length === 0) return true;
-  let depth = 0;
-  let contextHasContent = false;
-  for (const character of suffix) {
-    if (character === '(') {
-      depth += 1;
-      contextHasContent = false;
-    } else if (character === ')') {
-      if (depth === 0 || !contextHasContent) return false;
-      depth -= 1;
-      contextHasContent = true;
-    } else {
-      if (depth === 0) return false;
-      contextHasContent = true;
-    }
+function semverAt(value: string, index: number): string | undefined {
+  const identifier = '(?:0|[1-9]\\d*|[0-9A-Za-z-]*[A-Za-z-][0-9A-Za-z-]*)';
+  const semver = new RegExp(`^(?:0|[1-9]\\d*)\\.(?:0|[1-9]\\d*)\\.(?:0|[1-9]\\d*)(?:-${identifier}(?:\\.${identifier})*)?(?:\\+[0-9A-Za-z-]+(?:\\.[0-9A-Za-z-]+)*)?`);
+  return semver.exec(value.slice(index))?.[0];
+}
+
+function peerContextEnd(value: string, index: number): number | undefined {
+  if (value[index] !== '(') return undefined;
+  const identity = /^(?:@[a-z0-9][a-z0-9._-]*\/)?[a-z0-9][a-z0-9._-]*@/.exec(value.slice(index + 1));
+  if (!identity) return undefined;
+  const version = semverAt(value, index + 1 + identity[0].length);
+  if (!version) return undefined;
+  let end = index + 1 + identity[0].length + version.length;
+  while (value[end] === '(') {
+    const nestedEnd = peerContextEnd(value, end);
+    if (nestedEnd === undefined) return undefined;
+    end = nestedEnd;
   }
-  return depth === 0 && contextHasContent;
+  return value[end] === ')' ? end + 1 : undefined;
 }
 
 function namesInOrder(declaredNames: readonly string[]): readonly string[] {
