@@ -8,25 +8,7 @@ import {
   publicPackageGraph,
   validatePackedArtifacts,
 } from "./compatibility-contract.mjs";
-
-function signalProcessTree(child, signal) {
-  if (!child.pid) return;
-  if (process.platform === "win32") {
-    const args = ["/pid", String(child.pid), "/t"];
-    if (signal === "SIGKILL") args.push("/f");
-    const killer = spawn("taskkill", args, {
-      stdio: "ignore",
-      windowsHide: true,
-    });
-    killer.on("error", () => child.kill(signal));
-    return;
-  }
-  try {
-    process.kill(-child.pid, signal);
-  } catch {
-    child.kill(signal);
-  }
-}
+import { createTerminationCoordinator } from "./compatibility-termination.mjs";
 
 export function runCompatibilityProcess({
   command,
@@ -35,6 +17,8 @@ export function runCompatibilityProcess({
   timeoutMs = 300_000,
   outputLimitBytes = 1024 * 1024,
   killGraceMs = 2_000,
+  treeKillTimeoutMs = 5_000,
+  terminateTree,
 }) {
   const started = performance.now();
   return new Promise((resolvePromise, rejectPromise) => {
@@ -55,6 +39,7 @@ export function runCompatibilityProcess({
     const cleanup = () => {
       clearTimeout(timer);
       clearTimeout(escalation);
+      termination.cleanup();
       child.stdout.removeListener("data", append);
       child.stderr.removeListener("data", append);
       child.removeListener("error", onError);
@@ -76,13 +61,18 @@ export function runCompatibilityProcess({
       failure.output = output();
       rejectPromise(failure);
     };
-    const terminate = (nextReason) => {
+    const termination = createTerminationCoordinator({
+      child,
+      timeoutMs: treeKillTimeoutMs,
+      onReady: finish,
+      terminateTree,
+    });
+    const beginTermination = (nextReason) => {
       if (reason) return;
       reason = nextReason;
-      signalProcessTree(child, "SIGTERM");
+      termination.start();
       escalation = setTimeout(() => {
-        signalProcessTree(child, "SIGKILL");
-        finish();
+        termination.force();
       }, killGraceMs);
     };
     const append = (value) => {
@@ -90,18 +80,22 @@ export function runCompatibilityProcess({
       const remaining = Math.max(0, outputLimitBytes - capturedBytes);
       if (remaining > 0) chunks.push(chunk.subarray(0, remaining));
       capturedBytes += Math.min(remaining, chunk.length);
-      if (chunk.length > remaining) terminate("output limit exceeded");
+      if (chunk.length > remaining) beginTermination("output limit exceeded");
     };
     const onError = (error) => finish(error);
     const onClose = (code, signal) => {
       closed = { code, signal };
       if (!reason) finish();
+      else {
+        clearTimeout(escalation);
+        termination.close();
+      }
     };
     child.stdout.on("data", append);
     child.stderr.on("data", append);
     child.on("error", onError);
     child.on("close", onClose);
-    const timer = setTimeout(() => terminate("timed out"), timeoutMs);
+    const timer = setTimeout(() => beginTermination("timed out"), timeoutMs);
   });
 }
 

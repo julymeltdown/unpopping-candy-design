@@ -8,7 +8,7 @@ import {
   writeFile,
 } from "node:fs/promises";
 import { tmpdir } from "node:os";
-import { dirname, join, relative } from "node:path";
+import { dirname, join, relative, sep } from "node:path";
 import {
   assertObservedVersions,
   assertOutsideWorkspace,
@@ -49,7 +49,7 @@ async function installConsumerManagerFiles({
   }
 }
 
-async function writeResult(artifactRoot, run, result) {
+export async function writeCompatibilityResult(artifactRoot, run, result) {
   const resultPath = join(
     artifactRoot,
     run.fixture,
@@ -58,7 +58,11 @@ async function writeResult(artifactRoot, run, result) {
   );
   await mkdir(dirname(resultPath), { recursive: true });
   await writeFile(resultPath, `${JSON.stringify(result, null, 2)}\n`);
-  return resultPath;
+  const locator = relative(artifactRoot, resultPath);
+  if (!locator || locator.startsWith("..")) {
+    throw new TypeError("Compatibility result escaped the artifact root.");
+  }
+  return locator.split(sep).join("/");
 }
 
 async function assertInstalledIsolation({
@@ -227,17 +231,12 @@ export async function executeCompatibilityRun(context, run) {
     result.smokeTest = { status: "passed", durationMs: smoke.durationMs };
     result.status = "passed";
     result.stage = "complete";
-    const resultPath = await writeResult(artifactRoot, run, result);
-    const path = relative(workspaceRoot, resultPath);
-    const sanitizedPath = path.startsWith("..")
-      ? join(
-          ".artifacts/compatibility",
-          run.fixture,
-          run.cell,
-          `${run.manager}.json`,
-        )
-      : path;
-    return { resultPath: sanitizedPath, result };
+    const resultPath = await writeCompatibilityResult(
+      artifactRoot,
+      run,
+      result,
+    );
+    return { resultPath, result };
   } catch (error) {
     result.status = "failed";
     const outcome =
@@ -245,7 +244,7 @@ export async function executeCompatibilityRun(context, run) {
     if (outcome && typeof outcome === "object" && "status" in outcome) {
       outcome.status = "failed";
     }
-    await writeResult(artifactRoot, run, result);
+    await writeCompatibilityResult(artifactRoot, run, result);
     throw error;
   } finally {
     if (!keepTemporary || !temporaryApproved) {
