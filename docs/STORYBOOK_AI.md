@@ -79,7 +79,7 @@ With dependencies installed:
 
 ```bash
 pnpm --filter @unpopping-candy/docs dev
-pnpm --filter @unpopping-candy/docs test-storybook
+pnpm test:storybook
 pnpm --filter @unpopping-candy/docs build-storybook
 ```
 

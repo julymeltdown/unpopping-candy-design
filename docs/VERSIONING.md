@@ -22,10 +22,10 @@ Prerelease versions use explicit SemVer identifiers such as `alpha` or `beta` an
 
 ## Compatibility and support
 
-Before `1.0`, only the current minor is supported. Every release claim names exact framework, React, package-manager, TypeScript, browser, and assistive-technology evidence rather than inheriting unexecuted plans. See [compatibility](./COMPATIBILITY.md), [accessibility](./ACCESSIBILITY.md), and [support](./SUPPORT.md).
+Before `1.0`, once publication begins, only the newest published current minor is supported. No published minor exists today, so the Stage 0 source versions and local candidates have no supported npm-release window. Every release claim names exact framework, React, package-manager, TypeScript, browser, and assistive-technology evidence rather than inheriting unexecuted plans. See [compatibility](./COMPATIBILITY.md), [accessibility](./ACCESSIBILITY.md), and [support](./SUPPORT.md).
 
 ## External authorization
 
-Version calculation, local builds, packing, validation, and dry-run candidate preparation may be automated locally. npm publication, tag changes, releases, workflow dispatch, Pages or hosted-service deployment, Figma publication, remote Registry writes, and model/provider calls are external actions and require explicit owner authorization for that action and target.
+Version calculation, local builds, packing, validation, and dry-run candidate preparation may be automated locally. npm publication, tag changes, releases, workflow dispatch, Pages or hosted-service deployment, Figma publication, remote Registry writes, and model/provider calls are external actions and require explicit owner authorization for that action and target. Request authorization in a repository issue or pull request that names the exact action and target; a repository owner records approval there before execution. Security-sensitive requests use private vulnerability reporting.
 
 Authorization is not inferred from a green build, credential availability, a configured workflow, or an earlier approval for a different action. Release evidence must distinguish preparation from execution and must not claim a remote outcome that was not observed.

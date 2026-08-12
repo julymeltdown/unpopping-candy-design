@@ -1,5 +1,13 @@
 import assert from "node:assert/strict";
-import { readFile } from "node:fs/promises";
+import {
+  mkdtemp,
+  mkdir,
+  readFile,
+  rm,
+  symlink,
+  writeFile,
+} from "node:fs/promises";
+import { tmpdir } from "node:os";
 import { dirname, join, resolve } from "node:path";
 import test from "node:test";
 import { fileURLToPath } from "node:url";
@@ -10,20 +18,6 @@ import {
 
 const root = resolve(dirname(fileURLToPath(import.meta.url)), "../..");
 const readDocument = (path) => readFile(join(root, path), "utf8");
-
-const publicPackages = [
-  "@unpopping-candy/tokens",
-  "@unpopping-candy/theme",
-  "@unpopping-candy/icons",
-  "@unpopping-candy/ui",
-  "@unpopping-candy/social",
-  "@unpopping-candy/knowledge",
-  "@unpopping-candy/registry",
-  "@unpopping-candy/cli",
-  "@unpopping-candy/mcp",
-];
-
-const privateTools = ["@unpopping-candy/evals", "@unpopping-candy/figma"];
 
 test("markdown contract extracts only repository-relative links", () => {
   const source = `
@@ -45,13 +39,9 @@ test("markdown contract detects balanced fenced code blocks", () => {
   assert.equal(hasBalancedCodeFences("```ts\nconst broken = true;\n"), false);
 });
 
-test("README is a bounded adoption page with one local package and agent workflow", async () => {
-  // Given: the repository landing page consumed by a new adopter.
-  // When: its stable adoption contract is inspected.
+test("README keeps the bounded landing and adopter workflow", async () => {
   const source = await readDocument("README.md");
   const lineCount = source.trimEnd().split(/\r?\n/).length;
-
-  // Then: it is concise, keeps the overview, and exposes exact local workflows and package roles.
   assert.ok(
     lineCount >= 200 && lineCount <= 300,
     `README has ${lineCount} lines`,
@@ -60,125 +50,11 @@ test("README is a bounded adoption page with one local package and agent workflo
     source,
     /!\[Unpopping Candy component overview\]\(\.\/docs\/preview\/captures\/unpopping-candy-overview\.png\)/,
   );
-  for (const command of [
-    "npm run popcandy -- info --path . --json",
-    'npm run popcandy -- search "publish post" --path . --json',
-    "npm run popcandy -- get social.post-composer-view --path . --json",
-    'npm run popcandy -- compose "publish a post with pending, success, and error states" --path . --json',
-    "npm run popcandy -- validate --path . --json",
-  ]) {
-    assert.ok(source.includes(command), `README is missing ${command}`);
+  for (const command of ["info", "search", "get", "compose", "validate"]) {
+    assert.match(source, new RegExp(`npm run popcandy -- ${command}`));
   }
-  assert.equal(
-    publicPackages.filter((name) => source.includes(`| \`${name}\``)).length,
-    9,
-  );
-  assert.equal(
-    privateTools.filter((name) => source.includes(`| \`${name}\``)).length,
-    2,
-  );
-  assert.match(source, /not published to npm/i);
-  assert.match(source, /placeholder Figma/i);
-  assert.match(source, /no remote Registry/i);
-  assert.match(source, /no hosted MCP/i);
-  assert.match(source, /no public model-quality claim/i);
-});
-
-test("AI-assisted case study preserves the evidence schema without inventing a model run", async () => {
-  // Given: the Stage 0 publish-a-post case study.
-  // When: its ordered evidence headings are read.
-  const source = await readDocument("docs/AI_ASSISTED_POST_CASE_STUDY.md");
-  const headings = [...source.matchAll(/^## (.+)$/gm)].map((match) => match[1]);
-
-  // Then: the schema is exact and the absent model comparison is explicit.
-  assert.deepEqual(headings, [
-    "Task and acceptance criteria",
-    "Fixture and exact installed versions",
-    "Prompt",
-    "Bounded inputs",
-    "`popcandy` transcript",
-    "Output diff",
-    "Storybook, axe, and visual commands",
-    "Model, provider, and timestamp",
-    "Failures and corrections",
-    "No-context comparison",
-    "Reproducibility and redaction",
-  ]);
-  assert.ok(source.includes("Real-model comparison: not executed"));
-  assert.match(
-    source,
-    /Stage 0 is ineligible for a public model-quality claim/,
-  );
-});
-
-test("compatibility policy distinguishes pinned plans from the six executed cells", async () => {
-  // Given: the public compatibility policy.
-  // When: its exact pinned lanes and evidence scope are inspected.
-  const source = await readDocument("docs/COMPATIBILITY.md");
-
-  // Then: seven framework cells, five managers, and the source toolchain are fail closed.
-  for (const row of [
-    "vite-react-18 | Vite 8.1.0 | React 18.3.1",
-    "vite-react-19 | Vite 8.1.0 | React 19.2.8",
-    "next-15-react-18 | Next.js 15.5.23 | React 18.3.1",
-    "next-15-react-19 | Next.js 15.5.23 | React 19.2.8",
-    "next-16-react-19 | Next.js 16.3.0 | React 19.2.8",
-    "react-router-7-react-18 | React Router 7.18.2 | React 18.3.1",
-    "react-router-7-react-19 | React Router 7.18.2 | React 19.2.8",
-    "npm-10 | npm 10.9.9",
-    "npm-11 | npm 11.19.0",
-    "pnpm-10 | pnpm 10.34.5",
-    "pnpm-11 | pnpm 11.21.0",
-    "yarn-4 | Yarn 4.18.0 | node-modules",
-  ]) {
-    assert.ok(source.includes(row), `Compatibility policy is missing ${row}`);
-  }
-  assert.match(source, /pnpm@11\.4\.0/);
-  assert.match(source, /140 planned cells/);
-  assert.match(source, /six executed cells/);
-  assert.match(source, /tarball-only isolation/);
-});
-
-test("accessibility policy records targets and manual evidence schemas without claiming execution", async () => {
-  // Given: the public accessibility policy.
-  // When: its conformance target and evidence boundaries are inspected.
-  const source = await readDocument("docs/ACCESSIBILITY.md");
-
-  // Then: the standard, browser window, AT lanes, and no-claim rule remain explicit.
-  assert.match(source, /WCAG 2\.2 AA/);
-  assert.match(source, /latest two major versions/);
-  for (const lane of [
-    "VoiceOver with Safari",
-    "NVDA with Chrome",
-    "real iOS Safari",
-  ]) {
-    assert.ok(source.includes(lane), `Accessibility policy is missing ${lane}`);
-  }
-  assert.match(source, /Unexecuted checks are never reported as passes/);
-});
-
-test("support, security, and versioning policies keep exact pre-1.0 trust boundaries", async () => {
-  // Given: the public support, security, and versioning policies.
-  // When: their release commitments are read.
-  const [support, security, versioning] = await Promise.all([
-    readDocument("docs/SUPPORT.md"),
-    readDocument("docs/SECURITY.md"),
-    readDocument("docs/VERSIONING.md"),
-  ]);
-
-  // Then: every externally meaningful commitment is explicit.
-  assert.match(support, /pre-1\.0 current-minor support/);
-  assert.match(security, /GitHub private vulnerability reporting/);
-  for (const term of [
-    "ESM",
-    "deprecation",
-    "withdrawal",
-    "prerelease",
-    "coordinated public package versions",
-    "external authorization",
-  ]) {
-    assert.match(versioning, new RegExp(term, "i"));
-  }
+  assert.match(source, /corepack pnpm create vite@8\.1\.0/);
+  assert.match(source, /manifest\.scripts\.popcandy = 'popcandy'/);
 });
 
 test("documentation verifier fails closed when trust documents are incomplete", async () => {
@@ -207,5 +83,138 @@ test("documentation verifier fails closed when trust documents are incomplete", 
         error.includes(`${path}: required trust document is missing`),
       ),
     );
+  }
+});
+
+test("documentation verifier compares structured trust claims with canonical sources", async () => {
+  const verifier = await import("../../scripts/verify-docs.mjs");
+  const documents = new Map(
+    await Promise.all(
+      [
+        "README.md",
+        "docs/AI_ASSISTED_POST_CASE_STUDY.md",
+        "docs/COMPATIBILITY.md",
+        "docs/ACCESSIBILITY.md",
+        "docs/SUPPORT.md",
+        "docs/SECURITY.md",
+        "docs/VERSIONING.md",
+        "docs/STORYBOOK_AI.md",
+        "docs/PUBLISHING.md",
+      ].map(async (path) => [path, await readDocument(path)]),
+    ),
+  );
+  const context = await verifier.loadTrustContext(root);
+  const mutate = (path, transform) => {
+    const changed = new Map(documents);
+    changed.set(path, transform(changed.get(path)));
+    return verifier.trustContractErrors(changed, context);
+  };
+
+  assert.deepEqual(verifier.trustContractErrors(documents, context), []);
+  for (const [label, path, transform] of [
+    [
+      "public/private swap",
+      "README.md",
+      (source) =>
+        source
+          .replace("| `@unpopping-candy/ui`", "| `@unpopping-candy/TEMP`")
+          .replace("| `@unpopping-candy/evals`", "| `@unpopping-candy/ui`")
+          .replace("| `@unpopping-candy/TEMP`", "| `@unpopping-candy/evals`"),
+    ],
+    [
+      "eighth framework cell",
+      "docs/COMPATIBILITY.md",
+      (source) =>
+        source.replace(
+          /(\| react-router-7-react-19[^\n]+\|)/,
+          "$1\n| extra                         | Vite         | 8.1.0   | 19.2.8 |",
+        ),
+    ],
+    [
+      "unexecuted cells claimed passed",
+      "docs/COMPATIBILITY.md",
+      (source) =>
+        source.replace(
+          "remaining 134 planned combinations were not executed",
+          "remaining 134 planned combinations passed",
+        ),
+    ],
+    [
+      "npm contradiction",
+      "README.md",
+      (source) =>
+        source.replace(
+          "The nine public packages are not published to npm",
+          "The nine public packages are published to npm",
+        ),
+    ],
+    [
+      "remote Registry contradiction",
+      "README.md",
+      (source) =>
+        source.replace(
+          "There is no remote Registry",
+          "A remote Registry is available",
+        ),
+    ],
+    [
+      "hosted MCP contradiction",
+      "README.md",
+      (source) =>
+        source.replace(
+          "There is no hosted MCP service",
+          "A hosted MCP service is available",
+        ),
+    ],
+    [
+      "model-evidence contradiction",
+      "README.md",
+      (source) =>
+        source.replace(
+          "Stage 0 makes no public model-quality claim",
+          "Stage 0 makes a public model-quality claim",
+        ),
+    ],
+    [
+      "indefinite old-minor support",
+      "docs/SUPPORT.md",
+      (source) =>
+        `${source}\nAll old minor lines receive fixes indefinitely.\n`,
+    ],
+  ]) {
+    assert.ok(mutate(path, transform).length > 0, `${label} must fail closed`);
+  }
+});
+
+test("documentation links reject prefix siblings and escaping symlinks", async () => {
+  const verifier = await import("../../scripts/verify-docs.mjs");
+  const sandbox = await mkdtemp(join(tmpdir(), "popcandy-doc-links-"));
+  const repo = join(sandbox, "repo");
+  const sibling = join(sandbox, "repository-sibling");
+  try {
+    await mkdir(join(repo, "docs"), { recursive: true });
+    await mkdir(sibling);
+    await writeFile(join(repo, "README.md"), "# fixture\n");
+    await writeFile(join(sibling, "outside.md"), "# outside\n");
+    await symlink(join(sibling, "outside.md"), join(repo, "docs", "escape.md"));
+
+    assert.match(
+      await verifier.relativeLinkError(
+        repo,
+        join(repo, "README.md"),
+        "../repository-sibling/outside.md",
+      ),
+      /escapes repository root/,
+    );
+    assert.match(
+      await verifier.relativeLinkError(
+        repo,
+        join(repo, "README.md"),
+        "./docs/escape.md",
+      ),
+      /escapes repository root/,
+    );
+  } finally {
+    await rm(sandbox, { recursive: true, force: true });
   }
 });

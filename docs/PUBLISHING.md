@@ -65,7 +65,7 @@ minor  compatible component, token, pattern, template, or AI-tool addition
 major  breaking API, token, export, behavior, or accessibility change
 ```
 
-AI packages are versioned independently from visual packages unless a change crosses their public contracts.
+All nine public packages use one coordinated requested version. A release candidate updates visual packages (`tokens`, `theme`, `icons`, `ui`, and `social`) and AI-operable packages (`knowledge`, `registry`, `cli`, and `mcp`) together, including consistent internal dependency ranges. The two private tooling packages are not publication targets.
 
 ## Versioning
 

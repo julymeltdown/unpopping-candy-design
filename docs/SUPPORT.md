@@ -4,11 +4,11 @@ Unpopping Candy follows pre-1.0 current-minor support.
 
 ## Supported release window
 
-Before `1.0.0`, only the newest published `0.N.x` minor line receives fixes and compatibility updates. Patch releases may correct defects without intentionally changing the documented public API. Moving from `0.N` to `0.N+1` may include breaking changes and requires migration and release notes.
+Before `1.0.0`, once publication begins, only the newest published `0.N.x` minor line receives fixes and compatibility updates. Patch releases may correct defects without intentionally changing the documented public API. Moving from `0.N` to `0.N+1` may include breaking changes and requires migration and release notes.
 
 Older minor lines are unsupported once a newer minor is published. Maintainers may answer questions or accept a narrowly scoped backport, but that is best effort and not a support commitment.
 
-Because the public packages are not yet published to npm, Stage 0 source and local tarballs are evaluation artifacts rather than a supported npm release.
+Because the public packages are not yet published to npm, there is currently no supported published minor. Stage 0 source and local tarballs are evaluation artifacts rather than a supported npm release.
 
 ## Getting help
 

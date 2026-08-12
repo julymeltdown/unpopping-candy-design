@@ -27,11 +27,11 @@ Consuming applications own:
 
 `@unpopping-candy/ui` and `@unpopping-candy/social` remain presentation packages. Do not move TanStack Query, SWR, Zustand, routers, API clients, or business workflows into them.
 
-## Shipped in Stage 0
+## Repository-implemented in Stage 0
 
 The committed catalog is version `0.2.0` and contains 32 public component contracts, six product patterns, five local Registry templates, and one migration record.
 
-Stage 0 ships:
+Stage 0 currently implements in this repository:
 
 - reference, semantic, and component tokens;
 - scoped light, dark, system, high-contrast, density, and accent themes;
@@ -39,8 +39,8 @@ Stage 0 ships:
 - general layout, form, feedback, loading, dialog, tabs, and display primitives;
 - controlled social post, composer, profile, user, notification, conversation, and timeline views;
 - 32 dedicated Storybook contract stories;
-- generated catalog, portable agent documents, Skills, local CLI, local MCP adapter, and guarded local Registry;
-- deterministic static agent-output evaluation and placeholder-gated Code Connect generation;
+- generated catalog, portable agent documents, Skills, and the local public-package candidates for CLI, MCP, and Registry;
+- private repository tools for deterministic static evaluation and placeholder-gated Code Connect generation;
 - packed-consumer compatibility planning and six executed clean-consumer cells.
 
 See the [catalog manifest](./agent/manifests/catalog.json) and [Storybook usage source](./apps/docs/stories/Introduction.mdx). No hosted Storybook URL is configured in this repository.
@@ -55,14 +55,14 @@ Those names are reserved roadmap work, not imports available in the Stage 0 cata
 
 ## Local Vite quickstart
 
-The packages are not published to npm. This single copy/paste path builds and packs the current checkout, creates a clean Vite app, installs only local tarballs for Unpopping Candy, writes a small token-based screen, and runs a production build.
+The packages are not published to npm. This single copy/paste POSIX-shell path builds and packs the current checkout, creates a clean Vite app, installs all nine Unpopping Candy packages from local tarballs, writes a small token-based screen, runs the five local CLI commands, builds, and checks a bounded preview.
 
-Prerequisites: Git, Node `>=22.13.0`, Corepack, and a clone of this repository. Run from the repository root:
+Prerequisites: a POSIX shell with `sh`, Git, Node `>=22.13.0`, Corepack, `curl`, and a clone of this repository. Run from the repository root:
 
 ```bash
-corepack enable
-corepack prepare pnpm@11.4.0 --activate
-pnpm install --frozen-lockfile
+set -eu
+corepack prepare pnpm@11.4.0
+corepack pnpm install --frozen-lockfile
 
 PACK_ROOT="$(mktemp -d)"
 APP_PARENT="$(mktemp -d)"
@@ -72,18 +72,31 @@ await packPublicWorkspace({ workspaceRoot: process.cwd(), outputRoot: process.ar
 NODE
 
 cd "$APP_PARENT"
-pnpm create vite@8.1.0 popcandy-vite --template react-ts
+corepack pnpm create vite@8.1.0 popcandy-vite --template react-ts
 cd popcandy-vite
 mkdir packs
-cp "$PACK_ROOT"/unpopping-candy-{tokens,theme,icons,ui}-0.1.0.tgz packs/
+for PACKAGE in tokens theme icons ui social; do
+  cp "$PACK_ROOT/unpopping-candy-$PACKAGE-0.1.0.tgz" packs/
+done
+for PACKAGE in knowledge registry cli mcp; do
+  cp "$PACK_ROOT/unpopping-candy-$PACKAGE-0.2.0.tgz" packs/
+done
 
 node --input-type=module <<'NODE'
 import { readFile, writeFile } from 'node:fs/promises';
 const manifest = JSON.parse(await readFile('package.json', 'utf8'));
 manifest.packageManager = 'pnpm@11.4.0';
+manifest.scripts.popcandy = 'popcandy';
+manifest.devDependencies.vite = '8.1.0';
+manifest.devDependencies['@vitejs/plugin-react'] = '5.1.4';
 manifest.dependencies = {
   ...manifest.dependencies,
+  '@unpopping-candy/cli': 'file:./packs/unpopping-candy-cli-0.2.0.tgz',
   '@unpopping-candy/icons': 'file:./packs/unpopping-candy-icons-0.1.0.tgz',
+  '@unpopping-candy/knowledge': 'file:./packs/unpopping-candy-knowledge-0.2.0.tgz',
+  '@unpopping-candy/mcp': 'file:./packs/unpopping-candy-mcp-0.2.0.tgz',
+  '@unpopping-candy/registry': 'file:./packs/unpopping-candy-registry-0.2.0.tgz',
+  '@unpopping-candy/social': 'file:./packs/unpopping-candy-social-0.1.0.tgz',
   '@unpopping-candy/theme': 'file:./packs/unpopping-candy-theme-0.1.0.tgz',
   '@unpopping-candy/tokens': 'file:./packs/unpopping-candy-tokens-0.1.0.tgz',
   '@unpopping-candy/ui': 'file:./packs/unpopping-candy-ui-0.1.0.tgz',
@@ -97,13 +110,18 @@ allowBuilds:
 onlyBuiltDependencies:
   - esbuild
 overrides:
+  '@unpopping-candy/cli': file:./packs/unpopping-candy-cli-0.2.0.tgz
   '@unpopping-candy/icons': file:./packs/unpopping-candy-icons-0.1.0.tgz
+  '@unpopping-candy/knowledge': file:./packs/unpopping-candy-knowledge-0.2.0.tgz
+  '@unpopping-candy/mcp': file:./packs/unpopping-candy-mcp-0.2.0.tgz
+  '@unpopping-candy/registry': file:./packs/unpopping-candy-registry-0.2.0.tgz
+  '@unpopping-candy/social': file:./packs/unpopping-candy-social-0.1.0.tgz
   '@unpopping-candy/theme': file:./packs/unpopping-candy-theme-0.1.0.tgz
   '@unpopping-candy/tokens': file:./packs/unpopping-candy-tokens-0.1.0.tgz
   '@unpopping-candy/ui': file:./packs/unpopping-candy-ui-0.1.0.tgz
 YAML
 
-pnpm install --frozen-lockfile=false
+corepack pnpm install --frozen-lockfile=false
 
 tee src/App.tsx >/dev/null <<'TSX'
 import { UnpoppingCandyProvider } from '@unpopping-candy/theme';
@@ -142,11 +160,28 @@ tee src/index.css >/dev/null <<'CSS'
 body { margin: var(--popcandy-space-0); }
 CSS
 
-pnpm build
-pnpm dev
+corepack pnpm build
+npm run popcandy -- info --path . --json
+npm run popcandy -- search "publish post" --path . --json
+npm run popcandy -- get social.post-composer-view --path . --json
+npm run popcandy -- compose "publish a post with pending, success, and error states" --path . --json
+npm run popcandy -- validate --path . --json
+
+corepack pnpm preview --host 127.0.0.1 >preview.log 2>&1 &
+PREVIEW_PID=$!
+trap 'kill "$PREVIEW_PID" 2>/dev/null || true' EXIT INT TERM
+ATTEMPTS=0
+until curl --fail --silent http://127.0.0.1:4173/ >/dev/null; do
+  ATTEMPTS=$((ATTEMPTS + 1))
+  [ "$ATTEMPTS" -lt 30 ] || { cat preview.log; exit 1; }
+  sleep 1
+done
+kill "$PREVIEW_PID"
+wait "$PREVIEW_PID" 2>/dev/null || true
+trap - EXIT INT TERM
 ```
 
-The packer requires the source repository's exact `pnpm@11.4.0`, builds all nine public packages in dependency order, and emits isolated `.tgz` artifacts. Stop the dev server with Ctrl-C; the temporary directories can then be removed.
+The packer requires the source repository's exact `pnpm@11.4.0`, builds all nine public packages in dependency order, and emits isolated `.tgz` artifacts. The consumer pins Vite `8.1.0` and `@vitejs/plugin-react` `5.1.4`; the bounded preview terminates automatically. The temporary directories can then be removed.
 
 ## Local agent workflow
 
@@ -166,26 +201,30 @@ The full operating contract is in [AGENTS.md](./AGENTS.md); CLI details are in [
 
 ## Package map
 
-Nine packages are intended for public distribution:
+### Public package candidates
 
-| Package                      | Role                                                                        |
-| ---------------------------- | --------------------------------------------------------------------------- |
-| `@unpopping-candy/tokens`    | Reference, semantic, and component tokens plus CSS and JSON exports.        |
-| `@unpopping-candy/theme`     | React theme, density, accent, persistence, and scoped variables.            |
-| `@unpopping-candy/icons`     | Semantic icon names backed by Ant Design Icons.                             |
-| `@unpopping-candy/ui`        | Accessible, product-independent React presentation components.              |
-| `@unpopping-candy/social`    | Controlled, API-agnostic social and collaboration presentation.             |
-| `@unpopping-candy/knowledge` | Canonical catalog types, validation, search, and generators.                |
-| `@unpopping-candy/registry`  | Versioned local templates with checksums, dry-run plans, and guarded apply. |
-| `@unpopping-candy/cli`       | Deterministic project detection, discovery, composition, and validation.    |
-| `@unpopping-candy/mcp`       | Thin local MCP adapter over the same knowledge and guarded services.        |
+Nine packages are local public-package candidates. None is a supported npm release yet:
+
+| Package                      | Version | Role                                                                        |
+| ---------------------------- | ------- | --------------------------------------------------------------------------- |
+| `@unpopping-candy/tokens`    | 0.1.0   | Reference, semantic, and component tokens plus CSS and JSON exports.        |
+| `@unpopping-candy/theme`     | 0.1.0   | React theme, density, accent, persistence, and scoped variables.            |
+| `@unpopping-candy/icons`     | 0.1.0   | Semantic icon names backed by Ant Design Icons.                             |
+| `@unpopping-candy/ui`        | 0.1.0   | Accessible, product-independent React presentation components.              |
+| `@unpopping-candy/social`    | 0.1.0   | Controlled, API-agnostic social and collaboration presentation.             |
+| `@unpopping-candy/knowledge` | 0.2.0   | Canonical catalog types, validation, search, and generators.                |
+| `@unpopping-candy/registry`  | 0.2.0   | Versioned local templates with checksums, dry-run plans, and guarded apply. |
+| `@unpopping-candy/cli`       | 0.2.0   | Deterministic project detection, discovery, composition, and validation.    |
+| `@unpopping-candy/mcp`       | 0.2.0   | Thin local MCP adapter over the same knowledge and guarded services.        |
+
+### Private tooling
 
 Two packages are private repository tooling and are not publication targets:
 
-| Package                  | Role                                                                 |
-| ------------------------ | -------------------------------------------------------------------- |
-| `@unpopping-candy/evals` | Deterministic static evaluation of generated interface source.       |
-| `@unpopping-candy/figma` | Code Connect manifest validation and parserless template generation. |
+| Package                  | Version | Role                                                                 |
+| ------------------------ | ------- | -------------------------------------------------------------------- |
+| `@unpopping-candy/evals` | 0.2.0   | Deterministic static evaluation of generated interface source.       |
+| `@unpopping-candy/figma` | 0.2.0   | Code Connect manifest validation and parserless template generation. |
 
 ## Verification
 
@@ -199,10 +238,12 @@ pnpm typecheck
 pnpm build
 ```
 
-Storybook interaction and configured accessibility checks run with:
+Launch, test, and statically build the local Storybook from the repository root with:
 
 ```bash
-pnpm --filter @unpopping-candy/docs test -- --run
+pnpm --filter @unpopping-candy/docs dev
+pnpm test:storybook
+pnpm --filter @unpopping-candy/docs build-storybook
 ```
 
 Compatibility is defined in [docs/COMPATIBILITY.md](./docs/COMPATIBILITY.md). Stage 0 planned 140 combinations but executed six named tarball-only cells; it does not claim the unexecuted cells passed.
@@ -230,6 +271,6 @@ Compatibility is defined in [docs/COMPATIBILITY.md](./docs/COMPATIBILITY.md). St
 
 ## Contributing
 
-Start with [AGENTS.md](./AGENTS.md), search and inspect the installed catalog, use only public imports and semantic tokens, keep business ownership in applications, and add visible states to Storybook. A public component also requires adjacent metadata, typed ref/native behavior, accessibility guidance, tests, generated contracts, a Changeset, and the full verification set in [component guidelines](./docs/COMPONENT_GUIDELINES.md).
+Fork the [GitHub repository](https://github.com/julymeltdown/unpopping-candy-design), create a focused branch in your fork, follow [AGENTS.md](./AGENTS.md), and open a pull request against the repository with the commands and outcomes you executed. Search and inspect the installed catalog, use only public imports and semantic tokens, keep business ownership in applications, and add visible states to Storybook. A public component also requires adjacent metadata, typed ref/native behavior, accessibility guidance, tests, generated contracts, a Changeset, and the full verification set in [component guidelines](./docs/COMPONENT_GUIDELINES.md). Use [GitHub issues](https://github.com/julymeltdown/unpopping-candy-design/issues) for scoped bugs, proposals, or contribution questions; report vulnerabilities privately through the security policy.
 
-Publication, deployment, provider calls, Figma publication, remote writes, and model execution require explicit external authorization. Local checks and dry runs are evidence, not permission to perform those actions.
+Publication, deployment, provider calls, Figma publication, remote writes, and model execution require explicit external authorization. Request it in a GitHub issue or pull request that names the exact action and target, then wait for a repository owner to approve that action before execution. Security-sensitive requests use private vulnerability reporting instead. Local checks and dry runs are evidence, not permission to perform those actions.

@@ -4,11 +4,23 @@ This Stage 0 record uses committed, deterministic repository inputs. It is an ev
 
 ## Task and acceptance criteria
 
-Build a controlled publish-a-post surface with a retained draft, pending publication state, and visible failure recovery. Use only public Unpopping Candy imports and documented props; keep submission, API, authentication, routing, uploads, and business policy in the application. The result must have a named main landmark, compile from packed packages, build for production, and pass its configured browser smoke assertion.
+Build a controlled publish-a-post surface with a retained draft and pending publication state. Use only public Unpopping Candy imports and documented props; keep submission, API, authentication, routing, uploads, and business policy in the application. The result must have a named main landmark, compile from packed packages, build for production, and pass its configured browser smoke assertion. Visible failure recovery is UNPROVEN by this fixture because it does not supply `error` or recovery behavior.
 
 ## Fixture and exact installed versions
 
 The committed fixture is [`fixtures/compatibility/scenarios/publish-post.tsx`](../fixtures/compatibility/scenarios/publish-post.tsx). The executed Task 7 cell was `publish-post/vite-react-19/npm-10` with Node `v22.16.0`, npm `10.9.9`, Vite `8.1.0`, React `19.2.8`, TypeScript `5.7.3`, and Playwright Chromium `151.0.7922.34`. It installed all nine Unpopping Candy packages from checksum-validated local tarballs; the catalog version was `0.2.0`.
+
+| Installed package            | Version |
+| ---------------------------- | ------- |
+| `@unpopping-candy/tokens`    | 0.1.0   |
+| `@unpopping-candy/theme`     | 0.1.0   |
+| `@unpopping-candy/icons`     | 0.1.0   |
+| `@unpopping-candy/ui`        | 0.1.0   |
+| `@unpopping-candy/social`    | 0.1.0   |
+| `@unpopping-candy/knowledge` | 0.2.0   |
+| `@unpopping-candy/registry`  | 0.2.0   |
+| `@unpopping-candy/cli`       | 0.2.0   |
+| `@unpopping-candy/mcp`       | 0.2.0   |
 
 ## Prompt
 
@@ -42,7 +54,9 @@ npm run popcandy -- compose "publish a post with pending, success, and error sta
 npm run popcandy -- validate --path . --json
 ```
 
-The committed catalog makes the relevant results deterministic: search returns `social.post-composer-view` first; `get` identifies public entrypoints `@unpopping-candy/social` and `@unpopping-candy/social/post`, controlled `value`, `pending`, `onValueChange`, and `onSubmit` props, and the story `catalog-social-post-composer-view--contract`. Validation rejects private entrypoints, invented props, hardcoded visual values, and presentation-owned remote workflows.
+The transcript was fact-checked locally on 2026-08-13. `info` reported catalog `0.2.0`, pnpm project detection, and no installed published packages in the repository root. Search returned seven results with `social.post-composer-view` first. `get` reported public entrypoints `@unpopping-candy/social` and `@unpopping-candy/social/post`, documented props including `value`, `pending`, `onValueChange`, and `onSubmit`, and story `catalog-social-post-composer-view--contract`. Compose selected documented components and the `pattern.feedback-recovery` and `pattern.form-actions` guidance, among other catalog matches; this guidance is not validator enforcement. Validate scanned the current configured source and returned zero errors and zero warnings.
+
+The implemented validator reports errors for `src`/`dist` deep imports and unknown Unpopping Candy entrypoints. It reports warnings for literal hex/RGB/HSL colors and configured generic decorative utility patterns. It does not validate invented props, failure recovery, or application-versus-presentation workflow ownership, so this record makes no such enforcement claim.
 
 ## Output diff
 
@@ -53,12 +67,12 @@ git show HEAD:fixtures/compatibility/scenarios/publish-post.tsx
 git diff --exit-code -- fixtures/compatibility/scenarios/publish-post.tsx
 ```
 
-Its observable choices are `PostComposerView` from the public social root, `UnpoppingCandyProvider` from the public theme root, application-owned `draft` and `pending` state, injected callbacks, and a named `main` landmark. This is not represented as generated output.
+Its observable choices are `PostComposerView` from the public social root, `UnpoppingCandyProvider` from the public theme root, application-owned `draft` and `pending` state, injected callbacks, and a named `main` landmark. It does not render a failure or correction path. This is not represented as generated output.
 
 ## Storybook, axe, and visual commands
 
 ```bash
-pnpm --filter @unpopping-candy/docs test -- --run
+pnpm test:storybook
 pnpm test:browser
 npm run preview:capture
 pnpm fixtures:compat -- --fixture publish-post --cell vite-react-19 --manager npm-10

@@ -1,0 +1,65 @@
+{
+  "schemaVersion": 1,
+  "sourceCommit": "616c55c7683392cc56c9798e875783dc32382ed3",
+  "runner": "scripts/run-compatibility-matrix.mjs",
+  "matrix": "fixtures/compatibility/matrix.json",
+  "plannedCells": 140,
+  "executedCells": 6,
+  "unexecutedCells": 134,
+  "runs": [
+    {
+      "id": "base/vite-react-19/pnpm-11",
+      "status": "passed",
+      "manager": "pnpm@11.21.0",
+      "framework": "vite@8.1.0",
+      "react": "19.2.8",
+      "typescript": "5.7.3",
+      "browser": "chromium@151.0.7922.34"
+    },
+    {
+      "id": "publish-post/vite-react-19/npm-10",
+      "status": "passed",
+      "manager": "npm@10.9.9",
+      "framework": "vite@8.1.0",
+      "react": "19.2.8",
+      "typescript": "5.7.3",
+      "browser": "chromium@151.0.7922.34"
+    },
+    {
+      "id": "activity-review/vite-react-19/yarn-4",
+      "status": "passed",
+      "manager": "@yarnpkg/cli-dist@4.18.0",
+      "framework": "vite@8.1.0",
+      "react": "19.2.8",
+      "typescript": "5.7.3",
+      "browser": "chromium@151.0.7922.34"
+    },
+    {
+      "id": "member-moderation/vite-react-19/pnpm-11",
+      "status": "passed",
+      "manager": "pnpm@11.21.0",
+      "framework": "vite@8.1.0",
+      "react": "19.2.8",
+      "typescript": "5.7.3",
+      "browser": "chromium@151.0.7922.34"
+    },
+    {
+      "id": "base/next-15-react-18/pnpm-10",
+      "status": "passed",
+      "manager": "pnpm@10.34.5",
+      "framework": "next@15.5.23",
+      "react": "18.3.1",
+      "typescript": "5.7.3",
+      "browser": "chromium@151.0.7922.34"
+    },
+    {
+      "id": "base/react-router-7-react-18/npm-11",
+      "status": "passed",
+      "manager": "npm@11.19.0",
+      "framework": "react-router@7.18.2",
+      "react": "18.3.1",
+      "typescript": "5.7.3",
+      "browser": "chromium@151.0.7922.34"
+    }
+  ]
+}

@@ -724,7 +724,11 @@ git commit -m "test: add packed consumer compatibility matrix"
 - Create: `docs/SUPPORT.md`
 - Create: `docs/SECURITY.md`
 - Create: `docs/VERSIONING.md`
+- Modify: `docs/STORYBOOK_AI.md`
+- Modify: `docs/PUBLISHING.md`
+- Create: `docs/evidence/stage-0-compatibility-summary.json`
 - Modify: `scripts/verify-docs.mjs`
+- Create: `scripts/lib/documentation-trust.mjs`
 - Test: `tests/architecture/markdown-contract.test.mjs`
 
 **Interfaces:**
@@ -764,7 +768,7 @@ Expected: both commands pass and README stays inside 200–300 lines.
 - [ ] **Step 5: Commit**
 
 ```bash
-git add README.md docs/AI_ASSISTED_POST_CASE_STUDY.md docs/COMPATIBILITY.md docs/ACCESSIBILITY.md docs/SUPPORT.md docs/SECURITY.md docs/VERSIONING.md scripts/verify-docs.mjs tests/architecture/markdown-contract.test.mjs
+git add README.md docs/AI_ASSISTED_POST_CASE_STUDY.md docs/COMPATIBILITY.md docs/ACCESSIBILITY.md docs/SUPPORT.md docs/SECURITY.md docs/VERSIONING.md docs/STORYBOOK_AI.md docs/PUBLISHING.md docs/evidence/stage-0-compatibility-summary.json scripts/verify-docs.mjs scripts/lib/documentation-trust.mjs tests/architecture/markdown-contract.test.mjs docs/superpowers/plans/2026-08-11-unpopping-candy-stage-0-foundation.md
 git commit -m "docs: publish adoption and trust contracts"
 ```
 
