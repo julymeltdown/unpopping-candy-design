@@ -61,6 +61,17 @@ function claims(errors, path, source, required, forbidden = []) {
       errors.push(`${path}: forbidden claim: ${pattern}`);
 }
 
+function positiveAvailability(source, subject, state) {
+  return prose(source)
+    .split(/[.\n]/)
+    .some(
+      (sentence) =>
+        subject.test(sentence) &&
+        state.test(sentence) &&
+        !/\b(?:not|none|no|without|unavailable|unpublished)\b/i.test(sentence),
+    );
+}
+
 function unique(errors, path, source, titles) {
   for (const title of titles)
     if (section(source, title).count !== 1)
@@ -93,11 +104,18 @@ function checkReadme(errors, source, context) {
     "not published to npm\0placeholder Figma mappings\0There is no remote Registry\0There is no hosted MCP service\0no public model-quality claim",
   );
   claims(errors, "README.md", source, "", [
-    /(?:packages|package candidates) (?:are|is) (?:now )?(?:available|published) (?:on|to) npm/i,
-    /remote Registry is available/i,
-    /hosted MCP service is available/i,
+    /(?:remote|cloud|hosted)[^.\n]*Registry[^.\n]*(?:available|ready|operat(?:e|ing)|live)/i,
+    /(?:hosted|web|remote)[^.\n]*MCP[^.\n]*(?:available|ready|operat(?:e|ing)|live)|operat(?:e|ing)[^.\n]*MCP[^.\n]*(?:web|remote|hosted)/i,
     /makes a public model-quality claim/i,
   ]);
+  if (
+    positiveAvailability(
+      source,
+      /(?:packages|package candidates)/i,
+      /(?:available|published|installed)[^.\n]*(?:on|from|to) npm/i,
+    )
+  )
+    errors.push("README.md: forbidden positive npm availability claim");
 }
 
 function checkCompatibility(errors, source, context) {
@@ -146,7 +164,7 @@ function checkCompatibility(errors, source, context) {
     source,
     "140 planned cells\0exactly six executed cells\0remaining 134 planned combinations were not executed\0tarball-only isolation\0pnpm@11.4.0\0./evidence/stage-0-compatibility-summary.json",
     [
-      /all (?:the )?140 (?:planned )?(?:cells|combinations) passed/i,
+      /(?:all|every one of)(?: the)? 140 (?:planned )?(?:cells|combinations)[^.\n]*passed/i,
       /remaining 134[^.\n]*passed/i,
     ],
   );
@@ -191,6 +209,7 @@ export function structuredTrustContractErrors(documents, context) {
         /all old minor lines receive fixes indefinitely/i,
         /every old minor is supported/i,
         /old minor lines receive fixes for (?:one year|12 months)/i,
+        /(?:each|every|all)[^.\n]*(?:prior|old)[^.\n]*minor[^.\n]*(?:maintenance|fixes|support)[^.\n]*(?:twelve months|12 months|one year)/i,
       ],
     ],
     [

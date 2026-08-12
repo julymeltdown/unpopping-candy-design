@@ -9,6 +9,10 @@ import {
 } from "./lib/markdown-contract.mjs";
 import { structuredTrustContractErrors } from "./lib/documentation-trust.mjs";
 import {
+  historicalJson,
+  historicalRunnerDigest,
+} from "./lib/historical-evidence.mjs";
+import {
   listFiles,
   relativePath,
   repositoryRoot,
@@ -25,28 +29,17 @@ const executedIds =
   );
 const retainedRunsDigest =
   "13760a3f53649e3ef57e2f588072cf50d745766d55fb603817db81ed8768bffc";
-
-async function gitJson(root, commit, path) {
-  const { stdout } = await execFileAsync("git", ["show", `${commit}:${path}`], {
-    cwd: root,
-    encoding: "utf8",
-    maxBuffer: 1024 * 1024,
-    timeout: 5000,
-  });
-  return JSON.parse(stdout);
-}
-
-function evidenceValidator(matrix, packages) {
+function evidenceValidator(matrix, packages, sourceCommit, runnerDigest) {
   const tarballNames = packages.map(({ name, version }) => [
     name,
     `unpopping-candy-${name.split("/")[1]}-${version}.tgz`,
   ]);
   return (evidence) => {
     // prettier-ignore
-    const headerKeys = "schemaVersion,sourceCommit,runner,matrix,plannedCells,executedCells,unexecutedCells,runs";
+    const headerKeys = "schemaVersion,sourceCommit,runnerDigest,runner,matrix,plannedCells,executedCells,unexecutedCells,runs";
     // Six exact scalar assertions remain readable as one bounded tuple.
     // prettier-ignore
-    const headerValues = [evidence.schemaVersion === 2, evidence.runner === "scripts/run-compatibility-matrix.mjs", evidence.matrix === "fixtures/compatibility/matrix.json", evidence.plannedCells === 140, evidence.executedCells === 6, evidence.unexecutedCells === 134];
+    const headerValues = [evidence.schemaVersion === 2, evidence.sourceCommit === sourceCommit, evidence.runnerDigest === runnerDigest, evidence.runner === "scripts/run-compatibility-matrix.mjs", evidence.matrix === "fixtures/compatibility/matrix.json", evidence.plannedCells === 140, evidence.executedCells === 6, evidence.unexecutedCells === 134];
     // prettier-ignore
     const ids = evidence.runs.map(({ id }) => id).sort().join();
     // prettier-ignore
@@ -112,9 +105,6 @@ export async function loadTrustContext(root) {
       path: relative(root, path),
     });
   }
-  const matrix = JSON.parse(
-    await readFile(join(root, "fixtures/compatibility/matrix.json"), "utf8"),
-  );
   const evidence = JSON.parse(
     await readFile(
       join(root, "docs/evidence/stage-0-compatibility-summary.json"),
@@ -128,19 +118,20 @@ export async function loadTrustContext(root) {
     ["merge-base", "--is-ancestor", evidence.sourceCommit, "HEAD"],
     { cwd: root, encoding: "utf8", maxBuffer: 1024, timeout: 5000 },
   );
-  const historicalMatrix = await gitJson(
+  const historicalMatrix = await historicalJson(
     root,
     evidence.sourceCommit,
     "fixtures/compatibility/matrix.json",
   );
   const historicalPackages = await Promise.all(
-    packages.map(({ path }) => gitJson(root, evidence.sourceCommit, path)),
+    packages.map(({ path }) =>
+      historicalJson(root, evidence.sourceCommit, path),
+    ),
   );
-  const names = {
-    vite: "Vite",
-    next: "Next.js",
-    "react-router": "React Router",
-  };
+  const runnerDigest = await historicalRunnerDigest(
+    root,
+    evidence.sourceCommit,
+  );
   return {
     publicPackages: packages
       .filter((entry) => !entry.private)
@@ -166,23 +157,10 @@ export async function loadTrustContext(root) {
     evidenceIsExact: evidenceValidator(
       historicalMatrix,
       historicalPackages.filter((entry) => entry.private !== true),
+      evidence.sourceCommit,
+      runnerDigest,
     ),
-    matrix,
     historicalMatrix,
-    frameworkRows: Object.entries(historicalMatrix.cells).map(([id, cell]) => [
-      id,
-      names[cell.framework],
-      cell.frameworkVersion,
-      cell.reactVersion,
-    ]),
-    managerRows: Object.entries(historicalMatrix.managers).map(
-      ([id, manager]) => [
-        id,
-        manager.package,
-        manager.version,
-        manager.nodeLinker ?? "default",
-      ],
-    ),
     evidence,
   };
 }

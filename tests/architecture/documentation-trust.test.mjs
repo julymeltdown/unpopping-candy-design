@@ -51,6 +51,11 @@ test("visible appended trust contradictions fail closed", async () => {
       (source) => `${source}\nAll 140 planned cells passed.\n`,
     ],
     [
+      "all cells passed paraphrase",
+      "docs/COMPATIBILITY.md",
+      (source) => `${source}\nEvery one of the 140 planned cells passed.\n`,
+    ],
+    [
       "eighth framework",
       "docs/COMPATIBILITY.md",
       (source) =>
@@ -66,6 +71,23 @@ test("visible appended trust contradictions fail closed", async () => {
         `${source}\n<!-- The nine public packages are not published to npm. -->\nThe nine public packages are available on npm.\n`,
     ],
     [
+      "npm installability paraphrase",
+      "README.md",
+      (source) =>
+        `${source}\nAll nine public package candidates can now be installed from npm.\n`,
+    ],
+    [
+      "cloud Registry paraphrase",
+      "README.md",
+      (source) =>
+        `${source}\nA cloud Registry endpoint is ready for consumers.\n`,
+    ],
+    [
+      "web MCP paraphrase",
+      "README.md",
+      (source) => `${source}\nWe operate an MCP server on the web.\n`,
+    ],
+    [
       "evals classified public",
       "README.md",
       (source) =>
@@ -78,6 +100,12 @@ test("visible appended trust contradictions fail closed", async () => {
       "year-long old-minor support",
       "docs/SUPPORT.md",
       (source) => `${source}\nOld minor lines receive fixes for one year.\n`,
+    ],
+    [
+      "year-long support paraphrase",
+      "docs/SUPPORT.md",
+      (source) =>
+        `${source}\nEach prior minor receives maintenance for twelve months.\n`,
     ],
     [
       "independent versions",
@@ -123,16 +151,12 @@ test("compatibility evidence stays bound to its historical source commit", async
   const { verifier, documents, context } = await fixture();
   const changed = {
     ...context,
-    matrix: structuredClone(context.matrix),
-    frameworkRows: structuredClone(context.frameworkRows),
+    historicalMatrix: structuredClone(context.historicalMatrix),
     evidence: structuredClone(context.evidence),
   };
-  for (const cell of Object.values(changed.matrix.cells)) {
+  for (const cell of Object.values(changed.historicalMatrix.cells)) {
     if (cell.framework === "vite") cell.frameworkVersion = "9.0.0";
   }
-  changed.frameworkRows = changed.frameworkRows.map((row) =>
-    row[1] === "Vite" ? [row[0], row[1], "9.0.0", row[3]] : row,
-  );
   for (const run of changed.evidence.runs) {
     if (run.framework.name === "vite") run.framework.version = "9.0.0";
   }
@@ -153,5 +177,17 @@ test("compatibility evidence stays bound to its historical source commit", async
   assert.ok(
     verifier.trustContractErrors(documents, changedDigest).length > 0,
     "a syntactically valid replacement tarball digest must fail closed",
+  );
+
+  const wrongCommit = {
+    ...context,
+    evidence: structuredClone(context.evidence),
+  };
+  wrongCommit.evidence.sourceCommit =
+    "3482eae81ac86a09dbe80755857ce9daa1aa3231";
+  assert.equal(
+    wrongCommit.evidenceIsExact(wrongCommit.evidence),
+    false,
+    "an ancestor with a different runner must not claim the retained runs",
   );
 });
