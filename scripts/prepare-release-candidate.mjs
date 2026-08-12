@@ -102,9 +102,9 @@ export async function prepareReleaseCandidate(options) {
     await run("pnpm", ["install", "--no-frozen-lockfile"], workspace);
     await run("pnpm", ["install", "--frozen-lockfile"], workspace);
     await run("pnpm", ["agent:check"], workspace);
-    await run("pnpm", ["test:pure"], workspace);
     await run("pnpm", ["typecheck"], workspace);
     await run("pnpm", ["build:packages"], workspace);
+    await run("pnpm", ["test:pure"], workspace);
     const packed = await packPublicWorkspace({
       workspaceRoot: workspace,
       outputRoot: packagesRoot,
