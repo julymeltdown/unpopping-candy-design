@@ -565,6 +565,8 @@ git commit -m "feat: bind discovery to installed compatibility"
 - Modify: `packages/evals/src/types.ts`
 - Modify: `packages/evals/src/index.ts`
 - Create: `scripts/run-model-evals.mjs`
+- Create: `scripts/lib/model-eval-contract.mjs`
+- Create: `scripts/lib/model-eval-execution.mjs`
 - Create: `.github/workflows/model-evals.yml`
 - Modify: `package.json`
 - Modify: `.gitignore`
@@ -627,7 +629,7 @@ Expected: plan lists twenty runs per task for two models and two context modes a
 - [ ] **Step 5: Commit**
 
 ```bash
-git add packages/evals/src/model-captures.ts packages/evals/src/providers.ts packages/evals/src/statistics.ts packages/evals/src/types.ts packages/evals/src/index.ts packages/evals/test/model-captures.test.ts scripts/run-model-evals.mjs .github/workflows/model-evals.yml package.json .gitignore
+git add packages/evals/src/model-captures.ts packages/evals/src/providers.ts packages/evals/src/statistics.ts packages/evals/src/types.ts packages/evals/src/index.ts packages/evals/test/model-captures.test.ts scripts/run-model-evals.mjs scripts/lib/model-eval-contract.mjs scripts/lib/model-eval-execution.mjs .github/workflows/model-evals.yml package.json .gitignore docs/superpowers/plans/2026-08-11-unpopping-candy-stage-0-foundation.md
 git commit -m "feat: add reproducible model evaluation captures"
 ```
 

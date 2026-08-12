@@ -1,0 +1,99 @@
+name: Model evaluations
+on:
+  pull_request:
+  schedule:
+    - cron: "17 3 * * *"
+  workflow_dispatch:
+permissions:
+  contents: read
+
+jobs:
+  deterministic-plan:
+    if: ${{ github.event_name == 'pull_request' }}
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: pnpm/action-setup@v4
+        with: { version: 11.4.0 }
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: pnpm
+      - name: Install locked workspace dependencies
+        run: pnpm install --frozen-lockfile
+      - name: Verify deterministic evaluation fixtures
+        run: pnpm evals:check
+      - name: Enumerate fixture-only model evaluation plan
+        run: >-
+          pnpm evals:plan --
+          --codex-model codex-fixture-model
+          --claude-model claude-fixture-model
+          --max-estimated-usd 0
+          --claude-max-budget-usd 0
+
+  approved-capture:
+    if: >-
+      ${{ github.event_name != 'pull_request' &&
+          vars.POPCANDY_MODEL_EVAL_ENABLED == 'true' }}
+    runs-on: ubuntu-latest
+    environment: model-evaluations
+    steps:
+      - uses: actions/checkout@v4
+      - uses: pnpm/action-setup@v4
+        with: { version: 11.4.0 }
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: pnpm
+      - name: Install locked workspace dependencies
+        run: pnpm install --frozen-lockfile
+      - name: Install pinned provider CLIs
+        run: >-
+          npm install --global
+          @openai/codex@0.147.0
+          @anthropic-ai/claude-code@2.1.114
+      - name: Verify pinned provider CLIs
+        run: |
+          test "$(codex --version)" = "codex-cli 0.147.0"
+          claude --version | grep -Eq '(^|[^0-9])2\.1\.114([^0-9]|$)'
+      - name: Capture approved model evaluations
+        run: >-
+          pnpm evals:run --
+          --codex-model "$POPCANDY_CODEX_MODEL"
+          --claude-model "$POPCANDY_CLAUDE_MODEL"
+          --max-estimated-usd "$POPCANDY_CODEX_MAX_ESTIMATED_USD"
+          --claude-max-budget-usd "$POPCANDY_CLAUDE_MAX_BUDGET_USD"
+          --repetitions 5
+        env:
+          POPCANDY_MODEL_EVAL_APPROVED: "true"
+          POPCANDY_CODEX_MODEL: ${{ vars.POPCANDY_CODEX_MODEL }}
+          POPCANDY_CLAUDE_MODEL: ${{ vars.POPCANDY_CLAUDE_MODEL }}
+          POPCANDY_CODEX_MAX_ESTIMATED_USD: ${{ vars.POPCANDY_CODEX_MAX_ESTIMATED_USD }}
+          POPCANDY_CLAUDE_MAX_BUDGET_USD: ${{ vars.POPCANDY_CLAUDE_MAX_BUDGET_USD }}
+          OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
+          ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
+      - name: Produce redacted public evidence
+        run: pnpm evals:report
+      - name: Encrypt restricted raw evidence
+        run: |
+          tar -C .artifacts/model-evals -czf - raw |
+            openssl enc -aes-256-cbc -pbkdf2 -salt \
+              -pass env:POPCANDY_RAW_EVIDENCE_KEY \
+              -out .artifacts/model-evals/raw-evidence.tar.gz.enc
+        env:
+          POPCANDY_RAW_EVIDENCE_KEY: ${{ secrets.POPCANDY_MODEL_EVAL_RAW_ENCRYPTION_KEY }}
+      - name: Upload sanitized evidence
+        uses: actions/upload-artifact@v4
+        with:
+          name: model-evaluations-public
+          path: .artifacts/model-evals/public
+          if-no-files-found: error
+          retention-days: 30
+      - name: Upload restricted raw evidence
+        uses: actions/upload-artifact@v4
+        with:
+          name: model-evaluations-raw-restricted
+          path: .artifacts/model-evals/raw-evidence.tar.gz.enc
+          if-no-files-found: error
+          retention-days: 7
+          include-hidden-files: true

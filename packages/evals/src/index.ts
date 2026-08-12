@@ -1,5 +1,19 @@
-export { referenceAgentScenarios } from './reference-scenarios.ts';
-export { evaluateAgentOutput, evaluateScenarioSuite } from './evaluator.ts';
+export { referenceAgentScenarios } from "./reference-scenarios.ts";
+export { evaluateAgentOutput, evaluateScenarioSuite } from "./evaluator.ts";
+export {
+  assertCompleteCaptureSet,
+  parseModelEvaluationCapture,
+  redactCapture,
+} from "./model-captures.ts";
+export {
+  assertProviderCliVersion,
+  buildClaudeCommand,
+  buildCodexCommand,
+  parseClaudeEnvelope,
+  parseCodexJsonl,
+  providerCliVersions,
+} from "./providers.ts";
+export { summarizeCaptures, wilsonInterval } from "./statistics.ts";
 export type {
   AgentContextMode,
   AgentEvaluationMetrics,
@@ -8,4 +22,12 @@ export type {
   AgentEvaluationSuite,
   AgentSourceFile,
   EvaluationFinding,
-} from './types.ts';
+  ModelEvaluationCapture,
+  ModelEvaluationContextMode,
+  ModelEvaluationProvider,
+  ModelEvaluationResult,
+  ModelEvaluationSummary,
+  ModelEvaluationSummaryGroup,
+  ProviderCaptureOutput,
+  WilsonInterval,
+} from "./types.ts";
