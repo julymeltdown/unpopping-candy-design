@@ -62,6 +62,7 @@ jobs:
           --codex-model "$POPCANDY_CODEX_MODEL"
           --claude-model "$POPCANDY_CLAUDE_MODEL"
           --max-estimated-usd "$POPCANDY_CODEX_MAX_ESTIMATED_USD"
+          --codex-worst-case-usd "$POPCANDY_CODEX_WORST_CASE_USD"
           --claude-max-budget-usd "$POPCANDY_CLAUDE_MAX_BUDGET_USD"
           --repetitions 5
         env:
@@ -69,6 +70,7 @@ jobs:
           POPCANDY_CODEX_MODEL: ${{ vars.POPCANDY_CODEX_MODEL }}
           POPCANDY_CLAUDE_MODEL: ${{ vars.POPCANDY_CLAUDE_MODEL }}
           POPCANDY_CODEX_MAX_ESTIMATED_USD: ${{ vars.POPCANDY_CODEX_MAX_ESTIMATED_USD }}
+          POPCANDY_CODEX_WORST_CASE_USD: ${{ vars.POPCANDY_CODEX_WORST_CASE_USD }}
           POPCANDY_CLAUDE_MAX_BUDGET_USD: ${{ vars.POPCANDY_CLAUDE_MAX_BUDGET_USD }}
           OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
           ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
@@ -76,10 +78,12 @@ jobs:
         run: pnpm evals:report
       - name: Encrypt restricted raw evidence
         run: |
+          test -n "$POPCANDY_RAW_EVIDENCE_KEY"
           tar -C .artifacts/model-evals -czf - raw |
             openssl enc -aes-256-cbc -pbkdf2 -salt \
               -pass env:POPCANDY_RAW_EVIDENCE_KEY \
               -out .artifacts/model-evals/raw-evidence.tar.gz.enc
+          test -s .artifacts/model-evals/raw-evidence.tar.gz.enc
         env:
           POPCANDY_RAW_EVIDENCE_KEY: ${{ secrets.POPCANDY_MODEL_EVAL_RAW_ENCRYPTION_KEY }}
       - name: Upload sanitized evidence

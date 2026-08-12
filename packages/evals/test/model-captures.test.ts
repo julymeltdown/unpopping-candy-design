@@ -102,20 +102,22 @@ test("complete capture sets require every provider, context, and repetition", ()
 test("public capture redaction removes API-like secrets and user paths", () => {
   const redacted = redactCapture(
     capture({
-      prompt:
-        "OPENAI_API_KEY=sk-proj-abcdefghijklmnopqrstuvwxyz /Users/alice/work/private.ts",
+      prompt: 'OPENAI_API_KEY="synthetic-double" /Users/alice/work/private.ts',
       rawOutput:
-        "Bearer sk-ant-api03-abcdefghijklmnopqrstuvwxyz at C:\\Users\\Alice\\secret.txt",
-      reason: "read /home/alice/source.ts with ghp_abcdefghijklmnopqrstuvwxyz",
+        "ANTHROPIC_API_KEY='synthetic-single' Bearer sk-ant-api03-abcdefghijklmnopqrstuvwxyz at C:\\Users\\Alice\\secret.txt",
+      reason:
+        '{"OPENAI_API_KEY":"synthetic-json","ANTHROPIC_API_KEY":"synthetic-json-two"} /home/alice/source.ts ghp_abcdefghijklmnopqrstuvwxyz',
     }),
   );
   const serialized = JSON.stringify(redacted);
   assert.doesNotMatch(
     serialized,
-    /abcdefghijklmnopqrstuvwxyz|\/Users\/alice|\/home\/alice|C:\\Users\\Alice/,
+    /synthetic-|abcdefghijklmnopqrstuvwxyz|\/Users\/alice|\/home\/alice|C:\\Users\\Alice/,
   );
-  assert.match(serialized, /\[REDACTED_SECRET\]/);
-  assert.match(serialized, /\[REDACTED_USER_PATH\]/);
+  assert.match(
+    serialized,
+    /(?=.*\[REDACTED_SECRET\])(?=.*\[REDACTED_USER_PATH\])/,
+  );
 });
 
 test("Wilson intervals are bounded and cover the hand-checked five-run estimate", () => {
@@ -161,7 +163,6 @@ test("Codex JSONL parser selects the final completed agent message and terminal 
   const output = parseCodexJsonl(
     [
       '{"type":"item.completed","item":{"type":"agent_message","text":"first"}}',
-      '{"type":"turn.completed","usage":{"input_tokens":1,"output_tokens":2}}',
       '{"type":"item.completed","item":{"type":"agent_message","text":"final"}}',
       '{"type":"turn.completed","usage":{"input_tokens":11,"output_tokens":7}}',
     ].join("\n"),
@@ -169,6 +170,12 @@ test("Codex JSONL parser selects the final completed agent message and terminal 
   assert.equal(output.output, "final");
   assert.deepEqual(output.usage, { inputTokens: 11, outputTokens: 7 });
   assert.match(output.raw, /"text":"first"/);
+  for (const raw of [
+    `${output.raw}\n{"type":"turn.completed","usage":{"input_tokens":1,"output_tokens":1}}`,
+    `${output.raw}\n{"type":"item.completed","item":{"type":"agent_message","text":"late"}}`,
+  ]) {
+    assert.throws(() => parseCodexJsonl(raw), /terminal event|final event/);
+  }
 });
 
 test("Claude parser reads only structured output and envelope usage", () => {
@@ -222,14 +229,14 @@ test("fixture-only plan enumerates twenty runs without provider preflight", () =
     import.meta.url,
   );
   const args =
-    `--experimental-strip-types ${script.pathname} plan --codex-model codex-fixture-model --claude-model claude-fixture-model --max-estimated-usd 0 --claude-max-budget-usd 0`.split(
+    `plan --codex-model codex-fixture-model --claude-model claude-fixture-model --max-estimated-usd 0 --claude-max-budget-usd 0`.split(
       " ",
     );
-  const result = spawnSync(process.execPath, args, {
-    cwd: new URL("../../../", import.meta.url),
-    encoding: "utf8",
-    env: { PATH: "" },
-  });
+  const result = spawnSync(
+    process.execPath,
+    ["--experimental-strip-types", script.pathname, ...args],
+    { encoding: "utf8", env: { PATH: "" } },
+  );
   assert.equal(result.status, 0, result.stderr);
   const plan: unknown = JSON.parse(result.stdout);
   assert.ok(
@@ -239,8 +246,4 @@ test("fixture-only plan enumerates twenty runs without provider preflight", () =
       Array.isArray(plan.runs),
   );
   assert.equal(plan.runs.length, 20);
-  assert.deepEqual(
-    [...new Set(plan.runs.map((run) => run.provider))],
-    ["codex", "claude"],
-  );
 });

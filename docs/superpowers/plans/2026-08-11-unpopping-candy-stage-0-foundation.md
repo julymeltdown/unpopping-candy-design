@@ -567,10 +567,12 @@ git commit -m "feat: bind discovery to installed compatibility"
 - Create: `scripts/run-model-evals.mjs`
 - Create: `scripts/lib/model-eval-contract.mjs`
 - Create: `scripts/lib/model-eval-execution.mjs`
+- Create: `scripts/lib/model-eval-reporting.mjs`
 - Create: `.github/workflows/model-evals.yml`
 - Modify: `package.json`
 - Modify: `.gitignore`
 - Test: `packages/evals/test/model-captures.test.ts`
+- Test: `packages/evals/test/model-eval-boundaries.test.ts`
 
 **Interfaces:**
 
@@ -601,7 +603,7 @@ The Codex adapter keeps these verified flags and adds an explicit full model ID:
 codex exec --ignore-user-config --ephemeral --sandbox read-only --model "$POPCANDY_CODEX_MODEL" --json --output-schema capture-schema.json -
 ```
 
-Treat Codex stdout as JSONL events: retain the raw stream, extract the final completed agent-message item as model output, and extract the terminal usage event. Codex CLI has no enforceable per-run USD flag, so `--max-estimated-usd` is explicitly an estimate; before each repetition, refuse to start when accumulated actual cost plus the configured worst-case estimate exceeds it.
+Treat Codex stdout as JSONL events: retain the raw stream, extract the final completed agent-message item as model output, and extract the terminal usage event. Codex CLI has no enforceable per-run USD flag, so `--max-estimated-usd` is explicitly an estimate. Real runs also require a positive `--codex-worst-case-usd`; before each repetition, refuse to start when accumulated usage-priced actual cost plus that independent configured worst-case exceeds the total. Use only versioned, explicitly priced full Codex model IDs and fail closed for unknown pricing before provider preflight. The Stage 0 pricing snapshot supports `gpt-5.3-codex` at $1.75 per million input tokens and $14.00 per million output tokens, conservatively treating every input token as non-cached, verified 2026-08-12 from https://developers.openai.com/api/docs/models/gpt-5.3-codex.
 
 The Claude adapter keeps these verified flags, adds the exact model and budget, reads `capture-schema.json`, passes `JSON.stringify(schema)` as the literal `--json-schema` argument, and requires `ANTHROPIC_API_KEY` because `--bare` ignores OAuth/keychain state:
 
@@ -629,7 +631,7 @@ Expected: plan lists twenty runs per task for two models and two context modes a
 - [ ] **Step 5: Commit**
 
 ```bash
-git add packages/evals/src/model-captures.ts packages/evals/src/providers.ts packages/evals/src/statistics.ts packages/evals/src/types.ts packages/evals/src/index.ts packages/evals/test/model-captures.test.ts scripts/run-model-evals.mjs scripts/lib/model-eval-contract.mjs scripts/lib/model-eval-execution.mjs .github/workflows/model-evals.yml package.json .gitignore docs/superpowers/plans/2026-08-11-unpopping-candy-stage-0-foundation.md
+git add packages/evals/src/model-captures.ts packages/evals/src/providers.ts packages/evals/src/statistics.ts packages/evals/src/types.ts packages/evals/src/index.ts packages/evals/test/model-captures.test.ts packages/evals/test/model-eval-boundaries.test.ts scripts/run-model-evals.mjs scripts/lib/model-eval-contract.mjs scripts/lib/model-eval-execution.mjs scripts/lib/model-eval-reporting.mjs .github/workflows/model-evals.yml package.json .gitignore docs/superpowers/plans/2026-08-11-unpopping-candy-stage-0-foundation.md
 git commit -m "feat: add reproducible model evaluation captures"
 ```
 

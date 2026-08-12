@@ -75,7 +75,7 @@ function numericOption(options, name) {
   return parsed;
 }
 
-function planConfiguration(options) {
+function planConfiguration(options, mode) {
   const allowed = new Set([
     "codex-model",
     "claude-model",
@@ -83,6 +83,7 @@ function planConfiguration(options) {
     "claude-max-budget-usd",
     "repetitions",
   ]);
+  if (mode === "run") allowed.add("codex-worst-case-usd");
   for (const name of Object.keys(options)) {
     if (!allowed.has(name)) fail(`Unknown option --${name}.`);
   }
@@ -100,11 +101,16 @@ function planConfiguration(options) {
   const repetitions =
     options.repetitions === undefined ? 5 : Number(options.repetitions);
   if (repetitions !== 5) fail("--repetitions must be exactly 5.");
-  return {
+  const config = {
     models: { codex: codexModel, claude: claudeModel },
     maxEstimatedUsd: numericOption(options, "max-estimated-usd"),
     claudeMaxBudgetUsd,
     repetitions,
+  };
+  if (mode !== "run") return config;
+  return {
+    ...config,
+    codexWorstCaseUsd: numericOption(options, "codex-worst-case-usd"),
   };
 }
 
@@ -119,7 +125,7 @@ export function parseModelEvaluationCommand(argv) {
       fail("evals:report accepts no options.");
     return { mode };
   }
-  return { mode, config: planConfiguration(options) };
+  return { mode, config: planConfiguration(options, mode) };
 }
 
 export function buildModelEvaluationPlan(config) {

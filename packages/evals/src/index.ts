@@ -6,9 +6,12 @@ export {
   redactCapture,
 } from "./model-captures.ts";
 export {
+  assertCodexModelPricing,
   assertProviderCliVersion,
   buildClaudeCommand,
   buildCodexCommand,
+  codexPricingSnapshot,
+  estimateCodexUsd,
   parseClaudeEnvelope,
   parseCodexJsonl,
   providerCliVersions,

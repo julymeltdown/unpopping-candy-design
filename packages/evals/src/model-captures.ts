@@ -216,7 +216,7 @@ export function assertCompleteCaptureSet(
 function redactText(value: string): string {
   return value
     .replace(
-      /\b(?:OPENAI_API_KEY|ANTHROPIC_API_KEY)\s*=\s*[^\s"'`]+/gi,
+      /["']?(?:OPENAI_API_KEY|ANTHROPIC_API_KEY)["']?\s*[:=]\s*(?:"[^"]*"|'[^']*'|[^\s,}\]]+)/gi,
       "[REDACTED_SECRET]",
     )
     .replace(/\bBearer\s+[A-Za-z0-9._-]{16,}/gi, "[REDACTED_SECRET]")

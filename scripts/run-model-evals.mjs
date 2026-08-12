@@ -2,10 +2,8 @@ import {
   buildModelEvaluationPlan,
   parseModelEvaluationCommand,
 } from "./lib/model-eval-contract.mjs";
-import {
-  reportModelEvaluations,
-  runModelEvaluations,
-} from "./lib/model-eval-execution.mjs";
+import { runModelEvaluations } from "./lib/model-eval-execution.mjs";
+import { reportModelEvaluations } from "./lib/model-eval-reporting.mjs";
 
 const command = parseModelEvaluationCommand(process.argv.slice(2));
 if (command.mode === "report") await reportModelEvaluations();

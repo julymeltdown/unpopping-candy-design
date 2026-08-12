@@ -7,6 +7,11 @@ import { bundledCatalog } from "../../packages/knowledge/src/index.ts";
 import * as evals from "../../packages/evals/src/index.ts";
 import * as contract from "./model-eval-contract.mjs";
 
+const providerCli = {
+  codex: "@openai/codex",
+  claude: "@anthropic-ai/claude-code",
+};
+
 function providerEnvironment(provider) {
   const path = process.env.PATH;
   const name = provider === "codex" ? "OPENAI_API_KEY" : "ANTHROPIC_API_KEY";
@@ -17,26 +22,25 @@ function providerEnvironment(provider) {
   return { PATH: path, [name]: credential };
 }
 
-const providerCli = {
-  codex: { name: "@openai/codex", version: "0.147.0" },
-  claude: { name: "@anthropic-ai/claude-code", version: "2.1.114" },
-};
+async function assertPathAbsent(path, label) {
+  try {
+    await fs.access(path);
+    throw new Error(`${label} already exists.`);
+  } catch (error) {
+    const missing =
+      error instanceof Error && "code" in error && error.code === "ENOENT";
+    if (!missing) throw error;
+  }
+}
 
-async function preflightProviders(environments) {
-  const task = contract.modelEvaluationTasks[0];
-  if (!task) throw new Error("At least one model evaluation task is required.");
-  return withEvaluationDirectory(task, "none", async (cwd) => {
-    for (const provider of ["codex", "claude"]) {
-      const version = runProcess(
-        provider,
-        ["--version"],
-        cwd,
-        environments[provider],
-        "",
-      );
-      evals.assertProviderCliVersion(provider, version.trim());
-    }
-  });
+function validateRunConfiguration(config) {
+  if (config.maxEstimatedUsd <= 0)
+    throw new Error("--max-estimated-usd must be positive for evals:run.");
+  if (config.codexWorstCaseUsd <= 0)
+    throw new Error("--codex-worst-case-usd must be positive for evals:run.");
+  if (config.codexWorstCaseUsd > config.maxEstimatedUsd)
+    throw new Error("Codex worst-case USD must not exceed the total USD cap.");
+  evals.assertCodexModelPricing(config.models.codex);
 }
 
 function runProcess(command, args, cwd, env, input) {
@@ -95,7 +99,10 @@ function makeCapture(run, task, input, parsed, report, estimate) {
     rawOutput: parsed.raw,
     provider: run.provider,
     model: run.model,
-    providerCli: providerCli[run.provider],
+    providerCli: {
+      name: providerCli[run.provider],
+      version: evals.providerCliVersions[run.provider],
+    },
     timestamp: new Date().toISOString(),
     evaluatorVersion: "0.2.0",
     repetition: run.repetition,
@@ -114,11 +121,8 @@ async function persistCapture(run, raw, capture) {
   const directory = new URL(relative, contract.rawCaptureRoot);
   const extension = run.provider === "codex" ? "jsonl" : "json";
   await fs.mkdir(directory, { recursive: true });
-  await fs.writeFile(
-    new URL(`${run.repetition}.${extension}`, directory),
-    raw,
-    { mode: 0o600 },
-  );
+  const rawPath = new URL(`${run.repetition}.${extension}`, directory);
+  await fs.writeFile(rawPath, raw, { mode: 0o600 });
   await fs.writeFile(
     new URL(`${run.repetition}.capture.json`, directory),
     `${JSON.stringify(capture, null, 2)}\n`,
@@ -126,7 +130,7 @@ async function persistCapture(run, raw, capture) {
   );
 }
 
-async function executeRun(run, config, codexWorstCaseUsd, environments) {
+async function executeRun(run, config, environments) {
   const task = contract.modelEvaluationTasks.find(
     ({ id }) => id === run.taskId,
   );
@@ -156,94 +160,62 @@ async function executeRun(run, config, codexWorstCaseUsd, environments) {
       files,
     });
     const estimate =
-      run.provider === "codex" ? codexWorstCaseUsd : config.claudeMaxBudgetUsd;
+      run.provider === "codex"
+        ? evals.estimateCodexUsd(run.model, parsed.usage)
+        : config.claudeMaxBudgetUsd;
     const capture = makeCapture(run, task, input, parsed, report, estimate);
     await persistCapture(run, raw, capture);
     return capture;
   });
 }
 
-async function readCaptureFiles(directory) {
-  const entries = await fs.readdir(directory, { withFileTypes: true });
-  const output = [];
-  for (const entry of entries) {
-    const relative = `${entry.name}${entry.isDirectory() ? "/" : ""}`;
-    const path = new URL(relative, directory);
-    if (entry.isDirectory()) output.push(...(await readCaptureFiles(path)));
-    else if (entry.name.endsWith(".capture.json")) {
-      output.push(JSON.parse(await fs.readFile(path, "utf8")));
+async function preflightProviders(environments) {
+  const task = contract.modelEvaluationTasks[0];
+  if (!task) throw new Error("At least one model evaluation task is required.");
+  return withEvaluationDirectory(task, "none", async (cwd) => {
+    for (const provider of ["codex", "claude"]) {
+      const version = runProcess(
+        provider,
+        ["--version"],
+        cwd,
+        environments[provider],
+        "",
+      );
+      evals.assertProviderCliVersion(provider, version.trim());
     }
-  }
-  return output;
+  });
 }
 
 export async function runModelEvaluations(config) {
-  if (process.env.POPCANDY_MODEL_EVAL_APPROVED !== "true") {
+  if (process.env.POPCANDY_MODEL_EVAL_APPROVED !== "true")
     throw new Error("POPCANDY_MODEL_EVAL_APPROVED=true is required.");
-  }
-  try {
-    await fs.access(contract.rawCaptureRoot);
-    throw new Error(
-      "Raw model evaluation directory must be empty before a run.",
-    );
-  } catch (error) {
-    const missing =
-      error instanceof Error && "code" in error && error.code === "ENOENT";
-    if (!missing) throw error;
-  }
+  validateRunConfiguration(config);
+  await assertPathAbsent(contract.rawCaptureRoot, "Raw capture directory");
   const environments = {
     codex: providerEnvironment("codex"),
     claude: providerEnvironment("claude"),
   };
   await preflightProviders(environments);
   const plan = contract.buildModelEvaluationPlan(config);
-  const codexRuns = plan.runs.filter((run) => run.provider === "codex").length;
-  const worstCase = config.maxEstimatedUsd / codexRuns;
   let accumulated = 0;
   for (const run of plan.runs) {
     if (
       run.provider === "codex" &&
-      accumulated + worstCase > config.maxEstimatedUsd + Number.EPSILON
+      accumulated + config.codexWorstCaseUsd >
+        config.maxEstimatedUsd + Number.EPSILON
     ) {
       throw new Error(
-        "Codex accumulated estimate plus the next worst-case estimate exceeds --max-estimated-usd.",
+        "Codex accumulated actual cost plus the next worst-case estimate exceeds --max-estimated-usd.",
       );
     }
-    const capture = await executeRun(run, config, worstCase, environments);
+    const capture = await executeRun(run, config, environments);
     if (run.provider === "codex") accumulated += capture.estimatedUsd;
   }
-  await fs.writeFile(
-    new URL("run-manifest.json", contract.rawCaptureRoot),
-    `${JSON.stringify(plan, null, 2)}\n`,
-    { mode: 0o600 },
-  );
+  const manifestPath = new URL("run-manifest.json", contract.rawCaptureRoot);
+  await fs.writeFile(manifestPath, `${JSON.stringify(plan, null, 2)}\n`, {
+    mode: 0o600,
+  });
   process.stdout.write(
     `${JSON.stringify({ completed: plan.runs.length, estimatedCodexUsd: accumulated }, null, 2)}\n`,
-  );
-}
-
-export async function reportModelEvaluations() {
-  const manifest = JSON.parse(
-    await fs.readFile(
-      new URL("run-manifest.json", contract.rawCaptureRoot),
-      "utf8",
-    ),
-  );
-  const captures = evals.assertCompleteCaptureSet(
-    await readCaptureFiles(contract.rawCaptureRoot),
-  );
-  contract.validateRunManifest(manifest, captures);
-  const summary = evals.summarizeCaptures(captures);
-  await fs.mkdir(contract.publicCaptureRoot, { recursive: true });
-  await fs.writeFile(
-    new URL("captures.json", contract.publicCaptureRoot),
-    `${JSON.stringify(captures.map(evals.redactCapture), null, 2)}\n`,
-  );
-  await fs.writeFile(
-    new URL("summary.json", contract.publicCaptureRoot),
-    `${JSON.stringify(summary, null, 2)}\n`,
-  );
-  process.stdout.write(
-    `${JSON.stringify({ complete: true, captures: captures.length, groups: summary.groups.length }, null, 2)}\n`,
   );
 }
