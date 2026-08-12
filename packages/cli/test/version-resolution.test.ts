@@ -17,6 +17,13 @@ async function project(dependencies: Record<string, string> = {}): Promise<strin
   return root;
 }
 
+async function pnpmSnapshot(root: string, version: string): Promise<void> {
+  await writeFile(join(root, 'pnpm-lock.yaml'), [
+    "lockfileVersion: '9.0'", 'importers:', '  .:', '    dependencies:',
+    '      "@unpopping-candy/ui":', `        version: ${version}`,
+  ].join('\n'));
+}
+
 async function installedPackage(root: string, packageName: string, version: string, esmOnly = false): Promise<void> {
   const packageDirectory = join(root, 'packages', packageName.replace('@unpopping-candy/', ''));
   const linkDirectory = join(root, 'node_modules', '@unpopping-candy');
@@ -131,14 +138,19 @@ test('resolves exact versions from a pnpm lockfile v9', async () => {
 test('strips pnpm v9 peer suffixes from exact snapshots', async () => {
   // Given
   const root = await project({ [ui]: '^0.1.0' });
-  await writeFile(join(root, 'pnpm-lock.yaml'), [
-    "lockfileVersion: '9.0'",
-    'importers:',
-    '  .:',
-    '    dependencies:',
-    '      "@unpopping-candy/ui":',
-    '        version: 0.1.4(react@19.2.8)',
-  ].join('\n'));
+  await pnpmSnapshot(root, '0.1.4(react@19.2.8)');
+
+  // When
+  const result = await resolveInstalledPopcandyVersions(root, [ui]);
+
+  // Then
+  assert.deepEqual(result.versions, { [ui]: '0.1.4' });
+});
+
+test('strips nested and repeated pnpm v9 peer contexts from exact snapshots', async () => {
+  // Given
+  const root = await project({ [ui]: '^0.1.0' });
+  await pnpmSnapshot(root, '0.1.4(react-dom@19.2.8(react@19.2.8))(react@19.2.8)');
 
   // When
   const result = await resolveInstalledPopcandyVersions(root, [ui]);
@@ -199,14 +211,15 @@ test('fails closed for unsupported and incomplete installations', async (t) => {
   const aliasRoot = await project({ [ui]: 'npm:@unpopping-candy/ui@0.1.4' });
   await writeFile(join(aliasRoot, 'package-lock.json'), JSON.stringify({ lockfileVersion: 3, packages: {} }));
   const pnpmAliasRoot = await project({ [ui]: '^0.1.0' });
-  await writeFile(join(pnpmAliasRoot, 'pnpm-lock.yaml'), [
-    "lockfileVersion: '9.0'",
-    'importers:',
-    '  .:',
-    '    dependencies:',
-    '      "@unpopping-candy/ui":',
-    '        version: link:../ui',
-  ].join('\n'));
+  await pnpmSnapshot(pnpmAliasRoot, 'link:../ui');
+  const malformedPeerRoot = await project({ [ui]: '^0.1.0' });
+  await pnpmSnapshot(malformedPeerRoot, '0.1.4(react@19.2.8');
+  const malformedPeerSuffixRoot = await project({ [ui]: '^0.1.0' });
+  await pnpmSnapshot(malformedPeerSuffixRoot, '0.1.4(react@19.2.8)garbage');
+  const emptyPeerRoot = await project({ [ui]: '^0.1.0' });
+  await pnpmSnapshot(emptyPeerRoot, '0.1.4()');
+  const nestedEmptyPeerRoot = await project({ [ui]: '^0.1.0' });
+  await pnpmSnapshot(nestedEmptyPeerRoot, '0.1.4(react@19.2.8())');
   const partialRoot = await project({ [ui]: '^0.1.0', [tokens]: '^0.1.0' });
   await writeFile(join(partialRoot, 'package-lock.json'), JSON.stringify({
     lockfileVersion: 3,
@@ -221,5 +234,9 @@ test('fails closed for unsupported and incomplete installations', async (t) => {
   await t.test('Bun lockfile only', () => expectError(resolveInstalledPopcandyVersions(bunRoot, [ui]), 'POPCANDY_LOCKFILE_UNSUPPORTED'));
   await t.test('unresolved alias', () => expectError(resolveInstalledPopcandyVersions(aliasRoot, [ui]), 'POPCANDY_LOCKFILE_UNSUPPORTED'));
   await t.test('unresolved pnpm alias', () => expectError(resolveInstalledPopcandyVersions(pnpmAliasRoot, [ui]), 'POPCANDY_LOCKFILE_UNSUPPORTED'));
+  await t.test('unbalanced pnpm peer context', () => expectError(resolveInstalledPopcandyVersions(malformedPeerRoot, [ui]), 'POPCANDY_LOCKFILE_UNSUPPORTED'));
+  await t.test('trailing pnpm peer context garbage', () => expectError(resolveInstalledPopcandyVersions(malformedPeerSuffixRoot, [ui]), 'POPCANDY_LOCKFILE_UNSUPPORTED'));
+  await t.test('empty pnpm peer context', () => expectError(resolveInstalledPopcandyVersions(emptyPeerRoot, [ui]), 'POPCANDY_LOCKFILE_UNSUPPORTED'));
+  await t.test('empty nested pnpm peer context', () => expectError(resolveInstalledPopcandyVersions(nestedEmptyPeerRoot, [ui]), 'POPCANDY_LOCKFILE_UNSUPPORTED'));
   await t.test('partial npm lockfile', () => expectError(resolveInstalledPopcandyVersions(partialRoot, [ui, tokens]), 'POPCANDY_DEPENDENCIES_NOT_INSTALLED'));
 });

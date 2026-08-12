@@ -44,8 +44,31 @@ async function readJsonRecord(path: string): Promise<JsonRecord> {
 
 function exactVersion(value: unknown): string | undefined {
   if (typeof value !== 'string') return undefined;
-  const match = /^(\d+\.\d+\.\d+(?:-[0-9A-Za-z.-]+)?)(?:\([^)]*\))?$/.exec(value);
-  return match?.[1];
+  const match = /^(\d+\.\d+\.\d+(?:-[0-9A-Za-z.-]+)?)/.exec(value);
+  if (!match) return undefined;
+  const version = match[1];
+  if (!version || !hasBalancedPeerContexts(value.slice(version.length))) return undefined;
+  return version;
+}
+
+function hasBalancedPeerContexts(suffix: string): boolean {
+  if (suffix.length === 0) return true;
+  let depth = 0;
+  let contextHasContent = false;
+  for (const character of suffix) {
+    if (character === '(') {
+      depth += 1;
+      contextHasContent = false;
+    } else if (character === ')') {
+      if (depth === 0 || !contextHasContent) return false;
+      depth -= 1;
+      contextHasContent = true;
+    } else {
+      if (depth === 0) return false;
+      contextHasContent = true;
+    }
+  }
+  return depth === 0 && contextHasContent;
 }
 
 function namesInOrder(declaredNames: readonly string[]): readonly string[] {
