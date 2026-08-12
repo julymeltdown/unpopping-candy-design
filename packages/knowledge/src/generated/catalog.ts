@@ -745,7 +745,7 @@ export const bundledCatalog = {
         "preferred": [
           {
             "title": "Injected actions",
-            "code": "<PostActions post={post} onLike={onLike} pendingAction={pending} />",
+            "code": "<PostActions metrics={post.metrics} viewerState={post.viewerState} onLike={onLike} pendingAction={pending} />",
             "reason": "Keeps mutation ownership outside the component."
           }
         ],
@@ -1111,7 +1111,7 @@ export const bundledCatalog = {
         "preferred": [
           {
             "title": "Controlled draft",
-            "code": "<PostComposerView value={draft} onChange={setDraft} onSubmit={publish} pending={pending} />",
+            "code": "<PostComposerView viewer={viewer} value={draft} onValueChange={setDraft} onSubmit={publish} pending={pending} />",
             "reason": "Leaves workflow state in the consuming app."
           }
         ],
@@ -1212,7 +1212,7 @@ export const bundledCatalog = {
         "preferred": [
           {
             "title": "Post identity",
-            "code": "<PostHeader post={post} onOpenAuthor={openAuthor} />",
+            "code": "<PostHeader author={post.author} createdAt={post.createdAt} onOpenAuthor={openAuthor} />",
             "reason": "Injects navigation behavior."
           }
         ],
@@ -1408,7 +1408,7 @@ export const bundledCatalog = {
         "preferred": [
           {
             "title": "External relationship action",
-            "code": "<ProfileHeader profile={profile} action={<FollowButton />} />",
+            "code": "<ProfileHeader profile={profile} primaryAction={<FollowButton />} />",
             "reason": "Keeps relationship behavior in the application."
           }
         ],
@@ -1635,7 +1635,7 @@ export const bundledCatalog = {
         "preferred": [
           {
             "title": "Search result",
-            "code": "<UserCell user={user} onSelect={openProfile} action={<FollowButton />} />",
+            "code": "<UserCell user={user} onSelect={openProfile} actionLabel=\"Follow\" onAction={followUser} />",
             "reason": "Separates row navigation and relationship action."
           }
         ],
@@ -2186,7 +2186,7 @@ export const bundledCatalog = {
         "preferred": [
           {
             "title": "Identity row",
-            "code": "<Avatar src={user.avatarUrl} name={user.displayName} />",
+            "code": "<Avatar src={user.avatarUrl} alt={user.displayName} fallback={user.initials} />",
             "reason": "Provides both image and fallback data."
           }
         ],
@@ -2918,7 +2918,7 @@ export const bundledCatalog = {
         "preferred": [
           {
             "title": "Toolbar action",
-            "code": "<IconButton aria-label=\"Bookmark post\"><BookmarkIcon /></IconButton>",
+            "code": "<IconButton label=\"Bookmark post\" icon={<BookmarkIcon />} />",
             "reason": "Provides a stable accessible name."
           }
         ],
@@ -3027,7 +3027,7 @@ export const bundledCatalog = {
         "preferred": [
           {
             "title": "Action row",
-            "code": "<Inline gap=\"sm\"><Button>Save</Button><Button variant=\"secondary\">Cancel</Button></Inline>",
+            "code": "<Inline gap={3}><Button>Save</Button><Button variant=\"secondary\">Cancel</Button></Inline>",
             "reason": "Groups related actions without arbitrary margins."
           }
         ],
@@ -3373,7 +3373,7 @@ export const bundledCatalog = {
         "preferred": [
           {
             "title": "Form layout",
-            "code": "<Stack gap=\"md\"><TextField /><TextArea /></Stack>",
+            "code": "<Stack gap={4}><TextField label=\"Name\" /><TextArea label=\"Biography\" /></Stack>",
             "reason": "Creates consistent vertical rhythm."
           }
         ],
@@ -3467,7 +3467,7 @@ export const bundledCatalog = {
         "preferred": [
           {
             "title": "Settings section",
-            "code": "<Surface tone=\"subtle\"><Stack>...</Stack></Surface>",
+            "code": "<Surface tone=\"muted\"><Stack>...</Stack></Surface>",
             "reason": "Adds bounded contrast to a local region."
           }
         ],
@@ -3583,7 +3583,7 @@ export const bundledCatalog = {
         "preferred": [
           {
             "title": "Profile views",
-            "code": "<Tabs value={tab} onValueChange={setTab} items={items} />",
+            "code": "<Tabs ariaLabel=\"Profile views\" value={tab} onValueChange={setTab} items={items} />",
             "reason": "Keeps selection controlled and explicit."
           }
         ],

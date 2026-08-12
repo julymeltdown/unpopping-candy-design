@@ -5,7 +5,7 @@ import figma from 'figma'
 
 export default {
   example: figma.code`
-    <Tabs value={tab} onValueChange={setTab} items={items} />
+    <Tabs ariaLabel="Profile views" value={tab} onValueChange={setTab} items={items} />
   `,
   imports: ['import { Tabs } from "@unpopping-candy/ui/tabs"'],
   id: 'ui-tabs',

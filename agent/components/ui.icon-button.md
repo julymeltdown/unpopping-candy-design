@@ -67,7 +67,7 @@ import { IconButton } from '@unpopping-candy/ui/button';
 Provides a stable accessible name.
 
 ```tsx
-<IconButton aria-label="Bookmark post"><BookmarkIcon /></IconButton>
+<IconButton label="Bookmark post" icon={<BookmarkIcon />} />
 ```
 
 ## Avoid examples

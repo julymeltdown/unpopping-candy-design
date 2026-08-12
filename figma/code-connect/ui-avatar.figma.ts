@@ -5,7 +5,7 @@ import figma from 'figma'
 
 export default {
   example: figma.code`
-    <Avatar src={user.avatarUrl} name={user.displayName} />
+    <Avatar src={user.avatarUrl} alt={user.displayName} fallback={user.initials} />
   `,
   imports: ['import { Avatar } from "@unpopping-candy/ui/avatar"'],
   id: 'ui-avatar',

@@ -62,7 +62,7 @@ import { Stack } from '@unpopping-candy/ui/layout';
 Creates consistent vertical rhythm.
 
 ```tsx
-<Stack gap="md"><TextField /><TextArea /></Stack>
+<Stack gap={4}><TextField label="Name" /><TextArea label="Biography" /></Stack>
 ```
 
 ## Avoid examples

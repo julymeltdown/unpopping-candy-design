@@ -66,7 +66,7 @@ import { ProfileHeader } from '@unpopping-candy/social/profile';
 Keeps relationship behavior in the application.
 
 ```tsx
-<ProfileHeader profile={profile} action={<FollowButton />} />
+<ProfileHeader profile={profile} primaryAction={<FollowButton />} />
 ```
 
 ## Avoid examples

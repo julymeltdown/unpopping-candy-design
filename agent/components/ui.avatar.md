@@ -65,7 +65,7 @@ import { Avatar } from '@unpopping-candy/ui/avatar';
 Provides both image and fallback data.
 
 ```tsx
-<Avatar src={user.avatarUrl} name={user.displayName} />
+<Avatar src={user.avatarUrl} alt={user.displayName} fallback={user.initials} />
 ```
 
 ## Avoid examples

@@ -5,7 +5,7 @@ import figma from 'figma'
 
 export default {
   example: figma.code`
-    <Inline gap="sm"><Button>Save</Button><Button variant="secondary">Cancel</Button></Inline>
+    <Inline gap={3}><Button>Save</Button><Button variant="secondary">Cancel</Button></Inline>
   `,
   imports: ['import { Inline } from "@unpopping-candy/ui/layout"'],
   id: 'ui-inline',

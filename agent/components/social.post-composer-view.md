@@ -73,7 +73,7 @@ import { PostComposerView } from '@unpopping-candy/social/post';
 Leaves workflow state in the consuming app.
 
 ```tsx
-<PostComposerView value={draft} onChange={setDraft} onSubmit={publish} pending={pending} />
+<PostComposerView viewer={viewer} value={draft} onValueChange={setDraft} onSubmit={publish} pending={pending} />
 ```
 
 ## Avoid examples

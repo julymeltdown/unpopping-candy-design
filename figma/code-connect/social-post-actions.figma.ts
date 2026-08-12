@@ -5,7 +5,7 @@ import figma from 'figma'
 
 export default {
   example: figma.code`
-    <PostActions post={post} onLike={onLike} pendingAction={pending} />
+    <PostActions metrics={post.metrics} viewerState={post.viewerState} onLike={onLike} pendingAction={pending} />
   `,
   imports: ['import { PostActions } from "@unpopping-candy/social/post"'],
   id: 'social-post-actions',

@@ -70,7 +70,7 @@ import { PostActions } from '@unpopping-candy/social/post';
 Keeps mutation ownership outside the component.
 
 ```tsx
-<PostActions post={post} onLike={onLike} pendingAction={pending} />
+<PostActions metrics={post.metrics} viewerState={post.viewerState} onLike={onLike} pendingAction={pending} />
 ```
 
 ## Avoid examples

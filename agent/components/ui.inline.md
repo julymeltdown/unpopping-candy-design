@@ -63,7 +63,7 @@ import { Inline } from '@unpopping-candy/ui/layout';
 Groups related actions without arbitrary margins.
 
 ```tsx
-<Inline gap="sm"><Button>Save</Button><Button variant="secondary">Cancel</Button></Inline>
+<Inline gap={3}><Button>Save</Button><Button variant="secondary">Cancel</Button></Inline>
 ```
 
 ## Avoid examples

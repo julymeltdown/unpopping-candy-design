@@ -62,7 +62,7 @@ import { Surface } from '@unpopping-candy/ui/layout';
 Adds bounded contrast to a local region.
 
 ```tsx
-<Surface tone="subtle"><Stack>...</Stack></Surface>
+<Surface tone="muted"><Stack>...</Stack></Surface>
 ```
 
 ## Avoid examples

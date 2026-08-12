@@ -483,7 +483,7 @@ import { PostActions } from '@unpopping-candy/social/post';
 Keeps mutation ownership outside the component.
 
 ```tsx
-<PostActions post={post} onLike={onLike} pendingAction={pending} />
+<PostActions metrics={post.metrics} viewerState={post.viewerState} onLike={onLike} pendingAction={pending} />
 ```
 
 ## Avoid examples
@@ -767,7 +767,7 @@ import { PostComposerView } from '@unpopping-candy/social/post';
 Leaves workflow state in the consuming app.
 
 ```tsx
-<PostComposerView value={draft} onChange={setDraft} onSubmit={publish} pending={pending} />
+<PostComposerView viewer={viewer} value={draft} onValueChange={setDraft} onSubmit={publish} pending={pending} />
 ```
 
 ## Avoid examples
@@ -854,7 +854,7 @@ import { PostHeader } from '@unpopping-candy/social/post';
 Injects navigation behavior.
 
 ```tsx
-<PostHeader post={post} onOpenAuthor={openAuthor} />
+<PostHeader author={post.author} createdAt={post.createdAt} onOpenAuthor={openAuthor} />
 ```
 
 ## Avoid examples
@@ -1030,7 +1030,7 @@ import { ProfileHeader } from '@unpopping-candy/social/profile';
 Keeps relationship behavior in the application.
 
 ```tsx
-<ProfileHeader profile={profile} action={<FollowButton />} />
+<ProfileHeader profile={profile} primaryAction={<FollowButton />} />
 ```
 
 ## Avoid examples
@@ -1213,7 +1213,7 @@ import { UserCell } from '@unpopping-candy/social/user';
 Separates row navigation and relationship action.
 
 ```tsx
-<UserCell user={user} onSelect={openProfile} action={<FollowButton />} />
+<UserCell user={user} onSelect={openProfile} actionLabel="Follow" onAction={followUser} />
 ```
 
 ## Avoid examples
@@ -1407,7 +1407,7 @@ import { Avatar } from '@unpopping-candy/ui/avatar';
 Provides both image and fallback data.
 
 ```tsx
-<Avatar src={user.avatarUrl} name={user.displayName} />
+<Avatar src={user.avatarUrl} alt={user.displayName} fallback={user.initials} />
 ```
 
 ## Avoid examples
@@ -2037,7 +2037,7 @@ import { IconButton } from '@unpopping-candy/ui/button';
 Provides a stable accessible name.
 
 ```tsx
-<IconButton aria-label="Bookmark post"><BookmarkIcon /></IconButton>
+<IconButton label="Bookmark post" icon={<BookmarkIcon />} />
 ```
 
 ## Avoid examples
@@ -2130,7 +2130,7 @@ import { Inline } from '@unpopping-candy/ui/layout';
 Groups related actions without arbitrary margins.
 
 ```tsx
-<Inline gap="sm"><Button>Save</Button><Button variant="secondary">Cancel</Button></Inline>
+<Inline gap={3}><Button>Save</Button><Button variant="secondary">Cancel</Button></Inline>
 ```
 
 ## Avoid examples
@@ -2463,7 +2463,7 @@ import { Stack } from '@unpopping-candy/ui/layout';
 Creates consistent vertical rhythm.
 
 ```tsx
-<Stack gap="md"><TextField /><TextArea /></Stack>
+<Stack gap={4}><TextField label="Name" /><TextArea label="Biography" /></Stack>
 ```
 
 ## Avoid examples
@@ -2550,7 +2550,7 @@ import { Surface } from '@unpopping-candy/ui/layout';
 Adds bounded contrast to a local region.
 
 ```tsx
-<Surface tone="subtle"><Stack>...</Stack></Surface>
+<Surface tone="muted"><Stack>...</Stack></Surface>
 ```
 
 ## Avoid examples
@@ -2643,7 +2643,7 @@ import { Tabs } from '@unpopping-candy/ui/tabs';
 Keeps selection controlled and explicit.
 
 ```tsx
-<Tabs value={tab} onValueChange={setTab} items={items} />
+<Tabs ariaLabel="Profile views" value={tab} onValueChange={setTab} items={items} />
 ```
 
 ## Avoid examples

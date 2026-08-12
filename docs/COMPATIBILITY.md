@@ -51,7 +51,7 @@ Task 7 documented exactly six executed cells:
 | base/next-15-react-18/pnpm-10           | passed |
 | base/react-router-7-react-18/npm-11     | passed |
 
-The tracked [sanitized compatibility summary](./evidence/stage-0-compatibility-summary.json) records schema version `1`, source commit, runner, exact observed versions, and status for those six runs. Those six executed cells passed install, TypeScript `5.7.3` typecheck, production build, and Playwright Chromium smoke checks with their exact expected accessible names. The remaining 134 planned combinations were not executed and are not support claims.
+The tracked [sanitized compatibility summary](./evidence/stage-0-compatibility-summary.json) records schema version `2`, its full source commit, runner, per-run Node/framework/React/TypeScript/browser versions, nine tarball names and SHA-256 digests, install/typecheck/build/smoke statuses, isolation booleans, and exact expected accessible name. Those six executed cells passed all four recorded stages. The original result locators belong to ignored local artifacts, are unavailable in the tracked summary, and are not claimed as retained evidence. The remaining 134 planned combinations were not executed and are not support claims.
 
 ## Reproducing the plan and evidence
 

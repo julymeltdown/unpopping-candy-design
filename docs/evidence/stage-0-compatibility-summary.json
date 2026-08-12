@@ -1,5 +1,5 @@
 {
-  "schemaVersion": 1,
+  "schemaVersion": 2,
   "sourceCommit": "616c55c7683392cc56c9798e875783dc32382ed3",
   "runner": "scripts/run-compatibility-matrix.mjs",
   "matrix": "fixtures/compatibility/matrix.json",
@@ -8,58 +8,482 @@
   "unexecutedCells": 134,
   "runs": [
     {
-      "id": "base/vite-react-19/pnpm-11",
-      "status": "passed",
-      "manager": "pnpm@11.21.0",
-      "framework": "vite@8.1.0",
-      "react": "19.2.8",
-      "typescript": "5.7.3",
-      "browser": "chromium@151.0.7922.34"
-    },
-    {
-      "id": "publish-post/vite-react-19/npm-10",
-      "status": "passed",
-      "manager": "npm@10.9.9",
-      "framework": "vite@8.1.0",
-      "react": "19.2.8",
-      "typescript": "5.7.3",
-      "browser": "chromium@151.0.7922.34"
-    },
-    {
       "id": "activity-review/vite-react-19/yarn-4",
       "status": "passed",
-      "manager": "@yarnpkg/cli-dist@4.18.0",
-      "framework": "vite@8.1.0",
+      "node": "v22.16.0",
+      "manager": {
+        "id": "yarn-4",
+        "package": "@yarnpkg/cli-dist",
+        "version": "4.18.0"
+      },
+      "framework": {
+        "id": "vite-react-19",
+        "name": "vite",
+        "version": "8.1.0"
+      },
       "react": "19.2.8",
       "typescript": "5.7.3",
-      "browser": "chromium@151.0.7922.34"
-    },
-    {
-      "id": "member-moderation/vite-react-19/pnpm-11",
-      "status": "passed",
-      "manager": "pnpm@11.21.0",
-      "framework": "vite@8.1.0",
-      "react": "19.2.8",
-      "typescript": "5.7.3",
-      "browser": "chromium@151.0.7922.34"
+      "browser": {
+        "name": "chromium",
+        "version": "151.0.7922.34",
+        "expectedAccessibleName": "Activity review compatibility fixture"
+      },
+      "tarballs": [
+        {
+          "packageName": "@unpopping-candy/cli",
+          "name": "unpopping-candy-cli-0.2.0.tgz",
+          "sha256": "86654f6d95acad35a06ee2a0fa5308671dd7a539b4ffae087d46116b046010a2"
+        },
+        {
+          "packageName": "@unpopping-candy/icons",
+          "name": "unpopping-candy-icons-0.1.0.tgz",
+          "sha256": "4a191d8404641622d9c13409a594990bf31a90b62bdcdec798980799823c745b"
+        },
+        {
+          "packageName": "@unpopping-candy/knowledge",
+          "name": "unpopping-candy-knowledge-0.2.0.tgz",
+          "sha256": "c6588193e500f706a2a53282fd452e5def877a881c5ad7f61eb674dc2007f48b"
+        },
+        {
+          "packageName": "@unpopping-candy/mcp",
+          "name": "unpopping-candy-mcp-0.2.0.tgz",
+          "sha256": "e56903258f8df017c65dbd99070b0db1d125606e9ce3fd1503f4ecd5310f5fa2"
+        },
+        {
+          "packageName": "@unpopping-candy/registry",
+          "name": "unpopping-candy-registry-0.2.0.tgz",
+          "sha256": "3ae7d9fa9f56f4eea7aef2f953fd4e2f3be04795405bba305e54bbd444d25374"
+        },
+        {
+          "packageName": "@unpopping-candy/social",
+          "name": "unpopping-candy-social-0.1.0.tgz",
+          "sha256": "cf2d83fa8e985e9b4a6889f8aa35d48f2eb97afcbc0ae938da4df15e5baec62a"
+        },
+        {
+          "packageName": "@unpopping-candy/theme",
+          "name": "unpopping-candy-theme-0.1.0.tgz",
+          "sha256": "0dc60f0675baf8437c4d9f78023099dc05eb20095a566692af8ed73e5fd96d5c"
+        },
+        {
+          "packageName": "@unpopping-candy/tokens",
+          "name": "unpopping-candy-tokens-0.1.0.tgz",
+          "sha256": "686af37a738379d35634895c3b8145a458121449b75f657ffd06610c494d01ec"
+        },
+        {
+          "packageName": "@unpopping-candy/ui",
+          "name": "unpopping-candy-ui-0.1.0.tgz",
+          "sha256": "9ee8f72ac7b1e441c879e40493a9fc77f1e7f174d87c8d2f084ae8272cfc676e"
+        }
+      ],
+      "stages": {
+        "install": "passed",
+        "typecheck": "passed",
+        "build": "passed",
+        "smoke": "passed"
+      },
+      "isolation": {
+        "temporaryRootOutsideWorkspace": true,
+        "tarballOnlyPublicPackages": true,
+        "workspaceAliases": false,
+        "privateImportPaths": false
+      },
+      "resultLocator": null,
+      "resultLocatorStatus": "ignored artifact locator unavailable"
     },
     {
       "id": "base/next-15-react-18/pnpm-10",
       "status": "passed",
-      "manager": "pnpm@10.34.5",
-      "framework": "next@15.5.23",
+      "node": "v22.16.0",
+      "manager": { "id": "pnpm-10", "package": "pnpm", "version": "10.34.5" },
+      "framework": {
+        "id": "next-15-react-18",
+        "name": "next",
+        "version": "15.5.23"
+      },
       "react": "18.3.1",
       "typescript": "5.7.3",
-      "browser": "chromium@151.0.7922.34"
+      "browser": {
+        "name": "chromium",
+        "version": "151.0.7922.34",
+        "expectedAccessibleName": "Base compatibility fixture"
+      },
+      "tarballs": [
+        {
+          "packageName": "@unpopping-candy/cli",
+          "name": "unpopping-candy-cli-0.2.0.tgz",
+          "sha256": "50baca84d3d895e18d2340d22fa6ab4da1a5866b1bc024989ba20513572aeee5"
+        },
+        {
+          "packageName": "@unpopping-candy/icons",
+          "name": "unpopping-candy-icons-0.1.0.tgz",
+          "sha256": "4a191d8404641622d9c13409a594990bf31a90b62bdcdec798980799823c745b"
+        },
+        {
+          "packageName": "@unpopping-candy/knowledge",
+          "name": "unpopping-candy-knowledge-0.2.0.tgz",
+          "sha256": "c6588193e500f706a2a53282fd452e5def877a881c5ad7f61eb674dc2007f48b"
+        },
+        {
+          "packageName": "@unpopping-candy/mcp",
+          "name": "unpopping-candy-mcp-0.2.0.tgz",
+          "sha256": "1335d4d0d8aa46fac358de8869e56406eaea9ff4c2e446f219fb3c903802ce0e"
+        },
+        {
+          "packageName": "@unpopping-candy/registry",
+          "name": "unpopping-candy-registry-0.2.0.tgz",
+          "sha256": "3ae7d9fa9f56f4eea7aef2f953fd4e2f3be04795405bba305e54bbd444d25374"
+        },
+        {
+          "packageName": "@unpopping-candy/social",
+          "name": "unpopping-candy-social-0.1.0.tgz",
+          "sha256": "489f1c60e64e3f6d2758c1aab66b098590b05a7ec4724a1ad7dff6a6f7993ebe"
+        },
+        {
+          "packageName": "@unpopping-candy/theme",
+          "name": "unpopping-candy-theme-0.1.0.tgz",
+          "sha256": "0dc60f0675baf8437c4d9f78023099dc05eb20095a566692af8ed73e5fd96d5c"
+        },
+        {
+          "packageName": "@unpopping-candy/tokens",
+          "name": "unpopping-candy-tokens-0.1.0.tgz",
+          "sha256": "686af37a738379d35634895c3b8145a458121449b75f657ffd06610c494d01ec"
+        },
+        {
+          "packageName": "@unpopping-candy/ui",
+          "name": "unpopping-candy-ui-0.1.0.tgz",
+          "sha256": "9ee8f72ac7b1e441c879e40493a9fc77f1e7f174d87c8d2f084ae8272cfc676e"
+        }
+      ],
+      "stages": {
+        "install": "passed",
+        "typecheck": "passed",
+        "build": "passed",
+        "smoke": "passed"
+      },
+      "isolation": {
+        "temporaryRootOutsideWorkspace": true,
+        "tarballOnlyPublicPackages": true,
+        "workspaceAliases": false,
+        "privateImportPaths": false
+      },
+      "resultLocator": null,
+      "resultLocatorStatus": "ignored artifact locator unavailable"
     },
     {
       "id": "base/react-router-7-react-18/npm-11",
       "status": "passed",
-      "manager": "npm@11.19.0",
-      "framework": "react-router@7.18.2",
+      "node": "v22.16.0",
+      "manager": { "id": "npm-11", "package": "npm", "version": "11.19.0" },
+      "framework": {
+        "id": "react-router-7-react-18",
+        "name": "react-router",
+        "version": "7.18.2"
+      },
       "react": "18.3.1",
       "typescript": "5.7.3",
-      "browser": "chromium@151.0.7922.34"
+      "browser": {
+        "name": "chromium",
+        "version": "151.0.7922.34",
+        "expectedAccessibleName": "Base compatibility fixture"
+      },
+      "tarballs": [
+        {
+          "packageName": "@unpopping-candy/cli",
+          "name": "unpopping-candy-cli-0.2.0.tgz",
+          "sha256": "50baca84d3d895e18d2340d22fa6ab4da1a5866b1bc024989ba20513572aeee5"
+        },
+        {
+          "packageName": "@unpopping-candy/icons",
+          "name": "unpopping-candy-icons-0.1.0.tgz",
+          "sha256": "4a191d8404641622d9c13409a594990bf31a90b62bdcdec798980799823c745b"
+        },
+        {
+          "packageName": "@unpopping-candy/knowledge",
+          "name": "unpopping-candy-knowledge-0.2.0.tgz",
+          "sha256": "c6588193e500f706a2a53282fd452e5def877a881c5ad7f61eb674dc2007f48b"
+        },
+        {
+          "packageName": "@unpopping-candy/mcp",
+          "name": "unpopping-candy-mcp-0.2.0.tgz",
+          "sha256": "e56903258f8df017c65dbd99070b0db1d125606e9ce3fd1503f4ecd5310f5fa2"
+        },
+        {
+          "packageName": "@unpopping-candy/registry",
+          "name": "unpopping-candy-registry-0.2.0.tgz",
+          "sha256": "3ae7d9fa9f56f4eea7aef2f953fd4e2f3be04795405bba305e54bbd444d25374"
+        },
+        {
+          "packageName": "@unpopping-candy/social",
+          "name": "unpopping-candy-social-0.1.0.tgz",
+          "sha256": "f4fed95c05241ba6f01367d9daa7e26aa1c59179fd0a2e3017c2ab84879b978f"
+        },
+        {
+          "packageName": "@unpopping-candy/theme",
+          "name": "unpopping-candy-theme-0.1.0.tgz",
+          "sha256": "0dc60f0675baf8437c4d9f78023099dc05eb20095a566692af8ed73e5fd96d5c"
+        },
+        {
+          "packageName": "@unpopping-candy/tokens",
+          "name": "unpopping-candy-tokens-0.1.0.tgz",
+          "sha256": "686af37a738379d35634895c3b8145a458121449b75f657ffd06610c494d01ec"
+        },
+        {
+          "packageName": "@unpopping-candy/ui",
+          "name": "unpopping-candy-ui-0.1.0.tgz",
+          "sha256": "9ee8f72ac7b1e441c879e40493a9fc77f1e7f174d87c8d2f084ae8272cfc676e"
+        }
+      ],
+      "stages": {
+        "install": "passed",
+        "typecheck": "passed",
+        "build": "passed",
+        "smoke": "passed"
+      },
+      "isolation": {
+        "temporaryRootOutsideWorkspace": true,
+        "tarballOnlyPublicPackages": true,
+        "workspaceAliases": false,
+        "privateImportPaths": false
+      },
+      "resultLocator": null,
+      "resultLocatorStatus": "ignored artifact locator unavailable"
+    },
+    {
+      "id": "base/vite-react-19/pnpm-11",
+      "status": "passed",
+      "node": "v22.16.0",
+      "manager": { "id": "pnpm-11", "package": "pnpm", "version": "11.21.0" },
+      "framework": {
+        "id": "vite-react-19",
+        "name": "vite",
+        "version": "8.1.0"
+      },
+      "react": "19.2.8",
+      "typescript": "5.7.3",
+      "browser": {
+        "name": "chromium",
+        "version": "151.0.7922.34",
+        "expectedAccessibleName": "Base compatibility fixture"
+      },
+      "tarballs": [
+        {
+          "packageName": "@unpopping-candy/cli",
+          "name": "unpopping-candy-cli-0.2.0.tgz",
+          "sha256": "86654f6d95acad35a06ee2a0fa5308671dd7a539b4ffae087d46116b046010a2"
+        },
+        {
+          "packageName": "@unpopping-candy/icons",
+          "name": "unpopping-candy-icons-0.1.0.tgz",
+          "sha256": "4a191d8404641622d9c13409a594990bf31a90b62bdcdec798980799823c745b"
+        },
+        {
+          "packageName": "@unpopping-candy/knowledge",
+          "name": "unpopping-candy-knowledge-0.2.0.tgz",
+          "sha256": "c6588193e500f706a2a53282fd452e5def877a881c5ad7f61eb674dc2007f48b"
+        },
+        {
+          "packageName": "@unpopping-candy/mcp",
+          "name": "unpopping-candy-mcp-0.2.0.tgz",
+          "sha256": "1335d4d0d8aa46fac358de8869e56406eaea9ff4c2e446f219fb3c903802ce0e"
+        },
+        {
+          "packageName": "@unpopping-candy/registry",
+          "name": "unpopping-candy-registry-0.2.0.tgz",
+          "sha256": "3ae7d9fa9f56f4eea7aef2f953fd4e2f3be04795405bba305e54bbd444d25374"
+        },
+        {
+          "packageName": "@unpopping-candy/social",
+          "name": "unpopping-candy-social-0.1.0.tgz",
+          "sha256": "f4fed95c05241ba6f01367d9daa7e26aa1c59179fd0a2e3017c2ab84879b978f"
+        },
+        {
+          "packageName": "@unpopping-candy/theme",
+          "name": "unpopping-candy-theme-0.1.0.tgz",
+          "sha256": "0dc60f0675baf8437c4d9f78023099dc05eb20095a566692af8ed73e5fd96d5c"
+        },
+        {
+          "packageName": "@unpopping-candy/tokens",
+          "name": "unpopping-candy-tokens-0.1.0.tgz",
+          "sha256": "686af37a738379d35634895c3b8145a458121449b75f657ffd06610c494d01ec"
+        },
+        {
+          "packageName": "@unpopping-candy/ui",
+          "name": "unpopping-candy-ui-0.1.0.tgz",
+          "sha256": "9ee8f72ac7b1e441c879e40493a9fc77f1e7f174d87c8d2f084ae8272cfc676e"
+        }
+      ],
+      "stages": {
+        "install": "passed",
+        "typecheck": "passed",
+        "build": "passed",
+        "smoke": "passed"
+      },
+      "isolation": {
+        "temporaryRootOutsideWorkspace": true,
+        "tarballOnlyPublicPackages": true,
+        "workspaceAliases": false,
+        "privateImportPaths": false
+      },
+      "resultLocator": null,
+      "resultLocatorStatus": "ignored artifact locator unavailable"
+    },
+    {
+      "id": "member-moderation/vite-react-19/pnpm-11",
+      "status": "passed",
+      "node": "v22.16.0",
+      "manager": { "id": "pnpm-11", "package": "pnpm", "version": "11.21.0" },
+      "framework": {
+        "id": "vite-react-19",
+        "name": "vite",
+        "version": "8.1.0"
+      },
+      "react": "19.2.8",
+      "typescript": "5.7.3",
+      "browser": {
+        "name": "chromium",
+        "version": "151.0.7922.34",
+        "expectedAccessibleName": "Member moderation compatibility fixture"
+      },
+      "tarballs": [
+        {
+          "packageName": "@unpopping-candy/cli",
+          "name": "unpopping-candy-cli-0.2.0.tgz",
+          "sha256": "86654f6d95acad35a06ee2a0fa5308671dd7a539b4ffae087d46116b046010a2"
+        },
+        {
+          "packageName": "@unpopping-candy/icons",
+          "name": "unpopping-candy-icons-0.1.0.tgz",
+          "sha256": "4a191d8404641622d9c13409a594990bf31a90b62bdcdec798980799823c745b"
+        },
+        {
+          "packageName": "@unpopping-candy/knowledge",
+          "name": "unpopping-candy-knowledge-0.2.0.tgz",
+          "sha256": "c6588193e500f706a2a53282fd452e5def877a881c5ad7f61eb674dc2007f48b"
+        },
+        {
+          "packageName": "@unpopping-candy/mcp",
+          "name": "unpopping-candy-mcp-0.2.0.tgz",
+          "sha256": "da5a5e005155dd20f5d353295bd28c977bd4f5764a7fc03e03fc21ef164748d3"
+        },
+        {
+          "packageName": "@unpopping-candy/registry",
+          "name": "unpopping-candy-registry-0.2.0.tgz",
+          "sha256": "3ae7d9fa9f56f4eea7aef2f953fd4e2f3be04795405bba305e54bbd444d25374"
+        },
+        {
+          "packageName": "@unpopping-candy/social",
+          "name": "unpopping-candy-social-0.1.0.tgz",
+          "sha256": "cf2d83fa8e985e9b4a6889f8aa35d48f2eb97afcbc0ae938da4df15e5baec62a"
+        },
+        {
+          "packageName": "@unpopping-candy/theme",
+          "name": "unpopping-candy-theme-0.1.0.tgz",
+          "sha256": "0dc60f0675baf8437c4d9f78023099dc05eb20095a566692af8ed73e5fd96d5c"
+        },
+        {
+          "packageName": "@unpopping-candy/tokens",
+          "name": "unpopping-candy-tokens-0.1.0.tgz",
+          "sha256": "686af37a738379d35634895c3b8145a458121449b75f657ffd06610c494d01ec"
+        },
+        {
+          "packageName": "@unpopping-candy/ui",
+          "name": "unpopping-candy-ui-0.1.0.tgz",
+          "sha256": "9ee8f72ac7b1e441c879e40493a9fc77f1e7f174d87c8d2f084ae8272cfc676e"
+        }
+      ],
+      "stages": {
+        "install": "passed",
+        "typecheck": "passed",
+        "build": "passed",
+        "smoke": "passed"
+      },
+      "isolation": {
+        "temporaryRootOutsideWorkspace": true,
+        "tarballOnlyPublicPackages": true,
+        "workspaceAliases": false,
+        "privateImportPaths": false
+      },
+      "resultLocator": null,
+      "resultLocatorStatus": "ignored artifact locator unavailable"
+    },
+    {
+      "id": "publish-post/vite-react-19/npm-10",
+      "status": "passed",
+      "node": "v22.16.0",
+      "manager": { "id": "npm-10", "package": "npm", "version": "10.9.9" },
+      "framework": {
+        "id": "vite-react-19",
+        "name": "vite",
+        "version": "8.1.0"
+      },
+      "react": "19.2.8",
+      "typescript": "5.7.3",
+      "browser": {
+        "name": "chromium",
+        "version": "151.0.7922.34",
+        "expectedAccessibleName": "Publish post compatibility fixture"
+      },
+      "tarballs": [
+        {
+          "packageName": "@unpopping-candy/cli",
+          "name": "unpopping-candy-cli-0.2.0.tgz",
+          "sha256": "86654f6d95acad35a06ee2a0fa5308671dd7a539b4ffae087d46116b046010a2"
+        },
+        {
+          "packageName": "@unpopping-candy/icons",
+          "name": "unpopping-candy-icons-0.1.0.tgz",
+          "sha256": "4a191d8404641622d9c13409a594990bf31a90b62bdcdec798980799823c745b"
+        },
+        {
+          "packageName": "@unpopping-candy/knowledge",
+          "name": "unpopping-candy-knowledge-0.2.0.tgz",
+          "sha256": "c6588193e500f706a2a53282fd452e5def877a881c5ad7f61eb674dc2007f48b"
+        },
+        {
+          "packageName": "@unpopping-candy/mcp",
+          "name": "unpopping-candy-mcp-0.2.0.tgz",
+          "sha256": "da5a5e005155dd20f5d353295bd28c977bd4f5764a7fc03e03fc21ef164748d3"
+        },
+        {
+          "packageName": "@unpopping-candy/registry",
+          "name": "unpopping-candy-registry-0.2.0.tgz",
+          "sha256": "3ae7d9fa9f56f4eea7aef2f953fd4e2f3be04795405bba305e54bbd444d25374"
+        },
+        {
+          "packageName": "@unpopping-candy/social",
+          "name": "unpopping-candy-social-0.1.0.tgz",
+          "sha256": "489f1c60e64e3f6d2758c1aab66b098590b05a7ec4724a1ad7dff6a6f7993ebe"
+        },
+        {
+          "packageName": "@unpopping-candy/theme",
+          "name": "unpopping-candy-theme-0.1.0.tgz",
+          "sha256": "0dc60f0675baf8437c4d9f78023099dc05eb20095a566692af8ed73e5fd96d5c"
+        },
+        {
+          "packageName": "@unpopping-candy/tokens",
+          "name": "unpopping-candy-tokens-0.1.0.tgz",
+          "sha256": "686af37a738379d35634895c3b8145a458121449b75f657ffd06610c494d01ec"
+        },
+        {
+          "packageName": "@unpopping-candy/ui",
+          "name": "unpopping-candy-ui-0.1.0.tgz",
+          "sha256": "d21459ca16d93a78f6d2011b28ea994a7620b3f50b04dd27ba2fa6e7193cd348"
+        }
+      ],
+      "stages": {
+        "install": "passed",
+        "typecheck": "passed",
+        "build": "passed",
+        "smoke": "passed"
+      },
+      "isolation": {
+        "temporaryRootOutsideWorkspace": true,
+        "tarballOnlyPublicPackages": true,
+        "workspaceAliases": false,
+        "privateImportPaths": false
+      },
+      "resultLocator": null,
+      "resultLocatorStatus": "ignored artifact locator unavailable"
     }
   ]
 }

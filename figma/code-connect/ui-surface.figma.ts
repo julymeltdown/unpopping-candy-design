@@ -5,7 +5,7 @@ import figma from 'figma'
 
 export default {
   example: figma.code`
-    <Surface tone="subtle"><Stack>...</Stack></Surface>
+    <Surface tone="muted"><Stack>...</Stack></Surface>
   `,
   imports: ['import { Surface } from "@unpopping-candy/ui/layout"'],
   id: 'ui-surface',

@@ -5,7 +5,7 @@ import figma from 'figma'
 
 export default {
   example: figma.code`
-    <PostHeader post={post} onOpenAuthor={openAuthor} />
+    <PostHeader author={post.author} createdAt={post.createdAt} onOpenAuthor={openAuthor} />
   `,
   imports: ['import { PostHeader } from "@unpopping-candy/social/post"'],
   id: 'social-post-header',

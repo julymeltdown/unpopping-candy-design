@@ -68,7 +68,7 @@ import { Tabs } from '@unpopping-candy/ui/tabs';
 Keeps selection controlled and explicit.
 
 ```tsx
-<Tabs value={tab} onValueChange={setTab} items={items} />
+<Tabs ariaLabel="Profile views" value={tab} onValueChange={setTab} items={items} />
 ```
 
 ## Avoid examples

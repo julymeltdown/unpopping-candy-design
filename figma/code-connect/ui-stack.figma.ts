@@ -5,7 +5,7 @@ import figma from 'figma'
 
 export default {
   example: figma.code`
-    <Stack gap="md"><TextField /><TextArea /></Stack>
+    <Stack gap={4}><TextField label="Name" /><TextArea label="Biography" /></Stack>
   `,
   imports: ['import { Stack } from "@unpopping-candy/ui/layout"'],
   id: 'ui-stack',

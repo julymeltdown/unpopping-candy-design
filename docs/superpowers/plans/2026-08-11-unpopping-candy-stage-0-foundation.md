@@ -726,10 +726,27 @@ git commit -m "test: add packed consumer compatibility matrix"
 - Create: `docs/VERSIONING.md`
 - Modify: `docs/STORYBOOK_AI.md`
 - Modify: `docs/PUBLISHING.md`
+- Modify: `docs/CLI.md`
 - Create: `docs/evidence/stage-0-compatibility-summary.json`
 - Modify: `scripts/verify-docs.mjs`
 - Create: `scripts/lib/documentation-trust.mjs`
 - Test: `tests/architecture/markdown-contract.test.mjs`
+- Test: `tests/architecture/documentation-trust.test.mjs`
+- Modify: `packages/social/src/post-composer/post-composer-view.docs.ts`
+- Modify: `packages/social/src/post-card/post-actions.docs.ts`
+- Modify: `packages/ui/src/inline/inline.docs.ts`
+- Modify: `packages/ui/src/tabs/tabs.docs.ts`
+- Modify: `packages/social/src/post-card/post-header.docs.ts`
+- Modify: `packages/social/src/profile/profile-header.docs.ts`
+- Modify: `packages/social/src/user-cell/user-cell.docs.ts`
+- Modify: `packages/ui/src/avatar/avatar.docs.ts`
+- Modify: `packages/ui/src/icon-button/icon-button.docs.ts`
+- Modify: `packages/ui/src/stack/stack.docs.ts`
+- Modify: `packages/ui/src/surface/surface.docs.ts`
+- Modify: `packages/registry/templates/social-feed-page/src/social-feed-page.tsx`
+- Modify: `packages/registry/templates/moderation-workspace/src/moderation-workspace.tsx`
+- Modify: `packages/knowledge/test/generated-catalog.test.ts`
+- Modify (generator-owned output only): `agent/components/*.md`, `agent/llms-full.txt`, `agent/manifests/{build,catalog,compatibility,components,registry}.json`, `figma/code-connect/*.figma.ts`, `packages/knowledge/src/generated/{catalog,compatibility}.ts`, `packages/registry/src/registry.json`
 
 **Interfaces:**
 
@@ -746,7 +763,7 @@ Expected: FAIL because README is 1,363 lines and policy files are absent.
 
 - [ ] **Step 2: Write the concise landing page**
 
-Keep the overview image, use one copy-paste Vite quickstart, explain what application code still owns, link Storybook/catalog/case-study evidence, distinguish currently shipped components from Stages 1–3, and list all nine public packages plus two private tools. Do not claim npm availability, public Figma mappings, remote Registry, hosted MCP, or real-model results until corresponding evidence exists.
+Keep the overview image, use one copy-paste Vite quickstart, explain what application code still owns, link Storybook/catalog/case-study evidence, distinguish repository-implemented components from Stages 1–3, and list all nine public packages plus two private tools. Do not claim npm availability, public Figma mappings, remote Registry, hosted MCP, or real-model results until corresponding evidence exists.
 
 - [ ] **Step 3: Record the local AI-assisted publish-a-post slice**
 
@@ -768,8 +785,8 @@ Expected: both commands pass and README stays inside 200–300 lines.
 - [ ] **Step 5: Commit**
 
 ```bash
-git add README.md docs/AI_ASSISTED_POST_CASE_STUDY.md docs/COMPATIBILITY.md docs/ACCESSIBILITY.md docs/SUPPORT.md docs/SECURITY.md docs/VERSIONING.md docs/STORYBOOK_AI.md docs/PUBLISHING.md docs/evidence/stage-0-compatibility-summary.json scripts/verify-docs.mjs scripts/lib/documentation-trust.mjs tests/architecture/markdown-contract.test.mjs docs/superpowers/plans/2026-08-11-unpopping-candy-stage-0-foundation.md
-git commit -m "docs: publish adoption and trust contracts"
+git add README.md docs/AI_ASSISTED_POST_CASE_STUDY.md docs/COMPATIBILITY.md docs/ACCESSIBILITY.md docs/SUPPORT.md docs/SECURITY.md docs/VERSIONING.md docs/STORYBOOK_AI.md docs/PUBLISHING.md docs/CLI.md docs/evidence/stage-0-compatibility-summary.json scripts/verify-docs.mjs scripts/lib/documentation-trust.mjs tests/architecture/markdown-contract.test.mjs tests/architecture/documentation-trust.test.mjs packages/social/src/post-composer/post-composer-view.docs.ts packages/social/src/post-card/post-actions.docs.ts packages/social/src/post-card/post-header.docs.ts packages/social/src/profile/profile-header.docs.ts packages/social/src/user-cell/user-cell.docs.ts packages/ui/src/avatar/avatar.docs.ts packages/ui/src/icon-button/icon-button.docs.ts packages/ui/src/inline/inline.docs.ts packages/ui/src/stack/stack.docs.ts packages/ui/src/surface/surface.docs.ts packages/ui/src/tabs/tabs.docs.ts packages/registry/templates/social-feed-page/src/social-feed-page.tsx packages/registry/templates/moderation-workspace/src/moderation-workspace.tsx packages/knowledge/test/generated-catalog.test.ts agent/components/*.md agent/llms-full.txt agent/manifests/{build,catalog,compatibility,components,registry}.json figma/code-connect/*.figma.ts packages/knowledge/src/generated/{catalog,compatibility}.ts packages/registry/src/registry.json docs/superpowers/plans/2026-08-11-unpopping-candy-stage-0-foundation.md
+git commit -m "fix: verify published contracts"
 ```
 
 ### Task 9: Enforce MIT, bundle, namespace, and brand gates

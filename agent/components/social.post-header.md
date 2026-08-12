@@ -61,7 +61,7 @@ import { PostHeader } from '@unpopping-candy/social/post';
 Injects navigation behavior.
 
 ```tsx
-<PostHeader post={post} onOpenAuthor={openAuthor} />
+<PostHeader author={post.author} createdAt={post.createdAt} onOpenAuthor={openAuthor} />
 ```
 
 ## Avoid examples

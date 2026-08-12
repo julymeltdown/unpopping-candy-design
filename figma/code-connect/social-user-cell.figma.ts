@@ -5,7 +5,7 @@ import figma from 'figma'
 
 export default {
   example: figma.code`
-    <UserCell user={user} onSelect={openProfile} action={<FollowButton />} />
+    <UserCell user={user} onSelect={openProfile} actionLabel="Follow" onAction={followUser} />
   `,
   imports: ['import { UserCell } from "@unpopping-candy/social/user"'],
   id: 'social-user-cell',

@@ -41,7 +41,7 @@
       "version": "0.2.0"
     },
     {
-      "digest": "8795bb12e531db33e93042d17da8e33f0777b73f312607d26e103a0d5ffda9b5",
+      "digest": "1a4eefe84506daaa17def26e469f1f157e17285a2bba2e91f3f1f6eb8e3e3694",
       "files": [
         {
           "bytes": 766,
@@ -51,8 +51,8 @@
           "source": "packages/registry/templates/moderation-workspace/src/moderation-workspace.css"
         },
         {
-          "bytes": 2012,
-          "digest": "08d0559d5f5f57ae28978d4195745e4c515a41c7a7a0faa673961fcf90d81995",
+          "bytes": 2569,
+          "digest": "e240e2175c1f411fcd3c30cedb00a5e779c67d44af64afdbf9306f8450e28c26",
           "path": "src/moderation-workspace.tsx",
           "role": "Moderation workspace composition",
           "source": "packages/registry/templates/moderation-workspace/src/moderation-workspace.tsx"
@@ -94,7 +94,7 @@
       "version": "0.2.0"
     },
     {
-      "digest": "7a378efa8fbc6acbccad925576f20a0e211ae7f92ef22ec1a6f19efa6495a6f7",
+      "digest": "6cac49d20a552930dc997f626d9aada3cd39522a9934d6697bf2af98860901d8",
       "files": [
         {
           "bytes": 432,
@@ -104,8 +104,8 @@
           "source": "packages/registry/templates/social-feed-page/src/social-feed-page.css"
         },
         {
-          "bytes": 1377,
-          "digest": "3651277f539baa241b90bcbbb56773d0dd05ada5635492c0cca0f498ee99a5de",
+          "bytes": 1824,
+          "digest": "53f1198f351ef5a71b64db371c3c1fe3c7c383cc41e44c7bdad4a4cda60dc7ef",
           "path": "src/social-feed-page.tsx",
           "role": "Feed page composition",
           "source": "packages/registry/templates/social-feed-page/src/social-feed-page.tsx"

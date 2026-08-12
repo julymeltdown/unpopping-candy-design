@@ -95,16 +95,17 @@ npm run popcandy -- validate --path apps/playground --json
 
 Current checks include:
 
-- private or unknown Unpopping Candy imports;
-- source and `dist` deep imports;
-- hardcoded visual values that bypass tokens;
-- required style setup and project metadata through `doctor`.
+- errors for source/`dist` deep imports and unknown Unpopping Candy entrypoints;
+- warnings for literal hex, RGB, or HSL colors;
+- warnings for configured generic decorative utility patterns.
 
 Validation output uses stable issue codes, severity, file, line, message, and guidance.
+It does not type-check component props or enforce application workflow guidance.
 
 ### `doctor`
 
 Reports installation and configuration prerequisites without modifying the project.
+Use `info` and `doctor` for project-detection and required-style-setup recommendations; those recommendations are not `validate` enforcement.
 
 ```bash
 npm run popcandy -- doctor --path . --json

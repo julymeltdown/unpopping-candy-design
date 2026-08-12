@@ -5,7 +5,7 @@ import figma from 'figma'
 
 export default {
   example: figma.code`
-    <ProfileHeader profile={profile} action={<FollowButton />} />
+    <ProfileHeader profile={profile} primaryAction={<FollowButton />} />
   `,
   imports: ['import { ProfileHeader } from "@unpopping-candy/social/profile"'],
   id: 'social-profile-header',

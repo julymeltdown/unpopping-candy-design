@@ -5,7 +5,7 @@ import figma from 'figma'
 
 export default {
   example: figma.code`
-    <IconButton aria-label="Bookmark post"><BookmarkIcon /></IconButton>
+    <IconButton label="Bookmark post" icon={<BookmarkIcon />} />
   `,
   imports: ['import { IconButton } from "@unpopping-candy/ui/button"'],
   id: 'ui-icon-button',

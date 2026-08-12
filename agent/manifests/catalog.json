@@ -638,7 +638,7 @@
         "avoid": [],
         "preferred": [
           {
-            "code": "<PostActions post={post} onLike={onLike} pendingAction={pending} />",
+            "code": "<PostActions metrics={post.metrics} viewerState={post.viewerState} onLike={onLike} pendingAction={pending} />",
             "reason": "Keeps mutation ownership outside the component.",
             "title": "Injected actions"
           }
@@ -995,7 +995,7 @@
         "avoid": [],
         "preferred": [
           {
-            "code": "<PostComposerView value={draft} onChange={setDraft} onSubmit={publish} pending={pending} />",
+            "code": "<PostComposerView viewer={viewer} value={draft} onValueChange={setDraft} onSubmit={publish} pending={pending} />",
             "reason": "Leaves workflow state in the consuming app.",
             "title": "Controlled draft"
           }
@@ -1132,7 +1132,7 @@
         "avoid": [],
         "preferred": [
           {
-            "code": "<PostHeader post={post} onOpenAuthor={openAuthor} />",
+            "code": "<PostHeader author={post.author} createdAt={post.createdAt} onOpenAuthor={openAuthor} />",
             "reason": "Injects navigation behavior.",
             "title": "Post identity"
           }
@@ -1325,7 +1325,7 @@
         "avoid": [],
         "preferred": [
           {
-            "code": "<ProfileHeader profile={profile} action={<FollowButton />} />",
+            "code": "<ProfileHeader profile={profile} primaryAction={<FollowButton />} />",
             "reason": "Keeps relationship behavior in the application.",
             "title": "External relationship action"
           }
@@ -1552,7 +1552,7 @@
         "avoid": [],
         "preferred": [
           {
-            "code": "<UserCell user={user} onSelect={openProfile} action={<FollowButton />} />",
+            "code": "<UserCell user={user} onSelect={openProfile} actionLabel=\"Follow\" onAction={followUser} />",
             "reason": "Separates row navigation and relationship action.",
             "title": "Search result"
           }
@@ -2104,7 +2104,7 @@
         "avoid": [],
         "preferred": [
           {
-            "code": "<Avatar src={user.avatarUrl} name={user.displayName} />",
+            "code": "<Avatar src={user.avatarUrl} alt={user.displayName} fallback={user.initials} />",
             "reason": "Provides both image and fallback data.",
             "title": "Identity row"
           }
@@ -2842,7 +2842,7 @@
         ],
         "preferred": [
           {
-            "code": "<IconButton aria-label=\"Bookmark post\"><BookmarkIcon /></IconButton>",
+            "code": "<IconButton label=\"Bookmark post\" icon={<BookmarkIcon />} />",
             "reason": "Provides a stable accessible name.",
             "title": "Toolbar action"
           }
@@ -2946,7 +2946,7 @@
         "avoid": [],
         "preferred": [
           {
-            "code": "<Inline gap=\"sm\"><Button>Save</Button><Button variant=\"secondary\">Cancel</Button></Inline>",
+            "code": "<Inline gap={3}><Button>Save</Button><Button variant=\"secondary\">Cancel</Button></Inline>",
             "reason": "Groups related actions without arbitrary margins.",
             "title": "Action row"
           }
@@ -3299,7 +3299,7 @@
         "avoid": [],
         "preferred": [
           {
-            "code": "<Stack gap=\"md\"><TextField /><TextArea /></Stack>",
+            "code": "<Stack gap={4}><TextField label=\"Name\" /><TextArea label=\"Biography\" /></Stack>",
             "reason": "Creates consistent vertical rhythm.",
             "title": "Form layout"
           }
@@ -3396,7 +3396,7 @@
         "avoid": [],
         "preferred": [
           {
-            "code": "<Surface tone=\"subtle\"><Stack>...</Stack></Surface>",
+            "code": "<Surface tone=\"muted\"><Stack>...</Stack></Surface>",
             "reason": "Adds bounded contrast to a local region.",
             "title": "Settings section"
           }
@@ -3491,7 +3491,7 @@
         "avoid": [],
         "preferred": [
           {
-            "code": "<Tabs value={tab} onValueChange={setTab} items={items} />",
+            "code": "<Tabs ariaLabel=\"Profile views\" value={tab} onValueChange={setTab} items={items} />",
             "reason": "Keeps selection controlled and explicit.",
             "title": "Profile views"
           }

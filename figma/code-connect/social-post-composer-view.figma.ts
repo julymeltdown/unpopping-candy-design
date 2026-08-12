@@ -5,7 +5,7 @@ import figma from 'figma'
 
 export default {
   example: figma.code`
-    <PostComposerView value={draft} onChange={setDraft} onSubmit={publish} pending={pending} />
+    <PostComposerView viewer={viewer} value={draft} onValueChange={setDraft} onSubmit={publish} pending={pending} />
   `,
   imports: ['import { PostComposerView } from "@unpopping-candy/social/post"'],
   id: 'social-post-composer-view',
