@@ -17,12 +17,14 @@ async function project(dependencies: Record<string, string> = {}): Promise<strin
   return root;
 }
 
-async function installedPackage(root: string, packageName: string, version: string): Promise<void> {
+async function installedPackage(root: string, packageName: string, version: string, esmOnly = false): Promise<void> {
   const packageDirectory = join(root, 'packages', packageName.replace('@unpopping-candy/', ''));
   const linkDirectory = join(root, 'node_modules', '@unpopping-candy');
   await mkdir(packageDirectory, { recursive: true });
   await mkdir(linkDirectory, { recursive: true });
-  await writeFile(join(packageDirectory, 'package.json'), JSON.stringify({ name: packageName, version }));
+  await writeFile(join(packageDirectory, 'package.json'), JSON.stringify(esmOnly
+    ? { name: packageName, version, type: 'module', exports: { '.': { types: './dist/index.d.ts', import: './dist/index.js' } } }
+    : { name: packageName, version }));
   await writeFile(join(packageDirectory, 'index.js'), 'export {};\n');
   await symlink(packageDirectory, join(linkDirectory, packageName.replace('@unpopping-candy/', '')));
 }
@@ -51,6 +53,22 @@ test('resolves exact versions from symlinked package manifests', async () => {
       await realpath(join(root, 'packages', 'tokens', 'package.json')),
       await realpath(join(root, 'packages', 'ui', 'package.json')),
     ],
+  });
+});
+
+test('resolves ESM-only symlinked package manifests after CommonJS resolution rejects exports', async () => {
+  // Given
+  const root = await project({ [ui]: '^0.1.0' });
+  await installedPackage(root, ui, '0.1.4', true);
+
+  // When
+  const result = await resolveInstalledPopcandyVersions(root, [ui]);
+
+  // Then
+  assert.deepEqual(result, {
+    versions: { [ui]: '0.1.4' },
+    source: 'manifest',
+    evidencePaths: [await realpath(join(root, 'packages', 'ui', 'package.json'))],
   });
 });
 
@@ -101,6 +119,25 @@ test('resolves exact versions from a pnpm lockfile v9', async () => {
     source: 'pnpm-lock-v9',
     evidencePaths: [join(root, 'pnpm-lock.yaml')],
   });
+});
+
+test('strips pnpm v9 peer suffixes from exact snapshots', async () => {
+  // Given
+  const root = await project({ [ui]: '^0.1.0' });
+  await writeFile(join(root, 'pnpm-lock.yaml'), [
+    "lockfileVersion: '9.0'",
+    'importers:',
+    '  .:',
+    '    dependencies:',
+    '      "@unpopping-candy/ui":',
+    '        version: 0.1.4(react@19.2.8)',
+  ].join('\n'));
+
+  // When
+  const result = await resolveInstalledPopcandyVersions(root, [ui]);
+
+  // Then
+  assert.deepEqual(result.versions, { [ui]: '0.1.4' });
 });
 
 test('uses materialized Yarn Berry node modules before a Yarn lockfile', async () => {

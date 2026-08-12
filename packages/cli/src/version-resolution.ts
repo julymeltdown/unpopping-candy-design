@@ -1,4 +1,4 @@
-import { access, readFile } from 'node:fs/promises';
+import { access, readFile, realpath } from 'node:fs/promises';
 import { createRequire } from 'node:module';
 import { dirname, join, parse, resolve } from 'node:path';
 import { parseDocument } from 'yaml';
@@ -20,6 +20,10 @@ function isRecord(value: unknown): value is JsonRecord {
 
 function isNodeError(value: unknown, code: string): boolean {
   return value instanceof Error && isRecord(value) && value.code === code;
+}
+
+function isEsmOnlyResolutionError(value: unknown): boolean {
+  return isNodeError(value, 'ERR_PACKAGE_PATH_NOT_EXPORTED') || isNodeError(value, 'ERR_PACKAGE_IMPORT_NOT_DEFINED');
 }
 
 async function pathExists(path: string): Promise<boolean> {
@@ -62,6 +66,14 @@ async function findPackageManifest(entryPath: string, packageName: string): Prom
   }
 }
 
+async function findInstalledPackageManifest(root: string, packageName: string): Promise<string | undefined> {
+  const installedManifestPath = join(root, 'node_modules', packageName, 'package.json');
+  if (!(await pathExists(installedManifestPath))) return undefined;
+  const manifestPath = await realpath(installedManifestPath);
+  const manifest = await readJsonRecord(manifestPath);
+  return manifest.name === packageName && typeof manifest.version === 'string' ? manifestPath : undefined;
+}
+
 async function resolveManifestVersions(root: string, names: readonly string[]): Promise<InstalledPopcandyVersions | undefined> {
   const requireFromRoot = createRequire(join(root, 'package.json'));
   const evidence: string[] = [];
@@ -72,6 +84,15 @@ async function resolveManifestVersions(root: string, names: readonly string[]): 
       entryPath = requireFromRoot.resolve(packageName);
     } catch (error) {
       if (isNodeError(error, 'MODULE_NOT_FOUND')) return undefined;
+      if (isEsmOnlyResolutionError(error)) {
+        const manifestPath = await findInstalledPackageManifest(root, packageName);
+        if (!manifestPath) return undefined;
+        const manifest = await readJsonRecord(manifestPath);
+        if (typeof manifest.version !== 'string') return undefined;
+        versions[packageName] = manifest.version;
+        evidence.push(manifestPath);
+        continue;
+      }
       throw error;
     }
     const manifestPath = await findPackageManifest(entryPath, packageName);
