@@ -1,21 +1,39 @@
 import { access, readFile } from 'node:fs/promises';
 import { dirname, join, parse, resolve } from 'node:path';
+import { PopcandyProjectError } from './project-errors.ts';
 import type { PopcandyProjectInfo } from './types.ts';
+import { resolveInstalledPopcandyVersions } from './version-resolution.ts';
 
-async function exists(path: string): Promise<boolean> {
-  try { await access(path); return true; } catch { return false; }
+function isNodeError(value: unknown, code: string): boolean {
+  return value instanceof Error && typeof value === 'object' && 'code' in value && value.code === code;
 }
 
-async function readJson(path: string): Promise<Record<string, unknown>> {
-  return JSON.parse(await readFile(path, 'utf8')) as Record<string, unknown>;
+async function exists(path: string): Promise<boolean> {
+  try {
+    await access(path);
+    return true;
+  } catch (error) {
+    if (isNodeError(error, 'ENOENT')) return false;
+    throw error;
+  }
+}
+
+function isRecord(value: unknown): value is Readonly<Record<string, unknown>> {
+  return typeof value === 'object' && value !== null && !Array.isArray(value);
+}
+
+async function readJson(path: string): Promise<Readonly<Record<string, unknown>>> {
+  const parsed: unknown = JSON.parse(await readFile(path, 'utf8'));
+  if (!isRecord(parsed)) throw new PopcandyProjectError('POPCANDY_PROJECT_NOT_FOUND', `Expected an object in ${path}.`);
+  return parsed;
 }
 
 function dependenciesOf(manifest: Record<string, unknown>): Record<string, string> {
   const output: Record<string, string> = {};
   for (const key of ['dependencies', 'devDependencies', 'peerDependencies']) {
     const group = manifest[key];
-    if (!group || typeof group !== 'object') continue;
-    for (const [name, version] of Object.entries(group as Record<string, unknown>)) if (typeof version === 'string') output[name] = version;
+    if (!isRecord(group)) continue;
+    for (const [name, version] of Object.entries(group)) if (typeof version === 'string') output[name] = version;
   }
   return output;
 }
@@ -39,23 +57,24 @@ function detectFramework(dependencies: Record<string, string>): PopcandyProjectI
 
 async function findRoot(startDirectory: string): Promise<string> {
   let current = resolve(startDirectory);
-  if (!(await exists(current))) throw new Error(`Start directory does not exist: ${current}`);
+  if (!(await exists(current))) throw new PopcandyProjectError('POPCANDY_PROJECT_NOT_FOUND', `Start directory does not exist: ${current}`);
   while (true) {
     if (await exists(join(current, 'package.json'))) return current;
     const parent = dirname(current);
-    if (parent === current || parse(current).root === current) throw new Error(`No package.json found above ${startDirectory}`);
+    if (parent === current || parse(current).root === current) throw new PopcandyProjectError('POPCANDY_PROJECT_NOT_FOUND', `No package.json found above ${startDirectory}`);
     current = parent;
   }
 }
 
-function collectInstalled(dependencies: Record<string, string>): Record<string, string> {
-  return Object.fromEntries(Object.entries(dependencies).filter(([name]) => name.startsWith('@unpopping-candy/')).sort(([a], [b]) => a.localeCompare(b)));
+function declaredPopcandyNames(dependencies: Readonly<Record<string, string>>): readonly string[] {
+  return Object.keys(dependencies).filter((name) => name.startsWith('@unpopping-candy/')).sort();
 }
 
 export async function detectPopcandyProject(startDirectory = process.cwd()): Promise<PopcandyProjectInfo> {
   const root = await findRoot(startDirectory);
   const manifest = await readJson(join(root, 'package.json'));
   const dependencies = dependenciesOf(manifest);
+  const versionResolution = await resolveInstalledPopcandyVersions(root, declaredPopcandyNames(dependencies));
   const configCandidates = ['popcandy.config.json', 'popcandy.json'];
   const configPath = (await Promise.all(configCandidates.map(async (name) => (await exists(join(root, name)) ? join(root, name) : null)))).find(Boolean) ?? null;
   const sourceDirectories: string[] = [];
@@ -74,7 +93,8 @@ export async function detectPopcandyProject(startDirectory = process.cwd()): Pro
     framework: detectFramework(dependencies),
     packageName: typeof manifest.name === 'string' ? manifest.name : null,
     configPath,
-    installed: collectInstalled(dependencies),
+    installed: versionResolution.versions,
+    versionResolutionSource: versionResolution.source,
     sourceDirectories: sourceDirectories.length ? sourceDirectories : ['src'],
     styleImports: [...styleImports].sort(),
   };

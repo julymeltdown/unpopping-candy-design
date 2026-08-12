@@ -1,5 +1,6 @@
 import type { KnowledgeCatalog, KnowledgeEntry, SearchResult } from '@unpopping-candy/knowledge';
 import type { ScaffoldInput, ScaffoldResult } from '@unpopping-candy/registry';
+import type { VersionResolutionSource } from './version-resolution.ts';
 
 export interface PopcandyProjectInfo {
   root: string;
@@ -8,6 +9,7 @@ export interface PopcandyProjectInfo {
   packageName: string | null;
   configPath: string | null;
   installed: Readonly<Record<string, string>>;
+  versionResolutionSource: VersionResolutionSource;
   sourceDirectories: readonly string[];
   styleImports: readonly string[];
 }

@@ -23,7 +23,8 @@
   },
   "dependencies": {
     "@unpopping-candy/knowledge": "workspace:^",
-    "@unpopping-candy/registry": "workspace:^"
+    "@unpopping-candy/registry": "workspace:^",
+    "yaml": "2.9.0"
   },
   "devDependencies": {
     "@types/node": "24.3.0"

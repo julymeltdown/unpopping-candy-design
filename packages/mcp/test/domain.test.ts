@@ -55,6 +55,10 @@ test('project and validation tools read the selected local root without mutation
   const root = await mkdtemp(join(tmpdir(), 'popcandy-mcp-'));
   await mkdir(join(root, 'src'));
   await writeFile(join(root, 'package.json'), JSON.stringify({ name: 'fixture', dependencies: { react: '19.2.0', vite: '8.1.0', '@unpopping-candy/ui': '0.1.0' } }));
+  await writeFile(join(root, 'package-lock.json'), JSON.stringify({
+    lockfileVersion: 3,
+    packages: { 'node_modules/@unpopping-candy/ui': { version: '0.1.0' } },
+  }));
   await writeFile(join(root, 'src/app.tsx'), "import { Button } from '@unpopping-candy/ui/src/button/button';\nexport const App=()=> <Button>Save</Button>;\n");
   const info = await domain.projectInfo({ path: root }) as { project: { root: string } };
   assert.equal(info.project.root, root);

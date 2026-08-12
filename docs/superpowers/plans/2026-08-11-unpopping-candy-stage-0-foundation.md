@@ -408,7 +408,10 @@ git commit -m "feat: generate exact catalog compatibility"
 - Modify: `packages/cli/src/index.ts`
 - Modify: `packages/cli/package.json`
 - Modify: `pnpm-lock.yaml`
+- Modify: `scripts/verify-boundaries.mjs`
 - Test: `packages/cli/test/version-resolution.test.ts`
+- Test: `packages/cli/test/cli.test.ts`
+- Test: `packages/mcp/test/domain.test.ts`
 
 **Interfaces:**
 
@@ -459,7 +462,7 @@ Expected: exact manifest and supported lockfile versions pass; every unsupported
 - [ ] **Step 5: Commit**
 
 ```bash
-git add packages/cli/src/project-errors.ts packages/cli/src/version-resolution.ts packages/cli/src/project-info.ts packages/cli/src/types.ts packages/cli/src/index.ts packages/cli/package.json packages/cli/test/version-resolution.test.ts pnpm-lock.yaml
+git add packages/cli/src/project-errors.ts packages/cli/src/version-resolution.ts packages/cli/src/project-info.ts packages/cli/src/types.ts packages/cli/src/index.ts packages/cli/package.json packages/cli/test/version-resolution.test.ts packages/cli/test/cli.test.ts packages/mcp/test/domain.test.ts pnpm-lock.yaml scripts/verify-boundaries.mjs docs/superpowers/plans/2026-08-11-unpopping-candy-stage-0-foundation.md
 git commit -m "feat: resolve installed package versions"
 ```
 

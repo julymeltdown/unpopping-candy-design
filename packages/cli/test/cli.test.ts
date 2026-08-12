@@ -28,6 +28,14 @@ async function fixture(): Promise<string> {
     name: 'fixture-app', packageManager: 'pnpm@11.4.0',
     dependencies: { react: '19.2.0', vite: '8.1.0', '@unpopping-candy/ui': '0.1.0', '@unpopping-candy/theme': '0.1.0', '@unpopping-candy/tokens': '0.1.0' },
   }));
+  await writeFile(join(root, 'package-lock.json'), JSON.stringify({
+    lockfileVersion: 3,
+    packages: {
+      'node_modules/@unpopping-candy/theme': { version: '0.1.0' },
+      'node_modules/@unpopping-candy/tokens': { version: '0.1.0' },
+      'node_modules/@unpopping-candy/ui': { version: '0.1.0' },
+    },
+  }));
   await writeFile(join(root, 'popcandy.config.json'), JSON.stringify({ source: 'src' }));
   await writeFile(join(root, 'src/main.tsx'), [
     "import '@unpopping-candy/tokens/styles.css';",

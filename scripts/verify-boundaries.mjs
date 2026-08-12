@@ -13,7 +13,7 @@ const rules = {
   social: { allowed: new Set(['react', '@unpopping-candy/icons', '@unpopping-candy/tokens', '@unpopping-candy/ui']), bannedText: [...deterministicBans, /api-contract/, /auth-contract/] },
   knowledge: { allowed: new Set(), bannedText: deterministicBans },
   registry: { allowed: new Set(['@unpopping-candy/knowledge']), bannedText: deterministicBans },
-  cli: { allowed: new Set(['@unpopping-candy/knowledge', '@unpopping-candy/registry']), bannedText: deterministicBans },
+  cli: { allowed: new Set(['@unpopping-candy/knowledge', '@unpopping-candy/registry', 'yaml']), bannedText: deterministicBans },
   mcp: {
     allowed: new Set(['@unpopping-candy/cli', '@unpopping-candy/knowledge', '@unpopping-candy/registry', '@unpopping-candy/tokens', '@modelcontextprotocol/server', 'zod']),
     bannedText: [/useQuery\b/, /useMutation\b/, /useSWR\b/, /zustand/, /react-router/, /Authorization\s*:/],
