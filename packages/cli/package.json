@@ -1,6 +1,11 @@
 {
   "name": "@unpopping-candy/cli",
   "version": "0.2.0",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/julymeltdown/unpopping-candy-design.git",
+    "directory": "packages/cli"
+  },
   "description": "Deterministic project detection, design-system discovery, composition planning, and validation for Unpopping Candy.",
   "license": "MIT",
   "type": "module",

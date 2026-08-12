@@ -11,7 +11,7 @@ pnpm-lock.yaml      committed
 npm release         not executed
 ```
 
-The manual release workflow calls `npm run release:check` before any publish action.
+The manual release workflow defaults to evidence-only candidate preparation. It publishes only when the protected `publish` input is explicitly true.
 
 ## Preconditions
 
@@ -30,7 +30,7 @@ External publication requires all of the following:
 11. accessibility and interaction tests pass;
 12. package tarballs are inspected;
 13. npm organization, provenance, and protected release environment are configured;
-14. `NPM_TOKEN` or trusted publishing is configured appropriately.
+14. npm trusted publishing is configured for all nine packages.
 
 Figma Code Connect publication has a separate gate. Placeholder mappings must not be published.
 
@@ -46,6 +46,8 @@ It checks at least:
 - package license fields;
 - lockfile presence;
 - publishable-package status.
+- exact Stage 0 gzip bundle ceilings;
+- unexpired local npm-namespace and brand authorization evidence.
 
 It does not replace tests, builds, or tarball inspection.
 
@@ -82,6 +84,17 @@ Review:
 - README installation examples;
 - MCP and CLI advertised versions.
 
+## Ephemeral candidate
+
+Prepare the Stage 0 candidate without editing source manifests, lockfiles, generated compatibility, or Changesets:
+
+```bash
+pnpm release:candidate -- --version 0.3.0-alpha.0 --channel next --out .artifacts/releases/stage-0-alpha.0
+node scripts/verify-release-candidate.mjs .artifacts/releases/stage-0-alpha.0 --source-commit "$(git rev-parse HEAD)"
+```
+
+The command copies a bounded source tree into the ignored output, runs normal Changesets versioning only in that staging tree, rewrites the coordinated public packages to the requested prerelease, refreshes and freezes the staging lockfile, regenerates and validates AI artifacts, packs exactly nine tarballs, and runs the base Vite/React 19/pnpm 11 consumer. `candidate.json` binds every tarball digest to the source commit and compatibility result. A failed run removes its incomplete candidate directory.
+
 ## Manual release workflow
 
 The GitHub release workflow is manual and protected by the `npm-release` environment.
@@ -90,24 +103,42 @@ It executes:
 
 ```text
 frozen dependency installation
-release readiness
-all tests and architecture gates
-typecheck
-all builds
-optional publication
+trusted-publishing npm CLI installation
+npm namespace and brand authorization
+isolated alpha candidate preparation
+candidate digest verification
+candidate evidence upload
+optional next-channel publication
 ```
 
-The publish input must be selected explicitly.
+The `publish` input defaults to `false`. The `npm-release` environment must require named owner approval. No workflow dispatch, tag, or publication is part of ordinary source preparation.
+
+### Trusted-publisher prerequisites
+
+Before selecting `publish: true`, configure npm trusted publishing for each of the nine `@unpopping-candy/*` public packages with these exact values:
+
+```text
+GitHub owner/repository  julymeltdown/unpopping-candy-design
+workflow filename        release.yml
+environment              npm-release
+allowed action           npm publish
+```
+
+The workflow uses GitHub-hosted runners, Node 22.16.0, npm 12.0.2, and `id-token: write`. It intentionally defines no `NODE_AUTH_TOKEN` or long-lived npm write secret. The public package manifests must keep their repository URL aligned with this GitHub repository before first publication. Store the schema-v1 authorization JSON as the protected `POPCANDY_RELEASE_AUTHORIZATION` environment secret; the workflow materializes it only at ignored `.artifacts/authorizations/release.json`, validates it, and never uploads or commits it.
+
+### Storybook delivery prerequisites
+
+Storybook verification always runs on pull requests and `master`. Chromatic runs only when `POPCANDY_CHROMATIC_ENABLED` is `true` and `CHROMATIC_PROJECT_TOKEN` exists. Pages deploys only from `master` when `POPCANDY_PAGES_ENABLED` is `true`, through the protected `github-pages` environment. Missing variables or credentials mean the corresponding external delivery does not run and must not be claimed.
 
 ## Publish
 
-Once packages are versioned and every precondition passes:
+Stable `latest` publication is not available in Stage 0. It remains owned by the Stage 3 stable release process. The current protected workflow can publish only the verified `0.3.0-alpha.0` tarballs under `next`:
 
 ```bash
-pnpm release
+npm publish <verified-tarball> --provenance --access public --tag next
 ```
 
-The command repeats release readiness, builds packages, and invokes Changesets publication.
+Do not run that command manually unless the same authorization, digest, and protected-environment evidence is present.
 
 ## Package inspection
 
@@ -187,12 +218,12 @@ npm run figma:publish
 
 ## Release channels
 
-Recommended future channels:
+Release channels:
 
 ```text
-latest   stable releases
-next     release candidates and next-major work
-canary   commit-scoped integration testing
+latest   Stage 3 stable releases only
+next     verified prerelease candidates
+canary   future commit-scoped integration testing
 ```
 
 Canary packages must still build and be tested from actual tarballs. Do not publish source-alias-only results.

@@ -11,7 +11,7 @@ const approvedDigests = new Map(
     "docs/COMPATIBILITY.md":
       "45766fe0f7a466693bc6a11678a0f63e540d739c285bbc5c4b854af5bfb95a4e",
     "docs/PUBLISHING.md":
-      "5c41cfb8e637e81fdce88226246a2275bef4197a6647b83c99b09ea3ce832f93",
+      "6e25af3015ed329efbf529db87b017d87db828db1d15aca44998df6b3eef5d0c",
     "docs/SECURITY.md":
       "83dd162480f1ba80beb6fb60d2b88c9bfbf468aca67af36560719a930dfd27d1",
     "docs/STORYBOOK_AI.md":

@@ -15,39 +15,15 @@ import {
   createCompatibilityResult,
 } from "./compatibility-contract.mjs";
 import {
-  readInstalledVersion,
+  installConsumerManagerFiles,
   smokeTestCompatibilityBuild,
   writeCompatibilityConsumer,
 } from "./compatibility-consumer.mjs";
 import {
   createManagerInvocation,
+  readInstalledVersion,
   runCompatibilityProcess,
 } from "./compatibility-process.mjs";
-
-async function installConsumerManagerFiles({
-  consumerRoot,
-  manager,
-  tarballs,
-}) {
-  if (manager.nodeLinker) {
-    await writeFile(
-      join(consumerRoot, ".yarnrc.yml"),
-      `nodeLinker: ${manager.nodeLinker}\n`,
-    );
-  }
-  if (manager.package === "pnpm") {
-    const overrides = tarballs
-      .map(
-        (tarball) =>
-          `  '${tarball.packageName}': file:../packs/${tarball.name}`,
-      )
-      .join("\n");
-    await writeFile(
-      join(consumerRoot, "pnpm-workspace.yaml"),
-      `overrides:\n${overrides}\n`,
-    );
-  }
-}
 
 export async function writeCompatibilityResult(artifactRoot, run, result) {
   const resultPath = join(
@@ -64,7 +40,6 @@ export async function writeCompatibilityResult(artifactRoot, run, result) {
   }
   return locator.split(sep).join("/");
 }
-
 async function assertInstalledIsolation({
   consumerRoot,
   workspaceRoot,
@@ -87,10 +62,15 @@ async function assertInstalledIsolation({
     );
   }
 }
-
 export async function executeCompatibilityRun(context, run) {
-  const { workspaceRoot, artifactRoot, matrix, packed, keepTemporary } =
-    context;
+  const {
+    workspaceRoot,
+    artifactRoot,
+    matrix,
+    packed,
+    keepTemporary,
+    environment,
+  } = context;
   const cell = matrix.cells[run.cell];
   const manager = matrix.managers[run.manager];
   const result = createCompatibilityResult({
@@ -149,6 +129,7 @@ export async function executeCompatibilityRun(context, run) {
       args: invocation.versionArgs,
       cwd: consumerRoot,
       timeoutMs: 120_000,
+      environment,
     });
     result.packageManager.observedVersion = version.output.split("\n").at(-1);
     if (result.packageManager.observedVersion !== manager.version) {
@@ -163,6 +144,7 @@ export async function executeCompatibilityRun(context, run) {
       args: invocation.installArgs,
       cwd: consumerRoot,
       timeoutMs: 600_000,
+      environment,
     });
     result.install = { status: "passed", durationMs: install.durationMs };
     await assertInstalledIsolation({ consumerRoot, workspaceRoot, tarballs });
@@ -189,6 +171,7 @@ export async function executeCompatibilityRun(context, run) {
       args: ["node_modules/typescript/bin/tsc", "--version"],
       cwd: consumerRoot,
       timeoutMs: 30_000,
+      environment,
     });
     result.typescript.observedVersion = typeVersion.output.replace(
       "Version ",
@@ -203,6 +186,7 @@ export async function executeCompatibilityRun(context, run) {
       command: process.execPath,
       args: ["node_modules/typescript/bin/tsc", "--noEmit"],
       cwd: consumerRoot,
+      environment,
     });
     result.typecheck = {
       status: "passed",
@@ -217,6 +201,7 @@ export async function executeCompatibilityRun(context, run) {
       args: consumer.generated.build,
       cwd: consumerRoot,
       timeoutMs: 600_000,
+      environment,
     });
     result.build = { status: "passed", durationMs: build.durationMs };
 
@@ -225,6 +210,7 @@ export async function executeCompatibilityRun(context, run) {
       consumerRoot,
       generated: consumer.generated,
       expectedName,
+      environment,
     });
     result.browser.observedVersion = smoke.browserVersion;
     result.browser.accessibleName = expectedName;

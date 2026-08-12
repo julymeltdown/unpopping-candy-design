@@ -19,6 +19,7 @@
     "format:check": "prettier --check .",
     "lint": "eslint .",
     "release": "pnpm build:packages && npm run release:check && changeset publish",
+    "release:candidate": "node scripts/prepare-release-candidate.mjs",
     "test": "pnpm test:pure && pnpm verify",
     "test:storybook": "pnpm --filter @unpopping-candy/docs test -- --run",
     "test:browser": "playwright test",

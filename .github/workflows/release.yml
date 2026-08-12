@@ -3,16 +3,17 @@ on:
   workflow_dispatch:
     inputs:
       publish:
-        description: Publish the already-versioned packages after all readiness gates pass
+        description: Publish the verified alpha candidate after all approval gates pass
         type: boolean
         required: true
         default: false
 permissions:
-  contents: write
+  contents: read
   id-token: write
 concurrency: ${{ github.workflow }}-${{ github.ref }}
 jobs:
   release:
+    if: ${{ github.ref == 'refs/heads/master' }}
     runs-on: ubuntu-latest
     environment: npm-release
     steps:
@@ -21,22 +22,39 @@ jobs:
         with: { version: 11.4.0 }
       - uses: actions/setup-node@v4
         with:
-          node-version: 22
+          node-version: 22.16.0
           registry-url: https://registry.npmjs.org
           cache: pnpm
       - name: Install locked workspace dependencies
         run: pnpm install --frozen-lockfile
-      - name: Verify publication prerequisites
-        run: pnpm release:check
-      - name: Run all tests and architecture gates
-        run: pnpm test
-      - name: Typecheck
-        run: pnpm typecheck
-      - name: Build all packages and consumers
-        run: pnpm build
-      - name: Publish packages
-        if: ${{ inputs.publish }}
-        run: pnpm release
+      - name: Materialize local authorization evidence
         env:
-          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
-          NPM_CONFIG_PROVENANCE: true
+          POPCANDY_RELEASE_AUTHORIZATION: ${{ secrets.POPCANDY_RELEASE_AUTHORIZATION }}
+        run: |
+          test -n "$POPCANDY_RELEASE_AUTHORIZATION"
+          mkdir -p .artifacts/authorizations
+          printf '%s\n' "$POPCANDY_RELEASE_AUTHORIZATION" > .artifacts/authorizations/release.json
+      - name: Install trusted-publishing npm CLI
+        run: npm install --global npm@12.0.2
+      - name: Verify namespace and brand authorization
+        run: node scripts/verify-release-authorizations.mjs --scope npm,brand
+      - name: Prepare verified alpha candidate
+        run: pnpm release:candidate -- --version 0.3.0-alpha.0 --channel next --out .artifacts/releases/stage-0-alpha.0
+      - name: Verify candidate digests before upload
+        run: node scripts/verify-release-candidate.mjs .artifacts/releases/stage-0-alpha.0 --source-commit "$GITHUB_SHA"
+      - name: Upload candidate evidence without publishing
+        uses: actions/upload-artifact@v4
+        with:
+          name: popcandy-stage-0-alpha.0
+          path: |
+            .artifacts/releases/stage-0-alpha.0/candidate.json
+            .artifacts/releases/stage-0-alpha.0/packages/*.tgz
+            .artifacts/releases/stage-0-alpha.0/compatibility/**/*.json
+          if-no-files-found: error
+      - name: Publish verified next-channel tarballs with OIDC provenance
+        if: ${{ inputs.publish }}
+        run: |
+          node scripts/verify-release-candidate.mjs .artifacts/releases/stage-0-alpha.0 --source-commit "$GITHUB_SHA"
+          for tarball in .artifacts/releases/stage-0-alpha.0/packages/*.tgz; do
+            npm publish "$tarball" --provenance --access public --tag next
+          done

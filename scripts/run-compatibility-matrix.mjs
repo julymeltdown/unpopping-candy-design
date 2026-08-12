@@ -21,6 +21,7 @@ export async function packPublicWorkspace(options = {}) {
   return createPackedWorkspace({
     workspaceRoot: resolve(options.workspaceRoot ?? defaultWorkspaceRoot),
     outputRoot: options.outputRoot,
+    environment: options.environment,
   });
 }
 
@@ -33,7 +34,10 @@ export async function runCompatibilityMatrix(options = {}) {
   const candidatePacked =
     options.packed ?? (await packPublicWorkspace({ workspaceRoot }));
   try {
-    const packed = await validatePackedWorkspace(candidatePacked);
+    const packed = await validatePackedWorkspace(
+      candidatePacked,
+      options.environment,
+    );
     const artifactRoot = resolve(
       options.artifactRoot ?? join(workspaceRoot, ".artifacts/compatibility"),
     );
@@ -47,6 +51,7 @@ export async function runCompatibilityMatrix(options = {}) {
             matrix,
             packed,
             keepTemporary: options.keepTemporary === true,
+            environment: options.environment,
           },
           run,
         ),

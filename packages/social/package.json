@@ -1,23 +1,59 @@
 {
   "name": "@unpopping-candy/social",
   "version": "0.1.0",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/julymeltdown/unpopping-candy-design.git",
+    "directory": "packages/social"
+  },
   "description": "API-agnostic social presentation patterns for Unpopping Candy.",
   "license": "MIT",
   "type": "module",
-  "files": ["dist", "README.md"],
-  "sideEffects": ["./dist/styles.css"],
+  "files": [
+    "dist",
+    "README.md"
+  ],
+  "sideEffects": [
+    "./dist/styles.css"
+  ],
   "exports": {
-    ".": { "types": "./dist/index.d.ts", "import": "./dist/index.js" },
-    "./conversation": { "types": "./dist/conversation.d.ts", "import": "./dist/conversation.js" },
-    "./model": { "types": "./dist/model.d.ts", "import": "./dist/model.js" },
-    "./notification": { "types": "./dist/notification.d.ts", "import": "./dist/notification.js" },
-    "./post": { "types": "./dist/post.d.ts", "import": "./dist/post.js" },
-    "./profile": { "types": "./dist/profile.d.ts", "import": "./dist/profile.js" },
-    "./timeline": { "types": "./dist/timeline.d.ts", "import": "./dist/timeline.js" },
-    "./user": { "types": "./dist/user.d.ts", "import": "./dist/user.js" },
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js"
+    },
+    "./conversation": {
+      "types": "./dist/conversation.d.ts",
+      "import": "./dist/conversation.js"
+    },
+    "./model": {
+      "types": "./dist/model.d.ts",
+      "import": "./dist/model.js"
+    },
+    "./notification": {
+      "types": "./dist/notification.d.ts",
+      "import": "./dist/notification.js"
+    },
+    "./post": {
+      "types": "./dist/post.d.ts",
+      "import": "./dist/post.js"
+    },
+    "./profile": {
+      "types": "./dist/profile.d.ts",
+      "import": "./dist/profile.js"
+    },
+    "./timeline": {
+      "types": "./dist/timeline.d.ts",
+      "import": "./dist/timeline.js"
+    },
+    "./user": {
+      "types": "./dist/user.d.ts",
+      "import": "./dist/user.js"
+    },
     "./styles.css": "./dist/styles.css"
   },
-  "publishConfig": { "access": "public" },
+  "publishConfig": {
+    "access": "public"
+  },
   "peerDependencies": {
     "react": ">=18.3 <20",
     "react-dom": ">=18.3 <20"

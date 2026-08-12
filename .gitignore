@@ -5,6 +5,7 @@ coverage/
 .artifacts/
 .artifacts/authorizations/
 .artifacts/bundles/
+.artifacts/releases/
 .tmp/
 .worktrees/
 .DS_Store

@@ -58,6 +58,31 @@ export default function Page() { return <Scenario />; }
   };
 }
 
+export async function installConsumerManagerFiles({
+  consumerRoot,
+  manager,
+  tarballs,
+}) {
+  if (manager.nodeLinker) {
+    await writeFile(
+      join(consumerRoot, ".yarnrc.yml"),
+      `nodeLinker: ${manager.nodeLinker}\n`,
+    );
+  }
+  if (manager.package === "pnpm") {
+    const overrides = tarballs
+      .map(
+        (tarball) =>
+          `  '${tarball.packageName}': file:../packs/${tarball.name}`,
+      )
+      .join("\n");
+    await writeFile(
+      join(consumerRoot, "pnpm-workspace.yaml"),
+      `overrides:\n${overrides}\n`,
+    );
+  }
+}
+
 export async function writeCompatibilityConsumer(options) {
   const { consumerRoot, fixtureRoot, scenarioSource, cell, tarballs } = options;
   const framework =
@@ -192,24 +217,11 @@ export async function serveCompatibilityBuild(root) {
   return { server, url: `http://127.0.0.1:${address.port}` };
 }
 
-export async function readInstalledVersion(root, packageName) {
-  const path = join(
-    root,
-    "node_modules",
-    ...packageName.split("/"),
-    "package.json",
-  );
-  const manifest = JSON.parse(await readFile(path, "utf8"));
-  if (typeof manifest.version !== "string") {
-    throw new TypeError(`Installed ${packageName} has no version.`);
-  }
-  return manifest.version;
-}
-
 export async function smokeTestCompatibilityBuild({
   consumerRoot,
   generated,
   expectedName,
+  environment,
 }) {
   const started = performance.now();
   const served = await serveCompatibilityBuild(
@@ -217,7 +229,7 @@ export async function smokeTestCompatibilityBuild({
   );
   let browser;
   try {
-    browser = await chromium.launch({ timeout: 30_000 });
+    browser = await chromium.launch({ timeout: 30_000, env: environment });
     const page = await browser.newPage();
     await page.goto(served.url, { timeout: 30_000 });
     const main = page.getByRole("main", { name: expectedName, exact: true });

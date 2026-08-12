@@ -1,10 +1,18 @@
 {
   "name": "@unpopping-candy/theme",
   "version": "0.1.0",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/julymeltdown/unpopping-candy-design.git",
+    "directory": "packages/theme"
+  },
   "description": "Theme and density scoping for Unpopping Candy.",
   "license": "MIT",
   "type": "module",
-  "files": ["dist", "README.md"],
+  "files": [
+    "dist",
+    "README.md"
+  ],
   "sideEffects": false,
   "exports": {
     ".": {

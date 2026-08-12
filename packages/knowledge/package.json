@@ -1,17 +1,36 @@
 {
   "name": "@unpopping-candy/knowledge",
   "version": "0.2.0",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/julymeltdown/unpopping-candy-design.git",
+    "directory": "packages/knowledge"
+  },
   "description": "Canonical structured design-system knowledge, generators, and search for Unpopping Candy.",
   "license": "MIT",
   "type": "module",
-  "files": ["dist", "README.md"],
+  "files": [
+    "dist",
+    "README.md"
+  ],
   "sideEffects": false,
   "exports": {
-    ".": { "types": "./dist/index.d.ts", "import": "./dist/index.js" },
-    "./catalog": { "types": "./dist/catalog.d.ts", "import": "./dist/catalog.js" },
-    "./generators": { "types": "./dist/generators.d.ts", "import": "./dist/generators.js" }
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js"
+    },
+    "./catalog": {
+      "types": "./dist/catalog.d.ts",
+      "import": "./dist/catalog.js"
+    },
+    "./generators": {
+      "types": "./dist/generators.d.ts",
+      "import": "./dist/generators.js"
+    }
   },
-  "publishConfig": { "access": "public" },
+  "publishConfig": {
+    "access": "public"
+  },
   "scripts": {
     "build": "tsc -p tsconfig.build.json",
     "test": "node --experimental-strip-types --test test/*.test.ts",

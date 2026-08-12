@@ -1,11 +1,21 @@
 {
   "name": "@unpopping-candy/icons",
   "version": "0.1.0",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/julymeltdown/unpopping-candy-design.git",
+    "directory": "packages/icons"
+  },
   "description": "Semantic Unpopping Candy icon names backed by Ant Design Icons.",
   "license": "MIT",
   "type": "module",
-  "files": ["dist", "README.md"],
-  "sideEffects": ["./dist/styles.css"],
+  "files": [
+    "dist",
+    "README.md"
+  ],
+  "sideEffects": [
+    "./dist/styles.css"
+  ],
   "exports": {
     ".": {
       "types": "./dist/index.d.ts",

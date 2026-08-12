@@ -19,12 +19,13 @@ export function runCompatibilityProcess({
   killGraceMs = 2_000,
   treeKillTimeoutMs = 5_000,
   terminateTree,
+  environment = process.env,
 }) {
   const started = performance.now();
   return new Promise((resolvePromise, rejectPromise) => {
     const child = spawn(command, args, {
       cwd,
-      env: { ...process.env, CI: "1" },
+      env: { ...environment, CI: "1" },
       stdio: ["ignore", "pipe", "pipe"],
       detached: process.platform !== "win32",
       windowsHide: true,
@@ -146,13 +147,14 @@ async function sha256(path) {
     .digest("hex");
 }
 
-export async function validatePackedWorkspace(packed) {
+export async function validatePackedWorkspace(packed, environment) {
   return validatePackedArtifacts(packed, async (path, root) => {
     const inspected = await runCompatibilityProcess({
       command: "tar",
       args: ["-xOf", path, "package/package.json"],
       cwd: root,
       timeoutMs: 30_000,
+      environment,
     });
     return JSON.parse(inspected.output);
   });
@@ -171,6 +173,7 @@ export async function createPackedWorkspace(options) {
       args: ["--version"],
       cwd: workspaceRoot,
       timeoutMs: 30_000,
+      environment: options.environment,
     });
     if (sourceManager.output !== "11.4.0") {
       throw new TypeError(
@@ -184,6 +187,7 @@ export async function createPackedWorkspace(options) {
         command: "pnpm",
         args: ["--filter", manifest.name, "build"],
         cwd: workspaceRoot,
+        environment: options.environment,
       });
     }
     const tarballs = [];
@@ -195,6 +199,7 @@ export async function createPackedWorkspace(options) {
         command: "pnpm",
         args: ["pack", "--out", path, "--json"],
         cwd: packageRoot,
+        environment: options.environment,
       });
       tarballs.push({
         packageName: manifest.name,
@@ -234,4 +239,18 @@ export function createManagerInvocation(manager) {
     versionArgs: [...prefix, binary, "--version"],
     installArgs: [...prefix, binary, ...installArgs],
   };
+}
+
+export async function readInstalledVersion(root, packageName) {
+  const path = join(
+    root,
+    "node_modules",
+    ...packageName.split("/"),
+    "package.json",
+  );
+  const manifest = JSON.parse(await readFile(path, "utf8"));
+  if (typeof manifest.version !== "string") {
+    throw new TypeError(`Installed ${packageName} has no version.`);
+  }
+  return manifest.version;
 }

@@ -1,0 +1,95 @@
+name: Storybook verification and delivery
+
+on:
+  pull_request:
+  push:
+    branches: [master]
+
+permissions:
+  contents: read
+
+jobs:
+  verify-storybook:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: pnpm/action-setup@v4
+        with:
+          version: 11.4.0
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22.16.0
+          cache: pnpm
+      - name: Install locked workspace dependencies
+        run: pnpm install --frozen-lockfile
+      - name: Install exact Playwright browsers
+        run: pnpm exec playwright install --with-deps chromium firefox webkit
+      - name: Run Storybook interactions and accessibility checks
+        run: pnpm test:storybook
+      - name: Run cross-browser Storybook smoke tests
+        run: pnpm test:browser
+      - name: Build Storybook
+        run: pnpm --filter @unpopping-candy/docs build-storybook
+      - name: Upload reviewed Storybook artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: popcandy-storybook
+          path: apps/docs/storybook-static
+          if-no-files-found: error
+
+  chromatic:
+    if: ${{ vars.POPCANDY_CHROMATIC_ENABLED == 'true' }}
+    needs: verify-storybook
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: pnpm/action-setup@v4
+        with:
+          version: 11.4.0
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22.16.0
+          cache: pnpm
+      - run: pnpm install --frozen-lockfile
+      - uses: chromaui/action@v13
+        with:
+          projectToken: ${{ secrets.CHROMATIC_PROJECT_TOKEN }}
+          workingDir: apps/docs
+          exitZeroOnChanges: false
+
+  build-pages:
+    if: ${{ github.ref == 'refs/heads/master' && vars.POPCANDY_PAGES_ENABLED == 'true' }}
+    needs: verify-storybook
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+    steps:
+      - uses: actions/checkout@v4
+      - uses: pnpm/action-setup@v4
+        with:
+          version: 11.4.0
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22.16.0
+          cache: pnpm
+      - run: pnpm install --frozen-lockfile
+      - run: pnpm --filter @unpopping-candy/docs build-storybook
+      - uses: actions/configure-pages@v5
+      - uses: actions/upload-pages-artifact@v3
+        with:
+          path: apps/docs/storybook-static
+
+  deploy-pages:
+    if: ${{ github.ref == 'refs/heads/master' && vars.POPCANDY_PAGES_ENABLED == 'true' }}
+    needs: build-pages
+    runs-on: ubuntu-latest
+    permissions:
+      pages: write
+      id-token: write
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - name: Deploy approved Storybook to Pages
+        id: deployment
+        uses: actions/deploy-pages@v4
