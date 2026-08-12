@@ -91,10 +91,19 @@ function attributes(source: string) {
         index = end + 1;
       } else if (quote === "{") {
         let braces = 1;
+        let expressionQuote = "";
+        let escaped = false;
         const start = ++index;
         while (index < source.length && braces) {
-          if (source[index] === "{") braces += 1;
-          if (source[index] === "}") braces -= 1;
+          const character = source[index] ?? "";
+          if (expressionQuote) {
+            if (escaped) escaped = false;
+            else if (character === "\\") escaped = true;
+            else if (character === expressionQuote) expressionQuote = "";
+          } else if (['"', "'", "`"].includes(character))
+            expressionQuote = character;
+          else if (character === "{") braces += 1;
+          else if (character === "}") braces -= 1;
           index += 1;
         }
         const value = source.slice(start, index - 1).trim();

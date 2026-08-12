@@ -78,3 +78,32 @@ test("preferred JSX rejects aliases, qualifications, and prop spreads", () => {
     );
   }
 });
+
+test("preferred JSX keeps scanning after comments", () => {
+  for (const [label, code] of [
+    [
+      "line comment boundary",
+      '<Button variant="primary">Save</Button> // visible explanation\n<Action>Unsafe</Action>',
+    ],
+    [
+      "block comment boundary",
+      '<Button variant="primary">Save</Button> /* visible explanation */ <Candy.Button variant="not-a-variant" />',
+    ],
+  ] as const) {
+    assert.ok(
+      publicContractErrors(code, label, "Button").length > 0,
+      `${label} must fail closed`,
+    );
+  }
+});
+
+test("preferred JSX keeps scanning inside quoted attribute expressions", () => {
+  const errors = publicContractErrors(
+    '<Button id={"safe } value"} variant="not-a-variant">Save</Button>',
+    "quoted brace attribute",
+    "Button",
+  );
+  assert.deepEqual(errors, [
+    "quoted brace attribute: Button.variant expected primary | secondary | ghost | danger",
+  ]);
+});

@@ -13,8 +13,8 @@ function maskNonCode(source: string) {
     const next = source[index + 1];
     if (state !== "code") {
       output[index] = character === "\n" ? "\n" : " ";
-      if (state === "line" && character === "\n") state = "code";
-      else if (state === "block" && character === "*" && next === "/") {
+      if (state === "line-comment" && character === "\n") state = "code";
+      else if (state === "block-comment" && character === "*" && next === "/") {
         output[index + 1] = " ";
         index += 1;
         state = "code";
@@ -61,12 +61,16 @@ export function openingTags(code: string) {
     }
     let braces = 0;
     let quote = "";
+    let escaped = false;
     let end = cursor + match[0].length;
     for (; end < code.length; end += 1) {
       const character = code[end];
       if (quote) {
-        if (character === quote && code[end - 1] !== "\\") quote = "";
-      } else if (character === '"' || character === "'") quote = character;
+        if (escaped) escaped = false;
+        else if (character === "\\") escaped = true;
+        else if (character === quote) quote = "";
+      } else if (['"', "'", "`"].includes(character ?? ""))
+        quote = character ?? "";
       else if (character === "{") braces += 1;
       else if (character === "}") braces -= 1;
       else if (character === ">" && braces === 0) break;
