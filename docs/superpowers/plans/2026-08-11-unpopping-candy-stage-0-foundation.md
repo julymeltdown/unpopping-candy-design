@@ -574,6 +574,8 @@ git commit -m "feat: bind discovery to installed compatibility"
 - Modify: `packages/{tokens,theme,icons,ui,social,knowledge,registry,cli,mcp}/package.json`
 - Modify: `packages/knowledge/test/compatibility.test.ts`
 - Modify: `packages/registry/test/registry.test.ts`
+- Modify: `packages/cli/test/cli.test.ts`
+- Modify: `packages/mcp/test/domain.test.ts`
 - Test: `packages/evals/test/model-captures.test.ts`
 - Test: `packages/evals/test/model-eval-boundaries.test.ts`
 
@@ -1024,7 +1026,7 @@ Before public promotion, attach a Chromatic review, Pages URL, actual Node/brows
 - [ ] **Step 8: Commit source preparation without candidate artifacts**
 
 ```bash
-git add scripts/prepare-release-candidate.mjs scripts/lib/release-candidate-contract.mjs scripts/lib/release-candidate-artifacts.mjs scripts/lib/release-candidate-workspace.mjs scripts/verify-release-candidate.mjs scripts/run-compatibility-matrix.mjs scripts/lib/compatibility-process.mjs scripts/lib/compatibility-execution.mjs scripts/lib/compatibility-consumer.mjs scripts/lib/documentation-policy.mjs tests/architecture/release-candidate.test.mjs tests/architecture/release-candidate-verifier.test.mjs tests/architecture/release-workflow.test.mjs .github/workflows/storybook.yml .github/workflows/release.yml docs/PUBLISHING.md .changeset/stage-zero-foundation.md package.json .gitignore packages/{tokens,theme,icons,ui,social,knowledge,registry,cli,mcp}/package.json packages/knowledge/test/compatibility.test.ts packages/registry/test/registry.test.ts docs/superpowers/plans/2026-08-11-unpopping-candy-stage-0-foundation.md
+git add scripts/prepare-release-candidate.mjs scripts/lib/release-candidate-contract.mjs scripts/lib/release-candidate-artifacts.mjs scripts/lib/release-candidate-workspace.mjs scripts/verify-release-candidate.mjs scripts/run-compatibility-matrix.mjs scripts/lib/compatibility-process.mjs scripts/lib/compatibility-execution.mjs scripts/lib/compatibility-consumer.mjs scripts/lib/documentation-policy.mjs tests/architecture/release-candidate.test.mjs tests/architecture/release-candidate-verifier.test.mjs tests/architecture/release-workflow.test.mjs .github/workflows/storybook.yml .github/workflows/release.yml docs/PUBLISHING.md .changeset/stage-zero-foundation.md package.json .gitignore packages/{tokens,theme,icons,ui,social,knowledge,registry,cli,mcp}/package.json packages/knowledge/test/compatibility.test.ts packages/registry/test/registry.test.ts packages/cli/test/cli.test.ts packages/mcp/test/domain.test.ts docs/superpowers/plans/2026-08-11-unpopping-candy-stage-0-foundation.md
 git commit -m "release: prepare ephemeral alpha candidates"
 ```
 
