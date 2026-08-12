@@ -37,11 +37,24 @@ test('resolves a strict nested and scoped pnpm peer snapshot', async () => {
   assert.equal(result.source, 'pnpm-lock-v9');
 });
 
+test('resolves alphanumeric prerelease identifiers in root and nested peer snapshots', async () => {
+  // Given
+  const versions = ['1.2.3-1a', '1.2.3-0alpha', '1.2.3-123abc', '1.2.3-alpha.01a'];
+
+  // When / Then
+  for (const version of versions) {
+    const result = await resolveInstalledPopcandyVersions(await snapshotProject(version), [ui]);
+    assert.equal(result.versions[ui], version);
+  }
+  const nested = await resolveInstalledPopcandyVersions(await snapshotProject('1.2.3(react@4.5.6-1a+build.2)'), [ui]);
+  assert.equal(nested.versions[ui], '1.2.3');
+});
+
 test('rejects malformed pnpm peer snapshots', async (t) => {
   // Given
   const invalidSnapshots = [
     '0.1.4(garbage)', '0.1.4((react@19.2.8))', '0.1.4( )',
-    '01.2.3', '1.2.3-alpha..1', '0.1.4(react@^19.2.8)',
+    '01.2.3', '1.2.3-01', '1.2.3-alpha..1', '0.1.4(react@^19.2.8)',
     '0.1.4(react@workspace:*)', '0.1.4(react@npm:react-dom@19.2.8)',
   ];
 

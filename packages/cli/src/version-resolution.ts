@@ -56,7 +56,7 @@ function exactVersion(value: unknown): string | undefined {
 }
 
 function semverAt(value: string, index: number): string | undefined {
-  const identifier = '(?:0|[1-9]\\d*|[0-9A-Za-z-]*[A-Za-z-][0-9A-Za-z-]*)';
+  const identifier = '(?:[0-9A-Za-z-]*[A-Za-z-][0-9A-Za-z-]*|0|[1-9]\\d*)';
   const semver = new RegExp(`^(?:0|[1-9]\\d*)\\.(?:0|[1-9]\\d*)\\.(?:0|[1-9]\\d*)(?:-${identifier}(?:\\.${identifier})*)?(?:\\+[0-9A-Za-z-]+(?:\\.[0-9A-Za-z-]+)*)?`);
   return semver.exec(value.slice(index))?.[0];
 }
