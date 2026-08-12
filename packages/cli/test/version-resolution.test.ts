@@ -22,9 +22,16 @@ async function installedPackage(root: string, packageName: string, version: stri
   const linkDirectory = join(root, 'node_modules', '@unpopping-candy');
   await mkdir(packageDirectory, { recursive: true });
   await mkdir(linkDirectory, { recursive: true });
-  await writeFile(join(packageDirectory, 'package.json'), JSON.stringify(esmOnly
-    ? { name: packageName, version, type: 'module', exports: { '.': { types: './dist/index.d.ts', import: './dist/index.js' } } }
-    : { name: packageName, version }));
+  await writeFile(join(packageDirectory, 'package.json'), JSON.stringify(
+    esmOnly
+      ? { name: packageName, version, type: 'module', exports: { '.': { types: './dist/index.d.ts', import: './dist/index.js' } } }
+      : { name: packageName, version },
+  ));
+  if (esmOnly) {
+    await mkdir(join(packageDirectory, 'dist'));
+    await writeFile(join(packageDirectory, 'dist/index.d.ts'), 'export {};\n');
+    await writeFile(join(packageDirectory, 'dist/index.js'), 'export {};\n');
+  }
   await writeFile(join(packageDirectory, 'index.js'), 'export {};\n');
   await symlink(packageDirectory, join(linkDirectory, packageName.replace('@unpopping-candy/', '')));
 }

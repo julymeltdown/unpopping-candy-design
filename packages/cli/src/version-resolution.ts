@@ -23,7 +23,7 @@ function isNodeError(value: unknown, code: string): boolean {
 }
 
 function isEsmOnlyResolutionError(value: unknown): boolean {
-  return isNodeError(value, 'ERR_PACKAGE_PATH_NOT_EXPORTED') || isNodeError(value, 'ERR_PACKAGE_IMPORT_NOT_DEFINED');
+  return isNodeError(value, 'ERR_PACKAGE_PATH_NOT_EXPORTED');
 }
 
 async function pathExists(path: string): Promise<boolean> {
