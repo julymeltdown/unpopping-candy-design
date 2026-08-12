@@ -48,6 +48,7 @@
     "figma:parse": "figma connect parse --config figma.config.json",
     "figma:preview": "figma connect preview --config figma.config.json",
     "figma:publish": "npm run figma:publish-check && figma connect publish --config figma.config.json",
+    "fixtures:compat": "node scripts/run-compatibility-matrix.mjs",
     "ai:check": "node scripts/verify-ai-contracts.mjs",
     "release:check": "node scripts/verify-release-readiness.mjs"
   },

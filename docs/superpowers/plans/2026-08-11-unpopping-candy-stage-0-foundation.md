@@ -647,6 +647,10 @@ git commit -m "feat: add reproducible model evaluation captures"
 - Create: `fixtures/compatibility/scenarios/activity-review.tsx`
 - Create: `fixtures/compatibility/index.html`
 - Create: `scripts/run-compatibility-matrix.mjs`
+- Create: `scripts/lib/compatibility-contract.mjs`
+- Create: `scripts/lib/compatibility-process.mjs`
+- Create: `scripts/lib/compatibility-consumer.mjs`
+- Create: `scripts/lib/compatibility-execution.mjs`
 - Modify: `package.json`
 - Test: `tests/architecture/inspection.test.mjs`
 
@@ -703,7 +707,7 @@ Expected: all installs occur outside the workspace and all three results record 
 - [ ] **Step 5: Commit**
 
 ```bash
-git add fixtures/compatibility/matrix.json fixtures/compatibility/types.ts fixtures/compatibility/scenarios/base.tsx fixtures/compatibility/scenarios/publish-post.tsx fixtures/compatibility/scenarios/member-moderation.tsx fixtures/compatibility/scenarios/activity-review.tsx fixtures/compatibility/index.html scripts/run-compatibility-matrix.mjs package.json tests/architecture/inspection.test.mjs
+git add fixtures/compatibility/matrix.json fixtures/compatibility/types.ts fixtures/compatibility/scenarios/base.tsx fixtures/compatibility/scenarios/publish-post.tsx fixtures/compatibility/scenarios/member-moderation.tsx fixtures/compatibility/scenarios/activity-review.tsx fixtures/compatibility/index.html scripts/run-compatibility-matrix.mjs scripts/lib/compatibility-contract.mjs scripts/lib/compatibility-process.mjs scripts/lib/compatibility-consumer.mjs scripts/lib/compatibility-execution.mjs package.json tests/architecture/inspection.test.mjs docs/superpowers/plans/2026-08-11-unpopping-candy-stage-0-foundation.md
 git commit -m "test: add packed consumer compatibility matrix"
 ```
 
