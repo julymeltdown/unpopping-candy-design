@@ -14,11 +14,12 @@ function promptArguments(value: unknown): Record<string, string | undefined> {
   return Object.fromEntries(Object.entries(value).filter((entry): entry is [string, string | undefined] => typeof entry[1] === 'string' || entry[1] === undefined));
 }
 
-export function createPopcandyMcpServer(domain: PopcandyMcpDomain): McpServer {
+export function createPopcandyMcpServer(domain: PopcandyMcpDomain, options: { readonly projectRoot?: string } = {}): McpServer {
+  const projectRoot = options.projectRoot ?? process.cwd();
   const server = new McpServer({ name: 'popcandy', version: '0.2.0' });
   for (const resource of domain.listResources().filter((item) => !/^popcandy:\/\/(?:components|patterns|templates|migrations)\//.test(item.uri))) {
     server.registerResource(resource.name, resource.uri, { title: resource.name, description: resource.description, mimeType: resource.mimeType }, async (uri) => {
-      const content = await domain.readResource(uri.href);
+      const content = await domain.readResource(uri.href, projectRoot);
       return { contents: [{ uri: content.uri, mimeType: content.mimeType, text: content.text }] };
     });
   }
@@ -30,7 +31,7 @@ export function createPopcandyMcpServer(domain: PopcandyMcpDomain): McpServer {
       }),
       { title: `Unpopping Candy ${plural}`, description: `Read exact ${kind} metadata by stable id.`, mimeType: 'application/json' },
       async (uri) => {
-        const content = await domain.readResource(uri.href);
+        const content = await domain.readResource(uri.href, projectRoot);
         return { contents: [{ uri: content.uri, mimeType: content.mimeType, text: content.text }] };
       },
     );

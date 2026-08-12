@@ -13,11 +13,12 @@ import { detectPopcandyProject } from '../src/project-info.ts';
 import { validatePopcandyProject } from '../src/validate.ts';
 
 const registry = createRegistryService({ catalog: bundledCatalog, templateRoot: join(resolve(new URL('../../..', import.meta.url).pathname), 'packages/registry/templates') });
+const templateRoot = join(resolve(new URL('../../..', import.meta.url).pathname), 'packages/registry/templates');
 const services = {
   projectContext: resolveProjectCatalogContext,
   catalogContext: resolveCatalogContext,
   validate: validatePopcandyProject,
-  scaffold: registry.scaffold,
+  scaffold: (catalog: typeof bundledCatalog, input: Parameters<typeof registry.scaffold>[0]) => createRegistryService({ catalog, templateRoot }).scaffold(input),
 };
 
 async function fixture(): Promise<string> {
@@ -165,20 +166,26 @@ test('explicit catalog configuration fails closed when missing, malformed, or es
   assert.ok(results.every((result) => !result.ok && result.error.code === 'POPCANDY_CATALOG_INCOMPATIBLE'));
 });
 
-test('scaffold rejects a template absent from the selected catalog before registry work', async () => {
-  // Given an explicit catalog with no templates
-  const root = await mkdtemp(join(tmpdir(), 'popcandy-scaffold-incompatible-'));
-  await writeFile(join(root, 'package.json'), JSON.stringify({ name: 'fixture' }));
-  await writeFile(join(root, 'catalog.json'), JSON.stringify({ schemaVersion: 1, generatedAt: '2026-08-12T00:00:00.000Z', packageVersion: 'empty', entries: [] }));
-  await writeFile(join(root, 'popcandy.config.json'), JSON.stringify({ schemaVersion: 1, catalog: './catalog.json' }));
-
-  // When scaffold requests a bundled-only template
-  const result = await executeCliCommand(services, 'scaffold', ['template.profile-settings', '--path', root], root);
-
-  // Then the selected catalog rejects it without applying registry output
-  assert.equal(result.ok, false);
-  if (result.ok) throw new Error('Expected incompatible scaffold failure.');
-  assert.equal(result.error.code, 'POPCANDY_CATALOG_INCOMPATIBLE');
+test('scaffold is bound to the selected catalog entry and source', async () => {
+  const button = bundledCatalog.entries.find((entry) => entry.id === 'ui.button');
+  const template = bundledCatalog.entries.find((entry) => entry.id === 'template.profile-settings');
+  if (!button || button.kind !== 'component' || !template || template.kind !== 'template') throw new Error('Missing scaffold fixtures.');
+  const entries = [
+    { entry: { ...button, id: template.id, related: [] }, code: 'POPCANDY_CATALOG_INCOMPATIBLE', message: /unavailable/ },
+    { entry: { ...template, components: [], patterns: [], variables: [], files: [{ path: 'selected.tsx', role: 'component', source: 'packages/registry/templates/missing-selected.tsx' }] }, code: 'ENOENT', message: /missing-selected/ },
+  ];
+  for (const selected of entries) {
+    const root = await mkdtemp(join(tmpdir(), 'popcandy-scaffold-selected-'));
+    await writeFile(join(root, 'package.json'), JSON.stringify({ name: 'fixture' }));
+    await writeFile(join(root, 'catalog.json'), JSON.stringify({ ...bundledCatalog, packageVersion: 'selected', entries: [selected.entry] }));
+    await writeFile(join(root, 'popcandy.config.json'), JSON.stringify({ schemaVersion: 1, catalog: './catalog.json' }));
+    const result = await executeCliCommand(services, 'scaffold', [template.id, '--path', root], root);
+    assert.equal(result.ok, false);
+    if (result.ok) throw new Error('Expected selected-catalog failure.');
+    assert.equal(result.error.code, selected.code);
+    assert.match(result.error.message, selected.message);
+    await assert.rejects(readFile(join(root, 'selected.tsx'), 'utf8'));
+  }
 });
 
 test('validation rejects private imports and reports hardcoded visual values', async () => {

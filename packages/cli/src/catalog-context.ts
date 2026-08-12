@@ -5,9 +5,9 @@ import {
   bundledCompatibilityManifest,
   CatalogCompatibilityError,
   selectCatalogVersion,
-  validateCatalog,
 } from '@unpopping-candy/knowledge';
-import type { KnowledgeCatalog, KnowledgeEntry } from '@unpopping-candy/knowledge';
+import type { KnowledgeCatalog } from '@unpopping-candy/knowledge';
+import { parseKnowledgeCatalog } from './catalog-schema.ts';
 import { PopcandyProjectError } from './project-errors.ts';
 import { detectPopcandyProject } from './project-info.ts';
 import type { CatalogContext, ProjectCatalogContext } from './types.ts';
@@ -18,42 +18,6 @@ export const catalogsByVersion: Readonly<Record<string, KnowledgeCatalog>> = Obj
 
 function isRecord(value: unknown): value is Readonly<Record<string, unknown>> {
   return typeof value === 'object' && value !== null && !Array.isArray(value);
-}
-
-function isStringArray(value: unknown): value is readonly string[] {
-  return Array.isArray(value) && value.every((item) => typeof item === 'string');
-}
-
-function isEntry(value: unknown): value is KnowledgeEntry {
-  if (!isRecord(value) || typeof value.id !== 'string' || typeof value.name !== 'string' ||
-    typeof value.version !== 'string' || typeof value.summary !== 'string' ||
-    !isStringArray(value.keywords) || !isStringArray(value.useWhen) || !isStringArray(value.avoidWhen) ||
-    !isRecord(value.accessibility) || !isStringArray(value.accessibility.requirements) ||
-    !isRecord(value.examples) || !Array.isArray(value.examples.preferred) || !Array.isArray(value.examples.avoid)) return false;
-  if (value.status !== 'stable' && value.status !== 'beta' && value.status !== 'experimental' && value.status !== 'deprecated') return false;
-  switch (value.kind) {
-    case 'component': return typeof value.package === 'string' && isStringArray(value.entrypoints) && isStringArray(value.tokens) && isStringArray(value.related) && isStringArray(value.stories) && isStringArray(value.states) && Array.isArray(value.props) && Array.isArray(value.variants);
-    case 'pattern': return isStringArray(value.components) && isStringArray(value.anatomy) && isStringArray(value.states) && isStringArray(value.responsive);
-    case 'template': return typeof value.description === 'string' && isStringArray(value.components) && isStringArray(value.patterns) && Array.isArray(value.files) && Array.isArray(value.variables) && (value.target === 'react-vite' || value.target === 'react-vite-fsd' || value.target === 'agnostic');
-    case 'migration': return typeof value.fromVersion === 'string' && typeof value.toVersion === 'string' && Array.isArray(value.changes);
-    default: return false;
-  }
-}
-
-function parseCatalog(value: unknown, path: string): KnowledgeCatalog {
-  if (!isRecord(value) || value.schemaVersion !== 1 || typeof value.generatedAt !== 'string' ||
-    typeof value.packageVersion !== 'string' || !Array.isArray(value.entries) || !value.entries.every(isEntry)) {
-    throw new PopcandyProjectError('POPCANDY_CATALOG_INCOMPATIBLE', `Catalog at ${path} does not match schemaVersion 1.`);
-  }
-  const catalog: KnowledgeCatalog = {
-    schemaVersion: value.schemaVersion,
-    generatedAt: value.generatedAt,
-    packageVersion: value.packageVersion,
-    entries: value.entries,
-  };
-  const errors = validateCatalog(catalog).filter((issue) => issue.severity === 'error');
-  if (errors.length > 0) throw new PopcandyProjectError('POPCANDY_CATALOG_INCOMPATIBLE', `Catalog at ${path} is invalid: ${errors[0]?.message ?? 'unknown catalog error'}`);
-  return catalog;
 }
 
 function isInside(root: string, target: string): boolean {
@@ -84,7 +48,7 @@ async function configuredCatalog(context: ProjectCatalogContext): Promise<Knowle
   }
   if (!isInside(root, catalogPath)) throw new PopcandyProjectError('POPCANDY_CATALOG_INCOMPATIBLE', `Configured catalog resolves outside ${root}.`);
   try {
-    return parseCatalog(JSON.parse(await readFile(catalogPath, 'utf8')), catalogPath);
+    return parseKnowledgeCatalog(JSON.parse(await readFile(catalogPath, 'utf8')), catalogPath);
   } catch (error) {
     if (error instanceof PopcandyProjectError) throw error;
     throw new PopcandyProjectError('POPCANDY_CATALOG_INCOMPATIBLE', `Configured catalog at ${catalogPath} is not valid JSON: ${error instanceof Error ? error.message : String(error)}`);

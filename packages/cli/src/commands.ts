@@ -109,9 +109,10 @@ export async function executeCliCommand(services: CliServices, command: string, 
         const context = await services.catalogContext(targetPath);
         const templateId = positional(args)[0];
         if (!templateId) throw new Error('scaffold requires a template id.');
-        if (!getCatalogEntry(context.catalog, templateId)) return { ok: false, command, error: { code: 'POPCANDY_CATALOG_INCOMPATIBLE', message: `Template ${templateId} is unavailable in catalog ${context.catalogVersion}.` } };
+        const entry = getCatalogEntry(context.catalog, templateId);
+        if (!entry || entry.kind !== 'template') return { ok: false, command, error: { code: 'POPCANDY_CATALOG_INCOMPATIBLE', message: `Template ${templateId} is unavailable in catalog ${context.catalogVersion}.` } };
         if (args.includes('--apply') && args.includes('--dry-run')) throw new Error('Use either --apply or --dry-run, not both.');
-        const data = await services.scaffold({ templateId, projectRoot: context.project.root, targetDirectory: option(args, '--target') ?? '.', mode: args.includes('--apply') ? 'apply' : 'dry-run', variables: scaffoldVariables(options(args, '--var')) });
+        const data = await services.scaffold(context.catalog, { templateId, projectRoot: context.project.root, targetDirectory: option(args, '--target') ?? '.', mode: args.includes('--apply') ? 'apply' : 'dry-run', variables: scaffoldVariables(options(args, '--var')) });
         return { ok: true, command, data };
       }
       default: return { ok: false, command, error: { code: 'UNKNOWN_COMMAND', message: `Unknown command: ${command || '(empty)'}` } };

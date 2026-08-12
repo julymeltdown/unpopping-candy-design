@@ -10,6 +10,7 @@ import { createRegistryService } from '../../registry/src/index.ts';
 import { createPopcandyMcpDomain } from '../src/domain.ts';
 
 const registry = createRegistryService({ catalog: bundledCatalog, templateRoot: join(resolve(new URL('../../..', import.meta.url).pathname), 'packages/registry/templates') });
+const templateRoot = join(resolve(new URL('../../..', import.meta.url).pathname), 'packages/registry/templates');
 const domain = createPopcandyMcpDomain({
   catalog: bundledCatalog,
   tokens,
@@ -17,8 +18,8 @@ const domain = createPopcandyMcpDomain({
   catalogContext: resolveCatalogContext,
   designMarkdown: (catalog) => generateDesignMarkdown(catalog, tokens),
   validate: validatePopcandyProject,
-  registryManifest: () => registry.manifest(),
-  scaffold: registry.scaffold,
+  registryManifest: (catalog) => createRegistryService({ catalog, templateRoot }).manifest(),
+  scaffold: (catalog, input) => createRegistryService({ catalog, templateRoot }).scaffold(input),
 });
 
 test('resource list exposes static context and every versioned catalog entry', () => {
@@ -113,4 +114,19 @@ test('scaffold tool is dry-run by default and writes only after explicit apply',
   const applied = await domain.scaffold({ templateId: 'template.profile-settings', path: root, targetDirectory: 'profile', variables: { componentPrefix: 'Agent' }, apply: true }) as { applied: boolean };
   assert.equal(applied.applied, true);
   assert.match(await (await import('node:fs/promises')).readFile(join(root, 'profile/src/profile-settings.tsx'), 'utf8'), /AgentProfileSettings/);
+});
+
+test('scaffold uses the selected catalog source without bundled substitution', async () => {
+  const root = await mkdtemp(join(tmpdir(), 'popcandy-mcp-selected-scaffold-'));
+  const template = bundledCatalog.entries.find((entry) => entry.id === 'template.profile-settings');
+  if (!template || template.kind !== 'template') throw new Error('Expected profile template fixture.');
+  const catalog = { ...bundledCatalog, packageVersion: 'selected-template', entries: [{ ...template, components: [], patterns: [], variables: [], files: [{ path: 'selected.tsx', role: 'component', source: 'packages/registry/templates/missing-selected.tsx' }] }] };
+  await writeFile(join(root, 'package.json'), JSON.stringify({ name: 'fixture' }));
+  await writeFile(join(root, 'catalog.json'), JSON.stringify(catalog));
+  await writeFile(join(root, 'popcandy.config.json'), JSON.stringify({ schemaVersion: 1, catalog: './catalog.json' }));
+
+  await assert.rejects(
+    domain.scaffold({ templateId: 'template.profile-settings', path: root }),
+    /missing-selected/,
+  );
 });

@@ -28,7 +28,7 @@ export interface McpDomainServices {
   catalogContext(path: string): Promise<CatalogContext>;
   validate(catalog: KnowledgeCatalog, path: string): Promise<ValidationReport>;
   registryManifest(catalog: KnowledgeCatalog): Promise<RegistryManifest>;
-  scaffold(input: ScaffoldInput): Promise<ScaffoldResult>;
+  scaffold(catalog: KnowledgeCatalog, input: ScaffoldInput): Promise<ScaffoldResult>;
 }
 
 export interface PopcandyMcpDomain {

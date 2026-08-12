@@ -87,7 +87,7 @@ export function createPopcandyMcpDomain(services: McpDomainServices): PopcandyMc
       const context = await services.catalogContext(input.path ?? process.cwd());
       const entry = getCatalogEntry(context.catalog, input.templateId.trim());
       if (!entry || entry.kind !== 'template') throw new Error(`Template ${input.templateId} is incompatible with catalog ${context.catalogVersion}.`);
-      return services.scaffold({ templateId: entry.id, projectRoot: context.project.root, targetDirectory: input.targetDirectory ?? '.', variables: input.variables ?? {}, mode: input.apply === true ? 'apply' : 'dry-run' });
+      return services.scaffold(context.catalog, { templateId: entry.id, projectRoot: context.project.root, targetDirectory: input.targetDirectory ?? '.', variables: input.variables ?? {}, mode: input.apply === true ? 'apply' : 'dry-run' });
     },
     listPrompts: () => PROMPTS,
     getPrompt(name, args) {

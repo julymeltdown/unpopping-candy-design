@@ -64,7 +64,7 @@ export interface CliServices {
   projectContext(startDirectory: string): Promise<ProjectCatalogContext>;
   catalogContext(startDirectory: string): Promise<CatalogContext>;
   validate(catalog: KnowledgeCatalog, path: string): Promise<ValidationReport>;
-  scaffold?(input: ScaffoldInput): Promise<ScaffoldResult>;
+  scaffold?(catalog: KnowledgeCatalog, input: ScaffoldInput): Promise<ScaffoldResult>;
 }
 
 export type CliResult =
