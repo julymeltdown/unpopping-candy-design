@@ -1,7 +1,7 @@
 #!/usr/bin/env node
 import { executeCliCommand } from './commands.ts';
+import { resolveCatalogContext, resolveProjectCatalogContext } from './catalog-context.ts';
 import { formatCliResult } from './format.ts';
-import { detectPopcandyProject } from './project-info.ts';
 import { validatePopcandyProject } from './validate.ts';
 
 const knowledge = await import(import.meta.url.endsWith('.ts') ? '../../knowledge/src/index.ts' : '@unpopping-candy/knowledge');
@@ -11,11 +11,9 @@ const args = process.argv.slice(2);
 const command = args.shift() ?? '';
 const json = args.includes('--json');
 const result = await executeCliCommand({
-  catalog: knowledge.bundledCatalog,
-  projectInfo: detectPopcandyProject,
-  validate: (path) => validatePopcandyProject(knowledge.bundledCatalog, path),
-  search: (query, options) => knowledge.searchCatalog(knowledge.bundledCatalog, query, options),
-  get: (idOrName) => knowledge.getCatalogEntry(knowledge.bundledCatalog, idOrName),
+  projectContext: resolveProjectCatalogContext,
+  catalogContext: resolveCatalogContext,
+  validate: validatePopcandyProject,
   scaffold: registryService.scaffold,
 }, command, args);
 process.stdout.write(formatCliResult(result, json));

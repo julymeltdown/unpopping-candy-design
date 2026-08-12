@@ -3,7 +3,15 @@ import * as z from 'zod/v4';
 import type { PopcandyMcpDomain } from './types.ts';
 
 function toolResult(data: unknown) {
-  return { content: [{ type: 'text' as const, text: JSON.stringify(data, null, 2) }], structuredContent: data as Record<string, unknown> };
+  const content = [{ type: 'text' as const, text: JSON.stringify(data, null, 2) }];
+  return typeof data === 'object' && data !== null && !Array.isArray(data)
+    ? { content, structuredContent: data }
+    : { content };
+}
+
+function promptArguments(value: unknown): Record<string, string | undefined> {
+  if (typeof value !== 'object' || value === null || Array.isArray(value)) return {};
+  return Object.fromEntries(Object.entries(value).filter((entry): entry is [string, string | undefined] => typeof entry[1] === 'string' || entry[1] === undefined));
 }
 
 export function createPopcandyMcpServer(domain: PopcandyMcpDomain): McpServer {
@@ -28,14 +36,14 @@ export function createPopcandyMcpServer(domain: PopcandyMcpDomain): McpServer {
     );
   }
   server.registerTool('popcandy_project_info', { title: 'Unpopping Candy project information', description: 'Detect framework, installed Unpopping Candy versions, source roots, configuration, and required style imports.', inputSchema: z.object({ path: z.string().optional() }) }, async (input) => toolResult(await domain.projectInfo(input)));
-  server.registerTool('popcandy_search', { title: 'Search Unpopping Candy knowledge', description: 'Search components, patterns, templates, and migrations in the exact bundled catalog.', inputSchema: z.object({ query: z.string().min(1), kind: z.enum(['component','pattern','template','migration']).optional(), limit: z.number().int().min(1).max(20).optional() }) }, async (input) => toolResult(domain.search(input)));
-  server.registerTool('popcandy_get', { title: 'Get Unpopping Candy entry', description: 'Read complete guidance for one stable component, pattern, template, or migration id.', inputSchema: z.object({ id: z.string().min(1) }) }, async (input) => toolResult(domain.get(input)));
-  server.registerTool('popcandy_compose', { title: 'Compose Unpopping Candy interface', description: 'Convert a natural-language interface request into a bounded template, pattern, component, state, and validation plan.', inputSchema: z.object({ request: z.string().min(1) }) }, async (input) => toolResult(domain.compose(input)));
+  server.registerTool('popcandy_search', { title: 'Search Unpopping Candy knowledge', description: 'Search components, patterns, templates, and migrations in the selected compatible catalog.', inputSchema: z.object({ query: z.string().min(1), path: z.string().optional(), kind: z.enum(['component','pattern','template','migration']).optional(), limit: z.number().int().min(1).max(20).optional() }) }, async (input) => toolResult(await domain.search(input)));
+  server.registerTool('popcandy_get', { title: 'Get Unpopping Candy entry', description: 'Read complete guidance for one stable component, pattern, template, or migration id.', inputSchema: z.object({ id: z.string().min(1), path: z.string().optional() }) }, async (input) => toolResult(await domain.get(input)));
+  server.registerTool('popcandy_compose', { title: 'Compose Unpopping Candy interface', description: 'Convert a natural-language interface request into a bounded template, pattern, component, state, and validation plan.', inputSchema: z.object({ request: z.string().min(1), path: z.string().optional() }) }, async (input) => toolResult(await domain.compose(input)));
   server.registerTool('popcandy_validate', { title: 'Validate Unpopping Candy usage', description: 'Read-only validation of imports, hardcoded visual values, and Unpopping Candy package usage.', inputSchema: z.object({ path: z.string().optional() }) }, async (input) => toolResult(await domain.validate(input)));
   server.registerTool('popcandy_scaffold', { title: 'Scaffold a Unpopping Candy template', description: 'Create a checksum-verified template plan. Dry-run is the default; files are written only when apply is explicitly true. Existing different files are never overwritten.', inputSchema: z.object({ templateId: z.string().min(1), path: z.string().optional(), targetDirectory: z.string().optional(), variables: z.record(z.string(), z.string()).optional(), apply: z.boolean().optional() }) }, async (input) => toolResult(await domain.scaffold(input)));
   for (const prompt of domain.listPrompts()) {
     server.registerPrompt(prompt.name, { title: prompt.title, description: prompt.description, argsSchema: z.object(Object.fromEntries(prompt.arguments.map((argument) => [argument.name, argument.required ? z.string().min(1) : z.string().optional()]))) }, (args) => {
-      const result = domain.getPrompt(prompt.name, args as Record<string, string | undefined>);
+      const result = domain.getPrompt(prompt.name, promptArguments(args));
       return { description: result.description, messages: [{ role: 'user', content: { type: 'text', text: result.text } }] };
     });
   }

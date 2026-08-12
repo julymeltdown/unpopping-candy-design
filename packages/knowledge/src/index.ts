@@ -1,7 +1,9 @@
 export { extractComponentApi, extractExportedInterfaces } from './source-api.ts';
 export type { ExtractedComponentApi, ExtractedInterface, InterfacePickReference } from './source-api.ts';
-export { createCatalog, getCatalogEntry, searchCatalog, validateCatalog } from './catalog.ts';
+export { createCatalog, getCatalogEntry, validateCatalog } from './catalog.ts';
 export type { CreateCatalogOptions } from './catalog.ts';
+export { searchCatalog, searchCatalogDetailed } from './search.ts';
+export type { DetailedSearchResult, SearchBenchmark, SearchDiagnostic, SearchDiagnosticCode, SearchOptions } from './search.ts';
 export { CatalogCompatibilityError, dependencyClosedPackageSets, selectCatalogVersion } from './compatibility.ts';
 export { defineComponentDoc, defineMigrationDoc, definePatternDoc, defineTemplateDoc } from './define.ts';
 export { stableStringify } from './stable-json.ts';

@@ -14,6 +14,25 @@ export interface PopcandyProjectInfo {
   styleImports: readonly string[];
 }
 
+export interface CatalogContextDiagnostic {
+  readonly code: 'POPCANDY_DEPENDENCIES_NOT_INSTALLED';
+  readonly guidance: string;
+}
+
+export interface ProjectCatalogContext {
+  readonly project: PopcandyProjectInfo;
+  readonly catalog: KnowledgeCatalog | null;
+  readonly catalogVersion: string | null;
+  readonly catalogSource: 'installed-set' | 'repository-config' | null;
+  readonly diagnostics: readonly CatalogContextDiagnostic[];
+}
+
+export interface CatalogContext extends ProjectCatalogContext {
+  readonly catalog: KnowledgeCatalog;
+  readonly catalogVersion: string;
+  readonly catalogSource: 'installed-set' | 'repository-config';
+}
+
 export interface ValidationIssue {
   code: string;
   severity: 'error' | 'warning';
@@ -42,11 +61,9 @@ export interface CompositionPlan {
 }
 
 export interface CliServices {
-  catalog: KnowledgeCatalog;
-  projectInfo(startDirectory: string): Promise<PopcandyProjectInfo>;
-  validate(path: string): Promise<ValidationReport>;
-  search(query: string, options?: { kind?: KnowledgeEntry['kind']; limit?: number }): readonly SearchResult[];
-  get(idOrName: string): KnowledgeEntry | undefined;
+  projectContext(startDirectory: string): Promise<ProjectCatalogContext>;
+  catalogContext(startDirectory: string): Promise<CatalogContext>;
+  validate(catalog: KnowledgeCatalog, path: string): Promise<ValidationReport>;
   scaffold?(input: ScaffoldInput): Promise<ScaffoldResult>;
 }
 
@@ -55,7 +72,16 @@ export type CliResult =
   | { ok: false; command: string; error: { code: string; message: string; details?: unknown } };
 
 export interface SearchResponse {
-  query: string;
-  catalogVersion: string;
-  results: readonly SearchResult[];
+  readonly query: string;
+  readonly catalogVersion: string;
+  readonly catalogSource: CatalogContext['catalogSource'];
+  readonly results: readonly SearchResult[];
+  readonly benchmark: {
+    readonly scanned: number;
+    readonly eligible: number;
+    readonly returned: number;
+    readonly omittedDeprecated: number;
+    readonly omittedIncompatible: number;
+  };
+  readonly diagnostics: readonly { readonly code: string; readonly entryId?: string; readonly count?: number; readonly guidance: string }[];
 }

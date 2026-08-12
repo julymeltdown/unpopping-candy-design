@@ -1,5 +1,5 @@
-import type { KnowledgeCatalog, KnowledgeEntry, SearchResult } from '@unpopping-candy/knowledge';
-import type { PopcandyProjectInfo, CompositionPlan, ValidationReport } from '@unpopping-candy/cli';
+import type { KnowledgeCatalog, KnowledgeEntry } from '@unpopping-candy/knowledge';
+import type { CatalogContext, ProjectCatalogContext, ValidationReport } from '@unpopping-candy/cli';
 import type { RegistryManifest, ScaffoldInput, ScaffoldResult } from '@unpopping-candy/registry';
 
 export interface McpResourceDescriptor {
@@ -22,14 +22,12 @@ export interface McpPromptDefinition {
 
 export interface McpDomainServices {
   catalog: KnowledgeCatalog;
-  designMarkdown: string;
+  designMarkdown(catalog: KnowledgeCatalog): string;
   tokens: Record<string, unknown>;
-  projectInfo(path: string): Promise<PopcandyProjectInfo>;
-  validate(path: string): Promise<ValidationReport>;
-  search(query: string, options?: { kind?: KnowledgeEntry['kind']; limit?: number }): readonly SearchResult[];
-  get(idOrName: string): KnowledgeEntry | undefined;
-  compose(request: string): CompositionPlan;
-  registryManifest(): Promise<RegistryManifest>;
+  projectContext(path: string): Promise<ProjectCatalogContext>;
+  catalogContext(path: string): Promise<CatalogContext>;
+  validate(catalog: KnowledgeCatalog, path: string): Promise<ValidationReport>;
+  registryManifest(catalog: KnowledgeCatalog): Promise<RegistryManifest>;
   scaffold(input: ScaffoldInput): Promise<ScaffoldResult>;
 }
 
@@ -37,9 +35,9 @@ export interface PopcandyMcpDomain {
   listResources(): readonly McpResourceDescriptor[];
   readResource(uri: string, projectPath?: string): Promise<McpResourceContent>;
   projectInfo(input: { path?: string | undefined }): Promise<unknown>;
-  search(input: { query: string; kind?: KnowledgeEntry['kind'] | undefined; limit?: number | undefined }): unknown;
-  get(input: { id: string }): unknown;
-  compose(input: { request: string }): unknown;
+  search(input: { query: string; path?: string | undefined; kind?: KnowledgeEntry['kind'] | undefined; limit?: number | undefined }): Promise<unknown>;
+  get(input: { id: string; path?: string | undefined }): Promise<unknown>;
+  compose(input: { request: string; path?: string | undefined }): Promise<unknown>;
   validate(input: { path?: string | undefined }): Promise<unknown>;
   scaffold(input: { templateId: string; path?: string | undefined; targetDirectory?: string | undefined; variables?: Readonly<Record<string, string>> | undefined; apply?: boolean | undefined }): Promise<unknown>;
   listPrompts(): readonly McpPromptDefinition[];

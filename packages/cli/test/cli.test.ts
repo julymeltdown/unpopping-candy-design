@@ -3,21 +3,20 @@ import { mkdtemp, mkdir, readFile, writeFile } from 'node:fs/promises';
 import { tmpdir } from 'node:os';
 import { join, resolve } from 'node:path';
 import test from 'node:test';
-import { bundledCatalog, getCatalogEntry, searchCatalog } from '../../knowledge/src/index.ts';
+import { bundledCatalog, searchCatalog } from '../../knowledge/src/index.ts';
 import { createRegistryService } from '../../registry/src/index.ts';
+import { resolveCatalogContext, resolveProjectCatalogContext } from '../src/catalog-context.ts';
 import { executeCliCommand } from '../src/commands.ts';
 import { composeInterfacePlan } from '../src/compose.ts';
+import { PopcandyProjectError } from '../src/project-errors.ts';
 import { detectPopcandyProject } from '../src/project-info.ts';
 import { validatePopcandyProject } from '../src/validate.ts';
 
-const search = (query: string, options?: Parameters<typeof searchCatalog>[2]) => searchCatalog(bundledCatalog, query, options);
 const registry = createRegistryService({ catalog: bundledCatalog, templateRoot: join(resolve(new URL('../../..', import.meta.url).pathname), 'packages/registry/templates') });
 const services = {
-  catalog: bundledCatalog,
-  projectInfo: detectPopcandyProject,
-  validate: (path: string) => validatePopcandyProject(bundledCatalog, path),
-  search,
-  get: (idOrName: string) => getCatalogEntry(bundledCatalog, idOrName),
+  projectContext: resolveProjectCatalogContext,
+  catalogContext: resolveCatalogContext,
+  validate: validatePopcandyProject,
   scaffold: registry.scaffold,
 };
 
@@ -72,16 +71,114 @@ test('search and get commands use the exact bundled catalog', async () => {
   const getResult = await executeCliCommand(services, 'get', ['Button']);
   if (!getResult.ok) throw new Error(getResult.error.message);
   assert.equal(getResult.ok, true);
-  assert.equal((getResult.data as { id: string }).id, 'ui.button');
+  assert.equal((getResult.data as { entry: { id: string } }).entry.id, 'ui.button');
 });
 
 test('composition planning returns a bounded implementation and verification sequence', () => {
-  const plan = composeInterfacePlan(bundledCatalog, 'social feed page', search);
+  const plan = composeInterfacePlan(bundledCatalog, 'social feed page', (query, options) => searchCatalog(bundledCatalog, query, options));
   assert.equal(plan.catalogVersion, '0.2.0');
   assert.ok(plan.patterns.some((entry) => entry.id === 'pattern.social-feed'));
   assert.ok(plan.components.some((entry) => entry.id === 'social.timeline-view'));
   assert.equal(plan.steps.at(-1)?.phase, 'verify');
   assert.ok(plan.components.length <= 14);
+});
+
+test('all catalog-aware commands preserve a typed mixed-version failure after one context resolution', async () => {
+  // Given a context resolver that observes a known mixed package set
+  const calls: string[] = [];
+  const mixedError = new PopcandyProjectError('POPCANDY_VERSION_SET_MIXED', 'Mixed package releases.');
+  const mixedServices = {
+    ...services,
+    async projectContext(path: string) { calls.push(path); throw mixedError; },
+    async catalogContext(path: string) { calls.push(path); throw mixedError; },
+  };
+  const commands = [
+    ['info', []],
+    ['search', ['button']],
+    ['get', ['ui.button']],
+    ['compose', ['profile settings']],
+    ['validate', []],
+  ] as const;
+
+  // When each command targets the same project
+  const results = await Promise.all(commands.map(([command, args]) => executeCliCommand(mixedServices, command, args, '/target')));
+
+  // Then each resolves once and preserves the stable error code
+  assert.deepEqual(calls, ['/target', '/target', '/target', '/target', '/target']);
+  assert.ok(results.every((result) => !result.ok && result.error.code === 'POPCANDY_VERSION_SET_MIXED'));
+});
+
+test('empty consumers report a nullable catalog for info and fail catalog commands actionably', async () => {
+  // Given an ordinary project with no Unpopping Candy dependencies or catalog config
+  const root = await mkdtemp(join(tmpdir(), 'popcandy-empty-'));
+  await writeFile(join(root, 'package.json'), JSON.stringify({ name: 'empty-consumer' }));
+
+  // When info and catalog-requiring commands run
+  const info = await executeCliCommand(services, 'info', ['--path', root], root);
+  const failures = await Promise.all([
+    executeCliCommand(services, 'search', ['button', '--path', root], root),
+    executeCliCommand(services, 'get', ['ui.button', '--path', root], root),
+    executeCliCommand(services, 'compose', ['profile settings', '--path', root], root),
+    executeCliCommand(services, 'validate', ['--path', root], root),
+  ]);
+
+  // Then info succeeds diagnostically while catalog commands fail with the typed dependency code
+  assert.equal(info.ok, true);
+  assert.match(JSON.stringify(info), /"installed":\{\}/);
+  assert.match(JSON.stringify(info), /"catalogVersion":null/);
+  assert.match(JSON.stringify(info), /POPCANDY_DEPENDENCIES_NOT_INSTALLED/);
+  assert.ok(failures.every((result) => !result.ok && result.error.code === 'POPCANDY_DEPENDENCIES_NOT_INSTALLED'));
+});
+
+test('--path selects one repository catalog context and never enters search text', async () => {
+  // Given the repository's explicit catalog configuration
+  const repositoryRoot = resolve(new URL('../../..', import.meta.url).pathname);
+
+  // When search targets it through the value flag
+  const result = await executeCliCommand(services, 'search', ['profile', 'settings', '--path', repositoryRoot], '/unrelated');
+
+  // Then the response is bound to repository config and the query excludes the path
+  assert.equal(result.ok, true);
+  assert.match(JSON.stringify(result), /"query":"profile settings"/);
+  assert.match(JSON.stringify(result), /"catalogSource":"repository-config"/);
+});
+
+test('explicit catalog configuration fails closed when missing, malformed, or escaping root', async () => {
+  // Given explicit configurations that cannot safely produce a valid catalog
+  const cases = [
+    { schemaVersion: 1, catalog: './missing.json' },
+    { schemaVersion: 1, catalog: '../outside.json' },
+    { schemaVersion: 1, catalog: 42 },
+    { schemaVersion: 2, catalog: './catalog.json' },
+    { schemaVersion: 1, catalog: '/tmp/catalog.json' },
+  ] as const;
+
+  // When each project context is resolved
+  const results = await Promise.all(cases.map(async (config) => {
+    const root = await mkdtemp(join(tmpdir(), 'popcandy-config-invalid-'));
+    await writeFile(join(root, 'package.json'), JSON.stringify({ name: 'fixture' }));
+    await writeFile(join(root, 'popcandy.config.json'), JSON.stringify(config));
+    return executeCliCommand(services, 'search', ['button', '--path', root], root);
+  }));
+
+  // Then no explicit config silently falls back to bundled catalog state
+  assert.ok(results.every((result) => !result.ok && result.error.code === 'POPCANDY_CATALOG_INCOMPATIBLE'));
+});
+
+test('scaffold rejects a template absent from the selected catalog before registry work', async () => {
+  // Given an explicit catalog with no templates
+  const root = await mkdtemp(join(tmpdir(), 'popcandy-scaffold-incompatible-'));
+  await writeFile(join(root, 'package.json'), JSON.stringify({ name: 'fixture' }));
+  await writeFile(join(root, 'catalog.json'), JSON.stringify({ schemaVersion: 1, generatedAt: '2026-08-12T00:00:00.000Z', packageVersion: 'empty', entries: [] }));
+  await writeFile(join(root, 'popcandy.config.json'), JSON.stringify({ schemaVersion: 1, catalog: './catalog.json' }));
+
+  // When scaffold requests a bundled-only template
+  const result = await executeCliCommand(services, 'scaffold', ['template.profile-settings', '--path', root], root);
+
+  // Then the selected catalog rejects it without applying registry output
+  assert.equal(result.ok, false);
+  if (result.ok) throw new Error('Expected incompatible scaffold failure.');
+  assert.equal(result.error.code, 'POPCANDY_CATALOG_INCOMPATIBLE');
 });
 
 test('validation rejects private imports and reports hardcoded visual values', async () => {
@@ -110,6 +207,8 @@ test('doctor reports missing installation and style prerequisites without mutati
 
 test('scaffold defaults to dry-run and requires explicit apply for writes', async () => {
   const root = await mkdtemp(join(tmpdir(), 'popcandy-cli-scaffold-'));
+  await writeFile(join(root, 'package.json'), JSON.stringify({ name: 'fixture', dependencies: { '@unpopping-candy/icons': '0.1.0', '@unpopping-candy/tokens': '0.1.0', '@unpopping-candy/ui': '0.1.0' } }));
+  await writeFile(join(root, 'package-lock.json'), JSON.stringify({ lockfileVersion: 3, packages: { 'node_modules/@unpopping-candy/icons': { version: '0.1.0' }, 'node_modules/@unpopping-candy/tokens': { version: '0.1.0' }, 'node_modules/@unpopping-candy/ui': { version: '0.1.0' } } }));
   const dryRun = await executeCliCommand(services, 'scaffold', ['template.profile-settings', '--target', 'features/profile'], root);
   if (!dryRun.ok) throw new Error(dryRun.error.message);
   assert.equal(dryRun.ok, true);

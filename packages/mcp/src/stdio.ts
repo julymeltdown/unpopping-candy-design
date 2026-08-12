@@ -8,18 +8,15 @@ const knowledge = await import(import.meta.url.endsWith('.ts') ? '../../knowledg
 const cli = await import(import.meta.url.endsWith('.ts') ? '../../cli/src/index.ts' : '@unpopping-candy/cli');
 const registry = await import(import.meta.url.endsWith('.ts') ? '../../registry/src/index.ts' : '@unpopping-candy/registry');
 const registryService = registry.createBundledRegistryService(knowledge.bundledCatalog);
-const tokens = (await import('@unpopping-candy/tokens/tokens.json', { with: { type: 'json' } })).default as Record<string, unknown>;
-const searchCatalog: McpDomainServices['search'] = (query, options) => knowledge.searchCatalog(knowledge.bundledCatalog, query, options);
+const tokens: Record<string, unknown> = (await import('@unpopping-candy/tokens/tokens.json', { with: { type: 'json' } })).default;
 const services: McpDomainServices = {
   catalog: knowledge.bundledCatalog,
-  designMarkdown: knowledge.generateDesignMarkdown(knowledge.bundledCatalog, tokens),
+  designMarkdown: (catalog) => knowledge.generateDesignMarkdown(catalog, tokens),
   tokens,
-  projectInfo: cli.detectPopcandyProject,
-  validate: (path) => cli.validatePopcandyProject(knowledge.bundledCatalog, path),
-  search: searchCatalog,
-  get: (id) => knowledge.getCatalogEntry(knowledge.bundledCatalog, id),
-  compose: (request) => cli.composeInterfacePlan(knowledge.bundledCatalog, request, searchCatalog),
-  registryManifest: registryService.manifest,
+  projectContext: cli.resolveProjectCatalogContext,
+  catalogContext: cli.resolveCatalogContext,
+  validate: cli.validatePopcandyProject,
+  registryManifest: (catalog) => registry.createBundledRegistryService(catalog).manifest(),
   scaffold: registryService.scaffold,
 };
 const domain = createPopcandyMcpDomain(services);

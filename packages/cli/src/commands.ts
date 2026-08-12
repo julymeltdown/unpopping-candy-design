@@ -1,3 +1,4 @@
+import { getCatalogEntry, searchCatalog, searchCatalogDetailed } from '@unpopping-candy/knowledge';
 import type { KnowledgeEntry } from '@unpopping-candy/knowledge';
 import { composeInterfacePlan } from './compose.ts';
 import type { CliResult, CliServices, SearchResponse } from './types.ts';
@@ -7,11 +8,10 @@ function option(args: readonly string[], name: string): string | undefined {
   return index >= 0 ? args[index + 1] : undefined;
 }
 
-
 function options(args: readonly string[], name: string): string[] {
   const output: string[] = [];
   for (let index = 0; index < args.length; index += 1) {
-    if (args[index] === name && args[index + 1]) output.push(args[index + 1] as string);
+    if (args[index] === name && args[index + 1]) output.push(args[index + 1] ?? '');
   }
   return output;
 }
@@ -31,7 +31,7 @@ function scaffoldVariables(values: readonly string[]): Readonly<Record<string, s
 
 function positional(args: readonly string[]): string[] {
   const output: string[] = [];
-  const valueFlags = new Set(['--kind', '--limit', '--target', '--var']);
+  const valueFlags = new Set(['--kind', '--limit', '--path', '--target', '--var']);
   for (let index = 0; index < args.length; index += 1) {
     const value = args[index];
     if (value?.startsWith('--')) { if (valueFlags.has(value)) index += 1; continue; }
@@ -51,71 +51,72 @@ function boundedLimit(value: string | undefined): number {
   return Number.isInteger(parsed) ? Math.max(1, Math.min(parsed, 50)) : 20;
 }
 
+function errorCode(error: unknown): string {
+  return error instanceof Error && 'code' in error && typeof error.code === 'string' ? error.code : 'INVALID_INPUT';
+}
+
 export async function executeCliCommand(services: CliServices, command: string, args: readonly string[], cwd = process.cwd()): Promise<CliResult> {
   try {
+    const targetPath = option(args, '--path') ?? cwd;
     switch (command) {
-      case 'info': return { ok: true, command, data: { ...(await services.projectInfo(cwd)), catalogVersion: services.catalog.packageVersion } };
+      case 'info': {
+        const context = await services.projectContext(targetPath);
+        return { ok: true, command, data: { ...context.project, catalogVersion: context.catalogVersion, catalogSource: context.catalogSource, diagnostics: context.diagnostics } };
+      }
       case 'list': {
+        const context = await services.catalogContext(targetPath);
         const kind = optionalKind(option(args, '--kind'));
-        const entries = services.catalog.entries.filter((entry) => !kind || entry.kind === kind).slice(0, boundedLimit(option(args, '--limit')));
-        return { ok: true, command, data: { catalogVersion: services.catalog.packageVersion, entries } };
+        const entries = context.catalog.entries.filter((entry) => !kind || entry.kind === kind).slice(0, boundedLimit(option(args, '--limit')));
+        return { ok: true, command, data: { catalogVersion: context.catalogVersion, catalogSource: context.catalogSource, entries } };
       }
       case 'get': {
+        const context = await services.catalogContext(targetPath);
         const target = positional(args).join(' ').trim();
         if (!target) throw new Error('get requires a component, pattern, template, or migration name.');
-        const entry = services.get(target);
+        const entry = getCatalogEntry(context.catalog, target);
         if (!entry) return { ok: false, command, error: { code: 'NOT_FOUND', message: `No Unpopping Candy knowledge entry matched: ${target}` } };
-        return { ok: true, command, data: entry };
+        return { ok: true, command, data: { catalogVersion: context.catalogVersion, catalogSource: context.catalogSource, entry } };
       }
       case 'search': {
+        const context = await services.catalogContext(targetPath);
         const query = positional(args).join(' ').trim();
         if (!query) throw new Error('search requires a query.');
         const kind = optionalKind(option(args, '--kind'));
-        const data: SearchResponse = {
-          query,
-          catalogVersion: services.catalog.packageVersion,
-          results: services.search(query, {
-            ...(kind ? { kind } : {}),
-            limit: boundedLimit(option(args, '--limit')),
-          }),
-        };
+        const detailed = searchCatalogDetailed(context.catalog, query, { ...(kind ? { kind } : {}), limit: boundedLimit(option(args, '--limit')) });
+        const data: SearchResponse = { query, catalogVersion: context.catalogVersion, catalogSource: context.catalogSource, ...detailed };
         return { ok: true, command, data };
       }
       case 'compose': {
+        const context = await services.catalogContext(targetPath);
         const request = positional(args).join(' ').trim();
-        return { ok: true, command, data: composeInterfacePlan(services.catalog, request, services.search) };
+        return { ok: true, command, data: { catalogSource: context.catalogSource, ...composeInterfacePlan(context.catalog, request, (query, searchOptions) => searchCatalog(context.catalog, query, searchOptions)) } };
       }
       case 'validate': {
-        const target = positional(args)[0] ?? cwd;
-        const data = await services.validate(target);
-        return data.summary.errors ? { ok: false, command, error: { code: 'VALIDATION_FAILED', message: `${data.summary.errors} Unpopping Candy validation errors found.`, details: data } } : { ok: true, command, data };
+        const context = await services.catalogContext(targetPath);
+        const data = await services.validate(context.catalog, context.project.root);
+        return data.summary.errors ? { ok: false, command, error: { code: 'VALIDATION_FAILED', message: `${data.summary.errors} Unpopping Candy validation errors found.`, details: data } } : { ok: true, command, data: { catalogVersion: context.catalogVersion, catalogSource: context.catalogSource, ...data } };
       }
       case 'doctor': {
-        const info = await services.projectInfo(cwd);
-        const report = await services.validate(info.root);
+        const context = await services.projectContext(targetPath);
+        const report = context.catalog ? await services.validate(context.catalog, context.project.root) : { root: context.project.root, filesScanned: 0, issues: [], summary: { errors: 0, warnings: 0 } };
         const recommendations: string[] = [];
-        for (const required of ['@unpopping-candy/tokens', '@unpopping-candy/theme', '@unpopping-candy/ui']) if (!info.installed[required]) recommendations.push(`Install ${required}.`);
-        for (const stylesheet of ['@unpopping-candy/tokens/styles.css', '@unpopping-candy/icons/styles.css', '@unpopping-candy/ui/styles.css']) if (!info.styleImports.includes(stylesheet)) recommendations.push(`Import ${stylesheet} once at the application entry.`);
-        if (!info.configPath) recommendations.push('Add popcandy.config.json for deterministic scaffolding and validation paths.');
-        return { ok: report.summary.errors === 0, command, ...(report.summary.errors === 0 ? { data: { info, validation: report.summary, recommendations } } : { error: { code: 'DOCTOR_FAILED', message: 'Project has blocking Unpopping Candy issues.', details: { info, report, recommendations } } }) } as CliResult;
+        for (const required of ['@unpopping-candy/tokens', '@unpopping-candy/theme', '@unpopping-candy/ui']) if (!context.project.installed[required]) recommendations.push(`Install ${required}.`);
+        if (!context.project.configPath) recommendations.push('Add popcandy.config.json for deterministic scaffolding and validation paths.');
+        return { ok: true, command, data: { info: context.project, validation: report.summary, recommendations } };
       }
       case 'scaffold': {
         if (!services.scaffold) return { ok: false, command, error: { code: 'REGISTRY_REQUIRED', message: 'Scaffolding requires @unpopping-candy/registry.' } };
+        const context = await services.catalogContext(targetPath);
         const templateId = positional(args)[0];
         if (!templateId) throw new Error('scaffold requires a template id.');
+        if (!getCatalogEntry(context.catalog, templateId)) return { ok: false, command, error: { code: 'POPCANDY_CATALOG_INCOMPATIBLE', message: `Template ${templateId} is unavailable in catalog ${context.catalogVersion}.` } };
         if (args.includes('--apply') && args.includes('--dry-run')) throw new Error('Use either --apply or --dry-run, not both.');
-        const data = await services.scaffold({
-          templateId,
-          projectRoot: cwd,
-          targetDirectory: option(args, '--target') ?? '.',
-          mode: args.includes('--apply') ? 'apply' : 'dry-run',
-          variables: scaffoldVariables(options(args, '--var')),
-        });
+        const data = await services.scaffold({ templateId, projectRoot: context.project.root, targetDirectory: option(args, '--target') ?? '.', mode: args.includes('--apply') ? 'apply' : 'dry-run', variables: scaffoldVariables(options(args, '--var')) });
         return { ok: true, command, data };
       }
-      default: return { ok: false, command, error: { code: 'UNKNOWN_COMMAND', message: `Unknown command: ${command || '(empty)'}`, details: { commands: ['info','list','get','search','compose','validate','doctor','scaffold'] } } };
+      default: return { ok: false, command, error: { code: 'UNKNOWN_COMMAND', message: `Unknown command: ${command || '(empty)'}` } };
     }
   } catch (error) {
-    return { ok: false, command, error: { code: 'INVALID_INPUT', message: error instanceof Error ? error.message : String(error) } };
+    return { ok: false, command, error: { code: errorCode(error), message: error instanceof Error ? error.message : String(error) } };
   }
 }

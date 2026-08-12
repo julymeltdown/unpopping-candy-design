@@ -471,6 +471,7 @@ git commit -m "feat: resolve installed package versions"
 **Files:**
 
 - Create: `packages/knowledge/src/search.ts`
+- Modify: `packages/knowledge/src/catalog.ts`
 - Create: `packages/cli/src/catalog-context.ts`
 - Modify: `packages/knowledge/src/index.ts`
 - Modify: `packages/cli/src/types.ts`
@@ -479,6 +480,7 @@ git commit -m "feat: resolve installed package versions"
 - Modify: `packages/mcp/src/types.ts`
 - Modify: `packages/mcp/src/domain.ts`
 - Modify: `packages/mcp/src/stdio.ts`
+- Modify: `packages/mcp/src/server.ts`
 - Test: `packages/knowledge/test/search-diagnostics.test.ts`
 - Test: `packages/cli/test/cli.test.ts`
 - Test: `packages/mcp/test/domain.test.ts`
@@ -546,7 +548,7 @@ Expected: tests pass; all five commands load the exact catalog declared by the r
 - [ ] **Step 5: Commit**
 
 ```bash
-git add packages/knowledge/src/search.ts packages/knowledge/src/index.ts packages/knowledge/test/search-diagnostics.test.ts packages/cli/src/catalog-context.ts packages/cli/src/types.ts packages/cli/src/commands.ts packages/cli/src/bin.ts packages/cli/test/cli.test.ts packages/mcp/src/types.ts packages/mcp/src/domain.ts packages/mcp/src/stdio.ts packages/mcp/test/domain.test.ts
+git add packages/knowledge/src/search.ts packages/knowledge/src/catalog.ts packages/knowledge/src/index.ts packages/knowledge/test/search-diagnostics.test.ts packages/cli/src/catalog-context.ts packages/cli/src/types.ts packages/cli/src/commands.ts packages/cli/src/bin.ts packages/cli/test/cli.test.ts packages/mcp/src/types.ts packages/mcp/src/domain.ts packages/mcp/src/stdio.ts packages/mcp/src/server.ts packages/mcp/test/domain.test.ts
 git commit -m "feat: bind discovery to installed compatibility"
 ```
 

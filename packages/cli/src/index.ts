@@ -1,4 +1,5 @@
 export { executeCliCommand } from './commands.ts';
+export { catalogsByVersion, resolveCatalogContext, resolveProjectCatalogContext } from './catalog-context.ts';
 export { composeInterfacePlan } from './compose.ts';
 export { formatCliResult } from './format.ts';
 export { detectPopcandyProject } from './project-info.ts';
@@ -7,4 +8,4 @@ export { validatePopcandyProject } from './validate.ts';
 export { resolveInstalledPopcandyVersions } from './version-resolution.ts';
 export type { PopcandyErrorCode } from './project-errors.ts';
 export type { InstalledPopcandyVersions, VersionResolutionSource } from './version-resolution.ts';
-export type { CliResult, CliServices, PopcandyProjectInfo, CompositionPlan, SearchResponse, ValidationIssue, ValidationReport } from './types.ts';
+export type { CatalogContext, CatalogContextDiagnostic, CliResult, CliServices, PopcandyProjectInfo, ProjectCatalogContext, CompositionPlan, SearchResponse, ValidationIssue, ValidationReport } from './types.ts';
