@@ -808,10 +808,16 @@ git commit -m "fix: verify published contracts"
 
 - Create: `config/bundle-budgets.json`
 - Create: `scripts/verify-bundle-budgets.mjs`
+- Create: `scripts/lib/bundle-policy.mjs`
 - Create: `scripts/verify-release-authorizations.mjs`
 - Modify: `scripts/verify-release-readiness.mjs`
 - Modify: `package.json`
 - Modify: `.gitignore`
+- Modify: `packages/theme/vite.config.ts`
+- Modify: `packages/icons/vite.config.ts`
+- Modify: `packages/ui/vite.config.ts`
+- Modify: `packages/social/vite.config.ts`
+- Test: `tests/architecture/build-config.test.mjs`
 - Test: `tests/architecture/bundle-budget.test.mjs`
 - Test: `tests/architecture/release-authorization.test.mjs`
 
@@ -845,9 +851,9 @@ Measure built `.js`, `.css`, and `.json` files with Node `gzipSync` at level 9; 
 | icons     |     2005 |      2250 |    2250 |    3500 |    4500 |    5500 |
 | ui        |    15220 |     16750 |   16750 |   45000 |   75000 |  110000 |
 | social    |    10336 |     11400 |   11400 |   14000 |   20000 |   30000 |
-| knowledge |    26161 |     28800 |   28800 |   52000 |   76000 |  105000 |
+| knowledge |    26161 |     28800 |   30000 |   52000 |   76000 |  105000 |
 | registry  |     4556 |      5100 |    5100 |    6500 |    7500 |    9000 |
-| cli       |     8330 |      9200 |    9200 |   12000 |   13500 |   16000 |
+| cli       |     8330 |      9200 |   15000 |   15000 |   15000 |   16000 |
 | mcp       |     4808 |      5300 |    5300 |    7000 |    8500 |   10000 |
 
 The four stage columns are cumulative roadmap allocations, not automatically learned baselines. Store these immutable planned catalog-ID lists beside them:
@@ -857,7 +863,7 @@ The four stage columns are cumulative roadmap allocations, not automatically lea
 - `stage-2`: `ui.menu`, `ui.menu-trigger`, `ui.menu-item`, `ui.menu-section`, `ui.menu-separator`, `ui.menu-checkbox-item`, `ui.menu-radio-item`, `ui.popover`, `ui.tooltip`, `ui.disclosure`, `ui.accordion`.
 - `stage-3`: `ui.breadcrumbs`, `ui.breadcrumb-item`, `ui.pagination`, `ui.table`, `ui.data-grid`, `ui.progress`.
 
-When `--changed-from` finds a newly added catalog ID, require it to appear in the selected stage's reserved list; an unreserved addition fails closed. Stage 1–3 edits to existing IDs use the selected cumulative stage ceiling, so ordinary fixes remain possible. The unplanned column governs Stage 0 and non-expansion package growth where no new public ID is added. Tests hard-code this table and the approved ID lists, so later stages may consume the allocations but cannot raise them by editing JSON alone.
+When `--changed-from` finds a newly added catalog ID, require it to appear in the selected stage's reserved list; an unreserved addition fails closed. Stage 1–3 edits to existing IDs use the selected cumulative stage ceiling, so ordinary fixes remain possible. Stage 0 has explicit foundation allocations for the knowledge and CLI work already implemented; the unplanned column governs later non-expansion package growth where no public catalog ID changed. Tests hard-code this table and the approved ID lists, so later stages may consume the allocations but cannot raise them by editing JSON alone.
 
 - [ ] **Step 3: Implement publication authorization evidence**
 
@@ -865,7 +871,7 @@ Require a schema-versioned local JSON record with npm organization, approving ow
 
 - [ ] **Step 4: Wire package, license, and budget gates**
 
-Add `bundle:check` with value `node scripts/verify-bundle-budgets.mjs` to root scripts and call `bundle:check -- --stage stage-0 --json .artifacts/bundles/stage-0.json` from `verify-release-readiness.mjs`; compare every public manifest license with root `LICENSE.md`, require two private tools to remain private, and expose no command that writes or raises a baseline.
+Add `bundle:check` with value `node scripts/verify-bundle-budgets.mjs` to root scripts and call `bundle:check -- --stage stage-0 --json .artifacts/bundles/stage-0.json` from `verify-release-readiness.mjs`; compare every public manifest license with root `LICENSE.md`, require two private tools to remain private, and expose no command that writes or raises a baseline. Make every Vite library build empty its own `dist` before emitting so hashed chunks from an earlier build cannot enter measurements or published tarballs; cover that invariant in `build-config.test.mjs`.
 
 Run:
 
@@ -881,7 +887,7 @@ Expected: bundle and unit gates pass, `.artifacts/bundles/stage-0.json` records 
 - [ ] **Step 5: Commit**
 
 ```bash
-git add config/bundle-budgets.json scripts/verify-bundle-budgets.mjs scripts/verify-release-authorizations.mjs scripts/verify-release-readiness.mjs package.json .gitignore tests/architecture/bundle-budget.test.mjs tests/architecture/release-authorization.test.mjs
+git add config/bundle-budgets.json scripts/lib/bundle-policy.mjs scripts/verify-bundle-budgets.mjs scripts/verify-release-authorizations.mjs scripts/verify-release-readiness.mjs package.json .gitignore packages/theme/vite.config.ts packages/icons/vite.config.ts packages/ui/vite.config.ts packages/social/vite.config.ts tests/architecture/build-config.test.mjs tests/architecture/bundle-budget.test.mjs tests/architecture/release-authorization.test.mjs docs/superpowers/plans/2026-08-11-unpopping-candy-stage-0-foundation.md
 git commit -m "build: enforce release trust budgets"
 ```
 

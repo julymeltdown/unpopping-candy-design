@@ -2,6 +2,7 @@
   "name": "unpopping-candy-design",
   "version": "0.1.0",
   "private": true,
+  "license": "MIT",
   "type": "module",
   "packageManager": "pnpm@11.4.0",
   "engines": {
@@ -10,13 +11,14 @@
   "scripts": {
     "build": "pnpm --recursive --filter './packages/**' build && pnpm --filter @unpopping-candy/playground build && pnpm --filter @unpopping-candy/agent-lab build && pnpm --filter @unpopping-candy/consumer-fixture build && pnpm --filter @unpopping-candy/docs build-storybook",
     "build:packages": "pnpm --recursive --filter './packages/**' build",
+    "bundle:check": "node scripts/verify-bundle-budgets.mjs",
     "changeset": "changeset",
     "clean": "node scripts/clean.mjs",
     "dev": "pnpm --parallel --filter @unpopping-candy/playground --filter @unpopping-candy/docs --filter @unpopping-candy/agent-lab dev",
     "format": "prettier --write .",
     "format:check": "prettier --check .",
     "lint": "eslint .",
-    "release": "npm run release:check && pnpm build:packages && changeset publish",
+    "release": "pnpm build:packages && npm run release:check && changeset publish",
     "test": "pnpm test:pure && pnpm verify",
     "test:storybook": "pnpm --filter @unpopping-candy/docs test -- --run",
     "test:browser": "playwright test",

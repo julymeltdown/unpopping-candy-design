@@ -3,6 +3,8 @@ dist/
 storybook-static/
 coverage/
 .artifacts/
+.artifacts/authorizations/
+.artifacts/bundles/
 .tmp/
 .worktrees/
 .DS_Store

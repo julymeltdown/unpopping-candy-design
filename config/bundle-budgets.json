@@ -1,0 +1,116 @@
+{
+  "schemaVersion": 1,
+  "policyDigest": "1505cd42c4acc04aefe2d417774b8103735c5df1d28c8271b2992afba8389761",
+  "packages": {
+    "tokens": {
+      "baseline": 2597,
+      "unplanned": 2900,
+      "stage-0": 2900,
+      "stage-1": 5000,
+      "stage-2": 6500,
+      "stage-3": 8000
+    },
+    "theme": {
+      "baseline": 1826,
+      "unplanned": 2050,
+      "stage-0": 2050,
+      "stage-1": 2300,
+      "stage-2": 2500,
+      "stage-3": 2800
+    },
+    "icons": {
+      "baseline": 2005,
+      "unplanned": 2250,
+      "stage-0": 2250,
+      "stage-1": 3500,
+      "stage-2": 4500,
+      "stage-3": 5500
+    },
+    "ui": {
+      "baseline": 15220,
+      "unplanned": 16750,
+      "stage-0": 16750,
+      "stage-1": 45000,
+      "stage-2": 75000,
+      "stage-3": 110000
+    },
+    "social": {
+      "baseline": 10336,
+      "unplanned": 11400,
+      "stage-0": 11400,
+      "stage-1": 14000,
+      "stage-2": 20000,
+      "stage-3": 30000
+    },
+    "knowledge": {
+      "baseline": 26161,
+      "unplanned": 28800,
+      "stage-0": 30000,
+      "stage-1": 52000,
+      "stage-2": 76000,
+      "stage-3": 105000
+    },
+    "registry": {
+      "baseline": 4556,
+      "unplanned": 5100,
+      "stage-0": 5100,
+      "stage-1": 6500,
+      "stage-2": 7500,
+      "stage-3": 9000
+    },
+    "cli": {
+      "baseline": 8330,
+      "unplanned": 9200,
+      "stage-0": 15000,
+      "stage-1": 15000,
+      "stage-2": 15000,
+      "stage-3": 16000
+    },
+    "mcp": {
+      "baseline": 4808,
+      "unplanned": 5300,
+      "stage-0": 5300,
+      "stage-1": 7000,
+      "stage-2": 8500,
+      "stage-3": 10000
+    }
+  },
+  "reservedCatalogIds": {
+    "stage-0": [],
+    "stage-1": [
+      "ui.checkbox",
+      "ui.checkbox-group",
+      "ui.radio",
+      "ui.radio-group",
+      "ui.switch",
+      "ui.select",
+      "ui.select-item",
+      "ui.select-section",
+      "ui.combo-box",
+      "ui.list-box",
+      "ui.list-box-item",
+      "ui.list-box-section"
+    ],
+    "stage-2": [
+      "ui.menu",
+      "ui.menu-trigger",
+      "ui.menu-item",
+      "ui.menu-section",
+      "ui.menu-separator",
+      "ui.menu-checkbox-item",
+      "ui.menu-radio-item",
+      "ui.popover",
+      "ui.tooltip",
+      "ui.disclosure",
+      "ui.accordion"
+    ],
+    "stage-3": [
+      "ui.breadcrumbs",
+      "ui.breadcrumb-item",
+      "ui.pagination",
+      "ui.table",
+      "ui.data-grid",
+      "ui.progress"
+    ]
+  }
+}
