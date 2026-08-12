@@ -1,4 +1,3 @@
-import { chromium } from "@playwright/test";
 import {
   copyFile,
   mkdir,
@@ -11,8 +10,13 @@ import {
 import { tmpdir } from "node:os";
 import { dirname, join, relative } from "node:path";
 import {
+  assertObservedVersions,
+  assertOutsideWorkspace,
+  createCompatibilityResult,
+} from "./compatibility-contract.mjs";
+import {
   readInstalledVersion,
-  serveCompatibilityBuild,
+  smokeTestCompatibilityBuild,
   writeCompatibilityConsumer,
 } from "./compatibility-consumer.mjs";
 import {
@@ -45,30 +49,38 @@ async function installConsumerManagerFiles({
   }
 }
 
-async function smokeTestBuild({ consumerRoot, generated, expectedName }) {
-  const started = performance.now();
-  const served = await serveCompatibilityBuild(
-    join(consumerRoot, generated.output),
+async function writeResult(artifactRoot, run, result) {
+  const resultPath = join(
+    artifactRoot,
+    run.fixture,
+    run.cell,
+    `${run.manager}.json`,
   );
-  let browser;
-  try {
-    browser = await chromium.launch({ timeout: 30_000 });
-    const browserVersion = browser.version();
-    const page = await browser.newPage();
-    await page.goto(served.url, { timeout: 30_000 });
-    await page
-      .getByRole("main", { name: expectedName })
-      .waitFor({ timeout: 30_000 });
-    return {
-      browserVersion,
-      smokeTest: {
-        status: "passed",
-        durationMs: Math.round(performance.now() - started),
-      },
-    };
-  } finally {
-    if (browser) await browser.close();
-    await new Promise((resolvePromise) => served.server.close(resolvePromise));
+  await mkdir(dirname(resultPath), { recursive: true });
+  await writeFile(resultPath, `${JSON.stringify(result, null, 2)}\n`);
+  return resultPath;
+}
+
+async function assertInstalledIsolation({
+  consumerRoot,
+  workspaceRoot,
+  tarballs,
+}) {
+  const rootNodeModules = await realpath(join(workspaceRoot, "node_modules"));
+  for (const tarball of tarballs) {
+    const location = await realpath(
+      join(consumerRoot, "node_modules", ...tarball.packageName.split("/")),
+    );
+    await assertOutsideWorkspace(
+      workspaceRoot,
+      location,
+      `Installed ${tarball.packageName}`,
+    );
+    await assertOutsideWorkspace(
+      rootNodeModules,
+      location,
+      `Installed ${tarball.packageName}`,
+    );
   }
 }
 
@@ -77,12 +89,24 @@ export async function executeCompatibilityRun(context, run) {
     context;
   const cell = matrix.cells[run.cell];
   const manager = matrix.managers[run.manager];
+  const result = createCompatibilityResult({
+    run,
+    cell,
+    manager,
+    tarballs: packed.tarballs,
+  });
   const temporaryRoot = await mkdtemp(join(tmpdir(), "popcandy-consumer-"));
   const consumerRoot = join(temporaryRoot, "consumer");
   const packsRoot = join(temporaryRoot, "packs");
-  const outcomes = {};
-  let stage = "prepare";
+  let temporaryApproved = false;
   try {
+    await assertOutsideWorkspace(
+      workspaceRoot,
+      temporaryRoot,
+      "Temporary consumer",
+    );
+    temporaryApproved = true;
+    result.audit.temporaryRootOutsideWorkspace = true;
     await Promise.all([mkdir(consumerRoot), mkdir(packsRoot)]);
     const tarballs = [];
     for (const tarball of packed.tarballs) {
@@ -109,49 +133,64 @@ export async function executeCompatibilityRun(context, run) {
       tarballs,
     });
     await installConsumerManagerFiles({ consumerRoot, manager, tarballs });
+    result.audit.managerResolution.publicPackagePins =
+      consumer.publicPackagePins;
+    result.audit.manifestDependencies = consumer.dependencies;
+    result.audit.scenarioImports = consumer.imports;
     const invocation = createManagerInvocation(manager);
 
-    stage = "manager-version";
-    const versionResult = await runCompatibilityProcess({
+    result.stage = "manager-version";
+    const version = await runCompatibilityProcess({
       command: invocation.command,
       args: invocation.versionArgs,
       cwd: consumerRoot,
       timeoutMs: 120_000,
     });
-    const managerVersion = versionResult.output.split("\n").at(-1);
-    if (managerVersion !== manager.version) {
+    result.packageManager.observedVersion = version.output.split("\n").at(-1);
+    if (result.packageManager.observedVersion !== manager.version) {
       throw new TypeError(
-        `Expected ${manager.version}, received ${managerVersion}.`,
+        `Expected ${manager.version}, received ${result.packageManager.observedVersion}.`,
       );
     }
 
-    stage = "install";
+    result.stage = "install";
     const install = await runCompatibilityProcess({
       command: invocation.command,
       args: invocation.installArgs,
       cwd: consumerRoot,
       timeoutMs: 600_000,
     });
-    outcomes.install = { status: "passed", durationMs: install.durationMs };
-    for (const tarball of tarballs) {
-      const location = await realpath(
-        join(consumerRoot, "node_modules", ...tarball.packageName.split("/")),
-      );
-      if (location.startsWith(workspaceRoot)) {
-        throw new TypeError(
-          `${tarball.packageName} resolved into the workspace.`,
-        );
-      }
-    }
+    result.install = { status: "passed", durationMs: install.durationMs };
+    await assertInstalledIsolation({ consumerRoot, workspaceRoot, tarballs });
+    result.audit.tarballOnlyPublicPackages = true;
+    result.stage = "version-audit";
+    const frameworkPackage =
+      cell.framework === "react-router" ? "react-router" : cell.framework;
+    result.framework.observedVersion = await readInstalledVersion(
+      consumerRoot,
+      frameworkPackage,
+    );
+    result.react.observedVersion = await readInstalledVersion(
+      consumerRoot,
+      "react",
+    );
+    assertObservedVersions(cell, {
+      frameworkVersion: result.framework.observedVersion,
+      reactVersion: result.react.observedVersion,
+    });
 
-    stage = "typecheck";
+    result.stage = "typecheck";
     const typeVersion = await runCompatibilityProcess({
       command: process.execPath,
       args: ["node_modules/typescript/bin/tsc", "--version"],
       cwd: consumerRoot,
       timeoutMs: 30_000,
     });
-    if (typeVersion.output !== "Version 5.7.3") {
+    result.typescript.observedVersion = typeVersion.output.replace(
+      "Version ",
+      "",
+    );
+    if (result.typescript.observedVersion !== "5.7.3") {
       throw new TypeError(
         `Expected TypeScript 5.7.3, received ${typeVersion.output}.`,
       );
@@ -161,93 +200,55 @@ export async function executeCompatibilityRun(context, run) {
       args: ["node_modules/typescript/bin/tsc", "--noEmit"],
       cwd: consumerRoot,
     });
-    outcomes.typecheck = {
+    result.typecheck = {
       status: "passed",
       durationMs: typecheck.durationMs,
     };
+    result.typescript.status = "passed";
+    result.typescript.durationMs = typecheck.durationMs;
 
-    stage = "build";
+    result.stage = "build";
     const build = await runCompatibilityProcess({
       command: process.execPath,
       args: consumer.generated.build,
       cwd: consumerRoot,
       timeoutMs: 600_000,
     });
-    outcomes.build = { status: "passed", durationMs: build.durationMs };
+    result.build = { status: "passed", durationMs: build.durationMs };
 
-    stage = "smoke-test";
-    const { browserVersion, smokeTest } = await smokeTestBuild({
+    result.stage = "smoke-test";
+    const smoke = await smokeTestCompatibilityBuild({
       consumerRoot,
       generated: consumer.generated,
       expectedName,
     });
-    const frameworkPackage =
-      cell.framework === "react-router" ? "react-router" : cell.framework;
-    const frameworkVersion = await readInstalledVersion(
-      consumerRoot,
-      frameworkPackage,
-    );
-    const reactVersion = await readInstalledVersion(consumerRoot, "react");
-    const result = {
-      id: run.id,
-      status: "passed",
-      node: process.version,
-      packageManager: { id: run.manager, version: managerVersion },
-      framework: {
-        id: run.cell,
-        name: cell.framework,
-        version: frameworkVersion,
-      },
-      react: { version: reactVersion },
-      typescript: { version: "5.7.3", ...outcomes.typecheck },
-      browser: {
-        name: "chromium",
-        version: browserVersion,
-        accessibleName: expectedName,
-        ...smokeTest,
-      },
-      tarballs: tarballs.map(({ packageName, name, sha256 }) => ({
-        packageName,
-        name,
-        sha256,
-      })),
-      install: outcomes.install,
-      build: outcomes.build,
-      audit: {
-        temporaryRootOutsideWorkspace: !temporaryRoot.startsWith(workspaceRoot),
-        tarballOnlyPublicPackages: true,
-        workspaceAliases: false,
-        privateImportPaths: false,
-        managerResolution: {
-          nodeLinker: manager.nodeLinker ?? null,
-          publicPackagePins: consumer.publicPackagePins,
-        },
-        manifestDependencies: consumer.dependencies,
-        scenarioImports: consumer.imports,
-      },
-    };
-    const resultPath = join(
-      artifactRoot,
-      run.fixture,
-      run.cell,
-      `${run.manager}.json`,
-    );
-    await mkdir(dirname(resultPath), { recursive: true });
-    await writeFile(resultPath, `${JSON.stringify(result, null, 2)}\n`);
-    return { resultPath: relative(workspaceRoot, resultPath), result };
+    result.browser.observedVersion = smoke.browserVersion;
+    result.browser.accessibleName = expectedName;
+    result.smokeTest = { status: "passed", durationMs: smoke.durationMs };
+    result.status = "passed";
+    result.stage = "complete";
+    const resultPath = await writeResult(artifactRoot, run, result);
+    const path = relative(workspaceRoot, resultPath);
+    const sanitizedPath = path.startsWith("..")
+      ? join(
+          ".artifacts/compatibility",
+          run.fixture,
+          run.cell,
+          `${run.manager}.json`,
+        )
+      : path;
+    return { resultPath: sanitizedPath, result };
   } catch (error) {
-    const resultPath = join(
-      artifactRoot,
-      run.fixture,
-      run.cell,
-      `${run.manager}.json`,
-    );
-    await mkdir(dirname(resultPath), { recursive: true });
-    const failure = { id: run.id, status: "failed", stage };
-    await writeFile(resultPath, `${JSON.stringify(failure, null, 2)}\n`);
+    result.status = "failed";
+    const outcome =
+      result.stage === "smoke-test" ? result.smokeTest : result[result.stage];
+    if (outcome && typeof outcome === "object" && "status" in outcome) {
+      outcome.status = "failed";
+    }
+    await writeResult(artifactRoot, run, result);
     throw error;
   } finally {
-    if (!keepTemporary) {
+    if (!keepTemporary || !temporaryApproved) {
       await rm(temporaryRoot, { recursive: true, force: true });
     }
   }

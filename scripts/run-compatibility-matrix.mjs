@@ -7,7 +7,10 @@ import {
   readCompatibilityMatrix,
 } from "./lib/compatibility-contract.mjs";
 import { executeCompatibilityRun } from "./lib/compatibility-execution.mjs";
-import { createPackedWorkspace } from "./lib/compatibility-process.mjs";
+import {
+  createPackedWorkspace,
+  validatePackedWorkspace,
+} from "./lib/compatibility-process.mjs";
 
 const defaultWorkspaceRoot = resolve(
   dirname(fileURLToPath(import.meta.url)),
@@ -27,12 +30,13 @@ export async function runCompatibilityMatrix(options = {}) {
   const runs = createCompatibilityPlan(matrix, options);
   if (options.plan) return { runs };
 
-  const packed =
+  const candidatePacked =
     options.packed ?? (await packPublicWorkspace({ workspaceRoot }));
-  const artifactRoot = resolve(
-    options.artifactRoot ?? join(workspaceRoot, ".artifacts/compatibility"),
-  );
   try {
+    const packed = await validatePackedWorkspace(candidatePacked);
+    const artifactRoot = resolve(
+      options.artifactRoot ?? join(workspaceRoot, ".artifacts/compatibility"),
+    );
     const results = [];
     for (const run of runs) {
       results.push(
@@ -51,7 +55,7 @@ export async function runCompatibilityMatrix(options = {}) {
     return { runs, results };
   } finally {
     if (!options.packed && !options.keepPacked) {
-      await rm(packed.root, { recursive: true, force: true });
+      await rm(candidatePacked.root, { recursive: true, force: true });
     }
   }
 }

@@ -1,6 +1,7 @@
 import { createServer } from "node:http";
 import { copyFile, mkdir, readFile, writeFile } from "node:fs/promises";
 import { dirname, join } from "node:path";
+import { chromium, expect } from "@playwright/test";
 
 function createConsumerFiles(cell) {
   const styles = [
@@ -203,4 +204,31 @@ export async function readInstalledVersion(root, packageName) {
     throw new TypeError(`Installed ${packageName} has no version.`);
   }
   return manifest.version;
+}
+
+export async function smokeTestCompatibilityBuild({
+  consumerRoot,
+  generated,
+  expectedName,
+}) {
+  const started = performance.now();
+  const served = await serveCompatibilityBuild(
+    join(consumerRoot, generated.output),
+  );
+  let browser;
+  try {
+    browser = await chromium.launch({ timeout: 30_000 });
+    const page = await browser.newPage();
+    await page.goto(served.url, { timeout: 30_000 });
+    const main = page.getByRole("main", { name: expectedName, exact: true });
+    await expect(main).toBeVisible({ timeout: 30_000 });
+    await expect(main).toHaveAccessibleName(expectedName);
+    return {
+      browserVersion: browser.version(),
+      durationMs: Math.round(performance.now() - started),
+    };
+  } finally {
+    if (browser) await browser.close();
+    await new Promise((resolvePromise) => served.server.close(resolvePromise));
+  }
 }
