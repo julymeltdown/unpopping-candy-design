@@ -36,3 +36,14 @@ export type KnowledgeEntry = ComponentDoc | PatternDoc | TemplateDoc | Migration
 export interface KnowledgeCatalog { schemaVersion: 1; generatedAt: string; packageVersion: string; entries: readonly KnowledgeEntry[]; }
 export interface CatalogIssue { code: string; severity: 'error' | 'warning'; entryId?: string; message: string; }
 export interface SearchResult { id: string; kind: KnowledgeKind; name: string; summary: string; score: number; reasons: readonly string[]; }
+export interface CompatibilityRelease {
+  readonly catalogVersion: string;
+  readonly catalogDigest: string;
+  readonly publicPackageVersions: Readonly<Record<string, string>>;
+  readonly allowedPackageSets: readonly (readonly string[])[];
+}
+export interface CompatibilityManifest {
+  readonly schemaVersion: 1;
+  readonly generatedAt: string;
+  readonly releases: readonly CompatibilityRelease[];
+}

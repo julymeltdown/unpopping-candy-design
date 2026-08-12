@@ -2,17 +2,11 @@ import { createHash } from 'node:crypto';
 import { access, mkdir, readFile, readdir, writeFile } from 'node:fs/promises';
 import { dirname, join, relative, resolve } from 'node:path';
 import { pathToFileURL } from 'node:url';
-import {
-  createCatalog,
-  defineComponentDoc,
-  defineMigrationDoc,
-  definePatternDoc,
-  defineTemplateDoc,
-  stableStringify,
-  validateCatalog,
-  extractComponentApi,
-  extractExportedInterfaces,
-} from '../packages/knowledge/src/index.ts';
+import { createCatalog, validateCatalog } from '../packages/knowledge/src/catalog.ts';
+import { dependencyClosedPackageSets } from '../packages/knowledge/src/compatibility.ts';
+import { defineComponentDoc, defineMigrationDoc, definePatternDoc, defineTemplateDoc } from '../packages/knowledge/src/define.ts';
+import { extractComponentApi, extractExportedInterfaces } from '../packages/knowledge/src/source-api.ts';
+import { stableStringify } from '../packages/knowledge/src/stable-json.ts';
 
 const repositoryRoot = resolve(new URL('..', import.meta.url).pathname);
 const checkOnly = process.argv.includes('--check');
@@ -67,23 +61,29 @@ async function packageExportMap() {
   return output;
 }
 
-function sourceDigest(entries) {
-  return createHash('sha256').update(stableStringify(entries)).digest('hex');
+function stableDigest(value) {
+  return createHash('sha256').update(stableStringify(value)).digest('hex');
 }
 
 function generatedCatalogModule(catalog) {
   return `import type { KnowledgeCatalog } from '../types.ts';\n\nexport const bundledCatalog = ${JSON.stringify(catalog, null, 2)} as const satisfies KnowledgeCatalog;\n`;
 }
 
-async function expectedOutputs(catalog, tokensJson) {
+function generatedCompatibilityModule(manifest) {
+  return `import type { CompatibilityManifest } from '../types.ts';\n\nexport const bundledCompatibilityManifest = ${JSON.stringify(manifest, null, 2)} as const satisfies CompatibilityManifest;\n`;
+}
+
+async function expectedOutputs(catalog, compatibilityManifest, tokensJson) {
   const components = catalog.entries.filter((entry) => entry.kind === 'component');
   const patterns = catalog.entries.filter((entry) => entry.kind === 'pattern');
   const templates = catalog.entries.filter((entry) => entry.kind === 'template');
   const migrations = catalog.entries.filter((entry) => entry.kind === 'migration');
-  const digest = sourceDigest(catalog.entries);
+  const digest = stableDigest(catalog.entries);
   return new Map([
     [join(repositoryRoot, 'packages/knowledge/src/generated/catalog.ts'), generatedCatalogModule(catalog)],
+    [join(repositoryRoot, 'packages/knowledge/src/generated/compatibility.ts'), generatedCompatibilityModule(compatibilityManifest)],
     [join(repositoryRoot, 'agent/manifests/catalog.json'), stableStringify(catalog)],
+    [join(repositoryRoot, 'agent/manifests/compatibility.json'), stableStringify(compatibilityManifest)],
     [join(repositoryRoot, 'agent/manifests/components.json'), stableStringify({ schemaVersion: 1, generatedAt: catalog.generatedAt, entries: components })],
     [join(repositoryRoot, 'agent/manifests/patterns.json'), stableStringify({ schemaVersion: 1, generatedAt: catalog.generatedAt, entries: patterns })],
     [join(repositoryRoot, 'agent/manifests/templates.json'), stableStringify({ schemaVersion: 1, generatedAt: catalog.generatedAt, entries: templates })],
@@ -181,6 +181,26 @@ for (const file of metadataFiles) {
 const knowledgeManifest = await readJson(join(repositoryRoot, 'packages/knowledge/package.json'));
 const catalog = createCatalog(entries, { generatedAt: fixedGeneratedAt, packageVersion: knowledgeManifest.version });
 await assertCatalogContracts(catalog, metadataFiles);
+const publicPackageDirectories = ['tokens', 'theme', 'icons', 'ui', 'social', 'knowledge', 'registry', 'cli', 'mcp'];
+const publicPackageManifests = (await Promise.all(
+  publicPackageDirectories.map((directory) =>
+    readJson(join(repositoryRoot, 'packages', directory, 'package.json')),
+  ),
+)).sort((left, right) => left.name.localeCompare(right.name));
+const compatibilityManifest = {
+  schemaVersion: 1,
+  generatedAt: catalog.generatedAt,
+  releases: [
+    {
+      catalogVersion: catalog.packageVersion,
+      catalogDigest: stableDigest(catalog),
+      publicPackageVersions: Object.fromEntries(
+        publicPackageManifests.map((manifest) => [manifest.name, manifest.version]),
+      ),
+      allowedPackageSets: dependencyClosedPackageSets(publicPackageManifests),
+    },
+  ],
+};
 const tokensJson = await readJson(join(repositoryRoot, 'packages/tokens/src/tokens.json'));
-await writeOrCheck(await expectedOutputs(catalog, tokensJson));
+await writeOrCheck(await expectedOutputs(catalog, compatibilityManifest, tokensJson));
 console.log(`${checkOnly ? 'Verified' : 'Generated'} ${catalog.entries.length} knowledge entries (${catalog.entries.filter((entry) => entry.kind === 'component').length} components).`);
