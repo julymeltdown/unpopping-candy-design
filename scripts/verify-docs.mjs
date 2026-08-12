@@ -13,15 +13,15 @@ import {
   historicalRunnerDigest,
 } from "./lib/historical-evidence.mjs";
 import {
+  approvedTrustDocumentErrors,
+  trustPaths,
+} from "./lib/documentation-policy.mjs";
+import {
   listFiles,
   relativePath,
   repositoryRoot,
 } from "./lib/project-inspection.mjs";
 
-const trustPaths =
-  "README.md\0docs/AI_ASSISTED_POST_CASE_STUDY.md\0docs/COMPATIBILITY.md\0docs/ACCESSIBILITY.md\0docs/SUPPORT.md\0docs/SECURITY.md\0docs/VERSIONING.md\0docs/STORYBOOK_AI.md\0docs/PUBLISHING.md".split(
-    "\0",
-  );
 const execFileAsync = promisify(execFile);
 const executedIds =
   "base/vite-react-19/pnpm-11\0publish-post/vite-react-19/npm-10\0activity-review/vite-react-19/yarn-4\0member-moderation/vite-react-19/pnpm-11\0base/next-15-react-18/pnpm-10\0base/react-router-7-react-18/npm-11".split(
@@ -168,10 +168,10 @@ export async function loadTrustContext(root, suppliedEvidence) {
 }
 
 export function trustContractErrors(documents, context) {
-  const errors = structuredTrustContractErrors(documents, context);
-  for (const path of trustPaths)
-    if (!documents.has(path))
-      errors.push(`${path}: required trust document is missing`);
+  const errors = [
+    ...structuredTrustContractErrors(documents, context),
+    ...approvedTrustDocumentErrors(documents),
+  ];
   const source = documents.get("README.md");
   if (!source) return errors;
   const lines = source.trimEnd().split(/\r?\n/).length;

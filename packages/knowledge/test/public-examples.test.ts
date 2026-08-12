@@ -44,4 +44,37 @@ test("preferred JSX rejects aliases, qualifications, and prop spreads", () => {
     ),
     ["spread Button: Button uses unverified prop spread"],
   );
+
+  for (const [label, code, expected] of [
+    [
+      "qualified expected prefix",
+      '<Button.Group variant="not-a-variant" />',
+      "Button",
+    ],
+    [
+      "nested qualified component",
+      '<Inline><Candy.Button variant="not-a-variant" /></Inline>',
+      "Inline",
+    ],
+    [
+      "nested aliased component",
+      '<Inline><Action variant="not-a-variant" /></Inline>',
+      "Inline",
+    ],
+    [
+      "qualified nested spread",
+      "<Inline><Candy.Button {...props} /></Inline>",
+      "Inline",
+    ],
+    [
+      "string decoy",
+      'const decoy = "<Button>"; <Action>Save</Action>',
+      "Button",
+    ],
+  ] as const) {
+    assert.ok(
+      publicContractErrors(code, label, expected).length > 0,
+      `${label} must fail closed`,
+    );
+  }
 });

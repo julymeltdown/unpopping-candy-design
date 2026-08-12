@@ -1,4 +1,5 @@
 import { bundledCatalog } from "../src/index.ts";
+import { openingTags } from "./public-example-parser.ts";
 
 type ComponentEntry = Extract<
   (typeof bundledCatalog.entries)[number],
@@ -26,6 +27,11 @@ const nativeProps = new Set([
   "style",
   "tabIndex",
   "type",
+]);
+const externalExampleComponents = new Set([
+  "App",
+  "BookmarkIcon",
+  "FollowButton",
 ]);
 
 function allowedLiterals(
@@ -63,37 +69,6 @@ function literalError(
       return `expected ${type}`;
   }
   return undefined;
-}
-
-function openingTags(code: string) {
-  const tags: Array<{
-    name: string;
-    attributes: string;
-    hasChildren: boolean;
-  }> = [];
-  for (const match of code.matchAll(/<([A-Z][A-Za-z0-9]*)\b/g)) {
-    const name = match[1];
-    if (!name) continue;
-    let braces = 0;
-    let quote = "";
-    let end = match.index + match[0].length;
-    for (; end < code.length; end += 1) {
-      const character = code[end];
-      if (quote) {
-        if (character === quote && code[end - 1] !== "\\") quote = "";
-      } else if (character === '"' || character === "'") quote = character;
-      else if (character === "{") braces += 1;
-      else if (character === "}") braces -= 1;
-      else if (character === ">" && braces === 0) break;
-    }
-    const attributes = code.slice(match.index + match[0].length, end);
-    tags.push({
-      name,
-      attributes,
-      hasChildren: !attributes.trimEnd().endsWith("/"),
-    });
-  }
-  return tags;
 }
 
 function attributes(source: string) {
@@ -144,15 +119,22 @@ export function publicContractErrors(
   expectedComponent?: string,
 ) {
   const errors: string[] = [];
+  const tags = openingTags(code);
   if (
     expectedComponent &&
     code.includes("<") &&
-    !new RegExp(`<${expectedComponent}\\b`).test(code)
-  )
+    !tags.some((tag) => tag.name === expectedComponent)
+  ) {
     errors.push(`${label}: expected direct ${expectedComponent} JSX`);
-  for (const tag of openingTags(code)) {
+    return errors;
+  }
+  for (const tag of tags) {
     const component = components.get(tag.name);
-    if (!component) continue;
+    if (!component) {
+      if (expectedComponent && !externalExampleComponents.has(tag.name))
+        errors.push(`${label}: unknown JSX component ${tag.name}`);
+      continue;
+    }
     const present = new Set<string>();
     if (/\{\.\.\./.test(tag.attributes))
       errors.push(`${label}: ${component.name} uses unverified prop spread`);
