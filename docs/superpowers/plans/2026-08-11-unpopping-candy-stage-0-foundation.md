@@ -188,6 +188,7 @@ git commit -m "test: run Storybook cross-browser contracts"
 **Files:**
 
 - Create: `scripts/lib/public-packages.mjs`
+- Create: `scripts/lib/changeset-frontmatter.mjs`
 - Modify: `scripts/verify-package-contracts.mjs`
 - Modify: `scripts/verify-release-readiness.mjs`
 - Modify: `.changeset/config.json`
@@ -270,7 +271,7 @@ Expected: all three commands exit 0 and report nine publishable packages plus tw
 - [ ] **Step 4: Commit**
 
 ```bash
-git add scripts/lib/public-packages.mjs scripts/verify-package-contracts.mjs scripts/verify-release-readiness.mjs .changeset/config.json .changeset/ai-native-system.md packages/evals/package.json packages/figma/package.json tests/architecture/build-config.test.mjs
+git add scripts/lib/public-packages.mjs scripts/lib/changeset-frontmatter.mjs scripts/verify-package-contracts.mjs scripts/verify-release-readiness.mjs .changeset/config.json .changeset/ai-native-system.md packages/evals/package.json packages/figma/package.json tests/architecture/build-config.test.mjs
 git commit -m "build: define the coordinated public package set"
 ```
 
