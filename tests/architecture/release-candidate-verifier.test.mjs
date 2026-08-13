@@ -84,10 +84,17 @@ test("release candidate verifier re-hashes every exact artifact", async () => {
   });
   const inspectMcpReadme = () =>
     '"args": ["-y", "@unpopping-candy/mcp@0.3.0-alpha.0"]\n';
+  const inspectArchive = () => [
+    { name: "package/package.json", type: "-" },
+    { name: "package/README.md", type: "-" },
+    { name: "package/LICENSE.md", type: "-" },
+    { name: "package/dist/index.js", type: "-" },
+  ];
   assert.equal(
     (
       await verifyReleaseCandidate(root, {
         expectedSourceCommit: "a".repeat(40),
+        inspectArchive,
         inspectManifest,
         inspectMcpReadme,
       })
@@ -99,7 +106,12 @@ test("release candidate verifier re-hashes every exact artifact", async () => {
   candidate.verification.compatibility[0].sha256 = resultDigest;
   await writeCandidate();
   await assert.rejects(
-    () => verifyReleaseCandidate(root, { inspectManifest, inspectMcpReadme }),
+    () =>
+      verifyReleaseCandidate(root, {
+        inspectArchive,
+        inspectManifest,
+        inspectMcpReadme,
+      }),
     /source commit mismatch/,
   );
   result.sourceCommit = candidate.sourceCommit;
@@ -121,9 +133,21 @@ test("release candidate verifier re-hashes every exact artifact", async () => {
   await assert.rejects(
     () =>
       verifyReleaseCandidate(root, {
+        inspectArchive,
         inspectManifest,
         inspectMcpReadme: () =>
           '"args": ["-y", "@unpopping-candy/mcp@0.2.0"]\n',
+      }),
+    /MCP README must advertise the exact candidate version/,
+  );
+  await assert.rejects(
+    () =>
+      verifyReleaseCandidate(root, {
+        inspectArchive,
+        inspectManifest,
+        inspectMcpReadme: () =>
+          '"args": ["-y", "@unpopping-candy/mcp@0.3.0-alpha.0"]\n' +
+          "npx -y @unpopping-candy/mcp\n",
       }),
     /MCP README must advertise the exact candidate version/,
   );
