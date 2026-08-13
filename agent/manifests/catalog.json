@@ -1860,7 +1860,10 @@
         "social",
         "feed",
         "page",
-        "template"
+        "template",
+        "post",
+        "publish",
+        "composer"
       ],
       "kind": "template",
       "name": "Social feed page",

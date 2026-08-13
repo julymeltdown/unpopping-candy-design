@@ -11,7 +11,10 @@ export default {
     "social",
     "feed",
     "page",
-    "template"
+    "template",
+    "post",
+    "publish",
+    "composer"
   ],
   "useWhen": [
     "A state-complete social feed page using presentation models and externally owned remote state."
