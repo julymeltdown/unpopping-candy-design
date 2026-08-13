@@ -1,6 +1,12 @@
 import assert from "node:assert/strict";
 import { readFile } from "node:fs/promises";
+import { createRequire } from "node:module";
 import test from "node:test";
+
+const cliRequire = createRequire(
+  new URL("../../packages/cli/package.json", import.meta.url),
+);
+const { parse: parseYaml } = cliRequire("yaml");
 
 test("delivery workflows default to verification and gate every external write", async () => {
   const repository = new URL("../..", import.meta.url);
@@ -30,6 +36,20 @@ test("delivery workflows default to verification and gate every external write",
     Object.values(packageJson.scripts).join("\n"),
     /(?:changeset|npm) publish/,
   );
+  const releaseWorkflow = parseYaml(release);
+  const upload = releaseWorkflow.jobs.release.steps.find(
+    (step) => step.name === "Upload candidate evidence without publishing",
+  );
+  assert.ok(upload);
+  const uploadedPaths = upload.with.path.trim().split("\n");
+  for (const path of [
+    ".artifacts/releases/stage-0-alpha.0/candidate.json",
+    ".artifacts/releases/stage-0-alpha.0/catalog.json",
+    ".artifacts/releases/stage-0-alpha.0/packages/*.tgz",
+    ".artifacts/releases/stage-0-alpha.0/compatibility/**/*.json",
+  ]) {
+    assert.ok(uploadedPaths.includes(path), path);
+  }
   for (const literal of [
     "POPCANDY_CHROMATIC_ENABLED == 'true'",
     "POPCANDY_PAGES_ENABLED == 'true'",

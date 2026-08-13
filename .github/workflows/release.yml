@@ -48,6 +48,7 @@ jobs:
           name: popcandy-stage-0-alpha.0
           path: |
             .artifacts/releases/stage-0-alpha.0/candidate.json
+            .artifacts/releases/stage-0-alpha.0/catalog.json
             .artifacts/releases/stage-0-alpha.0/packages/*.tgz
             .artifacts/releases/stage-0-alpha.0/compatibility/**/*.json
           if-no-files-found: error
