@@ -108,3 +108,21 @@ test("secret-bearing model captures only execute from protected master", async (
   assert.match(capture.if, /github\.ref == 'refs\/heads\/master'/);
   assert.match(capture.if, /POPCANDY_MODEL_EVAL_ENABLED == 'true'/);
 });
+
+test("secret-bearing Chromatic delivery only executes from trusted master", async () => {
+  // Given: the Storybook workflow can receive the Chromatic project token.
+  const repository = new URL("../..", import.meta.url);
+  const source = await readFile(
+    new URL(".github/workflows/storybook.yml", repository),
+    "utf8",
+  );
+  const workflow = parseYaml(source);
+
+  // When: the Chromatic job is selected.
+  const chromatic = workflow.jobs.chromatic;
+
+  // Then: pull-request code cannot execute in the secret-bearing job.
+  assert.match(chromatic.if, /github\.event_name == 'push'/);
+  assert.match(chromatic.if, /github\.ref == 'refs\/heads\/master'/);
+  assert.match(chromatic.if, /POPCANDY_CHROMATIC_ENABLED == 'true'/);
+});

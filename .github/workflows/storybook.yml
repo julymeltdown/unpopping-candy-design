@@ -38,7 +38,7 @@ jobs:
           if-no-files-found: error
 
   chromatic:
-    if: ${{ vars.POPCANDY_CHROMATIC_ENABLED == 'true' }}
+    if: ${{ github.event_name == 'push' && github.ref == 'refs/heads/master' && vars.POPCANDY_CHROMATIC_ENABLED == 'true' }}
     needs: verify-storybook
     runs-on: ubuntu-latest
     steps:
