@@ -71,6 +71,7 @@ export async function executeCompatibilityRun(context, run) {
     keepTemporary,
     environment,
     cacheRoot,
+    sourceCommit,
   } = context;
   const cell = matrix.cells[run.cell];
   const manager = matrix.managers[run.manager];
@@ -79,6 +80,7 @@ export async function executeCompatibilityRun(context, run) {
     cell,
     manager,
     tarballs: packed.tarballs,
+    sourceCommit,
   });
   const temporaryRoot = await mkdtemp(join(tmpdir(), "popcandy-consumer-"));
   const consumerRoot = join(temporaryRoot, "consumer");

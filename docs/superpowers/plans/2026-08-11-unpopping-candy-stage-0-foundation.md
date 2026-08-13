@@ -482,8 +482,10 @@ git commit -m "feat: resolve installed package versions"
 - Modify: `packages/mcp/src/domain.ts`
 - Modify: `packages/mcp/src/stdio.ts`
 - Modify: `packages/mcp/src/server.ts`
+- Modify: `packages/knowledge/content/templates/template-social-feed-page.docs.ts`
 - Test: `packages/knowledge/test/search-diagnostics.test.ts`
 - Test: `packages/cli/test/cli.test.ts`
+- Test: `packages/cli/test/compose.test.ts`
 - Test: `packages/cli/test/catalog-context.test.ts`
 - Test: `packages/mcp/test/domain.test.ts`
 - Test: `packages/mcp/test/server.test.ts`
@@ -494,6 +496,7 @@ git commit -m "feat: resolve installed package versions"
 - Produces: `catalogsByVersion`, initially containing only `bundledCatalog.packageVersion`; a selected version absent from this map fails `POPCANDY_CATALOG_INCOMPATIBLE` instead of falling back.
 - Produces: `searchCatalogDetailed(catalog, query, options)` returning `results`, deterministic `benchmark` counts, and diagnostics for beta, experimental, deprecated, unsupported, truncated, and incompatible outcomes.
 - Every `info`, `search`, `get`, `compose`, and `validate` call resolves one context before reading catalog data.
+- Composition search metadata includes workflow-bearing post, publish, and composer terms so a post-publishing request selects `template.social-feed-page`, never an unrelated form template.
 
 - [ ] **Step 1: Write failing command and diagnostic tests**
 
@@ -551,7 +554,7 @@ Expected: tests pass; all five commands load the exact catalog declared by the r
 - [ ] **Step 5: Commit**
 
 ```bash
-git add packages/knowledge/src/search.ts packages/knowledge/src/catalog.ts packages/knowledge/src/index.ts packages/knowledge/test/search-diagnostics.test.ts packages/cli/src/catalog-context.ts packages/cli/src/catalog-schema.ts packages/cli/src/types.ts packages/cli/src/commands.ts packages/cli/src/bin.ts packages/cli/test/cli.test.ts packages/cli/test/catalog-context.test.ts packages/mcp/src/types.ts packages/mcp/src/domain.ts packages/mcp/src/stdio.ts packages/mcp/src/server.ts packages/mcp/test/domain.test.ts packages/mcp/test/server.test.ts
+git add packages/knowledge/src/search.ts packages/knowledge/src/catalog.ts packages/knowledge/src/index.ts packages/knowledge/content/templates/template-social-feed-page.docs.ts packages/knowledge/test/search-diagnostics.test.ts packages/cli/src/catalog-context.ts packages/cli/src/catalog-schema.ts packages/cli/src/types.ts packages/cli/src/commands.ts packages/cli/src/bin.ts packages/cli/test/cli.test.ts packages/cli/test/compose.test.ts packages/cli/test/catalog-context.test.ts packages/mcp/src/types.ts packages/mcp/src/domain.ts packages/mcp/src/stdio.ts packages/mcp/src/server.ts packages/mcp/test/domain.test.ts packages/mcp/test/server.test.ts
 git commit -m "feat: bind discovery to installed compatibility"
 ```
 
@@ -662,13 +665,14 @@ git commit -m "feat: add reproducible model evaluation captures"
 - Test: `tests/architecture/inspection.test.mjs`
 - Test: `tests/architecture/compatibility-boundaries.test.mjs`
 - Test: `tests/architecture/compatibility-environment.test.mjs`
+- Test: `tests/architecture/compatibility-provenance.test.mjs`
 
 **Interfaces:**
 
 - Produces the only packed-consumer engine: root script `fixtures:compat` delegates to `scripts/run-compatibility-matrix.mjs`; later stage plans modify their owned scenario and must not create another scenario, pack, or install runner.
 - Supports `--fixture base|publish-post|member-moderation|activity-review`, `--cell` plus `--manager`, and `--all`. A focused run requires fixture, cell, and manager; `--fixture publish-post --all` runs that fixture across seven cells and five managers (35 runs); bare `--all` runs all four fixtures across all cells and managers (140 runs).
 - Exports `packPublicWorkspace(options)` and `runCompatibilityMatrix(options)` so Task 10 reuses this implementation inside its staging workspace.
-- Produces `.artifacts/compatibility/fixture-id/cell-id/manager-id.json` with exact Node, package-manager, framework, React, browser, tarball digest, install, typecheck, build, and smoke-test results.
+- Produces `.artifacts/compatibility/fixture-id/cell-id/manager-id.json` with the exact full source commit plus exact Node, package-manager, framework, React, browser, tarball digest, install, typecheck, build, and smoke-test results.
 - Runs package-manager, build, and browser children with an explicit non-secret environment allowlist, an isolated consumer home, no user npm configuration, and one temporary package cache shared only by cells in the same matrix run.
 
 - [ ] **Step 1: Write the failing matrix-contract test**
@@ -717,7 +721,7 @@ Expected: all installs occur outside the workspace and all three results record 
 - [ ] **Step 5: Commit**
 
 ```bash
-git add fixtures/compatibility/matrix.json fixtures/compatibility/types.ts fixtures/compatibility/scenarios/base.tsx fixtures/compatibility/scenarios/publish-post.tsx fixtures/compatibility/scenarios/member-moderation.tsx fixtures/compatibility/scenarios/activity-review.tsx fixtures/compatibility/index.html scripts/run-compatibility-matrix.mjs scripts/lib/compatibility-contract.mjs scripts/lib/compatibility-environment.mjs scripts/lib/compatibility-process.mjs scripts/lib/compatibility-consumer.mjs scripts/lib/compatibility-execution.mjs scripts/lib/compatibility-termination.mjs package.json tests/architecture/inspection.test.mjs tests/architecture/compatibility-boundaries.test.mjs tests/architecture/compatibility-environment.test.mjs docs/superpowers/plans/2026-08-11-unpopping-candy-stage-0-foundation.md
+git add fixtures/compatibility/matrix.json fixtures/compatibility/types.ts fixtures/compatibility/scenarios/base.tsx fixtures/compatibility/scenarios/publish-post.tsx fixtures/compatibility/scenarios/member-moderation.tsx fixtures/compatibility/scenarios/activity-review.tsx fixtures/compatibility/index.html scripts/run-compatibility-matrix.mjs scripts/lib/compatibility-contract.mjs scripts/lib/compatibility-environment.mjs scripts/lib/compatibility-process.mjs scripts/lib/compatibility-consumer.mjs scripts/lib/compatibility-execution.mjs scripts/lib/compatibility-termination.mjs package.json tests/architecture/inspection.test.mjs tests/architecture/compatibility-boundaries.test.mjs tests/architecture/compatibility-environment.test.mjs tests/architecture/compatibility-provenance.test.mjs docs/superpowers/plans/2026-08-11-unpopping-candy-stage-0-foundation.md
 git commit -m "test: add packed consumer compatibility matrix"
 ```
 
@@ -931,7 +935,7 @@ git commit -m "build: enforce release trust budgets"
 
 - Produces the Stage 0 command `pnpm release:candidate -- --version 0.3.0-alpha.0 --channel next --out .artifacts/releases/stage-0-alpha.0`; Stages 1–3 use the same required `--version`, `--channel`, and `--out` interface with their plan's exact values.
 - Produces: `validateCandidateRequest`, `sourceHashes`, and `prepareReleaseCandidate` for pure contract tests and the CLI adapter.
-- Produces `.artifacts/releases/stage-0-alpha.0/candidate.json`, `.artifacts/releases/stage-0-alpha.0/packages` with exactly nine tarballs, and `.artifacts/releases/stage-0-alpha.0/workspace` as an ephemeral staging copy. The output is a direct child of the ignored `.artifacts/releases` root and may not target any other source path.
+- Produces `.artifacts/releases/stage-0-alpha.0/candidate.json`, an exact `.artifacts/releases/stage-0-alpha.0/catalog.json` attestation artifact, `.artifacts/releases/stage-0-alpha.0/packages` with exactly nine tarballs, and `.artifacts/releases/stage-0-alpha.0/workspace` as an ephemeral staging copy. The output is a direct child of the ignored `.artifacts/releases` root and may not target any other source path.
 - `requestedVersion` is the single version input used for staging public manifest versions, exact workspace selectors, packed dependency ranges, compatibility generation, tarball names, and `candidate.json`; the implementation contains no stage-specific prerelease literal.
 - Source package manifests, source lockfile, source generated compatibility, and normal Changesets remain byte-identical after candidate preparation.
 - Produces dry-run-capable Pages, Chromatic, and npm trusted-publishing workflows; publication remains a separate owner action and prereleases use npm tag `next`.
@@ -975,10 +979,10 @@ The implementation performs this order:
 2. Copy only Git-tracked repository files, excluding `node_modules`, `dist`, `storybook-static`, `.artifacts`, local agent state, and secret-bearing paths, into the output workspace; preserve only the worktree's `.git` pointer so historical documentation checks stay bound to the source commit.
 3. Run `pnpm install --frozen-lockfile` and normal `pnpm version-packages` only inside staging; require Changesets to calculate exactly `0.3.0` for all nine public packages before candidate rewriting.
 4. Rewrite all nine staging public versions to `requestedVersion`. Rewrite every staging dependency on a public workspace package to exact `workspace:${requestedVersion}`, including selectors in private-tool manifests; leave private-tool manifest versions unchanged.
-5. Run `pnpm install` inside staging to refresh its lockfile, then run `pnpm install --frozen-lockfile`, `pnpm agent:generate`, `pnpm agent:check`, `pnpm build:packages`, `pnpm typecheck`, and every package source test there. Package builds precede typechecking and source tests because private tooling and CLI/MCP tests resolve internal workspace packages through their public `dist` exports. Repository architecture/documentation tests remain source-checkout gates because their trust tables intentionally describe the unversioned source manifests, not an ephemeral candidate rewrite. The second install proves the refreshed staging lock is reproducible.
+5. Run `pnpm install` inside staging to refresh its lockfile, then run `pnpm install --frozen-lockfile`, `pnpm agent:generate`, `pnpm agent:check`, `pnpm build:packages`, `pnpm typecheck`, and every package source test there. Record this last gate as `packageTests`, not `pureTests`. Package builds precede typechecking and source tests because private tooling and CLI/MCP tests resolve internal workspace packages through their public `dist` exports. Repository architecture/documentation tests remain source-checkout gates because their trust tables intentionally describe the unversioned source manifests, not an ephemeral candidate rewrite. The second install proves the refreshed staging lock is reproducible.
 6. Replace the staging compatibility output with the generated candidate record for its available candidate catalog; do not append or overwrite the source tree's pre-Stage-0 record.
 7. Call Task 7's exported `packPublicWorkspace` for exactly nine tarballs, verify every packed internal public dependency is bare exact `requestedVersion`, then call `runCompatibilityMatrix` for fixture `base`, cell `vite-react-19`, and manager `pnpm-11` against those tarballs.
-8. Write `requestedVersion`, relative tarball paths, names, versions, SHA-256 digests, catalog digest, source commit, channel, and hashed verification results to `candidate.json`; the standalone verifier must re-open packed manifests and require the expected source commit.
+8. Copy the exact generated catalog bytes to top-level `catalog.json`; write `requestedVersion`, relative tarball paths, names, versions, SHA-256 digests, the catalog digest, source commit, channel, and hashed verification results to `candidate.json`. The standalone verifier must re-hash the non-symlinked catalog and all packages, re-open packed manifests, and require both the candidate and compatibility receipt to name the expected source commit.
 9. Re-hash the source paths and fail if any source byte changed.
 
 - [ ] **Step 3: Add a normal source Changeset without entering prerelease mode**
@@ -1034,7 +1038,7 @@ Before public promotion, attach a Chromatic review, Pages URL, actual Node/brows
 - [ ] **Step 8: Commit source preparation without candidate artifacts**
 
 ```bash
-git add scripts/prepare-release-candidate.mjs scripts/lib/release-candidate-contract.mjs scripts/lib/release-candidate-artifacts.mjs scripts/lib/release-candidate-workspace.mjs scripts/verify-release-candidate.mjs scripts/run-compatibility-matrix.mjs scripts/lib/compatibility-process.mjs scripts/lib/compatibility-execution.mjs scripts/lib/compatibility-consumer.mjs scripts/lib/documentation-policy.mjs tests/architecture/release-candidate.test.mjs tests/architecture/release-candidate-verifier.test.mjs tests/architecture/release-workflow.test.mjs tests/architecture/build-config.test.mjs .github/workflows/storybook.yml .github/workflows/release.yml .github/workflows/ci.yml docs/PUBLISHING.md .changeset/stage-zero-foundation.md package.json .gitignore packages/{tokens,theme,icons,ui,social,knowledge,registry,cli,mcp}/package.json packages/{cli,mcp}/README.md packages/knowledge/test/compatibility.test.ts packages/registry/test/registry.test.ts packages/cli/test/cli.test.ts packages/mcp/test/domain.test.ts docs/superpowers/plans/2026-08-11-unpopping-candy-stage-0-foundation.md
+git add scripts/prepare-release-candidate.mjs scripts/lib/release-candidate-contract.mjs scripts/lib/release-candidate-artifacts.mjs scripts/lib/release-candidate-workspace.mjs scripts/verify-release-candidate.mjs scripts/run-compatibility-matrix.mjs scripts/lib/compatibility-process.mjs scripts/lib/compatibility-execution.mjs scripts/lib/compatibility-consumer.mjs scripts/lib/documentation-policy.mjs tests/architecture/release-candidate.test.mjs tests/architecture/release-candidate-verifier.test.mjs tests/architecture/release-workflow.test.mjs tests/architecture/build-config.test.mjs tests/architecture/compatibility-provenance.test.mjs .github/workflows/storybook.yml .github/workflows/release.yml .github/workflows/ci.yml docs/PUBLISHING.md .changeset/stage-zero-foundation.md package.json .gitignore packages/{tokens,theme,icons,ui,social,knowledge,registry,cli,mcp}/package.json packages/{cli,mcp}/README.md packages/knowledge/test/compatibility.test.ts packages/registry/test/registry.test.ts packages/cli/test/cli.test.ts packages/cli/test/compose.test.ts packages/knowledge/content/templates/template-social-feed-page.docs.ts packages/mcp/test/domain.test.ts docs/superpowers/plans/2026-08-11-unpopping-candy-stage-0-foundation.md
 git commit -m "release: prepare ephemeral alpha candidates"
 ```
 

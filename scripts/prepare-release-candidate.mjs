@@ -1,4 +1,4 @@
-import { mkdir, rm, writeFile } from "node:fs/promises";
+import { copyFile, mkdir, rm, writeFile } from "node:fs/promises";
 import { join, resolve } from "node:path";
 import { pathToFileURL } from "node:url";
 import {
@@ -128,18 +128,27 @@ export async function prepareReleaseCandidate(options) {
       artifactRoot: join(request.outputRoot, "compatibility"),
       keepPacked: true,
       environment: candidateEnvironment(),
+      sourceCommit: commit,
     });
     const packages = await packageEvidence(verified, packagesRoot);
+    const catalogPath = join(workspace, "agent/manifests/catalog.json");
+    const catalogDigest = await sha256File(catalogPath);
+    if (catalogDigest !== compatibility.releases[0].catalogDigest) {
+      throw new TypeError(
+        "Candidate catalog digest does not match compatibility metadata.",
+      );
+    }
+    await copyFile(catalogPath, join(request.outputRoot, "catalog.json"));
     const candidate = {
       schemaVersion: 1,
       requestedVersion: request.requestedVersion,
       channel: request.channel,
       sourceCommit: commit,
-      catalogDigest: compatibility.releases[0].catalogDigest,
+      catalogDigest,
       packages,
       verification: {
         agentCheck: "passed",
-        pureTests: "passed",
+        packageTests: "passed",
         typecheck: "passed",
         packageBuild: "passed",
         compatibility: await Promise.all(

@@ -8,21 +8,16 @@ import {
   writeFile,
 } from "node:fs/promises";
 import { tmpdir } from "node:os";
-import { join } from "node:path";
+import { basename, dirname, join } from "node:path";
 import test from "node:test";
 import { publicPackageGraph } from "../../scripts/lib/compatibility-contract.mjs";
-import { createCompatibilityEnvironment } from "../../scripts/lib/compatibility-environment.mjs";
+import * as compatibilityEnvironment from "../../scripts/lib/compatibility-environment.mjs";
 import {
   createPackedWorkspace,
   runCompatibilityProcess,
 } from "../../scripts/lib/compatibility-process.mjs";
-import { runCompatibilityMatrix } from "../../scripts/run-compatibility-matrix.mjs";
 
-function runCacheEntries() {
-  return readdir(tmpdir()).then((entries) =>
-    entries.filter((entry) => entry.startsWith("popcandy-run-cache-")).sort(),
-  );
-}
+const { createCompatibilityEnvironment } = compatibilityEnvironment;
 
 test("compatibility subprocesses exclude parent credentials and runtime injection", async () => {
   const root = await mkdtemp(join(tmpdir(), "popcandy-environment-"));
@@ -147,37 +142,26 @@ if (output >= 0) writeFileSync(args[output + 1], "synthetic-tarball");
   }
 });
 
-test("matrix removes its run cache when workspace packing fails", async () => {
-  const root = await mkdtemp(join(tmpdir(), "popcandy-pack-failure-"));
-  const fixtureRoot = join(root, "fixtures", "compatibility");
-  await mkdir(fixtureRoot, { recursive: true });
-  await writeFile(
-    join(fixtureRoot, "matrix.json"),
-    JSON.stringify({
-      cells: {
-        "vite-react-19": {
-          framework: "vite",
-          frameworkVersion: "8.1.0",
-          reactVersion: "19.2.8",
-        },
-      },
-      managers: {
-        "pnpm-11": { package: "pnpm", version: "11.21.0" },
-      },
-    }),
-  );
-  const before = await runCacheEntries();
-
+test("owned compatibility run cache is removed when its operation fails", async () => {
+  // Given: a cache parent owned only by this test.
+  const root = await mkdtemp(join(tmpdir(), "popcandy-run-cache-test-"));
+  const cacheParent = join(root, "caches");
+  await mkdir(cacheParent);
+  let observedCache;
   try {
+    // When: the cache-scoped operation fails after observing its cache.
     await assert.rejects(
-      runCompatibilityMatrix({
-        workspaceRoot: root,
-        fixture: "base",
-        cell: "vite-react-19",
-        manager: "pnpm-11",
-      }),
+      compatibilityEnvironment.withCompatibilityRunCache((cacheRoot) => {
+        observedCache = cacheRoot;
+        throw new TypeError("Synthetic packing failure.");
+      }, cacheParent),
+      /Synthetic packing failure/,
     );
-    assert.deepEqual(await runCacheEntries(), before);
+
+    // Then: only the test-owned parent is inspected and the cache is gone.
+    assert.equal(dirname(observedCache), cacheParent);
+    assert.match(basename(observedCache), /^popcandy-run-cache-/);
+    assert.deepEqual(await readdir(cacheParent), []);
   } finally {
     await rm(root, { recursive: true, force: true });
   }

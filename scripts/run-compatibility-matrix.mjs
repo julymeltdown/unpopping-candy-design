@@ -1,13 +1,18 @@
-import { mkdtemp, rm } from "node:fs/promises";
-import { tmpdir } from "node:os";
+import { execFile } from "node:child_process";
+import { rm } from "node:fs/promises";
 import { dirname, join, resolve } from "node:path";
 import { fileURLToPath, pathToFileURL } from "node:url";
+import { promisify } from "node:util";
 import {
   createCompatibilityPlan,
   parseCompatibilityArguments,
   readCompatibilityMatrix,
 } from "./lib/compatibility-contract.mjs";
 import { executeCompatibilityRun } from "./lib/compatibility-execution.mjs";
+import {
+  createCompatibilityEnvironment,
+  withCompatibilityRunCache,
+} from "./lib/compatibility-environment.mjs";
 import {
   createPackedWorkspace,
   validatePackedWorkspace,
@@ -17,6 +22,20 @@ const defaultWorkspaceRoot = resolve(
   dirname(fileURLToPath(import.meta.url)),
   "..",
 );
+const execFileAsync = promisify(execFile);
+
+async function readSourceCommit(workspaceRoot) {
+  const { stdout } = await execFileAsync("git", ["rev-parse", "HEAD"], {
+    cwd: workspaceRoot,
+    env: createCompatibilityEnvironment(),
+    maxBuffer: 64 * 1024,
+  });
+  const sourceCommit = stdout.trim();
+  if (!/^[0-9a-f]{40}$/.test(sourceCommit)) {
+    throw new TypeError("Compatibility source commit must be a full Git SHA.");
+  }
+  return sourceCommit;
+}
 
 export async function packPublicWorkspace(options = {}) {
   return createPackedWorkspace({
@@ -31,46 +50,52 @@ export async function runCompatibilityMatrix(options = {}) {
   const matrix = await readCompatibilityMatrix(workspaceRoot);
   const runs = createCompatibilityPlan(matrix, options);
   if (options.plan) return { runs };
-
-  const ownsCache = !options.cacheRoot;
-  const cacheRoot = options.cacheRoot
-    ? resolve(options.cacheRoot)
-    : await mkdtemp(join(tmpdir(), "popcandy-run-cache-"));
-  let candidatePacked;
-  try {
-    candidatePacked =
-      options.packed ?? (await packPublicWorkspace({ workspaceRoot }));
-    const packed = await validatePackedWorkspace(
-      candidatePacked,
-      options.environment,
-    );
-    const artifactRoot = resolve(
-      options.artifactRoot ?? join(workspaceRoot, ".artifacts/compatibility"),
-    );
-    const results = [];
-    for (const run of runs) {
-      results.push(
-        await executeCompatibilityRun(
-          {
-            workspaceRoot,
-            artifactRoot,
-            matrix,
-            packed,
-            keepTemporary: options.keepTemporary === true,
-            environment: options.environment,
-            cacheRoot,
-          },
-          run,
-        ),
-      );
-    }
-    return { runs, results };
-  } finally {
-    if (candidatePacked && !options.packed && !options.keepPacked) {
-      await rm(candidatePacked.root, { recursive: true, force: true });
-    }
-    if (ownsCache) await rm(cacheRoot, { recursive: true, force: true });
+  const sourceCommit =
+    options.sourceCommit ?? (await readSourceCommit(workspaceRoot));
+  if (!/^[0-9a-f]{40}$/.test(sourceCommit)) {
+    throw new TypeError("Compatibility source commit must be a full Git SHA.");
   }
+
+  const execute = async (cacheRoot) => {
+    let candidatePacked;
+    try {
+      candidatePacked =
+        options.packed ?? (await packPublicWorkspace({ workspaceRoot }));
+      const packed = await validatePackedWorkspace(
+        candidatePacked,
+        options.environment,
+      );
+      const artifactRoot = resolve(
+        options.artifactRoot ?? join(workspaceRoot, ".artifacts/compatibility"),
+      );
+      const results = [];
+      for (const run of runs) {
+        results.push(
+          await executeCompatibilityRun(
+            {
+              workspaceRoot,
+              artifactRoot,
+              matrix,
+              packed,
+              keepTemporary: options.keepTemporary === true,
+              environment: options.environment,
+              cacheRoot,
+              sourceCommit,
+            },
+            run,
+          ),
+        );
+      }
+      return { runs, results };
+    } finally {
+      if (candidatePacked && !options.packed && !options.keepPacked) {
+        await rm(candidatePacked.root, { recursive: true, force: true });
+      }
+    }
+  };
+  return options.cacheRoot
+    ? execute(resolve(options.cacheRoot))
+    : withCompatibilityRunCache(execute);
 }
 
 async function main() {

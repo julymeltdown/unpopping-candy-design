@@ -17,13 +17,26 @@ test("release candidate verifier re-hashes every exact artifact", async () => {
     root,
     "compatibility/base/vite-react-19/pnpm-11.json",
   );
-  await writeFile(
-    resultPath,
-    `${JSON.stringify({ id: "base/vite-react-19/pnpm-11", status: "passed" })}\n`,
-  );
-  const resultDigest = createHash("sha256")
-    .update(await readFile(resultPath))
-    .digest("hex");
+  const result = {
+    id: "base/vite-react-19/pnpm-11",
+    sourceCommit: "a".repeat(40),
+    status: "passed",
+  };
+  const writeResult = async () => {
+    await writeFile(resultPath, `${JSON.stringify(result)}\n`);
+    return createHash("sha256")
+      .update(await readFile(resultPath))
+      .digest("hex");
+  };
+  let resultDigest = await writeResult();
+  const catalogPath = join(root, "catalog.json");
+  const catalogBytes = `${JSON.stringify({
+    schemaVersion: 1,
+    packageVersion: "0.3.0-alpha.0",
+    entries: [],
+  })}\n`;
+  await writeFile(catalogPath, catalogBytes);
+  const catalogDigest = createHash("sha256").update(catalogBytes).digest("hex");
   const packages = [];
   for (const packageName of publicPackageNames) {
     const name = `${packageName.slice(1).replace("/", "-")}-0.3.0-alpha.0.tgz`;
@@ -36,47 +49,72 @@ test("release candidate verifier re-hashes every exact artifact", async () => {
       sha256: createHash("sha256").update(packageName).digest("hex"),
     });
   }
-  await writeFile(
-    join(root, "candidate.json"),
-    `${JSON.stringify({
-      schemaVersion: 1,
-      requestedVersion: "0.3.0-alpha.0",
-      channel: "next",
-      sourceCommit: "a".repeat(40),
-      catalogDigest: "b".repeat(64),
-      packages,
-      verification: {
-        agentCheck: "passed",
-        pureTests: "passed",
-        typecheck: "passed",
-        packageBuild: "passed",
-        compatibility: [
-          {
-            resultPath: "compatibility/base/vite-react-19/pnpm-11.json",
-            id: "base/vite-react-19/pnpm-11",
-            status: "passed",
-            sha256: resultDigest,
-          },
-        ],
-      },
-    })}\n`,
-  );
+  const candidate = {
+    schemaVersion: 1,
+    requestedVersion: "0.3.0-alpha.0",
+    channel: "next",
+    sourceCommit: "a".repeat(40),
+    catalogDigest,
+    packages,
+    verification: {
+      agentCheck: "passed",
+      packageTests: "passed",
+      typecheck: "passed",
+      packageBuild: "passed",
+      compatibility: [
+        {
+          resultPath: "compatibility/base/vite-react-19/pnpm-11.json",
+          id: "base/vite-react-19/pnpm-11",
+          status: "passed",
+          sha256: resultDigest,
+        },
+      ],
+    },
+  };
+  const writeCandidate = () =>
+    writeFile(join(root, "candidate.json"), `${JSON.stringify(candidate)}\n`);
+  await writeCandidate();
+  const inspectManifest = (item) => ({
+    name: item.packageName,
+    version: item.version,
+    repository: {
+      url: "https://github.com/julymeltdown/unpopping-candy-design.git",
+      directory: `packages/${item.packageName.split("/")[1]}`,
+    },
+  });
   assert.equal(
     (
       await verifyReleaseCandidate(root, {
         expectedSourceCommit: "a".repeat(40),
-        inspectManifest: (item) => ({
-          name: item.packageName,
-          version: item.version,
-          repository: {
-            url: "https://github.com/julymeltdown/unpopping-candy-design.git",
-            directory: `packages/${item.packageName.split("/")[1]}`,
-          },
-        }),
+        inspectManifest,
       })
     ).packages.length,
     9,
   );
+  result.sourceCommit = "c".repeat(40);
+  resultDigest = await writeResult();
+  candidate.verification.compatibility[0].sha256 = resultDigest;
+  await writeCandidate();
+  await assert.rejects(
+    () => verifyReleaseCandidate(root, { inspectManifest }),
+    /source commit mismatch/,
+  );
+  result.sourceCommit = candidate.sourceCommit;
+  candidate.verification.compatibility[0].sha256 = await writeResult();
+  await writeCandidate();
+  await writeFile(
+    catalogPath,
+    `${JSON.stringify({
+      schemaVersion: 1,
+      packageVersion: "0.3.0-alpha.0",
+      entries: [{ id: "tampered" }],
+    })}\n`,
+  );
+  await assert.rejects(
+    () => verifyReleaseCandidate(root, { inspectManifest }),
+    /catalog digest mismatch/,
+  );
+  await writeFile(catalogPath, catalogBytes);
   await assert.rejects(
     () =>
       verifyReleaseCandidate(root, {

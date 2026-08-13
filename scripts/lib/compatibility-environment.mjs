@@ -1,3 +1,4 @@
+import { mkdtemp, rm } from "node:fs/promises";
 import { tmpdir } from "node:os";
 import { join, resolve } from "node:path";
 
@@ -13,6 +14,15 @@ const inheritedNames = [
   "TEMP",
   "TMP",
 ];
+
+export async function withCompatibilityRunCache(operation, parent = tmpdir()) {
+  const cacheRoot = await mkdtemp(join(resolve(parent), "popcandy-run-cache-"));
+  try {
+    return await operation(cacheRoot);
+  } finally {
+    await rm(cacheRoot, { recursive: true, force: true });
+  }
+}
 
 export function createCompatibilityEnvironment(
   source = process.env,

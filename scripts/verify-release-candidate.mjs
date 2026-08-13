@@ -1,14 +1,8 @@
 import { createHash } from "node:crypto";
 import { lstat, readFile, readdir, realpath } from "node:fs/promises";
-import {
-  basename,
-  dirname,
-  isAbsolute,
-  join,
-  relative,
-  resolve,
-} from "node:path";
+import { basename, dirname, join, resolve } from "node:path";
 import { pathToFileURL } from "node:url";
+import { pathIsInside as inside } from "./lib/compatibility-contract.mjs";
 import { PUBLIC_PACKAGE_NAMES } from "./lib/public-packages.mjs";
 import {
   inspectTarballManifest,
@@ -16,11 +10,6 @@ import {
 } from "./lib/release-candidate-artifacts.mjs";
 import { parseExactVersion } from "./lib/release-candidate-contract.mjs";
 import { runCompatibilityProcess } from "./lib/compatibility-process.mjs";
-
-function inside(parent, candidate) {
-  const path = relative(parent, candidate);
-  return path === "" || (!path.startsWith("..") && !isAbsolute(path));
-}
 
 function exactKeys(value, keys, label) {
   if (!value || typeof value !== "object" || Array.isArray(value)) {
@@ -68,6 +57,29 @@ export async function verifyReleaseCandidate(candidateRoot, options = {}) {
     !/^[0-9a-f]{64}$/.test(candidate.catalogDigest)
   ) {
     throw new TypeError("Candidate metadata is invalid for the next channel.");
+  }
+  const catalogPath = join(root, "catalog.json");
+  const catalogInfo = await lstat(catalogPath);
+  const catalogCanonical = await realpath(catalogPath);
+  if (
+    catalogInfo.isSymbolicLink() ||
+    !catalogInfo.isFile() ||
+    catalogInfo.size > 8 * 1024 * 1024 ||
+    !inside(root, catalogCanonical)
+  ) {
+    throw new TypeError("Candidate catalog artifact is unsafe.");
+  }
+  const catalogBytes = await readFile(catalogCanonical);
+  const catalog = JSON.parse(catalogBytes.toString("utf8"));
+  if (
+    catalog.packageVersion !== candidate.requestedVersion ||
+    !Array.isArray(catalog.entries)
+  ) {
+    throw new TypeError("Candidate catalog artifact is invalid.");
+  }
+  const catalogDigest = createHash("sha256").update(catalogBytes).digest("hex");
+  if (catalogDigest !== candidate.catalogDigest) {
+    throw new TypeError("Candidate catalog digest mismatch.");
   }
   if (!Array.isArray(candidate.packages) || candidate.packages.length !== 9) {
     throw new TypeError("Candidate must contain exactly nine packages.");
@@ -141,13 +153,19 @@ export async function verifyReleaseCandidate(candidateRoot, options = {}) {
   );
   exactKeys(
     candidate.verification,
-    ["agentCheck", "pureTests", "typecheck", "packageBuild", "compatibility"],
+    [
+      "agentCheck",
+      "packageTests",
+      "typecheck",
+      "packageBuild",
+      "compatibility",
+    ],
     "Candidate verification",
   );
   if (
     [
       candidate.verification.agentCheck,
-      candidate.verification.pureTests,
+      candidate.verification.packageTests,
       candidate.verification.typecheck,
       candidate.verification.packageBuild,
     ].some((status) => status !== "passed")
@@ -187,9 +205,12 @@ export async function verifyReleaseCandidate(candidateRoot, options = {}) {
   if (
     resultDigest !== compatibility[0].sha256 ||
     result.id !== compatibility[0].id ||
+    result.sourceCommit !== candidate.sourceCommit ||
     result.status !== "passed"
   ) {
-    throw new TypeError("Candidate compatibility artifact is invalid.");
+    throw new TypeError(
+      "Candidate compatibility source commit mismatch or artifact is invalid.",
+    );
   }
   return candidate;
 }

@@ -72,13 +72,18 @@ export function assertObservedVersions(cell, observed) {
   }
 }
 
-function pendingOutcome() {
-  return { status: "not-run", durationMs: null };
-}
+const pendingOutcome = () => ({ status: "not-run", durationMs: null });
 
-export function createCompatibilityResult({ run, cell, manager, tarballs }) {
+export function createCompatibilityResult({
+  run,
+  cell,
+  manager,
+  tarballs,
+  sourceCommit,
+}) {
   return {
     id: run.id,
+    sourceCommit,
     status: "pending",
     stage: "prepare",
     node: process.version,

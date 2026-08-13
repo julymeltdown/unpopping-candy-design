@@ -93,7 +93,7 @@ pnpm release:candidate -- --version 0.3.0-alpha.0 --channel next --out .artifact
 node scripts/verify-release-candidate.mjs .artifacts/releases/stage-0-alpha.0 --source-commit "$(git rev-parse HEAD)"
 ```
 
-The command copies a bounded source tree into the ignored output, runs normal Changesets versioning only in that staging tree, rewrites the coordinated public packages to the requested prerelease, refreshes and freezes the staging lockfile, regenerates and validates AI artifacts, packs exactly nine tarballs, and runs the base Vite/React 19/pnpm 11 consumer. `candidate.json` binds every tarball digest to the source commit and compatibility result. A failed run removes its incomplete candidate directory.
+The command copies a bounded source tree into the ignored output, runs normal Changesets versioning only in that staging tree, rewrites the coordinated public packages to the requested prerelease, refreshes and freezes the staging lockfile, regenerates and validates AI artifacts, packs exactly nine tarballs, and runs the base Vite/React 19/pnpm 11 consumer. `candidate.json` binds every tarball digest, the exact `catalog.json` bytes, and the compatibility receipt to the same source commit. Its `packageTests` status names the staging package-source tests precisely; the source checkout's complete `test:pure` gate remains a separate required check. A failed run removes its incomplete candidate directory.
 
 ## Manual release workflow
 
