@@ -14,6 +14,7 @@ import {
 } from "./lib/release-candidate-artifacts.mjs";
 import {
   rewriteCandidateManifests,
+  rewriteCandidateMcpReadme,
   sourceHashes,
   stableStringify,
   validateCandidateRequest,
@@ -34,6 +35,7 @@ import {
 export {
   createCandidateCompatibility,
   rewriteCandidateManifests,
+  rewriteCandidateMcpReadme,
   sourceHashes,
   validateCandidateRequest,
   verifyPackedCandidate,
@@ -92,6 +94,7 @@ export async function prepareReleaseCandidate(options) {
     await run("pnpm", ["version-packages"], workspace);
     await assertCoordinatedVersion(workspace);
     await rewriteCandidateManifests(workspace, request.requestedVersion);
+    await rewriteCandidateMcpReadme(workspace, request.requestedVersion);
     await run("pnpm", ["install", "--no-frozen-lockfile"], workspace);
     await run("pnpm", ["install", "--frozen-lockfile"], workspace);
     await run("pnpm", ["agent:generate"], workspace);

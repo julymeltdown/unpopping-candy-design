@@ -2,11 +2,11 @@
 
 ## Reporting a vulnerability
 
-Use GitHub private vulnerability reporting for this repository:
+Use GitHub private vulnerability reporting when GitHub presents the repository form:
 
 [Privately report a security vulnerability](https://github.com/julymeltdown/unpopping-candy-design/security/advisories/new)
 
-Do not disclose a suspected vulnerability in a public issue, discussion, pull request, Storybook, fixture, or model prompt. If GitHub does not present the private-report form, contact the repository owners through GitHub without including exploit details publicly and request a private channel.
+Do not disclose a suspected vulnerability in a public issue, discussion, pull request, Storybook, fixture, or model prompt. If GitHub does not present the private-report form, open a [security-contact request](https://github.com/julymeltdown/unpopping-candy-design/issues/new) containing only a request for a private channel, with no vulnerability details, affected versions, logs, attachments, or proof of concept. Maintainers must establish a private channel before the reporter shares sensitive material.
 
 Include affected package and version or commit, impact, prerequisites, minimal reproduction, proof of concept, known mitigations, and whether disclosure is already public. Remove credentials, personal data, private product content, and unrelated secrets.
 

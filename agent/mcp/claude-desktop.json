@@ -1,8 +1,10 @@
 {
   "mcpServers": {
     "popcandy": {
-      "command": "npx",
-      "args": ["-y", "@unpopping-candy/mcp@0.2.0"]
+      "command": "node",
+      "args": [
+        "/absolute/path/to/unpopping-candy-design/packages/mcp/dist/stdio.js"
+      ]
     }
   }
 }

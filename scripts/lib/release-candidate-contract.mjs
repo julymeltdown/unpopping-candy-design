@@ -19,6 +19,7 @@ const manifestSections = [
   "peerDependencies",
   "optionalDependencies",
 ];
+const candidateMcpMarker = "<!-- POPCANDY_CANDIDATE_MCP_COMMAND -->";
 
 function inside(parent, candidate) {
   const path = relative(parent, candidate);
@@ -159,6 +160,21 @@ export async function rewriteCandidateManifests(root, requestedVersion) {
     );
   }
   return { requestedVersion, publicPackageNames: sortedNames };
+}
+
+export async function rewriteCandidateMcpReadme(root, requestedVersion) {
+  const mcpReadmePath = join(root, "packages/mcp/README.md");
+  const mcpReadme = await readFile(mcpReadmePath, "utf8");
+  if (mcpReadme.split(candidateMcpMarker).length !== 2) {
+    throw new TypeError(
+      "MCP README must contain exactly one candidate command marker.",
+    );
+  }
+  const candidateCommand = `## Verified candidate package\n\nIf this exact candidate is published through the approved workflow, configure clients with its immutable prerelease version:\n\n\`\`\`json\n{\n  "mcpServers": {\n    "popcandy": {\n      "command": "npx",\n      "args": ["-y", "@unpopping-candy/mcp@${requestedVersion}"]\n    }\n  }\n}\n\`\`\`\n`;
+  await writeFile(
+    mcpReadmePath,
+    mcpReadme.replace(candidateMcpMarker, candidateCommand),
+  );
 }
 
 export function stableStringify(value) {

@@ -4,12 +4,8 @@ import { basename, dirname, join, resolve } from "node:path";
 import { pathToFileURL } from "node:url";
 import { pathIsInside as inside } from "./lib/compatibility-contract.mjs";
 import { PUBLIC_PACKAGE_NAMES } from "./lib/public-packages.mjs";
-import {
-  inspectTarballManifest,
-  verifyPackedCandidate,
-} from "./lib/release-candidate-artifacts.mjs";
+import { verifyPackedReleaseArtifacts } from "./lib/release-candidate-verification.mjs";
 import { parseExactVersion } from "./lib/release-candidate-contract.mjs";
-import { runCompatibilityProcess } from "./lib/compatibility-process.mjs";
 
 function exactKeys(value, keys, label) {
   if (!value || typeof value !== "object" || Array.isArray(value)) {
@@ -135,7 +131,7 @@ export async function verifyReleaseCandidate(candidateRoot, options = {}) {
       throw new TypeError(`${item.name}: candidate digest mismatch.`);
     }
   }
-  await verifyPackedCandidate(
+  await verifyPackedReleaseArtifacts(
     {
       root: packagesRoot,
       tarballs: candidate.packages.map((item) => ({
@@ -147,9 +143,7 @@ export async function verifyReleaseCandidate(candidateRoot, options = {}) {
       })),
     },
     candidate.requestedVersion,
-    options.inspectManifest ??
-      ((item) =>
-        inspectTarballManifest(item, packagesRoot, runCompatibilityProcess)),
+    options,
   );
   exactKeys(
     candidate.verification,

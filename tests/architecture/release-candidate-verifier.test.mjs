@@ -82,11 +82,14 @@ test("release candidate verifier re-hashes every exact artifact", async () => {
       directory: `packages/${item.packageName.split("/")[1]}`,
     },
   });
+  const inspectMcpReadme = () =>
+    '"args": ["-y", "@unpopping-candy/mcp@0.3.0-alpha.0"]\n';
   assert.equal(
     (
       await verifyReleaseCandidate(root, {
         expectedSourceCommit: "a".repeat(40),
         inspectManifest,
+        inspectMcpReadme,
       })
     ).packages.length,
     9,
@@ -96,7 +99,7 @@ test("release candidate verifier re-hashes every exact artifact", async () => {
   candidate.verification.compatibility[0].sha256 = resultDigest;
   await writeCandidate();
   await assert.rejects(
-    () => verifyReleaseCandidate(root, { inspectManifest }),
+    () => verifyReleaseCandidate(root, { inspectManifest, inspectMcpReadme }),
     /source commit mismatch/,
   );
   result.sourceCommit = candidate.sourceCommit;
@@ -115,6 +118,15 @@ test("release candidate verifier re-hashes every exact artifact", async () => {
     /catalog digest mismatch/,
   );
   await writeFile(catalogPath, catalogBytes);
+  await assert.rejects(
+    () =>
+      verifyReleaseCandidate(root, {
+        inspectManifest,
+        inspectMcpReadme: () =>
+          '"args": ["-y", "@unpopping-candy/mcp@0.2.0"]\n',
+      }),
+    /MCP README must advertise the exact candidate version/,
+  );
   await assert.rejects(
     () =>
       verifyReleaseCandidate(root, {

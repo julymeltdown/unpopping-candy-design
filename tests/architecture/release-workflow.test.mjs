@@ -90,3 +90,21 @@ test("public packages bind npm provenance to the target GitHub repository", asyn
     });
   }
 });
+
+test("secret-bearing model captures only execute from protected master", async () => {
+  // Given: the model workflow can be manually dispatched with provider secrets.
+  const repository = new URL("../..", import.meta.url);
+  const source = await readFile(
+    new URL(".github/workflows/model-evals.yml", repository),
+    "utf8",
+  );
+  const workflow = parseYaml(source);
+
+  // When: the approved capture job is selected.
+  const capture = workflow.jobs["approved-capture"];
+
+  // Then: repository policy and the protected environment both gate execution.
+  assert.equal(capture.environment, "model-evaluations");
+  assert.match(capture.if, /github\.ref == 'refs\/heads\/master'/);
+  assert.match(capture.if, /POPCANDY_MODEL_EVAL_ENABLED == 'true'/);
+});

@@ -20,13 +20,8 @@ The small generic surface prevents component-per-tool context bloat. Component, 
 ## Local source checkout
 
 ```bash
-node --experimental-strip-types packages/mcp/src/stdio.ts
+pnpm build:packages
+node packages/mcp/dist/stdio.js
 ```
 
-## Published package
-
-```bash
-npx -y @unpopping-candy/mcp@0.2.0
-```
-
-The example client configurations in this directory are templates. Pin the version and adjust the repository path before use.
+The package is not currently published to npm, so this repository does not advertise an `npx` command. The example client configurations in this directory are source-checkout templates. Replace the absolute repository path before use. An approved release candidate rewrites the packaged MCP README to its exact requested version and is independently verified before publication.

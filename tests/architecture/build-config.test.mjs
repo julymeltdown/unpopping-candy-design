@@ -44,6 +44,20 @@ test("CI materializes package exports before gates that resolve them", async () 
   }
 });
 
+test("CI fetches the history required by retained documentation evidence", async () => {
+  // Given: documentation verification authenticates an ancestor commit.
+  const ci = await readFile(new URL(".github/workflows/ci.yml", root), "utf8");
+
+  // When: the push workflow checks out the candidate source.
+  const checkout = ci.match(
+    /- uses: actions\/checkout@v4\n(?<configuration>(?:\s{8,}.+\n)*)/,
+  );
+
+  // Then: the checkout retains enough history for git show and merge-base.
+  assert.ok(checkout?.groups?.configuration, "CI checkout configuration");
+  assert.match(checkout.groups.configuration, /fetch-depth:\s*0/);
+});
+
 test("published runtime tools declare the supported Node release lines", async () => {
   for (const packageName of ["cli", "mcp"]) {
     const manifest = JSON.parse(

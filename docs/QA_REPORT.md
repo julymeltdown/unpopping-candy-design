@@ -1,8 +1,12 @@
-# AI-native Unpopping Candy verification report
+# Historical AI-native Unpopping Candy verification report
+
+Snapshot commit: `d535eba3bb7208067729302b2c109ed095a74eed` (2026-08-10).
+
+This is a retained historical snapshot, not current release evidence. **Superseded by the Stage 0 verification evidence** in [the compatibility policy](./COMPATIBILITY.md), [the publishing policy](./PUBLISHING.md), and the current repository gates. Its counts and conclusions must not be used to authorize publication.
 
 ## 1. Scope
 
-This report records the verification performed for the standalone Unpopping Candy repository after the AI-operable design-system upgrade.
+This report records verification performed at the snapshot commit after the initial AI-operable design-system upgrade.
 
 The verified source includes:
 
@@ -20,7 +24,7 @@ The verified source includes:
 
 This report distinguishes four categories:
 
-1. **Executed positive checks** that passed in the current environment.
+1. **Executed positive checks** that passed in the snapshot environment.
 2. **Executed negative checks** that correctly rejected incomplete or unsafe publication.
 3. **Generated artifacts** whose reproducibility was checked byte-for-byte.
 4. **Dependency-aware checks not executed** because the npm registry was unavailable.
@@ -74,12 +78,12 @@ fc06d1a  chore: enforce AI context and release governance
 40d0515  feat: add project-scoped validation configuration
 ```
 
-## 4. Verified inventory
+## 4. Historical verified inventory
 
-The generated and source contracts currently contain:
+The generated and source contracts contained at the snapshot:
 
 ```text
-publishable packages                 11
+package directories in snapshot      11
 knowledge entries                    44
 ├─ components                        32
 ├─ product patterns                   6
@@ -100,6 +104,8 @@ Figma Code Connect templates           32
 Figma mappings ready for publish        0
 Figma mappings intentionally blocked   32
 ```
+
+Stage 0 later classified exactly nine packages as public candidates and two as private repository tools. The snapshot count above predates that policy.
 
 The six MCP tools are deliberately generic rather than component-specific:
 
@@ -190,7 +196,7 @@ The tests cover, among other contracts:
 - Agent Skill metadata and reference validation;
 - Storybook ID and named-story extraction.
 
-## 7. Full static verification gate
+## 7. Historical static verification gate
 
 ### Command
 
@@ -209,7 +215,7 @@ Agent Skills                           6 verified
 evaluation scenarios                   6 verified
 Figma templates                       32 verified
 AI cross-contract gate                 passed
-publishable package contracts      11 / 11 passed
+snapshot package contracts         11 / 11 passed
 package dependency boundaries          passed
 public export maps                      passed
 CSS namespace files                  7 / 7 passed
@@ -331,7 +337,7 @@ publishable mappings          0
 
 The command rejected every generated placeholder until a reviewed Figma component node URL is provided. This is intentional. Code Connect templates, public imports, Story IDs, and source paths are generated, but no fictitious Figma connection is represented as complete.
 
-## 13. Public package release prerequisites
+## 13. Historical release-prerequisite check
 
 ### Command
 
@@ -344,13 +350,11 @@ npm run release:check
 ```text
 exit code                    0
 repository license           MIT
-publishable package licenses MIT
+snapshot package licenses    MIT
 workspace lockfile           present
 ```
 
-The release prerequisite gate passes with the repository's MIT license, matching
-license metadata on all 11 publishable packages, and the committed
-`pnpm-lock.yaml`. This check does not publish packages.
+At the snapshot, the prerequisite check found MIT metadata on all 11 package directories and a committed `pnpm-lock.yaml`. It did not publish packages and does not represent the current nine-public/two-private policy or current authorization state.
 
 ## 14. Dependency installation
 
@@ -372,9 +376,9 @@ Workspace dependencies were installed successfully. The workspace records the
 approved `esbuild` install script in `pnpm-workspace.yaml`, so frozen installs can
 reproduce the generated application and Storybook builds.
 
-## 15. Dependency-aware checks
+## 15. Historical dependency-aware checks
 
-The installed workspace was used for the full typecheck, package and application
+The snapshot workspace was used for the full typecheck, package and application
 builds, Storybook static build, browser interaction and accessibility sweeps,
 package contract checks, MCP transport checks, and release prerequisite checks.
 The final verification set is recorded below and must remain green before a
@@ -382,9 +386,9 @@ release commit.
 
 Public npm publication was not performed as part of this repository replacement.
 
-## 16. Current release decision
+## 16. Historical release decision (superseded)
 
-The repository is suitable for:
+At the snapshot, the repository was considered suitable for:
 
 - continued design-system development;
 - internal source distribution;
@@ -395,15 +399,11 @@ The repository is suitable for:
 - adding real agent output fixtures to the evaluation harness;
 - preparing reviewed Figma Code Connect mappings.
 
-The repository now has the license, lockfile, typecheck, build, consumer fixture,
-Storybook, and package-contract prerequisites needed for a public package release.
-Publishing to npm remains a separate, explicitly triggered operation.
+The snapshot concluded that license, lockfile, typecheck, build, consumer fixture, Storybook, and package-contract prerequisites were present. That conclusion is superseded: current publication additionally requires the exact candidate, authorization, provenance, and protected-workflow gates in [the publishing policy](./PUBLISHING.md).
 
-Figma Code Connect publication is still intentionally blocked until the 32
-placeholder node URLs are replaced with reviewed Figma component URLs. This does
-not block the repository or npm package release.
+Figma Code Connect publication was intentionally blocked by 32 placeholder node URLs. Current Figma and npm readiness must be determined from their current fail-closed gates, not this snapshot.
 
-## 17. Final commands
+## 17. Snapshot commands
 
 The complete verification set is:
 
