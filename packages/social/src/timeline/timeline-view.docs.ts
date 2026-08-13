@@ -36,7 +36,7 @@ export default {
     "pattern.social-feed"
   ],
   "stories": [
-    "catalog-social-timeline-view--contract"
+    "catalog-social-timelineview--contract"
   ],
   "accessibility": {
     "requirements": [

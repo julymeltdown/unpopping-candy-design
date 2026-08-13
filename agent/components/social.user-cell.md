@@ -77,7 +77,7 @@ Separates row navigation and relationship action.
 
 ## Storybook
 
-- `catalog-social-user-cell--contract`
+- `catalog-social-usercell--contract`
 
 ## Source
 

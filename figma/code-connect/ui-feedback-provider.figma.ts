@@ -13,7 +13,7 @@ export default {
     nestable: true,
     props: {
       knowledgeId: 'ui.feedback-provider',
-      storyId: 'catalog-ui-feedback-provider--contract',
+      storyId: 'catalog-ui-feedbackprovider--contract',
     },
   },
 }

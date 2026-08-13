@@ -3,68 +3,68 @@
     {
       "componentId": "social.conversation-preview",
       "file": "apps/docs/stories/catalog/social/ConversationPreview.stories.tsx",
-      "storyId": "catalog-social-conversation-preview--contract",
-      "url": "/?path=/story/catalog-social-conversation-preview--contract"
+      "storyId": "catalog-social-conversationpreview--contract",
+      "url": "/?path=/story/catalog-social-conversationpreview--contract"
     },
     {
       "componentId": "social.notification-item",
       "file": "apps/docs/stories/catalog/social/NotificationItem.stories.tsx",
-      "storyId": "catalog-social-notification-item--contract",
-      "url": "/?path=/story/catalog-social-notification-item--contract"
+      "storyId": "catalog-social-notificationitem--contract",
+      "url": "/?path=/story/catalog-social-notificationitem--contract"
     },
     {
       "componentId": "social.post-actions",
       "file": "apps/docs/stories/catalog/social/PostActions.stories.tsx",
-      "storyId": "catalog-social-post-actions--contract",
-      "url": "/?path=/story/catalog-social-post-actions--contract"
+      "storyId": "catalog-social-postactions--contract",
+      "url": "/?path=/story/catalog-social-postactions--contract"
     },
     {
       "componentId": "social.post-card",
       "file": "apps/docs/stories/catalog/social/PostCard.stories.tsx",
-      "storyId": "catalog-social-post-card--contract",
-      "url": "/?path=/story/catalog-social-post-card--contract"
+      "storyId": "catalog-social-postcard--contract",
+      "url": "/?path=/story/catalog-social-postcard--contract"
     },
     {
       "componentId": "social.post-card-skeleton",
       "file": "apps/docs/stories/catalog/social/PostCardSkeleton.stories.tsx",
-      "storyId": "catalog-social-post-card-skeleton--contract",
-      "url": "/?path=/story/catalog-social-post-card-skeleton--contract"
+      "storyId": "catalog-social-postcardskeleton--contract",
+      "url": "/?path=/story/catalog-social-postcardskeleton--contract"
     },
     {
       "componentId": "social.post-composer-view",
       "file": "apps/docs/stories/catalog/social/PostComposerView.stories.tsx",
-      "storyId": "catalog-social-post-composer-view--contract",
-      "url": "/?path=/story/catalog-social-post-composer-view--contract"
+      "storyId": "catalog-social-postcomposerview--contract",
+      "url": "/?path=/story/catalog-social-postcomposerview--contract"
     },
     {
       "componentId": "social.post-header",
       "file": "apps/docs/stories/catalog/social/PostHeader.stories.tsx",
-      "storyId": "catalog-social-post-header--contract",
-      "url": "/?path=/story/catalog-social-post-header--contract"
+      "storyId": "catalog-social-postheader--contract",
+      "url": "/?path=/story/catalog-social-postheader--contract"
     },
     {
       "componentId": "social.post-media-grid",
       "file": "apps/docs/stories/catalog/social/PostMediaGrid.stories.tsx",
-      "storyId": "catalog-social-post-media-grid--contract",
-      "url": "/?path=/story/catalog-social-post-media-grid--contract"
+      "storyId": "catalog-social-postmediagrid--contract",
+      "url": "/?path=/story/catalog-social-postmediagrid--contract"
     },
     {
       "componentId": "social.profile-header",
       "file": "apps/docs/stories/catalog/social/ProfileHeader.stories.tsx",
-      "storyId": "catalog-social-profile-header--contract",
-      "url": "/?path=/story/catalog-social-profile-header--contract"
+      "storyId": "catalog-social-profileheader--contract",
+      "url": "/?path=/story/catalog-social-profileheader--contract"
     },
     {
       "componentId": "social.timeline-view",
       "file": "apps/docs/stories/catalog/social/TimelineView.stories.tsx",
-      "storyId": "catalog-social-timeline-view--contract",
-      "url": "/?path=/story/catalog-social-timeline-view--contract"
+      "storyId": "catalog-social-timelineview--contract",
+      "url": "/?path=/story/catalog-social-timelineview--contract"
     },
     {
       "componentId": "social.user-cell",
       "file": "apps/docs/stories/catalog/social/UserCell.stories.tsx",
-      "storyId": "catalog-social-user-cell--contract",
-      "url": "/?path=/story/catalog-social-user-cell--contract"
+      "storyId": "catalog-social-usercell--contract",
+      "url": "/?path=/story/catalog-social-usercell--contract"
     },
     {
       "componentId": "ui.alert",
@@ -105,20 +105,20 @@
     {
       "componentId": "ui.empty-state",
       "file": "apps/docs/stories/catalog/ui/EmptyState.stories.tsx",
-      "storyId": "catalog-ui-empty-state--contract",
-      "url": "/?path=/story/catalog-ui-empty-state--contract"
+      "storyId": "catalog-ui-emptystate--contract",
+      "url": "/?path=/story/catalog-ui-emptystate--contract"
     },
     {
       "componentId": "ui.feedback-provider",
       "file": "apps/docs/stories/catalog/ui/FeedbackProvider.stories.tsx",
-      "storyId": "catalog-ui-feedback-provider--contract",
-      "url": "/?path=/story/catalog-ui-feedback-provider--contract"
+      "storyId": "catalog-ui-feedbackprovider--contract",
+      "url": "/?path=/story/catalog-ui-feedbackprovider--contract"
     },
     {
       "componentId": "ui.icon-button",
       "file": "apps/docs/stories/catalog/ui/IconButton.stories.tsx",
-      "storyId": "catalog-ui-icon-button--contract",
-      "url": "/?path=/story/catalog-ui-icon-button--contract"
+      "storyId": "catalog-ui-iconbutton--contract",
+      "url": "/?path=/story/catalog-ui-iconbutton--contract"
     },
     {
       "componentId": "ui.inline",
@@ -165,14 +165,14 @@
     {
       "componentId": "ui.text-area",
       "file": "apps/docs/stories/catalog/ui/TextArea.stories.tsx",
-      "storyId": "catalog-ui-text-area--contract",
-      "url": "/?path=/story/catalog-ui-text-area--contract"
+      "storyId": "catalog-ui-textarea--contract",
+      "url": "/?path=/story/catalog-ui-textarea--contract"
     },
     {
       "componentId": "ui.text-field",
       "file": "apps/docs/stories/catalog/ui/TextField.stories.tsx",
-      "storyId": "catalog-ui-text-field--contract",
-      "url": "/?path=/story/catalog-ui-text-field--contract"
+      "storyId": "catalog-ui-textfield--contract",
+      "url": "/?path=/story/catalog-ui-textfield--contract"
     },
     {
       "componentId": "ui.toast",
@@ -183,14 +183,14 @@
     {
       "componentId": "ui.toast-viewport",
       "file": "apps/docs/stories/catalog/ui/ToastViewport.stories.tsx",
-      "storyId": "catalog-ui-toast-viewport--contract",
-      "url": "/?path=/story/catalog-ui-toast-viewport--contract"
+      "storyId": "catalog-ui-toastviewport--contract",
+      "url": "/?path=/story/catalog-ui-toastviewport--contract"
     },
     {
       "componentId": "ui.visually-hidden",
       "file": "apps/docs/stories/catalog/ui/VisuallyHidden.stories.tsx",
-      "storyId": "catalog-ui-visually-hidden--contract",
-      "url": "/?path=/story/catalog-ui-visually-hidden--contract"
+      "storyId": "catalog-ui-visuallyhidden--contract",
+      "url": "/?path=/story/catalog-ui-visuallyhidden--contract"
     }
   ],
   "generatedAt": "2026-08-09T00:00:00.000Z",

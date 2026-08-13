@@ -75,7 +75,7 @@ Injects navigation behavior.
 
 ## Storybook
 
-- `catalog-social-post-header--contract`
+- `catalog-social-postheader--contract`
 
 ## Source
 

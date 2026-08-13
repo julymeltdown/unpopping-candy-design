@@ -34,7 +34,7 @@ export default {
     "ui.toast"
   ],
   "stories": [
-    "catalog-ui-toast-viewport--contract"
+    "catalog-ui-toastviewport--contract"
   ],
   "accessibility": {
     "requirements": [

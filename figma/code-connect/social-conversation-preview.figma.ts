@@ -13,7 +13,7 @@ export default {
     nestable: true,
     props: {
       knowledgeId: 'social.conversation-preview',
-      storyId: 'catalog-social-conversation-preview--contract',
+      storyId: 'catalog-social-conversationpreview--contract',
     },
   },
 }

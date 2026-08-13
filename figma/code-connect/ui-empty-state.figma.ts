@@ -13,7 +13,7 @@ export default {
     nestable: true,
     props: {
       knowledgeId: 'ui.empty-state',
-      storyId: 'catalog-ui-empty-state--contract',
+      storyId: 'catalog-ui-emptystate--contract',
     },
   },
 }

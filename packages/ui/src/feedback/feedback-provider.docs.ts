@@ -35,7 +35,7 @@ export default {
     "ui.alert"
   ],
   "stories": [
-    "catalog-ui-feedback-provider--contract"
+    "catalog-ui-feedbackprovider--contract"
   ],
   "accessibility": {
     "requirements": [

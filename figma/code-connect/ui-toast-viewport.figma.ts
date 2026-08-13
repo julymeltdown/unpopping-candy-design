@@ -13,7 +13,7 @@ export default {
     nestable: true,
     props: {
       knowledgeId: 'ui.toast-viewport',
-      storyId: 'catalog-ui-toast-viewport--contract',
+      storyId: 'catalog-ui-toastviewport--contract',
     },
   },
 }

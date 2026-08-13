@@ -6,7 +6,7 @@ export const bundledCompatibilityManifest = {
   "releases": [
     {
       "catalogVersion": "0.2.0",
-      "catalogDigest": "b3a93d4039230febbc119cd336ec1a66ea44ebb7fa4e2bffc66f5ba8132bb63a",
+      "catalogDigest": "936c4fec16fe1a2b839cc2b499a729b567dcf1b0503bc915ec061c357844273f",
       "publicPackageVersions": {
         "@unpopping-candy/cli": "0.2.0",
         "@unpopping-candy/icons": "0.1.0",

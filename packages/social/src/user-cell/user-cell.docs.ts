@@ -18,7 +18,7 @@ export default {
   avoidWhen: ["A full profile context is needed; use ProfileHeader."],
   tokens: ["--popcandy-ink", "--popcandy-ink-muted", "--popcandy-border"],
   related: ["ui.avatar", "social.profile-header"],
-  stories: ["catalog-social-user-cell--contract"],
+  stories: ["catalog-social-usercell--contract"],
   accessibility: {
     requirements: [
       "If the entire row is interactive, preserve nested action behavior.",

@@ -86,7 +86,7 @@ Screen-reader users cannot identify the action.
 
 ## Storybook
 
-- `catalog-ui-icon-button--contract`
+- `catalog-ui-iconbutton--contract`
 
 ## Source
 

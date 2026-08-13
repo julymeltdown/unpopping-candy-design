@@ -464,7 +464,7 @@ export const bundledCatalog = {
         "pattern.conversation-list"
       ],
       "stories": [
-        "catalog-social-conversation-preview--contract"
+        "catalog-social-conversationpreview--contract"
       ],
       "accessibility": {
         "requirements": [
@@ -554,7 +554,7 @@ export const bundledCatalog = {
         "pattern.collection-states"
       ],
       "stories": [
-        "catalog-social-notification-item--contract"
+        "catalog-social-notificationitem--contract"
       ],
       "accessibility": {
         "requirements": [
@@ -664,7 +664,7 @@ export const bundledCatalog = {
         "ui.icon-button"
       ],
       "stories": [
-        "catalog-social-post-actions--contract"
+        "catalog-social-postactions--contract"
       ],
       "accessibility": {
         "requirements": [
@@ -793,7 +793,7 @@ export const bundledCatalog = {
         "pattern.social-feed"
       ],
       "stories": [
-        "catalog-social-post-card--contract"
+        "catalog-social-postcard--contract"
       ],
       "accessibility": {
         "requirements": [
@@ -951,7 +951,7 @@ export const bundledCatalog = {
         "ui.skeleton"
       ],
       "stories": [
-        "catalog-social-post-card-skeleton--contract"
+        "catalog-social-postcardskeleton--contract"
       ],
       "accessibility": {
         "requirements": [
@@ -1019,7 +1019,7 @@ export const bundledCatalog = {
         "pattern.form-actions"
       ],
       "stories": [
-        "catalog-social-post-composer-view--contract"
+        "catalog-social-postcomposerview--contract"
       ],
       "accessibility": {
         "requirements": [
@@ -1154,7 +1154,7 @@ export const bundledCatalog = {
         "social.user-cell"
       ],
       "stories": [
-        "catalog-social-post-header--contract"
+        "catalog-social-postheader--contract"
       ],
       "accessibility": {
         "requirements": [
@@ -1256,7 +1256,7 @@ export const bundledCatalog = {
         "social.post-card"
       ],
       "stories": [
-        "catalog-social-post-media-grid--contract"
+        "catalog-social-postmediagrid--contract"
       ],
       "accessibility": {
         "requirements": [
@@ -1348,7 +1348,7 @@ export const bundledCatalog = {
         "pattern.profile-surface"
       ],
       "stories": [
-        "catalog-social-profile-header--contract"
+        "catalog-social-profileheader--contract"
       ],
       "accessibility": {
         "requirements": [
@@ -1453,7 +1453,7 @@ export const bundledCatalog = {
         "pattern.social-feed"
       ],
       "stories": [
-        "catalog-social-timeline-view--contract"
+        "catalog-social-timelineview--contract"
       ],
       "accessibility": {
         "requirements": [
@@ -1576,7 +1576,7 @@ export const bundledCatalog = {
         "social.profile-header"
       ],
       "stories": [
-        "catalog-social-user-cell--contract"
+        "catalog-social-usercell--contract"
       ],
       "accessibility": {
         "requirements": [
@@ -2681,7 +2681,7 @@ export const bundledCatalog = {
         "ui.skeleton"
       ],
       "stories": [
-        "catalog-ui-empty-state--contract"
+        "catalog-ui-emptystate--contract"
       ],
       "accessibility": {
         "requirements": [
@@ -2780,7 +2780,7 @@ export const bundledCatalog = {
         "ui.alert"
       ],
       "stories": [
-        "catalog-ui-feedback-provider--contract"
+        "catalog-ui-feedbackprovider--contract"
       ],
       "accessibility": {
         "requirements": [
@@ -2860,7 +2860,7 @@ export const bundledCatalog = {
         "ui.button"
       ],
       "stories": [
-        "catalog-ui-icon-button--contract"
+        "catalog-ui-iconbutton--contract"
       ],
       "accessibility": {
         "requirements": [
@@ -3632,7 +3632,7 @@ export const bundledCatalog = {
         "pattern.form-actions"
       ],
       "stories": [
-        "catalog-ui-text-area--contract"
+        "catalog-ui-textarea--contract"
       ],
       "accessibility": {
         "requirements": [
@@ -3732,7 +3732,7 @@ export const bundledCatalog = {
         "pattern.form-actions"
       ],
       "stories": [
-        "catalog-ui-text-field--contract"
+        "catalog-ui-textfield--contract"
       ],
       "accessibility": {
         "requirements": [
@@ -3941,7 +3941,7 @@ export const bundledCatalog = {
         "ui.toast"
       ],
       "stories": [
-        "catalog-ui-toast-viewport--contract"
+        "catalog-ui-toastviewport--contract"
       ],
       "accessibility": {
         "requirements": [
@@ -4024,7 +4024,7 @@ export const bundledCatalog = {
         "ui.spinner"
       ],
       "stories": [
-        "catalog-ui-visually-hidden--contract"
+        "catalog-ui-visuallyhidden--contract"
       ],
       "accessibility": {
         "requirements": [

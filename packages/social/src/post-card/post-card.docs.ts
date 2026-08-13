@@ -39,7 +39,7 @@ export default {
     "pattern.social-feed"
   ],
   "stories": [
-    "catalog-social-post-card--contract"
+    "catalog-social-postcard--contract"
   ],
   "accessibility": {
     "requirements": [

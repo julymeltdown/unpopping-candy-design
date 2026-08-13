@@ -80,7 +80,7 @@ Keeps relationship behavior in the application.
 
 ## Storybook
 
-- `catalog-social-profile-header--contract`
+- `catalog-social-profileheader--contract`
 
 ## Source
 

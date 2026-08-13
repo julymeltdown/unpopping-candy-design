@@ -37,7 +37,7 @@ export default {
     "pattern.form-actions"
   ],
   "stories": [
-    "catalog-ui-text-field--contract"
+    "catalog-ui-textfield--contract"
   ],
   "accessibility": {
     "requirements": [

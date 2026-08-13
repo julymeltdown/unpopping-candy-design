@@ -23,7 +23,7 @@ export default {
     "--popcandy-critical",
   ],
   related: ["social.post-card", "ui.icon-button"],
-  stories: ["catalog-social-post-actions--contract"],
+  stories: ["catalog-social-postactions--contract"],
   accessibility: {
     requirements: [
       "Each icon action needs an accessible label and pressed state.",

@@ -99,7 +99,7 @@ function PostCard({ id }) { const post = useQuery(...); }
 
 ## Storybook
 
-- `catalog-social-post-card--contract`
+- `catalog-social-postcard--contract`
 
 ## Source
 

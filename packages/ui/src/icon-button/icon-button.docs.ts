@@ -23,7 +23,7 @@ export default {
     "--popcandy-ink-muted",
   ],
   related: ["ui.button"],
-  stories: ["catalog-ui-icon-button--contract"],
+  stories: ["catalog-ui-iconbutton--contract"],
   accessibility: {
     requirements: [
       "An aria-label is required.",

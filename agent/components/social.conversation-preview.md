@@ -76,7 +76,7 @@ Injects navigation and keeps data ownership external.
 
 ## Storybook
 
-- `catalog-social-conversation-preview--contract`
+- `catalog-social-conversationpreview--contract`
 
 ## Source
 

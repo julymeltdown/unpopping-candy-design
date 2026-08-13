@@ -73,7 +73,7 @@ Creates one deterministic queue.
 
 ## Storybook
 
-- `catalog-ui-feedback-provider--contract`
+- `catalog-ui-feedbackprovider--contract`
 
 ## Source
 

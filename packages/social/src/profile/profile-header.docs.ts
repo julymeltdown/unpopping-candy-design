@@ -23,7 +23,7 @@ export default {
     "--popcandy-ink-muted",
   ],
   related: ["social.user-cell", "pattern.profile-surface"],
-  stories: ["catalog-social-profile-header--contract"],
+  stories: ["catalog-social-profileheader--contract"],
   accessibility: {
     requirements: [
       "Heading levels must fit the page hierarchy.",

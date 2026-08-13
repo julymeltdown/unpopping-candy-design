@@ -35,7 +35,7 @@ export default {
     "social.post-card"
   ],
   "stories": [
-    "catalog-social-post-media-grid--contract"
+    "catalog-social-postmediagrid--contract"
   ],
   "accessibility": {
     "requirements": [

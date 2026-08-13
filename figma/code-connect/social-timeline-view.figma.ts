@@ -13,7 +13,7 @@ export default {
     nestable: true,
     props: {
       knowledgeId: 'social.timeline-view',
-      storyId: 'catalog-social-timeline-view--contract',
+      storyId: 'catalog-social-timelineview--contract',
     },
   },
 }

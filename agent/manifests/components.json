@@ -67,7 +67,7 @@
       ],
       "status": "stable",
       "stories": [
-        "catalog-social-conversation-preview--contract"
+        "catalog-social-conversationpreview--contract"
       ],
       "summary": "Presents a conversation summary with participants, latest message, time, and unread state.",
       "tokens": [
@@ -163,7 +163,7 @@
       ],
       "status": "stable",
       "stories": [
-        "catalog-social-notification-item--contract"
+        "catalog-social-notificationitem--contract"
       ],
       "summary": "Presents one social notification with actor context, event description, and optional target content.",
       "tokens": [
@@ -302,7 +302,7 @@
       ],
       "status": "stable",
       "stories": [
-        "catalog-social-post-actions--contract"
+        "catalog-social-postactions--contract"
       ],
       "summary": "Presents reply, repost, like, bookmark, and share actions as controlled social interactions.",
       "tokens": [
@@ -462,7 +462,7 @@
       ],
       "status": "stable",
       "stories": [
-        "catalog-social-post-card--contract"
+        "catalog-social-postcard--contract"
       ],
       "summary": "Presents a social post with author, content, distribution context, metrics, and injected actions.",
       "tokens": [
@@ -537,7 +537,7 @@
       ],
       "status": "stable",
       "stories": [
-        "catalog-social-post-card-skeleton--contract"
+        "catalog-social-postcardskeleton--contract"
       ],
       "summary": "Reserves the expected geometry of a PostCard while timeline data loads.",
       "tokens": [
@@ -668,7 +668,7 @@
       ],
       "status": "stable",
       "stories": [
-        "catalog-social-post-composer-view--contract"
+        "catalog-social-postcomposerview--contract"
       ],
       "summary": "Presents a controlled social composer while the application owns draft, validation, upload, and publishing state.",
       "tokens": [
@@ -771,7 +771,7 @@
       ],
       "status": "stable",
       "stories": [
-        "catalog-social-post-header--contract"
+        "catalog-social-postheader--contract"
       ],
       "summary": "Presents post identity, timestamp, and distribution context without owning navigation.",
       "tokens": [
@@ -854,7 +854,7 @@
       ],
       "status": "stable",
       "stories": [
-        "catalog-social-post-media-grid--contract"
+        "catalog-social-postmediagrid--contract"
       ],
       "summary": "Arranges one to four social media assets with stable aspect ratios and selection callbacks.",
       "tokens": [
@@ -961,7 +961,7 @@
       ],
       "status": "stable",
       "stories": [
-        "catalog-social-profile-header--contract"
+        "catalog-social-profileheader--contract"
       ],
       "summary": "Presents a curator or user profile summary with injected primary and secondary actions.",
       "tokens": [
@@ -1094,7 +1094,7 @@
       ],
       "status": "stable",
       "stories": [
-        "catalog-social-timeline-view--contract"
+        "catalog-social-timelineview--contract"
       ],
       "summary": "Composes timeline states and rendered post rows without owning pagination or virtualization.",
       "tokens": [
@@ -1194,7 +1194,7 @@
       ],
       "status": "stable",
       "stories": [
-        "catalog-social-user-cell--contract"
+        "catalog-social-usercell--contract"
       ],
       "summary": "Presents a compact person row with optional supporting text and injected action.",
       "tokens": [
@@ -1980,7 +1980,7 @@
       ],
       "status": "stable",
       "stories": [
-        "catalog-ui-empty-state--contract"
+        "catalog-ui-emptystate--contract"
       ],
       "summary": "Explains why a meaningful region has no content and offers the next valid action.",
       "tokens": [
@@ -2065,7 +2065,7 @@
       ],
       "status": "stable",
       "stories": [
-        "catalog-ui-feedback-provider--contract"
+        "catalog-ui-feedbackprovider--contract"
       ],
       "summary": "Owns the application-level transient feedback queue and exposes a bounded controller.",
       "tokens": [
@@ -2168,7 +2168,7 @@
       ],
       "status": "stable",
       "stories": [
-        "catalog-ui-icon-button--contract"
+        "catalog-ui-iconbutton--contract"
       ],
       "summary": "Triggers a frequent action where a well-known icon can replace visible text.",
       "tokens": [
@@ -2933,7 +2933,7 @@
       ],
       "status": "stable",
       "stories": [
-        "catalog-ui-text-area--contract"
+        "catalog-ui-textarea--contract"
       ],
       "summary": "Collects multi-line text with label, description, validation, and native textarea semantics.",
       "tokens": [
@@ -3038,7 +3038,7 @@
       ],
       "status": "stable",
       "stories": [
-        "catalog-ui-text-field--contract"
+        "catalog-ui-textfield--contract"
       ],
       "summary": "Collects one short value with label, description, validation, and native input semantics.",
       "tokens": [
@@ -3224,7 +3224,7 @@
       ],
       "status": "stable",
       "stories": [
-        "catalog-ui-toast-viewport--contract"
+        "catalog-ui-toastviewport--contract"
       ],
       "summary": "Positions and announces the bounded stack of global feedback items.",
       "tokens": [
@@ -3297,7 +3297,7 @@
       ],
       "status": "stable",
       "stories": [
-        "catalog-ui-visually-hidden--contract"
+        "catalog-ui-visuallyhidden--contract"
       ],
       "summary": "Keeps essential text available to assistive technology without changing visual layout.",
       "tokens": [

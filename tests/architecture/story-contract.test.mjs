@@ -3,8 +3,8 @@ import test from 'node:test';
 import { storyId, inspectStorySource } from '../../scripts/lib/story-contract.mjs';
 
 test('Storybook ids are derived deterministically from title and named export', () => {
-  assert.equal(storyId('Catalog/UI/TextField', 'Contract'), 'catalog-ui-text-field--contract');
-  assert.equal(storyId('Catalog/Social/PostCard', 'WithRepost'), 'catalog-social-post-card--with-repost');
+  assert.equal(storyId('Catalog/UI/TextField', 'Contract'), 'catalog-ui-textfield--contract');
+  assert.equal(storyId('Catalog/Social/PostCard', 'WithRepost'), 'catalog-social-postcard--withrepost');
 });
 
 test('story source inspection finds one title and all named story exports', () => {
@@ -16,7 +16,7 @@ test('story source inspection finds one title and all named story exports', () =
   `);
   assert.equal(inspected.title, 'Catalog/UI/Button');
   assert.deepEqual(inspected.exports, ['Contract', 'PendingState']);
-  assert.deepEqual(inspected.ids, ['catalog-ui-button--contract', 'catalog-ui-button--pending-state']);
+  assert.deepEqual(inspected.ids, ['catalog-ui-button--contract', 'catalog-ui-button--pendingstate']);
 });
 
 test('story source inspection rejects missing or ambiguous titles', () => {

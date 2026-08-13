@@ -13,7 +13,7 @@ export default {
     nestable: true,
     props: {
       knowledgeId: 'social.post-card',
-      storyId: 'catalog-social-post-card--contract',
+      storyId: 'catalog-social-postcard--contract',
     },
   },
 }

@@ -13,7 +13,7 @@ export default {
     nestable: true,
     props: {
       knowledgeId: 'social.profile-header',
-      storyId: 'catalog-social-profile-header--contract',
+      storyId: 'catalog-social-profileheader--contract',
     },
   },
 }

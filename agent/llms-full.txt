@@ -312,7 +312,7 @@ Injects navigation and keeps data ownership external.
 
 ## Storybook
 
-- `catalog-social-conversation-preview--contract`
+- `catalog-social-conversationpreview--contract`
 
 ## Source
 
@@ -402,7 +402,7 @@ Keeps routing outside the package.
 
 ## Storybook
 
-- `catalog-social-notification-item--contract`
+- `catalog-social-notificationitem--contract`
 
 ## Source
 
@@ -497,7 +497,7 @@ Keeps mutation ownership outside the component.
 
 ## Storybook
 
-- `catalog-social-post-actions--contract`
+- `catalog-social-postactions--contract`
 
 ## Source
 
@@ -607,7 +607,7 @@ function PostCard({ id }) { const post = useQuery(...); }
 
 ## Storybook
 
-- `catalog-social-post-card--contract`
+- `catalog-social-postcard--contract`
 
 ## Source
 
@@ -683,7 +683,7 @@ Matches the post layout without fake content.
 
 ## Storybook
 
-- `catalog-social-post-card-skeleton--contract`
+- `catalog-social-postcardskeleton--contract`
 
 ## Source
 
@@ -782,7 +782,7 @@ Leaves workflow state in the consuming app.
 
 ## Storybook
 
-- `catalog-social-post-composer-view--contract`
+- `catalog-social-postcomposerview--contract`
 
 ## Source
 
@@ -868,7 +868,7 @@ Injects navigation behavior.
 
 ## Storybook
 
-- `catalog-social-post-header--contract`
+- `catalog-social-postheader--contract`
 
 ## Source
 
@@ -953,7 +953,7 @@ Uses application-owned media behavior.
 
 ## Storybook
 
-- `catalog-social-post-media-grid--contract`
+- `catalog-social-postmediagrid--contract`
 
 ## Source
 
@@ -1044,7 +1044,7 @@ Keeps relationship behavior in the application.
 
 ## Storybook
 
-- `catalog-social-profile-header--contract`
+- `catalog-social-profileheader--contract`
 
 ## Source
 
@@ -1139,7 +1139,7 @@ Keeps remote state outside presentation.
 
 ## Storybook
 
-- `catalog-social-timeline-view--contract`
+- `catalog-social-timelineview--contract`
 
 ## Source
 
@@ -1227,7 +1227,7 @@ Separates row navigation and relationship action.
 
 ## Storybook
 
-- `catalog-social-user-cell--contract`
+- `catalog-social-usercell--contract`
 
 ## Source
 
@@ -1875,7 +1875,7 @@ Explains the condition and recovery.
 
 ## Storybook
 
-- `catalog-ui-empty-state--contract`
+- `catalog-ui-emptystate--contract`
 
 ## Source
 
@@ -1959,7 +1959,7 @@ Creates one deterministic queue.
 
 ## Storybook
 
-- `catalog-ui-feedback-provider--contract`
+- `catalog-ui-feedbackprovider--contract`
 
 ## Source
 
@@ -2056,7 +2056,7 @@ Screen-reader users cannot identify the action.
 
 ## Storybook
 
-- `catalog-ui-icon-button--contract`
+- `catalog-ui-iconbutton--contract`
 
 ## Source
 
@@ -2747,7 +2747,7 @@ Associates label and validation feedback.
 
 ## Storybook
 
-- `catalog-ui-text-area--contract`
+- `catalog-ui-textarea--contract`
 
 ## Source
 
@@ -2842,7 +2842,7 @@ Uses native semantics and autofill metadata.
 
 ## Storybook
 
-- `catalog-ui-text-field--contract`
+- `catalog-ui-textfield--contract`
 
 ## Source
 
@@ -3015,7 +3015,7 @@ Binds queue state to presentation.
 
 ## Storybook
 
-- `catalog-ui-toast-viewport--contract`
+- `catalog-ui-toastviewport--contract`
 
 ## Source
 
@@ -3088,7 +3088,7 @@ Retains an accessible name.
 
 ## Storybook
 
-- `catalog-ui-visually-hidden--contract`
+- `catalog-ui-visuallyhidden--contract`
 
 ## Source
 

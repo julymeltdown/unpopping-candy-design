@@ -80,7 +80,7 @@ Associates label and validation feedback.
 
 ## Storybook
 
-- `catalog-ui-text-area--contract`
+- `catalog-ui-textarea--contract`
 
 ## Source
 

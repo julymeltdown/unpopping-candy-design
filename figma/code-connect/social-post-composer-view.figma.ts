@@ -13,7 +13,7 @@ export default {
     nestable: true,
     props: {
       knowledgeId: 'social.post-composer-view',
-      storyId: 'catalog-social-post-composer-view--contract',
+      storyId: 'catalog-social-postcomposerview--contract',
     },
   },
 }

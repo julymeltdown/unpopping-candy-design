@@ -74,7 +74,7 @@ Uses application-owned media behavior.
 
 ## Storybook
 
-- `catalog-social-post-media-grid--contract`
+- `catalog-social-postmediagrid--contract`
 
 ## Source
 

@@ -84,7 +84,7 @@ Uses native semantics and autofill metadata.
 
 ## Storybook
 
-- `catalog-ui-text-field--contract`
+- `catalog-ui-textfield--contract`
 
 ## Source
 

@@ -13,7 +13,7 @@ export default {
     nestable: true,
     props: {
       knowledgeId: 'ui.text-area',
-      storyId: 'catalog-ui-text-area--contract',
+      storyId: 'catalog-ui-textarea--contract',
     },
   },
 }

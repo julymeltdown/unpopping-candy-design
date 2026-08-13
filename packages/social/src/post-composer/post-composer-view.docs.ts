@@ -23,7 +23,7 @@ export default {
     "--popcandy-field-height",
   ],
   related: ["ui.text-area", "ui.button", "pattern.form-actions"],
-  stories: ["catalog-social-post-composer-view--contract"],
+  stories: ["catalog-social-postcomposerview--contract"],
   accessibility: {
     requirements: [
       "The text field needs a clear label.",

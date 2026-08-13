@@ -18,7 +18,7 @@ export default {
   avoidWhen: ["A generic person row is needed; use UserCell."],
   tokens: ["--popcandy-ink", "--popcandy-ink-muted"],
   related: ["social.post-card", "social.user-cell"],
-  stories: ["catalog-social-post-header--contract"],
+  stories: ["catalog-social-postheader--contract"],
   accessibility: {
     requirements: [
       "Timestamp text should expose a meaningful date to assistive technology.",

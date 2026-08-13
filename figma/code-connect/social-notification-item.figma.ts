@@ -13,7 +13,7 @@ export default {
     nestable: true,
     props: {
       knowledgeId: 'social.notification-item',
-      storyId: 'catalog-social-notification-item--contract',
+      storyId: 'catalog-social-notificationitem--contract',
     },
   },
 }
