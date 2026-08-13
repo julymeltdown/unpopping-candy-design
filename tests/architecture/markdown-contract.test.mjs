@@ -55,6 +55,11 @@ test("README keeps the bounded landing and adopter workflow", async () => {
   }
   assert.match(source, /corepack pnpm create vite@8\.1\.0/);
   assert.match(source, /manifest\.scripts\.popcandy = 'popcandy'/);
+  assert.match(
+    source,
+    /manifest\.devDependencies\['@vitejs\/plugin-react'\] = '6\.0\.1'/,
+  );
+  assert.doesNotMatch(source, /@vitejs\/plugin-react'\] = '5\.1\.4'/);
 });
 
 test("documentation verifier fails closed when trust documents are incomplete", async () => {

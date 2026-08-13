@@ -180,7 +180,7 @@ export function trustContractErrors(documents, context) {
   if ((source.match(/pnpm create vite@8\.1\.0/g) ?? []).length !== 1)
     errors.push("README.md: expected exactly one Vite quickstart");
   const claims =
-    "manifest.scripts.popcandy = 'popcandy'\0manifest.devDependencies.vite = '8.1.0'\0@vitejs/plugin-react'] = '5.1.4'\0npm run popcandy -- info --path . --json\0npm run popcandy -- search \"publish post\" --path . --json\0npm run popcandy -- get social.post-composer-view --path . --json\0npm run popcandy -- compose \"publish a post with pending, success, and error states\" --path . --json\0npm run popcandy -- validate --path . --json\0pnpm test:storybook\0POSIX shell\0GitHub issues\0repository owner\0Application code still owns\0pnpm preview --host 127.0.0.1\0curl --fail --silent\0![Unpopping Candy component overview](./docs/preview/captures/unpopping-candy-overview.png)";
+    "manifest.scripts.popcandy = 'popcandy'\0manifest.devDependencies.vite = '8.1.0'\0@vitejs/plugin-react'] = '6.0.1'\0npm run popcandy -- info --path . --json\0npm run popcandy -- search \"publish post\" --path . --json\0npm run popcandy -- get social.post-composer-view --path . --json\0npm run popcandy -- compose \"publish a post with pending, success, and error states\" --path . --json\0npm run popcandy -- validate --path . --json\0pnpm test:storybook\0POSIX shell\0GitHub issues\0repository owner\0Application code still owns\0pnpm preview --host 127.0.0.1\0curl --fail --silent\0![Unpopping Candy component overview](./docs/preview/captures/unpopping-candy-overview.png)";
   for (const claim of claims.split("\0"))
     if (!source.toLowerCase().includes(claim.toLowerCase()))
       errors.push(`README.md: required claim is missing: ${claim}`);

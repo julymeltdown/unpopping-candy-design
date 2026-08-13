@@ -88,7 +88,7 @@ const manifest = JSON.parse(await readFile('package.json', 'utf8'));
 manifest.packageManager = 'pnpm@11.4.0';
 manifest.scripts.popcandy = 'popcandy';
 manifest.devDependencies.vite = '8.1.0';
-manifest.devDependencies['@vitejs/plugin-react'] = '5.1.4';
+manifest.devDependencies['@vitejs/plugin-react'] = '6.0.1';
 manifest.dependencies = {
   ...manifest.dependencies,
   '@unpopping-candy/cli': 'file:./packs/unpopping-candy-cli-0.2.0.tgz',
@@ -181,7 +181,7 @@ wait "$PREVIEW_PID" 2>/dev/null || true
 trap - EXIT INT TERM
 ```
 
-The packer requires the source repository's exact `pnpm@11.4.0`, builds all nine public packages in dependency order, and emits isolated `.tgz` artifacts. The consumer pins Vite `8.1.0` and `@vitejs/plugin-react` `5.1.4`; the bounded preview terminates automatically. The temporary directories can then be removed.
+The packer requires the source repository's exact `pnpm@11.4.0`, builds all nine public packages in dependency order, and emits isolated `.tgz` artifacts. The consumer pins Vite `8.1.0` and `@vitejs/plugin-react` `6.0.1`; the bounded preview terminates automatically. The temporary directories can then be removed.
 
 ## Local agent workflow
 
