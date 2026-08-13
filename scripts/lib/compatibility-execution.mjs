@@ -130,6 +130,7 @@ export async function executeCompatibilityRun(context, run) {
       cwd: consumerRoot,
       timeoutMs: 120_000,
       environment,
+      homeRoot: temporaryRoot,
     });
     result.packageManager.observedVersion = version.output.split("\n").at(-1);
     if (result.packageManager.observedVersion !== manager.version) {
@@ -145,6 +146,7 @@ export async function executeCompatibilityRun(context, run) {
       cwd: consumerRoot,
       timeoutMs: 600_000,
       environment,
+      homeRoot: temporaryRoot,
     });
     result.install = { status: "passed", durationMs: install.durationMs };
     await assertInstalledIsolation({ consumerRoot, workspaceRoot, tarballs });
@@ -172,6 +174,7 @@ export async function executeCompatibilityRun(context, run) {
       cwd: consumerRoot,
       timeoutMs: 30_000,
       environment,
+      homeRoot: temporaryRoot,
     });
     result.typescript.observedVersion = typeVersion.output.replace(
       "Version ",
@@ -187,6 +190,7 @@ export async function executeCompatibilityRun(context, run) {
       args: ["node_modules/typescript/bin/tsc", "--noEmit"],
       cwd: consumerRoot,
       environment,
+      homeRoot: temporaryRoot,
     });
     result.typecheck = {
       status: "passed",
@@ -202,6 +206,7 @@ export async function executeCompatibilityRun(context, run) {
       cwd: consumerRoot,
       timeoutMs: 600_000,
       environment,
+      homeRoot: temporaryRoot,
     });
     result.build = { status: "passed", durationMs: build.durationMs };
 

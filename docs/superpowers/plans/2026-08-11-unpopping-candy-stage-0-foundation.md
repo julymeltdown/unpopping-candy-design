@@ -654,12 +654,14 @@ git commit -m "feat: add reproducible model evaluation captures"
 - Create: `scripts/run-compatibility-matrix.mjs`
 - Create: `scripts/lib/compatibility-contract.mjs`
 - Create: `scripts/lib/compatibility-process.mjs`
+- Create: `scripts/lib/compatibility-environment.mjs`
 - Create: `scripts/lib/compatibility-consumer.mjs`
 - Create: `scripts/lib/compatibility-execution.mjs`
 - Create: `scripts/lib/compatibility-termination.mjs`
 - Modify: `package.json`
 - Test: `tests/architecture/inspection.test.mjs`
 - Test: `tests/architecture/compatibility-boundaries.test.mjs`
+- Test: `tests/architecture/compatibility-environment.test.mjs`
 
 **Interfaces:**
 
@@ -667,6 +669,7 @@ git commit -m "feat: add reproducible model evaluation captures"
 - Supports `--fixture base|publish-post|member-moderation|activity-review`, `--cell` plus `--manager`, and `--all`. A focused run requires fixture, cell, and manager; `--fixture publish-post --all` runs that fixture across seven cells and five managers (35 runs); bare `--all` runs all four fixtures across all cells and managers (140 runs).
 - Exports `packPublicWorkspace(options)` and `runCompatibilityMatrix(options)` so Task 10 reuses this implementation inside its staging workspace.
 - Produces `.artifacts/compatibility/fixture-id/cell-id/manager-id.json` with exact Node, package-manager, framework, React, browser, tarball digest, install, typecheck, build, and smoke-test results.
+- Runs package-manager, build, and browser children with an explicit non-secret environment allowlist, an isolated consumer home, and no user npm configuration.
 
 - [ ] **Step 1: Write the failing matrix-contract test**
 
@@ -714,7 +717,7 @@ Expected: all installs occur outside the workspace and all three results record 
 - [ ] **Step 5: Commit**
 
 ```bash
-git add fixtures/compatibility/matrix.json fixtures/compatibility/types.ts fixtures/compatibility/scenarios/base.tsx fixtures/compatibility/scenarios/publish-post.tsx fixtures/compatibility/scenarios/member-moderation.tsx fixtures/compatibility/scenarios/activity-review.tsx fixtures/compatibility/index.html scripts/run-compatibility-matrix.mjs scripts/lib/compatibility-contract.mjs scripts/lib/compatibility-process.mjs scripts/lib/compatibility-consumer.mjs scripts/lib/compatibility-execution.mjs scripts/lib/compatibility-termination.mjs package.json tests/architecture/inspection.test.mjs tests/architecture/compatibility-boundaries.test.mjs docs/superpowers/plans/2026-08-11-unpopping-candy-stage-0-foundation.md
+git add fixtures/compatibility/matrix.json fixtures/compatibility/types.ts fixtures/compatibility/scenarios/base.tsx fixtures/compatibility/scenarios/publish-post.tsx fixtures/compatibility/scenarios/member-moderation.tsx fixtures/compatibility/scenarios/activity-review.tsx fixtures/compatibility/index.html scripts/run-compatibility-matrix.mjs scripts/lib/compatibility-contract.mjs scripts/lib/compatibility-environment.mjs scripts/lib/compatibility-process.mjs scripts/lib/compatibility-consumer.mjs scripts/lib/compatibility-execution.mjs scripts/lib/compatibility-termination.mjs package.json tests/architecture/inspection.test.mjs tests/architecture/compatibility-boundaries.test.mjs tests/architecture/compatibility-environment.test.mjs docs/superpowers/plans/2026-08-11-unpopping-candy-stage-0-foundation.md
 git commit -m "test: add packed consumer compatibility matrix"
 ```
 

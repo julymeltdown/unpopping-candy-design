@@ -2,6 +2,7 @@ import { createServer } from "node:http";
 import { copyFile, mkdir, readFile, writeFile } from "node:fs/promises";
 import { dirname, join } from "node:path";
 import { chromium, expect } from "@playwright/test";
+import { createCompatibilityEnvironment } from "./compatibility-environment.mjs";
 
 function createConsumerFiles(cell) {
   const styles = [
@@ -229,7 +230,10 @@ export async function smokeTestCompatibilityBuild({
   );
   let browser;
   try {
-    browser = await chromium.launch({ timeout: 30_000, env: environment });
+    browser = await chromium.launch({
+      timeout: 30_000,
+      env: createCompatibilityEnvironment(environment, consumerRoot),
+    });
     const page = await browser.newPage();
     await page.goto(served.url, { timeout: 30_000 });
     const main = page.getByRole("main", { name: expectedName, exact: true });

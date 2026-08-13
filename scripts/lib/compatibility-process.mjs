@@ -8,6 +8,7 @@ import {
   publicPackageGraph,
   validatePackedArtifacts,
 } from "./compatibility-contract.mjs";
+import { createCompatibilityEnvironment } from "./compatibility-environment.mjs";
 import { createTerminationCoordinator } from "./compatibility-termination.mjs";
 
 export function runCompatibilityProcess({
@@ -20,22 +21,21 @@ export function runCompatibilityProcess({
   treeKillTimeoutMs = 5_000,
   terminateTree,
   environment = process.env,
+  homeRoot = cwd,
 }) {
   const started = performance.now();
   return new Promise((resolvePromise, rejectPromise) => {
     const child = spawn(command, args, {
       cwd,
-      env: { ...environment, CI: "1" },
+      env: createCompatibilityEnvironment(environment, homeRoot),
       stdio: ["ignore", "pipe", "pipe"],
       detached: process.platform !== "win32",
       windowsHide: true,
     });
     const chunks = [];
     let capturedBytes = 0;
-    let closed;
-    let reason;
+    let closed, reason, escalation;
     let settled = false;
-    let escalation;
     const output = () => Buffer.concat(chunks).toString().trim();
     const cleanup = () => {
       clearTimeout(timer);
@@ -174,11 +174,11 @@ export async function createPackedWorkspace(options) {
       cwd: workspaceRoot,
       timeoutMs: 30_000,
       environment: options.environment,
+      homeRoot: outputRoot,
     });
-    if (sourceManager.output !== "11.4.0") {
-      throw new TypeError(
-        `Source pnpm must be 11.4.0, received ${sourceManager.output}.`,
-      );
+    const sourceManagerVersion = sourceManager.output.match(/[^\r\n]+$/)?.[0];
+    if (sourceManagerVersion !== "11.4.0") {
+      throw new TypeError(`Unexpected source pnpm: ${sourceManagerVersion}.`);
     }
     const manifests = await readPublicManifests(workspaceRoot);
     for (const folder of createBuildOrder()) {
@@ -188,6 +188,7 @@ export async function createPackedWorkspace(options) {
         args: ["--filter", manifest.name, "build"],
         cwd: workspaceRoot,
         environment: options.environment,
+        homeRoot: outputRoot,
       });
     }
     const tarballs = [];
@@ -200,6 +201,7 @@ export async function createPackedWorkspace(options) {
         args: ["pack", "--out", path, "--json"],
         cwd: packageRoot,
         environment: options.environment,
+        homeRoot: outputRoot,
       });
       tarballs.push({
         packageName: manifest.name,
@@ -211,7 +213,7 @@ export async function createPackedWorkspace(options) {
     }
     return {
       root: outputRoot,
-      sourceManagerVersion: sourceManager.output,
+      sourceManagerVersion,
       tarballs,
     };
   } catch (error) {
