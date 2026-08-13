@@ -2,7 +2,7 @@
 name: popcandy-ui
 description: Use whenever a task creates, changes, reviews, or migrates a React interface that should use Unpopping Candy components, tokens, patterns, or templates.
 license: MIT
-compatibility: Requires Node.js 22+ and @unpopping-candy/cli 0.2.x or a repository checkout.
+compatibility: Requires Node.js >=22.13.0 <23 or >=24 <25 and @unpopping-candy/cli 0.2.x or a repository checkout.
 metadata:
   author: Unpopping Candy
   version: "0.2.0"
@@ -22,7 +22,7 @@ Use this skill before writing interface code.
 5. Inspect each selected entry with `popcandy get <id> --json`.
 6. Implement only with documented public entrypoints and consumer-owned state.
 7. Add or update Storybook stories for loading, empty, populated, error, disabled, pending, responsive, dark, and high-contrast states that apply.
-8. Run `popcandy validate . --json` and then Storybook interaction and accessibility checks.
+8. Run `popcandy validate --path . --json` and then Storybook interaction and accessibility checks.
 
 ## Non-negotiable rules
 

@@ -58,11 +58,12 @@ function escapeMarkdown(value: string): string {
   return value.replaceAll("|", "\\|").replaceAll("\n", " ");
 }
 
-function bulletList(
-  items: readonly string[],
-  empty = "- None documented.",
-): string {
+function bulletList(items: readonly string[], empty = "- None documented.") {
   return items.length ? items.map((item) => `- ${item}`).join("\n") : empty;
+}
+
+function isRecord(value: unknown): value is Record<string, unknown> {
+  return typeof value === "object" && value !== null && !Array.isArray(value);
 }
 
 export function publicPackageNames(
@@ -85,18 +86,24 @@ export function publicPackageNames(
   return PACKAGE_BOUNDARIES.map(([name]) => name);
 }
 
-function frontmatter(
-  catalog: KnowledgeCatalog,
-  tokens: Record<string, unknown>,
-): string {
-  const semantic = ((tokens.color as Record<string, unknown> | undefined)
-    ?.semantic ?? {}) as Record<string, { $value?: unknown }>;
-  const lookup = (name: string, fallback: string) =>
-    String(semantic[name]?.$value ?? fallback);
+function frontmatter(data: KnowledgeCatalog, tokens: Record<string, unknown>) {
+  const color = tokens.color;
+  if (color !== undefined && !isRecord(color))
+    throw new Error("Color tokens must be an object.");
+  const semantic = color?.semantic;
+  if (semantic !== undefined && !isRecord(semantic))
+    throw new Error("Semantic color tokens must be an object.");
+  const lookup = (name: string, fallback: string) => {
+    const token = semantic?.[name];
+    if (token === undefined) return fallback;
+    if (!isRecord(token) || typeof token.$value !== "string")
+      throw new Error(`Semantic token ${name} must have a string $value.`);
+    return token.$value;
+  };
   return [
     "---",
     'schema: "https://designmd.org/spec/0.1"',
-    `version: "${catalog.packageVersion}"`,
+    `version: "${data.packageVersion}"`,
     'name: "Unpopping Candy"',
     'description: "AI-operable React design system for content-rich, social, editorial, and community products."',
     'sourceOfTruth: "agent/manifests/catalog.json"',
@@ -119,8 +126,8 @@ function frontmatter(
     '  supported: ["comfortable", "compact"]',
     'themes: ["light", "dark", "system", "high-contrast"]',
     "packages:",
-    ...publicPackageNames(catalog).map((name) => `  - "${name}"`),
-    `stableComponents: ${catalog.entries.filter((entry) => entry.kind === "component" && entry.status === "stable").length}`,
+    ...publicPackageNames(data).map((name) => `  - "${name}"`),
+    `stableComponents: ${data.entries.filter((entry) => entry.kind === "component" && entry.status === "stable").length}`,
     "---",
   ].join("\n");
 }

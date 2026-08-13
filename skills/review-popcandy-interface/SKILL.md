@@ -11,7 +11,7 @@ allowed-tools: Bash Read Grep Glob
 
 # Review a Unpopping Candy interface
 
-1. Run `popcandy info --json` and `popcandy validate . --json`.
+1. Run `popcandy info --json` and `popcandy validate --path . --json`.
 2. Identify the user task, selected Unpopping Candy pattern, and expected states.
 3. Search the catalog for every custom control or duplicated pattern. Flag invented or bypassed APIs.
 4. Review public imports, token use, data ownership, semantic DOM, focus, keyboard behavior, announcements, reflow, zoom, themes, and reduced motion.

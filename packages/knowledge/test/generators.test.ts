@@ -17,6 +17,16 @@ test("design document is generated from the catalog and machine-readable tokens"
   assert.match(output, /\[Button\]\(\.\/agent\/components\/ui\.button\.md\)/);
 });
 
+test("design generation rejects malformed semantic token values", () => {
+  assert.throws(
+    () =>
+      generateDesignMarkdown(bundledCatalog, {
+        color: { semantic: { canvas: { $value: 42 } } },
+      }),
+    /canvas.*string/i,
+  );
+});
+
 test("portable agent documents enumerate the coordinated nine-package public surface", () => {
   const packageNames = [
     "@unpopping-candy/tokens",

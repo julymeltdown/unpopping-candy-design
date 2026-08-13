@@ -7,7 +7,7 @@ const approvedDigests = new Map(
     "docs/ACCESSIBILITY.md":
       "809d02af2817ed7120adb4341626a433187d6db32324bb0f97ef45b56392e523",
     "docs/AI_ASSISTED_POST_CASE_STUDY.md":
-      "eed32d1c517467e213b4c7d4e5b446b617a12ee53367752e4629f56d89a0360e",
+      "9c5b845f9364129efda45c665e5d985122cf7c7414efb9d5056506c194f2b3a5",
     "docs/COMPATIBILITY.md":
       "7b543650a5ccd554ed6daac0d0b72ea53e6223619b39e371d3db73fe2c9ba6ba",
     "docs/PUBLISHING.md":

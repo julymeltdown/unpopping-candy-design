@@ -212,7 +212,7 @@ test("provider preflight and command contracts are pinned and explicit", () => {
     /0\.147\.0/,
   );
   const codexArgs =
-    "exec --ignore-user-config --strict-config --disable shell_tool --disable unified_exec --disable shell_snapshot -c shell_environment_policy.inherit=none -c shell_environment_policy.experimental_use_profile=false -c shell_environment_policy.ignore_default_excludes=false --ephemeral --sandbox read-only --model codex-fixture-model --json --output-schema capture-schema.json -".split(
+    "exec --ignore-user-config --strict-config --skip-git-repo-check --disable shell_tool --disable unified_exec --disable shell_snapshot -c shell_environment_policy.inherit=none -c shell_environment_policy.experimental_use_profile=false -c shell_environment_policy.ignore_default_excludes=false --ephemeral --sandbox read-only --model codex-fixture-model --json --output-schema capture-schema.json -".split(
       " ",
     );
   assert.deepEqual(buildCodexCommand("codex-fixture-model"), codexArgs);
@@ -232,7 +232,7 @@ test("fixture-only plan enumerates twenty runs without provider preflight", () =
     import.meta.url,
   );
   const args =
-    `plan --codex-model codex-fixture-model --claude-model claude-fixture-model --max-estimated-usd 0 --claude-max-budget-usd 0`.split(
+    `plan --codex-model codex-fixture-model --claude-model claude-fixture-model --codex-max-estimated-usd 0 --claude-max-budget-usd 0`.split(
       " ",
     );
   const result = spawnSync(

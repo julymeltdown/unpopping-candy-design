@@ -96,6 +96,6 @@ No publish-a-post no-context model run was executed. The repository's older dete
 
 ## Reproducibility and redaction
 
-Reproduce from a clean checkout at the case-study commit with Node `>=22.13.0`, exact source `pnpm@11.4.0`, the committed lockfile, and the commands above. Record the full commit SHA, catalog digest, tarball SHA-256 values, exact tool/browser versions, command exits, and any retained diff before cleanup.
+Reproduce from a clean checkout at the case-study commit with Node `>=22.13.0 <23 || >=24 <25`, exact source `pnpm@11.4.0`, the committed lockfile, and the commands above. Record the full commit SHA, catalog digest, tarball SHA-256 values, exact tool/browser versions, command exits, and any retained diff before cleanup.
 
 Public evidence must redact absolute user paths, usernames, tokens, credentials, provider request IDs, private prompts, and unpublished content. Preserve relative repository paths, stable IDs, package versions, digests, and command exits. A future model comparison must be newly authorized, timestamped, and captured rather than inferred from this deterministic record.

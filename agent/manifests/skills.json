@@ -18,7 +18,7 @@
         "references/public-api.md"
       ],
       "scripts": [],
-      "sourceDigest": "6f2085dfbde1ca15889d1fd7f346b784cf9dbc0a99d688e28c455d15cd7410ff"
+      "sourceDigest": "66c7491cea60cea35de86082963e669a136c818efc7bc4ad4bea1794f8781571"
     },
     {
       "name": "build-popcandy-interface",
@@ -53,7 +53,7 @@
         "references/mapping-rules.md"
       ],
       "scripts": [],
-      "sourceDigest": "7b9dcbf44969922d5d4e8dc5228d6019542e102c5a35f0bc4fdc3366c6c8541a"
+      "sourceDigest": "7d087b60c0374a18330fe34e2419cb2bdc634933734438d956dd0982eba054d3"
     },
     {
       "name": "migrate-to-popcandy",
@@ -70,7 +70,7 @@
         "references/migration-order.md"
       ],
       "scripts": [],
-      "sourceDigest": "f5360967c37023285312f2cd5e84141479270309afef0fe252af6ee3b39d8189"
+      "sourceDigest": "80cf83c6acce44d3c94a79559d1a915096ac3aad149da6ae1417b3ff6c374997"
     },
     {
       "name": "popcandy-ui",
@@ -90,7 +90,7 @@
       "scripts": [
         "scripts/project-info.mjs"
       ],
-      "sourceDigest": "cde7ac1b36f1cd4e127e1aa762d1dd2482721cd9b2a100925e2db472106406a3"
+      "sourceDigest": "b7cb92a9e53a166353deae0e01c7a34acdbfdea46cf95b23b7a247a1e6386383"
     },
     {
       "name": "review-popcandy-interface",
@@ -107,7 +107,7 @@
         "references/review-rubric.md"
       ],
       "scripts": [],
-      "sourceDigest": "6b450b3c65c41f4a07b5c84be9fe0964913b1f57fbac4891a0818935b7865994"
+      "sourceDigest": "9eeb245019dc2d084501dedf4b7d196da798e23cd17734ca8cf14bc14e99a9d9"
     }
   ]
 }

@@ -1,5 +1,6 @@
 import { getCatalogEntry, searchCatalog, searchCatalogDetailed } from '@unpopping-candy/knowledge';
 import type { KnowledgeEntry } from '@unpopping-candy/knowledge';
+import { validateArguments } from './arguments.ts';
 import { composeInterfacePlan } from './compose.ts';
 import type { CliResult, CliServices, SearchResponse } from './types.ts';
 
@@ -57,6 +58,7 @@ function errorCode(error: unknown): string {
 
 export async function executeCliCommand(services: CliServices, command: string, args: readonly string[], cwd = process.cwd()): Promise<CliResult> {
   try {
+    validateArguments(command, args);
     const targetPath = option(args, '--path') ?? cwd;
     switch (command) {
       case 'info': {

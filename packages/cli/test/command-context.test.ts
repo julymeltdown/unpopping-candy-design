@@ -7,6 +7,29 @@ import { executeCliCommand } from "../src/commands.ts";
 import { PopcandyProjectError } from "../src/project-errors.ts";
 import { services } from "./cli-fixture.ts";
 
+test("commands reject unknown flags and unexpected positional paths", async () => {
+  const cases = [
+    [
+      "scaffold",
+      ["template.profile-settings", "--target-directory", "src/ui"],
+      /unknown option --target-directory/i,
+    ],
+    ["validate", ["."], /validate does not accept positional arguments/i],
+    [
+      "scaffold",
+      ["template.profile-settings", "--target"],
+      /requires a value/i,
+    ],
+  ] as const;
+  for (const [command, args, message] of cases) {
+    const result = await executeCliCommand(services, command, args, "/unused");
+    assert.equal(result.ok, false);
+    if (result.ok) throw new Error("Expected a command argument failure.");
+    assert.equal(result.error.code, "INVALID_INPUT");
+    assert.match(result.error.message, message);
+  }
+});
+
 test("all catalog-aware commands preserve a typed mixed-version failure after one context resolution", async () => {
   // Given a context resolver that observes a known mixed package set
   const calls: string[] = [];

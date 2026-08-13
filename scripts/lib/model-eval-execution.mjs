@@ -34,12 +34,16 @@ async function assertPathAbsent(path, label) {
 }
 
 function validateRunConfiguration(config) {
-  if (config.maxEstimatedUsd <= 0)
-    throw new Error("--max-estimated-usd must be positive for evals:run.");
+  if (config.codexMaxEstimatedUsd <= 0)
+    throw new Error(
+      "--codex-max-estimated-usd must be positive for evals:run.",
+    );
   if (config.codexWorstCaseUsd <= 0)
     throw new Error("--codex-worst-case-usd must be positive for evals:run.");
-  if (config.codexWorstCaseUsd > config.maxEstimatedUsd)
-    throw new Error("Codex worst-case USD must not exceed the total USD cap.");
+  if (config.codexWorstCaseUsd > config.codexMaxEstimatedUsd)
+    throw new Error(
+      "Codex worst-case USD must not exceed the Codex estimate cap.",
+    );
   evals.assertCodexModelPricing(config.models.codex);
 }
 
@@ -55,8 +59,9 @@ function runProcess(command, args, cwd, env, input) {
   if (result.error)
     throw new Error(`${command} failed: ${result.error.message}`);
   if (result.status !== 0) {
+    const stderr = result.stderr ?? "";
     throw new Error(
-      `${command} exited ${result.status}: ${result.stderr.trim()}`,
+      `${command} exited ${result.status}; stderrBytes=${Buffer.byteLength(stderr)}; stderrSha256=${createHash("sha256").update(stderr).digest("hex")}`,
     );
   }
   return result.stdout;
@@ -202,10 +207,10 @@ export async function runModelEvaluations(config) {
     if (
       run.provider === "codex" &&
       accumulated + config.codexWorstCaseUsd >
-        config.maxEstimatedUsd + Number.EPSILON
+        config.codexMaxEstimatedUsd + Number.EPSILON
     ) {
       throw new Error(
-        "Codex accumulated actual cost plus the next worst-case estimate exceeds --max-estimated-usd.",
+        "Codex accumulated actual cost plus the next worst-case estimate exceeds --codex-max-estimated-usd.",
       );
     }
     const capture = await executeRun(run, config, environments);

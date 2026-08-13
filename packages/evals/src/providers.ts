@@ -169,6 +169,7 @@ export function buildCodexCommand(model: string): readonly string[] {
     "exec",
     "--ignore-user-config",
     "--strict-config",
+    "--skip-git-repo-check",
     "--disable",
     "shell_tool",
     "--disable",

@@ -581,6 +581,7 @@ git commit -m "feat: bind discovery to installed compatibility"
 - Modify: `packages/mcp/test/domain.test.ts`
 - Test: `packages/evals/test/model-captures.test.ts`
 - Test: `packages/evals/test/model-eval-boundaries.test.ts`
+- Test: `packages/evals/test/model-eval-process-boundaries.test.ts`
 
 **Interfaces:**
 
@@ -608,10 +609,10 @@ Pin `@openai/codex@0.147.0` and `@anthropic-ai/claude-code@2.1.114` in the night
 The Codex adapter keeps these verified flags and adds an explicit full model ID:
 
 ```text
-codex exec --ignore-user-config --ephemeral --sandbox read-only --model "$POPCANDY_CODEX_MODEL" --json --output-schema capture-schema.json -
+codex exec --ignore-user-config --strict-config --skip-git-repo-check --disable shell_tool --disable unified_exec --disable shell_snapshot -c shell_environment_policy.inherit=none -c shell_environment_policy.experimental_use_profile=false -c shell_environment_policy.ignore_default_excludes=false --ephemeral --sandbox read-only --model "$POPCANDY_CODEX_MODEL" --json --output-schema capture-schema.json -
 ```
 
-Treat Codex stdout as JSONL events: retain the raw stream, extract the final completed agent-message item as model output, and extract the terminal usage event. Codex CLI has no enforceable per-run USD flag, so `--max-estimated-usd` is explicitly an estimate. Real runs also require a positive `--codex-worst-case-usd`; before each repetition, refuse to start when accumulated usage-priced actual cost plus that independent configured worst-case exceeds the total. Use only versioned, explicitly priced full Codex model IDs and fail closed for unknown pricing before provider preflight. The Stage 0 pricing snapshot supports `gpt-5.3-codex` at $1.75 per million input tokens and $14.00 per million output tokens, conservatively treating every input token as non-cached, verified 2026-08-12 from https://developers.openai.com/api/docs/models/gpt-5.3-codex.
+Treat Codex stdout as JSONL events: retain the raw stream, extract the final completed agent-message item as model output, and extract the terminal usage event. Codex CLI has no enforceable per-run USD flag, so `--codex-max-estimated-usd` is explicitly a Codex-only estimate; Claude remains independently bounded per call by `--claude-max-budget-usd`. Real Codex runs also require a positive `--codex-worst-case-usd`; before each repetition, refuse to start when accumulated usage-priced actual cost plus that independent configured worst-case exceeds the Codex estimate cap. Use only versioned, explicitly priced full Codex model IDs and fail closed for unknown pricing before provider preflight. Provider failure diagnostics may expose only the executable, exit status, stderr byte length, and SHA-256 digest; raw provider stderr remains restricted and must not enter CI logs. The Stage 0 pricing snapshot supports `gpt-5.3-codex` at $1.75 per million input tokens and $14.00 per million output tokens, conservatively treating every input token as non-cached, verified 2026-08-12 from https://developers.openai.com/api/docs/models/gpt-5.3-codex.
 
 The Claude adapter keeps these verified flags, adds the exact model and budget, reads `capture-schema.json`, passes `JSON.stringify(schema)` as the literal `--json-schema` argument, and requires `ANTHROPIC_API_KEY` because `--bare` ignores OAuth/keychain state:
 
@@ -621,7 +622,7 @@ claude --bare --print --tools "" --model "$POPCANDY_CLAUDE_MODEL" --output-forma
 
 Parse Claude stdout as one result envelope and read only `structured_output` as generated content plus the envelope `usage`. Do not add the unsupported `--safe-mode` flag.
 
-`pnpm evals:plan` requires `--codex-model`, `--claude-model`, `--max-estimated-usd`, and `--claude-max-budget-usd`, then prints every task/model/context/repetition without invoking either executable. `pnpm evals:run` requires the same values, `POPCANDY_MODEL_EVAL_APPROVED=true`, and provider credentials. `pnpm evals:report` performs no provider call; it validates, redacts, summarizes, and writes public evidence.
+`pnpm evals:plan` requires `--codex-model`, `--claude-model`, `--codex-max-estimated-usd`, and `--claude-max-budget-usd`, then prints every task/model/context/repetition without invoking either executable. `pnpm evals:run` requires the same values, `POPCANDY_MODEL_EVAL_APPROVED=true`, and provider credentials. `pnpm evals:report` performs no provider call; it validates, redacts, summarizes, and writes public evidence.
 
 - [ ] **Step 4: Add disabled-by-default nightly automation**
 
@@ -630,7 +631,7 @@ Create a nightly and manual workflow whose run job is conditional on repository 
 Run:
 
 ```bash
-pnpm evals:plan -- --codex-model codex-fixture-model --claude-model claude-fixture-model --max-estimated-usd 0 --claude-max-budget-usd 0
+pnpm evals:plan -- --codex-model codex-fixture-model --claude-model claude-fixture-model --codex-max-estimated-usd 0 --claude-max-budget-usd 0
 pnpm --filter @unpopping-candy/evals test
 ```
 
@@ -639,7 +640,7 @@ Expected: plan lists twenty runs per task for two models and two context modes a
 - [ ] **Step 5: Commit**
 
 ```bash
-git add packages/evals/src/model-captures.ts packages/evals/src/providers.ts packages/evals/src/statistics.ts packages/evals/src/types.ts packages/evals/src/index.ts packages/evals/test/model-captures.test.ts packages/evals/test/model-eval-boundaries.test.ts scripts/run-model-evals.mjs scripts/lib/model-eval-contract.mjs scripts/lib/model-eval-execution.mjs scripts/lib/model-eval-reporting.mjs .github/workflows/model-evals.yml package.json .gitignore docs/superpowers/plans/2026-08-11-unpopping-candy-stage-0-foundation.md
+git add packages/evals/src/model-captures.ts packages/evals/src/providers.ts packages/evals/src/statistics.ts packages/evals/src/types.ts packages/evals/src/index.ts packages/evals/test/model-captures.test.ts packages/evals/test/model-eval-boundaries.test.ts packages/evals/test/model-eval-process-boundaries.test.ts scripts/run-model-evals.mjs scripts/lib/model-eval-contract.mjs scripts/lib/model-eval-execution.mjs scripts/lib/model-eval-reporting.mjs .github/workflows/model-evals.yml package.json .gitignore docs/superpowers/plans/2026-08-11-unpopping-candy-stage-0-foundation.md
 git commit -m "feat: add reproducible model evaluation captures"
 ```
 
@@ -951,6 +952,15 @@ git commit -m "build: enforce release trust budgets"
 - Modify: `packages/evals/src/model-captures.ts`
 - Modify: `packages/evals/test/model-captures.test.ts`
 - Modify: `packages/evals/test/model-eval-boundaries.test.ts`
+- Create: `packages/evals/test/model-eval-process-boundaries.test.ts`
+- Modify: `packages/cli/src/commands.ts`
+- Create: `packages/cli/src/arguments.ts`
+- Modify: `packages/cli/test/command-context.test.ts`
+- Modify: `tests/architecture/skills-contract.test.mjs`
+- Create: `tests/architecture/portable-docs.test.mjs`
+- Modify: `skills/{author-popcandy-component,connect-popcandy-figma,migrate-to-popcandy,popcandy-ui,review-popcandy-interface}/SKILL.md`
+- Modify: `docs/AI_ASSISTED_POST_CASE_STUDY.md`
+- Modify: `docs/preview/index.html`
 - Modify: `docs/MIGRATION.md`
 - Modify: `docs/MCP.md`
 - Modify: `packages/evals/fixtures/README.md`
@@ -1030,6 +1040,8 @@ Disable Codex shell tooling, unified execution, shell snapshots, and subprocess 
 
 Correct portable documentation to use the stable Registry ID and supported `--target` flag, remove mutable or unpublished npm MCP invocation guidance, identify evals as private repository tooling, and generate all nine public package names from the compatibility contract. Keep every hand-authored source/test module at or below 250 pure lines.
 
+Reject every unknown CLI option, missing option value, and positional argument on commands that accept none before resolving project context. Portable package, preview, and Skill examples use `popcandy validate --path . --json`; their Node requirement is exactly `>=22.13.0 <23 || >=24 <25`, never an open-ended 22+ shorthand.
+
 - [ ] **Step 5: Run the candidate and prove the source stayed untouched**
 
 Run:
@@ -1056,7 +1068,7 @@ pnpm test:storybook
 pnpm test:browser
 pnpm bundle:check -- --stage stage-0 --json .artifacts/bundles/stage-0.json
 pnpm fixtures:compat -- --all
-pnpm evals:plan -- --codex-model codex-fixture-model --claude-model claude-fixture-model --max-estimated-usd 0 --claude-max-budget-usd 0
+pnpm evals:plan -- --codex-model codex-fixture-model --claude-model claude-fixture-model --codex-max-estimated-usd 0 --claude-max-budget-usd 0
 node scripts/verify-release-authorizations.mjs --plan
 node --test tests/architecture/release-candidate.test.mjs
 git diff --check
@@ -1072,7 +1084,7 @@ Before public promotion, attach a Chromatic review, Pages URL, actual Node/brows
 
 ```bash
 git add scripts/prepare-release-candidate.mjs scripts/lib/release-candidate-contract.mjs scripts/lib/release-candidate-artifacts.mjs scripts/lib/release-candidate-workspace.mjs scripts/lib/release-candidate-verification.mjs scripts/verify-release-candidate.mjs scripts/run-compatibility-matrix.mjs scripts/lib/compatibility-process.mjs scripts/lib/compatibility-execution.mjs scripts/lib/compatibility-consumer.mjs scripts/lib/documentation-policy.mjs tests/architecture/release-candidate.test.mjs tests/architecture/release-candidate-verifier.test.mjs tests/architecture/release-candidate-archive.test.mjs tests/architecture/documentation-policy.test.mjs tests/architecture/documentation-trust.test.mjs tests/architecture/markdown-contract.test.mjs tests/architecture/release-workflow.test.mjs tests/architecture/build-config.test.mjs tests/architecture/compatibility-provenance.test.mjs .github/workflows/storybook.yml .github/workflows/release.yml .github/workflows/ci.yml docs/PUBLISHING.md .changeset/stage-zero-foundation.md package.json .gitignore packages/{tokens,theme,icons,ui,social,knowledge,registry,cli,mcp}/package.json packages/{cli,mcp}/README.md packages/knowledge/test/compatibility.test.ts packages/registry/test/registry.test.ts packages/cli/test/cli.test.ts packages/cli/test/compose.test.ts packages/knowledge/content/templates/template-social-feed-page.docs.ts packages/mcp/test/domain.test.ts docs/superpowers/plans/2026-08-11-unpopping-candy-stage-0-foundation.md
-git add tests/architecture/source-size.test.mjs docs/MIGRATION.md docs/MCP.md README.md DESIGN.md agent/llms-small.txt agent/llms-full.txt packages/knowledge/src/design-generator.ts packages/knowledge/src/generators.ts packages/knowledge/test/generators.test.ts packages/evals/src/evaluator-analysis.ts packages/evals/src/evaluator-import-analysis.ts packages/evals/src/evaluator-prop-analysis.ts packages/evals/src/evaluator.ts packages/evals/src/providers.ts packages/evals/src/model-captures.ts packages/evals/test/model-captures.test.ts packages/evals/test/model-eval-boundaries.test.ts packages/evals/fixtures/README.md
+git add tests/architecture/source-size.test.mjs tests/architecture/skills-contract.test.mjs tests/architecture/portable-docs.test.mjs docs/MIGRATION.md docs/MCP.md docs/AI_ASSISTED_POST_CASE_STUDY.md docs/preview/index.html README.md DESIGN.md agent/llms-small.txt agent/llms-full.txt packages/knowledge/src/design-generator.ts packages/knowledge/src/generators.ts packages/knowledge/test/generators.test.ts packages/evals/src/evaluator-analysis.ts packages/evals/src/evaluator-import-analysis.ts packages/evals/src/evaluator-prop-analysis.ts packages/evals/src/evaluator.ts packages/evals/src/providers.ts packages/evals/src/model-captures.ts packages/evals/test/model-captures.test.ts packages/evals/test/model-eval-boundaries.test.ts packages/evals/test/model-eval-process-boundaries.test.ts packages/evals/fixtures/README.md packages/cli/src/arguments.ts packages/cli/src/commands.ts packages/cli/test/command-context.test.ts packages/cli/README.md skills/author-popcandy-component/SKILL.md skills/connect-popcandy-figma/SKILL.md skills/migrate-to-popcandy/SKILL.md skills/popcandy-ui/SKILL.md skills/review-popcandy-interface/SKILL.md
 git commit -m "release: prepare ephemeral alpha candidates"
 ```
 

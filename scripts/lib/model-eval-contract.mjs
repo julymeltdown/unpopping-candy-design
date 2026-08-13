@@ -79,7 +79,7 @@ function planConfiguration(options, mode) {
   const allowed = new Set([
     "codex-model",
     "claude-model",
-    "max-estimated-usd",
+    "codex-max-estimated-usd",
     "claude-max-budget-usd",
     "repetitions",
   ]);
@@ -103,7 +103,7 @@ function planConfiguration(options, mode) {
   if (repetitions !== 5) fail("--repetitions must be exactly 5.");
   const config = {
     models: { codex: codexModel, claude: claudeModel },
-    maxEstimatedUsd: numericOption(options, "max-estimated-usd"),
+    codexMaxEstimatedUsd: numericOption(options, "codex-max-estimated-usd"),
     claudeMaxBudgetUsd,
     repetitions,
   };

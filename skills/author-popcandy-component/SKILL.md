@@ -2,7 +2,7 @@
 name: author-popcandy-component
 description: Use when adding or materially changing a public Unpopping Candy or social component, including its API, metadata, stories, tests, documentation, and release record.
 license: MIT
-compatibility: Requires the Unpopping Candy monorepo and Node.js 22+.
+compatibility: Requires the Unpopping Candy monorepo and Node.js >=22.13.0 <23 or >=24 <25.
 metadata:
   author: Unpopping Candy
   version: "0.2.0"

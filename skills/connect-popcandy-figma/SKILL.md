@@ -2,7 +2,7 @@
 name: connect-popcandy-figma
 description: Use when mapping Unpopping Candy components to Figma Code Connect, validating Figma component properties, or preparing Code Connect publication.
 license: MIT
-compatibility: Requires the Unpopping Candy monorepo, Node.js 22+, Figma Code Connect 1.5+, and access to the target Figma library.
+compatibility: Requires the Unpopping Candy monorepo, Node.js >=22.13.0 <23 or >=24 <25, Figma Code Connect 1.5+, and access to the target Figma library.
 metadata:
   author: Unpopping Candy
   version: "0.2.0"

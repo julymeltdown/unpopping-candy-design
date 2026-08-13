@@ -28,7 +28,7 @@ jobs:
           pnpm evals:plan --
           --codex-model codex-fixture-model
           --claude-model claude-fixture-model
-          --max-estimated-usd 0
+          --codex-max-estimated-usd 0
           --claude-max-budget-usd 0
 
   approved-capture:
@@ -62,7 +62,7 @@ jobs:
           pnpm evals:run --
           --codex-model "$POPCANDY_CODEX_MODEL"
           --claude-model "$POPCANDY_CLAUDE_MODEL"
-          --max-estimated-usd "$POPCANDY_CODEX_MAX_ESTIMATED_USD"
+          --codex-max-estimated-usd "$POPCANDY_CODEX_MAX_ESTIMATED_USD"
           --codex-worst-case-usd "$POPCANDY_CODEX_WORST_CASE_USD"
           --claude-max-budget-usd "$POPCANDY_CLAUDE_MAX_BUDGET_USD"
           --repetitions 5
