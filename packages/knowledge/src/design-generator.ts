@@ -100,58 +100,56 @@ function frontmatter(data: KnowledgeCatalog, tokens: Record<string, unknown>) {
       throw new Error(`Semantic token ${name} must have a string $value.`);
     return token.$value;
   };
-  return [
-    "---",
-    'schema: "https://designmd.org/spec/0.1"',
-    `version: "${data.packageVersion}"`,
-    'name: "Unpopping Candy"',
-    'description: "AI-operable React design system for content-rich, social, editorial, and community products."',
-    'sourceOfTruth: "agent/manifests/catalog.json"',
-    "generated: true",
-    "colors:",
-    `  canvas: "${lookup("canvas", "{color.reference.neutral50}")}"`,
-    `  surface: "${lookup("surface", "{color.reference.neutral0}")}"`,
-    `  text: "${lookup("text", "{color.reference.neutral950}")}"`,
-    `  textMuted: "${lookup("textMuted", "{color.reference.neutral600}")}"`,
-    `  border: "${lookup("border", "{color.reference.neutral200}")}"`,
-    `  action: "${lookup("action", "{color.reference.blue500}")}"`,
-    `  positive: "${lookup("positive", "{color.reference.green600}")}"`,
-    `  warning: "${lookup("warning", "{color.reference.amber700}")}"`,
-    `  critical: "${lookup("critical", "{color.reference.red600}")}"`,
-    "typography:",
-    '  ui: "Inter, Pretendard, IBM Plex Sans KR, system-ui, sans-serif"',
-    '  mono: "IBM Plex Mono, SFMono-Regular, Consolas, monospace"',
-    "density:",
-    '  default: "comfortable"',
-    '  supported: ["comfortable", "compact"]',
-    'themes: ["light", "dark", "system", "high-contrast"]',
-    "packages:",
-    ...publicPackageNames(data).map((name) => `  - "${name}"`),
-    `stableComponents: ${data.entries.filter((entry) => entry.kind === "component" && entry.status === "stable").length}`,
-    "---",
-  ].join("\n");
+  return `---
+schema: "https://designmd.org/spec/0.1"
+version: "${data.packageVersion}"
+name: "Unpopping Candy"
+description: "AI-operable React design system for content-rich, social, editorial, and community products."
+sourceOfTruth: "agent/manifests/catalog.json"
+generated: true
+colors:
+  canvas: "${lookup("canvas", "{color.reference.neutral50}")}"
+  surface: "${lookup("surface", "{color.reference.neutral0}")}"
+  text: "${lookup("text", "{color.reference.neutral950}")}"
+  textMuted: "${lookup("textMuted", "{color.reference.neutral600}")}"
+  border: "${lookup("border", "{color.reference.neutral200}")}"
+  action: "${lookup("action", "{color.reference.blue500}")}"
+  positive: "${lookup("positive", "{color.reference.green600}")}"
+  warning: "${lookup("warning", "{color.reference.amber700}")}"
+  critical: "${lookup("critical", "{color.reference.red600}")}"
+typography:
+  ui: "Inter, Pretendard, IBM Plex Sans KR, system-ui, sans-serif"
+  mono: "IBM Plex Mono, SFMono-Regular, Consolas, monospace"
+density:
+  default: "comfortable"
+  supported: ["comfortable", "compact"]
+themes: ["light", "dark", "system", "high-contrast"]
+packages:
+${publicPackageNames(data)
+  .map((name) => `  - "${name}"`)
+  .join("\n")}
+stableComponents: ${data.entries.filter((entry) => entry.kind === "component" && entry.status === "stable").length}
+---`;
 }
 
 function componentTable(components: readonly ComponentDoc[]): string {
-  return [
-    "| Component | Package | Category | Summary |",
-    "|---|---|---|---|",
-    ...components.map(
-      (component) =>
-        `| [${escapeMarkdown(component.name)}](./agent/components/${component.id}.md) | \`${component.package}\` | ${escapeMarkdown(component.category)} | ${escapeMarkdown(component.summary)} |`,
-    ),
-  ].join("\n");
+  return `| Component | Package | Category | Summary |
+|---|---|---|---|
+${components
+  .map(
+    (component) =>
+      `| [${escapeMarkdown(component.name)}](./agent/components/${component.id}.md) | \`${component.package}\` | ${escapeMarkdown(component.category)} | ${escapeMarkdown(component.summary)} |`,
+  )
+  .join("\n")}`;
 }
 
 function packageBoundaryTable(): string {
-  return [
-    "| Package | Responsibility | Must not own |",
-    "|---|---|---|",
-    ...PACKAGE_BOUNDARIES.map(
-      ([name, responsibility, exclusion]) =>
-        `| \`${name}\` | ${responsibility} | ${exclusion} |`,
-    ),
-  ].join("\n");
+  return `| Package | Responsibility | Must not own |
+|---|---|---|
+${PACKAGE_BOUNDARIES.map(
+  ([name, responsibility, exclusion]) =>
+    `| \`${name}\` | ${responsibility} | ${exclusion} |`,
+).join("\n")}`;
 }
 
 export function generateDesignMarkdown(
@@ -252,23 +250,6 @@ ${templates.map((template) => `- **${template.name}** (\`${template.id}\`, targe
 ## Content and feedback language
 
 Use specific verbs and name the affected object. For failures, state what failed, what remains preserved, and the next valid action. Never render raw server messages, tokens, stack traces, or unvalidated request identifiers.
-
-## Do
-
-- Search and reuse a stable component or pattern before creating a new one.
-- Compose layout with Stack, Inline, Container, and Surface.
-- Keep application state and side effects in the consuming app.
-- Use controlled props for product behavior.
-- Include representative Korean, English, long-content, mobile, dark, and high-contrast states in stories.
-
-## Do not
-
-- Import from \`@unpopping-candy/*/src/*\`.
-- Fetch, navigate, authenticate, or mutate inside \`@unpopping-candy/ui\` or \`@unpopping-candy/social\`.
-- Hardcode brand colors, spacing, radius, shadows, or motion durations.
-- Invent component props or component names.
-- Treat a static screenshot as functional UI.
-- Omit loading, empty, failure, and disabled states where they are possible.
 
 ## AI workflow
 

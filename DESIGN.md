@@ -354,23 +354,6 @@ Composes a readable, state-complete social timeline without moving content unexp
 
 Use specific verbs and name the affected object. For failures, state what failed, what remains preserved, and the next valid action. Never render raw server messages, tokens, stack traces, or unvalidated request identifiers.
 
-## Do
-
-- Search and reuse a stable component or pattern before creating a new one.
-- Compose layout with Stack, Inline, Container, and Surface.
-- Keep application state and side effects in the consuming app.
-- Use controlled props for product behavior.
-- Include representative Korean, English, long-content, mobile, dark, and high-contrast states in stories.
-
-## Do not
-
-- Import from `@unpopping-candy/*/src/*`.
-- Fetch, navigate, authenticate, or mutate inside `@unpopping-candy/ui` or `@unpopping-candy/social`.
-- Hardcode brand colors, spacing, radius, shadows, or motion durations.
-- Invent component props or component names.
-- Treat a static screenshot as functional UI.
-- Omit loading, empty, failure, and disabled states where they are possible.
-
 ## AI workflow
 
 ```text
