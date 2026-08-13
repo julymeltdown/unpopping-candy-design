@@ -10,6 +10,8 @@ import {
 } from "../src/index.ts";
 import { publicContractErrors } from "./public-example-contract.ts";
 
+const repositoryRoot = resolve(import.meta.dirname, "../../..");
+
 test("bundled catalog contains every stable public surface", () => {
   assert.equal(
     bundledCatalog.entries.filter((entry) => entry.kind === "component").length,
@@ -88,7 +90,10 @@ test("all preferred examples and Registry TSX templates honor public component p
   );
   for (const [path, label] of templates) {
     errors.push(
-      ...publicContractErrors(await readFile(resolve(path), "utf8"), label),
+      ...publicContractErrors(
+        await readFile(resolve(repositoryRoot, path), "utf8"),
+        label,
+      ),
     );
   }
   assert.deepEqual(errors, []);
