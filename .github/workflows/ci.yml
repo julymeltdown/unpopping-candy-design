@@ -25,7 +25,7 @@ jobs:
       - name: Verify generated AI context is current
         run: pnpm agent:check
       - name: Run deterministic package and architecture tests
-        run: pnpm test:pure
+        run: pnpm test:pure:source
       - name: Run package, AI, export, CSS, documentation, and syntax gates
         run: pnpm verify
       - name: Install Playwright browsers

@@ -28,6 +28,10 @@ packages:
   - "@unpopping-candy/icons"
   - "@unpopping-candy/ui"
   - "@unpopping-candy/social"
+  - "@unpopping-candy/knowledge"
+  - "@unpopping-candy/registry"
+  - "@unpopping-candy/cli"
+  - "@unpopping-candy/mcp"
 stableComponents: 32
 ---
 
@@ -74,6 +78,10 @@ Unpopping Candy is a reusable React design system for content-rich, social, edit
 | `@unpopping-candy/icons` | Semantic icon names backed by Ant Design Icons | Product-specific actions |
 | `@unpopping-candy/ui` | Product-independent accessible components | Network, router, cache, auth |
 | `@unpopping-candy/social` | API-independent social presentation models and patterns | Fetching, mutations, application state |
+| `@unpopping-candy/knowledge` | Deterministic catalog, compatibility, and document generators | Rendering, filesystem writes, or product state |
+| `@unpopping-candy/registry` | Checksum-verified local template planning and guarded writes | Network fetching or application behavior |
+| `@unpopping-candy/cli` | Installed-version discovery, composition, validation, and scaffolding | Component rendering or hosted services |
+| `@unpopping-candy/mcp` | Local stdio adapter over knowledge, CLI, Registry, and tokens | LLM calls or a duplicate catalog |
 
 Authentication, server state, Feature-Sliced Design application code, API clients, and backend services belong to the separate application kit.
 
@@ -359,9 +367,9 @@ Use specific verbs and name the affected object. For failures, state what failed
 - Import from `@unpopping-candy/*/src/*`.
 - Fetch, navigate, authenticate, or mutate inside `@unpopping-candy/ui` or `@unpopping-candy/social`.
 - Hardcode brand colors, spacing, radius, shadows, or motion durations.
-- invent component props or component names.
+- Invent component props or component names.
 - Treat a static screenshot as functional UI.
-- omit loading, empty, failure, and disabled states where they are possible.
+- Omit loading, empty, failure, and disabled states where they are possible.
 
 ## AI workflow
 

@@ -939,6 +939,24 @@ git commit -m "build: enforce release trust budgets"
 - Modify: `packages/{tokens,theme,icons,ui,social,knowledge,registry,cli,mcp}/package.json`
 - Modify: `packages/{cli,mcp}/README.md`
 - Modify: `tests/architecture/build-config.test.mjs`
+- Create: `tests/architecture/source-size.test.mjs`
+- Create: `packages/knowledge/src/design-generator.ts`
+- Modify: `packages/knowledge/src/generators.ts`
+- Modify: `packages/knowledge/test/generators.test.ts`
+- Create: `packages/evals/src/evaluator-analysis.ts`
+- Create: `packages/evals/src/evaluator-import-analysis.ts`
+- Create: `packages/evals/src/evaluator-prop-analysis.ts`
+- Modify: `packages/evals/src/evaluator.ts`
+- Modify: `packages/evals/src/providers.ts`
+- Modify: `packages/evals/src/model-captures.ts`
+- Modify: `packages/evals/test/model-captures.test.ts`
+- Modify: `packages/evals/test/model-eval-boundaries.test.ts`
+- Modify: `docs/MIGRATION.md`
+- Modify: `docs/MCP.md`
+- Modify: `packages/evals/fixtures/README.md`
+- Modify: `README.md`
+- Modify: `scripts/lib/documentation-policy.mjs` with the explicitly reviewed README digest
+- Regenerate: `DESIGN.md`, `agent/llms-small.txt`, and `agent/llms-full.txt`
 
 **Interfaces:**
 
@@ -1006,6 +1024,12 @@ Keep release permission `id-token: write`, remove `NODE_AUTH_TOKEN`, require env
 
 Remove the legacy root `release` script so no local `changeset publish` path can bypass the protected candidate workflow. Declare `engines.node` as `>=22.13.0 <23 || >=24 <25` in the published CLI and MCP manifests and state the requirement in their package READMEs. In the primary CI workflow, run `pnpm build:packages` immediately after the frozen install and before package tests, verification, or typechecking because those gates resolve internal packages through untracked public `dist` exports.
 
+Keep the documented clean-checkout commands self-contained: root `test:pure`, `popcandy`, and `mcp:dev` materialize their dependency-closed package exports before resolving public workspace entrypoints, while CI reuses the source-only test alias after its explicit package build. The root Node range and README prerequisite match the published CLI/MCP Node 22.13+/24.x lines.
+
+Disable Codex shell tooling, unified execution, shell snapshots, and subprocess environment inheritance for model-evaluation calls. Public evaluation evidence replaces raw provider output wholesale instead of attempting to recognize every possible secret transformation; complete raw transcripts remain restricted and encrypted.
+
+Correct portable documentation to use the stable Registry ID and supported `--target` flag, remove mutable or unpublished npm MCP invocation guidance, identify evals as private repository tooling, and generate all nine public package names from the compatibility contract. Keep every hand-authored source/test module at or below 250 pure lines.
+
 - [ ] **Step 5: Run the candidate and prove the source stayed untouched**
 
 Run:
@@ -1048,6 +1072,7 @@ Before public promotion, attach a Chromatic review, Pages URL, actual Node/brows
 
 ```bash
 git add scripts/prepare-release-candidate.mjs scripts/lib/release-candidate-contract.mjs scripts/lib/release-candidate-artifacts.mjs scripts/lib/release-candidate-workspace.mjs scripts/lib/release-candidate-verification.mjs scripts/verify-release-candidate.mjs scripts/run-compatibility-matrix.mjs scripts/lib/compatibility-process.mjs scripts/lib/compatibility-execution.mjs scripts/lib/compatibility-consumer.mjs scripts/lib/documentation-policy.mjs tests/architecture/release-candidate.test.mjs tests/architecture/release-candidate-verifier.test.mjs tests/architecture/release-candidate-archive.test.mjs tests/architecture/documentation-policy.test.mjs tests/architecture/documentation-trust.test.mjs tests/architecture/markdown-contract.test.mjs tests/architecture/release-workflow.test.mjs tests/architecture/build-config.test.mjs tests/architecture/compatibility-provenance.test.mjs .github/workflows/storybook.yml .github/workflows/release.yml .github/workflows/ci.yml docs/PUBLISHING.md .changeset/stage-zero-foundation.md package.json .gitignore packages/{tokens,theme,icons,ui,social,knowledge,registry,cli,mcp}/package.json packages/{cli,mcp}/README.md packages/knowledge/test/compatibility.test.ts packages/registry/test/registry.test.ts packages/cli/test/cli.test.ts packages/cli/test/compose.test.ts packages/knowledge/content/templates/template-social-feed-page.docs.ts packages/mcp/test/domain.test.ts docs/superpowers/plans/2026-08-11-unpopping-candy-stage-0-foundation.md
+git add tests/architecture/source-size.test.mjs docs/MIGRATION.md docs/MCP.md README.md DESIGN.md agent/llms-small.txt agent/llms-full.txt packages/knowledge/src/design-generator.ts packages/knowledge/src/generators.ts packages/knowledge/test/generators.test.ts packages/evals/src/evaluator-analysis.ts packages/evals/src/evaluator-import-analysis.ts packages/evals/src/evaluator-prop-analysis.ts packages/evals/src/evaluator.ts packages/evals/src/providers.ts packages/evals/src/model-captures.ts packages/evals/test/model-captures.test.ts packages/evals/test/model-eval-boundaries.test.ts packages/evals/fixtures/README.md
 git commit -m "release: prepare ephemeral alpha candidates"
 ```
 

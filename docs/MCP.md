@@ -8,11 +8,7 @@
 npm run mcp:dev
 ```
 
-After publication:
-
-```bash
-npx @unpopping-candy/mcp
-```
+The package is not currently published to npm, so there is no valid npm or `npx` invocation yet. After an approved release, copy the immutable, exact-version client command from that release's verified artifact rather than using a floating package reference.
 
 Configuration examples are committed under [`agent/mcp`](../agent/mcp/README.md).
 

@@ -57,7 +57,7 @@ Those names are reserved roadmap work, not imports available in the Stage 0 cata
 
 The packages are not published to npm. This single copy/paste POSIX-shell path builds and packs the current checkout, creates a clean Vite app, installs all nine Unpopping Candy packages from local tarballs, writes a small token-based screen, runs the five local CLI commands, builds, and checks a bounded preview.
 
-Prerequisites: a POSIX shell with `sh`, Git, Node `>=22.13.0`, Corepack, `curl`, and a clone of this repository. Run from the repository root:
+Prerequisites: a POSIX shell with `sh`, Git, Node `>=22.13.0 <23 || >=24 <25`, Corepack, `curl`, and a clone of this repository. Run from the repository root:
 
 ```bash
 set -eu

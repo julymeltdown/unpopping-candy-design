@@ -6,7 +6,7 @@
   "type": "module",
   "packageManager": "pnpm@11.4.0",
   "engines": {
-    "node": ">=22.13.0"
+    "node": ">=22.13.0 <23 || >=24 <25"
   },
   "scripts": {
     "build": "pnpm --recursive --filter './packages/**' build && pnpm --filter @unpopping-candy/playground build && pnpm --filter @unpopping-candy/agent-lab build && pnpm --filter @unpopping-candy/consumer-fixture build && pnpm --filter @unpopping-candy/docs build-storybook",
@@ -22,7 +22,8 @@
     "test": "pnpm test:pure && pnpm verify",
     "test:storybook": "pnpm --filter @unpopping-candy/docs test -- --run",
     "test:browser": "playwright test",
-    "test:pure": "node --experimental-strip-types --test packages/*/test/*.test.ts && node --test tests/architecture/*.test.mjs",
+    "test:pure": "pnpm build:packages && pnpm test:pure:source",
+    "test:pure:source": "node --experimental-strip-types --test packages/*/test/*.test.ts && node --test tests/architecture/*.test.mjs",
     "typecheck": "pnpm --recursive typecheck",
     "verify": "npm run agent:check && npm run ai:check && node scripts/verify-package-contracts.mjs && node scripts/verify-boundaries.mjs && node scripts/verify-exports.mjs && node scripts/verify-css-contract.mjs && node scripts/verify-docs.mjs && node scripts/verify-registry-templates.mjs && tsc -p tsconfig.syntax.json",
     "version-packages": "changeset version",
@@ -31,10 +32,10 @@
     "knowledge:check": "node --experimental-strip-types scripts/generate-knowledge.mjs --check",
     "agent:generate": "npm run knowledge:generate && npm run registry:generate && npm run stories:generate && node --experimental-strip-types scripts/generate-agent-docs.mjs && npm run skills:generate && npm run evals:generate && npm run figma:generate",
     "agent:check": "npm run knowledge:check && npm run registry:check && npm run stories:check && node --experimental-strip-types scripts/generate-agent-docs.mjs --check && npm run skills:check && npm run evals:check && npm run figma:check",
-    "popcandy": "node --experimental-strip-types packages/cli/src/bin.ts",
+    "popcandy": "pnpm --silent --filter '@unpopping-candy/cli...' build && node --experimental-strip-types packages/cli/src/bin.ts",
     "skills:generate": "node scripts/verify-skills.mjs --write",
     "skills:check": "node scripts/verify-skills.mjs --check",
-    "mcp:dev": "node --experimental-strip-types packages/mcp/src/stdio.ts",
+    "mcp:dev": "pnpm --silent --filter '@unpopping-candy/mcp...' build && node --experimental-strip-types packages/mcp/src/stdio.ts",
     "registry:generate": "node --experimental-strip-types scripts/generate-registry.mjs",
     "registry:check": "node --experimental-strip-types scripts/generate-registry.mjs --check",
     "stories:generate": "node --experimental-strip-types scripts/verify-story-manifest.mjs",

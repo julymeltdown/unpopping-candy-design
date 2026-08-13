@@ -245,7 +245,7 @@ export function redactCapture(
     ...capture,
     taskId: redactText(capture.taskId),
     prompt: redactText(capture.prompt),
-    rawOutput: redactText(capture.rawOutput),
+    rawOutput: "[REDACTED_RAW_OUTPUT]",
     model: redactText(capture.model),
     reason: redactText(capture.reason),
     evidencePath: redactText(capture.evidencePath),

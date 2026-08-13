@@ -54,6 +54,7 @@ async function fakeProviderBin(root: string) {
     "#!/bin/sh",
     'printf "%s\\n" "$*" >> "$0.log"',
     'if [ "$1" = "--version" ]; then echo "codex-cli 0.147.0"; exit 0; fi',
+    'printf "%s\\n" "$OPENAI_API_KEY" >> "$0.credential.log"',
     `printf '%s\\n' '${codexEvent}' '${terminal}'`,
   ].join("\n");
   const claude = [
@@ -181,6 +182,13 @@ test("run stops before a second paid call when actual cost plus worst case excee
     ),
   );
   assert.equal(capture.estimatedUsd, 0.0042);
+  assert.equal(
+    await fs.readFile(join(bin, "codex.credential.log"), "utf8"),
+    "synthetic-openai\n",
+  );
+  assert.match(log, /shell_tool.*unified_exec.*shell_snapshot/);
+  assert.match(log, /shell_environment_policy\.inherit=none/);
+  assert.match(log, /shell_environment_policy\.ignore_default_excludes=false/);
 });
 
 test("report refuses stale public evidence without mixing new files", async (context) => {

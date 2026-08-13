@@ -26,7 +26,7 @@
 
 Version: 0.2.0
 
-- Public packages: @unpopping-candy/tokens, @unpopping-candy/theme, @unpopping-candy/icons, @unpopping-candy/ui, @unpopping-candy/social.
+- Public packages: @unpopping-candy/tokens, @unpopping-candy/theme, @unpopping-candy/icons, @unpopping-candy/ui, @unpopping-candy/social, @unpopping-candy/knowledge, @unpopping-candy/registry, @unpopping-candy/cli, @unpopping-candy/mcp.
 - Visual packages never fetch, route, authenticate, or own remote state.
 - Use semantic tokens and public entrypoints only.
 - Search before generating. Cover loading, empty, error, disabled, pending, mobile, dark, and high-contrast states.

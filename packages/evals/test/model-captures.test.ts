@@ -103,7 +103,7 @@ test("public capture redaction removes API-like secrets and user paths", () => {
   const redacted = redactCapture(
     capture({
       prompt: 'OPENAI_API_KEY="synthetic-double" /Users/alice/work/private.ts',
-      rawOutput: String.raw`{"type":"item.completed","item":{"text":"{\"OPENAI_API_KEY\":\"synthetic-escaped-openai\"} {\"ANTHROPIC_API_KEY\":\"synthetic-escaped-anthropic\"}"}} ANTHROPIC_API_KEY='synthetic-single' Bearer sk-ant-api03-abcdefghijklmnopqrstuvwxyz at C:\Users\Alice\secret.txt`,
+      rawOutput: String.raw`{"type":"item.completed","item":{"text":"{\"OPENAI_API_KEY\":\"synthetic-escaped-openai\"} {\"ANTHROPIC_API_KEY\":\"synthetic-escaped-anthropic\"} transformed=c3ludGhldGljLW9wZW5haQ=="}} ANTHROPIC_API_KEY='synthetic-single' Bearer sk-ant-api03-abcdefghijklmnopqrstuvwxyz at C:\Users\Alice\secret.txt`,
       reason:
         'OPENAI_API_KEY variable is documented. {"OPENAI_API_KEY":"synthetic-json","ANTHROPIC_API_KEY":"synthetic-json-two"} /home/alice/source.ts ghp_abcdefghijklmnopqrstuvwxyz',
     }),
@@ -118,6 +118,8 @@ test("public capture redaction removes API-like secrets and user paths", () => {
     /(?=.*\[REDACTED_SECRET\])(?=.*\[REDACTED_USER_PATH\])/,
   );
   assert.doesNotMatch(redacted.rawOutput, /OPENAI_API_KEY|ANTHROPIC_API_KEY/);
+  assert.equal(redacted.rawOutput, "[REDACTED_RAW_OUTPUT]");
+  assert.doesNotMatch(serialized, /c3ludGhldGljLW9wZW5haQ==/);
   assert.match(redacted.reason, /OPENAI_API_KEY variable is documented/);
 });
 
@@ -210,7 +212,7 @@ test("provider preflight and command contracts are pinned and explicit", () => {
     /0\.147\.0/,
   );
   const codexArgs =
-    "exec --ignore-user-config --ephemeral --sandbox read-only --model codex-fixture-model --json --output-schema capture-schema.json -".split(
+    "exec --ignore-user-config --strict-config --disable shell_tool --disable unified_exec --disable shell_snapshot -c shell_environment_policy.inherit=none -c shell_environment_policy.experimental_use_profile=false -c shell_environment_policy.ignore_default_excludes=false --ephemeral --sandbox read-only --model codex-fixture-model --json --output-schema capture-schema.json -".split(
       " ",
     );
   assert.deepEqual(buildCodexCommand("codex-fixture-model"), codexArgs);

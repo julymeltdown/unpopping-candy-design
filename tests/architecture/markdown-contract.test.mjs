@@ -63,6 +63,34 @@ test("README keeps the bounded landing and adopter workflow", async () => {
   assert.doesNotMatch(source, /@vitejs\/plugin-react'\] = '5\.1\.4'/);
 });
 
+test("portable setup guidance uses executable commands and truthful package status", async () => {
+  const [migration, mcp, evalFixture, readme, packageJsonSource] =
+    await Promise.all([
+      readDocument("docs/MIGRATION.md"),
+      readDocument("docs/MCP.md"),
+      readDocument("packages/evals/fixtures/README.md"),
+      readDocument("README.md"),
+      readDocument("package.json"),
+    ]);
+  const packageJson = JSON.parse(packageJsonSource);
+
+  assert.match(
+    migration,
+    /scaffold template\.social-feed-page --path \. --target src\/ui --dry-run --json/,
+  );
+  assert.match(
+    migration,
+    /scaffold template\.social-feed-page --path \. --target src\/ui --apply --json/,
+  );
+  assert.doesNotMatch(migration, /--target-directory|scaffold social-feed\b/);
+  assert.match(mcp, /not currently published to npm/i);
+  assert.doesNotMatch(mcp, /npx(?:\s+-y)?\s+@unpopping-candy\/mcp(?:\s|`|$)/);
+  assert.match(evalFixture, /private repository tooling/i);
+  assert.match(evalFixture, /not published to npm/i);
+  assert.equal(packageJson.engines.node, ">=22.13.0 <23 || >=24 <25");
+  assert.match(readme, /Node `>=22\.13\.0 <23 \|\| >=24 <25`/);
+});
+
 test("documentation verifier fails closed when trust documents are incomplete", async () => {
   // Given: a deliberately incomplete in-memory trust-document set.
   const verifier = await import("../../scripts/verify-docs.mjs");

@@ -36,12 +36,36 @@ test("CI materializes package exports before gates that resolve them", async () 
 
   assert.ok(build > ci.indexOf("run: pnpm install --frozen-lockfile"));
   for (const command of [
-    "run: pnpm test:pure",
+    "run: pnpm test:pure:source",
     "run: pnpm verify",
     "run: pnpm typecheck",
   ]) {
     assert.ok(build < ci.indexOf(command), command);
   }
+});
+
+test("documented developer commands materialize the public exports they resolve", async () => {
+  const packageJson = JSON.parse(
+    await readFile(new URL("package.json", root), "utf8"),
+  );
+
+  assert.equal(packageJson.engines.node, ">=22.13.0 <23 || >=24 <25");
+  assert.equal(
+    packageJson.scripts["test:pure"],
+    "pnpm build:packages && pnpm test:pure:source",
+  );
+  assert.equal(
+    packageJson.scripts["test:pure:source"],
+    "node --experimental-strip-types --test packages/*/test/*.test.ts && node --test tests/architecture/*.test.mjs",
+  );
+  assert.equal(
+    packageJson.scripts.popcandy,
+    "pnpm --silent --filter '@unpopping-candy/cli...' build && node --experimental-strip-types packages/cli/src/bin.ts",
+  );
+  assert.equal(
+    packageJson.scripts["mcp:dev"],
+    "pnpm --silent --filter '@unpopping-candy/mcp...' build && node --experimental-strip-types packages/mcp/src/stdio.ts",
+  );
 });
 
 test("CI fetches the history required by retained documentation evidence", async () => {

@@ -1,6 +1,6 @@
 # Reference evaluation fixtures
 
-The published package includes a deterministic six-mode benchmark for the same profile-settings task:
+This private repository tooling includes a deterministic six-mode benchmark for the same profile-settings task. `@unpopping-candy/evals` is not published to npm:
 
 1. no design context;
 2. generated `DESIGN.md`;

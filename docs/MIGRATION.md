@@ -6,12 +6,12 @@ The source application bundled reusable visual packages with application-specifi
 
 ## Package mapping
 
-| Application package | Standalone destination | Migration note |
-|---|---|---|
-| `design-tokens` | `@unpopping-candy/tokens` | expanded into layered tokens and themes |
-| `icons` | `@unpopping-candy/icons` | semantic API retained; Ant names hidden |
-| `ui` | `@unpopping-candy/ui` | built output and public subpaths added |
-| `social-ui` | `@unpopping-candy/social` | backend DTO dependencies removed |
+| Application package | Standalone destination    | Migration note                          |
+| ------------------- | ------------------------- | --------------------------------------- |
+| `design-tokens`     | `@unpopping-candy/tokens` | expanded into layered tokens and themes |
+| `icons`             | `@unpopping-candy/icons`  | semantic API retained; Ant names hidden |
+| `ui`                | `@unpopping-candy/ui`     | built output and public subpaths added  |
+| `social-ui`         | `@unpopping-candy/social` | backend DTO dependencies removed        |
 
 ## What does not migrate
 
@@ -39,7 +39,7 @@ After:
 
 ```tsx
 const viewModel = mapPostToSocialViewModel(apiPost);
-<PostCard post={viewModel} />
+<PostCard post={viewModel} />;
 ```
 
 Keep the mapper in the consuming application's entity/domain boundary. Do not add API-specific aliases to the design-system model.
@@ -49,10 +49,10 @@ Keep the mapper in the consuming application's entity/domain boundary. Do not ad
 Replace application-local CSS imports with package assets:
 
 ```tsx
-import '@unpopping-candy/tokens/styles.css';
-import '@unpopping-candy/icons/styles.css';
-import '@unpopping-candy/ui/styles.css';
-import '@unpopping-candy/social/styles.css';
+import "@unpopping-candy/tokens/styles.css";
+import "@unpopping-candy/icons/styles.css";
+import "@unpopping-candy/ui/styles.css";
+import "@unpopping-candy/social/styles.css";
 ```
 
 ## Theme migration
@@ -147,8 +147,8 @@ Do not allow an AI migration to:
 A Registry template may be scaffolded only after a dry-run plan has been reviewed:
 
 ```bash
-popcandy scaffold social-feed --path . --target-directory src/ui --json
-popcandy scaffold social-feed --path . --target-directory src/ui --apply --json
+popcandy scaffold template.social-feed-page --path . --target src/ui --dry-run --json
+popcandy scaffold template.social-feed-page --path . --target src/ui --apply --json
 ```
 
 Existing different files are never overwritten. Template checksums and path boundaries are verified by the Registry service before any write.
