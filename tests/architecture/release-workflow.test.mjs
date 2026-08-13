@@ -4,10 +4,12 @@ import test from "node:test";
 
 test("delivery workflows default to verification and gate every external write", async () => {
   const repository = new URL("../..", import.meta.url);
-  const [release, storybook] = await Promise.all([
+  const [release, storybook, packageSource] = await Promise.all([
     readFile(new URL(".github/workflows/release.yml", repository), "utf8"),
     readFile(new URL(".github/workflows/storybook.yml", repository), "utf8"),
+    readFile(new URL("package.json", repository), "utf8"),
   ]);
+  const packageJson = JSON.parse(packageSource);
   for (const literal of [
     "default: false",
     "id-token: write",
@@ -22,6 +24,12 @@ test("delivery workflows default to verification and gate every external write",
     assert.ok(release.includes(literal), literal);
   }
   assert.doesNotMatch(release, /NODE_AUTH_TOKEN|NPM_TOKEN|--tag latest/);
+  assert.equal(packageJson.scripts.release, undefined);
+  assert.ok(packageJson.scripts["release:candidate"]);
+  assert.doesNotMatch(
+    Object.values(packageJson.scripts).join("\n"),
+    /(?:changeset|npm) publish/,
+  );
   for (const literal of [
     "POPCANDY_CHROMATIC_ENABLED == 'true'",
     "POPCANDY_PAGES_ENABLED == 'true'",

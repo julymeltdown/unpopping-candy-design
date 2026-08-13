@@ -915,11 +915,14 @@ git commit -m "build: enforce release trust budgets"
 - Create: `tests/architecture/release-candidate-verifier.test.mjs`
 - Create: `.github/workflows/storybook.yml`
 - Modify: `.github/workflows/release.yml`
+- Modify: `.github/workflows/ci.yml`
 - Modify: `docs/PUBLISHING.md`
 - Create: `.changeset/stage-zero-foundation.md`
 - Modify: `package.json`
 - Modify: `.gitignore`
 - Modify: `packages/{tokens,theme,icons,ui,social,knowledge,registry,cli,mcp}/package.json`
+- Modify: `packages/{cli,mcp}/README.md`
+- Modify: `tests/architecture/build-config.test.mjs`
 
 **Interfaces:**
 
@@ -985,6 +988,8 @@ The Storybook workflow installs with `pnpm install --frozen-lockfile`, installs 
 
 Keep release permission `id-token: write`, remove `NODE_AUTH_TOKEN`, require environment `npm-release`, run the authorization verifier, and build with `pnpm release:candidate -- --version 0.3.0-alpha.0 --channel next --out .artifacts/releases/stage-0-alpha.0`. When manual input `publish` is true, read the nine digests back, then publish each verified tarball with `npm publish --provenance --access public --tag next`. Document that npm trusted-publisher configuration and GitHub environment approval must already name this repository and workflow. Stable `latest` publication is owned by Stage 3 and is not added here.
 
+Remove the legacy root `release` script so no local `changeset publish` path can bypass the protected candidate workflow. Declare `engines.node` as `>=22.13.0 <23 || >=24 <25` in the published CLI and MCP manifests and state the requirement in their package READMEs. In the primary CI workflow, run `pnpm build:packages` immediately after the frozen install and before package tests, verification, or typechecking because those gates resolve internal packages through untracked public `dist` exports.
+
 - [ ] **Step 5: Run the candidate and prove the source stayed untouched**
 
 Run:
@@ -1026,7 +1031,7 @@ Before public promotion, attach a Chromatic review, Pages URL, actual Node/brows
 - [ ] **Step 8: Commit source preparation without candidate artifacts**
 
 ```bash
-git add scripts/prepare-release-candidate.mjs scripts/lib/release-candidate-contract.mjs scripts/lib/release-candidate-artifacts.mjs scripts/lib/release-candidate-workspace.mjs scripts/verify-release-candidate.mjs scripts/run-compatibility-matrix.mjs scripts/lib/compatibility-process.mjs scripts/lib/compatibility-execution.mjs scripts/lib/compatibility-consumer.mjs scripts/lib/documentation-policy.mjs tests/architecture/release-candidate.test.mjs tests/architecture/release-candidate-verifier.test.mjs tests/architecture/release-workflow.test.mjs .github/workflows/storybook.yml .github/workflows/release.yml docs/PUBLISHING.md .changeset/stage-zero-foundation.md package.json .gitignore packages/{tokens,theme,icons,ui,social,knowledge,registry,cli,mcp}/package.json packages/knowledge/test/compatibility.test.ts packages/registry/test/registry.test.ts packages/cli/test/cli.test.ts packages/mcp/test/domain.test.ts docs/superpowers/plans/2026-08-11-unpopping-candy-stage-0-foundation.md
+git add scripts/prepare-release-candidate.mjs scripts/lib/release-candidate-contract.mjs scripts/lib/release-candidate-artifacts.mjs scripts/lib/release-candidate-workspace.mjs scripts/verify-release-candidate.mjs scripts/run-compatibility-matrix.mjs scripts/lib/compatibility-process.mjs scripts/lib/compatibility-execution.mjs scripts/lib/compatibility-consumer.mjs scripts/lib/documentation-policy.mjs tests/architecture/release-candidate.test.mjs tests/architecture/release-candidate-verifier.test.mjs tests/architecture/release-workflow.test.mjs tests/architecture/build-config.test.mjs .github/workflows/storybook.yml .github/workflows/release.yml .github/workflows/ci.yml docs/PUBLISHING.md .changeset/stage-zero-foundation.md package.json .gitignore packages/{tokens,theme,icons,ui,social,knowledge,registry,cli,mcp}/package.json packages/{cli,mcp}/README.md packages/knowledge/test/compatibility.test.ts packages/registry/test/registry.test.ts packages/cli/test/cli.test.ts packages/mcp/test/domain.test.ts docs/superpowers/plans/2026-08-11-unpopping-candy-stage-0-foundation.md
 git commit -m "release: prepare ephemeral alpha candidates"
 ```
 

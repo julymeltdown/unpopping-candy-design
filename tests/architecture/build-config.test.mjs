@@ -30,6 +30,33 @@ test("CI installs an immutable pnpm 11.4.0 workspace", async () => {
   assert.doesNotMatch(ci, /--no-frozen-lockfile/);
 });
 
+test("CI materializes package exports before gates that resolve them", async () => {
+  const ci = await readFile(new URL(".github/workflows/ci.yml", root), "utf8");
+  const build = ci.indexOf("run: pnpm build:packages");
+
+  assert.ok(build > ci.indexOf("run: pnpm install --frozen-lockfile"));
+  for (const command of [
+    "run: pnpm test:pure",
+    "run: pnpm verify",
+    "run: pnpm typecheck",
+  ]) {
+    assert.ok(build < ci.indexOf(command), command);
+  }
+});
+
+test("published runtime tools declare the supported Node release lines", async () => {
+  for (const packageName of ["cli", "mcp"]) {
+    const manifest = JSON.parse(
+      await readFile(
+        new URL(`packages/${packageName}/package.json`, root),
+        "utf8",
+      ),
+    );
+
+    assert.equal(manifest.engines?.node, ">=22.13.0 <23 || >=24 <25");
+  }
+});
+
 test("Vite library builds remove stale output before emitting", async () => {
   for (const packageName of ["theme", "icons", "ui", "social"]) {
     const config = await readFile(

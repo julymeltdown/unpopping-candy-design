@@ -2,6 +2,8 @@
 
 Deterministic local interface for Unpopping Candy knowledge and the guarded template Registry. It detects the current project, searches the exact bundled catalog, proposes composition plans, validates source usage, and scaffolds versioned templates without calling a language model.
 
+Requires Node.js 22.13 or later in the Node 22 line, or Node.js 24.
+
 ```bash
 popcandy info --json
 popcandy search "profile settings" --json
