@@ -41,7 +41,7 @@ Stage 0 currently implements in this repository:
 - 32 dedicated Storybook contract stories;
 - generated catalog, portable agent documents, Skills, and the local public-package candidates for CLI, MCP, and Registry;
 - private repository tools for deterministic static evaluation and placeholder-gated Code Connect generation;
-- packed-consumer compatibility planning and six executed clean-consumer cells.
+- packed-consumer compatibility across all 140 clean-consumer cells.
 
 See the [catalog manifest](./agent/manifests/catalog.json) and [Storybook usage source](./apps/docs/stories/Introduction.mdx). No hosted Storybook URL is configured in this repository.
 
@@ -246,7 +246,7 @@ pnpm test:storybook
 pnpm --filter @unpopping-candy/docs build-storybook
 ```
 
-Compatibility is defined in [docs/COMPATIBILITY.md](./docs/COMPATIBILITY.md). Stage 0 planned 140 combinations but executed six named tarball-only cells; it does not claim the unexecuted cells passed.
+Compatibility is defined in [docs/COMPATIBILITY.md](./docs/COMPATIBILITY.md). All 140 planned tarball-only cells executed successfully across four fixtures, seven framework/React combinations, and five package managers.
 
 ## Trust and project policies
 

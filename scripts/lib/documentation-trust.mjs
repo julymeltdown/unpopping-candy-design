@@ -1,12 +1,7 @@
 import {
   availabilityClaimErrors,
-  compatibilityClaimErrors,
   supportClaimErrors,
 } from "./documentation-claims.mjs";
-const executedIds =
-  "base/vite-react-19/pnpm-11\0publish-post/vite-react-19/npm-10\0activity-review/vite-react-19/yarn-4\0member-moderation/vite-react-19/pnpm-11\0base/next-15-react-18/pnpm-10\0base/react-router-7-react-18/npm-11".split(
-    "\0",
-  );
 const studyHeadings =
   "Task and acceptance criteria\0Fixture and exact installed versions\0Prompt\0Bounded inputs\0`popcandy` transcript\0Output diff\0Storybook, axe, and visual commands\0Model, provider, and timestamp\0Failures and corrections\0No-context comparison\0Reproducibility and redaction".split(
     "\0",
@@ -149,13 +144,8 @@ function checkCompatibility(errors, source, context) {
     errors,
     "docs/COMPATIBILITY.md",
     source,
-    "140 planned cells\0exactly six executed cells\0remaining 134 planned combinations were not executed\0tarball-only isolation\0pnpm@11.4.0\0./evidence/stage-0-compatibility-summary.json",
-    [
-      /(?:all|every one of)(?: the)? 140 (?:planned )?(?:cells|combinations)[^.\n]*passed/i,
-      /remaining 134[^.\n]*passed/i,
-    ],
+    "140 planned cells\0All 140 executed cells passed\0tarball-only isolation\0pnpm@11.4.0\0./evidence/stage-0-compatibility-summary.json",
   );
-  errors.push(...compatibilityClaimErrors("docs/COMPATIBILITY.md", source));
 }
 
 export function structuredTrustContractErrors(documents, context) {

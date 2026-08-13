@@ -23,12 +23,10 @@ import {
 } from "./lib/project-inspection.mjs";
 
 const execFileAsync = promisify(execFile);
-const executedIds =
-  "base/vite-react-19/pnpm-11\0publish-post/vite-react-19/npm-10\0activity-review/vite-react-19/yarn-4\0member-moderation/vite-react-19/pnpm-11\0base/next-15-react-18/pnpm-10\0base/react-router-7-react-18/npm-11".split(
-    "\0",
-  );
+const scenarioIds =
+  "activity-review\0base\0member-moderation\0publish-post".split("\0");
 const retainedRunsDigest =
-  "13760a3f53649e3ef57e2f588072cf50d745766d55fb603817db81ed8768bffc";
+  "b834de7363bf997879ab479bb4197e53b490c625dc0b7ecb6f5b09989e84f11f";
 function evidenceValidator(matrix, packages, sourceCommit, runnerDigest) {
   const tarballNames = packages.map(({ name, version }) => [
     name,
@@ -37,9 +35,15 @@ function evidenceValidator(matrix, packages, sourceCommit, runnerDigest) {
   return (evidence) => {
     // prettier-ignore
     const headerKeys = "schemaVersion,sourceCommit,runnerDigest,runner,matrix,plannedCells,executedCells,unexecutedCells,runs";
-    // Six exact scalar assertions remain readable as one bounded tuple.
+    const expectedIds = scenarioIds.flatMap((scenario) =>
+      Object.keys(matrix.cells).flatMap((cell) =>
+        Object.keys(matrix.managers).map(
+          (manager) => `${scenario}/${cell}/${manager}`,
+        ),
+      ),
+    );
     // prettier-ignore
-    const headerValues = [evidence.schemaVersion === 2, evidence.sourceCommit === sourceCommit, evidence.runnerDigest === runnerDigest, evidence.runner === "scripts/run-compatibility-matrix.mjs", evidence.matrix === "fixtures/compatibility/matrix.json", evidence.plannedCells === 140, evidence.executedCells === 6, evidence.unexecutedCells === 134];
+    const headerValues = [evidence.schemaVersion === 2, evidence.sourceCommit === sourceCommit, evidence.runnerDigest === runnerDigest, evidence.runner === "scripts/run-compatibility-matrix.mjs", evidence.matrix === "fixtures/compatibility/matrix.json", evidence.plannedCells === 140, evidence.executedCells === 140, evidence.unexecutedCells === 0];
     // prettier-ignore
     const ids = evidence.runs.map(({ id }) => id).sort().join();
     // prettier-ignore
@@ -47,7 +51,7 @@ function evidenceValidator(matrix, packages, sourceCommit, runnerDigest) {
     if (
       Object.keys(evidence).join() !== headerKeys ||
       headerValues.includes(false) ||
-      ids !== [...executedIds].sort().join() ||
+      ids !== expectedIds.sort().join() ||
       digest !== retainedRunsDigest
     )
       return false;

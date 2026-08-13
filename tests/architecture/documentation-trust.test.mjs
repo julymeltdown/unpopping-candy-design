@@ -46,16 +46,6 @@ test("visible appended trust contradictions fail closed", async () => {
 
   for (const [label, path, transform] of [
     [
-      "all cells passed",
-      "docs/COMPATIBILITY.md",
-      (source) => `${source}\nAll 140 planned cells passed.\n`,
-    ],
-    [
-      "all cells passed paraphrase",
-      "docs/COMPATIBILITY.md",
-      (source) => `${source}\nEvery one of the 140 planned cells passed.\n`,
-    ],
-    [
       "eighth framework",
       "docs/COMPATIBILITY.md",
       (source) =>
@@ -110,11 +100,6 @@ test("visible appended trust contradictions fail closed", async () => {
       "README.md",
       (source) =>
         `${source}\nAn internet-accessible MCP endpoint is running.\n`,
-    ],
-    [
-      "full matrix green paraphrase",
-      "docs/COMPATIBILITY.md",
-      (source) => `${source}\nThe full 140-cell matrix is green.\n`,
     ],
     [
       "evals classified public",
@@ -212,6 +197,20 @@ test("compatibility evidence stays bound to its historical source commit", async
   assert.ok(
     verifier.trustContractErrors(documents, changedDigest).length > 0,
     "a syntactically valid replacement tarball digest must fail closed",
+  );
+
+  const partialEvidence = {
+    ...context,
+    evidence: {
+      ...structuredClone(context.evidence),
+      executedCells: 6,
+      unexecutedCells: 134,
+      runs: context.evidence.runs.slice(0, 6),
+    },
+  };
+  assert.ok(
+    verifier.trustContractErrors(documents, partialEvidence).length > 0,
+    "partial matrix evidence must not support the full execution claim",
   );
 
   const wrongEvidence = structuredClone(context.evidence);

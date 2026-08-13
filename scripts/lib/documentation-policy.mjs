@@ -3,13 +3,13 @@ import { createHash } from "node:crypto";
 const approvedDigests = new Map(
   Object.entries({
     "README.md":
-      "23b585ac190e424cb24226c051a94189dfaaa047f530dfd8062c496efcb31db6",
+      "96950dd16731fe62030570bf25bc47e5adf76f0fef7ea1bcc25b810e478de854",
     "docs/ACCESSIBILITY.md":
       "809d02af2817ed7120adb4341626a433187d6db32324bb0f97ef45b56392e523",
     "docs/AI_ASSISTED_POST_CASE_STUDY.md":
       "eed32d1c517467e213b4c7d4e5b446b617a12ee53367752e4629f56d89a0360e",
     "docs/COMPATIBILITY.md":
-      "45766fe0f7a466693bc6a11678a0f63e540d739c285bbc5c4b854af5bfb95a4e",
+      "7b543650a5ccd554ed6daac0d0b72ea53e6223619b39e371d3db73fe2c9ba6ba",
     "docs/PUBLISHING.md":
       "48cbecf293649022bf3a484fc4b418555132d5abf2ff071587380c173bd1d98e",
     "docs/SECURITY.md":

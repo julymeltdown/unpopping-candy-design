@@ -136,12 +136,12 @@ test("documentation verifier compares structured trust claims with canonical sou
         ),
     ],
     [
-      "unexecuted cells claimed passed",
+      "missing executed matrix row",
       "docs/COMPATIBILITY.md",
       (source) =>
         source.replace(
-          "remaining 134 planned combinations were not executed",
-          "remaining 134 planned combinations passed",
+          /^\| activity-review\/next-15-react-18\/npm-10[^\n]*\n/m,
+          "",
         ),
     ],
     [
@@ -189,6 +189,20 @@ test("documentation verifier compares structured trust claims with canonical sou
   ]) {
     assert.ok(mutate(path, transform).length > 0, `${label} must fail closed`);
   }
+});
+
+test("tracked compatibility evidence covers every planned matrix cell", async () => {
+  const verifier = await import("../../scripts/verify-docs.mjs");
+  const context = await verifier.loadTrustContext(root);
+  const { evidence } = context;
+
+  assert.equal(evidence.executedCells, evidence.plannedCells);
+  assert.equal(evidence.unexecutedCells, 0);
+  assert.equal(
+    new Set(evidence.runs.map(({ id }) => id)).size,
+    evidence.plannedCells,
+  );
+  assert.equal(context.evidenceIsExact(evidence), true);
 });
 
 test("documentation links reject prefix siblings and escaping symlinks", async () => {

@@ -38,20 +38,154 @@ This tarball-only isolation is the release boundary. A source-linked workspace b
 
 ## Planned versus executed
 
-Four fixture scenarios multiplied by seven framework cells and five managers produce 140 planned cells. Plan mode enumerated all 140 planned cells without installing, building, launching a browser, or writing results.
+Four fixture scenarios multiplied by seven framework cells and five managers produce 140 planned cells. Plan mode enumerates the same 140 cells without installing, building, launching a browser, or writing results.
 
-Task 7 documented exactly six executed cells:
+At source commit `4b85ce4897cf1c98a3045674e6e777545fb53360`, the full tarball-only matrix executed every planned cell:
 
-| Executed ID                             | Status |
-| --------------------------------------- | ------ |
-| base/vite-react-19/pnpm-11              | passed |
-| publish-post/vite-react-19/npm-10       | passed |
-| activity-review/vite-react-19/yarn-4    | passed |
-| member-moderation/vite-react-19/pnpm-11 | passed |
-| base/next-15-react-18/pnpm-10           | passed |
-| base/react-router-7-react-18/npm-11     | passed |
+| Executed ID                                       | Status |
+| ------------------------------------------------- | ------ |
+| activity-review/next-15-react-18/npm-10           | passed |
+| activity-review/next-15-react-18/npm-11           | passed |
+| activity-review/next-15-react-18/pnpm-10          | passed |
+| activity-review/next-15-react-18/pnpm-11          | passed |
+| activity-review/next-15-react-18/yarn-4           | passed |
+| activity-review/next-15-react-19/npm-10           | passed |
+| activity-review/next-15-react-19/npm-11           | passed |
+| activity-review/next-15-react-19/pnpm-10          | passed |
+| activity-review/next-15-react-19/pnpm-11          | passed |
+| activity-review/next-15-react-19/yarn-4           | passed |
+| activity-review/next-16-react-19/npm-10           | passed |
+| activity-review/next-16-react-19/npm-11           | passed |
+| activity-review/next-16-react-19/pnpm-10          | passed |
+| activity-review/next-16-react-19/pnpm-11          | passed |
+| activity-review/next-16-react-19/yarn-4           | passed |
+| activity-review/react-router-7-react-18/npm-10    | passed |
+| activity-review/react-router-7-react-18/npm-11    | passed |
+| activity-review/react-router-7-react-18/pnpm-10   | passed |
+| activity-review/react-router-7-react-18/pnpm-11   | passed |
+| activity-review/react-router-7-react-18/yarn-4    | passed |
+| activity-review/react-router-7-react-19/npm-10    | passed |
+| activity-review/react-router-7-react-19/npm-11    | passed |
+| activity-review/react-router-7-react-19/pnpm-10   | passed |
+| activity-review/react-router-7-react-19/pnpm-11   | passed |
+| activity-review/react-router-7-react-19/yarn-4    | passed |
+| activity-review/vite-react-18/npm-10              | passed |
+| activity-review/vite-react-18/npm-11              | passed |
+| activity-review/vite-react-18/pnpm-10             | passed |
+| activity-review/vite-react-18/pnpm-11             | passed |
+| activity-review/vite-react-18/yarn-4              | passed |
+| activity-review/vite-react-19/npm-10              | passed |
+| activity-review/vite-react-19/npm-11              | passed |
+| activity-review/vite-react-19/pnpm-10             | passed |
+| activity-review/vite-react-19/pnpm-11             | passed |
+| activity-review/vite-react-19/yarn-4              | passed |
+| base/next-15-react-18/npm-10                      | passed |
+| base/next-15-react-18/npm-11                      | passed |
+| base/next-15-react-18/pnpm-10                     | passed |
+| base/next-15-react-18/pnpm-11                     | passed |
+| base/next-15-react-18/yarn-4                      | passed |
+| base/next-15-react-19/npm-10                      | passed |
+| base/next-15-react-19/npm-11                      | passed |
+| base/next-15-react-19/pnpm-10                     | passed |
+| base/next-15-react-19/pnpm-11                     | passed |
+| base/next-15-react-19/yarn-4                      | passed |
+| base/next-16-react-19/npm-10                      | passed |
+| base/next-16-react-19/npm-11                      | passed |
+| base/next-16-react-19/pnpm-10                     | passed |
+| base/next-16-react-19/pnpm-11                     | passed |
+| base/next-16-react-19/yarn-4                      | passed |
+| base/react-router-7-react-18/npm-10               | passed |
+| base/react-router-7-react-18/npm-11               | passed |
+| base/react-router-7-react-18/pnpm-10              | passed |
+| base/react-router-7-react-18/pnpm-11              | passed |
+| base/react-router-7-react-18/yarn-4               | passed |
+| base/react-router-7-react-19/npm-10               | passed |
+| base/react-router-7-react-19/npm-11               | passed |
+| base/react-router-7-react-19/pnpm-10              | passed |
+| base/react-router-7-react-19/pnpm-11              | passed |
+| base/react-router-7-react-19/yarn-4               | passed |
+| base/vite-react-18/npm-10                         | passed |
+| base/vite-react-18/npm-11                         | passed |
+| base/vite-react-18/pnpm-10                        | passed |
+| base/vite-react-18/pnpm-11                        | passed |
+| base/vite-react-18/yarn-4                         | passed |
+| base/vite-react-19/npm-10                         | passed |
+| base/vite-react-19/npm-11                         | passed |
+| base/vite-react-19/pnpm-10                        | passed |
+| base/vite-react-19/pnpm-11                        | passed |
+| base/vite-react-19/yarn-4                         | passed |
+| member-moderation/next-15-react-18/npm-10         | passed |
+| member-moderation/next-15-react-18/npm-11         | passed |
+| member-moderation/next-15-react-18/pnpm-10        | passed |
+| member-moderation/next-15-react-18/pnpm-11        | passed |
+| member-moderation/next-15-react-18/yarn-4         | passed |
+| member-moderation/next-15-react-19/npm-10         | passed |
+| member-moderation/next-15-react-19/npm-11         | passed |
+| member-moderation/next-15-react-19/pnpm-10        | passed |
+| member-moderation/next-15-react-19/pnpm-11        | passed |
+| member-moderation/next-15-react-19/yarn-4         | passed |
+| member-moderation/next-16-react-19/npm-10         | passed |
+| member-moderation/next-16-react-19/npm-11         | passed |
+| member-moderation/next-16-react-19/pnpm-10        | passed |
+| member-moderation/next-16-react-19/pnpm-11        | passed |
+| member-moderation/next-16-react-19/yarn-4         | passed |
+| member-moderation/react-router-7-react-18/npm-10  | passed |
+| member-moderation/react-router-7-react-18/npm-11  | passed |
+| member-moderation/react-router-7-react-18/pnpm-10 | passed |
+| member-moderation/react-router-7-react-18/pnpm-11 | passed |
+| member-moderation/react-router-7-react-18/yarn-4  | passed |
+| member-moderation/react-router-7-react-19/npm-10  | passed |
+| member-moderation/react-router-7-react-19/npm-11  | passed |
+| member-moderation/react-router-7-react-19/pnpm-10 | passed |
+| member-moderation/react-router-7-react-19/pnpm-11 | passed |
+| member-moderation/react-router-7-react-19/yarn-4  | passed |
+| member-moderation/vite-react-18/npm-10            | passed |
+| member-moderation/vite-react-18/npm-11            | passed |
+| member-moderation/vite-react-18/pnpm-10           | passed |
+| member-moderation/vite-react-18/pnpm-11           | passed |
+| member-moderation/vite-react-18/yarn-4            | passed |
+| member-moderation/vite-react-19/npm-10            | passed |
+| member-moderation/vite-react-19/npm-11            | passed |
+| member-moderation/vite-react-19/pnpm-10           | passed |
+| member-moderation/vite-react-19/pnpm-11           | passed |
+| member-moderation/vite-react-19/yarn-4            | passed |
+| publish-post/next-15-react-18/npm-10              | passed |
+| publish-post/next-15-react-18/npm-11              | passed |
+| publish-post/next-15-react-18/pnpm-10             | passed |
+| publish-post/next-15-react-18/pnpm-11             | passed |
+| publish-post/next-15-react-18/yarn-4              | passed |
+| publish-post/next-15-react-19/npm-10              | passed |
+| publish-post/next-15-react-19/npm-11              | passed |
+| publish-post/next-15-react-19/pnpm-10             | passed |
+| publish-post/next-15-react-19/pnpm-11             | passed |
+| publish-post/next-15-react-19/yarn-4              | passed |
+| publish-post/next-16-react-19/npm-10              | passed |
+| publish-post/next-16-react-19/npm-11              | passed |
+| publish-post/next-16-react-19/pnpm-10             | passed |
+| publish-post/next-16-react-19/pnpm-11             | passed |
+| publish-post/next-16-react-19/yarn-4              | passed |
+| publish-post/react-router-7-react-18/npm-10       | passed |
+| publish-post/react-router-7-react-18/npm-11       | passed |
+| publish-post/react-router-7-react-18/pnpm-10      | passed |
+| publish-post/react-router-7-react-18/pnpm-11      | passed |
+| publish-post/react-router-7-react-18/yarn-4       | passed |
+| publish-post/react-router-7-react-19/npm-10       | passed |
+| publish-post/react-router-7-react-19/npm-11       | passed |
+| publish-post/react-router-7-react-19/pnpm-10      | passed |
+| publish-post/react-router-7-react-19/pnpm-11      | passed |
+| publish-post/react-router-7-react-19/yarn-4       | passed |
+| publish-post/vite-react-18/npm-10                 | passed |
+| publish-post/vite-react-18/npm-11                 | passed |
+| publish-post/vite-react-18/pnpm-10                | passed |
+| publish-post/vite-react-18/pnpm-11                | passed |
+| publish-post/vite-react-18/yarn-4                 | passed |
+| publish-post/vite-react-19/npm-10                 | passed |
+| publish-post/vite-react-19/npm-11                 | passed |
+| publish-post/vite-react-19/pnpm-10                | passed |
+| publish-post/vite-react-19/pnpm-11                | passed |
+| publish-post/vite-react-19/yarn-4                 | passed |
 
-The tracked [sanitized compatibility summary](./evidence/stage-0-compatibility-summary.json) records schema version `2`, its full source commit, runner, per-run Node/framework/React/TypeScript/browser versions, nine tarball names and SHA-256 digests, install/typecheck/build/smoke statuses, isolation booleans, and exact expected accessible name. Those six executed cells passed all four recorded stages. The original result locators belong to ignored local artifacts, are unavailable in the tracked summary, and are not claimed as retained evidence. The remaining 134 planned combinations were not executed and are not support claims.
+All 140 executed cells passed install, typecheck, build, and browser smoke stages. The tracked [sanitized compatibility summary](./evidence/stage-0-compatibility-summary.json) records schema version `2`, the full source commit and runner digest, per-run Node/framework/React/TypeScript/browser versions, nine tarball names and SHA-256 digests, isolation booleans, and exact expected accessible name. Original temporary result locators remain ignored; the tracked projection retains the evidence needed to reproduce and verify the matrix without exposing machine-local paths.
 
 ## Reproducing the plan and evidence
 
@@ -59,6 +193,7 @@ The tracked [sanitized compatibility summary](./evidence/stage-0-compatibility-s
 pnpm fixtures:compat -- --all --plan
 pnpm fixtures:compat -- --fixture publish-post --all --plan
 pnpm fixtures:compat -- --fixture publish-post --cell vite-react-19 --manager npm-10
+pnpm fixtures:compat -- --all
 ```
 
 Record the commit SHA, matrix source, Node/manager/framework/React/TypeScript/browser versions, nine tarball names and SHA-256 digests, isolation fields, command stages, and result locator. Failed or unfinished stages must remain explicit rather than being omitted.

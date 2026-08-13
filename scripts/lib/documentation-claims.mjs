@@ -51,13 +51,6 @@ const remoteWords = new Set([
   "server",
   "web",
 ]);
-const compatibilitySubjects = new Set([
-  "cell",
-  "cells",
-  "combination",
-  "combinations",
-  "matrix",
-]);
 const availableWords = new Set([
   "accessible",
   "available",
@@ -73,16 +66,6 @@ const availableWords = new Set([
   "reach",
   "reachable",
   "running",
-]);
-const successWords = new Set([
-  "complete",
-  "executed",
-  "green",
-  "pass",
-  "passed",
-  "passing",
-  "successful",
-  "verified",
 ]);
 const supportWords = new Set([
   "fix",
@@ -152,21 +135,6 @@ export function availabilityClaimErrors(path, source) {
       )
         report(errors, path, statement, `remote ${subject}`);
     }
-  }
-  return errors;
-}
-
-export function compatibilityClaimErrors(path, source) {
-  const errors = [];
-  for (const statement of statements(source)) {
-    const words = tokens(statement);
-    if (
-      positive(statement) &&
-      words.includes("140") &&
-      has(words, compatibilitySubjects) &&
-      has(words, successWords)
-    )
-      report(errors, path, statement, "full-matrix success");
   }
   return errors;
 }
