@@ -1,11 +1,11 @@
 import { spawn } from "node:child_process";
-import { createHash } from "node:crypto";
 import { mkdir, mkdtemp, readFile, rm } from "node:fs/promises";
 import { tmpdir } from "node:os";
 import { join, resolve } from "node:path";
 import {
   publicPackageFolders,
   publicPackageGraph,
+  sha256File,
   validatePackedArtifacts,
 } from "./compatibility-contract.mjs";
 import { createCompatibilityEnvironment } from "./compatibility-environment.mjs";
@@ -142,12 +142,6 @@ function createBuildOrder() {
   return order;
 }
 
-async function sha256(path) {
-  return createHash("sha256")
-    .update(await readFile(path))
-    .digest("hex");
-}
-
 export async function validatePackedWorkspace(packed, environment) {
   return validatePackedArtifacts(packed, async (path, root) => {
     const inspected = await runCompatibilityProcess({
@@ -164,6 +158,7 @@ export async function validatePackedWorkspace(packed, environment) {
 export async function createPackedWorkspace(options) {
   const workspaceRoot = resolve(options.workspaceRoot);
   const ownsOutput = !options.outputRoot;
+  const cacheRoot = await mkdtemp(join(tmpdir(), "popcandy-pack-cache-"));
   const outputRoot = options.outputRoot
     ? resolve(options.outputRoot)
     : await mkdtemp(join(tmpdir(), "popcandy-packs-"));
@@ -175,11 +170,12 @@ export async function createPackedWorkspace(options) {
       cwd: workspaceRoot,
       timeoutMs: 30_000,
       environment: options.environment,
-      homeRoot: outputRoot,
+      homeRoot: cacheRoot,
     });
     const sourceManagerVersion = sourceManager.output.split("\n").at(-1);
-    if (sourceManagerVersion !== "11.4.0")
-      throw new TypeError("Unexpected pnpm.");
+    if (sourceManagerVersion !== "11.4.0") {
+      throw new TypeError(`Unexpected source pnpm: ${sourceManagerVersion}.`);
+    }
     const manifests = await readPublicManifests(workspaceRoot);
     for (const folder of createBuildOrder()) {
       const { manifest } = manifests.get(folder);
@@ -188,7 +184,7 @@ export async function createPackedWorkspace(options) {
         args: ["--filter", manifest.name, "build"],
         cwd: workspaceRoot,
         environment: options.environment,
-        homeRoot: outputRoot,
+        homeRoot: cacheRoot,
       });
     }
     const tarballs = [];
@@ -201,14 +197,14 @@ export async function createPackedWorkspace(options) {
         args: ["pack", "--out", path, "--json"],
         cwd: packageRoot,
         environment: options.environment,
-        homeRoot: outputRoot,
+        homeRoot: cacheRoot,
       });
       tarballs.push({
         packageName: manifest.name,
         version: manifest.version,
         name,
         path,
-        sha256: await sha256(path),
+        sha256: await sha256File(path),
       });
     }
     return {
@@ -219,6 +215,8 @@ export async function createPackedWorkspace(options) {
   } catch (error) {
     if (ownsOutput) await rm(outputRoot, { recursive: true, force: true });
     throw error;
+  } finally {
+    await rm(cacheRoot, { recursive: true, force: true });
   }
 }
 

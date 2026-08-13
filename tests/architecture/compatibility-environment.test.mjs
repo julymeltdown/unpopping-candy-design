@@ -1,10 +1,28 @@
 import assert from "node:assert/strict";
-import { mkdtemp, rm } from "node:fs/promises";
+import {
+  chmod,
+  mkdir,
+  mkdtemp,
+  readdir,
+  rm,
+  writeFile,
+} from "node:fs/promises";
 import { tmpdir } from "node:os";
 import { join } from "node:path";
 import test from "node:test";
-import { runCompatibilityProcess } from "../../scripts/lib/compatibility-process.mjs";
+import { publicPackageGraph } from "../../scripts/lib/compatibility-contract.mjs";
 import { createCompatibilityEnvironment } from "../../scripts/lib/compatibility-environment.mjs";
+import {
+  createPackedWorkspace,
+  runCompatibilityProcess,
+} from "../../scripts/lib/compatibility-process.mjs";
+import { runCompatibilityMatrix } from "../../scripts/run-compatibility-matrix.mjs";
+
+function runCacheEntries() {
+  return readdir(tmpdir()).then((entries) =>
+    entries.filter((entry) => entry.startsWith("popcandy-run-cache-")).sort(),
+  );
+}
 
 test("compatibility subprocesses exclude parent credentials and runtime injection", async () => {
   const root = await mkdtemp(join(tmpdir(), "popcandy-environment-"));
@@ -72,4 +90,95 @@ test("compatibility cells share only a run-scoped package cache", () => {
   assert.equal(first.COREPACK_HOME, join(cacheRoot, "corepack"));
   assert.equal(first.XDG_CACHE_HOME, second.XDG_CACHE_HOME);
   assert.equal(first.XDG_DATA_HOME, second.XDG_DATA_HOME);
+});
+
+test("packed output excludes package-manager caches", async () => {
+  const root = await mkdtemp(join(tmpdir(), "popcandy-pack-output-"));
+  const workspaceRoot = join(root, "workspace");
+  const outputRoot = join(root, "output");
+  const binRoot = join(root, "bin");
+  await Promise.all([
+    mkdir(outputRoot),
+    mkdir(binRoot),
+    ...Object.keys(publicPackageGraph).map((folder) =>
+      mkdir(join(workspaceRoot, "packages", folder), { recursive: true }),
+    ),
+  ]);
+  const managerPath = join(binRoot, "pnpm");
+  await writeFile(
+    managerPath,
+    `#!/usr/bin/env node
+import { mkdirSync, writeFileSync } from "node:fs";
+for (const name of ["COREPACK_HOME", "NPM_CONFIG_CACHE"]) mkdirSync(process.env[name], { recursive: true });
+const args = process.argv.slice(2);
+if (args[0] === "--version") process.stdout.write("11.4.0");
+const output = args.indexOf("--out");
+if (output >= 0) writeFileSync(args[output + 1], "synthetic-tarball");
+`,
+  );
+  await chmod(managerPath, 0o755);
+  for (const [folder, dependencies] of Object.entries(publicPackageGraph)) {
+    await writeFile(
+      join(workspaceRoot, "packages", folder, "package.json"),
+      JSON.stringify({
+        name: `@unpopping-candy/${folder}`,
+        version: "0.2.0",
+        dependencies: Object.fromEntries(
+          dependencies.map((name) => [`@unpopping-candy/${name}`, "0.2.0"]),
+        ),
+      }),
+    );
+  }
+
+  try {
+    const packed = await createPackedWorkspace({
+      workspaceRoot,
+      outputRoot,
+      environment: { PATH: `${binRoot}:${process.env.PATH}` },
+    });
+
+    assert.equal(packed.tarballs.length, 9);
+    assert.deepEqual(
+      (await readdir(outputRoot)).sort(),
+      packed.tarballs.map(({ name }) => name).sort(),
+    );
+  } finally {
+    await rm(root, { recursive: true, force: true });
+  }
+});
+
+test("matrix removes its run cache when workspace packing fails", async () => {
+  const root = await mkdtemp(join(tmpdir(), "popcandy-pack-failure-"));
+  const fixtureRoot = join(root, "fixtures", "compatibility");
+  await mkdir(fixtureRoot, { recursive: true });
+  await writeFile(
+    join(fixtureRoot, "matrix.json"),
+    JSON.stringify({
+      cells: {
+        "vite-react-19": {
+          framework: "vite",
+          frameworkVersion: "8.1.0",
+          reactVersion: "19.2.8",
+        },
+      },
+      managers: {
+        "pnpm-11": { package: "pnpm", version: "11.21.0" },
+      },
+    }),
+  );
+  const before = await runCacheEntries();
+
+  try {
+    await assert.rejects(
+      runCompatibilityMatrix({
+        workspaceRoot: root,
+        fixture: "base",
+        cell: "vite-react-19",
+        manager: "pnpm-11",
+      }),
+    );
+    assert.deepEqual(await runCacheEntries(), before);
+  } finally {
+    await rm(root, { recursive: true, force: true });
+  }
 });

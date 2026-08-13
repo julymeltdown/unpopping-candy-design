@@ -36,9 +36,10 @@ export async function runCompatibilityMatrix(options = {}) {
   const cacheRoot = options.cacheRoot
     ? resolve(options.cacheRoot)
     : await mkdtemp(join(tmpdir(), "popcandy-run-cache-"));
-  const candidatePacked =
-    options.packed ?? (await packPublicWorkspace({ workspaceRoot }));
+  let candidatePacked;
   try {
+    candidatePacked =
+      options.packed ?? (await packPublicWorkspace({ workspaceRoot }));
     const packed = await validatePackedWorkspace(
       candidatePacked,
       options.environment,
@@ -65,7 +66,7 @@ export async function runCompatibilityMatrix(options = {}) {
     }
     return { runs, results };
   } finally {
-    if (!options.packed && !options.keepPacked) {
+    if (candidatePacked && !options.packed && !options.keepPacked) {
       await rm(candidatePacked.root, { recursive: true, force: true });
     }
     if (ownsCache) await rm(cacheRoot, { recursive: true, force: true });

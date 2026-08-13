@@ -37,6 +37,12 @@ export const publicPackageNames = publicPackageFolders.map(
   (folder) => `@unpopping-candy/${folder}`,
 );
 
+export async function sha256File(path) {
+  return createHash("sha256")
+    .update(await readFile(path))
+    .digest("hex");
+}
+
 export function pathIsInside(parent, candidate) {
   const path = relative(parent, candidate);
   return path === "" || (!path.startsWith("..") && !isAbsolute(path));
@@ -157,9 +163,7 @@ export async function validatePackedArtifacts(packed, inspectManifest) {
     ) {
       throw new TypeError(`Unsafe packed artifact for ${tarball.packageName}.`);
     }
-    const digest = createHash("sha256")
-      .update(await readFile(resolvedPath))
-      .digest("hex");
+    const digest = await sha256File(resolvedPath);
     if (digest !== tarball.sha256) {
       throw new TypeError(`Digest mismatch for ${tarball.packageName}.`);
     }
