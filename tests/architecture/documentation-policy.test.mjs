@@ -3,7 +3,10 @@ import { readFile } from "node:fs/promises";
 import { dirname, join, resolve } from "node:path";
 import test from "node:test";
 import { fileURLToPath } from "node:url";
-import { trustPaths } from "../../scripts/lib/documentation-policy.mjs";
+import {
+  approvedTrustDocumentErrors,
+  trustPaths,
+} from "../../scripts/lib/documentation-policy.mjs";
 
 const root = resolve(dirname(fileURLToPath(import.meta.url)), "../..");
 
@@ -46,4 +49,27 @@ test("trust policy rejects unreviewed wording independent of phrasing", async ()
       `${claim} must require trust-policy review`,
     );
   }
+});
+
+test("historical QA evidence requires an explicit policy review", async () => {
+  // Given: the complete approved document set plus the retained QA evidence.
+  const documents = new Map(
+    await Promise.all(
+      [...trustPaths, "docs/QA_REPORT.md"].map(async (path) => [
+        path,
+        await readFile(join(root, path), "utf8"),
+      ]),
+    ),
+  );
+  const changed = new Map(documents);
+  changed.set("docs/QA_REPORT.md", `${documents.get("docs/QA_REPORT.md")}\n`);
+
+  // When: an unreviewed change alters the historical evidence.
+  const errors = approvedTrustDocumentErrors(changed);
+
+  // Then: the machine-consumed trust policy rejects it.
+  assert.ok(
+    errors.some((error) => error.startsWith("docs/QA_REPORT.md:")),
+    "historical QA evidence must be covered by the trust policy",
+  );
 });

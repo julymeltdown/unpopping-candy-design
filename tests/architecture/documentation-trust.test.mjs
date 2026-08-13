@@ -3,25 +3,15 @@ import { readFile } from "node:fs/promises";
 import { dirname, join, resolve } from "node:path";
 import test from "node:test";
 import { fileURLToPath } from "node:url";
+import { trustPaths } from "../../scripts/lib/documentation-policy.mjs";
 
 const root = resolve(dirname(fileURLToPath(import.meta.url)), "../..");
-const paths = [
-  "README.md",
-  "docs/AI_ASSISTED_POST_CASE_STUDY.md",
-  "docs/COMPATIBILITY.md",
-  "docs/ACCESSIBILITY.md",
-  "docs/SUPPORT.md",
-  "docs/SECURITY.md",
-  "docs/VERSIONING.md",
-  "docs/STORYBOOK_AI.md",
-  "docs/PUBLISHING.md",
-];
 
 async function fixture() {
   const verifier = await import("../../scripts/verify-docs.mjs");
   const documents = new Map(
     await Promise.all(
-      paths.map(async (path) => [
+      trustPaths.map(async (path) => [
         path,
         await readFile(join(root, path), "utf8"),
       ]),

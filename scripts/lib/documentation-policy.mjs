@@ -12,6 +12,8 @@ const approvedDigests = new Map(
       "7b543650a5ccd554ed6daac0d0b72ea53e6223619b39e371d3db73fe2c9ba6ba",
     "docs/PUBLISHING.md":
       "48cbecf293649022bf3a484fc4b418555132d5abf2ff071587380c173bd1d98e",
+    "docs/QA_REPORT.md":
+      "57b9fb34c643981cd5b53df1b82c814f00c8bf810ffc5dc175c5139f6ee5b849",
     "docs/SECURITY.md":
       "4ba84346323d1e3b3e3f01caec6f88daa1e2738b73cf0a4de2b95d35df0c4fdc",
     "docs/STORYBOOK_AI.md":

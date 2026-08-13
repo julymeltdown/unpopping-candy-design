@@ -15,6 +15,7 @@ import {
   extractRelativeMarkdownLinks,
   hasBalancedCodeFences,
 } from "../../scripts/lib/markdown-contract.mjs";
+import { trustPaths } from "../../scripts/lib/documentation-policy.mjs";
 
 const root = resolve(dirname(fileURLToPath(import.meta.url)), "../..");
 const readDocument = (path) => readFile(join(root, path), "utf8");
@@ -95,17 +96,7 @@ test("documentation verifier compares structured trust claims with canonical sou
   const verifier = await import("../../scripts/verify-docs.mjs");
   const documents = new Map(
     await Promise.all(
-      [
-        "README.md",
-        "docs/AI_ASSISTED_POST_CASE_STUDY.md",
-        "docs/COMPATIBILITY.md",
-        "docs/ACCESSIBILITY.md",
-        "docs/SUPPORT.md",
-        "docs/SECURITY.md",
-        "docs/VERSIONING.md",
-        "docs/STORYBOOK_AI.md",
-        "docs/PUBLISHING.md",
-      ].map(async (path) => [path, await readDocument(path)]),
+      trustPaths.map(async (path) => [path, await readDocument(path)]),
     ),
   );
   const context = await verifier.loadTrustContext(root);
