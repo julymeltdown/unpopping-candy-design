@@ -22,12 +22,13 @@ export function runCompatibilityProcess({
   terminateTree,
   environment = process.env,
   homeRoot = cwd,
+  cacheRoot = homeRoot,
 }) {
   const started = performance.now();
   return new Promise((resolvePromise, rejectPromise) => {
     const child = spawn(command, args, {
       cwd,
-      env: createCompatibilityEnvironment(environment, homeRoot),
+      env: createCompatibilityEnvironment(environment, homeRoot, cacheRoot),
       stdio: ["ignore", "pipe", "pipe"],
       detached: process.platform !== "win32",
       windowsHide: true,
@@ -176,10 +177,9 @@ export async function createPackedWorkspace(options) {
       environment: options.environment,
       homeRoot: outputRoot,
     });
-    const sourceManagerVersion = sourceManager.output.match(/[^\r\n]+$/)?.[0];
-    if (sourceManagerVersion !== "11.4.0") {
-      throw new TypeError(`Unexpected source pnpm: ${sourceManagerVersion}.`);
-    }
+    const sourceManagerVersion = sourceManager.output.split("\n").at(-1);
+    if (sourceManagerVersion !== "11.4.0")
+      throw new TypeError("Unexpected pnpm.");
     const manifests = await readPublicManifests(workspaceRoot);
     for (const folder of createBuildOrder()) {
       const { manifest } = manifests.get(folder);

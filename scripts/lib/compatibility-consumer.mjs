@@ -223,6 +223,7 @@ export async function smokeTestCompatibilityBuild({
   generated,
   expectedName,
   environment,
+  cacheRoot,
 }) {
   const started = performance.now();
   const served = await serveCompatibilityBuild(
@@ -232,7 +233,7 @@ export async function smokeTestCompatibilityBuild({
   try {
     browser = await chromium.launch({
       timeout: 30_000,
-      env: createCompatibilityEnvironment(environment, consumerRoot),
+      env: createCompatibilityEnvironment(environment, consumerRoot, cacheRoot),
     });
     const page = await browser.newPage();
     await page.goto(served.url, { timeout: 30_000 });

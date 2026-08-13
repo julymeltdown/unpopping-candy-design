@@ -669,7 +669,7 @@ git commit -m "feat: add reproducible model evaluation captures"
 - Supports `--fixture base|publish-post|member-moderation|activity-review`, `--cell` plus `--manager`, and `--all`. A focused run requires fixture, cell, and manager; `--fixture publish-post --all` runs that fixture across seven cells and five managers (35 runs); bare `--all` runs all four fixtures across all cells and managers (140 runs).
 - Exports `packPublicWorkspace(options)` and `runCompatibilityMatrix(options)` so Task 10 reuses this implementation inside its staging workspace.
 - Produces `.artifacts/compatibility/fixture-id/cell-id/manager-id.json` with exact Node, package-manager, framework, React, browser, tarball digest, install, typecheck, build, and smoke-test results.
-- Runs package-manager, build, and browser children with an explicit non-secret environment allowlist, an isolated consumer home, and no user npm configuration.
+- Runs package-manager, build, and browser children with an explicit non-secret environment allowlist, an isolated consumer home, no user npm configuration, and one temporary package cache shared only by cells in the same matrix run.
 
 - [ ] **Step 1: Write the failing matrix-contract test**
 

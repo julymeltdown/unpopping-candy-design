@@ -1,4 +1,5 @@
-import { rm } from "node:fs/promises";
+import { mkdtemp, rm } from "node:fs/promises";
+import { tmpdir } from "node:os";
 import { dirname, join, resolve } from "node:path";
 import { fileURLToPath, pathToFileURL } from "node:url";
 import {
@@ -31,6 +32,10 @@ export async function runCompatibilityMatrix(options = {}) {
   const runs = createCompatibilityPlan(matrix, options);
   if (options.plan) return { runs };
 
+  const ownsCache = !options.cacheRoot;
+  const cacheRoot = options.cacheRoot
+    ? resolve(options.cacheRoot)
+    : await mkdtemp(join(tmpdir(), "popcandy-run-cache-"));
   const candidatePacked =
     options.packed ?? (await packPublicWorkspace({ workspaceRoot }));
   try {
@@ -52,6 +57,7 @@ export async function runCompatibilityMatrix(options = {}) {
             packed,
             keepTemporary: options.keepTemporary === true,
             environment: options.environment,
+            cacheRoot,
           },
           run,
         ),
@@ -62,6 +68,7 @@ export async function runCompatibilityMatrix(options = {}) {
     if (!options.packed && !options.keepPacked) {
       await rm(candidatePacked.root, { recursive: true, force: true });
     }
+    if (ownsCache) await rm(cacheRoot, { recursive: true, force: true });
   }
 }
 

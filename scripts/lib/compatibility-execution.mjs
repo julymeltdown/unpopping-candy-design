@@ -70,6 +70,7 @@ export async function executeCompatibilityRun(context, run) {
     packed,
     keepTemporary,
     environment,
+    cacheRoot,
   } = context;
   const cell = matrix.cells[run.cell];
   const manager = matrix.managers[run.manager];
@@ -131,6 +132,7 @@ export async function executeCompatibilityRun(context, run) {
       timeoutMs: 120_000,
       environment,
       homeRoot: temporaryRoot,
+      cacheRoot,
     });
     result.packageManager.observedVersion = version.output.split("\n").at(-1);
     if (result.packageManager.observedVersion !== manager.version) {
@@ -147,6 +149,7 @@ export async function executeCompatibilityRun(context, run) {
       timeoutMs: 600_000,
       environment,
       homeRoot: temporaryRoot,
+      cacheRoot,
     });
     result.install = { status: "passed", durationMs: install.durationMs };
     await assertInstalledIsolation({ consumerRoot, workspaceRoot, tarballs });
@@ -175,6 +178,7 @@ export async function executeCompatibilityRun(context, run) {
       timeoutMs: 30_000,
       environment,
       homeRoot: temporaryRoot,
+      cacheRoot,
     });
     result.typescript.observedVersion = typeVersion.output.replace(
       "Version ",
@@ -191,6 +195,7 @@ export async function executeCompatibilityRun(context, run) {
       cwd: consumerRoot,
       environment,
       homeRoot: temporaryRoot,
+      cacheRoot,
     });
     result.typecheck = {
       status: "passed",
@@ -207,6 +212,7 @@ export async function executeCompatibilityRun(context, run) {
       timeoutMs: 600_000,
       environment,
       homeRoot: temporaryRoot,
+      cacheRoot,
     });
     result.build = { status: "passed", durationMs: build.durationMs };
 
@@ -216,6 +222,7 @@ export async function executeCompatibilityRun(context, run) {
       generated: consumer.generated,
       expectedName,
       environment,
+      cacheRoot,
     });
     result.browser.observedVersion = smoke.browserVersion;
     result.browser.accessibleName = expectedName;

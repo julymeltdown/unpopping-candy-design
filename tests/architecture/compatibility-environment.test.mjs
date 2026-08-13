@@ -4,6 +4,7 @@ import { tmpdir } from "node:os";
 import { join } from "node:path";
 import test from "node:test";
 import { runCompatibilityProcess } from "../../scripts/lib/compatibility-process.mjs";
+import { createCompatibilityEnvironment } from "../../scripts/lib/compatibility-environment.mjs";
 
 test("compatibility subprocesses exclude parent credentials and runtime injection", async () => {
   const root = await mkdtemp(join(tmpdir(), "popcandy-environment-"));
@@ -55,4 +56,20 @@ test("compatibility subprocesses default their isolated home to the working root
   } finally {
     await rm(root, { recursive: true, force: true });
   }
+});
+
+test("compatibility cells share only a run-scoped package cache", () => {
+  const firstHome = join(tmpdir(), "popcandy-first-home");
+  const secondHome = join(tmpdir(), "popcandy-second-home");
+  const cacheRoot = join(tmpdir(), "popcandy-run-cache");
+
+  const first = createCompatibilityEnvironment({}, firstHome, cacheRoot);
+  const second = createCompatibilityEnvironment({}, secondHome, cacheRoot);
+
+  assert.notEqual(first.HOME, second.HOME);
+  assert.equal(first.NPM_CONFIG_CACHE, join(cacheRoot, "npm"));
+  assert.equal(first.NPM_CONFIG_CACHE, second.NPM_CONFIG_CACHE);
+  assert.equal(first.COREPACK_HOME, join(cacheRoot, "corepack"));
+  assert.equal(first.XDG_CACHE_HOME, second.XDG_CACHE_HOME);
+  assert.equal(first.XDG_DATA_HOME, second.XDG_DATA_HOME);
 });
