@@ -1,57 +1,45 @@
 # Unpopping Candy
 
-Unpopping Candy is a React design system for social, content, moderation, and collaboration interfaces, with the same versioned contracts exposed to developers and coding agents.
-
-It combines accessible UI primitives, controlled social presentation components, semantic tokens, Storybook contract stories, and a deterministic local catalog. Agents can discover the installed system before editing instead of guessing component names, props, states, or imports.
+Unpopping Candy is a React design system for social, content, moderation, and collaboration products. It gives developers and coding agents the same versioned component contracts, semantic tokens, examples, templates, and validation rules.
 
 ![Unpopping Candy component overview](./docs/preview/captures/unpopping-candy-overview.png)
 
-## Why it is different
+## What you get
 
-Most component libraries stop at rendered components and prose documentation. Unpopping Candy keeps typed public APIs, adjacent guidance, semantic tokens, Storybook stories, Registry templates, and machine-readable catalog entries aligned through repository checks.
+| Layer           | Packages                   | Use it for                                                                          |
+| --------------- | -------------------------- | ----------------------------------------------------------------------------------- |
+| Foundations     | `tokens`, `theme`, `icons` | Semantic CSS variables, scoped themes, density, accents, and semantic icons.        |
+| UI              | `ui`                       | Accessible layout, forms, feedback, loading, dialogs, tabs, and display primitives. |
+| Social          | `social`                   | Controlled posts, profiles, notifications, conversations, composers, and timelines. |
+| Agent tools     | `knowledge`, `cli`, `mcp`  | Exact installed-catalog discovery, composition planning, and source validation.     |
+| Local templates | `registry`                 | Checksum-backed, conflict-safe scaffolding with dry-run-first writes.               |
 
-The social layer is deliberately controlled and API-agnostic. It presents posts, profiles, notifications, conversations, composers, and timelines through view models and callbacks. That makes the components reusable across collaboration products without choosing an API, router, cache, authentication scheme, or server entity model.
+Typed exports, adjacent guidance, Storybook contract stories, Registry templates, Figma mappings, and the machine-readable catalog are checked together. The local `popcandy` CLI is deterministic: it does not call a model or replace visual and accessibility review.
 
-The AI-operable layer is deterministic. The local `popcandy` CLI detects installed versions, searches the exact catalog, returns full contracts by stable ID, proposes bounded compositions, and validates source. It does not call a model and it does not replace visual or accessibility review.
+## Architecture
+
+```text
+application APIs/auth/routing/state → view models + callbacks → social → ui → theme/tokens/icons
+```
+
+The presentation packages never choose your API, router, cache, authentication scheme, or server entity model. That boundary is what keeps the same components usable across different product architectures.
 
 ## What application code still owns
 
 Consuming applications own:
 
-- fetching, caching, retries, mutations, and realtime transport;
-- routing, URLs, navigation, and deep links;
-- authentication, authorization, JWTs, and policy decisions;
-- API DTOs, server entities, persistence, uploads, and analytics;
+- fetching, caching, mutations, realtime transport, routing, and navigation;
+- authentication, authorization, API DTOs, persistence, uploads, and analytics;
 - draft, pending, optimistic, success, and failure workflow state;
 - localization content and product-specific accessibility decisions.
 
 `@unpopping-candy/ui` and `@unpopping-candy/social` remain presentation packages. Do not move TanStack Query, SWR, Zustand, routers, API clients, or business workflows into them.
 
-## Repository-implemented in Stage 0
+## Current scope
 
-The committed catalog is version `0.2.0` and contains 32 public component contracts, six product patterns, five local Registry templates, and one migration record.
+The catalog is version `0.2.0`: 32 public component contracts, six product patterns, five local Registry templates, one migration record, and 32 dedicated Storybook stories. The repository retains passing evidence for 140 tarball-only consumer cells at the source commit recorded in the compatibility policy.
 
-Stage 0 currently implements in this repository:
-
-- reference, semantic, and component tokens;
-- scoped light, dark, system, high-contrast, density, and accent themes;
-- semantic icon wrappers;
-- general layout, form, feedback, loading, dialog, tabs, and display primitives;
-- controlled social post, composer, profile, user, notification, conversation, and timeline views;
-- 32 dedicated Storybook contract stories;
-- generated catalog, portable agent documents, Skills, and the local public-package candidates for CLI, MCP, and Registry;
-- private repository tools for deterministic static evaluation and placeholder-gated Code Connect generation;
-- retained packed-consumer compatibility evidence covering all 140 clean-consumer cells at its documented source commit.
-
-See the [catalog manifest](./agent/manifests/catalog.json) and [Storybook usage source](./apps/docs/stories/Introduction.mdx). No hosted Storybook URL is configured in this repository.
-
-## Roadmap, not current API
-
-- Stage 1 plans choice and collection forms: Checkbox, Radio, Switch, Select, ComboBox, and ListBox families.
-- Stage 2 plans Menu, Popover, Tooltip, Disclosure, and Accordion interactions.
-- Stage 3 plans Breadcrumbs, Pagination, Table, DataGrid, and Progress.
-
-Those names are reserved roadmap work, not imports available in the Stage 0 catalog. The detailed plans live under [`docs/superpowers/plans`](./docs/superpowers/plans/2026-08-11-unpopping-candy-competitive-release-index.md).
+Checkbox, Radio, Switch, Select, ComboBox, ListBox, Menu, Popover, Tooltip, Disclosure, Accordion, Breadcrumbs, Pagination, Table, DataGrid, and Progress are roadmap names, not current imports. Inspect the [catalog manifest](./agent/manifests/catalog.json) or run `popcandy list` instead of guessing. The detailed roadmap is in the [competitive release index](./docs/superpowers/plans/2026-08-11-unpopping-candy-competitive-release-index.md).
 
 ## Local Vite quickstart
 
@@ -183,6 +171,46 @@ trap - EXIT INT TERM
 
 The packer requires the source repository's exact `pnpm@11.4.0`, builds all nine public packages in dependency order, and emits isolated `.tgz` artifacts. The consumer pins Vite `8.1.0` and `@vitejs/plugin-react` `6.0.1`; the bounded preview terminates automatically. The temporary directories can then be removed.
 
+## Use the React packages
+
+Import the styles once, in dependency order, then place a provider around the part of the tree that uses Unpopping Candy:
+
+<!-- prettier-ignore -->
+```tsx
+import '@unpopping-candy/tokens/styles.css';
+import '@unpopping-candy/icons/styles.css';
+import '@unpopping-candy/ui/styles.css';
+import '@unpopping-candy/social/styles.css';
+import { UnpoppingCandyProvider } from '@unpopping-candy/theme';
+import { Button, Stack, Surface } from '@unpopping-candy/ui';
+
+export function AccountPanel() {
+  return <UnpoppingCandyProvider defaultTheme="system" scope="local">
+    <Surface border padding="lg"><Stack gap={4}>
+      <h1>Account</h1><Button variant="primary">Save</Button>
+    </Stack></Surface>
+  </UnpoppingCandyProvider>;
+}
+```
+
+Use semantic variables such as `var(--popcandy-ink)`, `var(--popcandy-canvas)`, and `var(--popcandy-space-4)` in application CSS. Import only the style packages you actually render; `social/styles.css` sits on top of the UI styles.
+
+Social components are controlled. Your application maps API data to view models and owns drafts, requests, optimistic state, and errors:
+
+<!-- prettier-ignore -->
+```tsx
+import { useState } from 'react';
+import { PostComposerView, type SocialUserViewModel } from '@unpopping-candy/social';
+
+type ComposerProps = { viewer: SocialUserViewModel; publish(text: string): void };
+export function Composer({ viewer, publish }: ComposerProps) {
+  const [draft, setDraft] = useState('');
+  return <PostComposerView viewer={viewer} value={draft} onValueChange={setDraft} onSubmit={() => publish(draft)} />;
+}
+```
+
+Use `scope="document"` when the entire page belongs to the system. Use `useUnpoppingCandyTheme()` inside the provider to change `theme`, `density`, or `accent`; use `ThemeScript` for an SSR bootstrap that avoids a theme flash.
+
 ## Local agent workflow
 
 Run these exact commands from an installed consumer project whose `package.json` and optional `popcandy.config.json` identify its Unpopping Candy packages:
@@ -195,9 +223,18 @@ npm run popcandy -- compose "publish a post with pending, success, and error sta
 npm run popcandy -- validate --path . --json
 ```
 
-Use the results in order: confirm versions, discover candidates, inspect every selected stable ID, compose a state-complete plan, implement through public entrypoints, add or update Storybook stories, then validate. Registry scaffolding remains dry-run by default and requires a separate explicit `--apply` action.
+Use the results in order: confirm versions, discover candidates, inspect every selected stable ID, compose a state-complete plan, implement through public entrypoints, add or update Storybook stories, then validate. Registry scaffolding remains dry-run by default and requires a separate explicit `--apply` action. The full operating contract is in [AGENTS.md](./AGENTS.md); CLI details are in [docs/CLI.md](./docs/CLI.md).
 
-The full operating contract is in [AGENTS.md](./AGENTS.md); CLI details are in [docs/CLI.md](./docs/CLI.md).
+## Registry and MCP
+
+Preview a template before allowing a local write; the second command is the explicit approval boundary:
+
+```bash
+npm run popcandy -- scaffold template.profile-settings --path . --target src/profile --dry-run --json
+npm run popcandy -- scaffold template.profile-settings --path . --target src/profile --apply --json
+```
+
+For local MCP clients, run `pnpm build:packages` and then `node packages/mcp/dist/stdio.js`. Point the client at that absolute file path using the [Codex, VS Code, or Claude Desktop templates](./agent/mcp/README.md). The six tools expose project info, search, get, compose, validate, and dry-run-first scaffold operations over the same catalog used by `popcandy`.
 
 ## Package map
 
@@ -248,18 +285,6 @@ pnpm --filter @unpopping-candy/docs build-storybook
 
 Compatibility is defined in [docs/COMPATIBILITY.md](./docs/COMPATIBILITY.md). Its retained evidence records all 140 planned tarball-only cells passing at the exact historical source commit named in that policy, across four fixtures, seven framework/React combinations, and five package managers.
 
-## Trust and project policies
-
-- [AI-assisted publish-a-post case study](./docs/AI_ASSISTED_POST_CASE_STUDY.md)
-- [Compatibility](./docs/COMPATIBILITY.md)
-- [Accessibility](./docs/ACCESSIBILITY.md)
-- [Support](./docs/SUPPORT.md)
-- [Security](./docs/SECURITY.md)
-- [Versioning](./docs/VERSIONING.md)
-- [Storybook and AI usage](./docs/STORYBOOK_AI.md)
-- [Catalog architecture](./docs/AI_CONTEXT_ARCHITECTURE.md)
-- [Contribution and public component requirements](./docs/COMPONENT_GUIDELINES.md)
-
 ## Current limitations
 
 - The nine public packages are not published to npm; use locally packed artifacts for adoption checks.
@@ -271,6 +296,4 @@ Compatibility is defined in [docs/COMPATIBILITY.md](./docs/COMPATIBILITY.md). It
 
 ## Contributing
 
-Fork the [GitHub repository](https://github.com/julymeltdown/unpopping-candy-design), create a focused branch in your fork, follow [AGENTS.md](./AGENTS.md), and open a pull request against the repository with the commands and outcomes you executed. Search and inspect the installed catalog, use only public imports and semantic tokens, keep business ownership in applications, and add visible states to Storybook. A public component also requires adjacent metadata, typed ref/native behavior, accessibility guidance, tests, generated contracts, a Changeset, and the full verification set in [component guidelines](./docs/COMPONENT_GUIDELINES.md). Use [GitHub issues](https://github.com/julymeltdown/unpopping-candy-design/issues) for scoped bugs, proposals, or contribution questions; report vulnerabilities privately through the security policy.
-
-Publication, deployment, provider calls, Figma publication, remote writes, and model execution require explicit external authorization. Request it in a GitHub issue or pull request that names the exact action and target, then wait for a repository owner to approve that action before execution. Security-sensitive requests use private vulnerability reporting instead. Local checks and dry runs are evidence, not permission to perform those actions.
+Fork the [GitHub repository](https://github.com/julymeltdown/unpopping-candy-design), follow [AGENTS.md](./AGENTS.md) and the [component guidelines](./docs/COMPONENT_GUIDELINES.md), then open a focused pull request with the commands and outcomes you executed. Use [GitHub issues](https://github.com/julymeltdown/unpopping-candy-design/issues) for bugs and proposals; use the [security policy](./docs/SECURITY.md) for vulnerabilities. Publication, deployment, provider calls, Figma publication, remote writes, and model execution require explicit repository owner approval; local checks and dry runs are evidence, not permission.

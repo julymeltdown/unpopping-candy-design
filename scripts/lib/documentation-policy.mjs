@@ -3,7 +3,7 @@ import { createHash } from "node:crypto";
 const approvedDigests = new Map(
   Object.entries({
     "README.md":
-      "39189ae36ddb56045a0034efd051e61b10578b2ae8126f5adef254934378671c",
+      "6d7d973196e10d2c6484d7e813d6df53e5916c818f85acc2c7cc2f51e3bc42ae",
     "docs/ACCESSIBILITY.md":
       "809d02af2817ed7120adb4341626a433187d6db32324bb0f97ef45b56392e523",
     "docs/AI_ASSISTED_POST_CASE_STUDY.md":
